@@ -1,4 +1,4 @@
-<!-- Page generated 2021-05-22 10:49:46 +0900-->
+<!-- Page generated 2021-06-04 14:08:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -115,6 +115,83 @@
 
 <h1 id="version-2010">Version 20.10</h1>
 
+<h2 id="20107">20.10.7</h2>
+<p>2021-06-02</p>
+
+<h3 id="client">クライアント</h3>
+
+<ul>
+  <li>廃止予定の cgroup に対する警告を除きました。
+<a href="https://github.com/docker/cli/pull/3099">docker/cli#3099</a> 参照。</li>
+  <li>Linux や macOS において、シグナル<code class="language-plaintext highlighter-rouge">SIGURG</code>がコンテナーに送信されないようにしました。
+Go 言語のランタイム (Go 1.14 以降) では、プリエンプティブなシステムコールのサポートを阻止するものとして、<code class="language-plaintext highlighter-rouge">SIGURG</code>シグナルが内部的に呼び出されます。
+Docker CLI がコンテナーにアタッチされる状況では、そういった阻止がコンテナーに対して転送されます。
+これによって Docker CLI が<code class="language-plaintext highlighter-rouge">SIGURG</code>シグナルを無視するような変更につながりました。
+<a href="https://github.com/docker/cli/pull/3107">docker/cli#3107</a>,
+<a href="https://github.com/moby/moby/pull/42421">moby/moby#42421</a> 参照。</li>
+</ul>
+
+<h3 id="builder">Builder</h3>
+
+<ul>
+  <li>BuildKit をバージョン v0.8.3-3-g244e8cde に更新しました。
+<a href="https://github.com/moby/moby/pull/42448">moby/moby#42448</a>。
+    <ul>
+      <li>Transform relative mountpoints for exec mounts in the executor to work around
+a breaking change in runc v1.0.0-rc94 and up. <a href="https://github.com/moby/buildkit/pull/2137">moby/buildkit#2137</a>.</li>
+      <li>Add retry on image push 5xx errors. <a href="https://github.com/moby/buildkit/pull/2043">moby/buildkit#2043</a>.</li>
+      <li><code class="language-plaintext highlighter-rouge">COPY</code>コマンドにワイルドカードをつけてファイル名変更を行った際に、ビルドキャッシュが不正にならないように修正しました。
+この変更によって、そのようなコピーを行った既存のビルドキャッシュは不正なものとなります。
+<a href="https://github.com/moby/buildkit/pull/2018">moby/buildkit#2018</a></li>
+      <li>マウントを利用した場合にビルドキャッシュが不正にならないように修正しました。
+<a href="https://github.com/moby/buildkit/pull/2076">moby/buildkit#2076</a></li>
+    </ul>
+  </li>
+  <li>古いスキーマ 1 イメージを用いていて<code class="language-plaintext highlighter-rouge">FROM</code>イメージがキャッシュされていない場合に、ビルドに失敗する状況を修正しました。
+<a href="https://github.com/moby/moby/pull/42382">moby/moby#42382</a></li>
+</ul>
+
+<h3 id="logging">ログ処理</h3>
+
+<ul>
+  <li>Update the hcsshim SDK to make daemon logs on Windows less verbose <a href="https://github.com/moby/moby/pull/42292">moby/moby#42292</a>.</li>
+</ul>
+
+<h3 id="rootless">Rootless</h3>
+
+<ul>
+  <li>Fix capabilities not being honored when an image was built on a daemon with
+user-namespaces enabled <a href="https://github.com/moby/moby/pull/42352">moby/moby#42352</a>.</li>
+</ul>
+
+<h3 id="networking">ネットワーク処理</h3>
+
+<ul>
+  <li>Update libnetwork to fix publishing ports on environments with kernel boot
+parameter <code class="language-plaintext highlighter-rouge">ipv6.disable=1</code>, and to fix a deadlock causing internal DNS lookups
+to fail <a href="https://github.com/moby/moby/pull/42413">moby/moby#42413</a>.</li>
+</ul>
+
+<h3 id="contrib">Contrib</h3>
+
+<ul>
+  <li>Update rootlesskit to v0.14.2 to fix a timeout when starting the userland proxy
+with the <code class="language-plaintext highlighter-rouge">slirp4netns</code> port driver <a href="https://github.com/moby/moby/pull/42294">moby/moby#42294</a>.</li>
+  <li>Fix “Device or resource busy” errors when running docker-in-docker on a rootless
+daemon <a href="https://github.com/moby/moby/pull/42342">moby/moby#42342</a>.</li>
+</ul>
+
+<h3 id="packaging">パッケージ</h3>
+
+<ul>
+  <li>Update containerd to v1.4.6, runc v1.0.0-rc95 to address <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30465">CVE-2021-30465</a>
+<a href="https://github.com/moby/moby/pull/42398">moby/moby#42398</a>, <a href="https://github.com/moby/moby/pull/42395">moby/moby#42395</a>,
+<a href="https://github.com/docker/containerd-packaging/pull/234">ocker/containerd-packaging#234</a></li>
+  <li>Update containerd to v1.4.5, runc v1.0.0-rc94 <a href="https://github.com/moby/moby/pull/42372">moby/moby#42372</a>,
+<a href="https://github.com/moby/moby/pull/42388">moby/moby#42388</a>, <a href="https://github.com/docker/containerd-packaging/pull/232">docker/containerd-packaging#232</a>.</li>
+  <li>Update Docker Scan plugin packages (<code class="language-plaintext highlighter-rouge">docker-scan-plugin</code>) to v0.8 <a href="https://github.com/docker/docker-ce-packaging/pull/545">docker/docker-ce-packaging#545</a>.</li>
+</ul>
+
 <h2 id="20106">20.10.6</h2>
 <p>2021-04-12</p>
 
@@ -127,7 +204,7 @@
 <a href="https://github.com/docker/cli/pull/3000">docker/cli#3000</a></li>
 </ul>
 
-<h3 id="builder">Builder</h3>
+<h3 id="builder-1">Builder</h3>
 
 <ul>
   <li>古いビルダーが Dockerfile オプションのうちサポートされていないものを、何も表示せずにやり過ごす点を修正し、代わりに BuildKit を有効にする方法を示すことにしました。
@@ -180,7 +257,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/42256">moby/moby#42256</a></li>
 </ul>
 
-<h3 id="rootless">Rootless</h3>
+<h3 id="rootless-1">Rootless</h3>
 
 <ul>
   <li>RootlessKit を <a href="https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.1">v0.14.1</a> に更新しました。
@@ -218,7 +295,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <h2 id="20104">20.10.4</h2>
 <p>2021-02-26</p>
 
-<h3 id="builder-1">Builder</h3>
+<h3 id="builder-2">Builder</h3>
 
 <ul>
   <li>空のレイヤーがあるインラインキャッシュのインポートにおいて、間違ったキャッシュがマッチしてしまう誤りを修正しました。
@@ -283,7 +360,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/41975">mobymoby#41975</a></li>
 </ul>
 
-<h3 id="rootless-1">Rootless</h3>
+<h3 id="rootless-2">Rootless</h3>
 
 <ul>
   <li>systemd の KillMode を mixed に設定することで、サービスが停止する際にハングしないようにしました。
@@ -378,7 +455,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h2 id="20101">20.10.1</h2>
 <p>2020-12-14</p>
 
-<h3 id="builder-2">Builder</h3>
+<h3 id="builder-3">Builder</h3>
 
 <ul>
   <li>buildkit: <a href="https://github.com/moby/buildkit/releases/tag/v0.8.1">v0.8.1</a> へのアップデート。
@@ -456,7 +533,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/39882">moby/moby#39882</a></li>
 </ul>
 
-<h3 id="builder-3">Builder</h3>
+<h3 id="builder-4">Builder</h3>
 
 <ul>
   <li>buildkit,dockerfile: Support for <code class="language-plaintext highlighter-rouge">RUN --mount</code> options without needing to specify experimental dockerfile <code class="language-plaintext highlighter-rouge">#syntax</code> directive. <a href="https://github.com/moby/buildkit/pull/1717">moby/buildkit#1717</a></li>
@@ -595,7 +672,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>seccomp: Remove dependency in dockerd on libseccomp <a href="https://github.com/moby/moby/pull/41395">moby/moby#41395</a></li>
 </ul>
 
-<h3 id="rootless-2">Rootless</h3>
+<h3 id="rootless-3">Rootless</h3>
 
 <ul>
   <li>rootless: 試験的機能から格上げ。
@@ -673,6 +750,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#20107" class="nomunge">20.10.7</a></li>
       <li><a href="#20106" class="nomunge">20.10.6</a></li>
       <li><a href="#20105" class="nomunge">20.10.5</a></li>
       <li><a href="#20104" class="nomunge">20.10.4</a></li>
@@ -700,7 +778,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
                     <ul class="footer_links">
                         <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
                         <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
-                        <li><a href="https://www.docker.com/dockercon-live/2021/?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-registration-dockercon">DockerCon21 への登録</a></li>
+                        <li><a href="https://docker.events.cube365.net/dockercon/">DockerCon</a></li>
                         <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
                         <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
                         <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
