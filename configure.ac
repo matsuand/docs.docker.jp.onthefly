@@ -35,7 +35,6 @@ AC_CONFIG_FILES([Makefile
 		 src/_data/docker-app/Makefile
 		 src/_data/docsarchive/Makefile
 		 src/_data/engine-cli/Makefile
-		 src/_data/registry-cli/Makefile
 		 src/_includes/Makefile
 		 src/_includes/analytics/Makefile
 		 src/_includes/content/Makefile

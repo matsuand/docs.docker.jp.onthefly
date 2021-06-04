@@ -34,7 +34,7 @@ toc_min: 1
 
 @x
 These topics describe the Docker Compose implementation of the Compose format.
-Docker Compose **1.27.0+** implements the format defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Previous Docker Compose versions have support for several Compose file formats – 2, 2.x, and 3.x. The Compose specification is an unified 2.x and 3.x file format, aggregating properties across these formats.
+Docker Compose **1.27.0+** implements the format defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Previous Docker Compose versions have support for several Compose file formats – 2, 2.x, and 3.x. The Compose specification is a unified 2.x and 3.x file format, aggregating properties across these formats.
 @y
 これらのトピックにおいては Docker Compose フォーマットに基づく Docker Compose の実装を示します。
 Docker Compose **1.27.0 以降** では、[Compose 仕様](https://github.com/compose-spec/compose-spec/blob/master/spec.md) に定義されたフォーマットを実装しています。

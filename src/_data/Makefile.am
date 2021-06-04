@@ -1,5 +1,5 @@
 SUBDIRS = buildx cluster compose-cli \
-	docker-app docsarchive engine-cli registry-cli
+	docker-app docsarchive engine-cli
 
 thisdir = _data
 origdir  = @abs_origdir@/$(thisdir)

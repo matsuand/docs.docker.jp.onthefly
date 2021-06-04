@@ -28,7 +28,6 @@ redirect_from:
 @x
 ## Use-case
 @y
-{: #use-case }
 ## Use-case
 @z
 
@@ -95,11 +94,11 @@ Hub can be mirrored.
 @x
 > **Note**
 >
-> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 @y
 > **Note**
 >
-> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 @z
 
 @x
@@ -202,6 +201,16 @@ but this property does not hold true for a registry cache cluster.
 Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
+@z
+
+@x
+**Note**
+>
+> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
+@y
+**Note**
+>
+> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 @z
 
 @x

@@ -16,19 +16,45 @@ title: ダウンロードレート制限
 @z
 
 @x
-Docker has enabled download rate limits for pull requests on 
-Docker Hub. Limits are determined based on the account type. 
-For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+## What is the download rate limit on Docker Hub
 @y
-Docker では Docker Hub 上でのプルリクエストに対して、ダウンロードレート制限を有効化してきました。
-この制限はアカウントの種類により決定されます。
-詳しくは [リソース消費 FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} や [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+{: #what-is-the-download-rate-limit-on-docker-hub }
+## Docker Hub におけるダウンロードレート制限とは
 @z
 
 @x
-A user's limit will be equal to the highest entitlement of their
+Docker Hub limits the number of Docker image downloads ("pulls")
+based on the account type of the user pulling the image. 
+See the [pricing page](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for current options.
+
+@y
+Docker Hub 上でプルリクエストを行うユーザーのアカウントタイプに応じて、Docker イメージのダウンロード (「pull」) にはいくつかの制限があります。
+現在あるアカウントタイプの違いについては [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+@y
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+@z
+
+@x
+Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+@y
+Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+@z
+
+@x
+## Definition of limits
+@y
+{: #definition-of-limits }
+## 制限の定義
+@z
+
+@x
+A user's limit is equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
-advantage of this, you must log into 
+advantage of this, you must log in to 
 [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
@@ -48,21 +74,11 @@ single manifest request.
 - A pull request for a multi-arch image makes two 
 manifest requests. 
 - `HEAD` requests are not counted. 
-- Limits are applied based on the user doing the pull, and 
-not based on the image being pulled or its owner.
 @y
 - プルリクエストとは、Registry マニフェスト URL（`/v2/*/manifests/*`）において、最大 2 つの`GET`リクエストとして定義されています。
 - 通常のイメージプルは、単一のマニフェストリクエストを行います。
 - マルチアーキテクチャーイメージに対するプルリクエストは、2 つのマニフェストリクエストを行います。
 - `HEAD`リクエストは数に含めません。
-- 制限は、プルを行うユーザーに対して適用されます。
-  プルされたイメージやその所有者に対して適用されるものではありません。
-@z
-
-@x
-Docker will gradually introduce these rate limits starting November 2nd, 2020.
-@y
-Docker においてこのレート制限は 2020 年 11 月 2 日から徐々に導入していきます。
 @z
 
 @x
@@ -107,13 +123,13 @@ Valid manifest API requests to Hub will usually include the following rate limit
 
 @x
 ```
-RateLimit-Limit    
-RateLimit-Remaining
+ratelimit-limit    
+ratelimit-remaining
 ```
 @y
 ```
-RateLimit-Limit    
-RateLimit-Remaining
+ratelimit-limit    
+ratelimit-remaining
 ```
 @z
 
@@ -179,13 +195,13 @@ Which should return headers including these:
 
 @x
 ```http
-RateLimit-Limit: 100;w=21600
-RateLimit-Remaining: 76;w=21600
+ratelimit-limit: 100;w=21600
+ratelimit-remaining: 76;w=21600
 ```
 @y
 ```http
-RateLimit-Limit: 100;w=21600
-RateLimit-Remaining: 76;w=21600
+ratelimit-limit: 100;w=21600
+ratelimit-remaining: 76;w=21600
 ```
 @z
 
@@ -208,9 +224,27 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 @z
 
 @x
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 @y
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+@z
+
+@x
+## I'm being limited even though I have a Pro/Team account
+@y
+## I'm being limited even though I have a Pro/Team account
+@z
+
+@x
+To take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+@y
+To take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+@z
+
+@x
+A Pro/Team plan does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
+@y
+A Pro/Team plan does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 @z
 
 @x

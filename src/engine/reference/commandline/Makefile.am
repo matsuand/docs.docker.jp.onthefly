@@ -197,15 +197,6 @@ bases = \
 	ps \
 	pull \
 	push \
-	registry \
-	registry_events \
-	registry_history \
-	registry_info \
-	registry_inspect \
-	registry_joblogs \
-	registry_jobs \
-	registry_ls \
-	registry_rmi \
 	rename \
 	restart \
 	rm \
