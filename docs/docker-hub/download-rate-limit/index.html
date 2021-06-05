@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-06-05 09:00:28 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ダウンロードレート制限 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ダウンロードレート制限" />
   <meta property="og:description" content="Download rate limit" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-05T09:00:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/download-rate-limit/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-05T09:00:28+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ダウンロードレート制限","description":"Download rate limit","url":"https://docs.docker.com/docker-hub/download-rate-limit/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,9 +103,15 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ダウンロードレート制限</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Docker では Docker Hub 上でのプルリクエストに対して、ダウンロードレート制限を有効化してきました。
-この制限はアカウントの種類により決定されます。
-詳しくは <a href="https://www.docker.com/pricing/resource-consumption-updates" target="_blank" rel="noopener" class="_">リソース消費 FAQ</a> や <a href="https://hub.docker.com/pricing" target="_blank" rel="noopener" class="_">Docker Hub Pricing</a> を参照してください。</p>
+                        <section class="section"><h1>ダウンロードレート制限</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="what-is-the-download-rate-limit-on-docker-hub">Docker Hub におけるダウンロードレート制限とは</h2>
+
+<p>Docker Hub 上でプルリクエストを行うユーザーのアカウントタイプに応じて、Docker イメージのダウンロード (「pull」) にはいくつかの制限があります。
+現在あるアカウントタイプの違いについては <a href="https://hub.docker.com/pricing" target="_blank" rel="noopener" class="_">Docker Hub Pricing</a> を参照してください。
+Some images are unlimited through our <a href="https://www.docker.com/blog/expanded-support-for-open-source-software-projects/" target="_blank" rel="noopener" class="_">Open Source</a> and <a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener" class="_">Publisher</a> programs.</p>
+
+<p>Unlimited pulls by IP is also available through our <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">Large Organization</a> plan.</p>
+
+<h2 id="definition-of-limits">制限の定義</h2>
 
 <p>ユーザーへの制限というのは、個人アカウントやこれが所属する組織に対しての、最大限の資格を意味します。
 これを利用するためには <a href="https://hub.docker.com/" target="_blank" rel="noopener" class="_">Docker Hub</a> に対して、認証されたユーザーとしてログインしなければなりません。
@@ -117,11 +123,7 @@
   <li>通常のイメージプルは、単一のマニフェストリクエストを行います。</li>
   <li>マルチアーキテクチャーイメージに対するプルリクエストは、2 つのマニフェストリクエストを行います。</li>
   <li><code class="language-plaintext highlighter-rouge">HEAD</code>リクエストは数に含めません。</li>
-  <li>制限は、プルを行うユーザーに対して適用されます。
-プルされたイメージやその所有者に対して適用されるものではありません。</li>
 </ul>
-
-<p>Docker においてこのレート制限は 2020 年 11 月 2 日から徐々に導入していきます。</p>
 
 <h2 id="how-do-i-know-my-pull-requests-are-being-limited">How do I know my pull requests are being limited</h2>
 
@@ -136,8 +138,8 @@
 
 <p>Valid manifest API requests to Hub will usually include the following rate limit headers in the response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RateLimit-Limit
-RateLimit-Remaining
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ratelimit-limit
+ratelimit-remaining
 </code></pre></div></div>
 
 <p>These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">grep</code>, and <code class="language-plaintext highlighter-rouge">jq</code> installed.</p>
@@ -159,8 +161,8 @@ RateLimit-Remaining
 
 <p>Which should return headers including these:</p>
 
-<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">RateLimit-Limit: 100;w=21600
-RateLimit-Remaining: 76;w=21600
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">ratelimit-limit: 100;w=21600
+ratelimit-remaining: 76;w=21600
 </span></code></pre></div></div>
 
 <p>This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.</p>
@@ -171,7 +173,13 @@ RateLimit-Remaining: 76;w=21600
 
 <h3 id="i-dont-see-any-ratelimit-headers">I don’t see any RateLimit headers</h3>
 
-<p>If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.</p>
+<p>If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.</p>
+
+<h2 id="im-being-limited-even-though-i-have-a-proteam-account">I’m being limited even though I have a Pro/Team account</h2>
+
+<p>To take advantage of the higher limits included in these plans, you must <a href="#how-do-i-authenticate-pull-requests">authenticate pulls</a> with your user account.</p>
+
+<p>A Pro/Team plan does not increase limits on your images for other users. See our <a href="https://www.docker.com/blog/expanded-support-for-open-source-software-projects/" target="_blank" rel="noopener" class="_">Open Source</a>, <a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener" class="_">Publisher</a>, or <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">Large Organization</a> offerings.</p>
 
 <h2 id="how-do-I-authenticate-pull-requests">プルリクエストの認証方法</h2>
 
@@ -263,12 +271,15 @@ Docker Compose ファイルを使ってアプリケーションをデプロイ�
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
+  <li><a href="#what-is-the-download-rate-limit-on-docker-hub" class="nomunge">Docker Hub におけるダウンロードレート制限とは</a></li>
+  <li><a href="#definition-of-limits" class="nomunge">制限の定義</a></li>
   <li><a href="#how-do-i-know-my-pull-requests-are-being-limited" class="nomunge">How do I know my pull requests are being limited</a></li>
   <li><a href="#how-can-i-check-my-current-rate" class="nomunge">How can I check my current rate</a>
     <ul>
       <li><a href="#i-dont-see-any-ratelimit-headers" class="nomunge">I don’t see any RateLimit headers</a></li>
     </ul>
   </li>
+  <li><a href="#im-being-limited-even-though-i-have-a-proteam-account" class="nomunge">I’m being limited even though I have a Pro/Team account</a></li>
   <li><a href="#how-do-I-authenticate-pull-requests" class="nomunge">プルリクエストの認証方法</a>
     <ul>
       <li><a href="#docker-desktop" class="nomunge">Docker Desktop</a></li>
