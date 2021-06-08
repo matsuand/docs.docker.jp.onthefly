@@ -35,9 +35,9 @@ that and understand its prerequisites.
 @z
 
 @x
-When working directly with the Notary client, it uses its [own set of environment variables](../../../notary/reference/client-config.md#environment-variables-optional).
+When working directly with the Notary client, it uses its [own set of environment variables](https://github.com/theupdateframework/notary/blob/master/docs/reference/client-config.md#environment-variables-optional){:target="_blank" rel="noopener" class="_"}.
 @y
-Notary クライアントを直接操作する場合は、[独自の環境変数のセット](../../../notary/reference/client-config.md#environment-variables-optional) を利用します。
+Notary クライアントを直接操作する場合は、[独自の環境変数のセット](https://github.com/theupdateframework/notary/blob/master/docs/reference/client-config.md#environment-variables-optional){:target="_blank" rel="noopener" class="_"} を利用します。
 @z
 
 @x

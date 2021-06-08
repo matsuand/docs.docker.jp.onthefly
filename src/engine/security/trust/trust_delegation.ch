@@ -25,12 +25,6 @@ an image tag. A delegation will have a pair of private and public delegation key
 could contain multiple pairs of keys and contributors in order to a) allow multiple users 
 to be part of a delegation, and b) to support key rotation.  
 @y
-{% comment %}
-Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign
-an image tag. A delegation will have a pair of private and public delegation keys. A delegation 
-could contain multiple pairs of keys and contributors in order to a) allow multiple users 
-to be part of a delegation, and b) to support key rotation.  
-{% endcomment %}
 Docker コンテントトラスト (Docker content trust; DCT) における委任鍵ペア（delegations）は、イメージタグへのサインを、誰ができて誰ができないのかを制御するものです。
 委任鍵は、委任を行う秘密鍵と公開鍵のペアによって構成されます。
 委任鍵には、鍵とその提供者の組み合わせを複数含めることができます。
@@ -42,11 +36,6 @@ The most important delegation within Docker Content Trust is `targets/releases`.
 This is seen as the canonical source of a trusted image tag, and without a 
 contributor's key being under this delegation, they will be unable to sign a tag.
 @y
-{% comment %}
-The most important delegation within Docker Content Trust is `targets/releases`.
-This is seen as the canonical source of a trusted image tag, and without a 
-contributor's key being under this delegation, they will be unable to sign a tag.
-{% endcomment %}
 Docker コンテントトラストにおける委任にあたり、最も重要なものは`targets/releases`です。
 これは信頼された（trusted）イメージタグの標準的なソースとして見ることができます。
 この委任情報のもとに提供者の鍵が存在していないと、提供者はタグにサインすることができません。
@@ -57,11 +46,6 @@ Fortunately when using the `$ docker trust` commands, we will automatically
 initialize a repository, manage the repository keys, and add a collaborator's key to the 
 `targets/releases` delegation via `docker trust signer add`. 
 @y
-{% comment %}
-Fortunately when using the `$ docker trust` commands, we will automatically 
-initialize a repository, manage the repository keys, and add a collaborator's key to the 
-`targets/releases` delegation via `docker trust signer add`. 
-{% endcomment %}
 `$ docker trust`コマンドを使えば、リポジトリの初期化、リポジトリ鍵の管理を簡単に行うことができます。
 また`docker trust signer add`によって`targets/releases`内の委任情報に共同作業者の鍵を含めることができます。
 @z
@@ -69,9 +53,6 @@ initialize a repository, manage the repository keys, and add a collaborator's ke
 @x
 ## Configuring the Docker Client
 @y
-{% comment %}
-## Configuring the Docker Client
-{% endcomment %}
 {: #configuring-the-docker-client }
 ## Docker クライアントの設定
 @z
@@ -84,14 +65,6 @@ server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
 URL for the notary server. This is done with:
 @y
-{% comment %}
-By default, the `$ docker trust` commands expect the notary server URL to be the
-same as the registry URL specified in the image tag (following a similar logic to
-`$ docker push`). When using Docker Hub or DTR, the notary
-server URL is the same as the registry URL. However, for self-hosted
-environments or 3rd party registries, you will need to specify an alternative
-URL for the notary server. This is done with:
-{% endcomment %}
 デフォルトで`$ docker trust`コマンドは、イメージタグ内にて指定されているレジストリ URL と Notary サーバーの URL が同一であるものとして扱います（これは`$ docker push`に対するロジックに対応するものです）。
 Docker Hub や DTR を利用する際には、Notary サーバーの URL はレジストリ URL と同じです。
 しかし独自に立ち上げたサーバー環境やサードパーティー製のレジストリの場合、Notary サーバーには別の URL を指定する必要があります。
@@ -112,10 +85,6 @@ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 If you do not export this variable in self-hosted environments, you may see 
 errors such as: 
 @y
-{% comment %}
-If you do not export this variable in self-hosted environments, you may see 
-errors such as: 
-{% endcomment %}
 独自に立ち上げているサーバー環境において、この変数を設定していないと、以下のようなエラーが発生します。
 @z
 
@@ -149,10 +118,6 @@ WARN[0000] Error while downloading remote metadata, using cached timestamp - thi
 If you have enabled authentication for your notary server, or are using DTR, you will need to log in 
 before you can push data to the notary server. 
 @y
-{% comment %}
-If you have enabled authentication for your notary server, or are using DTR, you will need to log in 
-before you can push data to the notary server. 
-{% endcomment %}
 Notary サーバーに対して認証機能を設定済みである場合、あるいは DTR を利用する場合は、Notary サーバーへのデータプッシュの前にログインする必要があります。
 @z
 
@@ -193,9 +158,6 @@ Successfully added signer: jeff to registry.example.com/user/repo
 @x
 If you do not log in, you will see:
 @y
-{% comment %}
-If you do not log in, you will see:
-{% endcomment %}
 ログインしていなければ、以下のようなメッセージになります。
 @z
 
@@ -224,9 +186,6 @@ Failed to add signer to: registry.example.com/user/repo
 @x
 ## Configuring the Notary Client
 @y
-{% comment %}
-## Configuring the Notary Client
-{% endcomment %}
 {: #configuring-the-notary-client }
 ## Notary クライアントの設定
 @z
@@ -235,32 +194,20 @@ Failed to add signer to: registry.example.com/user/repo
 Some of the more advanced features of DCT require the Notary CLI. To install and 
 configure the Notary CLI:
 @y
-{% comment %}
-Some of the more advanced features of DCT require the Notary CLI. To install and 
-configure the Notary CLI:
-{% endcomment %}
 DCT にはさらに高度な機能があって、これを利用するためには Notary CLI が必要になります。
 Notary CLI のインストールと設定は以下のようにします。
 @z
 
 @x
-1) Download the [client](https://github.com/theupdateframework/notary/releases) 
-and ensure that it is available on your path.
+1. Download the [client](https://github.com/theupdateframework/notary/releases) and ensure that it is available on your path.
 @y
-{% comment %}
-1) Download the [client](https://github.com/theupdateframework/notary/releases) 
-and ensure that it is available on your path.
-{% endcomment %}
-1) [クライアント](https://github.com/theupdateframework/notary/releases) をダウンロードし、パス上に配置して利用できるようにします。
+1. [クライアント](https://github.com/theupdateframework/notary/releases) をダウンロードし、パス上に配置して利用できるようにします。
 @z
 
 @x
-2) Create a configuration file at `~/.notary/config.json` with the following content:
+2. Create a configuration file at `~/.notary/config.json` with the following content:
 @y
-{% comment %}
-2) Create a configuration file at `~/.notary/config.json` with the following content:
-{% endcomment %}
-2) `~/.notary/config.json`に設定ファイルを生成し、その内容を以下のようにします。
+2. `~/.notary/config.json`に設定ファイルを生成し、その内容を以下のようにします。
 @z
 
 @x
@@ -288,32 +235,21 @@ and ensure that it is available on your path.
 @x
 The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.
 @y
-{% comment %}
-The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.
-{% endcomment %}
 上で新たに生成した設定ファイルでは、ローカルの Docker トラストデータの場所と Notary サーバーの URL が定義しています。
 @z
 
 @x
-For more detailed information about how to use notary outside of the 
-Docker Content Trust use cases, refer to the Notary CLI documentation 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md)
+For more detailed information about how to use notary outside of the
+Docker Content Trust use cases, refer to the Notary CLI documentation
+[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md){:target="_blank" rel="noopener" class="_"} 
 @y
-{% comment %}
-For more detailed information about how to use notary outside of the 
-Docker Content Trust use cases, refer to the Notary CLI documentation 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md)
-{% endcomment %}
-Docker コンテントトラストの利用とは別に、Notary を利用する方法に関しては [ここ](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md) にある Notary CLI ドキュメントを参照してください。
+Docker コンテントトラストの利用とは別に、Notary を利用する方法に関しては [ここ](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md){:target="_blank" rel="noopener" class="_"} にある Notary CLI ドキュメントを参照してください。
 
 @z
 
 @x
 ## Creating Delegation Keys
 @y
-{% comment %}
-## Creating Delegation Keys
-{% endcomment %}
 {: #creating-delegation-keys }
 ## 委任鍵ペアの生成
 @z
@@ -323,11 +259,6 @@ A prerequisite to adding your first contributor is a pair of delegation keys.
 These keys can either be generated locally using `$ docker trust`, generated by 
 a certificate authority.
 @y
-{% comment %}
-A prerequisite to adding your first contributor is a pair of delegation keys. 
-These keys can either be generated locally using `$ docker trust`, generated by 
-a certificate authority.
-{% endcomment %}
 提供者の情報を追加するにあたって必要となるのは、委任鍵 (delegation keys) のペアです。
 この鍵は`$ docker trust`を使ってローカル環境で生成することができ、あるいは認証局により生成することもできます。
 @z
@@ -335,9 +266,6 @@ a certificate authority.
 @x
 ### Using Docker Trust to Generate Keys
 @y
-{% comment %}
-### Using Docker Trust to Generate Keys
-{% endcomment %}
 {: #using-docker-trust-to-generate-keys }
 ### Docker トラストを用いた鍵生成
 @z
@@ -347,11 +275,6 @@ Docker trust has a built-in generator for a delegation key pair,
 `$ docker trust generate <name>`. Running this command will automatically load 
 the delegation private key in to the local Docker trust store. 
 @y
-{% comment %}
-Docker trust has a built-in generator for a delegation key pair, 
-`$ docker trust generate <name>`. Running this command will automatically load 
-the delegation private key in to the local Docker trust store. 
-{% endcomment %}
 Docker トラストには、委任鍵ペアを生成するビルトインのコマンド`$ docker trust generate <name>`があります。
 このコマンドを実行すると、Docker トラストのローカルな保存場所に、委任鍵ペアの秘密鍵を自動的にロードします。
 @z
@@ -381,9 +304,6 @@ Successfully generated and loaded private key. Corresponding public key availabl
 @x
 ### Manually Generating Keys
 @y
-{% comment %}
-### Manually Generating Keys
-{% endcomment %}
 {: #manually-generating-keys }
 ### 手動での鍵生成
 @z
@@ -393,11 +313,6 @@ If you need to manually generate a private key (either RSA or ECDSA) and a x509
 certificate containing the public key, you can use local tools like openssl or 
 cfssl along with a local or company-wide Certificate Authority. 
 @y
-{% comment %}
-If you need to manually generate a private key (either RSA or ECDSA) and a x509 
-certificate containing the public key, you can use local tools like openssl or 
-cfssl along with a local or company-wide Certificate Authority. 
-{% endcomment %}
 手動によって秘密鍵（RSA か ECDSA）と x509 証明書（公開鍵を含む）を生成する必要がある場合は、ローカルの、あるいは企業保有の認証局を使って openssl や cfssl などのツールを利用します。
 @z
 
@@ -405,10 +320,6 @@ cfssl along with a local or company-wide Certificate Authority.
 Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
 must be at least 2048 bits):
 @y
-{% comment %}
-Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
-must be at least 2048 bits):
-{% endcomment %}
 以下は、2048 ビットの RSA 鍵を生成する例です（RSA 鍵は最低でも 2048 ビットが必要）。
 @z
 
@@ -437,9 +348,6 @@ e is 65537 (0x10001)
 @x
 They should keep `delegation.key` private because it is used to sign tags.
 @y
-{% comment %}
-They should keep `delegation.key` private because it is used to sign tags.
-{% endcomment %}
 `delegation.key`は秘密鍵として保持しておきます。
 これを使って、タグへのサインを行います。
 @z
@@ -449,11 +357,6 @@ Then they need to generate an x509 certificate containing the public key, which 
 what you need from them. Here is the command to generate a CSR (certificate
 signing request):
 @y
-{% comment %}
-Then they need to generate an x509 certificate containing the public key, which is
-what you need from them. Here is the command to generate a CSR (certificate
-signing request):
-{% endcomment %}
 次に公開鍵を含む x509 証明書を生成する必要があります。
 ここから必要となるものが公開鍵です。
 以下は CSR (certificate signing request) を生成する例です。
@@ -474,11 +377,6 @@ Then they can send it to whichever CA you trust to sign certificates, or they
 can self-sign the certificate (in this example, creating a certificate that is
 valid for 1 year):
 @y
-{% comment %}
-Then they can send it to whichever CA you trust to sign certificates, or they
-can self-sign the certificate (in this example, creating a certificate that is
-valid for 1 year):
-{% endcomment %}
 Then they can send it to whichever CA you trust to sign certificates, or they
 can self-sign the certificate (in this example, creating a certificate that is
 valid for 1 year):
@@ -498,10 +396,6 @@ $ openssl x509 -req -sha256 -days 365 -in delegation.csr -signkey delegation.key
 Then they need to give you `delegation.crt`, whether it is self-signed or signed
 by a CA.
 @y
-{% comment %}
-Then they need to give you `delegation.crt`, whether it is self-signed or signed
-by a CA.
-{% endcomment %}
 Then they need to give you `delegation.crt`, whether it is self-signed or signed
 by a CA.
 @z
@@ -509,9 +403,6 @@ by a CA.
 @x
 Finally you will need to add the private key into your local Docker trust store.
 @y
-{% comment %}
-Finally you will need to add the private key into your local Docker trust store.
-{% endcomment %}
 最後に Docker トラストのローカルの保存場所に秘密鍵を追加します。
 @z
 
@@ -540,9 +431,6 @@ Successfully imported key from delegation.key
 @x
 ### Viewing local Delegation keys 
 @y
-{% comment %}
-### Viewing local Delegation keys 
-{% endcomment %}
 {: #viewing-local-delegation-keys  }
 ### ローカルの委任鍵ペアの確認
 @z
@@ -551,10 +439,6 @@ Successfully imported key from delegation.key
 To list the keys that have been imported in to the local Docker trust store we 
 can use the Notary CLI.
 @y
-{% comment %}
-To list the keys that have been imported in to the local Docker trust store we 
-can use the Notary CLI.
-{% endcomment %}
 Docker トラストのローカルの保存場所にインポートされている鍵は、Notary CLI を利用して一覧表示することができます。
 @z
 
@@ -583,9 +467,6 @@ jeff                                    9deed251daa1aa6f9d5f9b752847647cf8d705da
 @x
 ## Managing Delegations in a Notary Server
 @y
-{% comment %}
-## Managing Delegations in a Notary Server
-{% endcomment %}
 {: #managing-delegations-in-a-notary-server }
 ## Notary サーバー上の委任鍵の管理
 @z
@@ -597,13 +478,6 @@ the notary target and snapshots keys, and rotating the snapshot key to be
 managed by the notary server. More information on these keys can be found 
 [here](trust_key_mng.md)
 @y
-{% comment %}
-When the first Delegation is added to the Notary Server using `$ docker trust`,
-we automatically initiate trust data for the repository. This includes creating 
-the notary target and snapshots keys, and rotating the snapshot key to be 
-managed by the notary server. More information on these keys can be found 
-[here](trust_key_mng.md)
-{% endcomment %}
 `$ docker trust`コマンドを使って Notary サーバーに委任鍵を追加すると、リポジトリにおけるトラストデータは、自動的に初期化されます。
 この際にはターゲット鍵とスナップショット鍵も生成され、Notary サーバーが管理できるようにスナップショット鍵をローテートします。
 これらの鍵に関する詳細は [こちら](trust_key_mng.md) を参照してください。
@@ -614,11 +488,6 @@ When initiating a repository, you will need the key and the passphrase of a loca
 Notary Canonical Root Key. If you have not initiated a repository before, and 
 therefore don't have a Notary root key, `$ docker trust` will create one for you.
 @y
-{% comment %}
-When initiating a repository, you will need the key and the passphrase of a local
-Notary Canonical Root Key. If you have not initiated a repository before, and 
-therefore don't have a Notary root key, `$ docker trust` will create one for you.
-{% endcomment %}
 リポジトリの初期化にあたっては、ローカルの Notary 標準ルート鍵とそのパスフレーズが必要になります。
 まだリポジトリを初期化していない場合は、つまり Notary ルート鍵がないので、`$ docker trust`コマンドの実行がこれを生成します。
 @z
@@ -626,18 +495,12 @@ therefore don't have a Notary root key, `$ docker trust` will create one for you
 @x
 > Be sure to protect and back up your [Notary Canonical Root Key](trust_key_mng.md)
 @y
-{% comment %}
-> Be sure to protect and back up your [Notary Canonical Root Key](trust_key_mng.md)
-{% endcomment %}
 > [Notary 標準ルート鍵](trust_key_mng.md) は、しっかりと保護しバックアップをとっておいてください。
 @z
 
 @x
 ### Initiating the Repository
 @y
-{% comment %}
-### Initiating the Repository
-{% endcomment %}
 {: #initiating-the-repository }
 ### リポジトリの初期化
 @z
@@ -648,12 +511,6 @@ repository, you can use the `$ docker trust signer add` command. This will add
 the contributor's public key to the `targets/releases` delegation, and create a 
 second `targets/<name>` delegation. 
 @y
-{% comment %}
-To upload the first key to a delegation, at the same time initiating a 
-repository, you can use the `$ docker trust signer add` command. This will add 
-the contributor's public key to the `targets/releases` delegation, and create a 
-second `targets/<name>` delegation. 
-{% endcomment %}
 To upload the first key to a delegation, at the same time initiating a 
 repository, you can use the `$ docker trust signer add` command. This will add 
 the contributor's public key to the `targets/releases` delegation, and create a 
@@ -665,11 +522,6 @@ For DCT the name of the second delegation, in the below example
 `jeff`, is there to help you keep track of the owner of the keys. In more 
 advanced use cases of Notary additional delegations are used for hierarchy. 
 @y
-{% comment %}
-For DCT the name of the second delegation, in the below example
-`jeff`, is there to help you keep track of the owner of the keys. In more 
-advanced use cases of Notary additional delegations are used for hierarchy. 
-{% endcomment %}
 For DCT the name of the second delegation, in the below example
 `jeff`, is there to help you keep track of the owner of the keys. In more 
 advanced use cases of Notary additional delegations are used for hierarchy. 
@@ -693,8 +545,6 @@ Successfully initialized "registry.example.com/admin/demo"
 Successfully added signer: jeff to registry.example.com/admin/demo
 ```
 @y
-{% comment %}
-{% endcomment %}
 Adding signer "jeff" to registry.example.com/admin/demo...
 Initializing signed repository for registry.example.com/admin/demo...
 Enter passphrase for root key with ID f6c6a4b: 
@@ -709,10 +559,6 @@ Successfully added signer: jeff to registry.example.com/admin/demo
 You can see which keys have been pushed to the Notary server for each repository
 with the `$ docker trust inspect` command. 
 @y
-{% comment %}
-You can see which keys have been pushed to the Notary server for each repository
-with the `$ docker trust inspect` command. 
-{% endcomment %}
 You can see which keys have been pushed to the Notary server for each repository
 with the `$ docker trust inspect` command. 
 @z
@@ -765,8 +611,6 @@ Administrative keys for registry.example.com/admin/demo
 You could also use the Notary CLI to list delegations and keys. Here you can 
 clearly see the keys were attached to `targets/releases` and `targets/jeff`.
 @y
-{% comment %}
-{% endcomment %}
 You could also use the Notary CLI to list delegations and keys. Here you can 
 clearly see the keys were attached to `targets/releases` and `targets/jeff`.
 @z
@@ -800,8 +644,6 @@ targets/releases    "" <all paths>    1091060d7bfd938dfa5be703fa057974f9322a4fae
 @x
 ### Adding Additional Signers
 @y
-{% comment %}
-{% endcomment %}
 ### Adding Additional Signers
 @z
 
@@ -811,8 +653,6 @@ allowing you to manage the lifecycle of delegations. When adding additional
 delegations with `$ docker trust` the collaborators key is once again added to 
 the `targets/release` role.
 @y
-{% comment %}
-{% endcomment %}
 Docker Trust allows you to configure multiple delegations per repository, 
 allowing you to manage the lifecycle of delegations. When adding additional 
 delegations with `$ docker trust` the collaborators key is once again added to 
@@ -823,8 +663,6 @@ the `targets/release` role.
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 @y
-{% comment %}
-{% endcomment %}
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 @z
@@ -843,8 +681,6 @@ Enter passphrase for repository key with ID b0014f8:
 Successfully added signer: ben to registry.example.com/admin/demo
 ```
 @y
-{% comment %}
-{% endcomment %}
 Adding signer "ben" to registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
 Successfully added signer: ben to registry.example.com/admin/demo
@@ -854,8 +690,6 @@ Successfully added signer: ben to registry.example.com/admin/demo
 @x
 Check to prove that there are now 2 delegations (Signer).
 @y
-{% comment %}
-{% endcomment %}
 Check to prove that there are now 2 delegations (Signer).
 @z
 
@@ -908,8 +742,6 @@ Administrative keys for registry.example.com/admin/demo
 @x
 ### Adding Keys to an Existing Delegation
 @y
-{% comment %}
-{% endcomment %}
 ### Adding Keys to an Existing Delegation
 @z
 
@@ -919,8 +751,6 @@ multiple contributor keys per delegation. The only prerequisite here is to make
 sure you use the same the delegation name, in this case `jeff`. Docker trust 
 will automatically handle adding this new key to `targets/releases`. 
 @y
-{% comment %}
-{% endcomment %}
 To support things like key rotation and expiring / retiring keys you can publish
 multiple contributor keys per delegation. The only prerequisite here is to make
 sure you use the same the delegation name, in this case `jeff`. Docker trust 
@@ -931,8 +761,6 @@ will automatically handle adding this new key to `targets/releases`.
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 @y
-{% comment %}
-{% endcomment %}
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 @z
@@ -960,8 +788,6 @@ Successfully added signer: jeff to registry.example.com/admin/demo
 @x
 Check to prove that the delegation (Signer) now contains multiple Key IDs. 
 @y
-{% comment %}
-{% endcomment %}
 Check to prove that the delegation (Signer) now contains multiple Key IDs. 
 @z
 
@@ -1012,8 +838,6 @@ Administrative keys for registry.example.com/admin/demo
 @x
 ### Removing a Delegation
 @y
-{% comment %}
-{% endcomment %}
 ### Removing a Delegation
 @z
 
@@ -1022,8 +846,6 @@ If you need to remove a delegation, including the contributor keys that are
 attached to the `targets/releases` role, you can use the 
 `$ docker trust signer remove` command.
 @y
-{% comment %}
-{% endcomment %}
 If you need to remove a delegation, including the contributor keys that are 
 attached to the `targets/releases` role, you can use the 
 `$ docker trust signer remove` command.
@@ -1033,8 +855,6 @@ attached to the `targets/releases` role, you can use the
 > Note tags that were signed by the removed delegation will need to be resigned 
 > by an active delegation
 @y
-{% comment %}
-{% endcomment %}
 > Note tags that were signed by the removed delegation will need to be resigned 
 > by an active delegation
 @z
@@ -1058,8 +878,6 @@ Successfully removed ben from registry.example.com/admin/demo
 @x
 #### Troubleshooting
 @y
-{% comment %}
-{% endcomment %}
 #### Troubleshooting
 @z
 
@@ -1068,8 +886,6 @@ Successfully removed ben from registry.example.com/admin/demo
 will need to add additional delegations using `docker trust signer add` before 
 resigning images.
 @y
-{% comment %}
-{% endcomment %}
 1) If you see an error that there are no usable keys in `targets/releases`, you 
 will need to add additional delegations using `docker trust signer add` before 
 resigning images.
@@ -1090,8 +906,6 @@ WARN[0000] role targets/releases has fewer keys than its threshold of 1; it will
 message that there are no valid signatures in `targest/releases`, you will need
 to resign the `targets/releases` delegation file with the Notary CLI.
 @y
-{% comment %}
-{% endcomment %}
 2) If you have added additional delegations already and are seeing an error 
 message that there are no valid signatures in `targest/releases`, you will need
 to resign the `targets/releases` delegation file with the Notary CLI.
@@ -1110,8 +924,6 @@ WARN[0000] Error getting targets/releases: valid signatures did not meet thresho
 @x
 Resigning the delegation file is done with the `$ notary witness` command
 @y
-{% comment %}
-{% endcomment %}
 Resigning the delegation file is done with the `$ notary witness` command
 @z
 
@@ -1127,19 +939,15 @@ $ notary witness registry.example.com/admin/demo targets/releases --publish
 
 @x
 More information on the `$ notary witness` command can be found 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation)
+[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation){:target="_blank" rel="noopener" class="_"}
 @y
-{% comment %}
-{% endcomment %}
 More information on the `$ notary witness` command can be found 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation)
+[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation){:target="_blank" rel="noopener" class="_"}
 @z
 
 @x
 ### Removing a Contributor's Key from a Delegation
 @y
-{% comment %}
-{% endcomment %}
 ### Removing a Contributor's Key from a Delegation
 @z
 
@@ -1147,8 +955,6 @@ More information on the `$ notary witness` command can be found
 As part of rotating keys for a delegation, you may want to remove an individual 
 key but retain the delegation. This can be done with the Notary CLI.
 @y
-{% comment %}
-{% endcomment %}
 As part of rotating keys for a delegation, you may want to remove an individual 
 key but retain the delegation. This can be done with the Notary CLI.
 @z
@@ -1157,8 +963,6 @@ key but retain the delegation. This can be done with the Notary CLI.
 Remember you will have to remove the key from both the `targets/releases` role 
 and the role specific to that signer `targets/<name>`.
 @y
-{% comment %}
-{% endcomment %}
 Remember you will have to remove the key from both the `targets/releases` role 
 and the role specific to that signer `targets/<name>`.
 @z
@@ -1166,8 +970,6 @@ and the role specific to that signer `targets/<name>`.
 @x
 1) We will need to grab the Key ID from the Notary Server
 @y
-{% comment %}
-{% endcomment %}
 1) We will need to grab the Key ID from the Notary Server
 @z
 
@@ -1200,8 +1002,6 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 @x
 2) Remove from the `targets/releases` delegation
 @y
-{% comment %}
-{% endcomment %}
 2) Remove from the `targets/releases` delegation
 @z
 
@@ -1232,8 +1032,6 @@ Successfully published changes for repository registry.example.com/admin/demo
 @x
 3) Remove from the `targets/<name>` delegation
 @y
-{% comment %}
-{% endcomment %}
 3) Remove from the `targets/<name>` delegation
 @z
 
@@ -1270,8 +1068,6 @@ Successfully published changes for repository registry.example.com/admin/demo
 @x
 4) Check the remaining delegation list 
 @y
-{% comment %}
-{% endcomment %}
 4) Check the remaining delegation list 
 @z
 
@@ -1300,8 +1096,6 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 @x
 ### Removing a local Delegation Private Key
 @y
-{% comment %}
-{% endcomment %}
 ### Removing a local Delegation Private Key
 @z
 
@@ -1310,8 +1104,6 @@ As part of rotating delegation keys, you may need to remove a local delegation
 key from the local Docker trust store. This is done with the Notary CLI, using
 the `$ notary key remove` command.
 @y
-{% comment %}
-{% endcomment %}
 As part of rotating delegation keys, you may need to remove a local delegation
 key from the local Docker trust store. This is done with the Notary CLI, using
 the `$ notary key remove` command.
@@ -1320,8 +1112,6 @@ the `$ notary key remove` command.
 @x
 1) We will need to get the Key ID from the local Docker Trust store
 @y
-{% comment %}
-{% endcomment %}
 1) We will need to get the Key ID from the local Docker Trust store
 @z
 
@@ -1354,8 +1144,6 @@ targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fd
 @x
 2) Remove the key from the local Docker Trust store
 @y
-{% comment %}
-{% endcomment %}
 2) Remove the key from the local Docker Trust store
 @z
 
@@ -1384,8 +1172,6 @@ Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role j
 @x
 ## Removing all trust data from a Repository
 @y
-{% comment %}
-{% endcomment %}
 ## Removing all trust data from a Repository
 @z
 
@@ -1393,8 +1179,6 @@ Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role j
 You can remove all trust data from a repository, including repository, target, 
 snapshot and all delegations keys using the Notary CLI.
 @y
-{% comment %}
-{% endcomment %}
 You can remove all trust data from a repository, including repository, target, 
 snapshot and all delegations keys using the Notary CLI.
 @z
@@ -1403,8 +1187,6 @@ snapshot and all delegations keys using the Notary CLI.
 This is often required by a container registry before a particular repository
 can be deleted. 
 @y
-{% comment %}
-{% endcomment %}
 This is often required by a container registry before a particular repository
 can be deleted. 
 @z
@@ -1446,8 +1228,6 @@ No signatures or cannot access registry.example.com/admin/demo
 @x
 ## Related information
 @y
-{% comment %}
-{% endcomment %}
 ## Related information
 @z
 
@@ -1457,12 +1237,6 @@ No signatures or cannot access registry.example.com/admin/demo
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 @y
-{% comment %}
-* [Content trust in Docker](index.md)
-* [Manage keys for content trust](trust_key_mng.md)
-* [Automation with content trust](trust_automation.md)
-* [Play in a content trust sandbox](trust_sandbox.md)
-{% endcomment %}
 * [Docker のコンテントトラスト](index.md)
 * [コンテントトラストにおける鍵の管理](trust_key_mng.md)
 * [コンテントトラストの自動化](trust_automation.md)
