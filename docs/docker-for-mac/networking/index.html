@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-06-08 09:12:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop for Mac のネットワーク機能 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Desktop for Mac のネットワーク機能" />
   <meta property="og:description" content="ネットワーク機能。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-08T09:12:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/networking/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-08T09:12:16+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop for Mac のネットワーク機能","description":"ネットワーク機能。","url":"https://docs.docker.com/docker-for-mac/networking/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,12 +116,12 @@
 
 <h3 id="port-mapping">ポートマッピング</h3>
 
-<p>コンテナーの起動時に、たとえば以下のように <code class="language-plaintext highlighter-rouge">-p</code> 引数をつけたとします。</p>
+<p>コンテナーの起動時に、たとえば以下のように<code class="language-plaintext highlighter-rouge">-p</code>引数をつけたとします。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -p 80:80 -d nginx
 </code></pre></div></div>
 
-<p>Docker Desktop for Mac は、コンテナー上のポート 80 を使って稼動するものすべて（この場合は <code class="language-plaintext highlighter-rouge">nginx</code>）、<code class="language-plaintext highlighter-rouge">localhost</code> のポート 80 から利用できるようにします。
+<p>Docker Desktop for Mac は、コンテナー上のポート 80 を使って稼動するものすべて（この場合は<code class="language-plaintext highlighter-rouge">nginx</code>）、<code class="language-plaintext highlighter-rouge">localhost</code> のポート 80 から利用できるようにします。
 この例では、ホストとコンテナーのそれぞれのポート番号は同一にしています。
 ホストのポートを別のものに指定する必要があるとしたら、どうなるでしょう。
 つまり、ホストマシン上においてすでにポート 80 を利用して起動しているアプリケーションがあるなら、コンテナーのポートを別のものに接続したらよいことになります。</p>
@@ -129,8 +129,8 @@
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -p 8000:80 -d nginx
 </code></pre></div></div>
 
-<p>こうすると <code class="language-plaintext highlighter-rouge">localhost:8000</code> への接続が、コンテナー内のポート 80 へ接続されます。
-<code class="language-plaintext highlighter-rouge">-p</code> の文法は <code class="language-plaintext highlighter-rouge">ホストポート:クライアントポート</code> です。</p>
+<p>こうすると<code class="language-plaintext highlighter-rouge">localhost:8000</code>への接続が、コンテナー内のポート 80 へ接続されます。
+<code class="language-plaintext highlighter-rouge">-p</code> の文法は<code class="language-plaintext highlighter-rouge">ホストポート:クライアントポート</code>です。</p>
 
 <h3 id="httphttps-proxy-support">HTTP/HTTPS プロキシーサポート</h3>
 
@@ -140,9 +140,14 @@
 
 <p>以下では、Docker Desktop for Mac の現状のネットワーク機能における制約と回避方法についてまとめます。</p>
 
+<h3 id="changing-internal-ip-addresses">内部 IP アドレスの変更</h3>
+
+<p>Docker が利用する内部 IP アドレスは Settings (Windows の場合)、Preferences (Mac の場合) を通じて変更することができます。
+IP を変更したときは Kubernetes クラスターのリセットが必要であり、アクティブな Swarm はそのままとしておくことが必要です。</p>
+
 <h3 id="there-is-no-docker0-bridge-on-macos">macOS 上に docker0 ブリッジがない</h3>
 
-<p>Docker Desktop for Mac におけるネットワーク機能の実装方法により、ホスト上から <code class="language-plaintext highlighter-rouge">docker0</code> インターフェースを見ることはできません。
+<p>Docker Desktop for Mac におけるネットワーク機能の実装方法により、ホスト上から<code class="language-plaintext highlighter-rouge">docker0</code>インターフェースを見ることはできません。
 このインターフェースは仮想マシン内にあります。</p>
 
 <h3 id="i-cannot-ping-my-containers">コンテナーに ping ができない</h3>
@@ -160,11 +165,11 @@
 <h4 id="i-want-to-connect-from-a-container-to-a-service-on-the-host">コンテナーからホスト上のサービスに接続したい</h4>
 
 <p>ホストには可変の IP アドレスがあります（もっともネットワークを利用しなければ何もありません）。
-推奨されるのは、特別な DNS 名 <code class="language-plaintext highlighter-rouge">host.docker.internal</code> に接続することです。
+推奨されるのは、特別な DNS 名<code class="language-plaintext highlighter-rouge">host.docker.internal</code>に接続することです。
 この DNS は、ホストが利用する内部 IP アドレスを名前解決します。
 これは開発環境において用いられるものであり、Docker Desktop for Mac の範囲外にある本番環境では動作しません。</p>
 
-<p>ゲートウェイも <code class="language-plaintext highlighter-rouge">gateway.docker.internal</code> を利用してアクセス可能です。</p>
+<p>ゲートウェイも<code class="language-plaintext highlighter-rouge">gateway.docker.internal</code>を利用してアクセス可能です。</p>
 
 <p>マシン上に Python をインストールしている場合は、例として以下の手順に従い、コンテナーからホスト上のサービスに接続します。</p>
 
@@ -177,7 +182,7 @@
     <p>Python 2.x をインストールしている場合は、<code class="language-plaintext highlighter-rouge">python -m SimpleHTTPServer 8000</code> を実行します。</p>
   </li>
   <li>
-    <p>そしてコンテナーの実行と <code class="language-plaintext highlighter-rouge">curl</code> のインストールを行って、以下のコマンドのようにホストへの接続を試してみます。</p>
+    <p>そしてコンテナーの実行と<code class="language-plaintext highlighter-rouge">curl</code>のインストールを行って、以下のコマンドのようにホストへの接続を試してみます。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> alpine sh
 <span class="gp"> #</span><span class="w"> </span>apk add curl
@@ -190,27 +195,27 @@
 <h4 id="i-want-to-connect-to-a-container-from-the-mac">Mac からコンテナーに接続したい</h4>
 
 <p><code class="language-plaintext highlighter-rouge">localhost</code> に対するポート転送（port forwarding）が動作します。
-つまり <code class="language-plaintext highlighter-rouge">--publish</code>、<code class="language-plaintext highlighter-rouge">-p</code>、<code class="language-plaintext highlighter-rouge">-P</code> はすべて動きます。
+つまり<code class="language-plaintext highlighter-rouge">--publish</code>、<code class="language-plaintext highlighter-rouge">-p</code>、<code class="language-plaintext highlighter-rouge">-P</code>はすべて動きます。
 Linux コンテナーから公開されたポートは、ホストに転送されます。</p>
 
 <p>今のところ推奨される方法は、ポートを公開するか、あるいはもう 1 つ別のコンテナーから接続することです。
 Linux 上であっても、コンテナーがブリッジネットワーク上ではなく、オーバーレイネットワーク上にある場合には、こういった方法が必要になります。
 その場合にはルートが解決されないからです。</p>
 
-<p>以下は、<a href="/docs.docker.jp.onthefly/docker-for-mac/#explore-the-application">はじめよう</a> の節に示している <code class="language-plaintext highlighter-rouge">nginx</code> ウェブサーバーの起動コマンドです。</p>
+<p>以下は、<a href="/docs.docker.jp.onthefly/docker-for-mac/#explore-the-application">はじめよう</a> の節に示している<code class="language-plaintext highlighter-rouge">nginx</code>ウェブサーバーの起動コマンドです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 80:80 <span class="nt">--name</span> webserver nginx
 </code></pre></div></div>
 
 <p>文法を明確にする目的で、以下の 2 つのコマンドを実行します。
-両方ともコンテナー上のポート <code class="language-plaintext highlighter-rouge">80</code> を、ホスト上のポート <code class="language-plaintext highlighter-rouge">8000</code> に向けて公開するものです。</p>
+両方ともコンテナー上のポート<code class="language-plaintext highlighter-rouge">80</code>を、ホスト上のポート<code class="language-plaintext highlighter-rouge">8000</code>に向けて公開するものです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:80 <span class="nt">--name</span> webserver nginx
 
 <span class="nv">$ </span>docker run <span class="nt">-p</span> 8000:80 <span class="nt">--name</span> webserver nginx
 </code></pre></div></div>
 
-<p>ポートをすべて公開するには <code class="language-plaintext highlighter-rouge">-P</code> フラグを使います。
+<p>ポートをすべて公開するには<code class="language-plaintext highlighter-rouge">-P</code>フラグを使います。
 たとえば以下のコマンドは（デタッチモードで）コンテナーを起動し、<code class="language-plaintext highlighter-rouge">-P</code> フラグによってコンテナー上の全ポートを、ホスト上のランダムなポートとして公開します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-P</span> <span class="nt">--name</span> webserver nginx
@@ -259,6 +264,7 @@ Linux 上であっても、コンテナーがブリッジネットワーク上�
   </li>
   <li><a href="#known-limitations-use-cases-and-workarounds" class="nomunge">既知の制約、利用状況、回避策</a>
     <ul>
+      <li><a href="#changing-internal-ip-addresses" class="nomunge">内部 IP アドレスの変更</a></li>
       <li><a href="#there-is-no-docker0-bridge-on-macos" class="nomunge">macOS 上に docker0 ブリッジがない</a></li>
       <li><a href="#i-cannot-ping-my-containers" class="nomunge">コンテナーに ping ができない</a></li>
       <li><a href="#per-container-ip-addressing-is-not-possible" class="nomunge">コンテナー単位の IP アドレス割り当てができない</a></li>
