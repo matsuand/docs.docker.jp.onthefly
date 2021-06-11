@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-06-11 11:15:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストの委任鍵ペア | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテントトラストの委任鍵ペア" />
   <meta property="og:description" content="コンテントトラストの委任鍵ペア。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-11T11:15:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-11T11:15:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの委任鍵ペア","description":"コンテントトラストの委任鍵ペア。","url":"https://docs.docker.com/engine/security/trust/trust_delegation/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -97,8 +97,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテントトラストの委任鍵ペア</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p>
-<p>Docker コンテントトラスト (Docker content trust; DCT) における委任鍵ペア（delegations）は、イメージタグへのサインを、誰ができて誰ができないのかを制御するものです。
+                        <section class="section"><h1>コンテントトラストの委任鍵ペア</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><p>Docker コンテントトラスト (Docker content trust; DCT) における委任鍵ペア（delegations）は、イメージタグへのサインを、誰ができて誰ができないのかを制御するものです。
 委任鍵は、委任を行う秘密鍵と公開鍵のペアによって構成されます。
 委任鍵には、鍵とその提供者の組み合わせを複数含めることができます。
 これにより a) 委任鍵のユーザーを複数にすることができ、b) 鍵のローテーションを可能にします。</p>
@@ -162,9 +161,14 @@ Failed to add signer to: registry.example.com/user/repo
 <p>DCT にはさらに高度な機能があって、これを利用するためには Notary CLI が必要になります。
 Notary CLI のインストールと設定は以下のようにします。</p>
 
-<p>1) <a href="https://github.com/theupdateframework/notary/releases">クライアント</a> をダウンロードし、パス上に配置して利用できるようにします。</p>
-
-<p>2) <code class="language-plaintext highlighter-rouge">~/.notary/config.json</code>に設定ファイルを生成し、その内容を以下のようにします。</p>
+<ol>
+  <li>
+    <p><a href="https://github.com/theupdateframework/notary/releases">クライアント</a> をダウンロードし、パス上に配置して利用できるようにします。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">~/.notary/config.json</code>に設定ファイルを生成し、その内容を以下のようにします。</p>
+  </li>
+</ol>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"trust_dir"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~/.docker/trust"</span><span class="p">,</span><span class="w">
@@ -177,7 +181,7 @@ Notary CLI のインストールと設定は以下のようにします。</p>
 
 <p>上で新たに生成した設定ファイルでは、ローカルの Docker トラストデータの場所と Notary サーバーの URL が定義しています。</p>
 
-<p>Docker コンテントトラストの利用とは別に、Notary を利用する方法に関しては <a href="https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md">ここ</a> にある Notary CLI ドキュメントを参照してください。</p>
+<p>Docker コンテントトラストの利用とは別に、Notary を利用する方法に関しては <a href="https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md" target="_blank" rel="noopener" class="_">ここ</a> にある Notary CLI ドキュメントを参照してください。</p>
 
 <h2 id="creating-delegation-keys">委任鍵ペアの生成</h2>
 
@@ -279,7 +283,6 @@ advanced use cases of Notary additional delegations are used for hierarchy.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/admin/demo
 
-
 Adding signer <span class="s2">"jeff"</span> to registry.example.com/admin/demo...
 Initializing signed repository <span class="k">for </span>registry.example.com/admin/demo...
 Enter passphrase <span class="k">for </span>root key with ID f6c6a4b:
@@ -333,7 +336,6 @@ configured when you first initiated the repository.</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> ben.pub ben registry.example.com/admin/demo
-
 
 Adding signer <span class="s2">"ben"</span> to registry.example.com/admin/demo...
 Enter passphrase <span class="k">for </span>repository key with ID b0014f8:
@@ -434,7 +436,7 @@ to resign the <code class="language-plaintext highlighter-rouge">targets/release
 </code></pre></div></div>
 
 <p>More information on the <code class="language-plaintext highlighter-rouge">$ notary witness</code> command can be found
-<a href="https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation">here</a></p>
+<a href="https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation" target="_blank" rel="noopener" class="_">here</a></p>
 
 <h3 id="removing-a-contributors-key-from-a-delegation">Removing a Contributor’s Key from a Delegation</h3>
 

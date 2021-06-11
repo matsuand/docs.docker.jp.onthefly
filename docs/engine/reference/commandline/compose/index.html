@@ -1,8 +1,8 @@
-<!-- Page generated 2021-06-08 09:12:16 +0900-->
+<!-- Page generated 2021-06-11 11:15:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker compose | Docker ドキュメント</title>
-  <meta name="description" content="docker compose: Docker Compose コマンド。" />
+  <meta name="description" content="docker compose: You can use compose subcommand, `docker compose [-f ...] [options] [COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers. ### Use `-f` to specify name and..." />
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/reference/commandline/compose/" />
 
@@ -29,7 +29,7 @@
 
   <!-- SEO stuff -->
   <meta name="twitter:title" itemprop="title name" content="docker compose"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="docker compose: Docker Compose コマンド。" />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker compose: You can use compose subcommand, `docker compose [-f ...] [options] [COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers. ### Use `-f` to specify name and..." />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
   <meta name="twitter:site" content="@docker_docs"/>
@@ -37,15 +37,15 @@
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
   <meta property="og:title" content="docker compose" />
-  <meta property="og:description" content="docker compose: Docker Compose コマンド。" />
+  <meta property="og:description" content="docker compose: You can use compose subcommand, `docker compose [-f ...] [options] [COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers. ### Use `-f` to specify name and..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-08T09:12:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-11T11:15:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/compose/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-08T09:12:16+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker compose","description":"docker compose: Docker Compose コマンド。","url":"https://docs.docker.com/engine/reference/commandline/compose/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-11T11:15:38+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker compose","description":"docker compose: You can use compose subcommand, `docker compose [-f ...] [options] [COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers. ### Use `-f` to specify name and...","url":"https://docs.docker.com/engine/reference/commandline/compose/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker compose</h1><!--
+                        <section class="section"><h1>docker compose</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><!--
 Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears
 here, you'll need to find the string by searching this repo:
@@ -115,9 +115,103 @@ https://github.com/docker/compose-cli
 
 <p>Docker Compose コマンド</p>
 
+<h2 id="usage">利用方法</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker compose COMMAND
+</code></pre></div></div>
+
 <h2 id="extended-description">追加説明</h2>
 
-<p>Docker Compose コマンド。</p>
+<p>You can use compose subcommand, <code class="language-plaintext highlighter-rouge">docker compose [-f &lt;arg&gt;...] [options] [COMMAND] [ARGS...]</code>, to build and manage
+multiple services in Docker containers.</p>
+
+<h3 id="use--f-to-specify-name-and-path-of-one-or-more-compose-files">Use <code class="language-plaintext highlighter-rouge">-f</code> to specify name and path of one or more Compose files</h3>
+<p>Use the <code class="language-plaintext highlighter-rouge">-f</code> flag to specify the location of a Compose configuration file.</p>
+
+<h4 id="specifying-multiple-compose-files">Specifying multiple Compose files</h4>
+<p>You can supply multiple <code class="language-plaintext highlighter-rouge">-f</code> configuration files. When you supply multiple files, Compose combines them into a single 
+configuration. Compose builds the configuration in the order you supply the files. Subsequent files override and add 
+to their predecessors.</p>
+
+<p>For example, consider this command line:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file might specify a <code class="language-plaintext highlighter-rouge">webapp</code> service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">examples/web</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">/data"</span>
+</code></pre></div></div>
+<p>If the <code class="language-plaintext highlighter-rouge">docker-compose.admin.yml</code> also specifies this same service, any matching fields override the previous file. 
+New values, add to the <code class="language-plaintext highlighter-rouge">webapp</code> service configuration.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">DEBUG=1</span>
+</code></pre></div></div>
+
+<p>When you use multiple Compose files, all paths in the files are relative to the first configuration file specified 
+with <code class="language-plaintext highlighter-rouge">-f</code>. You can use the <code class="language-plaintext highlighter-rouge">--project-directory</code> option to override this base path.</p>
+
+<p>Use a <code class="language-plaintext highlighter-rouge">-f</code> with <code class="language-plaintext highlighter-rouge">-</code> (dash) as the filename to read the configuration from stdin. When stdin is used all paths in the 
+configuration are relative to the current working directory.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">-f</code> flag is optional. If you don’t provide this flag on the command line, Compose traverses the working directory 
+and its parent directories looking for a <code class="language-plaintext highlighter-rouge">compose.yaml</code> or <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file.</p>
+
+<h4 id="specifying-a-path-to-a-single-compose-file">Specifying a path to a single Compose file</h4>
+<p>You can use the <code class="language-plaintext highlighter-rouge">-f</code> flag to specify a path to a Compose file that is not located in the current directory, either 
+from the command line or by setting up a <code class="language-plaintext highlighter-rouge">COMPOSE_FILE</code> environment variable in your shell or in an environment file.</p>
+
+<p>For an example of using the <code class="language-plaintext highlighter-rouge">-f</code> option at the command line, suppose you are running the Compose Rails sample, and 
+have a <code class="language-plaintext highlighter-rouge">compose.yaml</code> file in a directory called <code class="language-plaintext highlighter-rouge">sandbox/rails</code>. You can use a command like <code class="language-plaintext highlighter-rouge">docker compose pull</code> to 
+get the postgres image for the db service from anywhere by using the <code class="language-plaintext highlighter-rouge">-f</code> flag as follows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose -f ~/sandbox/rails/compose.yaml pull db
+</code></pre></div></div>
+
+<h3 id="use--p-to-specify-a-project-name">Use <code class="language-plaintext highlighter-rouge">-p</code> to specify a project name</h3>
+
+<p>Each configuration has a project name. If you supply a <code class="language-plaintext highlighter-rouge">-p</code> flag, you can specify a project name. If you don’t 
+specify the flag, Compose uses the current directory name. 
+Project name can also be set by <code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code> environment variable.</p>
+
+<p>Most compose subcommand can be ran without a compose file, just passing 
+project name to retrieve the relevant resources.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker compose -p my_project ps -a
+NAME                 SERVICE    STATUS     PORTS
+my_project_demo_1    demo       running             
+
+$ docker compose -p my_project logs
+demo_1  | PING localhost (127.0.0.1): 56 data bytes
+demo_1  | 64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.095 ms
+</code></pre></div></div>
+
+<h3 id="use-profiles-to-enable-optional-services">Use profiles to enable optional services</h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">--profile</code> to specify one or more active profiles
+Calling <code class="language-plaintext highlighter-rouge">docker compose --profile frontend up</code> will start the services with the profile <code class="language-plaintext highlighter-rouge">frontend</code> and services 
+without any specified profiles. 
+You can also enable multiple profiles, e.g. with <code class="language-plaintext highlighter-rouge">docker compose --profile frontend --profile debug up</code> the profiles <code class="language-plaintext highlighter-rouge">frontend</code> and <code class="language-plaintext highlighter-rouge">debug</code> will be enabled.</p>
+
+<p>Profiles can also be set by <code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code> environment variable.</p>
+
+<h3 id="set-up-environment-variables">Set up environment variables</h3>
+
+<p>You can set environment variables for various docker-compose options, including the <code class="language-plaintext highlighter-rouge">-f</code>, <code class="language-plaintext highlighter-rouge">-p</code> and <code class="language-plaintext highlighter-rouge">--profiles</code> flags.</p>
+
+<p>Setting the <code class="language-plaintext highlighter-rouge">COMPOSE_FILE</code> environment variable is equivalent to passing the <code class="language-plaintext highlighter-rouge">-f</code> flag,
+<code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code> environment variable does the same for to the <code class="language-plaintext highlighter-rouge">-p</code> flag,
+and so does <code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code> environment variable for to the <code class="language-plaintext highlighter-rouge">--profiles</code> flag.</p>
+
+<p>If flags are explicitly set on command line, associated environment variable is ignored</p>
 
 <h2 id="options">オプション</h2>
 
@@ -171,6 +265,20 @@ https://github.com/docker/compose-cli
     <td><code class="language-plaintext highlighter-rouge">--file</code> , <code class="language-plaintext highlighter-rouge">-f</code></td>
     <td></td>
     <td>Compose 設定ファイル。</td>
+  </tr>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--no-ansi</code></td>
+    <td></td>
+    <td>ANSI 制御文字は表示しません (廃止予定)。</td>
   </tr>
 
   
@@ -276,6 +384,12 @@ https://github.com/docker/compose-cli
 
   
   <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_cp/">docker compose cp</a></td>
+    <td>Copy files/folders between a service container and the local filesystem</td>
+  </tr>
+
+  
+  <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_create/">docker compose create</a></td>
     <td>サービスコンテナーを生成します。</td>
   </tr>
@@ -296,6 +410,12 @@ https://github.com/docker/compose-cli
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_exec/">docker compose exec</a></td>
     <td>実行中コンテナー内においてコマンドを実行します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_images/">docker compose images</a></td>
+    <td>生成されたコンテナーにおいて利用されているイメージを一覧表示します。</td>
   </tr>
 
   
@@ -324,6 +444,12 @@ https://github.com/docker/compose-cli
 
   
   <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_port/">docker compose port</a></td>
+    <td>Print the public port for a port binding.</td>
+  </tr>
+
+  
+  <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_ps/">docker compose ps</a></td>
     <td>コンテナーを一覧表示します。</td>
   </tr>
@@ -338,6 +464,12 @@ https://github.com/docker/compose-cli
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_push/">docker compose push</a></td>
     <td>サービスイメージをプッシュします。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_restart/">docker compose restart</a></td>
+    <td>Restart containers</td>
   </tr>
 
   
@@ -419,7 +551,15 @@ https://github.com/docker/compose-cli
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#description" class="nomunge">説明</a></li>
-  <li><a href="#extended-description" class="nomunge">追加説明</a></li>
+  <li><a href="#usage" class="nomunge">利用方法</a></li>
+  <li><a href="#extended-description" class="nomunge">追加説明</a>
+    <ul>
+      <li><a href="#use--f-to-specify-name-and-path-of-one-or-more-compose-files" class="nomunge">Use -f to specify name and path of one or more Compose files</a></li>
+      <li><a href="#use--p-to-specify-a-project-name" class="nomunge">Use -p to specify a project name</a></li>
+      <li><a href="#use-profiles-to-enable-optional-services" class="nomunge">Use profiles to enable optional services</a></li>
+      <li><a href="#set-up-environment-variables" class="nomunge">Set up environment variables</a></li>
+    </ul>
+  </li>
   <li><a href="#options" class="nomunge">オプション</a></li>
   <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="#child-commands" class="nomunge">下位コマンド</a></li>

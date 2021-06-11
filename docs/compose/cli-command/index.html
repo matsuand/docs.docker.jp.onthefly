@@ -1,9 +1,9 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-06-11 11:15:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose CLI 技術プレビュー | Docker ドキュメント</title>
-  <meta name="description" content="Compose CLI 技術プレビュー" />
-  <meta name="keywords" content="documentation, docs, docker, compose, containers">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose V2 ベータ | Docker ドキュメント</title>
+  <meta name="description" content="Docker CLI における Compose V2" />
+  <meta name="keywords" content="compose, V2, beta, Tech preview">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/cli-command/" />
 
   <!-- favicon -->
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Compose CLI 技術プレビュー"/>
+  <meta name="twitter:title" itemprop="title name" content="Compose V2 ベータ"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Compose CLI 技術プレビュー" />
-  <meta property="og:description" content="Compose CLI 技術プレビュー" />
+  <meta property="og:title" content="Compose V2 ベータ" />
+  <meta property="og:description" content="Docker CLI における Compose V2" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-11T11:15:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/cli-command/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose CLI 技術プレビュー","description":"Compose CLI 技術プレビュー","url":"https://docs.docker.com/compose/cli-command/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-11T11:15:38+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose V2 ベータ","description":"Docker CLI における Compose V2","url":"https://docs.docker.com/compose/cli-command/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -91,7 +91,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/compose/">Docker Compose</a></li><li><a href="/docs.docker.jp.onthefly/compose/cli-command/">Compose CLI 技術プレビュー</a></li><li><a href="/docs.docker.jp.onthefly/compose/cli-command/">概要</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/compose/">Docker Compose</a></li><li><a href="/docs.docker.jp.onthefly/compose/cli-command/">Compose V2</a></li><li><a href="/docs.docker.jp.onthefly/compose/cli-command/">概要</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -103,60 +103,70 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose CLI 技術プレビュー</h1><h2 id="new-docker-compose-command">新しい Docker compose コマンド</h2>
+                        <section class="section"><h1>Compose V2 ベータ</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><h2 id="compose-v2-and-the-new-docker-compose-command">Compose V2 と新たな<code class="language-plaintext highlighter-rouge">docker compose</code>コマンド</h2>
 
 <blockquote class="important">
   <p>重要</p>
 
-  <p>Docker CLI の<code class="language-plaintext highlighter-rouge">compose</code>コマンドが技術プレビュー版として利用可能になりました。
-このコマンドを本番環境において用いることは推奨しません。</p>
+  <p>The new Compose V2, which supports the compose command as part of the Docker CLI, is now available as a beta version.  Compose V2 seamlessly integrates compose functions into the Docker platform, continuing to support most of the previous <code class="language-plaintext highlighter-rouge">docker-compose</code> features and flags. You can test the Compose V2 today, by simply replacing the dash (<code class="language-plaintext highlighter-rouge">-</code>) with a space, and running <code class="language-plaintext highlighter-rouge">docker compose</code>, instead of <code class="language-plaintext highlighter-rouge">docker-compose</code>.</p>
 
-  <p>みなさんからのフィードバックを頂くことが重要と思っています。
-新しい ‘compose’ コマンドに対するフィードバックは、GitHub リポジトリ <a href="https://github.com/docker/compose-cli/issues" target="_blank" rel="noopener" class="_">Compose-CLI</a> において issue を生成してお知らせください。</p>
+  <p>As Docker Compose V2 is in beta, we recommend that you extensively test before using it in production environments.</p>
 </blockquote>
 
-<p>Docker CLI が<code class="language-plaintext highlighter-rouge">compose</code>コマンドをサポートするようになりました。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>の機能やフラグを、個別のツールなしに利用できるようになります。</p>
+<p>Starting with Docker Desktop 3.4.0, you can run Compose V2 commands without modifying your invocations, by enabling the drop-in replacement of the previous <code class="language-plaintext highlighter-rouge">docker-compose</code> with the new command.  See the section <a href="#installing-compose-v2">Installing Compose v2</a> for detailed instructions how to enable the drop-in replacement.</p>
 
-<p>これまで<code class="language-plaintext highlighter-rouge">docker-compose</code>を利用する際のダッシュ（<code class="language-plaintext highlighter-rouge">-</code>）の部分を空白にするだけで<code class="language-plaintext highlighter-rouge">docker compose</code>に切り替えることができます。
-これは相互に切り替えが可能です。
-したがって新たな<code class="language-plaintext highlighter-rouge">compose</code>コマンドを必ず用いなければいけないというわけではありません。
-必要に応じて今でも<code class="language-plaintext highlighter-rouge">docker-compose</code>を用いることができます。</p>
+<p>We will gradually turn this option on automatically for Docker Desktop users, so that users can seamlessly move to Docker Compose V2 without the need to upgrade any of their scripts. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop <strong>Experimental</strong> Settings, or by running the command <code class="language-plaintext highlighter-rouge">docker-compose disable-v2</code>.</p>
 
-<p><a href="https://github.com/compose-spec/compose-spec" target="_blank" rel="noopener" class="_">Compose specification</a>（Compose 仕様）においては、Compose YAML ファイルモデルと<code class="language-plaintext highlighter-rouge">docker-compose</code>実装の違いについて説明しています。
-これを切り替えて利用することは数多くの拡張を可能にします。
-たとえば <a href="/docs.docker.jp.onthefly/cloud/ecs-integration">Amazon ECS</a> や <a href="/docs.docker.jp.onthefly/cloud/aci-integration">Microsoft ACI</a> の稼働にあたって、Docker コンテキストを切り替えるだけでクラウド上の Compose アプリケーションの「up」を行うことができます。
-compose コマンドが直接 Docker CLI に追加されています。
-Compose 仕様は進化を続けているので、Docker CLI への新たな機能の導入は素早く実現されます。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>は今後もサポートされメンテナンスが行われます。
-ただし Docker CLI 内の compose を実現する Go 言語の実装は、compose-go バインディングに直接依存するものであり、これは Compose 仕様の一部としてメンテナンスされているものです。
-このためコミュニティによる提案、Docker CLI や Engine の試験的実装が容易になり、ユーザーへの機能提供を迅速にすることができます。
-Docker CLI における comose コマンドでは、プロファイルや GPU デバイスなどのように、Compose 仕様に新たに加えられた機能をすでにサポートしているものもあります。</p>
+<p class="important">Your feedback is important to us. Let us know your feedback on the new ‘compose’ command by creating an issue in the <a href="https://github.com/docker/compose-cli/issues" target="_blank" rel="noopener" class="_">Compose-CLI</a> GitHub repository.</p>
 
-<p>新たな<code class="language-plaintext highlighter-rouge">compose</code>コマンドにおいて、またサポートされていないフラグに関しては <a href="/docs.docker.jp.onthefly/compose/cli-command-compatibility/">docker-compose 互換性一覧</a> を参照してください。</p>
+<h2 id="context-of-docker-compose-evolution">Context of Docker Compose evolution</h2>
 
-<h2 id="installing-the-compose-cli-tech-preview">Compose CLI 技術プレビューのインストール</h2>
+<p>Introduction of the <a href="https://github.com/compose-spec/compose-spec" target="_blank" rel="noopener" class="_">Compose specification</a> makes a clean distinction between the Compose YAML file model and the <code class="language-plaintext highlighter-rouge">docker-compose</code> implementation. Making this change has enabled a number of enhancements, including adding the <code class="language-plaintext highlighter-rouge">compose</code> command directly into the Docker CLI,  being able to “up” a Compose application on cloud platforms by simply switching the Docker context, and launching of <a href="/cloud/ecs-integration">Amazon ECS</a> and <a href="/cloud/aci-integration">Microsoft ACI</a>. As the Compose specification evolves, new features land faster in the Docker CLI.</p>
 
-<h3 id="install-compose-cli-tech-preview-on-mac-and-windows">Mac または Windows における Compose CLI 技術プレビューのインストール</h3>
+<p>While docker-compose is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. This allows us to include community proposals, experimental implementations by the Docker CLI and/or Engine, and deliver features faster to users. Compose V2 also  supports some of the newer additions to the Compose specification, such as <a href="/docs.docker.jp.onthefly/compose/profiles/">profiles</a> and <a href="/docs.docker.jp.onthefly/compose/gpu-support/">GPU</a> devices.</p>
 
-<p><strong>Docker Desktop for Mac および for Windows</strong> のバージョン 3.2.1 またはそれ以降には、Docker CLI に新たな compose コマンドが含まれます。
-したがって Windows と Mac のユーザーは、個別にインストールする必要はありません。</p>
+<p>Additionally, Compose V2 also supports <a href="/docs.docker.jp.onthefly/docker-for-mac/apple-silicon/">Apple silicon</a>.</p>
+
+<p>For more information about the flags that are supported in the new compose command, see the <a href="/docs.docker.jp.onthefly/compose/cli-command-compatibility/">docker-compose compatibility list</a>.</p>
+
+<h2 id="installing-compose-v2">Installing Compose V2</h2>
+
+<p>This section contains instructions on how to install Compose V2.</p>
+
+<h3 id="install-on-mac-and-windows">Install on Mac and Windows</h3>
+
+<p><strong>Docker Desktop for Mac and for Windows version 3.2.1</strong> and above includes the new Compose command along with the Docker CLI. Therefore, Windows and Mac users do not need to install the Compose V2 separately.</p>
+
+<p><strong>Docker Desktop for Mac and for Windows version 3.4.0</strong> and above also includes <code class="language-plaintext highlighter-rouge">docker-compose</code> drop-in replacement, allowing users to choose to use Compose V2 when using the <code class="language-plaintext highlighter-rouge">docker-compose</code> command.</p>
+
+<p>We will progressively turn Docker Compose V2 on automatically for Docker Desktop users, so that users can seamlessly move to Docker Compose V2 without the need to change any of their scripts.  If you run into any problems with Compose V2, you can simply switch back to Compose v1, either in Docker Desktop, or in the CLI.</p>
 
 <p>Docker Desktop のインストール手順は以下を参照してください。</p>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/docker-for-mac/install/">Docker Desktop の Mac へのンストール</a></li>
-  <li><a href="/docs.docker.jp.onthefly/docker-for-windows/install/">Docker Desktop の Windows へのンストール</a>.</li>
+  <li><a href="/docs.docker.jp.onthefly/docker-for-windows/install/">Docker Desktop の Windows へのンストール</a></li>
 </ul>
 
-<h3 id="install-compose-cli-tech-preview-on-linux">Linux における Compose CLI 技術プレビューのインストール</h3>
+<p>To disable Docker Compose V2 using Docker Desktop:</p>
 
-<p>新たな Compose CLI コマンドをインストールするのであれば、技術プレビューが含まれます。
-インストールには以下のスクリプトを実行します。</p>
+<ol>
+  <li>From the Docker menu, click <strong>Preferences</strong> (<strong>Settings</strong> on Windows) &gt; <strong>Experimental features</strong>.</li>
+  <li>Clear the <strong>Use Docker Compose V2</strong> check box.</li>
+</ol>
+
+<p>To disable Docker Compose V2 using the CLI, run:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose disable-v2
+</code></pre></div></div>
+
+<h3 id="install-on-linux">Install on Linux</h3>
+
+<p>You can install the new Compose CLI, including Compose V2, using the following install script:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-L</span> https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 </code></pre></div></div>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=V2">V2</a>, <a href="/docs.docker.jp.onthefly/search/?q=beta">beta</a>, <a href="/docs.docker.jp.onthefly/search/?q=Tech preview">Tech preview</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -189,11 +199,12 @@ Docker CLI における comose コマンドでは、プロファイルや GPU �
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#new-docker-compose-command" class="nomunge">新しい Docker compose コマンド</a></li>
-  <li><a href="#installing-the-compose-cli-tech-preview" class="nomunge">Compose CLI 技術プレビューのインストール</a>
+  <li><a href="#compose-v2-and-the-new-docker-compose-command" class="nomunge">Compose V2 と新たなdocker composeコマンド</a></li>
+  <li><a href="#context-of-docker-compose-evolution" class="nomunge">Context of Docker Compose evolution</a></li>
+  <li><a href="#installing-compose-v2" class="nomunge">Installing Compose V2</a>
     <ul>
-      <li><a href="#install-compose-cli-tech-preview-on-mac-and-windows" class="nomunge">Mac または Windows における Compose CLI 技術プレビューのインストール</a></li>
-      <li><a href="#install-compose-cli-tech-preview-on-linux" class="nomunge">Linux における Compose CLI 技術プレビューのインストール</a></li>
+      <li><a href="#install-on-mac-and-windows" class="nomunge">Install on Mac and Windows</a></li>
+      <li><a href="#install-on-linux" class="nomunge">Install on Linux</a></li>
     </ul>
   </li>
 </ul>
