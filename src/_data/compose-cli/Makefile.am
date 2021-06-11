@@ -16,6 +16,7 @@ bases = \
 	docker_compose         \
 	docker_compose_build   \
 	docker_compose_convert \
+	docker_compose_cp      \
 	docker_compose_create  \
 	docker_compose_down    \
 	docker_compose_events  \
@@ -25,9 +26,11 @@ bases = \
 	docker_compose_logs    \
 	docker_compose_ls      \
 	docker_compose_pause   \
+	docker_compose_port    \
 	docker_compose_ps      \
 	docker_compose_pull    \
 	docker_compose_push    \
+	docker_compose_restart \
 	docker_compose_rm      \
 	docker_compose_run     \
 	docker_compose_start   \

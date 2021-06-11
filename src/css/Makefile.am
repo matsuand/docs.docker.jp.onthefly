@@ -10,7 +10,7 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 csss = \
-	api-reference.css     \
+	api-reference.scss    \
 	bootstrap.min.css     \
 	bootstrap.min.css.map \
 	font-awesome.min.css  \

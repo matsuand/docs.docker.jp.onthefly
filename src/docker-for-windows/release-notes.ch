@@ -38,6 +38,106 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.4.0
+2021-06-09
+@y
+## Docker Desktop 3.4.0
+2021-06-09
+@z
+
+@x
+[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+@y
+[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+@z
+
+@x
+### New
+@y
+### New
+@z
+
+@x
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+@y
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+@z
+
+@x
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+@y
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+@z
+
+@x
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+@y
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+@z
+
+@x
+### Deprecation
+@y
+### Deprecation
+@z
+
+@x
+- Docker Desktop no longer installs Notary, `docker trust` should be used for image signing.
+@y
+- Docker Desktop no longer installs Notary, `docker trust` should be used for image signing.
+@z
+
+@x
+### Upgrades
+@y
+### Upgrades
+@z
+
+@x
+- [Docker Engine 20.10.7](https://docs.docker.com/engine/release-notes/#20107)
+- [Docker Compose 1.29.2](https://github.com/docker/compose/releases/tag/1.29.2)
+- [Docker Hub Tool v0.4.1](https://github.com/docker/hub-tool/releases/tag/v0.4.1)
+- [Compose CLI v1.0.16](https://github.com/docker/compose-cli/releases/tag/v1.0.16)
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1)
+- [containerd v1.4.6](https://github.com/containerd/containerd/releases/tag/v1.4.6)
+- [runc v1.0.0-rc95](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc95)
+- [Go 1.16.5](https://github.com/golang/go/releases/tag/go1.16.5)
+@y
+- [Docker Engine 20.10.7](https://docs.docker.com/engine/release-notes/#20107)
+- [Docker Compose 1.29.2](https://github.com/docker/compose/releases/tag/1.29.2)
+- [Docker Hub Tool v0.4.1](https://github.com/docker/hub-tool/releases/tag/v0.4.1)
+- [Compose CLI v1.0.16](https://github.com/docker/compose-cli/releases/tag/v1.0.16)
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1)
+- [containerd v1.4.6](https://github.com/containerd/containerd/releases/tag/v1.4.6)
+- [runc v1.0.0-rc95](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc95)
+- [Go 1.16.5](https://github.com/golang/go/releases/tag/go1.16.5)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+### Bug fixes and minor changes
+@z
+
+@x
+- Fixed error showing stderr log in the UI. Fixes [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
+- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
+- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
+- Fixed version number missing in update dialog window.
+- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+- Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+@y
+- Fixed error showing stderr log in the UI. Fixes [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
+- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
+- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
+- Fixed version number missing in update dialog window.
+- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+- Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+@z
+
+@x
 ## Docker Desktop 3.3.3
 2021-05-06
 @y
@@ -46,13 +146,13 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 @z
 
 @x
-## Upgrades
+### Upgrades
 @y
 {: #upgrades }
 ### アップグレード
@@ -67,7 +167,7 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 @y
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
@@ -88,13 +188,13 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
-## Upgrades
+### Upgrades
 @y
 {: #upgrades }
 ### アップグレード
@@ -113,7 +213,7 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 @y
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
@@ -146,9 +246,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
 @z
 
 @x

@@ -9,6 +9,8 @@ title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
+toc_min: 2
+toc_max: 3
 ---
 @y
 ---
@@ -18,6 +20,8 @@ title: Docker ダッシュボード
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
+toc_min: 2
+toc_max: 3
 ---
 @z
 
@@ -29,21 +33,30 @@ CLI を使って難しい操作を行う必要がなくなります。
 @z
 
 @x
-The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
+The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](explore-running-containers-and-applications).
 @y
 **Containers/Apps** 画面では、コンテナーやアプリケーションの実行状態を表示します。
 この画面においてはコンテナーやアプリケーションとのやりとりを行うことが可能であり、手元のマシンからアプリケーションのライフサイクルを直接制御することができます。
 この画面では、コンテナーや Docker Compose ベースのアプリケーションに含まれる Docker オブジェクトに対して、主要な操作、つまり詳細確認、対話指示、管理を直感的なインターフェースにより提供します。
+詳しくは [実行中コンテナーやアプリケーションの動作確認](#explore-running-containers-and-applications) を参照してください。
 @z
 
 @x
-The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
+The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](#explore-your-images)
 @y
 **Images** 画面には Docker イメージが一覧表示されます。
 ここからイメージをコンテナーとして実行したり、Docker Hub からの最新版イメージのプル、イメージの詳細確認を行ったりすることができます。
 また Snyk を利用したぜい弱性スキャン報告の概要が表示されます。
 さらにイメージ削除の機能もあり、不要となったイメージをディスク上から削除して容量を確保することができます。
 Docker Hub にログインできていれば、Docker Hub 上において自分や組織が共有しているイメージを参照することもできます。
+詳しくは [イメージの確認](#explore-your-images) を参照してください。
+@z
+
+@x
+The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](#explore-volumes).
+@y
+**Volumes** 画面にはボリュームの一覧が表示されるので、ボリュームの生成削除や、どれが利用中であるかの確認が簡単にできます。
+詳しくは [ボリュームの確認](#explore-volumes) を参照してください。
 @z
 
 @x
@@ -246,10 +259,10 @@ Use the **Search** option to search for a specific object. You can also sort you
 @z
 
 @x
-## Interact with containers and applications
+### Interact with containers and applications
 @y
 {: #interact-with-containers-and-applications }
-## コンテナーやアプリケーションとのやりとり
+### コンテナーやアプリケーションとのやりとり
 @z
 
 @x
@@ -281,10 +294,10 @@ Click **Open in Visual Studio Code** to open the application in VS Code. Hover o
 @z
 
 @x
-## Container view
+### Container view
 @y
 {: #container-view }
-## コンテナー画面
+### コンテナー画面
 @z
 
 @x
@@ -669,4 +682,75 @@ To interact with remote repositories:
 
    **View in Hub** オプションは Docker Hub ページを開いて、イメージの詳細情報を表示します。
    たとえば OS アーキテクチャー、イメージサイズ、イメージ公開日、イメージレイヤー一覧などです。
+@z
+
+@x
+    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+@y
+    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+@z
+
+@x
+## Explore volumes
+@y
+{: #explore-volumes }
+## ボリュームの確認
+@z
+
+@x
+The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes/index.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+@y
+Docker Dashboard の **Volumes** 画面では、[ボリューム](../storage/volumes/index.md) の生成削除や、どれが利用中であるかの確認が簡単にできます。
+Pro プランや Team プランを購入している開発者であれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
+@z
+
+@x
+> [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing account to a Pro or a Team plan to start exploring the details in your volume.
+@y
+> 既存のプランを Pro プランや Team プランに [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} して、ボリュームの詳細な確認を始めてみてください。
+@z
+
+@x
+### Manage volumes
+@y
+{: #manage-volumes }
+### ボリュームの管理
+@z
+
+@x
+By default, the **Volumes** view displays a list of all the volumes.
+@y
+By default, the **Volumes** view displays a list of all the volumes.
+@z
+
+@x
+![List volumes](images/volumes-list.png){:width="700px"}
+@y
+![ボリューム一覧](images/volumes-list.png){:width="700px"}
+@z
+
+@x
+To explore the details of a specific volume, select a volume from the list. This opens the detailed view. The **Data** tab displays the files and folders in the volume and their file size.
+@y
+特定のボリュームを詳細に確認するには、まず一覧の中からそのボリュームを選択します。
+そこからは詳細画面が開きます。
+**Data** タブには、そのボリューム内にあるファイルやフォルダーと、そのサイズが表示されます。
+@z
+
+@x
+To view the details of the volume such as the name of the container that’s using the volume, the image name, and the port number the container is using, click the **In Use** tab.
+@y
+To view the details of the volume such as the name of the container that’s using the volume, the image name, and the port number the container is using, click the **In Use** tab.
+@z
+
+@x
+### Remove a volume
+@y
+### Remove a volume
+@z
+
+@x
+Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button.  Alternatively, select the volume from the list and then click the **Delete** button.
+@y
+Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button.  Alternatively, select the volume from the list and then click the **Delete** button.
 @z

@@ -130,11 +130,11 @@ WSL 2 on Windows 10:
 @z
 
 @x
-- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+- Windows 10 64-bit: Pro (Build 19041 or higher), or Enterprise or Education (Build 18363 or higher).
 
   For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
 @y
-- Windows 10 64 ビット: Pro、Enterprise、Education（Build 17134 またはそれ以降）
+- Windows 10 64 ビット: Pro (Build 19041 またはそれ以降)、Enterprise、Education（Build 17134 またはそれ以降）
 
   Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#system-requirements-for-wsl-2-backend) を参照してください。
 @z
@@ -172,11 +172,11 @@ Hyper-V on Windows 10:
 @x
 > **Note**
 >
-> Docker supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
+> Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
 @y
 > **メモ**
 >
-> Docker における Windows 上の Docker Desktop は、Windows 10 オペレーティングシステムに対するマイクロソフトのサポートライフサイクルに対応づいて、サポートが行われます。
+> Docker における Windows 上の Docker Desktop は、Windows 10 オペレーティングシステムに対するマイクロソフトのサポートライフサイクルに対応づいてのみ、サポートが行われます。
 > 詳しくは [Windows ライフサイクルのファクトシート](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 

@@ -20,7 +20,8 @@ images = \
 	mac-container-view.png       \
 	mac-dashboard.png            \
 	mac-redis-container.png      \
-	redis-image.png
+	redis-image.png              \
+	volumes-list.png
 
 srcs = $(images)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
