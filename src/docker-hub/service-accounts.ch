@@ -46,17 +46,19 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 @x
 | Tier | Pull Rates Per Day* | Annual Fee |
 | ------ | ------ | ------ |
-| 1 | 15-50k | $9,950/yr |
-| 2 | 50-150k | $17,950/yr |
-| 3 | 150k-500k | $60,000/yr |
-| 4 | 500k+ | Tier 4+ $60k/yr/500k Pull increment |
+| 1 | 5-10k | $9,950/yr |
+| 2 | 10-25k | $17,950/yr |
+| 3 | 25k-50k | $32,950/yr |
+| 4 | 50-100k | $58,950/yr |
+| 5 | 100k+ | [Contact Sales](https://www.docker.com/pricing/questions){:target="_blank" rel="noopener" class="_"} |
 @y
 | Tier | Pull Rates Per Day* | Annual Fee |
 | ------ | ------ | ------ |
-| 1 | 15-50k | $9,950/yr |
-| 2 | 50-150k | $17,950/yr |
-| 3 | 150k-500k | $60,000/yr |
-| 4 | 500k+ | Tier 4+ $60k/yr/500k Pull increment |
+| 1 | 5-10k | $9,950/yr |
+| 2 | 10-25k | $17,950/yr |
+| 3 | 25k-50k | $32,950/yr |
+| 4 | 50-100k | $58,950/yr |
+| 5 | 100k+ | [Contact Sales](https://www.docker.com/pricing/questions){:target="_blank" rel="noopener" class="_"} |
 @z
 
 @x
