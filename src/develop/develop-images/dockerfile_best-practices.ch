@@ -942,12 +942,12 @@ maintainable `Dockerfile`.
 @x
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 5 MB), while still
+is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 @y
 イメージのベースは、できるだけ現時点での公式リポジトリを利用してください。
 [Alpine イメージ](https://hub.docker.com/_/alpine/) がお勧めです。
-このイメージはしっかりと管理されていて、充実した Linux ディストリビューションであるにもかかわらず、非常にコンパクトなものになっています（現在 5 MB 以下）。
+このイメージはしっかりと管理されていて、充実した Linux ディストリビューションであるにもかかわらず、非常にコンパクトなものになっています（現在 6 MB 以下）。
 @z
 
 @x

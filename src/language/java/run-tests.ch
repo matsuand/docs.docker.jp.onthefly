@@ -361,7 +361,7 @@ $ docker build -t java-docker --target test .
  => CACHED [base 4/6] COPY mvnw pom.xml ./
  => CACHED [base 5/6] RUN ./mvnw dependency:go-offline
  => CACHED [base 6/6] COPY src ./src
- => [test 1/1] RUN ["./mvnw", "test", "-Dspring-boot.run.profiles=mysql"]
+ => [test 1/1] RUN ["./mvnw", "test"]
  => exporting to image
  => => exporting layers
 => => writing image sha256:10cb585a7f289a04539e95d583ae97bcf8725959a6bd32c2f5632d0e7c1d16a0
@@ -375,7 +375,7 @@ $ docker build -t java-docker --target test .
  => CACHED [base 4/6] COPY mvnw pom.xml ./
  => CACHED [base 5/6] RUN ./mvnw dependency:go-offline
  => CACHED [base 6/6] COPY src ./src
- => [test 1/1] RUN ["./mvnw", "test", "-Dspring-boot.run.profiles=mysql"]
+ => [test 1/1] RUN ["./mvnw", "test"]
  => exporting to image
  => => exporting layers
 => => writing image sha256:10cb585a7f289a04539e95d583ae97bcf8725959a6bd32c2f5632d0e7c1d16a0
@@ -398,14 +398,14 @@ Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTes
 @x
 ```shell
 55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-57   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
+56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
 57   assertThat(violation.getMessage()).isEqualTo("must be empty");
 58 }
 ```
 @y
 ```shell
 55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-57   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
+56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
 57   assertThat(violation.getMessage()).isEqualTo("must be empty");
 58 }
 ```
@@ -421,7 +421,7 @@ Now, run the `docker build` command from above and observe that the build fails 
 ```shell
 $ docker build -t java-docker --target test .
  => [base 6/6] COPY src ./src
- => ERROR [test 1/1] RUN ["./mvnw", "test", "-Dspring-boot.run.profiles=mysql"]
+ => ERROR [test 1/1] RUN ["./mvnw", "test"]
 ...
 ------
 executor failed running [./mvnw test]: exit code: 1
@@ -430,7 +430,7 @@ executor failed running [./mvnw test]: exit code: 1
 ```shell
 $ docker build -t java-docker --target test .
  => [base 6/6] COPY src ./src
- => ERROR [test 1/1] RUN ["./mvnw", "test", "-Dspring-boot.run.profiles=mysql"]
+ => ERROR [test 1/1] RUN ["./mvnw", "test"]
 ...
 ------
 executor failed running [./mvnw test]: exit code: 1

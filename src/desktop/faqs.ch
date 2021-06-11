@@ -395,12 +395,18 @@ Docker が問題を調査できるようにするための診断情報のアッ�
 @z
 
 @x
-By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
+By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
 @y
 原則として Docker 社はアップロードされた診断情報を 30 日後には削除します。
 ユーザーから診断情報の削除を要請することもでき、その場合は診断情報 ID か、あるいは GitHub ID（その診断情報が GitHub issue に言及している場合）を送付します。
 Docker 社は診断情報内のデータを、特定の問題を調査するためだけに利用します。
 ただし issue の頻度などのように高度な（個人情報ではない）メトリックスを収集する場合があります。
+@z
+
+@x
+For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+@y
+詳しくは [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

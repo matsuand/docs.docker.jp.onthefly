@@ -165,10 +165,6 @@ redirect_from:
 [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} is a service provided by Docker for
 finding and sharing container images with your team. It is the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
 @y
-{% comment %}
-[Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} is a service provided by Docker for
-finding and sharing container images with your team. It is the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
-{% endcomment %}
 [Docker Hub](https://hub.docker.com) は、開発チームに向けて Docker のコンテナーイメージを検索したり共有したりするために Docker が提供するサービスの 1 つです。
 これは世界最大のコンテナーイメージのリポジトリであり、コンテナーコミュニティの開発者、オープンソースプロジェクトや独立系ソフトウェアベンダー（independent software vendors; ISV）が、コンテナー内でのソースビルドと配布を行うコンテンツを提供しています。
 @z
@@ -176,9 +172,6 @@ finding and sharing container images with your team. It is the world’s largest
 @x
 Users get access to free public repositories for storing and sharing images or can choose a [subscription plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for private repositories.
 @y
-{% comment %}
-Users get access to free public repositories for storing and sharing images or can choose a [subscription plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for private repositories.
-{% endcomment %}
 無償の公開リポジトリをユーザーがアクセスして、イメージの保存と共有を行います。
 プライベートリポジトリに対して [購入プラン](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を選ぶこともできます。
 @z
@@ -186,9 +179,6 @@ Users get access to free public repositories for storing and sharing images or c
 @x
 Docker Hub provides the following major features:
 @y
-{% comment %}
-Docker Hub provides the following major features:
-{% endcomment %}
 Docker Hub は主に以下の機能を提供します。
 @z
 
@@ -205,19 +195,6 @@ GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
 @y
-{% comment %}
-* [Repositories](repos.md): Push and pull container images.
-* [Teams & Organizations](orgs.md): Manage access to private
-repositories of container images.
-* [Official Images](official_images.md): Pull and use high-quality
-container images provided by Docker.
-* [Publisher Images](publish/customer_faq.md): Pull and use high-
-quality container images provided by external vendors.
-* [Builds](builds/index.md): Automatically build container images from
-GitHub and Bitbucket and push them to Docker Hub.
-* [Webhooks](webhooks.md): Trigger actions after a successful push
-  to a repository to integrate Docker Hub with other services.
-{% endcomment %}
 * [リポジトリ](repos.md): コンテナーイメージのプッシュ、プルを行います。
 * [チームと組織](orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
 * [公式イメージ](official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
@@ -227,20 +204,22 @@ GitHub and Bitbucket and push them to Docker Hub.
 @z
 
 @x
+Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+@y
+Docker では [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} ツール (現時点では試験的機能) を提供しています。
+また Docker Hub に直接アクセスできる API も提供しています。
+[Docker Hub API]({{ site.baseurl }}/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} のドキュメントを参照して、サポートされているエンドポイントを確認してください。
+@z
+
+@x
 The following section contains step-by-step instructions on how to easily get started with Docker Hub.
 @y
-{% comment %}
-The following section contains step-by-step instructions on how to easily get started with Docker Hub.
-{% endcomment %}
 以下の節において、Docker Hub を簡単にはじめる例を順に示していきます。
 @z
 
 @x
 ### Step 1: Sign up for a Docker account
 @y
-{% comment %}
-### Step 1: Sign up for a Docker account
-{% endcomment %}
 {: #step-1-sign-up-for-a-docker-account }
 ### 手順 1: Docker アカウントへのサインアップ
 @z
@@ -248,18 +227,12 @@ The following section contains step-by-step instructions on how to easily get st
 @x
 Let's start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
 @y
-{% comment %}
-Let's start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
-{% endcomment %}
 まずは [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} を生成するところからはじめます。
 @z
 
 @x
 A Docker ID grants you access to Docker Hub repositories and allows you to explore images that are available from the community and verified publishers. You'll also need a Docker ID to share images on Docker Hub.
 @y
-{% comment %}
-A Docker ID grants you access to Docker Hub repositories and allows you to explore images that are available from the community and verified publishers. You'll also need a Docker ID to share images on Docker Hub.
-{% endcomment %}
 Docker ID は Docker Hub リポジトリへのアクセス権を定めるものであり、コミュニティや検証済み公開者が提供するイメージを参照できるようになります。
 また Docker ID は Docker Hub 上においてイメージを共有するために必要となります。
 @z
@@ -267,9 +240,6 @@ Docker ID は Docker Hub リポジトリへのアクセス権を定めるもの�
 @x
 ### Step 2: Create your first repository
 @y
-{% comment %}
-### Step 2: Create your first repository
-{% endcomment %}
 ### 手順 2: リポジトリの新規生成
 {: #step-2-create-your-first-repository }
 @z
@@ -277,9 +247,6 @@ Docker ID は Docker Hub リポジトリへのアクセス権を定めるもの�
 @x
 To create a repository:
 @y
-{% comment %}
-To create a repository:
-{% endcomment %}
 リポジトリ生成の手順は以下です。
 @z
 
@@ -289,12 +256,6 @@ To create a repository:
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 @y
-{% comment %}
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **Create a Repository** on the Docker Hub welcome page:
-3. Name it **&lt;your-username&gt;/my-private-repo**.
-4. Set the visibility to **Private**.
-{% endcomment %}
 1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にサインインします。
 2. Docker Hub の Welcome ページにて **Create Repository** をクリックします。
 3. **&lt;your-username&gt;/my-first-repo** に名称を入力します。
@@ -304,45 +265,30 @@ To create a repository:
 @x
     ![Create Repository](images/index-create-repo.png)
 @y
-    {% comment %}
-    ![Create Repository](images/index-create-repo.png)
-    {% endcomment %}
     ![リポジトリの生成](images/index-create-repo.png)
 @z
 
 @x
 5. Click **Create**.
 @y
-{% comment %}
-5. Click **Create**.
-{% endcomment %}
 5. **Create** をクリックします。
 @z
 
 @x
     You've created your first repository. You should see:
 @y
-    {% comment %}
-    You've created your first repository. You should see:
-    {% endcomment %}
     リポジトリが初めて生成され、以下のように表示されます。
 @z
 
 @x
     ![Repository Created](images/index-repo-created.png)
 @y
-    {% comment %}
-    ![Repository Created](images/index-repo-created.png)
-    {% endcomment %}
     ![リポジトリが生成される](images/index-repo-created.png)
 @z
 
 @x
 ### Step 3: Download and install Docker Desktop
 @y
-{% comment %}
-### Step 3: Download and install Docker Desktop
-{% endcomment %}
 ### 手順 3: Docker Desktop のダウンロードとインストール
 {: #step-3-download-and-install-docker-desktop }
 @z
@@ -351,19 +297,12 @@ To create a repository:
 We'll need to download Docker Desktop to build and push a container image to
 Docker Hub.
 @y
-{% comment %}
-We'll need to download Docker Desktop to build and push a container image to
-Docker Hub.
-{% endcomment %}
 コンテナーイメージを構築して Docker Hub にプッシュするために、Docker Desktop をダウンロードする必要があります。
 @z
 
 @x
 1. Download and install [Docker Desktop](../desktop/#download-and-install). If on Linux, download [Docker Engine](../engine/install/).
 @y
-{% comment %}
-1. Download and install [Docker Desktop](../desktop/#download-and-install). If on Linux, download [Docker Engine](../engine/install/).
-{% endcomment %}
 1. [Docker Desktop](../desktop/#download-and-install) をダウンロードしてインストールします。
    Linux の場合は [Docker Engine](../engine/install/) をダウンロードします。
 @z
@@ -371,18 +310,12 @@ Docker Hub.
 @x
 2. Sign into the Docker Desktop application using the Docker ID you created in Step 1.
 @y
-{% comment %}
-2. Sign into the Docker Desktop application using the Docker ID you created in Step 1.
-{% endcomment %}
 2. 手順 1. において生成した Docker ID を用いて、Docker Desktop にサインインします。
 @z
 
 @x
 ### Step 4: Build and push a container image to Docker Hub from your computer
 @y
-{% comment %}
-### Step 4: Build and push a container image to Docker Hub from your computer
-{% endcomment %}
 ### 手順 4: ローカルマシンからコンテナーイメージを構築し Docker Hub へプッシュ
 {: #step-4-build-and-push-a-container-image-to-docker-hub-from-your-computer }
 @z
@@ -390,9 +323,6 @@ Docker Hub.
 @x
 1. Start by creating a [Dockerfile](../engine/reference/builder/) to specify your application as shown below:
 @y
-{% comment %}
-1. Start by creating a [Dockerfile](../engine/reference/builder/) to specify your application as shown below:
-{% endcomment %}
 1. 以下に示すように [Dockerfile](../engine/reference/builder/) を生成しアプリケーションを指定します。
 @z
 
@@ -416,10 +346,6 @@ Docker Hub.
 2. Run `docker build -t <your_username>/my-private-repo .` to build your Docker
    image.
 @y
-{% comment %}
-2. Run `docker build -t <your_username>/my-private-repo .` to build your Docker
-   image.
-{% endcomment %}
 2. Docker イメージを構築するために、コマンド`docker build -t <your_username>/my-private-repo .`を実行します。
 @z
 
@@ -427,19 +353,12 @@ Docker Hub.
 3. Run `docker run <your_username>/my-private-repo` to test your
 Docker image locally.
 @y
-{% comment %}
-3. Run `docker run <your_username>/my-private-repo` to test your
-Docker image locally.
-{% endcomment %}
 3. コマンド`docker run <your_username>/my-private-repo`を実行して、ローカル環境内の Docker イメージを確認します。
 @z
 
 @x
 4. Run `docker push <your_username>/my-private-repo` to push your Docker image to Docker Hub. You should see output similar to:
 @y
-{% comment %}
-4. Run `docker push <your_username>/my-private-repo` to push your Docker image to Docker Hub. You should see output similar to:
-{% endcomment %}
 4. `docker push <your_username>/my-private-repo`を実行して Docker イメージを Docker Hub にプッシュします。
    出力結果は以下のようになります。
 @z
@@ -447,18 +366,12 @@ Docker image locally.
 @x
     ![Terminal](images/index-terminal.png)
 @y
-    {% comment %}
-    ![Terminal](images/index-terminal.png)
-    {% endcomment %}
     ![端末画面](images/index-terminal.png)
 @z
 
 @x
     > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
 @y
-    {% comment %}
-    > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
-    {% endcomment %}
     > **プッシュ時にトラブル発生したら** Docker Desktop を通じて、あるいはコマンドラインから Docker Hub にサインインしていることが必要です。
     > またイメージの指定は、上の各手順ごとに正しく行ってください。
 @z
@@ -466,27 +379,18 @@ Docker image locally.
 @x
 5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
 @y
-{% comment %}
-5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
-{% endcomment %}
 5. Docker Hub 内ではリポジトリの**Tags**画面に、新たに`latest`というタグが追加されます。
 @z
 
 @x
     ![Tag Created](images/index-tag.png)
 @y
-    {% comment %}
-    ![Tag Created](images/index-tag.png)
-    {% endcomment %}
     ![生成されたタグ](images/index-tag.png)
 @z
 
 @x
 Congratulations! You've successfully:
 @y
-{% comment %}
-Congratulations! You've successfully:
-{% endcomment %}
 おめでとうございます。
 以下の作業が完了しました。
 @z
@@ -497,12 +401,6 @@ Congratulations! You've successfully:
 - Built a Docker container image on your computer
 - Pushed it successfully to Docker Hub
 @y
-{% comment %}
-- Signed up for a Docker account
-- Created your first repository
-- Built a Docker container image on your computer
-- Pushed it successfully to Docker Hub
-{% endcomment %}
 - Docker アカウントへのサインアップ
 - 初めてのリポジトリ生成
 - コンピューター上での Docker コンテナーイメージのビルド
@@ -512,9 +410,6 @@ Congratulations! You've successfully:
 @x
 ### Next steps
 @y
-{% comment %}
-### Next steps
-{% endcomment %}
 ### 次のステップ
 {: #next-steps }
 @z
@@ -526,13 +421,6 @@ Congratulations! You've successfully:
 - [Upgrade your plan](https://www.docker.com/pricing) to push additional private Docker images to
 Docker Hub.
 @y
-{% comment %}
-- Create an [organization](orgs.md) to use Docker Hub with your team.
-- Automatically build container images from code through [builds](builds/index.md).
-- [Explore](https://hub.docker.com/explore) official & publisher Images
-- [Upgrade your plan](https://www.docker.com/pricing) to push additional private Docker images to
-Docker Hub.
-{% endcomment %}
 - [組織](orgs.md)（organization）を生成して開発チームにより Docker Hub を利用します。
 - [ビルド](builds/index.md) からのコードを用いてコンテナーイメージを自動ビルドします。
 - 公式イメージや開発提供イメージを [検索](https://hub.docker.com/explore) します。

@@ -77,12 +77,12 @@ Let’s create our volumes now. We’ll create one for the data and one for conf
 
 @x
 ```console
-$ docker volume create mysql
+$ docker volume create mysql_data
 $ docker volume create mysql_config
 ```
 @y
 ```console
-$ docker volume create mysql
+$ docker volume create mysql_data
 $ docker volume create mysql_config
 ```
 @z
@@ -138,9 +138,9 @@ Okay, now that we have a running MySQL, let’s update our Dockerfile to activat
 @z
 
 @x
-We only need to add the MySQL profil as an argument to the `CMD` definition.
+We only need to add the MySQL profile as an argument to the `CMD` definition.
 @y
-We only need to add the MySQL profil as an argument to the `CMD` definition.
+We only need to add the MySQL profile as an argument to the `CMD` definition.
 @z
 
 @x

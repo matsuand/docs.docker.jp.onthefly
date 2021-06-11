@@ -93,8 +93,8 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
 
 @x
 3.  Create a `docker-compose.yml` file that starts your
-    `WordPress` blog and a separate `MySQL` instance with a volume
-    mount for data persistence:
+    `WordPress` blog and a separate `MySQL` instance with volume
+    mounts for data persistence:
 @y
 3.  `docker-compose.yml`ファイルを生成します。
     このファイルが`WordPress`ブログを起動します。
@@ -121,6 +121,8 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
         depends_on:
           - db
         image: wordpress:latest
+        volumes:
+          - wordpress_data:/var/www/html
         ports:
           - "8000:80"
         restart: always
@@ -131,6 +133,7 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
           WORDPRESS_DB_NAME: wordpress
     volumes:
       db_data: {}
+      wordpress_data: {}
     ```
 @y
     ```yaml
@@ -152,6 +155,8 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
         depends_on:
           - db
         image: wordpress:latest
+        volumes:
+          - wordpress_data:/var/www/html
         ports:
           - "8000:80"
         restart: always
@@ -162,21 +167,23 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
           WORDPRESS_DB_NAME: wordpress
     volumes:
       db_data: {}
+      wordpress_data: {}
     ```
 @z
 
 @x
    > **Notes**:
    >
-   * The docker volume `db_data` persists any updates made by WordPress
-   to the database. [Learn more about docker volumes](../storage/volumes.md)
+   * The docker volumes `db_data` and `wordpress_data` persists updates made by WordPress
+   to the database, as well as the installed themes and plugins. [Learn more about docker volumes](../storage/volumes.md)
    >
    * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
 @y
    > **メモ**
    >
-   * Docker ボリューム`db_data`は、WordPress 上から実行されるデータ更新をデータベースに保存します。
+   * Docker ボリューム`db_data`と`wordpress_data`は、WordPress 上から実行されるデータ更新をデータベースに保存します。
+   > インストール済のテーマやプラグインについても同様です。
    > 詳細は [Docker ボリューム](../storage/volumes.md) を参照してください。
    >
    * WordPress のマルチサイトは、ポート`80`と`443`上においてのみ動作します。
