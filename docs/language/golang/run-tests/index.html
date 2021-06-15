@@ -1,0 +1,342 @@
+<!-- Page generated 2021-06-15 09:12:28 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run your tests using Go test | Docker ドキュメント</title>
+  <meta name="description" content="How to build and run your Go tests in a container" />
+  <meta name="keywords" content="build, go, golang, test">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/golang/run-tests/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Run your tests using Go test"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Run your tests using Go test" />
+  <meta property="og:description" content="How to build and run your Go tests in a container" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-15T09:12:28+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/run-tests/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-15T09:12:28+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run your tests using Go test","description":"How to build and run your Go tests in a container","url":"https://docs.docker.com/language/golang/run-tests/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/language/">各種言語別ガイド (New)</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/">Go 言語</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/run-tests/">テストの実行</a></li></ol>
+    </nav>
+</div></div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Run your tests using Go test</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
+  <li><a href="/language/golang/build-images/">Build images</a></li>
+  <li><a href="/language/golang/run-containers/">Run your image as a container</a></li>
+  <li><a href="/language/golang/develop/">Use containers for development</a></li>
+  <li class="active"><a href="/language/golang/run-tests/">Run your tests</a></li>
+  <li><a href="/language/golang/configure-ci-cd/">Configure CI/CD</a></li>
+  <li><a href="/language/golang/deploy/">Deploy your app</a></li>
+</ul>
+
+<p>Testing is an essential part of modern software development. Yet, testing can mean a lot of things to different development teams. In the name of brevity, we’ll only take a look at running isolated, high-level, functional tests.</p>
+
+<h2 id="test-structure">Test structure</h2>
+
+<p>Each test is meant to verify a single business requirement for our example application. The following test is an excerpt from <code class="language-plaintext highlighter-rouge">main_test.go</code> test suite in our example application.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">TestRespondsWithLove</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+
+	<span class="n">pool</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">dockertest</span><span class="o">.</span><span class="n">NewPool</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"could not connect to Docker"</span><span class="p">)</span>
+
+	<span class="n">resource</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">pool</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="s">"docker-gs-ping"</span><span class="p">,</span> <span class="s">"latest"</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{})</span>
+	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"could not start container"</span><span class="p">)</span>
+
+	<span class="n">t</span><span class="o">.</span><span class="n">Cleanup</span><span class="p">(</span><span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">Purge</span><span class="p">(</span><span class="n">resource</span><span class="p">),</span> <span class="s">"failed to remove container"</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="k">var</span> <span class="n">resp</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Response</span>
+
+	<span class="n">err</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="k">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+		<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprint</span><span class="p">(</span><span class="s">"http://localhost:"</span><span class="p">,</span> <span class="n">resource</span><span class="o">.</span><span class="n">GetPort</span><span class="p">(</span><span class="s">"8080/tcp"</span><span class="p">),</span> <span class="s">"/"</span><span class="p">))</span>
+		<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+			<span class="n">t</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="s">"container not ready, waiting..."</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">err</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="no">nil</span>
+	<span class="p">})</span>
+	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"HTTP error"</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+	<span class="n">require</span><span class="o">.</span><span class="n">Equal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="s">"HTTP status code"</span><span class="p">)</span>
+
+	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">io</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"failed to read HTTP body"</span><span class="p">)</span>
+
+	<span class="c">// Finally, test the business requirement!</span>
+	<span class="n">require</span><span class="o">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="s">"&lt;3"</span><span class="p">,</span> <span class="s">"does not respond with love?"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see, this is a high-level test, unconcerned with the implementation details of our example application.</p>
+
+<ul>
+  <li>the test is using <a href="https://github.com/ory/dockertest"><code class="language-plaintext highlighter-rouge">ory/dockertest</code></a> Go module;</li>
+  <li>the test assumes that the Docker engine instance is running on the same machine where the test is being run.</li>
+</ul>
+
+<p>The second test in <code class="language-plaintext highlighter-rouge">main_test.go</code> has almost identical structure but it tests <em>another</em> business requirement of our application. You are welcome to have a look at all available tests in <a href="https://github.com/olliefr/docker-gs-ping/blob/main/main_test.go"><code class="language-plaintext highlighter-rouge">docker-gs-ping/main_test.go</code></a>.</p>
+
+<h2 id="run-tests-locally">Run tests locally</h2>
+
+<p>In order to run the tests, we must make sure that our application Docker image is up-to-date.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> docker-gs-ping:latest <span class="nb">.</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[+] Building 3.0s (13/13) FINISHED
+...
+</code></pre></div></div>
+
+<p>In the above example we’ve omitted most of the output, only displaying the first line indicating that the build was successful.</p>
+
+<p>Note, that the image is tagged with <code class="language-plaintext highlighter-rouge">latest</code> which is the same label we’ve chosen to use in our <code class="language-plaintext highlighter-rouge">main_test.go</code> tests.</p>
+
+<p>Now that the Docker image for our application had been built, we can run the tests that depend on it:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go <span class="nb">test</span> ./...
+ok      github.com/olliefr/docker-gs-ping       2.564s
+</code></pre></div></div>
+
+<p>That was a bit... underwhelming? Let’s ask it to print a bit more detail, just to be sure:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go <span class="nb">test</span> <span class="nt">-v</span> ./...
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=== RUN   TestRespondsWithLove
+    main_test.go:47: container not ready, waiting...
+--- PASS: TestRespondsWithLove (5.24s)
+=== RUN   TestHealthCheck
+    main_test.go:83: container not ready, waiting...
+--- PASS: TestHealthCheck (1.40s)
+PASS
+ok      github.com/olliefr/docker-gs-ping       6.670s
+</code></pre></div></div>
+
+<p>So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialised. What happens in each test is that <code class="language-plaintext highlighter-rouge">ory/dockertest</code> module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag <code class="language-plaintext highlighter-rouge">docker-gs-ping:latest</code>. Starting up a container may take a while, so our tests retry accessing the container until the container is ready to respond to requests.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, we’ve seen an example of using Docker for isolated functional testing of an example Go application. There are many different ways to test an application and we have only considered the high-level, functional testing. This, however, feeds naturally into the next topic, where we are going to set up our tests to run in an automated pipeline.</p>
+
+<p>In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/golang/configure-ci-cd/" class="button outline-btn">Configure CI/CD</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+
+<p><br /></p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=build">build</a>, <a href="/docs.docker.jp.onthefly/search/?q=go">go</a>, <a href="/docs.docker.jp.onthefly/search/?q=golang">golang</a>, <a href="/docs.docker.jp.onthefly/search/?q=test">test</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/language/golang/run-tests.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [language/golang/run-tests.ch](https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/run-tests/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#test-structure" class="nomunge">Test structure</a></li>
+  <li><a href="#run-tests-locally" class="nomunge">Run tests locally</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                        <li><a href="https://docker.events.cube365.net/dockercon/">DockerCon</a></li>
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/language/golang/run-tests/";</script></body>
+</html>

@@ -1,0 +1,1006 @@
+<!-- Page generated 2021-06-15 09:12:28 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use containers for development | Docker ドキュメント</title>
+  <meta name="description" content="Learn how to develop your application locally." />
+  <meta name="keywords" content="get started, go, golang, local, development">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/golang/develop/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Use containers for development"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Use containers for development" />
+  <meta property="og:description" content="Learn how to develop your application locally." />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-15T09:12:28+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/develop/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-15T09:12:28+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use containers for development","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/golang/develop/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/language/">各種言語別ガイド (New)</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/">Go 言語</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/develop/">アプリの開発</a></li></ol>
+    </nav>
+</div></div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Use containers for development</h1><p><em class="reading-time">読む時間の目安: 30 分</em></p><ul class="pagination">
+  <li><a href="/language/golang/build-images/">Build images</a></li>
+  <li><a href="/language/golang/run-containers/">Run your image as a container</a></li>
+  <li class="active"><a href="/language/golang/develop/">Use containers for development</a></li>
+  <li><a href="/language/golang/run-tests/">Run your tests</a></li>
+  <li><a href="/language/golang/configure-ci-cd/">Configure CI/CD</a></li>
+  <li><a href="/language/golang/deploy/">Deploy your app</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Work through the steps of the <a href="/docs.docker.jp.onthefly/language/golang/run-containers/">run your image as a container</a> module to learn how to manage the lifecycle of your containers.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this module, we’ll take a look at running a database engine in a container and connecting it to the extended version of the example application. We are going to see some options for keeping persistent data and for wiring up the containers to talk to one another. Finally, we’ll learn how to use Docker Compose to manage such multi-container local development environments effectively.</p>
+
+<h2 id="local-database-and-containers">Local database and containers</h2>
+
+<p>The database engine we are going to use is called <a href="https://www.cockroachlabs.com/product/">CockroachDB</a>. It is a modern, Cloud-native, distributed SQL database.</p>
+
+<p>Instead of compiling CockroachDB from the source code or using the operating system’s native package manager to install CockroachDB, we are going to use the <a href="https://hub.docker.com/r/cockroachdb/cockroach">Docker image for CockroachDB</a> and run it in a container.</p>
+
+<p>CockroachDB is compatible with PostgreSQL to a significant extent, and shares many conventions with the latter, particularly the default names for the environment variables. So, if you are familiar with Postgres, don’t be surprised that we are going to use some familiar environment variables names. The Go modules that work with Postgres, such as <a href="https://pkg.go.dev/github.com/jackc/pgx">pgx</a>, <a href="https://pkg.go.dev/github.com/lib/pq">pq</a>, <a href="https://gorm.io/index.html">GORM</a>, and <a href="https://upper.io/v4/">upper/db</a> also work with CockroachDB.</p>
+
+<p>For more information on the relation between Go and CockroachDB, please refer to the <a href="https://www.cockroachlabs.com/docs/v20.2/build-a-go-app-with-cockroachdb.html">CockroachDB documentation</a>, although this is not necessary to continue with the present guide.</p>
+
+<h3 id="storage">Storage</h3>
+
+<p>The point of a database is to have a persistent store of data. <a href="../../storage/volumes/">Volumes</a> are the preferred mechanism for persisting data generated by and used by Docker containers. Thus, before we start CockroachDB, let’s create the volume for it.</p>
+
+<p>To create a managed volume, run :</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create roach
+roach
+</code></pre></div></div>
+
+<p>We can view the list of all managed volumes in our Docker instance with the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume list
+DRIVER    VOLUME NAME
+<span class="nb">local     </span>roach
+</code></pre></div></div>
+
+<h3 id="networking">Networking</h3>
+
+<p>The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined <em>bridge network</em>. It is going to provide us with a DNS lookup service so that we can refer to our database enginer container by its host name.</p>
+
+<p>The following command creates a new bridge network named <code class="language-plaintext highlighter-rouge">mynet</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> bridge mynet
+51344edd6430b5acd121822cacc99f8bc39be63dd125a3b3cd517b6485ab7709
+</code></pre></div></div>
+
+<p>As it was the case with the managed volumes, there is a command to list all networks set up in your Docker instance:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network list
+NETWORK ID     NAME          DRIVER    SCOPE
+0ac2b1819fa4   bridge        bridge    <span class="nb">local
+</span>51344edd6430   mynet         bridge    <span class="nb">local
+</span>daed20bbecce   host          host      <span class="nb">local
+</span>6aee44f40a39   none          null      <span class="nb">local</span>
+</code></pre></div></div>
+
+<p>Our bridge network <code class="language-plaintext highlighter-rouge">mynet</code> has been created successfully. The other three networks, named <code class="language-plaintext highlighter-rouge">bridge</code>, <code class="language-plaintext highlighter-rouge">host</code>, and <code class="language-plaintext highlighter-rouge">none</code> are the <em>default</em> networks and they had been created by the Docker itself. While it is not relevant to our current discussion, you can learn more about Docker networking in the <a href="../../network/">networking overview</a> section.</p>
+
+<h3 id="choose-good-names-for-volumes-and-networks">Choose good names for volumes and networks</h3>
+
+<p>As the saying goes, there are only two hard things in Computer Science: cache invalidation and naming things. And off-by-one errors.</p>
+
+<p>When choosing a name for a network or a managed volume, it’s best to choose a name which is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.</p>
+
+<h3 id="start-the-database-engine">Start the database engine</h3>
+
+<p>Now that the housekeeping chores are done, we can run CockroachDB in a container and attach it to the volume and network we had just created. When you run the folllowing command, Docker will pull the image from Docker Hub and run it for you locally:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--name</span> roach <span class="se">\</span>
+  <span class="nt">--hostname</span> db <span class="se">\</span>
+  <span class="nt">--network</span> mynet <span class="se">\</span>
+  <span class="nt">-p</span> 26257:26257 <span class="se">\</span>
+  <span class="nt">-p</span> 8080:8080 <span class="se">\</span>
+  <span class="nt">-v</span> roach:/cockroach/cockroach-data <span class="se">\</span>
+  cockroachdb/cockroach:latest-v20.1 start-single-node <span class="se">\</span>
+  <span class="nt">--insecure</span>
+
+<span class="c"># ... output omitted ...</span>
+</code></pre></div></div>
+
+<p>Notice a clever use of the tag <code class="language-plaintext highlighter-rouge">latest-v20.1</code> to make sure that we are pulling the latest patch version of 20.1.  The diversity of available tags depend on the image maintainer. Here, our intent was to have the latest patched version of CockroachDB while not straying too far away from the known working version as the time goes by. To see the tags available for CockroachDB image, we went to <a href="https://hub.docker.com/r/cockroachdb/cockroach/tags">CockroachDB page on Docker Hub</a>.</p>
+
+<h3 id="configure-the-database-engine">Configure the database engine</h3>
+
+<p>Now that the database engine is live, there is some configuration to do before our application can begin using it. Fortunately, it’s not a lot. We must:</p>
+
+<ol>
+  <li>Create a blank database.</li>
+  <li>Register a new user account with the database engine.</li>
+  <li>Grant that new user access rights to the database.</li>
+</ol>
+
+<p>We can do that with the help of CockroachDB built-in SQL shell. To start the SQL shell in the <em>same</em> container where the database engine is running, type:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> roach ./cockroach sql <span class="nt">--insecure</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>In the SQL shell, create the database that our example application is going to use:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mydb</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Register a new SQL user account with the database engine. We pick the username <code class="language-plaintext highlighter-rouge">totoro</code>.</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">USER</span> <span class="n">totoro</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Give the new user the necessary permissions:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="k">DATABASE</span> <span class="n">mydb</span> <span class="k">TO</span> <span class="n">totoro</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Type <code class="language-plaintext highlighter-rouge">quit</code> to exit the shell.</p>
+  </li>
+</ol>
+
+<p>An example of interaction with the SQL shell is presented below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oliver@hki:~$ sudo docker exec -it roach ./cockroach sql --insecure
+#
+# Welcome to the CockroachDB SQL shell.
+# All statements must be terminated by a semicolon.
+# To exit, type: \q.
+#
+# Server version: CockroachDB CCL v20.1.15 (x86_64-unknown-linux-gnu, built 2021/04/26 16:11:58, go1.13.9) (same version as client)
+# Cluster ID: 7f43a490-ccd6-4c2a-9534-21f393ca80ce
+#
+# Enter \? for a brief introduction.
+#
+root@:26257/defaultdb&gt; CREATE DATABASE mydb;
+CREATE DATABASE
+
+Time: 22.985478ms
+
+root@:26257/defaultdb&gt; CREATE USER totoro;
+CREATE ROLE
+
+Time: 13.921659ms
+
+root@:26257/defaultdb&gt; GRANT ALL ON DATABASE mydb TO totoro;
+GRANT
+
+Time: 14.217559ms
+
+root@:26257/defaultdb&gt; quit
+oliver@hki:~$
+</code></pre></div></div>
+
+<h3 id="meet-the-example-application">Meet the example application</h3>
+
+<p>Now that we have started and configured the database engine, we can swith our attention to the application.</p>
+
+<p>The example application for this module is an extended version of <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> application we’ve used in the previous modules. You have two options:</p>
+
+<ul>
+  <li>You can update your local copy of <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> to match the new extended version presented in this chapter; or</li>
+  <li>You can clone the <a href="https://github.com/olliefr/docker-gs-ping-roach">olliefr/docker-gs-ping-roach</a> repo. This latter approach is recommended.</li>
+</ul>
+
+<p>To checkout the example application, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/olliefr/docker-gs-ping-roach.git
+<span class="c"># ... output omitted ...</span>
+</code></pre></div></div>
+
+<p>The application’s <code class="language-plaintext highlighter-rouge">main.go</code> now includes database initialisation code, as well as the code to implement a new business requirement:</p>
+
+<ul>
+  <li>An HTTP <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/send</code> containing a <code class="language-plaintext highlighter-rouge">{ "value" : string }</code> JSON must save the value to the database.</li>
+</ul>
+
+<p>We also have an update for another business requirement. The requirement <em>was</em>:</p>
+
+<ul>
+  <li>The application responds with a text message containing a heart symbol (“<code class="language-plaintext highlighter-rouge">&lt;3</code>”) on requests to <code class="language-plaintext highlighter-rouge">/</code>.</li>
+</ul>
+
+<p>And <em>now</em> it’s going to be:</p>
+
+<ul>
+  <li>
+    <p>The application responds with the string containing the count of messages stored in the database, enclosed in the parentheses.</p>
+
+    <p>Example output: <code class="language-plaintext highlighter-rouge">Hello, Docker! (7)</code></p>
+  </li>
+</ul>
+
+<p>The full source code listing of <code class="language-plaintext highlighter-rouge">main.go</code> follows.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"context"</span>
+	<span class="s">"database/sql"</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"log"</span>
+	<span class="s">"net/http"</span>
+	<span class="s">"os"</span>
+
+	<span class="s">"github.com/cenkalti/backoff/v4"</span>
+	<span class="s">"github.com/cockroachdb/cockroach-go/v2/crdb"</span>
+	<span class="s">"github.com/labstack/echo/v4"</span>
+	<span class="s">"github.com/labstack/echo/v4/middleware"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="n">e</span> <span class="o">:=</span> <span class="n">echo</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+
+	<span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Logger</span><span class="p">())</span>
+	<span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Recover</span><span class="p">())</span>
+
+	<span class="n">db</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">initStore</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">Fatalf</span><span class="p">(</span><span class="s">"failed to initialise the store: %s"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="n">db</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+	<span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">rootHandler</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/ping"</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="k">struct</span><span class="p">{</span> <span class="n">Status</span> <span class="kt">string</span> <span class="p">}{</span><span class="n">Status</span><span class="o">:</span> <span class="s">"OK"</span><span class="p">})</span>
+	<span class="p">})</span>
+
+	<span class="n">e</span><span class="o">.</span><span class="n">POST</span><span class="p">(</span><span class="s">"/send"</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">sendHandler</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="n">httpPort</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"HTTP_PORT"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">httpPort</span> <span class="o">==</span> <span class="s">""</span> <span class="p">{</span>
+		<span class="n">httpPort</span> <span class="o">=</span> <span class="s">"8080"</span>
+	<span class="p">}</span>
+
+	<span class="n">e</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">Start</span><span class="p">(</span><span class="s">":"</span> <span class="o">+</span> <span class="n">httpPort</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Message</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Value</span> <span class="kt">string</span> <span class="s">`json:"value"`</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">initStore</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+
+	<span class="n">pgConnString</span> <span class="o">:=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"host=%s port=%s dbname=%s user=%s password=%s sslmode=disable"</span><span class="p">,</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"PGHOST"</span><span class="p">),</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"PGPORT"</span><span class="p">),</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"PGDATABASE"</span><span class="p">),</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"PGUSER"</span><span class="p">),</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"PGPASSWORD"</span><span class="p">),</span>
+	<span class="p">)</span>
+
+	<span class="k">var</span> <span class="p">(</span>
+		<span class="n">db</span>  <span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">DB</span>
+		<span class="n">err</span> <span class="kt">error</span>
+	<span class="p">)</span>
+	<span class="n">openDB</span> <span class="o">:=</span> <span class="k">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+		<span class="n">db</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"postgres"</span><span class="p">,</span> <span class="n">pgConnString</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">err</span>
+	<span class="p">}</span>
+
+	<span class="n">err</span> <span class="o">=</span> <span class="n">backoff</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="n">openDB</span><span class="p">,</span> <span class="n">backoff</span><span class="o">.</span><span class="n">NewExponentialBackOff</span><span class="p">())</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">err</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">db</span><span class="o">.</span><span class="n">Exec</span><span class="p">(</span>
+		<span class="s">"CREATE TABLE IF NOT EXISTS message (value STRING PRIMARY KEY)"</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">err</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">db</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">rootHandler</span><span class="p">(</span><span class="n">db</span> <span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="n">r</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">countRecords</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusInternalServerError</span><span class="p">,</span> <span class="n">err</span><span class="o">.</span><span class="n">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"Hello, Docker! (%d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">sendHandler</span><span class="p">(</span><span class="n">db</span> <span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+
+	<span class="n">m</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">Message</span><span class="p">{}</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">c</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusInternalServerError</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="n">err</span> <span class="o">:=</span> <span class="n">crdb</span><span class="o">.</span><span class="n">ExecuteTx</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">(),</span> <span class="n">db</span><span class="p">,</span> <span class="no">nil</span><span class="p">,</span>
+		<span class="k">func</span><span class="p">(</span><span class="n">tx</span> <span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">Tx</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+			<span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">tx</span><span class="o">.</span><span class="n">Exec</span><span class="p">(</span>
+				<span class="s">"INSERT INTO message (value) VALUES ($1) ON CONFLICT (value) DO UPDATE SET value = excluded.value"</span><span class="p">,</span>
+				<span class="n">m</span><span class="o">.</span><span class="n">Value</span><span class="p">,</span>
+			<span class="p">)</span>
+			<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusInternalServerError</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+			<span class="p">}</span>
+			<span class="k">return</span> <span class="no">nil</span>
+		<span class="p">})</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusInternalServerError</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">countRecords</span><span class="p">(</span><span class="n">db</span> <span class="o">*</span><span class="n">sql</span><span class="o">.</span><span class="n">DB</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+
+	<span class="n">rows</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">db</span><span class="o">.</span><span class="n">Query</span><span class="p">(</span><span class="s">"SELECT COUNT(*) FROM message"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="m">0</span><span class="p">,</span> <span class="n">err</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="n">rows</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+	<span class="n">count</span> <span class="o">:=</span> <span class="m">0</span>
+	<span class="k">for</span> <span class="n">rows</span><span class="o">.</span><span class="n">Next</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">rows</span><span class="o">.</span><span class="n">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="n">count</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="m">0</span><span class="p">,</span> <span class="n">err</span>
+		<span class="p">}</span>
+		<span class="n">rows</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">count</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The repository also includes the <code class="language-plaintext highlighter-rouge">Dockerfile</code>, which is almost exactly the same as the multi-stage <code class="language-plaintext highlighter-rouge">Dockerfile</code> introduced in the previous modules. It uses official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, “distroless” image.</p>
+
+<p>Regardless of whether we had updated the old example application, or checked out the new one, this new Docker image has to be built to reflect the changes to the application source code.</p>
+
+<h3 id="build-the-application">Build the application</h3>
+
+<p>We can build the image with the familiar <code class="language-plaintext highlighter-rouge">build</code> command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> docker-gs-ping-roach <span class="nb">.</span>
+</code></pre></div></div>
+
+<h3 id="run-the-application">Run the application</h3>
+
+<p>Now, let’s run our container. This time we’ll need to set some environment variables so that our application would know how to access the database. For now, we’ll do this right in the <code class="language-plaintext highlighter-rouge">docker run</code> command. Later we will see a more convenient method with Docker Compose.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>Since we are running our CockroachDB cluster in “insecure” mode, the value for the password can be anything.</p>
+
+  <p><strong>Don’t run in insecure mode in production, though!</strong></p>
+</blockquote>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--network</span> mynet <span class="se">\</span>
+  <span class="nt">--name</span> rest-server <span class="se">\</span>
+  <span class="nt">-p</span> 80:8080 <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGUSER</span><span class="o">=</span>totoro <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGPASSWORD</span><span class="o">=</span>myfriend <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGHOST</span><span class="o">=</span>db <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGPORT</span><span class="o">=</span>26257 <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGDATABASE</span><span class="o">=</span>mydb <span class="se">\</span>
+  docker-gs-ping-roach
+</code></pre></div></div>
+
+<p>There are a few points to note about this command.</p>
+
+<ul>
+  <li>
+    <p>We map container port <code class="language-plaintext highlighter-rouge">8080</code> to host port <code class="language-plaintext highlighter-rouge">80</code> this time. Thus, for <code class="language-plaintext highlighter-rouge">GET</code> requests we can get away with <em>literally</em> <code class="language-plaintext highlighter-rouge">curl localhost</code>:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost
+Hello, Docker! <span class="o">(</span>0<span class="o">)</span>
+</code></pre></div>    </div>
+
+    <p>Or, if you prefer, a proper URL would work just as well:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost/
+Hello, Docker! <span class="o">(</span>0<span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>The total number of stored messages is <code class="language-plaintext highlighter-rouge">0</code> for now. This is fine, because we had not posted anything to our application yet.</li>
+  <li>
+    <p>We refer to the database container by its hostname, which is <code class="language-plaintext highlighter-rouge">db</code>. This is what we had the <code class="language-plaintext highlighter-rouge">--name db</code> for when we started the database container.</p>
+  </li>
+  <li>The actual password does not matter, but it must be set to something to avoid confusing the example application.</li>
+  <li>
+    <p>The container we’ve just run is named <code class="language-plaintext highlighter-rouge">rest-server</code>. These names are useful for managing the container lifecycle:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Don't do this just yet, it's only an example:</span>
+<span class="nv">$ </span>docker container <span class="nb">rm</span> <span class="nt">--force</span> rest-server
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="test-the-application">Test the application</h3>
+
+<p>In the previous section, we have already tested querying our application with <code class="language-plaintext highlighter-rouge">GET</code> and it returned zero for the stored message counter. Now, let’s post some messages to it:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost/send <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{"value": "Hello, Docker!"}'</span>
+</code></pre></div></div>
+
+<p>The application responds with the contents of the message, which means it had been saved in the database:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"Hello, Docker!"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Let’s send another message:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost/send <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{"value": "Hello, Oliver!"}'</span>
+</code></pre></div></div>
+
+<p>And again, we get the value of the message back:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s2">"value"</span>:<span class="s2">"Hello, Oliver!"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>Let’s see what the message counter says:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost
+Hello, Docker! <span class="o">(</span>2<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Hey, that’s exactly right! We sent two messages and the database kept them. Or has it? Let’s stop and remove all our containers, but not the volumes, and try again.</p>
+
+<p>First, let’s stop the containers:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop rest-server roach
+rest-server
+roach
+</code></pre></div></div>
+
+<p>Then, let’s remove them:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">rm </span>rest-server roach
+rest-server
+roach
+</code></pre></div></div>
+
+<p>Verify that they are gone:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container list <span class="nt">--all</span>
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+</code></pre></div></div>
+
+<p>And start them again, database first:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--name</span> roach <span class="se">\</span>
+  <span class="nt">--hostname</span> db <span class="se">\</span>
+  <span class="nt">--network</span> mynet <span class="se">\</span>
+  <span class="nt">-p</span> 26257:26257 <span class="se">\</span>
+  <span class="nt">-p</span> 8080:8080 <span class="se">\</span>
+  <span class="nt">-v</span> roach:/cockroach/cockroach-data <span class="se">\</span>
+  cockroachdb/cockroach:latest-v20.1 start-single-node <span class="se">\</span>
+  <span class="nt">--insecure</span>
+</code></pre></div></div>
+
+<p>And the service next:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--network</span> mynet <span class="se">\</span>
+  <span class="nt">--name</span> rest-server <span class="se">\</span>
+  <span class="nt">-p</span> 80:8080 <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGUSER</span><span class="o">=</span>totoro <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGPASSWORD</span><span class="o">=</span>myfriend <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGHOST</span><span class="o">=</span>db <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGPORT</span><span class="o">=</span>26257 <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">PGDATABASE</span><span class="o">=</span>mydb <span class="se">\</span>
+  docker-gs-ping-roach
+</code></pre></div></div>
+
+<p>Lastly, let’s query our service:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost
+Hello, Docker! <span class="o">(</span>2<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Great! The count of records from the database is correct although we had not only <em>stopped</em> the containers, but also removed them before starting new instances. The difference is in the managed volume for CockroachDB, which we had reused. The new CockroachDB container has read the database files from the disk, just as it normally would if it were running outside the container.</p>
+
+<p>Such is the power of managed volumes. Use it wisely.</p>
+
+<h3 id="wind-down-everything">Wind down everything</h3>
+
+<p>Remember, that we are running CockroachDB in “insecure” mode. Now that we had built and tested our application, it’s time to wind everything down before moving on. You can list the containers that you are running with the <code class="language-plaintext highlighter-rouge">list</code> command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container list
+</code></pre></div></div>
+
+<p>Now that you know the container IDs, you can use <code class="language-plaintext highlighter-rouge">docker container stop</code> and <code class="language-plaintext highlighter-rouge">docker container rm</code>, as demonstrated in the previous modules.</p>
+
+<p>Please make sure that you stop the CockroachDB and <code class="language-plaintext highlighter-rouge">docker-gs-ping-roach</code> containers before moving on.</p>
+
+<h2 id="better-productivity-with-docker-compose">Better productivity with Docker Compose</h2>
+
+<p>At this point you might be wondering if there is a way to avoid having to deal with long lists of argument to the <code class="language-plaintext highlighter-rouge">docker</code> command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, <em>many</em> more. Then there is also a question of dependencies – ideally, we would like to make sure that the database is started <em>before</em> our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.</p>
+
+<p>In this section, we’ll create a Docker Compose file to start our <code class="language-plaintext highlighter-rouge">docker-gs-ping-roach</code> application and CockroachDB database engine with a single command.</p>
+
+<h3 id="configure-docker-compose">Configure Docker Compose</h3>
+
+<p>In our application’s directory, create a new text file named <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> with the following content.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">docker-gs-ping-roach</span><span class="pi">:</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">roach</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">rest-server</span>
+    <span class="na">hostname</span><span class="pi">:</span> <span class="s">rest-server</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mynet</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:8080</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">PGUSER=${PGUSER:-totoro}</span>
+      <span class="pi">-</span> <span class="s">PGPASSWORD=${PGPASSWORD:?database password not set}</span>
+      <span class="pi">-</span> <span class="s">PGHOST=${PGHOST:-db}</span>
+      <span class="pi">-</span> <span class="s">PGPORT=${PGPORT:-26257}</span>
+      <span class="pi">-</span> <span class="s">PGDATABASE=${PGDATABASE-mydb}</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">restart_policy</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">on-failure</span>
+  <span class="na">roach</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">cockroachdb/cockroach:latest-v20.1</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">roach</span>
+    <span class="na">hostname</span><span class="pi">:</span> <span class="s">db</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mynet</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">26257:26257</span>
+      <span class="pi">-</span> <span class="s">8080:8080</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">roach:/cockroach/cockroach-data</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">start-single-node --insecure</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">roach</span><span class="pi">:</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">mynet</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
+</code></pre></div></div>
+
+<p>This Docker Compose configuration is super convenient as we do not have to type all the parameters to pass to the <code class="language-plaintext highlighter-rouge">docker run</code> command. We can declaratively do that in the Docker Compose file. The <a href="/docs.docker.jp.onthefly/compose/">Docker Compose documentation pages</a> are quite extensive and include a full reference for the Docker Compose file format.</p>
+
+<h3 id="the-env-file">The <code class="language-plaintext highlighter-rouge">.env</code> file</h3>
+
+<p>Docker Compose will automatically read environment variables from a <code class="language-plaintext highlighter-rouge">.env</code> file if it is available. Since our Compose file requires <code class="language-plaintext highlighter-rouge">PGPASSWORD</code> to be set, we add the following content to the <code class="language-plaintext highlighter-rouge">.env</code> file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PGPASSWORD=whatever
+</code></pre></div></div>
+
+<p>The exact value does not really matter for our example, because we run CockroachDB in <code class="language-plaintext highlighter-rouge">insecure</code> mode, but we have to set the variable to <em>some</em> value to avoid getting an error.</p>
+
+<h3 id="merging-compose-files">Merging Compose files</h3>
+
+<p>The file name <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> is the default file name which <code class="language-plaintext highlighter-rouge">docker-compose</code> command recognises if no <code class="language-plaintext highlighter-rouge">-f</code> flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of configuration together. The following list is just a few examples of scenarios where such feature would be very useful:</p>
+
+<ul>
+  <li>Using a bind mount for the source code for local development but not when running the CI tests;</li>
+  <li>Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;</li>
+  <li>Adding additional services for integration testing;</li>
+  <li>And many more...</li>
+</ul>
+
+<p>We are not going to cover any of these advanced use cases here.</p>
+
+<h3 id="variable-substitution-in-docker-compose">Variable substitution in Docker Compose</h3>
+
+<p>One of the really cool features of Docker Compose is <a href="../../compose/compose-file/compose-file-v3/#variable-substitution">variable substitution</a>. You can see some example in our Compose file, <code class="language-plaintext highlighter-rouge">environment</code> section. By means of example:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PGUSER=${PGUSER:-totoro}</code> means that inside the container, the environment variable <code class="language-plaintext highlighter-rouge">PGUSER</code> shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of <code class="language-plaintext highlighter-rouge">totoro</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">PGPASSWORD=${PGPASSWORD:?database password not set}</code> means that if the environment variable <code class="language-plaintext highlighter-rouge">PGPASSWORD</code> is not set on the host, Docker Compose will display an error. This is OK, because we don’t want to hard-code default values for the password. We set the password value in the <code class="language-plaintext highlighter-rouge">.env</code> file, which is local to our machine. It is always a good idea to add <code class="language-plaintext highlighter-rouge">.env</code> to <code class="language-plaintext highlighter-rouge">.gitignore</code> to prevent the secrets being checked into the version control.</li>
+</ul>
+
+<p>Other ways of dealing with undefined or empty values exist, as documented in the <a href="../../compose/compose-file/compose-file-v3/#variable-substitution">variable substitution</a> section of the Docker documentation.</p>
+
+<h3 id="validating-docker-compose-configuration">Validating Docker Compose configuration</h3>
+
+<p>Before you apply changes made to a Compose configuration file, there is an opportunity to validate the content of the configuration file with the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
+</code></pre></div></div>
+
+<p>When this command is run, Docker Compose would read the file <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>, parse it into a data structure in memory, validate where possible, and print back the <em>reconstruction</em> of that configuration file from its internal representation. If this is not possible due to errors, it would print an error message instead.</p>
+
+<h3 id="build-and-run-the-application-using-docker-compose">Build and run the application using Docker Compose</h3>
+
+<p>Let’s start our application and confirm that it is running properly.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>We pass the <code class="language-plaintext highlighter-rouge">--build</code> flag so Docker will compile our image and then starts it.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on update to the source code unless the <code class="language-plaintext highlighter-rouge">--build</code> flag is provided. It is a very common pitfall to edit one’s source code, and forget to use the <code class="language-plaintext highlighter-rouge">--build</code> flag when running <code class="language-plaintext highlighter-rouge">docker-compose up</code>.</p>
+</blockquote>
+
+<p>Since our set-up is now run by Docker Compose, it has assigned it a “project name”, so we got a new volume for our CockroachDB instance. This means that our application would fail to connect to the database, because the database does not exist in this new volume. The terminal would display an authentication error for the database:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ... omitted output ...
+rest-server             | 2021/05/10 00:54:25 failed to initialise the store: pq: password authentication failed for user totoro
+roach                   | *
+roach                   | * INFO: Replication was disabled for this cluster.
+roach                   | * When/if adding nodes in the future, update zone configurations to increase the replication factor.
+roach                   | *
+roach                   | CockroachDB node starting at 2021-05-10 00:54:26.398177 +0000 UTC (took 3.0s)
+roach                   | build:               CCL v20.1.15 @ 2021/04/26 16:11:58 (go1.13.9)
+roach                   | webui:               http://db:8080
+roach                   | sql:                 postgresql://root@db:26257?sslmode=disable
+roach                   | RPC client flags:    /cockroach/cockroach &lt;client cmd&gt; --host=db:26257 --insecure
+roach                   | logs:                /cockroach/cockroach-data/logs
+roach                   | temp dir:            /cockroach/cockroach-data/cockroach-temp349434348
+roach                   | external I/O path:   /cockroach/cockroach-data/extern
+roach                   | store[0]:            path=/cockroach/cockroach-data
+roach                   | storage engine:      rocksdb
+roach                   | status:              initialized new cluster
+roach                   | clusterID:           b7b1cb93-558f-4058-b77e-8a4ddb329a88
+roach                   | nodeID:              1
+rest-server exited with code 0
+rest-server             | 2021/05/10 00:54:25 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server             | 2021/05/10 00:54:26 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server             | 2021/05/10 00:54:29 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server             | 2021/05/10 00:54:25 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server             | 2021/05/10 00:54:26 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server             | 2021/05/10 00:54:29 failed to initialise the store: pq: password authentication failed for user totoro
+rest-server exited with code 1
+# ... omitted output ...
+</code></pre></div></div>
+
+<p>Because of the way we set up our deployment using <code class="language-plaintext highlighter-rouge">restart_policy</code>, the failing container is being restarted every 20 seconds. So, in order to fix the problem, we need to log into the database engine and create the user, we’ve done it before in the []</p>
+
+<p>This is not a big deal. All we have to do is to connect to CockroachDB instance and run the three SQL commands to create the database and the user, as described above in the <em>Configure the database engine</em> section above.</p>
+
+<p>So we login into the database engine from another terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> roach ./cockroach sql <span class="nt">--insecure</span>
+</code></pre></div></div>
+
+<p>And execute the same commands as before to create the database <code class="language-plaintext highlighter-rouge">mydb</code>, the user <code class="language-plaintext highlighter-rouge">totoro</code>, and to grant that user necessary permissions. Once we do that (and the example application container is automatically restarted), the <code class="language-plaintext highlighter-rouge">rest-service</code> stops failing and restarting and the console goes quiet.</p>
+
+<p>It would have been possible to connect the volume that we had previously used, but for the purposes of our example it’s more trouble than it’s worth and it also provided an opportunity to show how to introduce resilience into our deployment via the <code class="language-plaintext highlighter-rouge">restart_policy</code> Compose file feature.</p>
+
+<h3 id="testing-the-application">Testing the application</h3>
+
+<p>Now let’s test our API endpoint. In the new terminal, run the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost/
+</code></pre></div></div>
+
+<p>You should receive the following response:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">Hello,</span><span class="w"> </span><span class="err">Docker!</span><span class="w"> </span><span class="err">(</span><span class="mi">0</span><span class="err">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="shutting-down">Shutting down</h3>
+
+<p>To <em>stop</em> the containers started by Docker Compose, press ctrl+c in the terminal where we run <code class="language-plaintext highlighter-rouge">docker-compose up</code>. To <em>remove</em> those containers after they had been stopped, run <code class="language-plaintext highlighter-rouge">docker-compose down</code>.</p>
+
+<h3 id="detached-mode">Detached mode</h3>
+
+<p>You can run containers started by the <code class="language-plaintext highlighter-rouge">docker-compose</code> command in detached mode, just as you would with the <code class="language-plaintext highlighter-rouge">docker</code> command, by using the <code class="language-plaintext highlighter-rouge">-d</code> flag.</p>
+
+<p>To start the stack, defined by the Compose file in detached mode, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose up <span class="nt">--build</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>Then, you can use <code class="language-plaintext highlighter-rouge">docker-compose stop</code> to stop the containers and <code class="language-plaintext highlighter-rouge">docker-compose down</code> to remove them.</p>
+
+<h2 id="further-exploration">Further exploration</h2>
+
+<p>We would suggest running <code class="language-plaintext highlighter-rouge">docker-compose</code> to see what other commands are available.</p>
+
+<h2 id="wrap-up">Wrap up</h2>
+
+<p>There are some tangential, yet interesting points that were purposefully not covered in this chapter. For the more adventurous reader, this section offers some pointers for further study.</p>
+
+<h3 id="persistent-storage">Persistent storage</h3>
+
+<p>A <em>managed volume</em> isn’t the only way to provide your container with persistent storage. It is highly recommended to get acquainted with available storage options and their use cases, covered in the following part of Docker documentation: <a href="../storage/index.md">Manage data in Docker</a>.</p>
+
+<h3 id="cockroachdb-clusters">CockroachDB clusters</h3>
+
+<p>We run a single instance of CockroachDB, which was enough for our demonstration. But it is possible to run a CockroachDB <em>cluster</em>, which is made of multiple instances of CockroachDB, each instance running in its own container. Since CockroachDB engine is distributed by design, it would have taken us surprisingly little change to our procedure to run a cluster with multiple nodes.</p>
+
+<p>Such distributed set-up offers interesting possibilities, such as applying <em>Chaos Engineering</em> techniques to simulate parts of the cluster failing and evaluating our application’s ability to cope with such failures.</p>
+
+<p>If you are interested in experimenting with CockroachDB clusters, check out:</p>
+
+<ul>
+  <li><a href="https://www.cockroachlabs.com/docs/v20.2/start-a-local-cluster-in-docker-mac.html">Start a CockroachDB Cluster in Docker</a> article; and</li>
+  <li>Documentation for Docker Compose keywords <a href="../../compose/compose-file/compose-file-v3/#deploy"><code class="language-plaintext highlighter-rouge">deploy</code></a> and <a href="../../compose/compose-file/compose-file-v3/#replicas"><code class="language-plaintext highlighter-rouge">replicas</code></a>.</li>
+</ul>
+
+<h3 id="other-databases">Other databases</h3>
+
+<p>Since we did not run a cluster of CockroachDB instances, you might be wondering whether we could have used a non-distributed database engine. The answer is ‘yes’, and if we were to pick a more traditional SQL database, such as <a href="https://www.postgresql.org/">PostgreSQL</a>, the process described in this chapter would have been very similar.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, we set up a containerised development environment with our application and the database engine running in different containers. We also wrote a Docker Compose file which links the two containers together and provides for easy starting up and tearing down of the development environment.</p>
+
+<p>In the next module, we’ll take a look at one possible approach to running functional tests in Docker. See:</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/golang/run-tests/" class="button outline-btn">Run your tests</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs </a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+
+<p><br /></p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=go">go</a>, <a href="/docs.docker.jp.onthefly/search/?q=golang">golang</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/language/golang/develop.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [language/golang/develop.ch](https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/develop/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#introduction" class="nomunge">Introduction</a></li>
+  <li><a href="#local-database-and-containers" class="nomunge">Local database and containers</a>
+    <ul>
+      <li><a href="#storage" class="nomunge">Storage</a></li>
+      <li><a href="#networking" class="nomunge">Networking</a></li>
+      <li><a href="#choose-good-names-for-volumes-and-networks" class="nomunge">Choose good names for volumes and networks</a></li>
+      <li><a href="#start-the-database-engine" class="nomunge">Start the database engine</a></li>
+      <li><a href="#configure-the-database-engine" class="nomunge">Configure the database engine</a></li>
+      <li><a href="#meet-the-example-application" class="nomunge">Meet the example application</a></li>
+      <li><a href="#build-the-application" class="nomunge">Build the application</a></li>
+      <li><a href="#run-the-application" class="nomunge">Run the application</a></li>
+      <li><a href="#test-the-application" class="nomunge">Test the application</a></li>
+      <li><a href="#wind-down-everything" class="nomunge">Wind down everything</a></li>
+    </ul>
+  </li>
+  <li><a href="#better-productivity-with-docker-compose" class="nomunge">Better productivity with Docker Compose</a>
+    <ul>
+      <li><a href="#configure-docker-compose" class="nomunge">Configure Docker Compose</a></li>
+      <li><a href="#the-env-file" class="nomunge">The .env file</a></li>
+      <li><a href="#merging-compose-files" class="nomunge">Merging Compose files</a></li>
+      <li><a href="#variable-substitution-in-docker-compose" class="nomunge">Variable substitution in Docker Compose</a></li>
+      <li><a href="#validating-docker-compose-configuration" class="nomunge">Validating Docker Compose configuration</a></li>
+      <li><a href="#build-and-run-the-application-using-docker-compose" class="nomunge">Build and run the application using Docker Compose</a></li>
+      <li><a href="#testing-the-application" class="nomunge">Testing the application</a></li>
+      <li><a href="#shutting-down" class="nomunge">Shutting down</a></li>
+      <li><a href="#detached-mode" class="nomunge">Detached mode</a></li>
+    </ul>
+  </li>
+  <li><a href="#further-exploration" class="nomunge">Further exploration</a></li>
+  <li><a href="#wrap-up" class="nomunge">Wrap up</a>
+    <ul>
+      <li><a href="#persistent-storage" class="nomunge">Persistent storage</a></li>
+      <li><a href="#cockroachdb-clusters" class="nomunge">CockroachDB clusters</a></li>
+      <li><a href="#other-databases" class="nomunge">Other databases</a></li>
+    </ul>
+  </li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                        <li><a href="https://docker.events.cube365.net/dockercon/">DockerCon</a></li>
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/language/golang/develop/";</script></body>
+</html>

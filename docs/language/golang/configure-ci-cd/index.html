@@ -1,0 +1,586 @@
+<!-- Page generated 2021-06-15 09:12:28 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure CI/CD for your application | Docker ドキュメント</title>
+  <meta name="description" content="Learn how to set up CI/CD pipeline for your application." />
+  <meta name="keywords" content="ci, cd, ci/cd, continuous integration, continuous deployment, deployment, github, github actions, go, golang, development">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/golang/configure-ci-cd/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Configure CI/CD for your application"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Configure CI/CD for your application" />
+  <meta property="og:description" content="Learn how to set up CI/CD pipeline for your application." />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-15T09:12:28+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/configure-ci-cd/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-15T09:12:28+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Configure CI/CD for your application","description":"Learn how to set up CI/CD pipeline for your application.","url":"https://docs.docker.com/language/golang/configure-ci-cd/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/language/">各種言語別ガイド (New)</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/">Go 言語</a></li><li><a href="/docs.docker.jp.onthefly/language/golang/configure-ci-cd/">CI/CD の設定</a></li></ol>
+    </nav>
+</div></div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Configure CI/CD for your application</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><ul class="pagination">
+  <li><a href="/language/golang/build-images/">Build images</a></li>
+  <li><a href="/language/golang/run-containers/">Run your image as a container</a></li>
+  <li><a href="/language/golang/develop/">Use containers for development</a></li>
+  <li><a href="/language/golang/run-tests/">Run your tests</a></li>
+  <li class="active"><a href="/language/golang/configure-ci-cd/">Configure CI/CD</a></li>
+  <li><a href="/language/golang/deploy/">Deploy your app</a></li>
+</ul>
+
+<p>This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at <a href="https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/" target="_blank" rel="noopener" class="_">Ben’s blog</a> on CI/CD best practices.</p>
+
+<p>This guide contains instructions on how to:</p>
+
+<ol>
+  <li>Set up continuous integration (CI) pipeline using GitHub Actions;</li>
+  <li>Enable Docker Hub access for continuous deployment (CD) tools;</li>
+  <li>Optimize your GitHub Actions-based CI/CD pipeline to reduce the number of pull requests and the total build time; and</li>
+  <li>Release only specific versions of your application to Docker Hub.</li>
+</ol>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>Before we begin, it must be said that Continuous Integration (CI) and Continuous Deployment (CD) each is a <em>huge</em> subject, with many different approaches and opinions. The approach chosen in this guide is optimised for pedagogical clarity and simplicity and is not meant to be the One True Way to test and release software.</p>
+</blockquote>
+
+<h2 id="choose-a-sample-project">Choose a sample project</h2>
+
+<p>Let’s get started. This guide uses a simple Go project as an example. In fact, it is the same project we got acquainted with in <a href="/docs.docker.jp.onthefly/language/golang/build-images/">Build Images</a> part of this guide. The <a href="https://github.com/olliefr/docker-gs-ping" target="_blank" rel="noopener" class="_">olliefr/docker-gs-ping</a> repository contains the full source code and the <code class="language-plaintext highlighter-rouge">Dockerfile</code>. You can either fork it or to follow along and set up one of your own Go projects in a fashion described in this section.</p>
+
+<p>Thus, as long as you have a GitHub repo with a project and a <code class="language-plaintext highlighter-rouge">Dockerfile</code>, you can complete this part of the tutorial.</p>
+
+<h2 id="set-up-the-ci-workflow">Set up the CI workflow</h2>
+
+<p>In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any GitHub Actions workflow. But before setting out to build the images for releasing our software, let’s build a CI pipeline to run the tests first.</p>
+
+<p>To set up the workflow:</p>
+
+<ol>
+  <li>Go to your repository in GitHub and then click <strong>Actions</strong> &gt; <strong>New workflow</strong>.</li>
+  <li>Click <strong>set up a workflow yourself</strong> and update the starter template to match the following:</li>
+</ol>
+
+<p>First, we will name this workflow:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Run CI</span>
+</code></pre></div></div>
+
+<p>Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">workflow_dispatch</code> is optional. It enables to run this workflow manually from the Actions tab.</p>
+
+<p>Now, we need to specify what we actually want to happen within our workflow. A workflow run is made up of one or more <em>jobs</em> that can run sequentially or in parallel.</p>
+
+<p>The first job we would like to set up is the one to build and run our tests. Let it be run on the latest Ubuntu instance:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build-and-test</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+</code></pre></div></div>
+
+<p>A job is a sequence of <em>steps</em>. For this simple CI pipeline we would like to:</p>
+
+<ol>
+  <li>Set up Go compiler environment.</li>
+  <li>Check out our code from its GitHub repository.</li>
+  <li>Fetch Go modules used by our application.</li>
+  <li>(Optional) Build the binary for our application.</li>
+  <li>Build the Docker Image for our application.</li>
+  <li>Run the functional tests for our application against that Docker image.</li>
+</ol>
+
+<p>Building the binary in step 4 is actually optional. It is a “smoke test”. We don’t want to be building a Docker image and attempting functional testing if our application does not even compile. If we had “unit tests” or some other small tests, we would run them between steps 4 and 5 as well.</p>
+
+<p>The following sequence of <code class="language-plaintext highlighter-rouge">steps</code> achieves the goals we just set.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Go</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-go@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">go-version</span><span class="pi">:</span> <span class="s">1.16.4</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout code</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Fetch required Go modules</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">go mod download</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">go build -v ./...</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build Docker image</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">push</span><span class="pi">:</span> <span class="no">false</span>
+          <span class="na">tags</span><span class="pi">:</span> <span class="s">${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run functional tests</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">go test -v ./...</span>
+</code></pre></div></div>
+
+<p>As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project’s repo, under the name of <code class="language-plaintext highlighter-rouge">.github/workflow/ci.yml</code>.</p>
+
+<p>This should be enough to test our approach to CI. Change the workflow file name from <code class="language-plaintext highlighter-rouge">main.yml</code> to <code class="language-plaintext highlighter-rouge">ci.yml</code> and press <strong>Start commit</strong> button. Fill out the commit details in your preferred style and press <strong>Commit new file</strong>. GitHub Actions are saved as YAML files in <code class="language-plaintext highlighter-rouge">.github/workflows</code> directory and GitHub web interface would do that for us.</p>
+
+<p>Select <strong>Actions</strong> from the navigation bar for your repository. Since we’ve enabled <code class="language-plaintext highlighter-rouge">workflow_dispatch</code> option in our Action, GitHub will have started it already. If not, select “CI/CD to Docker Hub” action on the left, and then press <strong>Run workflow</strong> button on the right to start the workflow.</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/golang/images/runworkflow.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>Should the run fail, you can click on the failing entry to see the logs and amend the workflow YAML file accordingly.</p>
+
+<h2 id="enable-access-to-docker-hub">Enable access to Docker Hub</h2>
+
+<p>The <a href="https://hub.docker.com/">Docker Hub</a> is a hosted repository service provided by Docker for finding and sharing container images.</p>
+
+<p>Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.</p>
+
+<p>To set up the access to Docker Hub API:</p>
+
+<ol>
+  <li>
+    <p>Create a new Personal Access Token (PAT) for Docker Hub.</p>
+
+    <ul>
+      <li>Go to the <a href="https://hub.docker.com/settings/security">Docker Hub Account Settings</a> and then click <strong>New Access Token</strong>.</li>
+      <li>Let’s call this token <code class="language-plaintext highlighter-rouge">docker-gs-ping-ci</code>. Input the name and click <strong>Create</strong>.</li>
+      <li>Copy the token value, we’ll need it in a second.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Add your Docker ID and PAT as secrets to your GitHub repo.</p>
+
+    <ul>
+      <li>Navigate to your GitHub repository and click <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong>.</li>
+      <li>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</li>
+      <li>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code> and use the token value from the step (1).</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Your GitHub repository <strong>Secrets</strong> section would look like the following.</p>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.</p>
+
+<h2 id="set-up-the-cd-workflow">Set up the CD workflow</h2>
+
+<p>Now, let’s create a GitHub Actions workflow to build and store the image for our application in Docker Hub. We can achieve this by creating two Docker actions:</p>
+
+<ol>
+  <li>The first action enables us to log in to Docker Hub using the secrets we stored in the GitHub Repository settings.</li>
+  <li>The second one is the build and push action.</li>
+</ol>
+
+<p>In this example, let us set the push flag to <code class="language-plaintext highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
+
+<p>Now, we can add the steps required. Start a blank new workflow, just as we did before. Let’s give it a file name of <code class="language-plaintext highlighter-rouge">release.yml</code> and amend the template body to match the following.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Release to Docker Hub</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">tags</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">*.*.*"</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">release</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Go</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-go@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">go-version</span><span class="pi">:</span> <span class="s">1.16.4</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout code</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Fetch required Go modules</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">go mod download</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">go build -v ./...</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push Docker image</span>
+        <span class="na">id</span><span class="pi">:</span>   <span class="s">docker_build</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">push</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">tags</span><span class="pi">:</span> <span class="s">${{ github.repository }}:latest</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Image digest</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo ${{ steps.docker_build.outputs.digest }}</span>
+</code></pre></div></div>
+
+<p>This workflow is similar to the CI workflow, with the following changes:</p>
+
+<ul>
+  <li>This workflow is only triggered when a git tag of the format <code class="language-plaintext highlighter-rouge">*.*.*</code> is pushed to the repo. The tag meant to be a semantic version, such as <code class="language-plaintext highlighter-rouge">3.5.0</code> or <code class="language-plaintext highlighter-rouge">0.0.1</code>.</li>
+  <li>The very first step is to login into Docker Hub using the two secrets that we had saved in the repository settings previously.</li>
+  <li>The <em>build and push</em> step now has <code class="language-plaintext highlighter-rouge">push: true</code> and since we had logged into Docker Hub this will result in the latest image being published.</li>
+  <li>The image digest step prints out the image metadata to the log.</li>
+</ul>
+
+<p>Let’s save this workflow and check the <em>Actions</em> page for the repository on GitHub. Unlike the CI workflow, this new workflow cannot be triggered manually - this is how we set it up. So, in order to test it, we have to tag some commit. Let’s tag the <code class="language-plaintext highlighter-rouge">HEAD</code> of the <code class="language-plaintext highlighter-rouge">main</code> branch:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
+
+<span class="nv">$ </span>git push <span class="nt">--tags</span>
+Enumerating objects: 1, <span class="k">done</span><span class="nb">.</span>
+Counting objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, 169 bytes | 169.00 KiB/s, <span class="k">done</span><span class="nb">.</span>
+Total 1 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To https://github.com/olliefr/docker-gs-ping.git
+ <span class="k">*</span> <span class="o">[</span>new tag]         0.0.1 -&gt; 0.0.1
+</code></pre></div></div>
+
+<p>This means our tag was successfully pushed to the main repo. If we switch to the GitHub UI, we would see that the workflow has already been triggered:</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/golang/images/triggerontag.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>Plot twist! Despite having explained how to add secrets to the repository, we had forgotten to do it ourselves. And the workflow run results in error:</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/golang/images/loginerror.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>That’s easy to fix. We follow our own guide and add the secrets to the repository settings. But how do we re-run the workflow? We need to remove the tag and reapply it.</p>
+
+<p>To remove the tag on the <code class="language-plaintext highlighter-rouge">remote</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin :refs/tags/0.0.1
+To https://github.com/olliefr/docker-gs-ping.git
+ - <span class="o">[</span>deleted]         0.0.1
+</code></pre></div></div>
+
+<p>And to re-apply it locally and push:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-fa</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
+Updated tag <span class="s1">'0.0.1'</span> <span class="o">(</span>was d7d3edc<span class="o">)</span>
+<span class="nv">$ </span>git push origin <span class="nt">--tags</span>
+Enumerating objects: 1, <span class="k">done</span><span class="nb">.</span>
+Counting objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, 170 bytes | 170.00 KiB/s, <span class="k">done</span><span class="nb">.</span>
+Total 1 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To https://github.com/olliefr/docker-gs-ping.git
+ <span class="k">*</span> <span class="o">[</span>new tag]         0.0.1 -&gt; 0.0.1
+</code></pre></div></div>
+
+<p>And the workflow is triggered again. This time it completes without issues:</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/golang/images/cdsuccess.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>Since the image we’ve just pushed to Docker Hub is public, now it can be pulled by anyone, from anywhere:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull olliefr/docker-gs-ping
+Using default tag: latest
+latest: Pulling from olliefr/docker-gs-ping
+540db60ca938: Already exists
+adcc1eea9eea: Already exists
+4c4ab2625f07: Already exists
+c5e7595549f7: Pull <span class="nb">complete
+</span>3df88182f7ac: Pull <span class="nb">complete
+</span>56c9181b0012: Pull <span class="nb">complete
+</span>04b91de9e9ed: Pull <span class="nb">complete
+</span>7a1dde643d3d: Pull <span class="nb">complete
+</span>f815a8b426ad: Pull <span class="nb">complete
+</span>7a6b1ee48c34: Pull <span class="nb">complete
+</span>ca1a2b73aa81: Pull <span class="nb">complete
+</span>Digest: sha256:81bedd562952757322a07a26634b01e3916db375cc695843124f79641e433029
+Status: Downloaded newer image <span class="k">for </span>olliefr/docker-gs-ping:latest
+docker.io/olliefr/docker-gs-ping:latest
+</code></pre></div></div>
+
+<p>We’ve just build a simple (maybe even naive) CI/CD workflow. There are many ways in which it can be improved. We’ll look at some of these ways in the next section.</p>
+
+<h2 id="optimizing-the-workflow">Optimizing the workflow</h2>
+
+<p>Next, let’s look at how we can optimize the GitHub Actions workflow through build cache. This has two main advantages:</p>
+
+<ol>
+  <li>Build cache reduces the build time as it will not have to re-download all of the images, and</li>
+  <li>It also reduces the number of pulls we complete against Docker Hub. We need to make use of GitHub cache to make use of this.</li>
+</ol>
+
+<p>Let us set up a Builder with a build cache. First, we need to set up the builder, and then to configure the cache. In this example, let us add the path and keys to store this under using GitHub cache for this.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Docker Buildx</span>
+        <span class="na">id</span><span class="pi">:</span>   <span class="s">buildx</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/setup-buildx-action@v1</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cache Docker layers</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
+          <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">${{ runner.os }}-buildx-</span>
+</code></pre></div></div>
+
+<p>And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:</p>
+
+<ul>
+  <li>Setting up the builder to use the output of the buildx step, and then</li>
+  <li>Using the cache we set up earlier for it to store to and to retrieve</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">docker_build</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">builder</span><span class="pi">:</span> <span class="s">${{ steps.buildx.outputs.name }}</span>
+          <span class="na">push</span><span class="pi">:</span> <span class="no">false</span>
+          <span class="na">load</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">tags</span><span class="pi">:</span> <span class="s">${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest</span>
+          <span class="na">cache-from</span><span class="pi">:</span> <span class="s">type=local,src=/tmp/.buildx-cache</span>
+          <span class="na">cache-to</span><span class="pi">:</span> <span class="s">type=local,dest=/tmp/.buildx-cache</span>
+</code></pre></div></div>
+
+<p>Now, run the CI workflow again and verify that it uses the build cache by checking the workflow log.</p>
+
+<h2 id="wrap-up">Wrap up</h2>
+
+<p>GitHub Actions are an immensely powerful way to automate your CI and CD pipelines, and <a href="https://docs.github.com/en/actions">there is a lot of documentation</a> to aid you in that mission. It is not, however, the <em>only</em> way to integrate containers into your workflow. The aim of this section was to show you some of the basic things that are possible. There is a multitude of CI and CD tools on the market and you are very welcome to investigate what integration with the container ecosystem they provide. Well defined, automated CI pipelines can save you and your team a lot of effort.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.</p>
+
+<p>You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.</p>
+
+<p>In the next module, we’ll look into some options for doing so:</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/golang/deploy/" class="button outline-btn">Deploy to the Cloud</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs </a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+
+<p><br /></p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=ci">ci</a>, <a href="/docs.docker.jp.onthefly/search/?q=cd">cd</a>, <a href="/docs.docker.jp.onthefly/search/?q=ci/cd">ci/cd</a>, <a href="/docs.docker.jp.onthefly/search/?q=continuous integration">continuous integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=continuous deployment">continuous deployment</a>, <a href="/docs.docker.jp.onthefly/search/?q=deployment">deployment</a>, <a href="/docs.docker.jp.onthefly/search/?q=github">github</a>, <a href="/docs.docker.jp.onthefly/search/?q=github actions">github actions</a>, <a href="/docs.docker.jp.onthefly/search/?q=go">go</a>, <a href="/docs.docker.jp.onthefly/search/?q=golang">golang</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/language/golang/configure-ci-cd.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [language/golang/configure-ci-cd.ch](https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/configure-ci-cd/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#choose-a-sample-project" class="nomunge">Choose a sample project</a></li>
+  <li><a href="#set-up-the-ci-workflow" class="nomunge">Set up the CI workflow</a></li>
+  <li><a href="#enable-access-to-docker-hub" class="nomunge">Enable access to Docker Hub</a></li>
+  <li><a href="#set-up-the-cd-workflow" class="nomunge">Set up the CD workflow</a></li>
+  <li><a href="#optimizing-the-workflow" class="nomunge">Optimizing the workflow</a></li>
+  <li><a href="#wrap-up" class="nomunge">Wrap up</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                        <li><a href="https://docker.events.cube365.net/dockercon/">DockerCon</a></li>
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/language/golang/configure-ci-cd/";</script></body>
+</html>
