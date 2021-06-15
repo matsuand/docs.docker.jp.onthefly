@@ -1,4 +1,4 @@
-SUBDIRS = images java nodejs python
+SUBDIRS = images golang java nodejs python
 
 thisdir    = language
 origdir    = @abs_origdir@/$(thisdir)

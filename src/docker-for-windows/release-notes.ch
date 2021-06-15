@@ -127,6 +127,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
 - Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
 - Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+- Fixed an issue where `docker info` sometimes took longer to respond. Fixes [docker/for-win#10675](https://github.com/docker/for-win/issues/10675)
 @y
 - Fixed error showing stderr log in the UI. Fixes [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
 - Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
@@ -135,6 +136,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
 - Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
 - Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+- Fixed an issue where `docker info` sometimes took longer to respond. Fixes [docker/for-win#10675](https://github.com/docker/for-win/issues/10675)
 @z
 
 @x

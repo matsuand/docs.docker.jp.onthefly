@@ -87,7 +87,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = src/language
+subdir = src/language/golang
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/progs.m4 \
 	$(top_srcdir)/configure.ac
@@ -294,21 +294,32 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = images golang java nodejs python
-thisdir = language
+SUBDIRS = images
+thisdir = language/golang
 origdir = @abs_origdir@/$(thisdir)
 mysrcdir = $(shell cd $(srcdir) && pwd)
 targetdir = @abs_targetdir@/$(thisdir)
 publishdir = @abs_publishdir@/$(thisdir)
 uploaddir = @UPLOADDIR@/$(thisdir)
 bases = \
-	index
+	build-images    \
+	configure-ci-cd \
+	deploy          \
+	develop         \
+	index           \
+	run-containers  \
+	run-tests
 
-ch_mds = $(bases:=.ch)
-tr_mds = $(bases:=.md)
-EXTRA_DIST = $(ch_mds)
+htmlbases = \
+	nav
+
+ch_mds = $(bases:=.ch) # ch means change files
+tr_mds = $(bases:=.md) # tr means translated files
+ch_htmls = $(htmlbases:=.htmlch)
+tr_htmls = $(htmlbases:=.html)
+EXTRA_DIST = $(ch_mds) $(ch_htmls)
 #DISTCLEANFILES = 
-srcs = $(tr_mds)
+srcs = $(tr_mds) $(tr_htmls)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
 all: all-recursive
 
@@ -322,9 +333,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/language/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/language/golang/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/language/Makefile
+	  $(AUTOMAKE) --gnu src/language/golang/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -633,9 +644,11 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 
 @MAINT@.PHONY: chbuild
-@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
+@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds)) $(addprefix $(mysrcdir)/, $(ch_htmls))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
+@MAINT@$(addprefix $(mysrcdir)/, $(ch_htmls)):
+@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.htmlch$$|.html|"` $@; fi
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

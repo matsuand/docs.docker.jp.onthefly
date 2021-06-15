@@ -15,6 +15,7 @@ images = \
 	Docker-hub-tags-vulnerability-details.png \
 	FAQ-certified-content.png \
 	FAQ-types-of-certified-content.png \
+	VerifiedPublisherBadge.png \
 	certified_container.png \
 	certified_infrastructure.png \
 	certified_plugins.png \

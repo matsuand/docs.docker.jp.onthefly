@@ -133,7 +133,8 @@ This page contains information about the new features, improvements, known issue
 - Use `vpnkit` with `virtualization.framework` to fix connectivity issues with VPN clients such as Cisco AnyConnect.
 - Fixed version number missing in update dialog window.
 - Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
-- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes. Fixes [docker/for-mac#5707](https://github.com/docker/for-mac/issues/5707), [docker/for-mac#5680](https://github.com/docker/for-mac/issues/5680), [docker/for-mac#5663](https://github.com/docker/for-mac/issues/5663) and [docker/for-mac#5653](https://github.com/docker/for-mac/issues/5653).
+- Avoid running `com.docker.osxfs` when gRPC FUSE is enabled. Fixes [docker/for-mac#5725](https://github.com/docker/for-mac/issues/5725).
 @y
 - Prevent `docker run` from hanging if inotify event injection fails. Fixes [docker/for-mac#5590](https://github.com/docker/for-mac/issues/5590).
 - Fixed error showing stderr log in the UI. Fixes [docker/for-mac#5688](https://github.com/docker/for-mac/issues/5688).
@@ -146,7 +147,8 @@ This page contains information about the new features, improvements, known issue
 - Use `vpnkit` with `virtualization.framework` to fix connectivity issues with VPN clients such as Cisco AnyConnect.
 - Fixed version number missing in update dialog window.
 - Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
-- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes. Fixes [docker/for-mac#5707](https://github.com/docker/for-mac/issues/5707), [docker/for-mac#5680](https://github.com/docker/for-mac/issues/5680), [docker/for-mac#5663](https://github.com/docker/for-mac/issues/5663) and [docker/for-mac#5653](https://github.com/docker/for-mac/issues/5653).
+- Avoid running `com.docker.osxfs` when gRPC FUSE is enabled. Fixes [docker/for-mac#5725](https://github.com/docker/for-mac/issues/5725).
 @z
 
 @x

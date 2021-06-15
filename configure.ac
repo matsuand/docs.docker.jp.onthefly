@@ -172,6 +172,8 @@ AC_CONFIG_FILES([Makefile
 		 src/kitematic/images/Makefile
 		 src/language/Makefile
 		 src/language/images/Makefile
+		 src/language/golang/Makefile
+		 src/language/golang/images/Makefile
 		 src/language/java/Makefile
 		 src/language/java/images/Makefile
 		 src/language/nodejs/Makefile
