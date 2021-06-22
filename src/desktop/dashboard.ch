@@ -33,7 +33,7 @@ CLI を使って難しい操作を行う必要がなくなります。
 @z
 
 @x
-The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](explore-running-containers-and-applications).
+The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](#explore-running-containers-and-applications).
 @y
 **Containers/Apps** 画面では、コンテナーやアプリケーションの実行状態を表示します。
 この画面においてはコンテナーやアプリケーションとのやりとりを行うことが可能であり、手元のマシンからアプリケーションのライフサイクルを直接制御することができます。
