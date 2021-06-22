@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-06-22 19:38:08 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>自動ビルドの設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="自動ビルドの設定" />
   <meta property="og:description" content="自動ビルドを設定します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-22T19:38:08+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-06-22T19:38:08+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"自動ビルドの設定","description":"自動ビルドを設定します。","url":"https://docs.docker.com/docker-hub/builds/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,10 +103,17 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>自動ビルドの設定</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p>
-<h2 id="how-automated-builds-work">自動ビルドはどのように動くか</h2>
+                        <section class="section"><h1>自動ビルドの設定</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="how-automated-builds-work">自動ビルドはどのように動くか</h2>
 
 <p>Docker Hub においては、外部リポジトリ内のソースコードから自動的にイメージをビルドして、出来上がったイメージをリポジトリに自動プッシュすることができます。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>自動ビルド機能が利用できるのは Pro プランおよび Team プランのみです。
+自動ビルドを始めるには、現在のアカウントを Pro プランや Team プランに <a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade" target="_blank" rel="noopener" class="_">アップグレード</a> してください。
+この自動ビルド機能をオープンソースプロジェクトに利用している場合は、私たちの <a href="https://www.docker.com/community/open-source/application" target="_blank" rel="noopener" class="_">オープンソースコミュニティ</a> プログラムに参加していただき、Docker Hub 上にて Docker がどのようにプロジェクトをサポートするのかを学んでください。</p>
+</blockquote>
 
 <p>自動ビルド（automated builds または autobuilds）を設定する際には、Docker イメージとしてビルドしたいブランチとタグの一覧を生成します。
 その一覧に示されたイメージタグに対してのソースコードブランチ（たとえば GitHub 上）にソースをプッシュすると、このプッシュによって新たなビルドを起動するウェブフックが用いられます。
@@ -132,7 +139,8 @@
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。</p>
+  <p>キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。
+並行ビルド数は Pro プランでは 5、Team プランでは 15 です。</p>
 </blockquote>
 
 <p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-dashboard.png" alt="自動ビルドダッシュボード" /></p>
@@ -252,7 +260,9 @@
 つまりこれを利用すれば、アクセストークンや機密にしておきたい各種情報を安全に保存しておくことができることになります。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: ビルド設定画面上から設定した変数は、ビルド処理において <strong>のみ</strong> 利用されます。
+  <p><strong>メモ</strong></p>
+
+  <p>ビルド設定画面上から設定した変数は、ビルド処理において <strong>のみ</strong> 利用されます。
 したがってサービスにおいて利用している環境変数（たとえばサービスリンクの生成時に利用するもの）とは混同しないようにしてください。</p>
 </blockquote>
 
@@ -396,6 +406,13 @@ You could also use capture groups to build and label images that come from vario
 <p><a href="#configure-automated-build-settings">自動ビルドの設定</a> における <a href="#environment-variables-for-builds">環境変数</a> の設定に従って<code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code>を設定すれば、BuildKit ビルダーを有効にすることができます。
 BuildKit に関する詳細は <a href="/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/">BuildKit を使ったイメージビルド</a> を参照してください。</p>
 
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>自動ビルドは、デフォルトで buildKit によるビルドシステムを用います。
+ビルドシステムとして従来の Docker を用いたい場合は、<a href="/docs.docker.jp.onthefly/docker-hub/builds/#environment-variables-for-builds" target="_blank" rel="noopener" class="_">環境変数</a> Docker_BUILDKIT=0 を追加してください。</p>
+</blockquote>
+
 <h2 id="プライベートサブモジュールをリンクしているリポジトリのビルド">プライベートサブモジュールをリンクしているリポジトリのビルド</h2>
 
 <p>Docker Hub ではデプロイ鍵をソースコードリポジトリ内において設定することが可能であり、リポジトリのクローンやそのビルドを可能にしています。
@@ -491,7 +508,9 @@ BuildKit に関する詳細は <a href="/docs.docker.jp.onthefly/develop/develop
 <h3 id="service-users-for-team-autobuilds">チーム自動ビルドに対するサービスユーザー</h3>
 
 <blockquote>
-  <p><strong>メモ</strong>: チームに対する自動ビルドの設定は、<code class="language-plaintext highlighter-rouge">Owners</code>（所有者）チームのメンバーのみが行うことができます。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>チームに対する自動ビルドの設定は、<code class="language-plaintext highlighter-rouge">Owners</code>（所有者）チームのメンバーのみが行うことができます。</p>
 </blockquote>
 
 <p>チームに対して自動ビルドの設定を行う際には、Docker Hub からソースコードリポジトリへのアクセスを許可するために、特定のユーザーアカウントに紐づいた OAuth を利用します。
@@ -526,7 +545,9 @@ BuildKit に関する詳細は <a href="/docs.docker.jp.onthefly/develop/develop
 そして組織に切り替えて、サービスアカウントを使った <a href="/docs.docker.jp.onthefly/docker-hub/builds/link-source/">ソースコードリポジトリへのリンク</a> の手順を行います。</p>
 
     <blockquote>
-      <p><strong>メモ</strong>: サービスアカウントへのリンクを生成するためには、ソースコードプロバイダー上の個人アカウントからログアウトすることが必要かもしれません。</p>
+      <p><strong>メモ</strong></p>
+
+      <p>サービスアカウントへのリンクを生成するためには、ソースコードプロバイダー上の個人アカウントからログアウトすることが必要かもしれません。</p>
     </blockquote>
   </li>
   <li>任意の作業として、生成した SSH 鍵を使ってプライベートサブモジュールを利用するビルドの設定を行います。
