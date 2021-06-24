@@ -765,12 +765,12 @@ BuildKit に関する詳細は [BuildKit を使ったイメージビルド](../.
 @x
 > **Note**
 >
-> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0.
+> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} DOCKER_BUILDKIT=0.
 @y
 > **メモ**
 >
 > 自動ビルドは、デフォルトで buildKit によるビルドシステムを用います。
-> ビルドシステムとして従来の Docker を用いたい場合は、[環境変数](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0 を追加してください。
+> ビルドシステムとして従来の Docker を用いたい場合は、[環境変数](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} DOCKER_BUILDKIT=0 を追加してください。
 @z
 
 @x

@@ -20,15 +20,15 @@ toc_max: 2
 @z
 
 @x
-The Go getting started guide teaches you how to create a containerized Go application using Docker.
+In this guide, you will learn how to create a containerized Go application using Docker.
 @y
-The Go getting started guide teaches you how to create a containerized Go application using Docker.
+In this guide, you will learn how to create a containerized Go application using Docker.
 @z
 
 @x
-Why Go? According to its authors, [Go is an open source programming language that makes it easy to build simple, reliable, and efficient software][golang]. Whatever are the true reasons behind a wide-scale adoption of Go, it is undeniable that it is a major player in the modern Cloud ecosystem. In fact, Docker, as well as Kubernetes, are written in Go.
+Why [Go](https://golang.org/){:target="_blank" rel="noopener" class="_"}? Go is an open-source programming language that lets you build simple, reliable, and efficient software. Go is undeniably a major player in the modern Cloud ecosystem; both Docker and Kubernetes are written in Go. 
 @y
-Why Go? According to its authors, [Go is an open source programming language that makes it easy to build simple, reliable, and efficient software][golang]. Whatever are the true reasons behind a wide-scale adoption of Go, it is undeniable that it is a major player in the modern Cloud ecosystem. In fact, Docker, as well as Kubernetes, are written in Go.
+Why [Go](https://golang.org/){:target="_blank" rel="noopener" class="_"}? Go is an open-source programming language that lets you build simple, reliable, and efficient software. Go is undeniably a major player in the modern Cloud ecosystem; both Docker and Kubernetes are written in Go. 
 @z
 
 @x
@@ -54,23 +54,23 @@ In this guide, you’ll learn how to:
 @z
 
 @x
-* Create a new `Dockerfile` which contains instructions required to build a Docker image for a simple Go program;
-* Run the newly built image as a container;
-* Set up a local development environment to connect a database to the container;
-* Use Docker Compose to run your Go application and other services it requires;
-* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}.
+* Create a new `Dockerfile` which contains instructions required to build a Docker image for a simple Go program
+* Run the newly built image as a container
+* Set up a local development environment to connect a database to the container
+* Use Docker Compose to run your Go application and other services it requires
+* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}
 @y
-* Create a new `Dockerfile` which contains instructions required to build a Docker image for a simple Go program;
-* Run the newly built image as a container;
-* Set up a local development environment to connect a database to the container;
-* Use Docker Compose to run your Go application and other services it requires;
-* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}.
+* Create a new `Dockerfile` which contains instructions required to build a Docker image for a simple Go program
+* Run the newly built image as a container
+* Set up a local development environment to connect a database to the container
+* Use Docker Compose to run your Go application and other services it requires
+* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}
 @z
 
 @x
-After completing the Go getting started modules, you should be able to containerize your own Go application based on the examples and instructions provided in this guide and the resources that it refers to.
+You can containerize your own Go application using the examples and resources provided after you complete the Go getting started modules.
 @y
-After completing the Go getting started modules, you should be able to containerize your own Go application based on the examples and instructions provided in this guide and the resources that it refers to.
+You can containerize your own Go application using the examples and resources provided after you complete the Go getting started modules.
 @z
 
 @x

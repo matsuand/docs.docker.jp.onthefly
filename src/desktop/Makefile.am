@@ -17,6 +17,7 @@ ctie:
 bases = \
 	backup-and-restore \
 	dashboard          \
+	dev-environments   \
 	faqs               \
 	index              \
 	kubernetes         \

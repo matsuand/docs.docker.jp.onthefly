@@ -38,11 +38,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 3.4.0
-2021-06-09
+## Docker Desktop 3.5.0
+2021-06-23
 @y
-## Docker Desktop 3.4.0
-2021-06-09
+## Docker Desktop 3.5.0
+2021-06-23
 @z
 
 @x
@@ -54,7 +54,91 @@ This page contains information about the new features, improvements, known issue
 @x
 ### New
 @y
+{: #new }
+### 新機能
+@z
+
+@x
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+@y
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2 beta](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
+  - Fixed a bug where a container cannot be started when a file is bind-mounted into a nested mountpoint. Fixes [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795).
+  - Added support for container links and external links.
+  - Introduced the `docker compose logs --since --until` option.
+  - `docker compose config --profiles` now lists all defined profiles.
+- From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
+@y
+- [Compose V2 beta](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
+  - Fixed a bug where a container cannot be started when a file is bind-mounted into a nested mountpoint. Fixes [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795).
+  - Added support for container links and external links.
+  - Introduced the `docker compose logs --since --until` option.
+  - `docker compose config --profiles` now lists all defined profiles.
+- From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- **Volume Management**
+  - Users can now remove a file or directory inside a volume using the the Docker Dashboard.
+  - The **Volumes** view in Docker Dashboard displays the last modified time and the size of the contents inside a volume.
+  - Users can save the files and directories inside a volume from Docker Dashboard.
+- Fixed an issue that caused credStore timeout errors when running the `docker login` command. Fixes [docker/for-win#11472](https://github.com/docker/for-win/issues/11472)
+- Docker Desktop now allows the WSL 2 integration agent to start even when `/etc/wsl.conf` is malformed.
+- Fixed an issue with the Docker Compose app not being stopped or removed when started by multiple configuration files. [docker/for-win#11445](https://github.com/docker/for-win/issues/11445)
+- Fixed a bug where Docker Desktop fails to restart after a power failure because the Hyper-V VM restarted prematurely.
+- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
+- The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
+- Show the Docker Desktop Feedback popup only when clicking Docker menu.
+@y
+- **Volume Management**
+  - Users can now remove a file or directory inside a volume using the the Docker Dashboard.
+  - The **Volumes** view in Docker Dashboard displays the last modified time and the size of the contents inside a volume.
+  - Users can save the files and directories inside a volume from Docker Dashboard.
+- Fixed an issue that caused credStore timeout errors when running the `docker login` command. Fixes [docker/for-win#11472](https://github.com/docker/for-win/issues/11472)
+- Docker Desktop now allows the WSL 2 integration agent to start even when `/etc/wsl.conf` is malformed.
+- Fixed an issue with the Docker Compose app not being stopped or removed when started by multiple configuration files. [docker/for-win#11445](https://github.com/docker/for-win/issues/11445)
+- Fixed a bug where Docker Desktop fails to restart after a power failure because the Hyper-V VM restarted prematurely.
+- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
+- The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
+- Show the Docker Desktop Feedback popup only when clicking Docker menu.
+@z
+
+@x
+## Docker Desktop 3.4.0
+2021-06-09
+@y
+## Docker Desktop 3.4.0
+2021-06-09
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+@y
+> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
 ### New
+@y
+{: #new }
+### 新機能
 @z
 
 @x
@@ -78,7 +162,8 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Deprecation
 @y
-### Deprecation
+{: #deprecation }
+### 非推奨
 @z
 
 @x
@@ -90,7 +175,8 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Upgrades
 @y
-### Upgrades
+{: #upgrades }
+### アップグレード
 @z
 
 @x
@@ -116,7 +202,8 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Bug fixes and minor changes
 @y
-### Bug fixes and minor changes
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
 @z
 
 @x
@@ -148,9 +235,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe)
 @z
 
 @x

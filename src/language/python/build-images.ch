@@ -190,7 +190,7 @@ Now that our application is running properly, let’s take a look at creating a 
 @z
 
 @x
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and execute them consecutively and create a Docker image as a result.
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions, executes them consecutively, and creates a Docker image as a result.
 @y
 Dockerfile はテキストファイルであり、コマンドラインから実行するイメージ生成コマンドを記述したようなものです。
 Docker に対して`docker build`コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで 1 つずつそれを実行し、最終的に Docker イメージを作り出します。
