@@ -54,10 +54,10 @@ Docker では個人開発者向けや開発チーム向けの料金プランを�
 @z
 
 @x
-The **Pro** plan includes unlimited public repositories, unlimited private repositories, unlimited [collaborators](../repos.md#collaborators-and-their-role) for public repositories, one [service account](../repos.md#service-accounts) for private repositories, and 2 parallel builds, starting at $5 per month with the annual subscription.
+The **Pro** plan includes unlimited public repositories, unlimited private repositories, unlimited [collaborators](../repos.md#collaborators-and-their-role) for public repositories, one [service account](../repos.md#service-accounts) for private repositories, autobuilds with 5 parallel builds, starting at $5 per month with the annual subscription.
 @y
 **プロ**プランには以下が含まれます。
-無制限のパブリックリポジトリ、無制限のプライベートリポジトリ、パブリックリポジトリにおける無制限の [協力者](../repos.md#collaborators-and-their-role)、プライベートリポジトリにおける 1 つの [サービスアカウント](../repos.md#service-accounts)、2 つの同時並行ビルド。
+無制限のパブリックリポジトリ、無制限のプライベートリポジトリ、パブリックリポジトリにおける無制限の [協力者](../repos.md#collaborators-and-their-role)、プライベートリポジトリにおける 1 つの [サービスアカウント](../repos.md#service-accounts)、5 つの同時並行ビルドによる自動ビルド。
 年額のサブスクリプションは、月額 5 ドルから用意されています。
 @z
 
@@ -88,11 +88,11 @@ The **Free** plan includes unlimited public repositories and unlimited collabora
 @z
 
 @x
-The **Team** plan includes unlimited public and unlimited private repositories starting at $25 per month for the first 5 users and $7 per month for each user thereafter with the annual subscription. In addition, the Team plan offers 3 parallel builds, advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
+The **Team** plan includes unlimited public and unlimited private repositories starting at $25 per month for the first 5 users and $7 per month for each user thereafter with the annual subscription. In addition, the Team plan offers autobuilds with 15 parallel builds, advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
 @y
 **チーム**プランでは、無制限のパブリックリポジトリ、無制限のプライベートリポジトリが利用できます。
 5 ユーザーに対して月額 25 ドルから、また年額サブスクリプションではその後、各ユーザーに対して月額 7 ドルから用意されています。
-またチームプランでは 3 つの同時並行ビルド、高度な共同および管理ツール、チーム全体に向けたロールベースのアクセス制御による組織およびチーム管理が利用できます。
+またチームプランでは 15 個の同時並行ビルドによる自動ビルド、高度な共同および管理ツール、チーム全体に向けたロールベースのアクセス制御による組織およびチーム管理が利用できます。
 @z
 
 @x

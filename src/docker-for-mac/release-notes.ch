@@ -49,8 +49,8 @@ This page contains information about the new features, improvements, known issue
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @y
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @z
 
 @x
@@ -63,7 +63,19 @@ This page contains information about the new features, improvements, known issue
 @x
 **Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
 @y
-**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+**Dev 環境プレビュー**: Dev 環境はチームメンバーとの間で、シームレスに共同作業を実現できます。
+その場合にチームメンバーは、自分のマシンに Git ブランチを取り込むことなく作業が進められます。
+Dev 環境を使えば 1 クリックするだけで、作業中の環境をチームメンバーと共有できます。
+そしてマージコンフリクトに対処する必要もありません。
+Dev 環境に関する詳しい情報、あるいは利用手順については [Dev 環境プレビュー](../desktop/dev-environments.md) を参照してください。
+@z
+
+@x
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+@y
+**Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
+これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
 @z
 
 @x
@@ -81,12 +93,13 @@ This page contains information about the new features, improvements, known issue
   - `docker compose config --profiles` now lists all defined profiles.
 - From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
 @y
-- [Compose V2 beta](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
-  - Fixed a bug where a container cannot be started when a file is bind-mounted into a nested mountpoint. Fixes [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795).
-  - Added support for container links and external links.
-  - Introduced the `docker compose logs --since --until` option.
-  - `docker compose config --profiles` now lists all defined profiles.
-- From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
+- [Compose V2 ベータ](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
+  - バインドマウントされたファイルがネストマウントされている場合に、コンテナーが起動できなくなるバグを修正しました。
+    [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795) を Fix に。
+  - コンテナーリンクと外部リンクへのサポートを追加しました。
+  - `docker compose logs --since --until`オプションを追加しました。
+  - `docker compose config --profiles`では、定義されたプロファイルすべてを表示するようにしました。
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) から [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2) へアップデートしました。
 @z
 
 @x
@@ -110,18 +123,22 @@ This page contains information about the new features, improvements, known issue
 - The default `docker` CLI `context` is now `desktop-linux`.
 - Show the Docker Desktop Feedback popup only when clicking Docker menu.
 @y
-- **Volume Management**
-  - Users can now remove a file or directory inside a volume using the the Docker Dashboard.
-  - The **Volumes** view in Docker Dashboard displays the last modified time and the size of the contents inside a volume.
-  - Users can save the files and directories inside a volume from Docker Dashboard.
-- Fixed a bug that caused Docker to fail to start because `/usr/bin` was not present on the `PATH`. Fixes [docker/for-mac#5770](https://github.com/docker/for-mac/issues/5770)
-- Docker Desktop now allows files to be modified inside a host directory which is a nested mountpoint in a container. Fixes [docker/for-mac#5748](https://github.com/docker/for-mac/issues/5748).
-- Fixed a settings migration bug which caused Docker Desktop not to find images and containers data after upgrading to 3.4.0. Fixes [docker/for-mac#5754](https://github.com/docker/for-mac/issues/5754).
-- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
-- Docker Desktop now highlights the architecture of the non-native images in the Docker Dashboard on Apple Silicon.
-- Fix using virtualization.framework on macOS 12 (Monterey).
-- The default `docker` CLI `context` is now `desktop-linux`.
-- Show the Docker Desktop Feedback popup only when clicking Docker menu.
+- **ボリューム管理**
+  - Docker Dashboard を利用して、ボリューム内のファイルやディレクトリを削除できるようになりました。
+  - Docker Dashboard の **Volumes** 画面に、ボリュームの最終更新時刻と、ボリューム内容のサイズを表示します。
+  - Docker Dashboard を利用して、ボリューム内のファイルやディレクトリを保存できるようになりました。
+- `PATH`において`/usr/bin`が含まれていないことが原因で、Docker が起動に失敗するバグを修正しました。
+  [docker/for-mac#5770](https://github.com/docker/for-mac/issues/5770) を Fix に。
+- ホスト上のディレクトリがコンテナー内にネストされたマウントポイントとなっている場合は、Docker Desktop からファイル修正ができるようになりました。
+  [docker/for-mac#5748](https://github.com/docker/for-mac/issues/5748) を Fix に。
+- Docker Desktop を 3.4.0 にアップグレードした場合に、イメージとコンテナーデータを検出できなくなるという設定移行のバグを修正しました。
+  [docker/for-mac#5754](https://github.com/docker/for-mac/issues/5754) を Fix に。
+- Docker に対して診断データをアップロードする際、Docker がどのようにして処理を取り扱うかを示すポリシー情報へのリンクを修正しました。
+  [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741) を Fix に。
+- Docker Desktop では、Apple Silicon 上の Docker Dashboard において、ネイティブではないイメージのアーキテクチャーをハイライト表示するようにしました。
+- macOS 12 (Monterey) における仮想環境フレームワークの利用を修正しました。
+- デフォルトの`docker` CLI `context`を`desktop-linux`としました。
+- Docker メニューのクリック時にのみ Docker Desktop フィードバックのポップアップを表示するようにしました。
 @z
 
 @x
@@ -136,8 +153,8 @@ This page contains information about the new features, improvements, known issue
 [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
 [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
 @y
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
+[Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
+[Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
 @z
 
 @x
@@ -150,31 +167,38 @@ This page contains information about the new features, improvements, known issue
 @x
 **Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
 @y
-**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+**ボリューム管理**: Docker Desktop ユーザーは、Docker Dashboard を利用してボリュームの生成削除ができるようになりました。
+また利用されているボリュームを参照することもできます。
+詳しくは [ボリュームの確認](../desktop/dashboard.md#explore-volumes) を参照してください。
 @z
 
 @x
 **Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
 @y
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+**Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
+これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
 @z
 
 @x
 **Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
 @y
-**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+**Docker Desktop 更新のスキップ**: Docker Desktop の新規リリースがプロンプト表示される際に、アップデートをスキップできるようにしました。
+詳しくは [Docker Desktop のアップデート](../docker-for-windows/install.md#updates) を参照してください。
 @z
 
 @x
 ### Deprecation
 @y
-### Deprecation
+{: #deprecation }
+### 廃止決定
 @z
 
 @x
 - Docker Desktop no longer installs Notary. You can now use [Docker Content Trust](../engine/security/trust.md) for image signing.
 @y
-- Docker Desktop no longer installs Notary. You can now use [Docker Content Trust](../engine/security/trust.md) for image signing.
+- Docker Desktop では Notary をインストールしないようになりました。
+  イメージ署名には [Docker コンテントトラスト](../engine/security/trust.md) を利用できます。
 @z
 
 @x
@@ -226,19 +250,32 @@ This page contains information about the new features, improvements, known issue
 - Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes. Fixes [docker/for-mac#5707](https://github.com/docker/for-mac/issues/5707), [docker/for-mac#5680](https://github.com/docker/for-mac/issues/5680), [docker/for-mac#5663](https://github.com/docker/for-mac/issues/5663) and [docker/for-mac#5653](https://github.com/docker/for-mac/issues/5653).
 - Avoid running `com.docker.osxfs` when gRPC FUSE is enabled. Fixes [docker/for-mac#5725](https://github.com/docker/for-mac/issues/5725).
 @y
-- Prevent `docker run` from hanging if inotify event injection fails. Fixes [docker/for-mac#5590](https://github.com/docker/for-mac/issues/5590).
-- Fixed error showing stderr log in the UI. Fixes [docker/for-mac#5688](https://github.com/docker/for-mac/issues/5688).
-- Fixed an issue which caused `riscv64` emulation to fail on Docker Desktop. Fixes [docker/for-mac#5699](https://github.com/docker/for-mac/issues/5699).
-- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
-- Docker Desktop now allows a blank HTTP proxy to be configured for the Docker engine, which will completely disable the internal HTTP proxy. See [docker/for-mac#2467](https://github.com/docker/for-mac/issues/2467).
-- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
-- Docker Desktop now exposes the host CPU on Apple silicon. Fixes [docker/for-mac#5681](https://github.com/docker/for-mac/issues/5681).
-- Avoid leaking open ports bound to privileged ports and specific IPs over engine Restart. Fixes [docker/for-mac#5649](https://github.com/docker/for-mac/issues/5649).
-- Use `vpnkit` with `virtualization.framework` to fix connectivity issues with VPN clients such as Cisco AnyConnect.
-- Fixed version number missing in update dialog window.
-- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
-- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes. Fixes [docker/for-mac#5707](https://github.com/docker/for-mac/issues/5707), [docker/for-mac#5680](https://github.com/docker/for-mac/issues/5680), [docker/for-mac#5663](https://github.com/docker/for-mac/issues/5663) and [docker/for-mac#5653](https://github.com/docker/for-mac/issues/5653).
-- Avoid running `com.docker.osxfs` when gRPC FUSE is enabled. Fixes [docker/for-mac#5725](https://github.com/docker/for-mac/issues/5725).
+- inofity イベントインジェクションが失敗した場合に`docker run`がハングしないようにしました。
+  [docker/for-mac#5590](https://github.com/docker/for-mac/issues/5590) を Fix に。
+- UI 上に標準エラー出力ログが表示されるのを修正しました。
+  [docker/for-mac#5688](https://github.com/docker/for-mac/issues/5688) を Fix に。
+- Docker Desktop において`riscv64`エミュレーションが失敗する原因を修正しました。
+  [docker/for-mac#5699](https://github.com/docker/for-mac/issues/5699) を Fix に。
+- ボリューム削除とビルドキャッシュ削除を行うことにより、コンテナー削除後の容量再利用を自動的に行うようにしました。
+- Docker Desktop では Docker engine 向けに空の HTTP プロキシーを設定できるようになりました。
+  これにより、内部 HTTP プロキシーは完全に無効となります。
+  [docker/for-mac#2467](https://github.com/docker/for-mac/issues/2467) を参照。
+- Docker Compose アプリケーションが`docker-compose.yml`以外の名前で定義されているものは、Docker Desktop から削除されるようになりました。
+  [docker/for-win#11046](https://github.com/docker/for-win/issues/11046) を Fix に。
+- Docker Desktop では Apple Silicon 上のホスト CPU を公開することになりました。
+  [docker/for-mac#5681](https://github.com/docker/for-mac/issues/5681) を Fix に。
+- エンジン再起動時に特権ポートや特定 IP に割り当てられた公開済ポートを、開いたままにしないようにしました。
+  [docker/for-mac#5649](https://github.com/docker/for-mac/issues/5649) を Fix に。
+- `vpnkit`を`virtualization.framework`とともに用いることで、Cisco AnyConnect などの VPN クライアントとの接続に関わる問題を修正しました。
+- アップデートのダイアログ画面に、バージョン番号が含まれていなかったため修正しました。
+- **Support** ダイアログからの診断情報のアップロードが、正しくアップロードされないことがあるため、この問題を修正しました。
+- VM の IP が変更された後に、`*.docker.internal`と Kubernetes クラスターの DNS エントリのリセットを修正しました。
+  [docker/for-mac#5707](https://github.com/docker/for-mac/issues/5707),
+  [docker/for-mac#5680](https://github.com/docker/for-mac/issues/5680),
+  [docker/for-mac#5663](https://github.com/docker/for-mac/issues/5663),
+  [docker/for-mac#5653](https://github.com/docker/for-mac/issues/5653) を Fix に。
+- gRPC FUSE の有効時には`com.docker.osxfs`を実行しないようにしました。
+  [docker/for-mac#5725](https://github.com/docker/for-mac/issues/5725) を Fix に。
 @z
 
 @x
@@ -251,7 +288,9 @@ This page contains information about the new features, improvements, known issue
 @x
 - On Apple Silicon in native `arm64` containers, older versions of `libssl` in `debian:buster`, `ubuntu:20.04` and `centos:8` will segfault when connected to some TLS servers, for example `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04` and `fedora:35`.
 @y
-- On Apple Silicon in native `arm64` containers, older versions of `libssl` in `debian:buster`, `ubuntu:20.04` and `centos:8` will segfault when connected to some TLS servers, for example `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04` and `fedora:35`.
+- Apple Silicon 上において、`arm64`コンテナー、`debian:buster`において古い版の`libssl`を利用するもの、`ubuntu:20.04`、`centos:8`がいずれも、特定の TLS サーバーに接続した際にセグメンテーションフォールトを起こします。
+  たとえば`curl https://dl.yarnpkg.com`した場合です。
+  `debian:bullseye`、`ubuntu:21.04`、`fedora:35`における新しいバージョンの`libssl`において、このバグは修正されています。
 @z
 
 @x

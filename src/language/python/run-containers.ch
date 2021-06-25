@@ -165,11 +165,11 @@ Hello, Docker!
 @z
 
 @x
-Success! We were able to connect to the application running inside of our container on port 5000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.
+Success! We were able to connect to the application running inside of our container on port 5000. Switch back to the terminal where your container is running and you should see the GET request logged to the console.
 @y
 成功しました。
 コンテナー内部で実行されているアプリケーションに対して、ポート 5000 による接続ができました。
-コンテナーを実行させたターミナルに戻ってみると、コンソール上に POST リクエストのログが出力されているはずです。
+コンテナーを実行させたターミナルに戻ってみると、コンソール上に GET リクエストのログが出力されているはずです。
 @z
 
 @x

@@ -48,7 +48,7 @@ This page contains information about the new features, improvements, known issue
 @x
 [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
 @y
-[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+[ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
 @z
 
 @x
@@ -61,7 +61,19 @@ This page contains information about the new features, improvements, known issue
 @x
 **Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
 @y
-**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+**Dev 環境プレビュー**: Dev 環境はチームメンバーとの間で、シームレスに共同作業を実現できます。
+その場合にチームメンバーは、自分のマシンに Git ブランチを取り込むことなく作業が進められます。
+Dev 環境を使えば 1 クリックするだけで、作業中の環境をチームメンバーと共有できます。
+そしてマージコンフリクトに対処する必要もありません。
+Dev 環境に関する詳しい情報、あるいは利用手順については [Dev 環境プレビュー](../desktop/dev-environments.md) を参照してください。
+@z
+
+@x
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+@y
+**Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
+これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
 @z
 
 @x
@@ -79,12 +91,13 @@ This page contains information about the new features, improvements, known issue
   - `docker compose config --profiles` now lists all defined profiles.
 - From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
 @y
-- [Compose V2 beta](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
-  - Fixed a bug where a container cannot be started when a file is bind-mounted into a nested mountpoint. Fixes [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795).
-  - Added support for container links and external links.
-  - Introduced the `docker compose logs --since --until` option.
-  - `docker compose config --profiles` now lists all defined profiles.
-- From [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) to [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2)
+- [Compose V2 ベータ](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
+  - バインドマウントされたファイルがネストマウントされている場合に、コンテナーが起動できなくなるバグを修正しました。
+    [docker/compose-cli#1795](https://github.com/docker/compose-cli/issues/1795) を Fix に。
+  - コンテナーリンクと外部リンクへのサポートを追加しました。
+  - `docker compose logs --since --until`オプションを追加しました。
+  - `docker compose config --profiles`では、定義されたプロファイルすべてを表示するようにしました。
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1) から [Kubernetes 1.21.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.2) へアップデートしました。
 @z
 
 @x
@@ -107,17 +120,20 @@ This page contains information about the new features, improvements, known issue
 - The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
 - Show the Docker Desktop Feedback popup only when clicking Docker menu.
 @y
-- **Volume Management**
-  - Users can now remove a file or directory inside a volume using the the Docker Dashboard.
-  - The **Volumes** view in Docker Dashboard displays the last modified time and the size of the contents inside a volume.
-  - Users can save the files and directories inside a volume from Docker Dashboard.
-- Fixed an issue that caused credStore timeout errors when running the `docker login` command. Fixes [docker/for-win#11472](https://github.com/docker/for-win/issues/11472)
-- Docker Desktop now allows the WSL 2 integration agent to start even when `/etc/wsl.conf` is malformed.
-- Fixed an issue with the Docker Compose app not being stopped or removed when started by multiple configuration files. [docker/for-win#11445](https://github.com/docker/for-win/issues/11445)
-- Fixed a bug where Docker Desktop fails to restart after a power failure because the Hyper-V VM restarted prematurely.
-- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
-- The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
-- Show the Docker Desktop Feedback popup only when clicking Docker menu.
+- **ボリューム管理**
+  - Docker Dashboard を利用して、ボリューム内のファイルやディレクトリを削除できるようになりました。
+  - Docker Dashboard の **Volumes** 画面に、ボリュームの最終更新時刻と、ボリューム内容のサイズを表示します。
+  - Docker Dashboard を利用して、ボリューム内のファイルやディレクトリを保存できるようになりました。
+- `docker login`コマンド実行中に credStore がタイムアウトエラーとなる問題を修正しました。
+  [docker/for-win#11472](https://github.com/docker/for-win/issues/11472) を Fix に。
+- `/etc/wsl.conf`の記述が正しくない場合であっても、Docker Desktop による WSL 2 統合エージェントの起動が行われるようにしました。
+- 複数の設定ファイルによって Docker Compose アプリを起動した場合に、アプリの停止や削除ができない問題を修正しました。
+  [docker/for-win#11445](https://github.com/docker/for-win/issues/11445) を Fix に。
+- Hyper-V VM が途中で再起動したことが原因となって、電源障害発生時に Docker Desktop が再起動に失敗するバグを修正しました。
+- Docker に対して診断データをアップロードする際、Docker がどのようにして処理を取り扱うかを示すポリシー情報へのリンクを修正しました。
+  [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741) を Fix に。
+- デフォルトの`docker` CLI `context`は、Linux コンテナーモードでは`desktop-linux`、Windows コンテナーモードでは`desktop-windows`としました。
+- Docker メニューのクリック時にのみ Docker Desktop フィードバックのポップアップを表示するようにしました。
 @z
 
 @x
@@ -131,7 +147,7 @@ This page contains information about the new features, improvements, known issue
 @x
 > [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
 @y
-> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -144,19 +160,24 @@ This page contains information about the new features, improvements, known issue
 @x
 **Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
 @y
-**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+**ボリューム管理**: Docker Desktop ユーザーは、Docker Dashboard を利用してボリュームの生成削除ができるようになりました。
+また利用されているボリュームを参照することもできます。
+詳しくは [ボリュームの確認](../desktop/dashboard.md#explore-volumes) を参照してください。
 @z
 
 @x
 **Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
 @y
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+**Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
+これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
 @z
 
 @x
 **Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
 @y
-**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+**Docker Desktop 更新のスキップ**: Docker Desktop の新規リリースがプロンプト表示される際に、アップデートをスキップできるようにしました。
+詳しくは [Docker Desktop のアップデート](../docker-for-windows/install.md#updates) を参照してください。
 @z
 
 @x
@@ -169,7 +190,8 @@ This page contains information about the new features, improvements, known issue
 @x
 - Docker Desktop no longer installs Notary, `docker trust` should be used for image signing.
 @y
-- Docker Desktop no longer installs Notary, `docker trust` should be used for image signing.
+- Docker Desktop では Notary をインストールしないようになりました。
+  イメージ署名には`docker trust`を利用してください。
 @z
 
 @x
@@ -216,14 +238,18 @@ This page contains information about the new features, improvements, known issue
 - Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
 - Fixed an issue where `docker info` sometimes took longer to respond. Fixes [docker/for-win#10675](https://github.com/docker/for-win/issues/10675)
 @y
-- Fixed error showing stderr log in the UI. Fixes [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
-- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
-- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
-- Fixed version number missing in update dialog window.
-- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
-- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
-- Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
-- Fixed an issue where `docker info` sometimes took longer to respond. Fixes [docker/for-win#10675](https://github.com/docker/for-win/issues/10675)
+- UI 上に標準エラー出力ログが表示されるのを修正しました。
+  [docker/for-win#11251](https://github.com/docker/for-win/issues/11251) を Fix に。
+- ボリューム削除とビルドキャッシュ削除を行うことにより、コンテナー削除後の容量再利用を自動的に行うようにしました。
+- Docker Compose アプリケーションが`docker-compose.yml`以外の名前で定義されているものは、Docker Desktop から削除されるようになりました。
+  [docker/for-win#11046](https://github.com/docker/for-win/issues/11046) を Fix に。
+- アップデートのダイアログ画面に、バージョン番号が含まれていなかったため修正しました。
+- **Support** ダイアログからの診断情報のアップロードが、正しくアップロードされないことがあるため、この問題を修正しました。
+- VM の IP が変更された後に、`*.docker.internal`と Kubernetes クラスターの DNS エントリのリセットを修正しました。
+- 内部キャッシュが破損していると、Docker Desktop が起動できなくなる問題を修正しました。
+  [docker/for-win#8748](https://github.com/docker/for-win/issues/8748) を Fix に。
+- `docker info`の応答に長い時間を要する問題があったため修正しました。
+  [docker/for-win#10675](https://github.com/docker/for-win/issues/10675) を Fix に。
 @z
 
 @x

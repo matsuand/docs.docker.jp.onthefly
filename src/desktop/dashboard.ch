@@ -687,7 +687,7 @@ To interact with remote repositories:
 @x
     If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
 @y
-    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+    プロプランやチームプランを購入していて Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、Docker Hub ページには、ぜい弱性スキャン結果の概要が表示され、検出されたぜい弱性に関する詳細情報が提供されます。
 @z
 
 @x
@@ -720,7 +720,7 @@ Pro プランや Team プランを購入している開発者であれば、特�
 @x
 By default, the **Volumes** view displays a list of all the volumes.
 @y
-By default, the **Volumes** view displays a list of all the volumes.
+デフォルトで **Volumes** 画面には、ボリュームの全一覧が表示されます。
 @z
 
 @x
@@ -739,30 +739,34 @@ To explore the details of a specific volume, select a volume from the list. This
 @x
 The **In Use** tab displays the name of the container that’s using the volume, the image name, the port number used by the container, CPU, memory, disk read/write, and network I/O consumed by the container.
 @y
-The **In Use** tab displays the name of the container that’s using the volume, the image name, the port number used by the container, CPU, memory, disk read/write, and network I/O consumed by the container.
+**In Use** (利用中) タブには、ボリュームを利用しているコンテナー名、イメージ名、コンテナーが利用するポート番号、CPU、メモリ、ディスク I/O、コンテナーが消費するネットワーク I/O が表示されます。
 @z
 
 @x
 The **Data** tab displays the files and folders in the volume and their file size. To save a file or a folder, hover over the file or folder and click on the more options menu. Select **Save As** and then specify a location to download the file.
 @y
-**Data** タブには、そのボリューム内にあるファイルやフォルダーと、そのサイズが表示されます。
-To save a file or a folder, hover over the file or folder and click on the more options menu. Select **Save As** and then specify a location to download the file.
+**Data** タブには、そのボリューム内にあるファイルやフォルダーとそのサイズが表示されます。
+ファイルやフォルダーを保存するには、そのファイルやフォルダー上にマウス移動して、more オプションメニューをクリックします。
+そして **Save As** を選んで、ファイルのダウンロード先を指定します。
 @z
 
 @x
 To delete a file or a folder from the volume, select **Remove** from the more options menu.
 @y
-To delete a file or a folder from the volume, select **Remove** from the more options menu.
+ボリュームからファイルやフォルダーを削除するには、more オプションメニューから **Remove** を選びます。
 @z
 
 @x
 ### Remove a volume
 @y
-### Remove a volume
+{: #remove-a-volume }
+### ボリュームの削除
 @z
 
 @x
 Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button. Alternatively, select the volume from the list and then click the **Delete** button.
 @y
-Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button. Alternatively, select the volume from the list and then click the **Delete** button.
+ボリュームを削除すると、ボリュームと関連データをすべて削除します。
+ボリュームを削除するには、ボリューム上にマウス移動して **Delete** ボタンをクリックします。
+または一覧からボリュームを選択して、**Delete** ボタンをクリックします。
 @z
