@@ -16,6 +16,7 @@ htmlbases = \
 	apple-silicon           \
 	community-banner        \
 	develop-with-docker     \
+	dev-environments        \
 	docker-aci              \
 	docker-pricing          \
 	dockercon-banner        \

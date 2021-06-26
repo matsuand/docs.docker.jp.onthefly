@@ -32,23 +32,23 @@ Dockerfile は普通は親イメージから作り始めます。
 @z
 
 @x
-- A [parent image](../../glossary.md#parent_image) is the image that your
+- A [parent image](../../glossary.md#parent-image) is the image that your
   image is based on. It refers to the contents of the `FROM` directive in the
   Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
 @y
-- [親イメージ](../../glossary.md#parent_image) は基準とするイメージのことです。
-  Dockerfile 内の `FROM` ディレクティブによって指定されます。
+- [親イメージ](../../glossary.md#parent-image) は基準とするイメージのことです。
+  Dockerfile 内の`FROM`ディレクティブによって指定されます。
   Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
   Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
   ただしこの用語は混同されて用いられることもあります。
 @z
 
 @x
-- A [base image](../../glossary.md#base_image) has `FROM scratch` in its Dockerfile.
+- A [base image](../../glossary.md#base-image) has `FROM scratch` in its Dockerfile.
 @y
-- [ベースイメージ](../../glossary.md#base_image) は Dockerfile において `FROM scratch` に記述されるものです。
+- [ベースイメージ](../../glossary.md#base-image) は Dockerfile において`FROM scratch`に記述されるものです。
 @z
 
 @x
@@ -88,35 +88,35 @@ Ubuntu の親イメージを作るのは、以下のように簡単にできま�
 @z
 
 @x
-    $ sudo debootstrap xenial xenial > /dev/null
-    $ sudo tar -C xenial -c . | docker import - xenial
+    $ sudo debootstrap focal focal > /dev/null
+    $ sudo tar -C focal -c . | docker import - focal
 @y
-    $ sudo debootstrap xenial xenial > /dev/null
-    $ sudo tar -C xenial -c . | docker import - xenial
+    $ sudo debootstrap focal focal > /dev/null
+    $ sudo tar -C focal -c . | docker import - focal
 @z
 
 @x
-    a29c15f1bf7a
+    sha256:81ec9a55a92a5618161f68ae691d092bf14d700129093158297b3d01593f4ee3
 @y
-    a29c15f1bf7a
+    sha256:81ec9a55a92a5618161f68ae691d092bf14d700129093158297b3d01593f4ee3
 @z
 
 @x
-    $ docker run xenial cat /etc/lsb-release
+    $ docker run focal cat /etc/lsb-release
 @y
-    $ docker run xenial cat /etc/lsb-release
+    $ docker run focal cat /etc/lsb-release
 @z
 
 @x
     DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=16.04
-    DISTRIB_CODENAME=xenial
-    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
+    DISTRIB_RELEASE=20.04
+    DISTRIB_CODENAME=focal
+    DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
 @y
     DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=16.04
-    DISTRIB_CODENAME=xenial
-    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
+    DISTRIB_RELEASE=20.04
+    DISTRIB_CODENAME=focal
+    DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
 @z
 
 @x
@@ -139,8 +139,8 @@ building containers. Using the `scratch` "image" signals to the build process
 that you want the next command in the `Dockerfile` to be the first filesystem
 layer in your image.
 @y
-Docker が規定する最小イメージ `scratch` は、コンテナーを構築するベースイメージとして利用できます。
-`scratch` を利用すると「イメージ」は、`Dockerfile`内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。
+Docker が規定する最小イメージ`scratch`は、コンテナーを構築するベースイメージとして利用できます。
+`scratch`を利用すると「イメージ」は、`Dockerfile`内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。
 @z
 
 @x
@@ -149,9 +149,9 @@ run it, or tag any image with the name `scratch`. Instead, you can refer to it
 in your `Dockerfile`. For example, to create a minimal container using
 `scratch`:
 @y
-Docker Hub 上の Docker リポジトリとして `scratch` が登場したことにより、`scratch` という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
-そのかわり`Dockerfile` 内での参照のみが可能です。
-たとえば `scratch` を利用した最小コンテナーの生成は以下のようになります。
+Docker Hub 上の Docker リポジトリとして`scratch`が登場したことにより、`scratch`という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
+そのかわり`Dockerfile`内での参照のみが可能です。
+たとえば`scratch`を利用した最小コンテナーの生成は以下のようになります。
 @z
 
 @x
@@ -178,8 +178,8 @@ and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 @y
 [https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/)に示されている手順に従って、"hello" 実行モジュールの例を構築するとします。
-実行モジュールは `-static` フラグをつけてコンパイルします。
-Docker イメージは `docker build` コマンドによってビルドすることができます。
+実行モジュールは`-static`フラグをつけてコンパイルします。
+Docker イメージは`docker build`コマンドによってビルドすることができます。
 @z
 
 @x
@@ -196,7 +196,7 @@ docker build --tag hello .
 Don't forget the `.` character at the end, which sets the build context to the
 current directory.
 @y
-`.` の文字を最後につけるのを忘れないでください。
+`.`の文字を最後につけるのを忘れないでください。
 これはビルドコンテキストをカレントディレクトリに設定するものです。
 @z
 
@@ -206,29 +206,31 @@ current directory.
 > You can use a Docker container to build it:
 >
 > ```bash
-> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+> $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
 > container# cd /build
-> container# gcc -o hello -static -nostartfiles hello.c
+> container# gcc -o hello -static hello.c
 > ```
 @y
-> **メモ**: Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
+> **メモ**
+>
+> Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
 > Docker コンテナーを使って以下のようにビルドします。
 >
 > ```bash
-> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+> $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
 > container# cd /build
-> container# gcc -o hello -static -nostartfiles hello.c
+> container# gcc -o hello -static hello.c
 > ```
 @z
 
 @x
 To run your new image, use the `docker run` command:
 @y
-新イメージは `docker run` コマンドを使って実行します。
+新イメージは`docker run`コマンドを使って実行します。
 @z
 
 @x
@@ -269,7 +271,7 @@ There are lots of resources available to help you write your `Dockerfile`.
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
 * If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](../../docker-hub/official_images.md).
 @y
-* リファレンスには `Dockerfile` にて利用可能な [全コマンドのガイド](../../engine/reference/builder.md) があります。
+* リファレンスには`Dockerfile`にて利用可能な [全コマンドのガイド](../../engine/reference/builder.md) があります。
 * `Dockerfile`をわかりやすく読みやすく、保守がしやすくするように、[`Dockerfile`ベストプラクティス](dockerfile_best-practices.md) も記述しています。
 * 公式イメージを作ることが目的であれば Docker の[公式イメージ](../../docker-hub/official_images/) を確認してください。
 @z

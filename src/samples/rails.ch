@@ -54,7 +54,6 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY ../compose /myapp
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
@@ -74,7 +73,6 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY ../compose /myapp
 
 # コンテナー起動時に毎回実行されるスクリプトを追加
 COPY entrypoint.sh /usr/bin/

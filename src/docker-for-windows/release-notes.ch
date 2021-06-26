@@ -38,11 +38,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 3.5.0
-2021-06-23
+## Docker Desktop 3.5.1
+2021-06-25
 @y
-## Docker Desktop 3.5.0
-2021-06-23
+## Docker Desktop 3.5.1
+2021-06-25
 @z
 
 @x
@@ -69,11 +69,85 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 @z
 
 @x
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 @y
 **Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
-これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+これは Docker CLI の一部として`docker compose`コマンドをサポートするものです。
 詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
+`docker-compose`は、今もサポートされ保守も行われています。
+しかし Compose V2 の実装は、仕様の一部としてメンテナンスされている compose-go バインディングに直接基づいています。
+Docker CLI の compose コマンドは、`docker-compose`コマンドとフラグをほぼサポートしています。
+そこでこれらは`docker-compose`コマンドの代わりになるものとされます。
+ただしまだ実装できていないフラグがいくつか残っています。
+新たな compose コマンドにおいてサポートされているフラグの情報は [docker-compose 互換性リスト](../compose/cli-command-compatibility.md) を参照してください。
+Compose V2 の利用にあたって何か問題が発生したら、簡単に Compose V1 に戻すことができます。
+その方法は Docker Desktop の **Experimental** (試験的機能) の設定を変更するか、あるいはコマンド`docker-compose disable-v2`を実行します。
+新しい`compose`コマンドへのフィードバックは、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues) に issue を新規生成してお知らせください。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug where users could not install Docker Desktop when the path to the temp folder contained dots. Fixes [docker/for-win#11514](https://github.com/docker/for-win/issues/11514)
+- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
+@y
+- 一時フォルダーへのパスにドットが含まれていると、Docker Desktop がインストールできない場合があるバグを修正しました。
+  [docker/for-win#11514](https://github.com/docker/for-win/issues/11514) を Fix に。
+- アップロードされた診断データを Docker がどのように取り扱うかを詳細に示したポリシーへのリンクを修正しました。
+  [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741) を Fix に。
+@z
+
+@x
+## Docker Desktop 3.5.0
+2021-06-23
+@y
+## Docker Desktop 3.5.0
+2021-06-23
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+@y
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+@y
+**Dev 環境プレビュー**: Dev 環境はチームメンバーとの間で、シームレスに共同作業を実現できます。
+その場合にチームメンバーは、自分のマシンに Git ブランチを取り込むことなく作業が進められます。
+Dev 環境を使えば 1 クリックするだけで、作業中の環境をチームメンバーと共有できます。
+そしてマージコンフリクトに対処する必要もありません。
+Dev 環境に関する詳しい情報、あるいは利用手順については [Dev 環境プレビュー](../desktop/dev-environments.md) を参照してください。
+@z
+
+@x
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
+@y
+**Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
+これは Docker CLI の一部として`docker compose`コマンドをサポートするものです。
+詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
+`docker-compose`は、今もサポートされ保守も行われています。
+しかし Compose V2 の実装は、仕様の一部としてメンテナンスされている compose-go バインディングに直接基づいています。
+Docker CLI の compose コマンドは、`docker-compose`コマンドとフラグをほぼサポートしています。
+そこでこれらは`docker-compose`コマンドの代わりになるものとされます。
+ただしまだ実装できていないフラグがいくつか残っています。
+新たな compose コマンドにおいてサポートされているフラグの情報は [docker-compose 互換性リスト](../compose/cli-command-compatibility.md) を参照してください。
+Compose V2 の利用にあたって何か問題が発生したら、簡単に Compose V1 に戻すことができます。
+その方法は Docker Desktop の **Experimental** (試験的機能) の設定を変更するか、あるいはコマンド`docker-compose disable-v2`を実行します。
+新しい`compose`コマンドへのフィードバックは、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues) に issue を新規生成してお知らせください。
 @z
 
 @x
@@ -116,7 +190,6 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 - Docker Desktop now allows the WSL 2 integration agent to start even when `/etc/wsl.conf` is malformed.
 - Fixed an issue with the Docker Compose app not being stopped or removed when started by multiple configuration files. [docker/for-win#11445](https://github.com/docker/for-win/issues/11445)
 - Fixed a bug where Docker Desktop fails to restart after a power failure because the Hyper-V VM restarted prematurely.
-- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
 - The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
 - Show the Docker Desktop Feedback popup only when clicking Docker menu.
 @y
@@ -130,8 +203,6 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 - 複数の設定ファイルによって Docker Compose アプリを起動した場合に、アプリの停止や削除ができない問題を修正しました。
   [docker/for-win#11445](https://github.com/docker/for-win/issues/11445) を Fix に。
 - Hyper-V VM が途中で再起動したことが原因となって、電源障害発生時に Docker Desktop が再起動に失敗するバグを修正しました。
-- Docker に対して診断データをアップロードする際、Docker がどのようにして処理を取り扱うかを示すポリシー情報へのリンクを修正しました。
-  [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741) を Fix に。
 - デフォルトの`docker` CLI `context`は、Linux コンテナーモードでは`desktop-linux`、Windows コンテナーモードでは`desktop-windows`としました。
 - Docker メニューのクリック時にのみ Docker Desktop フィードバックのポップアップを表示するようにしました。
 @z
@@ -166,11 +237,20 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 @z
 
 @x
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 @y
 **Compose V2 ベータ**: Docker Desktop に Compose V2 ベータバージョンを含めました。
-これは Docker CLI の一部として`compose`コマンドをサポートするものです。
+これは Docker CLI の一部として`docker compose`コマンドをサポートするものです。
 詳しくは [Compose V2 ベータ](../compose/cli-command.md) を参照してください。
+`docker-compose`は、今もサポートされ保守も行われています。
+しかし Compose V2 の実装は、仕様の一部としてメンテナンスされている compose-go バインディングに直接基づいています。
+Docker CLI の compose コマンドは、`docker-compose`コマンドとフラグをほぼサポートしています。
+そこでこれらは`docker-compose`コマンドの代わりになるものとされます。
+ただしまだ実装できていないフラグがいくつか残っています。
+新たな compose コマンドにおいてサポートされているフラグの情報は [docker-compose 互換性リスト](../compose/cli-command-compatibility.md) を参照してください。
+Compose V2 の利用にあたって何か問題が発生したら、簡単に Compose V1 に戻すことができます。
+その方法は Docker Desktop の **Experimental** (試験的機能) の設定を変更するか、あるいはコマンド`docker-compose disable-v2`を実行します。
+新しい`compose`コマンドへのフィードバックは、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues) に issue を新規生成してお知らせください。
 @z
 
 @x

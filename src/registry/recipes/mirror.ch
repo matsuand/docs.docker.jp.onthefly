@@ -204,13 +204,13 @@ but this property does not hold true for a registry cache cluster.
 @z
 
 @x
-**Note**
+> **Note**
 >
-> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
+> Service accounts included in the Team plan are limited to 5,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 @y
-**Note**
+> **Note**
 >
-> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
+> Service accounts included in the Team plan are limited to 5,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 @z
 
 @x
