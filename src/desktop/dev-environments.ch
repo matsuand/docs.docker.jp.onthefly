@@ -112,18 +112,29 @@ Click **Install** to download and install any missing tools.
 @z
 
 @x
-The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `singe-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 Dev 環境を利用する一番簡単な方法は、作業プロジェクトの Git リポジトリをクローンして、新たな環境を生成することです。
-たとえば、単純なGitHub リポジトリ [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} を使って、新たな Dev 環境を構築していくことにします。
+たとえば、GitHub リポジトリ [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} から単純な`single-dev-env`プロジェクトを使って、新たな Dev 環境を構築していくことにします。
+@z
+
+@x
+> **Note**
+>
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+@y
+> **メモ**
+>
+> SSH を経由して Git リポジトリをクローンする場合は、ssh-agent に対して SSH 鍵を追加しておくのを忘れないでください。
+> これを行うには、ターミナルを開いて`ssh-add <公開鍵へのパス>`を実行します。
 @z
 
 @x
 1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
-3. Now, click **Create**.
+2. Now, click **Create**.
 @y
 1. まずは `git@github.com:dockersamples/single-dev-env.git` をコピーして、**Create a Development Environment** (Dev 環境の生成) ページ上の **Create** (生成) 欄に貼り付けます。
-3. そして **Create** (生成) をクリックします。
+2. そして **Create** (生成) をクリックします。
 @z
 
 @x
@@ -256,6 +267,17 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
 @y
 Dev 環境は Docker compose を用いたプロジェクトにおいても共有利用することができます。
 たとえば GitHub リポジトリ [Docker Samples](https://github.com/dockersamples/compose-dev-env){:target="_blank" rel="noopener" class="_"} から`compose-dev-env`プロジェクトを用いることにします。
+@z
+
+@x
+  > **Note**
+  >
+  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+@y
+  > **メモ**
+  >
+  > SSH を経由して Git リポジトリをクローンする場合は、ssh-agent に対して SSH 鍵を追加しておくのを忘れないでください。
+  > これを行うには、ターミナルを開いて`ssh-add <公開鍵へのパス>`を実行します。
 @z
 
 @x
