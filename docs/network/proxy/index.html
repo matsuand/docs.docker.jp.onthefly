@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-07-02 10:00:23 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>プロキシーサーバー利用の設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="プロキシーサーバー利用の設定" />
   <meta property="og:description" content="How to configure the Docker client to use a proxy server" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-02T10:00:23+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/proxy/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-02T10:00:23+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"プロキシーサーバー利用の設定","description":"How to configure the Docker client to use a proxy server","url":"https://docs.docker.com/network/proxy/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,7 +110,7 @@
     <p>Docker 17.07 またはそれ以降においては、<a href="#configure-the-docker-client">Docker クライアントの設定</a> を行って、プロキシー情報をコンテナーに自動的に設定することができます。</p>
   </li>
   <li>
-    <p>Docker 17.06 またはそれ以前においては、コンテナー内部にて <a href="#use-environment-variables">環境変数の適切な設定</a> を行うを必要があります。
+    <p>Docker 17.06 またはそれ以前においては、コンテナー内部にて <a href="#use-environment-variables">環境変数</a> の適切な設定を行う必要があります。
 これを行うタイミングは、イメージビルド時（この場合は可搬性が劣ることになります）、生成時、実行時のいずれかになります。</p>
   </li>
 </ul>
@@ -123,7 +123,7 @@
 そして以下のような JSON 記述を追加します。
 この記述において、プロキシータイプとして必要であれば<code class="language-plaintext highlighter-rouge">httpsProxy</code>または<code class="language-plaintext highlighter-rouge">ftpProxy</code>を指定します。
 またプロキシーサーバーのアドレスとポートを指定します。
-プロキシーサーバーは、同時に複数設定することができます。</p>
+プロキシーサーバーは、同時に複数設定することもできます。</p>
 
     <p>プロキシーサーバーを介したくないホストや IP 範囲の指定が必要な場合は、<code class="language-plaintext highlighter-rouge">noProxy</code>キーにおいて IP アドレスまたはホスト名をカンマ区切りにより設定します。
 ホストに対してはアスタリスク<code class="language-plaintext highlighter-rouge">*</code>を用いたワイルドカード指定、IP アドレスに対しては CIDR 記法がサポートされています。
@@ -134,8 +134,8 @@
  </span><span class="p">{</span><span class="w">
    </span><span class="nl">"default"</span><span class="p">:</span><span class="w">
    </span><span class="p">{</span><span class="w">
-     </span><span class="nl">"httpProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://127.0.0.1:3001"</span><span class="p">,</span><span class="w">
-     </span><span class="nl">"httpsProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://127.0.0.1:3001"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"httpProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.1.12:3128"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"httpsProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.1.12:3128"</span><span class="p">,</span><span class="w">
      </span><span class="nl">"noProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*.test.example.com,.example2.com,127.0.0.0/8"</span><span class="w">
    </span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
@@ -168,18 +168,18 @@
   <tbody>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HTTP_PROXY</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV HTTP_PROXY="http://127.0.0.1:3001"</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env HTTP_PROXY="http://127.0.0.1:3001"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV HTTP_PROXY="http://192.168.1.12:3128"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env HTTP_PROXY="http://192.168.1.12:3128"</code></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HTTPS_PROXY</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV HTTPS_PROXY="https://127.0.0.1:3001"</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env HTTPS_PROXY="https://127.0.0.1:3001"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV HTTPS_PROXY="https://192.168.1.12:3128"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env HTTPS_PROXY="https://192.168.1.12:3128"</code></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FTP_PROXY</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV FTP_PROXY="ftp://127.0.0.1:3001"</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env FTP_PROXY="ftp://127.0.0.1:3001"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ENV FTP_PROXY="ftp://192.168.1.12:3128"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--env FTP_PROXY="ftp://192.168.1.12:3128"</code></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">NO_PROXY</code></td>
@@ -188,7 +188,6 @@
     </tr>
   </tbody>
 </table>
-
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=network">network</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a>, <a href="/docs.docker.jp.onthefly/search/?q=proxy">proxy</a>, <a href="/docs.docker.jp.onthefly/search/?q=client">client</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
