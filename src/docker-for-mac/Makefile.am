@@ -20,6 +20,7 @@ bases = \
 	index              \
 	install            \
 	networking         \
+	previous-versions  \
 	release-notes      \
 	space              \
 	troubleshoot

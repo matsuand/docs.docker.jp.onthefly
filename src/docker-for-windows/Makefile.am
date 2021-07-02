@@ -19,6 +19,7 @@ bases = \
 	index              \
 	install            \
 	networking         \
+	previous-versions  \
 	release-notes      \
 	troubleshoot       \
 	wsl

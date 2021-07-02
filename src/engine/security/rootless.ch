@@ -203,6 +203,30 @@ testuser:231072:65536
 @z
 
 @x
+- Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
+  Check you have this with 
+@y
+- rootless docker では、`slirp4netns`のバージョンは`v0.4.0`以上が必要です (`vpnkit`がインストールされていない場合)。
+  これを確認するには以下のようにします。
+@z
+
+@x
+  ```console
+  $ slirp4netns --version
+  ```
+@y
+  ```console
+  $ slirp4netns --version
+  ```
+@z
+
+@x
+  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+@y
+  これをまだ入手していない場合は、最新版の [リリース](https://github.com/rootless-containers/slirp4netns/releases) をダウンロードしてインストールしてください。
+@z
+
+@x
 </div>
 <div id="hint-arch" class="tab-pane fade in" markdown="1">
 @y

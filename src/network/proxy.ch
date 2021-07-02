@@ -31,12 +31,12 @@ configure it in different ways:
 @z
 
 @x
-- In Docker 17.06 and lower, you must
-  [set appropriate environment variables](#use-environment-variables)
+- In Docker 17.06 and earlier versions, you must set the appropriate
+  [environment variables](#use-environment-variables)
   within the container. You can do this when you build the image (which makes
   the image less portable) or when you create or run the container.
 @y
-- Docker 17.06 またはそれ以前においては、コンテナー内部にて [環境変数の適切な設定](#use-environment-variables) を行うを必要があります。
+- Docker 17.06 またはそれ以前においては、コンテナー内部にて [環境変数](#use-environment-variables) の適切な設定を行う必要があります。
   これを行うタイミングは、イメージビルド時（この場合は可搬性が劣ることになります）、生成時、実行時のいずれかになります。
 @z
 
@@ -49,23 +49,21 @@ configure it in different ways:
 
 @x
 1.  On the Docker client, create or edit the file `~/.docker/config.json` in the
-    home directory of the user which starts containers. Add JSON such as the
-    following, substituting the type of proxy with `httpsProxy` or `ftpProxy` if
-    necessary, and substituting the address and port of the proxy server. You
-    can configure multiple proxy servers at the same time.
+    home directory of the user that starts containers. Add JSON similar to the
+    following example. Substitute the type of proxy with `httpsProxy` or `ftpProxy` if necessary, and substitute the address and port of the proxy server. You can also configure multiple proxy servers simultaneously.
 @y
 1.  Docker クライアント上において、コンテナーを起動するユーザーのホームディレクトリ内に`~/.docker/config.json`を新規生成するか、これを編集します。
     そして以下のような JSON 記述を追加します。
     この記述において、プロキシータイプとして必要であれば`httpsProxy`または`ftpProxy`を指定します。
     またプロキシーサーバーのアドレスとポートを指定します。
-    プロキシーサーバーは、同時に複数設定することができます。
+    プロキシーサーバーは、同時に複数設定することもできます。
 @z
 
 @x
     You can optionally exclude hosts or ranges from going through the proxy
     server by setting a `noProxy` key to one or more comma-separated IP
     addresses or hosts. Using the `*` character as a wildcard for hosts and using CIDR notation for IP addresses is supported as
-    shown in this example.
+    shown in this example:
 @y
     プロキシーサーバーを介したくないホストや IP 範囲の指定が必要な場合は、`noProxy`キーにおいて IP アドレスまたはホスト名をカンマ区切りにより設定します。
     ホストに対してはアスタリスク`*`を用いたワイルドカード指定、IP アドレスに対しては CIDR 記法がサポートされています。
@@ -79,8 +77,8 @@ configure it in different ways:
      {
        "default":
        {
-         "httpProxy": "http://127.0.0.1:3001",
-         "httpsProxy": "http://127.0.0.1:3001",
+         "httpProxy": "http://192.168.1.12:3128",
+         "httpsProxy": "http://192.168.1.12:3128",
          "noProxy": "*.test.example.com,.example2.com,127.0.0.0/8"
        }
      }
@@ -93,8 +91,8 @@ configure it in different ways:
      {
        "default":
        {
-         "httpProxy": "http://127.0.0.1:3001",
-         "httpsProxy": "http://127.0.0.1:3001",
+         "httpProxy": "http://192.168.1.12:3128",
+         "httpsProxy": "http://192.168.1.12:3128",
          "noProxy": "*.test.example.com,.example2.com,127.0.0.0/8"
        }
      }
@@ -142,17 +140,17 @@ instead.
 @z
 
 @x
-| Variable      | Dockerfile example                                | `docker run` Example                                |
+| Variable      | Dockerfile example                                | `docker run` example                                |
 |:--------------|:--------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
+| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://192.168.1.12:3128"`          | `--env HTTP_PROXY="http://192.168.1.12:3128"`          |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://192.168.1.12:3128"`        | `--env HTTPS_PROXY="https://192.168.1.12:3128"`        |
+| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://192.168.1.12:3128"`            | `--env FTP_PROXY="ftp://192.168.1.12:3128"`            |
 | `NO_PROXY`    | `ENV NO_PROXY="*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
 @y
 | 変数          | Dockerfile 例                                     | `docker run`実行例                                  |
 |:--------------|:--------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
+| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://192.168.1.12:3128"`       | `--env HTTP_PROXY="http://192.168.1.12:3128"`       |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://192.168.1.12:3128"`     | `--env HTTPS_PROXY="https://192.168.1.12:3128"`     |
+| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://192.168.1.12:3128"`         | `--env FTP_PROXY="ftp://192.168.1.12:3128"`         |
 | `NO_PROXY`    | `ENV NO_PROXY="*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
 @z

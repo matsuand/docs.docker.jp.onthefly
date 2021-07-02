@@ -169,9 +169,9 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-4. Go ahead and remove the first container using the `docker rm -f` command.
+4. Go ahead and remove the first container using the `docker rm -f <container-id>` command.
 @y
-4. `docker rm -f`コマンドを実行して 1 つめのコンテナーを削除します。
+4. `docker rm -f <コンテナーID>`コマンドを実行して 1 つめのコンテナーを削除します。
 @z
 
 @x
