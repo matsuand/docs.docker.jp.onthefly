@@ -87,13 +87,14 @@ Docker Desktop を正常にインストールするためには Windows マシ�
 @z
 
 @x
-- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Windows 10 64-bit: Home or Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10:
 @y
-- Windows 10 64 ビット: Home、Pro、Enterprise、Education、バージョン 1903（Build 18362 またはそれ以降）
+- Windows 10 64 ビット: Home または Pro 2004 (build 19041) またはそれ以降、
+  Enterprise または Education 1909 (build 18363) またはそれ以降。
 - Windows における WSL 2 機能の有効化。
   詳しくは [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"} を参照してください。
 - Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
@@ -130,11 +131,12 @@ WSL 2 on Windows 10:
 @z
 
 @x
-- Windows 10 64-bit: Pro (Build 19041 or higher), or Enterprise or Education (Build 18363 or higher).
+- Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
   For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
 @y
-- Windows 10 64 ビット: Pro (Build 19041 またはそれ以降)、Enterprise、Education（Build 17134 またはそれ以降）
+- Windows 10 64 ビット: Pro 2004 (build 19041) またはそれ以降、
+  Enterprise または Education 1909 (build 18363) またはそれ以降。
 
   Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#system-requirements-for-wsl-2-backend) を参照してください。
 @z
@@ -265,7 +267,7 @@ Windows コンテナーの利用方法についてお探しの方は以下です
     the recent downloads bar at the bottom of your web browser.
 @y
     インストーラー（`Docker Desktop Installer.exe`）をまだダウンロードしていない場合は [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) からダウンロードしてください。
-    通常は `Downloads` フォルダーにダウンロードされます。
+    通常は`Downloads`フォルダーにダウンロードされます。
     あるいはウェブブラウザーの下段に表示される、最新のダウンロードバーから直接起動することもできます。
 @z
 

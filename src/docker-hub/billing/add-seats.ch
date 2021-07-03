@@ -16,10 +16,9 @@ title: プランへのシート追加
 @z
 
 @x
-You can manage your Docker Hub subscription anytime by adding seats to your plan. If you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+You can manage your Docker Hub subscription anytime by adding seats to your plan.
 @y
 Docker Hub のサブスクリプションでは、そのプランに対していつでもシートを追加することができます。
-支払い期間の途中でシートを追加した場合、その追加シートに対して日割りの支払いが発生します。
 @z
 
 @x
@@ -32,11 +31,15 @@ Docker Hub のサブスクリプションでは、そのプランに対してい
 @x
 > **Note:**
 >
-> You must be a member of the ‘Owners’ team to add seats to your organization.
+>- A monthly subscription includes monthly seats only.
+>- You must be a member of the ‘owners’ team to add seats to your organization.
+>- When you add seats to your monthly plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 @y
 > **メモ**
 >
-> 組織に対してシートを追加するには「所有者」チームのメンバーでなければなりません。
+>- 月額プランには、 月額でのシートしか含まれません。
+>- 組織に対してシートを追加するには「所有者」チームのメンバーでなければなりません。
+>- 月額プランの支払い期間途中でシート追加を行った場合、追加シートに関しては日割り計算により請求が行われます。
 @z
 
 @x
@@ -52,7 +55,7 @@ To add seats to a monthly plan:
 @z
 
 @x
-2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
+2. Navigate to **Organizations** from the menu at the top of the page and select your organization.
 @y
 2. ページ上段にあるメニューから **Organizations**（組織）にアクセスします。
    そして自身の組織を選びます。
@@ -65,7 +68,7 @@ To add seats to a monthly plan:
 @z
 
 @x
-4. Specify the number of seats you’d like to add and click **Purchase**.
+4. Specify the number of seats you want to add and click **Purchase**.
 @y
 4. 追加したいシート数を入力して、**Purchase**（購入）をクリックします。
 @z
@@ -93,13 +96,13 @@ To add seats to a monthly plan:
 @x
 > **Note:**
 >
-> - You can only add annual seats after purchasing your annual plan.
-> - When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+> - An annual subscription includes annual seats only.
+> - When you add seats to your plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 @y
 > **メモ**
 >
-> - You can only add annual seats after purchasing your annual plan.
-> - When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+> - 年額プランには、 年額でのシートしか含まれません。
+> - 年額プランの支払い期間途中でシート追加を行った場合、追加シートに関しては日割り計算により請求が行われます。
 @z
 
 @x
@@ -115,7 +118,7 @@ To add annual seats to an annual plan:
 @z
 
 @x
-2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
+2. Navigate to **Organizations** from the menu at the top of the page and select your organization.
 @y
 2. ページ上段にあるメニューから **Organizations**（組織）にアクセスします。
    そして自身の組織を選びます。
@@ -128,7 +131,7 @@ To add annual seats to an annual plan:
 @z
 
 @x
-4. Specify the number of seats you’d like to add and click **Purchase**.
+4. Specify the number of seats you’d want to add and click **Purchase**.
 @y
 4. 追加したいシート数を入力して、**Purchase**（購入）をクリックします。
 @z

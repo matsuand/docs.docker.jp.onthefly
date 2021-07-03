@@ -16,39 +16,35 @@ title: プランからのシート削除
 @z
 
 @x
-You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes will be applied immediately and the changes will be reflected in the next billing cycle.
+You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes are applied immediately and reflect in the next billing cycle.
 @y
-You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes will be applied immediately and the changes will be reflected in the next billing cycle.
+You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes are applied immediately and reflect in the next billing cycle.
 @z
 
 @x
-For example, if you receive your billing on the 8th of every month for 10 seats and you choose to remove 2 seats on the 15th of the month, the 2 seats will be removed immediately. You will start paying for 8 seats from the next billing cycle.
+For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats are removed immediately. Your payment for 8 seats begins the next month. If you are on the annual plan, the 2 seats are removed immediately, and your payment for the 8 seats begins next year.
 @y
-For example, if you receive your billing on the 8th of every month for 10 seats and you choose to remove 2 seats on the 15th of the month, the 2 seats will be removed immediately. You will start paying for 8 seats from the next billing cycle.
+For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats are removed immediately. Your payment for 8 seats begins the next month. If you are on the annual plan, the 2 seats are removed immediately, and your payment for the 8 seats begins next year.
 @z
 
 @x
-## Remove seats from a monthly plan
+## Remove seats from a monthly or an annual plan
 @y
-## Remove seats from a monthly plan
+## Remove seats from a monthly or an annual plan
 @z
 
 @x
 > **Note:**
 >
 > - You must be a member of the ‘Owners’ team to remove seats from your organization.
-> - It is not possible to remove seats from your annual subscription.
+>
+To remove seats from a monthly or an annual plan:
 @y
 > **Note:**
 >
 > - You must be a member of the ‘Owners’ team to remove seats from your organization.
-> - It is not possible to remove seats from your annual subscription.
-@z
-
-@x
-To remove seats from a monthly plan:
-@y
-To remove seats from a monthly plan:
+>
+To remove seats from a monthly or an annual plan:
 @z
 
 @x
