@@ -73,19 +73,37 @@ Docker Engine をインストールするには、以下に示す Ubuntu の 64 
 - Ubuntu Groovy 20.10
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
-- Ubuntu Xenial 16.04 (LTS)
 @y
 - Ubuntu Hirsute 21.04
 - Ubuntu Groovy 20.10
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
-- Ubuntu Xenial 16.04 (LTS)
 @z
 
 @x
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 @y
 Docker Engine は`x86_64`（または`amd64`）、`armhf`、`arm64`の各アーキテクチャーをサポートします。
+@z
+
+@x
+> Ubuntu 16.04 LTS "Xenial Xerus" end-of-life
+> 
+> Ubuntu Linux 16.04 LTS reached the end of its five-year LTS window on April
+> 30th 2021 and is no longer supported. Docker no longer releases packages for
+> this distribution (including patch- and security releases). Users running
+> Docker on Ubuntu 16.04 are recommended to update their system to a currently
+> supported LTS version of Ubuntu.
+{: .important }
+@y
+> Ubuntu 16.04 LTS "Xenial Xerus" の終了
+> 
+> Ubuntu Linux 16.04 LTS は、2021年4月30日に、5年におよぶ LTS Window の期限になりました。
+> 今後はサポートされません。
+> Docker も今後、このディストリビューションに対するパッケージをリリースしません。
+> (パッチリリース、セキュリティリリースも行いません。)
+> Ubuntu 16.04 上において Docker を利用しているユーザーは、Ubuntu の現時点でサポートされている LTS バージョンへのアップデートをお勧めします。
+{: .important }
 @z
 
 @x
