@@ -546,9 +546,9 @@ GitHub にアクセスしてアクションを確認します。
 @z
 
 @x
-Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub registry. You may want to do this to:
+Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub Container Registry. You may want to do this to:
 @y
-次に 2 つめの GitHub アクションファイルを生成し、最新のコミットを GitHub レポジトリ内にイメージとして保存するようにします。
+次に 2 つめの GitHub アクションファイルを生成し、最新のコミットを GitHub コンテナーレポジトリ内にイメージとして保存するようにします。
 これはたとえば以下のような場合に利用できます。
 @z
 
@@ -562,11 +562,23 @@ Now, let’s set up a second GitHub action file to store our latest commit as an
 
 @x
 Let’s clone our previous GitHub action and add back in our previous logic for all pushes. This will mean we have two workflow files, our previous one and our new one we will now work on.
-Next, change your Docker Hub login to a GitHub container registry login:
 @y
 そこで上の GitHub アクションをクローンして、すべてのプッシュに関する前回のロジックを再度追加します。
 つまりここで 2 つのワークフローファイルを作り出し、前回のものと今回のものがともに動くということです。
-そして Docker Hub ログインは GitHub コンテナーのレジストリログインに切り替えます。
+@z
+
+@x
+To authenticate against the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry){:target="_blank" rel="noopener" class="_"},
+use the [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow){:target="_blank" rel="noopener" class="_"} for the best
+security and experience.
+@y
+[GitHub コンテナーレジストリ](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry){:target="_blank" rel="noopener" class="_"} に対して認証を得るために、[`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow){:target="_blank" rel="noopener" class="_"} を使えば、最適なセキュリティが確保できます。
+@z
+
+@x
+Now let’s change the Docker Hub login with the GitHub Container Registry one:
+@y
+そこで Docker Hub ログインは GitHub コンテナーレジストリのログインに切り替えます。
 @z
 
 @x
@@ -577,7 +589,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 @y
@@ -588,7 +600,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 @z
