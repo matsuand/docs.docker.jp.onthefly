@@ -181,6 +181,55 @@ You can launch the application by running the command `make run` in your VS Code
 @z
 
 @x
+### Create a Dev Environment from a specific branch or tag
+@y
+{: #create-a-dev-environment-from-a-specific-branch-or-tag }
+### 特定ブランチまたはタグからの Dev 環境生成
+@z
+
+@x
+You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
+@y
+Dev 環境は、特定のブランチから生成することができます （たとえばプルリクエストに対応したブランチなど）。
+あるいは Git URL に対するサフィックスとして`@mybranch`や`@tag`をつけたタグからも生成することができます。
+@z
+
+@x
+ `https://github.com/dockersamples/single-dev-env@mybranch`
+@y
+ `https://github.com/dockersamples/single-dev-env@mybranch`
+@z
+
+@x
+ or
+@y
+ または
+@z
+
+@x
+ `git@github.com:dockersamples/single-dev-env.git@mybranch`
+@y
+ `git@github.com:dockersamples/single-dev-env.git@mybranch`
+@z
+
+@x
+Docker then clones the repository with your specified branch or tag.
+@y
+Docker はこうすることで、特定のブランチやタグからリポジトリをクローンします。
+@z
+
+@x
+> **Note**
+>
+> Known issue: when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
+@y
+> **メモ**
+>
+> 既知の問題。
+> Git ブランチのクローン時に`https://`を用いる場合は、URL の終わりのサフィックス`.git`は取り除く必要があります。
+@z
+
+@x
 ### Recap
 @y
 {: #recap }
@@ -272,12 +321,12 @@ Dev 環境は Docker compose を用いたプロジェクトにおいても共有
 @x
   > **Note**
   >
-  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 @y
   > **メモ**
   >
   > SSH を経由して Git リポジトリをクローンする場合は、ssh-agent に対して SSH 鍵を追加しておくのを忘れないでください。
-  > これを行うには、ターミナルを開いて`ssh-add <公開鍵へのパス>`を実行します。
+  > これを行うには、ターミナルを開いて`ssh-add <秘密鍵へのパス>`を実行します。
 @z
 
 @x

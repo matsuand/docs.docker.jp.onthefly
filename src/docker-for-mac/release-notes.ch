@@ -38,11 +38,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 3.5.1
-2021-06-25
+## Docker Desktop 3.5.2
+2021-07-08
 @y
-## Docker Desktop 3.5.1
-2021-06-25
+## Docker Desktop 3.5.2
+2021-07-08
 @z
 
 @x
@@ -51,6 +51,102 @@ This page contains information about the new features, improvements, known issue
 @y
 [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+@y
+**Dev 環境プレビュー**: Dev 環境はチームメンバーとの間で、シームレスに共同作業を実現できます。
+その場合にチームメンバーは、自分のマシンに Git ブランチを取り込むことなく作業が進められます。
+Dev 環境を使えば 1 クリックするだけで、作業中の環境をチームメンバーと共有できます。
+そしてマージコンフリクトに対処する必要もありません。
+Dev 環境に関する詳しい情報、あるいは利用手順については [Dev 環境プレビュー](../desktop/dev-environments.md) を参照してください。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2 beta 6](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.6)
+  - `compose run` and `compose exec` commands use separate streams for stdout and stderr. See [docker/compose-cli#1873](https://github.com/docker/compose-cli/issues/1873).
+  - `compose run` and `compose exec` commands support detach keys. Fixes [docker/compose-cli#1709](https://github.com/docker/compose-cli/issues/1709).
+  - Fixed `--force` and `--volumes` flags on `compose rm` command. See [docker/compose-cli#1844](https://github.com/docker/compose-cli/issues/1844).
+  - Fixed network's IPAM configuration. Service can define a fixed IP. Fixes for [docker/compose-cli#1678](https://github.com/docker/compose-cli/issues/1678) and [docker/compose-cli#1816](https://github.com/docker/compose-cli/issues/1816)
+@y
+- [Compose V2 ベータ 6](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.6)
+  - `compose run`と`compose exec`のコマンドでは、stdout と stderr のストリームを分けるようにしました。
+    [docker/compose-cli#1873](https://github.com/docker/compose-cli/issues/1873) 参照。
+  - `compose run`と`compose exec`において、デタッチキー (detach key) をサポートしました。
+    [docker/compose-cli#1709](https://github.com/docker/compose-cli/issues/1709) を Fix に。
+  - `compose rm`コマンドにおける`--force`と`--volumes`フラグを修正しました。
+    [docker/compose-cli#1844](https://github.com/docker/compose-cli/issues/1844) 参照。
+  - ネットワーク IPAM 設定を修正しました。
+    サービスでは固定 IP を定義できるようになりました。
+    [docker/compose-cli#1678](https://github.com/docker/compose-cli/issues/1678) と [docker/compose-cli#1816](https://github.com/docker/compose-cli/issues/1816) を Fix に。
+@z
+
+@x
+- Dev Environments
+  - Support VS Code Insiders. See [dev-environments#3](https://github.com/docker/dev-environments/issues/3)
+  - Allow users to specify a branch when cloning a project. See [dev-environments#11](https://github.com/docker/dev-environments/issues/11)
+@y
+- Dev 環境
+  - VS Code Insiders をサポートしました。
+    [dev-environments#3](https://github.com/docker/dev-environments/issues/3) 参照。
+  - プロジェクトのクローン時にブランチ指定を可能にしました。
+    [dev-environments#11](https://github.com/docker/dev-environments/issues/11) 参照。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Dev Environments: Fixed a blank screen in some create and remove scenarios. Fixes [dev-environments#4](https://github.com/docker/dev-environments/issues/4)
+- Dev Environments: Fixed error handling when removing an environment. Fixes [dev-environments#8](https://github.com/docker/dev-environments/issues/8)
+- Dev Environments: The **Start**, **Stop**, and **Share** buttons are disabled while an environment is being created or removed.
+- Fixed a connection leak when using `virtualization.framework` and not using `vpnkit`.
+- Fixed spurious traces on iptables updates.
+- Fixed a delay when adding a multiple port forwarding option.
+@y
+- Dev 環境: 特定のシナリオ生成、削除における空画面を修正しました。
+  [dev-environments#4](https://github.com/docker/dev-environments/issues/4) を Fix に。
+- Dev 環境: 環境削除時のエラーハンドリングを修正しました。
+  [dev-environments#8](https://github.com/docker/dev-environments/issues/8) を Fix に。
+- Dev 環境: 環境の生成中あるいは削除中には、**Start**, **Stop**, **Share** の各ボタンを無効にしました。
+- `virtualization.framework`利用時、かつ`vpnkit`未使用時における接続漏れを修正しました。
+- iptables アップデート時のトレース誤動作を修正しました。
+- 複数のポートフォワードオプション追加時の遅延を修正しました。
+@z
+
+@x
+## Docker Desktop 3.5.1
+2021-06-25
+@y
+## Docker Desktop 3.5.1
+2021-06-25
+@z
+
+@x
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
+@y
+[Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
+[Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
 @z
 
 @x
