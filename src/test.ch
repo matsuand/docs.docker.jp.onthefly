@@ -1684,21 +1684,35 @@ Use the `upgrade-cta.html` include to render a CTA asking the user to upgrade th
 @z
 
 @x
-- `target-url`: This will typically be something like https://www.docker.com/pricing, possibly with a utm code.
+- `target-url`: This is what the upgrade button will link to. Will typically be something like `https://www.docker.com/pricing`, possibly with a utm code.
+- `header-text`: The text shown in the bolded header at the top of the CTA. Only accepts strings, no Markdown support.
 - `body`: This forms the body of the CTA. It accepts Markdown. To use multi-line bodies, use named captures as explained in [the Jekyll docs](https://jekyllrb.com/docs/includes/#passing-parameter-variables-to-includes).
 @y
-- `target-url`: This will typically be something like https://www.docker.com/pricing, possibly with a utm code.
+- `target-url`: This is what the upgrade button will link to. Will typically be something like `https://www.docker.com/pricing`, possibly with a utm code.
+- `header-text`: The text shown in the bolded header at the top of the CTA. Only accepts strings, no Markdown support.
 - `body`: This forms the body of the CTA. It accepts Markdown. To use multi-line bodies, use named captures as explained in [the Jekyll docs](https://jekyllrb.com/docs/includes/#passing-parameter-variables-to-includes).
 @z
 
 @x
+{% raw %}
+```liquid
+{% include upgrade-cta.html
+  body="Upgrade to gain access to this feature"
+  header-text="This feature is restricted to X and Y plans"
+  target-url="https://www.example.com/"
+%}
 ```
-{% include upgrade-cta.html body="Upgrade to gain access to this feature" target-url="https://www.example.com/" %}
-```
+{% endraw %}
 @y
+{% raw %}
+```liquid
+{% include upgrade-cta.html
+  body="Upgrade to gain access to this feature"
+  header-text="This feature is restricted to X and Y plans"
+  target-url="https://www.example.com/"
+%}
 ```
-{% include upgrade-cta.html body="Upgrade to gain access to this feature" target-url="https://www.example.com/" %}
-```
+{% endraw %}
 @z
 
 @x

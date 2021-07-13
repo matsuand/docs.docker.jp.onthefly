@@ -415,11 +415,11 @@ Now we can build our image.
 
 @x
 ```shell
-$ docker build --tag python-docker .
+$ docker build --tag python-docker-dev .
 ```
 @y
 ```shell
-$ docker build --tag python-docker .
+$ docker build --tag python-docker-dev .
 ```
 @z
 
@@ -437,7 +437,7 @@ $ docker run \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
-  python-docker
+  python-docker-dev
 ```
 @y
 ```shell
@@ -446,7 +446,7 @@ $ docker run \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
-  python-docker
+  python-docker-dev
 ```
 @z
 
@@ -492,16 +492,16 @@ You should receive the following JSON back from our service.
 @z
 
 @x
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker-dev` application in debug mode so that we can connect a debugger to the running process.
 @y
 ここでは [Compose ファイル](../../compose/index.md) を生成して、1 つのコマンド実行から python-docker と MySQL を起動できるようにします。
-なお`python-docker`はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。
+なお`python-docker-dev`はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。
 @z
 
 @x
-Open the `python-docker` code in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
+Open the `python-docker` directory in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 @y
-IDE あるいはテキストエディターにおいて`python-docker`を開いて、`docker-compose.dev.yml`というファイルを新規生成します。
+IDE あるいはテキストエディターにおいて`python-docker`ディレクトリを開いて、`docker-compose.dev.yml`というファイルを新規生成します。
 そのファイルに以下の記述をコピーおよび貼りつけます。
 @z
 
@@ -614,10 +614,10 @@ We pass the `--build` flag so Docker will compile our image and then starts the 
 @z
 
 @x
-Now let’s test our API endpoint. Run the following curl commands:
+Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
 @y
 では API エンドポイントを確認します。
-以下の curl コマンドを実行してみましょう。
+新たな端末を開き、curl コマンドを使って、サーバーへ GET リクエストを投げてみます。
 @z
 
 @x

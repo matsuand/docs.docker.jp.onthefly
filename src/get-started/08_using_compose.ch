@@ -725,9 +725,9 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 @z
 
 @x
-    If you don't already, you'll see output that looks like this...
+    If you have run the command already, you'll see output that looks like this:
 @y
-    ネットワークがまだ生成されていないと、以下のような出力になります。
+    コマンドをすでに実行済みであると、以下のような出力となるはずです。
 @z
 
 @x

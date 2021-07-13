@@ -171,13 +171,12 @@ CMD ["/hello"]
 @z
 
 @x
-Assuming you built the "hello" executable example by following the instructions
-at
-[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/),
+Assuming you built the "hello" executable example by using the source code at
+[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 @y
-[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/)に示されている手順に従って、"hello" 実行モジュールの例を構築するとします。
+[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world)にあるソースコードを使って、"hello" 実行モジュールの例を構築するとします。
 実行モジュールは`-static`フラグをつけてコンパイルします。
 Docker イメージは`docker build`コマンドによってビルドすることができます。
 @z
