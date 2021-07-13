@@ -108,7 +108,7 @@ WSL 2 on Windows 10:
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 @y
-  - 64-bit processor with [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
+  - [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
   - 4 GB のシステム RAM
   - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
     詳しくは [仮想化機能](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
@@ -340,10 +340,23 @@ taskbar to show it. To learn more, see [Docker Settings](index.md#docker-setting
 @z
 
 @x
-When the initialization is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+## Quick Start Guide
 @y
-初期設定が完了すると Docker Desktop はシステム内のチュートリアルを起動します。
+{: #quick-start-guide }
+## クイックスタートガイド
+@z
+
+@x
+When the initialization is complete, Docker Desktop launches the **Quick Start Guide**. This tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+@y
+初期設定が完了すると Docker Desktop はクイックスタートチュートリアルを起動します。
 このチュートリアルには、Docker イメージを試しにビルドし、コンテナーとしての実行、Docker Hub へのイメージのプッシュと保存、といった簡単な練習問題があります。
+@z
+
+@x
+To run the Quick Start Guide on demand, right-click the Docker icon in the Notifications area (or System tray) to open the Docker Desktop menu and then select **Quick Start Guide**.
+@y
+クイックスタートガイドを起動するには、通知エリア（またはシステムトレイ）にある Docker アイコンを右クリックして Docker Desktop メニューを開き、**Quick Start Guide** (クイックスタートガイド) を実行します。
 @z
 
 @x
@@ -357,12 +370,6 @@ Congratulations! You are now successfully running Docker Desktop on Windows.
 @y
 おめでとうございます。
 Windows 上に Docker Desktop が正常に起動できるようになりました。
-@z
-
-@x
-If you would like to rerun the tutorial, go to the Docker Desktop menu and select **Learn**.
-@y
-チュートリアルに戻る場合は、Docker Desktop メニューから **Learn** を実行します。
 @z
 
 @x

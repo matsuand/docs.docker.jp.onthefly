@@ -14,6 +14,7 @@ scsss = \
 	_base.scss          \
 	_breakpoint.scss    \
 	_buttons.scss       \
+	_color-palette.scss \
 	_content.scss       \
 	_github.scss        \
 	_layout.scss        \
@@ -24,6 +25,7 @@ scsss = \
 	_overrides.scss     \
 	_perldoc.scss       \
 	_typography.scss    \
+	_upgrade-cta.scss   \
 	_variables.scss
 scss_mods = \
 	_landing    \

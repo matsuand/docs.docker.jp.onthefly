@@ -104,7 +104,7 @@ curl: (7) Failed to connect to localhost port 5000: Connection refused
 @z
 
 @x
-As you can see, our `curl` command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on port 5000. This is expected because our container is run in isolation which includes networking. Let’s stop the container and restart with port 5000 published on our local network.
+As you can see, our `curl` command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on port 5000. This is expected because our container is running in isolation which includes networking. Let’s stop the container and restart with port 5000 published on our local network.
 @y
 上の`curl`コマンドは、サーバーへの接続が拒否されたために失敗しました。
 localhost のポート 5000 には接続できなかったということです。

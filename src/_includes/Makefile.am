@@ -32,7 +32,8 @@ htmlbases = \
 	navigation       \
 	read_time        \
 	theme-switch     \
-	toc_pure_liquid
+	toc_pure_liquid  \
+	upgrade-cta
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files

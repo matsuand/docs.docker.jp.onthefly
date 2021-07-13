@@ -62,10 +62,10 @@ Docker Desktop のダウンロード、システム要件、インストール�
 @z
 
 @x
-The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
-and more.
+The **Docker Desktop** menu allows you to open the Docker Dashboard, run the Quick Start Guide, configure your Docker settings such as installation, updates, version channels, Docker Hub login, and more.
 @y
-**Docker Desktop** メニューでは Docker に対する設定として、インストール設定、アップデート、バージョンチャネル設定、Docker Hub ログインなどを行うことができます。
+**Docker Desktop** メニューからは Docker ダッシュボードを開いて、クイックスタートガイドを始めることができます。
+また Docker に対する設定として、インストール設定、アップデート、バージョンチャネル設定、Docker Hub ログインなどを行うことができます。
 @z
 
 @x
@@ -75,9 +75,9 @@ This section explains the configuration options accessible from the **Settings**
 @z
 
 @x
-1. Open the Docker Desktop menu by clicking the Docker icon in the Notifications area (or System tray):
+1. To open the Docker Desktop menu, right-click the Docker icon in the Notifications area (or System tray):
 @y
-1. 通知領域（またはシステムトレイ）にある Docker アイコンをクリックし、Docker Desktop メニューを開きます。
+1. 通知エリア（またはシステムトレイ）にある Docker アイコンを右クリックして、Docker Desktop メニューを開きます。
 @z
 
 @x
