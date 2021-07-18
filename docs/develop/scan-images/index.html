@@ -1,7 +1,7 @@
-<!-- Page generated 2021-06-22 09:32:33 +0900-->
+<!-- Page generated 2021-07-18 12:23:00 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Best practices for scanning images | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>イメージスキャンのベストプラクティス | Docker ドキュメント</title>
   <meta name="description" content="Scan images best practices guide" />
   <meta name="keywords" content="docker scan, scan, images, snyk, vulnerability">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/develop/scan-images/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Best practices for scanning images"/>
+  <meta name="twitter:title" itemprop="title name" content="イメージスキャンのベストプラクティス"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Best practices for scanning images" />
+  <meta property="og:title" content="イメージスキャンのベストプラクティス" />
   <meta property="og:description" content="Scan images best practices guide" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-22T09:32:33+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-18T12:23:00+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/scan-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-22T09:32:33+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Best practices for scanning images","description":"Scan images best practices guide","url":"https://docs.docker.com/develop/scan-images/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-18T12:23:00+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"イメージスキャンのベストプラクティス","description":"Scan images best practices guide","url":"https://docs.docker.com/develop/scan-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -103,151 +103,214 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Best practices for scanning images</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p><p>This page contains recommendations and best practices for scanning and building secure images.</p>
+                        <section class="section"><h1>イメージスキャンのベストプラクティス</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><blockquote>
+  <p>Docker プランの購入者であれば、購入機能の一部として Snyk によるぜい弱性スキャンを 200 回行うことができます。
+ご存じでしたか？
+<a href="https://snyk.co/udvnv" target="_blank" rel="noopener" class="_">こちら</a> をクリックすれば、無償の月次スキャンを有効にすることができます。
+Docker プランは購入していませんか？
+<a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade_scan" target="_blank" rel="noopener" class="_">Docker pricing</a> にアクセスして、スキャンの詳細を確認してください。</p>
+</blockquote>
 
-<p>Docker and Snyk have partnered together to bring security natively into the development workflow by providing a simple and streamlined approach for developers to build and deploy secure containers. Container security spans multiple teams - developers, security, and operations. Additionally, there are multiple layers of security that apply to containers:</p>
+<p>このページでは、イメージをスキャンしてセキュアなイメージをビルドするための、推奨するベストプラクティスを示します。</p>
+
+<p>Docker と Snyk が協力し、開発ワークフロー内にネイティブに、セキュリティを取り込む機能を提供しています。
+ここにおいては、開発者が安全なコンテナー構築およびデプロイができるように、シンプルかつ合理的なアプローチを採用しています。
+コンテナーのセキュリティは、開発部門、セキュリティ部門、運用部門といった複数チームに影響します。
+さらにコンテナーに適用するセキュリティには、いくつもの対象があります。</p>
 
 <ul>
-  <li>The container image and the software running inside</li>
-  <li>The interaction between a container, the host operating system, and other containers on the same host</li>
-  <li>The host operating system</li>
-  <li>Container networking and storage</li>
+  <li>コンテナーイメージと、その中で動作するソフトウェア。</li>
+  <li>コンテナー、ホストオペレーティングシステム、同一ホスト上の別コンテナーとの通信。</li>
+  <li>ホストオペレーティングシステム。</li>
+  <li>コンテナーネットワークとストレージ。</li>
 </ul>
 
-<p>Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using <a href="https://snyk.io/advisor/docker" target="_blank" rel="noopener" class="_">Synk Advisor</a>, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.</p>
+<p>Docker プラットフォームへのオプションとしてぜい弱性スキャン機能を含めておけば、すでに使い慣れたぜい弱性検出が、さらに拡張されます。
+そして開発プロセスの初期段階において、ぜい弱性への対処が可能となります。
+たとえば <a href="https://snyk.io/advisor/docker" target="_blank" rel="noopener" class="_">Synk Advisor</a> を使えば、イメージのチェックはバックグラウンドで行われます。
+このようにスキャンチェックが簡単かつ継続的に行われるので、Docker Hub 内にぜい弱性を取り込むことが少なくなります。
+こうして CI のサイクルをより短く、そして本番環境へのデプロイはより信頼できるようになります。</p>
 
 <p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/dev-security-journey.png" alt="Developer's security journey" width="700px" /></p>
 
-<h2 id="scanning-images">Scanning images</h2>
+<h2 id="scanning-images">イメージのスキャン</h2>
 
-<p>You can trigger scans automatically by pushing an image to Docker Hub. You can achieve this either through the <code class="language-plaintext highlighter-rouge">docker scan</code> command in the CLI, or through Docker Hub.</p>
+<p>Docker Hub に対してイメージをプッシュすれば、スキャンを自動実行することができます。
+イメージのスキャンは Docker Hub を通じてだけでなく、CLI から<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドを使うことでも実現できます。</p>
 
-<h3 id="scan-using-the-cli">Scan using the CLI</h3>
+<h3 id="scan-using-the-cli">CLI を使ったスキャン</h3>
 
-<p>After you’ve built an image and before you push your image to Docker Hub, run the <code class="language-plaintext highlighter-rouge">docker scan</code> command. For detailed instructions on how to scan images using the CLI, see <a href="/docs.docker.jp.onthefly/engine/scan/">docker scan</a>.</p>
+<p>イメージのビルドを終えて Docker Hub へのプッシュを行う前に、<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドを実行します。
+CLI を使ってイメージスキャンを行う詳細については <a href="/docs.docker.jp.onthefly/engine/scan/">docker scan</a> を参照してください。</p>
 
-<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/docker-scan-cli.png" alt="Docker Scan CL" width="700px" /></p>
+<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/docker-scan-cli.png" alt="Docker スキャン CL" width="700px" /></p>
 
-<h3 id="scan-using-docker-hub">Scan using Docker Hub</h3>
+<h3 id="scan-using-docker-hub">Docker Hub を利用したスキャン</h3>
 
-<p>You can trigger scans, view, and inspect vulnerabilities through Docker Hub. For detailed information, see <a href="/docs.docker.jp.onthefly/docker-hub/vulnerability-scanning/">Hub Vulnerability Scanning</a>.</p>
+<p>イメージのスキャン、結果参照、ぜい弱性の確認は、Docker Hub を通じて行うことができます。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/vulnerability-scanning/">Docker Hub ぜい弱性スキャン</a> を参照してください。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see <a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade" target="_blank" rel="noopener" class="_">Docker Pricing</a>.</p>
+  <p>Docker Hub のぜい弱性スキャンは、Pro プランまたは Team プランを購入している開発者が利用できます。
+価格プランに関する詳細は <a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade" target="_blank" rel="noopener" class="_">Docker Pricing</a> を参照してください。</p>
 </blockquote>
 
-<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hub-hvs.png" alt="Hub Vulnerability scanning" width="700px" /></p>
+<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hub-hvs.png" alt="Docker Hub ぜい弱性スキャン" width="700px" /></p>
 
-<h3 id="view-the-scan-summary-in-docker-desktop">View the scan summary in Docker Desktop</h3>
+<h3 id="view-the-scan-summary-in-docker-desktop">Docker Desktop でのスキャン概要の参照</h3>
 
-<p>Docker Desktop provides you a snapshot of your vulnerabilities status on the Docker Dashboard. Hover over the image and click <strong>View in Hub</strong> to view a detailed vulnerability report in Docker Hub.</p>
+<p>Docker Desktop は、ぜい弱性に関する状態を Docker ダッシュボードから参照する機能を提供しています。
+イメージ上にマウス移動して <strong>View in Hub</strong>（Hub の参照）をクリックすると、Docker Hub 内において、詳細なぜい弱性報告を見ることができます。</p>
 
-<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hvs-scan-summary.png" alt="Hub Vulnerability scan summary" width="700px" /></p>
+<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hvs-scan-summary.png" alt="Docker Hub ぜい弱性スキャンの概要" width="700px" /></p>
 
-<h2 id="best-practices">Best practices</h2>
+<h2 id="best-practices">ベストプラクティス</h2>
 
-<p>As a developer, you can take a few simple steps to improve the security of your container. This includes:</p>
+<p>開発者としては、単純な作業をいくつか行うだけで、コンテナーのセキュリティを向上させることができます。
+具体的には以下のようなことです。</p>
 
 <ol>
-  <li>Choosing the right base image from a trusted source and keeping it small</li>
-  <li>Using multi-stage builds</li>
-  <li>Rebuilding images</li>
-  <li>Scanning images during development</li>
-  <li>Scanning images during production</li>
+  <li>信頼できる提供元からの適切なベースイメージを選び、コンテナーサイズを小さく保ちます。</li>
+  <li>マルチステージビルドを採用します。</li>
+  <li>イメージを再ビルドします。</li>
+  <li>開発段階でのイメージスキャンを行います。</li>
+  <li>本番稼働中にイメージスキャンを行います。</li>
 </ol>
 
-<p>Now, let’s take a detailed look at each of these best practices:</p>
+<p>そこでベストプラクティスの個々の手順を詳細に見ていきます。</p>
 
-<h3 id="choose-the-right-base-image">Choose the right base image</h3>
+<h3 id="choose-the-right-base-image">適切なベースイメージの選択</h3>
 
-<p>The first step towards achieving a secure image is to choose the right base image. When choosing an image, ensure it is built from a trusted source and keep it small.</p>
+<p>セキュアなイメージを得るために最初に為すべきなのは、適切なベースイメージを選ぶことです。
+イメージを選ぶにあたっては、信頼できる提供元のものを用いてビルドし、イメージサイズを小さく保ちます。</p>
 
-<p>Docker Hub has more than 8.3 million repositories. Some of these images are <a href="/docs.docker.jp.onthefly/docker-hub/official_images/">Official Images</a>, which are published by Docker as a curated set of Docker open source and drop-in solution repositories. Docker also offers images that are published by <a href="/docs.docker.jp.onthefly/docker-hub/publish/">Verified Publishers</a>. These high-quality images are published and maintained by the organizations partnering with Docker, with Docker verifying the authenticity of the content in their repositories. When you pick your base image, look out for the <strong>Official Image</strong> and <strong>Verified Publisher</strong> badges.</p>
+<p>Docker Hub には 830 万を超えるリポジトリが存在しています。
+その中には <a href="/docs.docker.jp.onthefly/docker-hub/official_images/">公式イメージ</a> を提供しているものがあります。
+これは Docker が提供する公開オープンソースであり、気軽に利用できるリポジトリです。
+Docker ではさらに <a href="/docs.docker.jp.onthefly/docker-hub/publish/">検証済公開者</a> が構築するイメージも提供しています。
+そのイメージは高品質なものであり、Docker と共同開発を行う組織が公開および保守を行っています。
+そして Docker を使って、リポジトリ内のコンテンツの信頼性検証が行われています。
+ベースイメージを選び出す際には、<strong>Official Image</strong>（公式イメージ）や <strong>Verified Publisher</strong>（検証済公開者）というバッチがついているかどうかの確認を行ってください。</p>
 
-<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hub-official-images.png" alt="Docker Hub Official and Verified Publisher images" width="700px" /></p>
+<p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/hub-official-images.png" alt="Docker Hub 公式イメージおよび検証済公開者によるイメージ" width="700px" /></p>
 
-<p>When building your own image from a Dockerfile, ensure you choose a minimal base image that matches your requirements. A smaller base image not just offers portability and fast downloads, but also shrinks the size of your image and minimizes the number of vulnerabilities introduced through the dependencies.</p>
+<p>Dockerfile から独自のイメージを構築する際には、仕様を満たす最小限のベースイメージを選ぶようにしてください。
+小さなベースイメージを選んでおけば、移植性に優れ、ダウンロードも早くなります。
+さらにイメージサイズは小さく抑えられ、依存パッケージからもたらされるぜい弱性の数も少なくて済みます。</p>
 
-<p>We also recommend that you use two types of base images: the first image for development and unit testing and the second one for testing during the latest stages of development and production. In the later stages of development, your image may not even require some build tools such as compilers, build systems, or any debugging tools. A small image with minimal dependencies can considerably lower the attack surface.</p>
+<p>またベースイメージは 2 種類を利用することをお勧めします。
+1 つは開発およびテスト用のイメージであり、もう 1 つは開発および本番の最終段階でのテスト用イメージです。
+開発の後半になると、コンパイラー、ビルドシステム、デバッグツールといったビルドツールなどが、イメージにおいて不要になるかもしれません。
+依存パッケージを最低限に抑えた最小イメージであれば、攻撃対象を相当少なくすることができます。</p>
 
-<h3 id="use-multi-stage-builds">Use multi-stage builds</h3>
+<h3 id="use-multi-stage-builds">マルチステージビルドの利用</h3>
 
-<p>Multi-stage builds are designed to create an optimized Dockerfile that is easy to read and maintain. With a multi-stage build, you can use multiple images and selectively copy only the artifacts needed from a particular image.</p>
+<p>マルチステージビルドは、Dockerfile を最適化して、読みやすく保守しやすくする目的で設計されています。
+マルチステージビルドでは複数のイメージを利用して、特定のイメージから必要な成果のみを選択してコピーすることができます。</p>
 
-<p>You can use multiple <code class="language-plaintext highlighter-rouge">FROM</code> statements in your Dockerfile, and you can use a different base image for each <code class="language-plaintext highlighter-rouge">FROM</code>. You can also selectively copy artifacts from one stage to another, leaving behind things you don’t need in the final image. This can result in a concise final image.</p>
+<p>Dockerfile には、複数の<code class="language-plaintext highlighter-rouge">FROM</code>命令を記述します。
+その<code class="language-plaintext highlighter-rouge">FROM</code>命令に対しては、それぞれ異なるベースイメージの指定が可能です。
+1 つのステージから別のステージへ、作り出した内容を選び出してコピーできるので、最終イメージに不要なものは使い捨てにできます。
+そうすれば、最終イメージをコンパクトにすることができます。</p>
 
-<p>This method of creating a tiny image does not only significantly reduce complexity, but also the change of implementing vulnerable artifacts in your image. Therefore, instead of images that are built on images, that again are built on other images, multi-stage builds allow you to ‘cherry pick’ your artifacts without inheriting the vulnerabilities from the base images on which they rely on.</p>
+<p>小さなイメージを生成するこの方法を取れば、複雑さが大幅に減ります。
+またイメージ内に実装されているぜい弱な成果物を修正することにもつながります。
+したがって複数イメージからなるイメージ、つまり別のイメージからビルドされたイメージを用いるのとは別に、マルチステージビルドを採用すれば、元のベースイメージからぜい弱性を受け継ぐことなく、成果を「cherry pick」することができます。</p>
 
-<p>For detailed information on how to configure multi-stage builds, see <a href="/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">multi-stage builds</a>.</p>
+<p>マルチステージビルドの設定方法の詳細は <a href="/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">マルチステージビルド</a> を参照してください。</p>
 
-<h3 id="rebuild-images">Rebuild images</h3>
+<h3 id="rebuild-images">イメージの再ビルド</h3>
 
-<p>A Docker image is built  from a Dockerfile. A Dockerfile contains a set of instructions which allows you to automate the steps you would normally (manually) take to create an image. Additionally, it can include some imported libraries and install custom software. These appear as instructions in the Dockerfile.</p>
+<p>Docker イメージは Dockerfile からビルドされます。
+Dockerfile には一連の命令が記述されていて、イメージ生成を（手動で）行ったとした場合に実施する処理手順が、自動的に実施されます。
+さらにライブラリをインポートしたり、カスタムソフトウェアをインストールしたりすることができます。
+そういったことが Dockerfile 内の命令として表されています。</p>
 
-<p>Building your image is a snapshot of that image, at that moment in time. When you depend on a base image without a tag, you’ll get a different base image every time you rebuild. Also, when you install packages using a package installer, rebuilding can change the image drastically. For example, a Dockerfile containing the following entries can potentially have a different binary with every rebuild.</p>
+<p>イメージをビルドするというのは、その時点でのイメージのスナップショットを得ることです。
+依存しているベースイメージにタグがなかった場合、イメージの再ビルド時には、毎回別イメージを取得することになります。
+さらにパッケージインストーラーを利用してパッケージをインストールしている場合、イメージの再ビルドによって、イメージは大幅に変更されます。
+たとえば、以下のような命令を含む Dockerfile では、再ビルドを行うたびに、潜在的に別バイナリを用いることになります。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
 <span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python
 </code></pre></div></div>
 
-<p>We recommend that you rebuild your Docker image regularly to prevent known vulnerabilities that have been addressed. When rebuilding, use the option <code class="language-plaintext highlighter-rouge">--no-cache</code> to avoid cache hits and to ensure a fresh download.</p>
+<p>Docker イメージは定期的に再ビルドすることを推奨します。
+公開されている既知の脆弱性を回避するためです。
+再ビルドの際には<code class="language-plaintext highlighter-rouge">--no-cache</code>オプションを用いることで、キャッシュ利用を行わず、最新のダウンロードを利用できるようになります。</p>
 
-<p>For example:</p>
+<p>たとえば以下です。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> myImage:myTag myPath/
 </code></pre></div></div>
 
-<p>Consider the following best practices when rebuilding an image:</p>
+<p>イメージ再ビルドの際には、以下のベストプラクティスを考えてください。</p>
 
 <ul>
-  <li>Each container should have only one responsibility.</li>
-  <li>Containers should be immutable, lightweight, and fast.</li>
-  <li>Don’t store data in your container. Use a shared data store instead.</li>
-  <li>Containers should be easy to destroy and rebuild.</li>
-  <li>Use a small base image (such as Linux Alpine).  Smaller images are easier to distribute.</li>
-  <li>Avoid installing unnecessary packages. This keeps the image clean and safe.</li>
-  <li>Avoid cache hits when building.</li>
-  <li>Auto-scan your image before deploying to avoid pushing vulnerable containers to production.</li>
-  <li>Scan your images daily both during development and production for vulnerabilities Based on that, automate the rebuild of images if necessary.</li>
+  <li>各コンテナーが担うべき責任は、ただ 1 つとすべきです。</li>
+  <li>コンテナーは不変なものであり、軽量で高速である必要があります。</li>
+  <li>コンテナー内にデータを保存しないでください。
+代わりに共有データストレージを利用してください。</li>
+  <li>コンテナーの削除と再ビルドは、いつでも簡単にできます。</li>
+  <li>ベースイメージには (Liux Alpine のような) 小さなものを用いてください。
+小さければ、それだけ配布がしやすくなります。</li>
+  <li>不要な依存パッケージはインストールしないようにしてください。
+イメージをきれいに、そして安全に保つようにします。</li>
+  <li>ビルド時にはキャッシュを無効にしてください。</li>
+  <li>デプロイ前には、イメージの自動スキャン機能を利用してください。
+これにより、ぜい弱なコンテナーを本番環境に導入することが避けられます。</li>
+  <li>開発中および本番稼働中は、イメージにぜい弱性がないかを毎日スキャンするようにしてください。
+必要であれば、イメージ再ビルドの自動化を行ってください。</li>
 </ul>
 
-<p>For detailed best practices and methods for building efficient images, see <a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/">Dockerfile best practices</a>.</p>
+<p>イメージビルドを効率的に行うベストプラクティスや手法については、<a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/">Dockerfile ベストプラクティス</a> を参照してください。</p>
 
-<h3 id="scan-images-during-development">Scan images during development</h3>
+<h3 id="scan-images-during-development">開発段階でのイメージスキャン</h3>
 
-<p>Creating an image from a Dockerfile and even rebuilding an image can introduce new vulnerabilities in your system. Scanning your Docker images during development should be part of your workflow to catch vulnerabilities earlier in your development. You should scan images at all stages of the development cycle, and ideally consider automating scans. For example, consider configuring automated scans during the build process, before pushing the image to Docker Hub (or any other registry), and finally before pushing it to a production environment.</p>
+<p>Dockerfile からイメージ生成や再ビルドを行うときは、システム内にぜい弱性を持ち込む可能性があります。
+開発作業中での Docker イメージスキャンは、ワークフローの一部として組み入れて、開発当初よりぜい弱性検出に努める必要があります。
+イメージスキャンは、開発のどの段階においても実施すべきであり、理想的には自動スキャンを検討すべきです。
+たとえばビルド作業において自動スキャンを組み入れるなら、Docker Hub (あるいは別のレジストリ) にイメージをプッシュする前に行うようにし、最終的には本番環境に投入する前に行うようにします。</p>
 
-<h3 id="scan-images-during-production">Scan images during production</h3>
+<h3 id="scan-images-during-production">本番稼働中のイメージスキャン</h3>
 
-<p>Actively checking your container can save you a lot of hassle when a new vulnerability is discovered, which otherwise can put your production system at risk.</p>
+<p>コンテナーを積極的にチェックしていれば、新たなぜい弱性が発見されたときに、多くの手間ひまを省くことができます。
+それを行わないでいると、本番環境が危険にさらされる可能性があります。</p>
 
-<p>Periodically scanning your Docker image is possible by using the Snyk monitor capabilities for containers. Snyk creates a snapshot of the image’s dependencies for continuous monitoring. Additionally, you should also activate runtime monitoring. Scanning for unused modules and packages inside your runtime gives insight into how to shrink images. Removing unused components prevents unnecessary vulnerabilities from entering both system and application libraries. This also makes an image more easily maintainable.</p>
+<p>コンテナーに対しては Synk 監視機能を利用することで、Docker イメージの定期的なスキャンが可能になります。
+Snyk は監視を継続的に行って、イメージの依存パッケージに対するスナップショットを生成します。
+さらに実行時の監視を有効にすることもできます。
+ランタイム内部に未使用のモジュールやパッケージがスキャンされると、それはつまりイメージ縮小の可能性を知らせてくれる契機となります。
+未使用のコンポーネントを取り除いておけば、システムおよびアプリケーションライブラリの双方に、不要なぜい弱性を導入しなくて済みます。
+こうすることが、イメージをより保守しやすくすることでもあるのです。</p>
 
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">結論</h2>
 
-<p>Building secure images is a continuous process. Consider the recommendations and best practices highlighted in this guide to plan and build efficient, scalable, and secure images.</p>
+<p>セキュアなイメージビルドは、継続的に行うべきものです。
+このガイドにおいて取り上げた推奨内容やベストプラクティスを考慮して、効率のよい、スケール変更が容易なセキュアイメージ作りを計画してビルドしてください。</p>
 
-<p>Let’s recap what we’ve learnt in this guide:</p>
+<p>このガイドを通じて学んだ内容をまとめます。</p>
 
 <ul>
-  <li>Start with a base image that you trust. Remember the Official image and Verified Publisher badges when you choose your base images.</li>
-  <li>Secure your code and its dependencies.</li>
-  <li>Select a minimal base image which contains only the required packages.</li>
-  <li>Use multi-stage builds to optimize your image.</li>
-  <li>Ensure you carefully monitor and manage the tools and dependencies you add to your image.</li>
-  <li>Ensure you scan images at multiple stages during your development lifecycle.</li>
-  <li>Check your images frequently for vulnerabilities.</li>
+  <li>信頼できるベースイメージから始めてください。
+ベースイメージを選択する際には、Official image (公式イメージ) あるいは Verified Publisher (検証済公開者) のバッチがあるかどうかの確認を忘れないでください。</li>
+  <li>コードや依存パッケージはセキュアなものとしてください。</li>
+  <li>ベースイメージは、必要最小限のパッケージを含んだものを選んでください。</li>
+  <li>イメージを最適化するため、マルチステージビルドを用いてください。</li>
+  <li>イメージに追加する依存パッケージやツールに関しては、注意深く監視し管理してください。</li>
+  <li>開発ライフサイクルのあるゆる段階において、イメージスキャンを行ってください。</li>
+  <li>イメージにぜい弱性がないかどうかを頻繁に確認してください。</li>
 </ul>
 
-<h2 id="further-reading">Further reading</h2>
+<h2 id="further-reading">さらに読むもの</h2>
 
-<p>You can also take a look at the following articles from Snyk:</p>
+<p>Snyk が提供している以下の投稿も確認してください。</p>
 
 <ul>
-  <li><a href="https://snyk.io/learn/container-security/" target="_blank" rel="noopener" class="_">Container Security Guide</a></li>
-  <li><a href="https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf" target="_blank" rel="noopener" class="_">Docker Vulnerability Scanning Cheat Sheet</a></li>
+  <li><a href="https://snyk.io/learn/container-security/" target="_blank" rel="noopener" class="_">Container Security Guide</a> (コンテナーセキュリティガイド)</li>
+  <li><a href="https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf" target="_blank" rel="noopener" class="_">Docker Vulnerability Scanning Cheat Sheet</a> (Docker ぜい弱性スキャンのチートシート)</li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker scan">docker scan</a>, <a href="/docs.docker.jp.onthefly/search/?q=scan">scan</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=snyk">snyk</a>, <a href="/docs.docker.jp.onthefly/search/?q=vulnerability">vulnerability</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -282,24 +345,24 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#scanning-images" class="nomunge">Scanning images</a>
+  <li><a href="#scanning-images" class="nomunge">イメージのスキャン</a>
     <ul>
-      <li><a href="#scan-using-the-cli" class="nomunge">Scan using the CLI</a></li>
-      <li><a href="#scan-using-docker-hub" class="nomunge">Scan using Docker Hub</a></li>
-      <li><a href="#view-the-scan-summary-in-docker-desktop" class="nomunge">View the scan summary in Docker Desktop</a></li>
+      <li><a href="#scan-using-the-cli" class="nomunge">CLI を使ったスキャン</a></li>
+      <li><a href="#scan-using-docker-hub" class="nomunge">Docker Hub を利用したスキャン</a></li>
+      <li><a href="#view-the-scan-summary-in-docker-desktop" class="nomunge">Docker Desktop でのスキャン概要の参照</a></li>
     </ul>
   </li>
-  <li><a href="#best-practices" class="nomunge">Best practices</a>
+  <li><a href="#best-practices" class="nomunge">ベストプラクティス</a>
     <ul>
-      <li><a href="#choose-the-right-base-image" class="nomunge">Choose the right base image</a></li>
-      <li><a href="#use-multi-stage-builds" class="nomunge">Use multi-stage builds</a></li>
-      <li><a href="#rebuild-images" class="nomunge">Rebuild images</a></li>
-      <li><a href="#scan-images-during-development" class="nomunge">Scan images during development</a></li>
-      <li><a href="#scan-images-during-production" class="nomunge">Scan images during production</a></li>
+      <li><a href="#choose-the-right-base-image" class="nomunge">適切なベースイメージの選択</a></li>
+      <li><a href="#use-multi-stage-builds" class="nomunge">マルチステージビルドの利用</a></li>
+      <li><a href="#rebuild-images" class="nomunge">イメージの再ビルド</a></li>
+      <li><a href="#scan-images-during-development" class="nomunge">開発段階でのイメージスキャン</a></li>
+      <li><a href="#scan-images-during-production" class="nomunge">本番稼働中のイメージスキャン</a></li>
     </ul>
   </li>
-  <li><a href="#conclusion" class="nomunge">Conclusion</a></li>
-  <li><a href="#further-reading" class="nomunge">Further reading</a></li>
+  <li><a href="#conclusion" class="nomunge">結論</a></li>
+  <li><a href="#further-reading" class="nomunge">さらに読むもの</a></li>
 </ul>
 
 </div>
