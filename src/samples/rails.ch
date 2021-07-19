@@ -238,9 +238,9 @@ services:
 
 @x
 With those files in place, you can now generate the Rails skeleton app
-using [docker-compose run](reference/run.md):
+using [docker-compose run](../compose/reference/run.md):
 @y
-ここまでのファイルを使って [docker-compose run](reference/run.md) を実行し、Rails アプリのひながたを生成します。
+ここまでのファイルを使って [docker-compose run](../compose/reference/run.md) を実行し、Rails アプリのひながたを生成します。
 @z
 
 @x
@@ -437,9 +437,9 @@ test:
 @z
 
 @x
-You can now boot the app with [docker-compose up](reference/up.md):
+You can now boot the app with [docker-compose up](../compose/reference/up.md):
 @y
-[docker-compose up](reference/up.md) によりアプリを起動します。
+[docker-compose up](../compose/reference/up.md) によりアプリを起動します。
 @z
 
 @x
