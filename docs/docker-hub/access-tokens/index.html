@@ -1,4 +1,4 @@
-<!-- Page generated 2021-06-04 14:08:15 +0900-->
+<!-- Page generated 2021-07-21 08:26:35 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アクセストークンの管理 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="アクセストークンの管理" />
   <meta property="og:description" content="Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/access-tokens/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-06-04T14:08:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"アクセストークンの管理","description":"Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically.","url":"https://docs.docker.com/docker-hub/access-tokens/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,24 +103,32 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>アクセストークンの管理</h1>
-<p>Docker Hub では、パスワードに代わるものとして個人用のアクセストークンを利用することができます。
+                        <section class="section"><h1>アクセストークンの管理</h1><p>Docker Hub では、パスワードに代わるものとして個人用のアクセストークンを利用することができます。
 このトークンを使って Docker CLI から Docker Hub イメージにアクセスできます</p>
 
 <p>個人用のアクセストークンを利用すると、パスワードに比べて以下の利点があります。</p>
 <ul>
   <li>アクセストークンの前回利用状況を確認できます。
-そのため何か疑わしい履歴が残っていたら、アクセストークンを無効化したり削除したりすることができます。</li>
+したがって何か疑わしい履歴が残っていたら、アクセストークンを無効化したり削除したりすることができます。</li>
   <li>アクセストークンを使ってログインしている際には、ログインアカウントに対する管理操作、たとえばパスワードの変更といったことを行うことはできません。</li>
 </ul>
+
+<blockquote class="important">
+  <p><strong>重要</strong></p>
+
+  <p>アクセストークンはパスワードと同様に、極秘の取り扱いとしてください。
+トークンは安全な場所に保存するようにしてください (たとえば資格情報マネージャー内など)。</p>
+</blockquote>
 
 <p>アクセストークンは複数環境で利用する際に活用できます。
 複数のトークンを生成しておき、環境ごとにトークンを使い分けます。
 不要になったらいつでも削除することができます。</p>
 
-<blockquote class="important">
-  <p>メモ: 利用アカウントに対して <a href="../2fa">２要素認証（two-factor authentication; 2FA）</a> を有効にしている場合は、個人用のアクセストークンを少なくとも 1 つ生成しておかなければなりません。
-これを行っていないと、Docker CLI を使ってアカウントへのログインを行うことができません。</p>
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>利用アカウントに対して <a href="/docs.docker.jp.onthefly/docker-hub/2fa/">２要素認証（two-factor authentication; 2FA）</a> を有効にしている場合は、個人用のアクセストークンを少なくとも 1 つ生成しておかなければなりません。
+これを行っていないと、Docker CLI を使ったアカウントへのログインができません。</p>
 </blockquote>
 
 <h2 id="create-an-access-token">アクセストークンの生成</h2>
@@ -129,46 +137,67 @@
 
 <ol>
   <li>
-    <p><a href="https://hub.docker.com">hub.docker.com</a> にログインします。</p>
+    <p><a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">hub.docker.com</a> にログインします。</p>
   </li>
   <li>
-    <p>画面右上に表示されている自身のユーザー名をクリックして、<strong>Account Settings</strong> を実行します。</p>
+    <p>画面右上に表示されている自身のユーザー名をクリックして、<strong><a href="https://hub.docker.com/settings/general">Account Settings</a></strong> を実行します。</p>
   </li>
   <li>
-    <p><strong>Security &gt; New Access Token</strong> を実行します。</p>
-
-    <p><img src="images/hub-create-token.png" alt="" /></p>
+    <p><strong><a href="https://hub.docker.com/settings/security">Security</a> &gt; New Access Token</strong> を実行します。</p>
   </li>
   <li>
     <p>トークンに対する説明を書きます。
 トークンをどのように用いるべきか、トークンの利用目的は何か、といったことを書きます。</p>
+
+    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/hub-create-token.png" alt="PAT メニュー" width="700px" /></p>
   </li>
   <li>
-    <p>画面上に表示されるトークンをコピーします。
-これは必ず実施するようにしてください。
-この表示画面を閉じてしまうと、トークンは二度と表示されません。</p>
+    <p>ドロップダウンメニューには、以下のようなパーミッションが表示されます。</p>
 
-    <p><img src="images/hub-copy-token.png" alt="" /></p>
+    <table>
+      <thead>
+        <tr>
+          <th>機能</th>
+          <th>Free</th>
+          <th>Pro</th>
+          <th>Team</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>パーソナルアクセストークン (読み込み、書き込み、削除の各スコープのみ)*</td>
+          <td>x</td>
+          <td>x</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>スコープつきパーソナルアクセストークン</td>
+          <td> </td>
+          <td>x</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>無制限のパーソナルアクセストークン</td>
+          <td> </td>
+          <td> </td>
+          <td>x</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <p>トークンはパスワードと同様に、大切な情報として扱ってください。
-   トークンは安全な方法で保存するようにします（たとえば Credential マネージャー内など）。</p>
+    <blockquote>
+      <ul>
+        <li>Free プラン内では 1 つのアクセストークン生成ができます。
+ Pro プランでは 5 つのトークン、Team プランでは無制限です。
+ Pro プランや Team プランの詳細については、<a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade" target="_blank" rel="noopener" class="_">Docker Pricing</a> を参照してください。</li>
+      </ul>
+    </blockquote>
   </li>
-</ol>
-
-<h2 id="modify-existing-tokens">既存トークンの修正</h2>
-
-<p>トークンは必要に応じて、名称変更、無効化、削除を行うことができます。</p>
-
-<ol>
   <li>
-    <p><strong>Account Settings &gt; Security</strong> の下にトークンを表示します。</p>
-  </li>
-  <li>
-    <p>トークンを選択して <strong>Delete</strong> や <strong>Edit</strong> をクリックします。
-あるいはトークンが表示されている行の一番右にあるメニューを用いて、編集画面を開きます。
-複数のトークンを選択状態にして、一括で削除することもできます。</p>
+    <p>画面上に表示されるトークンをコピーして保存します。
+この表示画面を閉じてしまうと、トークンを知ることはできなくなります。</p>
 
-    <p><img src="images/hub-edit-token.png" alt="" /></p>
+    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/hub-copy-token.png" alt="コピートークン" width="700px" /></p>
   </li>
 </ol>
 
@@ -177,10 +206,43 @@
 <p>Docker Hub のパスワードを必要とする場面では、どこでもアクセストークンを利用することができます。</p>
 
 <p>Docker CLI クライアントからログインする場合（<code class="language-plaintext highlighter-rouge">docker login --username &lt;ユーザー名&gt;</code>）、ログインコマンドにおけるパスワード入力は行いません。
-パスワードの入力プロンプトには、パスワードでなくトークンを入力します。</p>
+パスワードの入力プロンプトには、代わりにトークンを入力します。</p>
 
-<p>２要素認証を有効にしている場合、Docker CLI によりログインを行うには、個人用アクセストークンを用いる必要があります。
-２要素認証を有効にしていない場合、認証手段としてトークンを利用するかどうかは任意です（ただしトークンを利用することがより安全です）。</p>
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p><a href="/docs.docker.jp.onthefly/docker-hub/2fa/">２要素認証（two-factor authentication; 2FA）</a> を有効にしている場合、Docker CLI によりログインを行うには、個人用アクセストークンを用いる必要があります。
+2FA の利用は任意ですが、その方がより安全な認証方式です。</p>
+</blockquote>
+
+<h2 id="modify-existing-tokens">既存トークンの修正</h2>
+
+<p>トークンは必要に応じて、名称変更、有効無効化、削除を行うことができます。</p>
+
+<ol>
+  <li>
+    <p><strong><a href="https://hub.docker.com/settings/security" target="_blank" rel="noopener" class="_">Account Settings &gt; Security</a></strong> の下にトークンを表示します。</p>
+  </li>
+  <li>
+    <p>トークンを選択して <strong>Delete</strong> や <strong>Edit</strong> をクリックします。
+あるいはトークンが表示されている行の一番右にあるメニューを用いて、編集画面を開きます。
+複数のトークンを選択状態にして、一括で削除することもできます。</p>
+
+    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/hub-delete-edit-token.png" alt="削除または編集" width="700px" /></p>
+
+    <blockquote>
+      <p><strong>メモ</strong></p>
+
+      <p>有効または無効にしたトークン数は、ツールバーから参照することができます。</p>
+    </blockquote>
+
+    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/hub-edit-token.png" alt="トークンの修正" width="700px" /></p>
+  </li>
+</ol>
+
+<p>Docker では <a href="https://github.com/docker/hub-tool#readme" target="_blank" rel="noopener" class="_">Docker Hub CLI</a> ツール (現時点では試験的機能）と API を提供しています。
+これらを用いて Docker Hub との連携を行うことができます。
+ブラウザーから <a href="/docs.docker.jp.onthefly/docker-hub/api/latest/" target="_blank" rel="noopener" class="_">Docker Hub API</a> にあるドキュメントにアクセスして、サポートされているエンドポイントを調べてみてください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker hub">docker hub</a>, <a href="/docs.docker.jp.onthefly/search/?q=hub">hub</a>, <a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=PAT">PAT</a>, <a href="/docs.docker.jp.onthefly/search/?q=personal access token">personal access token</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -215,8 +277,8 @@
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#create-an-access-token" class="nomunge">アクセストークンの生成</a></li>
-  <li><a href="#modify-existing-tokens" class="nomunge">既存トークンの修正</a></li>
   <li><a href="#use-an-access-token" class="nomunge">アクセストークンの利用</a></li>
+  <li><a href="#modify-existing-tokens" class="nomunge">既存トークンの修正</a></li>
 </ul>
 
 </div>
@@ -249,7 +311,6 @@
                     <ul class="footer_links">
                         <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
                         <li><a href="https://www.docker.com/use-cases">利用例</a></li>
-                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
                         <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
                         <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
                         <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
