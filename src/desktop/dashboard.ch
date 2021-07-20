@@ -28,7 +28,7 @@ toc_max: 3
 @x
 The Docker Dashboard provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
 @y
-Docker Desktop ダッシュボードは、コンテナー、アプリケーション、イメージに食説にアクセスできるようなシンプルなインターフェースを提供します。
+Docker Desktop ダッシュボードは、コンテナー、アプリケーション、イメージに直接アクセスできるようなシンプルなインターフェースを提供します。
 CLI を使って難しい操作を行う必要がなくなります。
 @z
 
@@ -705,9 +705,17 @@ Pro プランや Team プランを購入している開発者であれば、特�
 @z
 
 @x
-> [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing account to a Pro or a Team plan to start exploring the details in your volume.
+{% include upgrade-cta.html
+  body="To start exploring the details in your volumes, upgrade to a Pro or a Team plan."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
+%}
 @y
-> 既存のプランを Pro プランや Team プランに [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} して、ボリュームの詳細な確認を始めてみてください。
+{% include upgrade-cta.html
+  body="ボリュームについてさらに深く理解していきたい場合は、Pro プランまたは Team プランにアップグレードしてください。"
+  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
+%}
 @z
 
 @x

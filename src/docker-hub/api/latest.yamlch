@@ -3,27 +3,29 @@
 
 @x
 swagger: '2.0'
+
+host: hub.docker.com
+basePath: '/'
 schemes:
   - https
 @y
 swagger: '2.0'
+
+host: hub.docker.com
+basePath: '/'
 schemes:
   - https
 @z
 
 @x
-host: hub.docker.com
-basePath: "/"
-produces:
-  - application/json
 consumes:
+  - application/json
+produces:
   - application/json
 @y
-host: hub.docker.com
-basePath: "/"
-produces:
-  - application/json
 consumes:
+  - application/json
+produces:
   - application/json
 @z
 
@@ -59,39 +61,149 @@ info:
 
 @x
 tags:
-  # Primary objects
 @y
 tags:
-  # Primary objects
 @z
 
 @x
-  - name: Authentication
+  - name: rate-limiting
+    x-displayName: Rate Limiting
+    description: |
+      The Docker Hub API is limited on the amount of requests you can perform
+      per minute against it.
+@y
+  - name: rate-limiting
+    x-displayName: Rate Limiting
+    description: |
+      The Docker Hub API is limited on the amount of requests you can perform
+      per minute against it.
+@z
+
+@x
+      If you haven't hit the limit, each request to the API will return the
+      following headers in the response.
+      - `X-RateLimit-Limit` - The limit of requests per minute.
+      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit
+      period.
+      - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
+@y
+      If you haven't hit the limit, each request to the API will return the
+      following headers in the response.
+      - `X-RateLimit-Limit` - The limit of requests per minute.
+      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit
+      period.
+      - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
+@z
+
+@x
+      If you have hit the limit, you will receive a response status of `429` and
+      the `X-Retry-After` header in the response.
+@y
+      If you have hit the limit, you will receive a response status of `429` and
+      the `X-Retry-After` header in the response.
+@z
+
+@x
+      The `X-Retry-After` header is a unix timestamp of when you can call the
+      API again.
+@y
+      The `X-Retry-After` header is a unix timestamp of when you can call the
+      API again.
+@z
+
+@x
+      *Note: These rate limits are separate from anti-abuse and Docker Hub
+      download, or pull rate limiting. To learn more about Docker Hub pull rate
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
+@y
+      *Note: These rate limits are separate from anti-abuse and Docker Hub
+      download, or pull rate limiting. To learn more about Docker Hub pull rate
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
+@z
+
+@x
+  - name: authentication
     x-displayName: Authentication
 @y
-  - name: Authentication
+  - name: authentication
     x-displayName: 認証
 @z
 
 @x
     description: |
-      Most Docker Hub API endpoints require you to authenticate using your Docker credentials.
-      
+      Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.
+
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
 @y
     description: |
       Docker Hub API のほとんどのエンドポイントでは、Docker 資格情報（credentials）を利用して認証されていることが必要になります。
-      
+
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
 @z
 
 @x
-  - name: Images
-    x-displayName: Advanced image management
+  - name: access-tokens
+    x-displayName: Personal Access Tokens
+    description: |
+      The Personal Access Token endpoints lets you manage personal access
+      tokens. For more information, see
+      [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
 @y
-  - name: Images
+  - name: access-tokens
+    x-displayName: Personal Access Tokens
+    description: |
+      The Personal Access Token endpoints lets you manage personal access
+      tokens. For more information, see
+      [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
+@z
+
+@x
+      You can use a personal access token instead of a password in the
+      [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or
+      in the [Create an authentication token](#operation/PostUsersLogin) route
+      to obtain a bearer token.
+@y
+      You can use a personal access token instead of a password in the
+      [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or
+      in the [Create an authentication token](#operation/PostUsersLogin) route
+      to obtain a bearer token.
+@z
+
+@x
+      ### Scopes
+@y
+      ### Scopes
+@z
+
+@x
+      For each scope grouping (in this case "repo"), you only need to define 1
+      scope as any lower scopes are assumed. For example: If you define
+      `repo:write`, the API assumes the scope of both `repo:read` *and*
+      `repo:public_read` as well. If you were to define both `repo:write` *and*
+      `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
+@y
+      For each scope grouping (in this case "repo"), you only need to define 1
+      scope as any lower scopes are assumed. For example: If you define
+      `repo:write`, the API assumes the scope of both `repo:read` *and*
+      `repo:public_read` as well. If you were to define both `repo:write` *and*
+      `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
+@z
+
+@x
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after
+      it is generated.***
+@y
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after
+      it is generated.***
+@z
+
+@x
+  - name: images
+    x-displayName: Advanced Image Management
+@y
+  - name: images
     x-displayName: 拡張イメージ管理
 @z
 
@@ -106,17 +218,41 @@ tags:
 @z
 
 @x
-  - name: Audit Logs
+  - name: audit-logs
     x-displayName: Audit Logs
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a namespace.
       For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
 @y
-  - name: Audit Logs
+  - name: audit-logs
     x-displayName: 監査ログ
     description: |
       監査ログ（Audit Logs）API エンドポイントを用いると、名前空間全体の監査ログイベントを検索することができます。
       詳しくは [監査ログ](__URL____BASEURL__/docker-hub/audit-log/) を参照してください。
+@z
+
+@x
+x-tagGroups:
+  - name: General
+    tags:
+      - rate-limiting
+  - name: API
+    tags:
+      - authentication
+      - access-tokens
+      - images
+      - audit-logs
+@y
+x-tagGroups:
+  - name: General
+    tags:
+      - rate-limiting
+  - name: API
+    tags:
+      - authentication
+      - access-tokens
+      - images
+      - audit-logs
 @z
 
 @x
@@ -126,12 +262,12 @@ definitions:
     type: object
     required: [username, password]
     properties:
-      username: 
+      username:
         description: The username of the Docker Hub account to authenticate with.
         type: string
         example: myusername
       password:
-        description: The password of the Docker Hub account to authenticate with.
+        description: The password or personal access token (PAT) of the Docker Hub account to authenticate with.
         type: string
         example: hunter2
 @y
@@ -141,12 +277,12 @@ definitions:
     type: object
     required: [username, password]
     properties:
-      username: 
+      username:
         description: 認証済 Docker Hub アカウントのユーザー名。
         type: string
         example: myusername
       password:
-        description: 認証済 Docker Hub アカウントのパスワード。
+        description: 認証に利用する Docker Hub アカウントのパスワードまたはパーソナルアクセストークン (PAT)。
         type: string
         example: hunter2
 @z
@@ -564,15 +700,15 @@ definitions:
     description: Delete images request.
     type: object
     properties:
-      dry_run: 
+      dry_run:
         description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images.
         type: boolean
         example: false
       active_from:
-        description: | 
-            Sets the time from which an image must have been pushed or pulled to be counted as active.
+        description: |
+          Sets the time from which an image must have been pushed or pulled to be counted as active.
 
-            Defaults to 1 month before the current time.
+          Defaults to 1 month before the current time.
         type: string
         example: '2020-12-01T12:00:00Z'
 @y
@@ -580,15 +716,15 @@ definitions:
     description: Delete images request.
     type: object
     properties:
-      dry_run: 
+      dry_run:
         description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images.
         type: boolean
         example: false
       active_from:
-        description: | 
-            Sets the time from which an image must have been pushed or pulled to be counted as active.
+        description: |
+          Sets the time from which an image must have been pushed or pulled to be counted as active.
 
-            Defaults to 1 month before the current time.
+          Defaults to 1 month before the current time.
         type: string
         example: '2020-12-01T12:00:00Z'
 @z
@@ -645,11 +781,11 @@ definitions:
 
 @x
           * is_active: warning when attempting to delete an image that is marked as active.
-          
+
           * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
 @y
           * is_active: warning when attempting to delete an image that is marked as active.
-          
+
           * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
 @z
 
@@ -815,7 +951,7 @@ definitions:
                           description: Name of the repository of the image that caused the error.
                           type: string
                           example: myrepo
-                        digest: 
+                        digest:
                           description: Digest of the image that caused the error.
                           type: string
                           example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
@@ -845,7 +981,7 @@ definitions:
                           description: Name of the repository of the image that caused the error.
                           type: string
                           example: myrepo
-                        digest: 
+                        digest:
                           description: Digest of the image that caused the error.
                           type: string
                           example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
@@ -1130,29 +1266,311 @@ definitions:
 @z
 
 @x
+  ValueError:
+    type: object
+    description: Used to error if input validation fails.
+    properties:
+      fields:
+        type: object
+        items:
+          type: string
+      text:
+        type: string
+@y
+  ValueError:
+    type: object
+    description: Used to error if input validation fails.
+    properties:
+      fields:
+        type: object
+        items:
+          type: string
+      text:
+        type: string
+@z
+
+@x
+  Error:
+    type: object
+    properties:
+      detail:
+        type: string
+      message:
+        type: string
+@y
+  Error:
+    type: object
+    properties:
+      detail:
+        type: string
+      message:
+        type: string
+@z
+
+@x
+  # Access Tokens
+  accessToken:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+      client_id:
+        type: string
+        example: HUB
+      creator_ip:
+        type: string
+        example: 127.0.0.1
+@y
+  # Access Tokens
+  accessToken:
+    type: object
+    properties:
+      uuid:
+        type: string
+        example: b30bbf97-506c-4ecd-aabc-842f3cb484fb
+      client_id:
+        type: string
+        example: HUB
+      creator_ip:
+        type: string
+        example: 127.0.0.1
+@z
+
+@x
+      creator_ua:
+        type: string
+        example: some user agent
+      created_at:
+        type: string
+        example: 2021-07-20T12:00:00.000000Z
+      last_used:
+        type: string
+        x-nullable: true
+        example: null
+@y
+      creator_ua:
+        type: string
+        example: some user agent
+      created_at:
+        type: string
+        example: 2021-07-20T12:00:00.000000Z
+      last_used:
+        type: string
+        x-nullable: true
+        example: null
+@z
+
+@x
+      generated_by:
+        type: string
+        example: manual
+      is_active:
+        type: boolean
+        example: true
+      token:
+        type: string
+        example: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+@y
+      generated_by:
+        type: string
+        example: manual
+      is_active:
+        type: boolean
+        example: true
+      token:
+        type: string
+        example: a7a5ef25-8889-43a0-8cc7-f2a94268e861
+@z
+
+@x
+      token_label:
+        type: string
+        example: My read only token
+      scopes:
+        type: array
+        example: ['repo:read']
+        items:
+          type: string
+@y
+      token_label:
+        type: string
+        example: My read only token
+      scopes:
+        type: array
+        example: ['repo:read']
+        items:
+          type: string
+@z
+
+@x
+  createAccessTokenRequest:
+    type: object
+    required:
+      - token_label
+      - scopes
+@y
+  createAccessTokenRequest:
+    type: object
+    required:
+      - token_label
+      - scopes
+@z
+
+@x
+    properties:
+      token_label:
+        type: string
+        description: Friendly name for you to identify the token.
+        example: My read only token
+      scopes:
+        type: array
+        description: 'Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"'
+        example: ['repo:read']
+        items:
+          type: string
+@y
+    properties:
+      token_label:
+        type: string
+        description: Friendly name for you to identify the token.
+        example: My read only token
+      scopes:
+        type: array
+        description: 'Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"'
+        example: ['repo:read']
+        items:
+          type: string
+@z
+
+@x
+  createAccessTokensResponse:
+    type: object
+    $ref: '#/definitions/accessToken'
+@y
+  createAccessTokensResponse:
+    type: object
+    $ref: '#/definitions/accessToken'
+@z
+
+@x
+  getAccessTokensResponse:
+    type: object
+    properties:
+      count:
+        type: number
+        example: 1
+      next:
+        type: string
+        example: null
+@y
+  getAccessTokensResponse:
+    type: object
+    properties:
+      count:
+        type: number
+        example: 1
+      next:
+        type: string
+        example: null
+@z
+
+@x
+      previous:
+        type: string
+        example: null
+      active_count:
+        type: number
+        example: 1
+@y
+      previous:
+        type: string
+        example: null
+      active_count:
+        type: number
+        example: 1
+@z
+
+@x
+      results:
+        type: array
+        items:
+          allOf:
+            - $ref: '#/definitions/accessToken'
+            - type: object
+              properties:
+                token:
+                  type: string
+                  example: ''
+@y
+      results:
+        type: array
+        items:
+          allOf:
+            - $ref: '#/definitions/accessToken'
+            - type: object
+              properties:
+                token:
+                  type: string
+                  example: ''
+@z
+
+@x
+  patchAccessTokenRequest:
+    type: object
+    properties:
+      token_label:
+        type: string
+        example: My read only token
+      is_active:
+        type: boolean
+        example: false
+@y
+  patchAccessTokenRequest:
+    type: object
+    properties:
+      token_label:
+        type: string
+        example: My read only token
+      is_active:
+        type: boolean
+        example: false
+@z
+
+@x
+  patchAccessTokenResponse:
+    type: object
+    $ref: '#/definitions/accessToken'
+@y
+  patchAccessTokenResponse:
+    type: object
+    $ref: '#/definitions/accessToken'
+@z
+
+@x
 paths:
   /v2/users/login:
     post:
-      tags: [Authentication]
-      summary: Create authentication token
+      tags: [authentication]
+      summary: Create an authentication token
       operationId: PostUsersLogin
       description: |
-        Creates an authentication token that can be used to authenticate with the Docker Hub APIs.
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
 
-        The returned token is used in the HTTP Authorization header like `Authorization: JWT {TOKEN}`.
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
 
         Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
 @y
 paths:
   /v2/users/login:
     post:
-      tags: [Authentication]
+      tags: [authentication]
       summary: 認証トークンの生成
       operationId: PostUsersLogin
       description: |
-        Docker Hub API の利用にあたっての認証を行うための認証トークンを生成します。
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
 
-        返されるトークンは、`Authorization: JWT {TOKEN}`のように HTTP 認証ヘッダーにおいて利用されます。
+        返されるトークンは、`Authorization: Bearer {TOKEN}`のように HTTP 認証ヘッダーにおいて利用されます。
 
         Docker Hub API のほとんどにおいて、このトークンは消費および詳細情報取得に利用されます。たとえばプライベートリポジトリ内のイメージ一覧を取得する際に利用されます。
 @z
@@ -1198,14 +1616,274 @@ paths:
 @z
 
 @x
+  /v2/access-tokens:
+    post:
+      summary: Create a personal access token
+      description: Creates and returns a personal access token.
+      tags: [access-tokens]
+@y
+  /v2/access-tokens:
+    post:
+      summary: Create a personal access token
+      description: Creates and returns a personal access token.
+      tags: [access-tokens]
+@z
+
+@x
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/createAccessTokenRequest'
+@y
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/createAccessTokenRequest'
+@z
+
+@x
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/createAccessTokensResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@y
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/createAccessTokensResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@z
+
+@x
+    get:
+      summary: Get a list of personal access tokens
+      description: Returns a paginated list of personal access tokens.
+      tags: [access-tokens]
+@y
+    get:
+      summary: Get a list of personal access tokens
+      description: Returns a paginated list of personal access tokens.
+      tags: [access-tokens]
+@z
+
+@x
+      parameters:
+        - in: query
+          name: page
+          type: number
+          default: 1
+        - in: query
+          name: page_size
+          type: number
+          default: 10
+@y
+      parameters:
+        - in: query
+          name: page
+          type: number
+          default: 1
+        - in: query
+          name: page_size
+          type: number
+          default: 10
+@z
+
+@x
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getAccessTokensResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@y
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getAccessTokensResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@z
+
+@x
+  /v2/access-tokens/{uuid}:
+    patch:
+      summary: Update a personal access token
+      description: |
+        Updates a personal access token partially. You can either update the
+        token's label or enable/disable it.
+      tags: [access-tokens]
+@y
+  /v2/access-tokens/{uuid}:
+    patch:
+      summary: Update a personal access token
+      description: |
+        Updates a personal access token partially. You can either update the
+        token's label or enable/disable it.
+      tags: [access-tokens]
+@z
+
+@x
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+        - in: body
+          name: request body
+          required: true
+          schema:
+            $ref: '#/definitions/patchAccessTokenRequest'
+@y
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+        - in: body
+          name: request body
+          required: true
+          schema:
+            $ref: '#/definitions/patchAccessTokenRequest'
+@z
+
+@x
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/patchAccessTokenResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@y
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/patchAccessTokenResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+@z
+
+@x
+    get:
+      summary: Get a personal access token
+      description: Returns a personal access token by UUID.
+      tags: [access-tokens]
+@y
+    get:
+      summary: Get a personal access token
+      description: Returns a personal access token by UUID.
+      tags: [access-tokens]
+@z
+
+@x
+      responses:
+        '200':
+          description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/accessToken'
+              - type: object
+                properties:
+                  token:
+                    type: string
+                    example: ''
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+@y
+      responses:
+        '200':
+          description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/accessToken'
+              - type: object
+                properties:
+                  token:
+                    type: string
+                    example: ''
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+@z
+
+@x
+    delete:
+      summary: Delete a personal access token
+      description: |
+        Deletes a personal access token permanently. This cannot be undone.
+      tags: [access-tokens]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+@y
+    delete:
+      summary: Delete a personal access token
+      description: |
+        Deletes a personal access token permanently. This cannot be undone.
+      tags: [access-tokens]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          type: string
+@z
+
+@x
+      responses:
+        '204':
+          description: A successful response.
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+@y
+      responses:
+        '204':
+          description: A successful response.
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+@z
+
+@x
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
-      tags: [Images]
+      tags: [images]
       summary: Get summary of repository's images
 @y
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
-      tags: [Images]
+      tags: [images]
       summary: リポジトリ内イメージの概要取得
 @z
 
@@ -1257,7 +1935,7 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: | 
+          description: |
             Sets the time from which an image must have been pushed or pulled to be counted as active.
 
             Defaults to 1 month before the current time.
@@ -1266,7 +1944,7 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: | 
+          description: |
             イメージをアクティブ状態としてカウントするのは、プッシュまたはプルされてからどれだけ経過したものであるのかを時間設定します。
 
             デフォルトは現在時刻から 1 ヵ月前。
@@ -1277,14 +1955,14 @@ paths:
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesSummaryResponse'
         401:
 @y
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesSummaryResponse'
         401:
 @z
@@ -1302,7 +1980,7 @@ paths:
 @x
   /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
-      tags: [Images]
+      tags: [images]
       summary: Get details of repository's images
       description: Gets details on the images in a repository.
       operationId: GetNamespacesRepositoriesImages
@@ -1311,7 +1989,7 @@ paths:
 @y
   /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
-      tags: [Images]
+      tags: [images]
       summary: リポジトリイメージの詳細取得
       description: 1 つのリポジトリ内にあるイメージの詳細情報を取得します。
       operationId: GetNamespacesRepositoriesImages
@@ -1370,7 +2048,7 @@ paths:
           in: query
           required: false
           type: boolean
-          description: | 
+          description: |
             Filters to only show images with:
             * `true`: at least 1 current tag.
             * `false`: no current tags.
@@ -1379,7 +2057,7 @@ paths:
           in: query
           required: false
           type: boolean
-          description: | 
+          description: |
             以下により表示イメージをフィルタリングします。
             * `true` は少なくともカレントなタグを 1 つ表示します。
             * `false` はカレントなタグを表示しません。
@@ -1411,7 +2089,7 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: | 
+          description: |
             Sets the time from which an image must have been pushed or pulled to be counted as active.
 
             Defaults to 1 month before the current time.
@@ -1420,7 +2098,7 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: | 
+          description: |
             イメージをアクティブ状態としてカウントするのは、プッシュまたはプルされてからどれだけ経過したものであるのかを時間設定します。
 
             デフォルトは現在時刻から 1 ヵ月前。
@@ -1459,13 +2137,13 @@ paths:
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
 @y
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
 @z
 
@@ -1492,7 +2170,7 @@ paths:
 @x
   /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
     get:
-      tags: [Images]
+      tags: [images]
       summary: Get image's tags
       description: Gets current and historical tags for an image.
       operationId: GetNamespacesRepositoriesImagesTags
@@ -1501,7 +2179,7 @@ paths:
 @y
   /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
     get:
-      tags: [Images]
+      tags: [images]
       summary: Get image's tags
       description: Gets current and historical tags for an image.
       operationId: GetNamespacesRepositoriesImagesTags
@@ -1569,13 +2247,13 @@ paths:
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesTagsResponse'
 @y
       responses:
         200:
           description: Success
-          schema: 
+          schema:
             $ref: '#/definitions/GetNamespaceRepositoryImagesTagsResponse'
 @z
 
@@ -1606,13 +2284,13 @@ paths:
 @x
   /v2/namespaces/{namespace}/delete-images:
     post:
-      tags: [Images]
+      tags: [images]
       summary: Delete images
       operationId: PostNamespacesDeleteImages
 @y
   /v2/namespaces/{namespace}/delete-images:
     post:
-      tags: [Images]
+      tags: [images]
       summary: イメージの削除
       operationId: PostNamespacesDeleteImages
 @z
@@ -1916,11 +2594,9 @@ paths:
 @z
 
 @x
-      tags:
-        - "Audit Logs"
+      tags: [audit-logs]
 @y
-      tags:
-        - "Audit Logs"
+      tags: [audit-logs]
 @z
 
 @x
@@ -2092,8 +2768,7 @@ paths:
           in: path
           required: true
           type: string
-      tags:
-        - "Audit Logs"
+      tags: [audit-logs]
 @y
       parameters:
         - name: account
@@ -2101,6 +2776,35 @@ paths:
           in: path
           required: true
           type: string
-      tags:
-        - "Audit Logs"
+      tags: [audit-logs]
+@z
+
+@x
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: '#/definitions/ValueError'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/Error'
+  NotFound:
+    description: Not Found
+    schema:
+      $ref: '#/definitions/Error'
+@y
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: '#/definitions/ValueError'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/Error'
+  NotFound:
+    description: Not Found
+    schema:
+      $ref: '#/definitions/Error'
 @z

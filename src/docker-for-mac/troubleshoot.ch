@@ -22,10 +22,15 @@ toc_max: 2
 @z
 
 @x
-> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
+{% include upgrade-cta.html
+  body="Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Upgrade your existing plan to benefit from Docker Support. Click [here](#support) to learn more."
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
+%}
 @y
-> Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？
-> 詳しくは [こちら](#support) を参照してください。
+{% include upgrade-cta.html
+  body="Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？ Docker サポートを得るには既存プランを更新してください。詳しくは [こちら](#support) を参照のこと。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
+%}
 @z
 
 @x
@@ -781,15 +786,23 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @z
 
 @x
-Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 @y
-Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 @z
 
 @x
-This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
+{% include upgrade-cta.html
+  body="Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Upgrade your existing plan to benefit from Docker Support."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
+%}
 @y
-This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
+{% include upgrade-cta.html
+  body="Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Upgrade your existing plan to benefit from Docker Support."
+  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
+%}
 @z
 
 @x

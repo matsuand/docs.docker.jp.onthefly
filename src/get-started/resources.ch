@@ -30,24 +30,22 @@ Docker や Kubernetes に対する理解をより深めるために、有償、�
 @z
 
 @x
-These self-paced and hands-on workshops use free, hosted environments ([Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"} and [Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that do not require anything to be installed. Follow along and learn more about Docker and Kubernetes.
+These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that does not require any installation. Follow along and learn more about Kubernetes.
 @y
-以下の自己学習型、かつ実践体験型のワークショップでは、無償のホスト環境（[Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"} と [Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}）を提供しており、何もインストールせずに利用することができます。
-Docker や Kubernetes についての詳細は、以下をご覧ください。
+以下の自己学習型、かつ実践体験型のワークショップでは、無償のホスト環境（[Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}）を提供しており、何もインストールせずに利用することができます。
+Kubernetes についての詳細は、以下をご覧ください。
 @z
 
 @x
 * [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/){:target="_blank" rel="noopener" class="_"}
-* [Microservice containerization and orchestration](https://training.play-with-docker.com/microservice-orchestration/){:target="_blank" rel="noopener" class="_"}
 @y
 * [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/){:target="_blank" rel="noopener" class="_"}
-* [Microservice containerization and orchestration](https://training.play-with-docker.com/microservice-orchestration/){:target="_blank" rel="noopener" class="_"}
 @z
 
 @x
-\* Labs are free but require registration with a Docker ID.
+* Labs are free but require registration with a Docker ID.
 @y
-\* ラボ（Lab）は無償利用できますが、Docker ID を使った登録が必要です。
+* ラボ（Lab）は無償利用できますが、Docker ID を使った登録が必要です。
 @z
 
 @x

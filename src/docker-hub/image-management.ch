@@ -16,12 +16,17 @@ title: 拡張イメージ管理ダッシュボード
 @z
 
 @x
-> Docker Pro and Team users can now use Docker Hub's new **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing subscription to start using the Advanced Image Management dashboard.
+{% include upgrade-cta.html
+  body="Docker Pro and Team users can now use Docker Hub's new **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade your existing plan to start using the Advanced Image Management dashboard."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
+%}
 @y
-> Docker のプロユーザーおよびチームユーザーは、Docker Hub の新機能、**拡張イメージ管理**（Advanced Image Management）ダッシュボードが利用できるようになりました。
-ダッシュボードを使えば、これまでにないイメージアクセスが可能になります。
-そして古いデータをきめ細かく整理したり、プッシュされたイメージの旧バージョンを確認したりすることができます。
-拡張イメージ管理ダッシュボードを利用するために、既存のサブスクリプションを [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} してください。
+{% include upgrade-cta.html
+  body="Docker の Pro ユーザーおよび Team ユーザーは、Docker Hub の新機能、**拡張イメージ管理**（Advanced Image Management）ダッシュボードが利用できるようになりました。ダッシュボードを使えば、これまでにないイメージアクセスが可能になります。そして古いデータをきめ細かく整理したり、プッシュされたイメージの旧バージョンを確認したりすることができます。拡張イメージ管理ダッシュボードを利用するために、既存のサブスクリプションをアップグレードしてください。"
+  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
+%}
 @z
 
 @x

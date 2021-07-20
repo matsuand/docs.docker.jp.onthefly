@@ -11,58 +11,72 @@ title: Audit log
 ---
 description: Audit log
 keywords: Team, organization, activity, log, audit, activities
-title: Audit log
+title: 監査ログ
 ---
 @z
 
 @x
-> The Audit log feature is available for users subscribed to a Team plan. [Upgrade](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} your existing account to a Team account to start using the Audit log feature.
+{% include upgrade-cta.html
+  body="The Audit log feature is available for organizations subscribed to a Team plan. Upgrade your existing plan to start tracking events across your organization."
+  header-text="This feature requires a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
+%}
 @y
-> The Audit log feature is available for users subscribed to a Team plan. [Upgrade](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} your existing account to a Team account to start using the Audit log feature.
+{% include upgrade-cta.html
+  body="監査ログ機能は、Team プランを購入している組織（organization）において利用可能です。既存のプランをアップグレードして、組織全体にわたるイベント追跡を始めてください。"
+  header-text="この機能を利用するには Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
+%}
 @z
 
 @x
 Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the Audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 @y
-Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the Audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+監査ログ (audit log) は、組織やリポジトリレベルで発生するアクティビティーを時系列で一覧表示するものです。
+この機能では、Docker Team アカウントの所有者すべてに対して、チームメンバーのアクティビティーを報告します。
+これによってチーム所有者は、実施された変更、その日付、その変更の開始者を確認して追跡することができます。
+たとえば監査ログには、リポジトリが生成、削除された日、リポジトリを生成したチームメンバー、リポジトリ名、固有設定がいつ変更されたか、といったアクティビティーが表示されます。
 @z
 
 @x
 Team owners can also see the Audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
 @y
-Team owners can also see the Audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
+Docker の Team プランを購入している組織のリポジトリに対しては、チーム所有者もそのリポジトリの監査ログを参照することができます。
 @z
 
 @x
 ## View the Audit log
 @y
-## View the Audit log
+{: #view-the-audit-log }
+## 監査ログの参照
 @z
 
 @x
 To view the Audit log:
 @y
-To view the Audit log:
+監査ログを参照するには以下を行います。
 @z
 
 @x
 1. Sign into an owner account for the organization in Docker Hub.
 2. Select your organization from the list and then click on the **Activity** tab.
 @y
-1. Sign into an owner account for the organization in Docker Hub.
-2. Select your organization from the list and then click on the **Activity** tab.
+1. Docker Hub において、対象組織の所有者アカウントによりサインインします。
+2. 一覧から対象組織を選択して、**Activity** タブをクリックします。
 @z
 
 @x
     ![Organization activity tab](images/org-activity-tab.png){:width="700px"}
 @y
-    ![Organization activity tab](images/org-activity-tab.png){:width="700px"}
+    ![組織の Activity タブ](images/org-activity-tab.png){:width="700px"}
 @z
 
 @x
 The Audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
 @y
-The Audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
+監査ログは、この機能が実現された日からのアクティビティーを追跡しています。
+その日とは **2021 年 1 月 25 日** です。
+この日付よりも前に発生したアクティビティーは記録されません。
 @z
 
 @x
@@ -70,27 +84,30 @@ The Audit log begins tracking activities from the date the feature is live, that
 >
 > Docker will retain the Audit log activity data for a period of three months.
 @y
-> **Note**
+> **メモ**
 >
-> Docker will retain the Audit log activity data for a period of three months.
+> Docker では監査ログアクティビティーデータを 3 ヵ月間保持します。
 @z
 
 @x
 ## Customize the Audit log
 @y
-## Customize the Audit log
+{: #customize-the-audit-log }
+## 監査ログのカスタマイズ
 @z
 
 @x
 By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the Audit log of all the activities that occurred during that period.
 @y
-By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the Audit log of all the activities that occurred during that period.
+組織やリポジトリレベルで発生するアクティビティーは、デフォルトですべて **Activity** タブに表示されます。
+カレンダーオプションを使って日付範囲を選べば、表示結果をカスタマイズすることができます。
+日付範囲を選択した後は、その範囲内に発生したアクティビティーに対する監査ログが **Activity** タブに表示されます。
 @z
 
 @x
 ![Activities list](images/activity-list.png){:width="600px"}
 @y
-![Activities list](images/activity-list.png){:width="600px"}
+![アクティビティー一覧](images/activity-list.png){:width="600px"}
 @z
 
 @x
@@ -104,9 +121,9 @@ By default, all activities that occur at organization and repository levels are 
 >
 > Activities created by the Docker Support team as part of resolving customer issues appear in the Audit log as **dockersupport**.
 @y
-> **Note**
+> **メモ**
 >
-> Activities created by the Docker Support team as part of resolving customer issues appear in the Audit log as **dockersupport**.
+> 利用者において発生した問題を Docker サポートが解決した場合、生成されるアクティビティーには、監査ログ内に **dockersupport** として示されます。
 @z
 
 @x
@@ -118,7 +135,9 @@ By default, all activities that occur at organization and repository levels are 
 @x
 Click the **All Activities** drop-down list to view activities that are specific to an organization or a repository. After choosing **Organization** or **Repository**, you can further refine the results using the **All Actions** drop-down list. If you select the **Activities** tab from the **Repository** view, you can only filter repository-level activities.
 @y
-Click the **All Activities** drop-down list to view activities that are specific to an organization or a repository. After choosing **Organization** or **Repository**, you can further refine the results using the **All Actions** drop-down list. If you select the **Activities** tab from the **Repository** view, you can only filter repository-level activities.
+ドロップダウンリストの中から **All Activities**（全アクティビティー）を選べば、組織やリポジトリに対するアクティビティーを一覧表示することができます。
+この後に **Organization**（組織）または **Repository**（リポジトリ）を選び、**All Actions** ドロップダウンリストを使って、表示結果を詳細に見ることができます。
+**Repository** 画面から **Activities** タブを選んだ場合は、リポジトリレベルのアクティビティーのみを見ることができます。
 @z
 
 @x
@@ -130,19 +149,21 @@ Click the **All Activities** drop-down list to view activities that are specific
 @x
 ## Audit log event definitions
 @y
-## Audit log event definitions
+{: #audit-log-event-definitions }
+## 監査ログのイベント定義
 @z
 
 @x
 Refer to the following section for a list of events and their descriptions:
 @y
-Refer to the following section for a list of events and their descriptions:
+以下の節におけるイベントとその説明の一覧を参照してください。
 @z
 
 @x
 ### Organization events
 @y
-### Organization events
+{: #organization-events }
+### 組織 (organization) イベント
 @z
 
 @x
@@ -156,21 +177,22 @@ Refer to the following section for a list of events and their descriptions:
 | Organization Member Removed | Details about member removed from your organization |
 |  Organization Created| Activities related to the creation of a new organization |
 @y
-| Event                                                          | Description                                   |
+| イベント                                                          | 内容説明                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
-| Team Created | Activities related to the creation of a team     |
-| Team Deleted | Activities related to the deletion of a team |
-| Team Member Added | Details of the member added to your team |
-| Team Member Removed | Details of the member removed from your team |
-| Team Member Invited | Details of the member invited to your team |
-| Organization Member Removed | Details about member removed from your organization |
-|  Organization Created| Activities related to the creation of a new organization |
+| Team Created<br/>チーム生成 | チーム生成に関するアクティビティー。     |
+| Team Deleted<br/>チーム削除 | チーム削除に関するアクティビティー。 |
+| Team Member Added<br/>チームメンバー追加 | チームへのメンバー追加に関する詳細。 |
+| Team Member Removed<br/>チームメンバー削除 | チームからのメンバー削除に関する詳細。|
+| Team Member Invited<br/>チームメンバー招待 | チームに招待されたメンバーに関する詳細。|
+| Organization Member Removed<br/>組織メンバー削除 | 組織から削除されたメンバーに関する詳細。|
+|  Organization Created<br/>組織生成 | 組織生成に関するアクティビティー。|
 @z
 
 @x
 ### Repository events
 @y
-### Repository events
+{: #repository-events }
+### リポジトリイベント
 @z
 
 @x
@@ -182,11 +204,11 @@ Refer to the following section for a list of events and their descriptions:
 | Tag Pushed | Activities related to the tags pushed |
 | Tag Deleted | Activities related to the tags deleted |
 @y
-| Event                                                          | Description                                   |
+| イベント                                                          | 内容説明                                        |
 |:------------------------------------------------------------------|:------------------------------------------------|
-| Repository Created | Activities related to the creation of a new repository |
-| Repository Deleted | Activities related to the deletion of a repository |
-| Privacy Changed | Details related to the privacy policies that were updated |
-| Tag Pushed | Activities related to the tags pushed |
-| Tag Deleted | Activities related to the tags deleted |
+| Repository Created<br/>リポジトリ生成 | 新たなリポジトリ生成に関するアクティビティー。     |
+| Repository Deleted<br/>リポジトリ削除 | リポジトリ削除に関するアクティビティー。           |
+| Privacy Changed<br/>プライバシー変更 | 更新されたプライバシーポリシーに関する詳細。        |
+| Tag Pushed<br/>タグプッシュ | タグプッシュに関するアクティビティー。                       |
+| Tag Deleted<br/>タグ削除 | タグ削除に関するアクティビティー。                              |
 @z

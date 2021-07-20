@@ -28,6 +28,20 @@ title: 自動ビルドの設定
 @z
 
 @x
+{% include upgrade-cta.html
+  body="The Automated Builds feature is available on Pro and Team plans. Upgrade your existing plan to start automatically building and pushing your images today."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+%}
+@y
+{% include upgrade-cta.html
+  body="自動ビルド機能は Pro プランまたは Team プランにおいて利用可能です。既存のプランをアップデートして、最新のイメージビルドおよびプッシュの自動化を始めてください。"
+  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+%}
+@z
+
+@x
 ## How Automated Builds work
 @y
 {: #how-automated-builds-work }
@@ -45,15 +59,11 @@ Docker Hub においては、外部リポジトリ内のソースコードから
 @x
 > **Note**
 >
-> The Automated Builds feature is available for Pro or Team plans only. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} 
-> your existing account to a Pro or a Team plan to start using Automated Builds.
-If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} program to learn how Docker can support your project on Docker Hub.
+> If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} program to learn how Docker can support your project on Docker Hub.
 @y
 > **メモ**
 >
-> 自動ビルド機能が利用できるのは Pro プランおよび Team プランのみです。
-> 自動ビルドを始めるには、現在のアカウントを Pro プランや Team プランに [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} してください。
-> この自動ビルド機能をオープンソースプロジェクトに利用している場合は、私たちの [オープンソースコミュニティ](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} プログラムに参加していただき、Docker Hub 上にて Docker がどのようにプロジェクトをサポートするのかを学んでください。
+> 自動ビルド機能をオープンソースプロジェクトに利用している場合は、私たちの [オープンソースコミュニティ](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} プログラムに参加していただき、Docker Hub 上にて Docker がどのようにプロジェクトをサポートするのかを学んでください。
 @z
 
 @x

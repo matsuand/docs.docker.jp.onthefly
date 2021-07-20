@@ -23,6 +23,7 @@ images = \
 	dashboard-delete-image.png     \
 	hub-copy-token.png             \
 	hub-create-token.png           \
+	hub-delete-edit-token.png      \
 	hub-edit-token.png             \
 	image-management-dashboard.png \
 	index-create-repo.png          \
