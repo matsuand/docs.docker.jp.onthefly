@@ -409,13 +409,13 @@ We’ll copy the `go.mod` and `go.sum` file into our working directory `/app` wh
 
 @x
 ```dockerfile
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 ```
 @y
 ```dockerfile
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 ```
 @z
 
@@ -449,11 +449,11 @@ The next thing we need to do is to copy our source code into the image. We’ll 
 
 @x
 ```dockerfile
-COPY *.go .
+COPY *.go ./
 ```
 @y
 ```dockerfile
-COPY *.go .
+COPY *.go ./
 ```
 @z
 
@@ -528,19 +528,19 @@ WORKDIR /app
 @z
 
 @x
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @y
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @z
 
 @x
-COPY *.go .
+COPY *.go ./
 @y
-COPY *.go .
+COPY *.go ./
 @z
 
 @x
@@ -589,13 +589,13 @@ WORKDIR /app
 
 @x
 # Download necessary Go modules
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @y
 # Download necessary Go modules
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @z
 
@@ -934,19 +934,19 @@ WORKDIR /app
 @z
 
 @x
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @y
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 @z
 
 @x
-COPY *.go .
+COPY *.go ./
 @y
-COPY *.go .
+COPY *.go ./
 @z
 
 @x

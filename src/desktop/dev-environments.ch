@@ -105,6 +105,38 @@ Click **Install** to download and install any missing tools.
 @z
 
 @x
+### Add Git to your PATH on Windows
+@y
+{: #add-git-to-your-path-on-windows }
+### Windows での Git のパス追加
+@z
+
+@x
+If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+@y
+すでに Git のインストールを行ったにもかかわらず、Git が正しく認識できていない場合は、以下のコマンドを実行して、CLI または PowerShell から Git が利用できるかどうかを確認してください。
+@z
+
+@x
+`$ git --version`
+@y
+`$ git --version`
+@z
+
+@x
+If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
+@y
+適正なコマンドとして Git が認識されない場合、Git の再インストールが必要です。
+そして **Adjusting your PATH environment** の手順において、**Git from the command line...** または **Use Git and optional Unix tools...** を選択してください。
+@z
+
+@x
+![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
+@y
+![Windows 上での Git のパス追加](/images/dev-env-gitbash.png){:width="300px"}
+@z
+
+@x
 ## Start a single container Dev Environment
 @y
 {: #start-a-single-container-dev-environment }
@@ -121,12 +153,12 @@ Dev 環境を利用する一番簡単な方法は、作業プロジェクトの 
 @x
 > **Note**
 >
-> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 @y
 > **メモ**
 >
 > SSH を経由して Git リポジトリをクローンする場合は、ssh-agent に対して SSH 鍵を追加しておくのを忘れないでください。
-> これを行うには、ターミナルを開いて`ssh-add <公開鍵へのパス>`を実行します。
+> これを行うには、ターミナルを開いて`ssh-add <秘密鍵へのパス>`を実行します。
 @z
 
 @x

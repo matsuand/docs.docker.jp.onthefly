@@ -118,7 +118,7 @@ curl: (7) Failed to connect to localhost port 8000: Connection refused
 @z
 
 @x
-Our curl command failed because the connection to our server was refused. Meaning that we were not able to connect to localhost on port 8000. This is expected because our container is run in isolation which includes networking. Let’s stop the container and restart with port 8000 published on our local network.
+Our curl command failed because the connection to our server was refused. It means that we were not able to connect to localhost on port 8000. This is expected because our container is running in isolation which includes networking. Let’s stop the container and restart with port 8000 published on our local network.
 @y
 上の curl コマンドは、サーバーへの接続が拒否されたために失敗しました。
 localhost のポート 8000 には接続できなかったということです。
