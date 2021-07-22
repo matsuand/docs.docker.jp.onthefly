@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-07-22 14:23:35 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Go image | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Build your Go image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-22T14:23:35+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-22T14:23:35+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Build your Go image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/golang/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -104,12 +104,12 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section"><h1>Build your Go image</h1><p><em class="reading-time">読む時間の目安: 17 分</em></p><ul class="pagination">
-  <li class="active"><a href="/language/golang/build-images/">Build images</a></li>
-  <li><a href="/language/golang/run-containers/">Run your image as a container</a></li>
-  <li><a href="/language/golang/develop/">Use containers for development</a></li>
-  <li><a href="/language/golang/run-tests/">Run your tests</a></li>
-  <li><a href="/language/golang/configure-ci-cd/">Configure CI/CD</a></li>
-  <li><a href="/language/golang/deploy/">Deploy your app</a></li>
+  <li class="active"><a href="/docs.docker.jp.onthefly/language/golang/build-images/">イメージのビルド</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/golang/run-containers/">コンテナーとしてイメージ実行</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/golang/develop/">コンテナーの開発利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/golang/run-tests/">テストの実行</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/golang/configure-ci-cd/">CI/CD の設定</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/golang/deploy/">アプリのデプロイ</a></li>
 </ul>
 
 <h2 id="prerequisites">Prerequisites</h2>
@@ -256,8 +256,8 @@ Hello, Docker! &lt;3
 
 <p>We’ll copy the <code class="language-plaintext highlighter-rouge">go.mod</code> and <code class="language-plaintext highlighter-rouge">go.sum</code> file into our working directory <code class="language-plaintext highlighter-rouge">/app</code> which, owing to our use of <code class="language-plaintext highlighter-rouge">WORKDIR</code>, is the current directory (<code class="language-plaintext highlighter-rouge">.</code>) inside the image.</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> go.mod .</span>
-<span class="k">COPY</span><span class="s"> go.sum .</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> go.mod ./</span>
+<span class="k">COPY</span><span class="s"> go.sum ./</span>
 </code></pre></div></div>
 
 <p>Now that we have the module files inside the Docker image that we are building, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">go mod download</code> there as well. This works exactly the same as if we were running <code class="language-plaintext highlighter-rouge">go</code> locally on our machine, but this time these Go modules will be installed into the a directory inside our image.</p>
@@ -269,7 +269,7 @@ Hello, Docker! &lt;3
 
 <p>The next thing we need to do is to copy our source code into the image. We’ll use the <code class="language-plaintext highlighter-rouge">COPY</code> command just like we did with our module files before.</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> *.go .</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> *.go ./</span>
 </code></pre></div></div>
 
 <p>This <code class="language-plaintext highlighter-rouge">COPY</code> command uses a wildcard to copy all files with <code class="language-plaintext highlighter-rouge">.go</code> extension located in the current directory on the host (the directory where the <code class="language-plaintext highlighter-rouge">Dockerfile</code> is located) into the current directory inside the image.</p>
@@ -294,11 +294,11 @@ Hello, Docker! &lt;3
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
-<span class="k">COPY</span><span class="s"> go.mod .</span>
-<span class="k">COPY</span><span class="s"> go.sum .</span>
+<span class="k">COPY</span><span class="s"> go.mod ./</span>
+<span class="k">COPY</span><span class="s"> go.sum ./</span>
 <span class="k">RUN </span>go mod download
 
-<span class="k">COPY</span><span class="s"> *.go .</span>
+<span class="k">COPY</span><span class="s"> *.go ./</span>
 
 <span class="k">RUN </span>go build <span class="nt">-o</span> /docker-gs-ping
 
@@ -316,8 +316,8 @@ Hello, Docker! &lt;3
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
 <span class="c"># Download necessary Go modules</span>
-<span class="k">COPY</span><span class="s"> go.mod .</span>
-<span class="k">COPY</span><span class="s"> go.sum .</span>
+<span class="k">COPY</span><span class="s"> go.mod ./</span>
+<span class="k">COPY</span><span class="s"> go.sum ./</span>
 <span class="k">RUN </span>go mod download
 
 <span class="c"># ... the rest of the Dockerfile is ...</span>
@@ -437,11 +437,11 @@ postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
-<span class="k">COPY</span><span class="s"> go.mod .</span>
-<span class="k">COPY</span><span class="s"> go.sum .</span>
+<span class="k">COPY</span><span class="s"> go.mod ./</span>
+<span class="k">COPY</span><span class="s"> go.sum ./</span>
 <span class="k">RUN </span>go mod download
 
-<span class="k">COPY</span><span class="s"> *.go .</span>
+<span class="k">COPY</span><span class="s"> *.go ./</span>
 
 <span class="k">RUN </span>go build <span class="nt">-o</span> /docker-gs-ping
 
