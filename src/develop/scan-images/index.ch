@@ -16,13 +16,17 @@ keywords: docker scan, scan, images, snyk, vulnerability
 @z
 
 @x
-> Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv){:target="_blank" rel="noopener" class="_"} to activate your free monthly scans. Not a Docker subscriber? Learn more about scanning on the [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan){:target="_blank" rel="noopener" class="_"} page.
+{% include upgrade-cta.html
+  body="Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv) to activate your free monthly scans. Upgrade your existing plan to start scanning your images for vulnerabilities."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
 @y
-> Docker プランの購入者であれば、購入機能の一部として Snyk によるぜい弱性スキャンを 200 回行うことができます。
-> ご存じでしたか？
-> [こちら](https://snyk.co/udvnv){:target="_blank" rel="noopener" class="_"} をクリックすれば、無償の月次スキャンを有効にすることができます。
-> Docker プランは購入していませんか？
-> [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan){:target="_blank" rel="noopener" class="_"} にアクセスして、スキャンの詳細を確認してください。
+{% include upgrade-cta.html
+  body="Docker プランの購入者であれば、購入機能の一部として Snyk によるぜい弱性スキャンを 200 回行うことができます。ご存じでしたか？ [こちら](https://snyk.co/udvnv) をクリックすれば、無償の月次スキャンを有効にすることができます。既存のプランをアップグレードして、イメージに対するぜい弱性スキャンを始めてください。"
+  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
 @z
 
 @x
