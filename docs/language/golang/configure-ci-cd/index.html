@@ -1,7 +1,7 @@
-<!-- Page generated 2021-07-22 14:23:35 +0900-->
+<!-- Page generated 2021-07-24 18:28:44 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure CI/CD for your application | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アプリケーションにおける CI/CD 設定 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to set up CI/CD pipeline for your application." />
   <meta name="keywords" content="ci, cd, ci/cd, continuous integration, continuous deployment, deployment, github, github actions, go, golang, development">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/golang/configure-ci-cd/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Configure CI/CD for your application"/>
+  <meta name="twitter:title" itemprop="title name" content="アプリケーションにおける CI/CD 設定"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Configure CI/CD for your application" />
+  <meta property="og:title" content="アプリケーションにおける CI/CD 設定" />
   <meta property="og:description" content="Learn how to set up CI/CD pipeline for your application." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-22T14:23:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-24T18:28:44+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-22T14:23:35+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Configure CI/CD for your application","description":"Learn how to set up CI/CD pipeline for your application.","url":"https://docs.docker.com/language/golang/configure-ci-cd/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-24T18:28:44+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"アプリケーションにおける CI/CD 設定","description":"Learn how to set up CI/CD pipeline for your application.","url":"https://docs.docker.com/language/golang/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Configure CI/CD for your application</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><ul class="pagination">
+                        <section class="section"><h1>アプリケーションにおける CI/CD 設定</h1><p><em class="reading-time">読む時間の目安: 13 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/golang/build-images/">イメージのビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/golang/run-containers/">コンテナーとしてイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/golang/develop/">コンテナーの開発利用</a></li>
@@ -112,24 +112,26 @@
   <li><a href="/docs.docker.jp.onthefly/language/golang/deploy/">アプリのデプロイ</a></li>
 </ul>
 
-<p>This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at <a href="https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/" target="_blank" rel="noopener" class="_">Ben’s blog</a> on CI/CD best practices.</p>
+<p>本ページでは Docker コンテナーを利用した GitHub アクションの CI/CD パイプライン（pipeline）の設定について説明します。
+新たなパイプラインを設定する前に、CI/CD のベストプラクティスとして <a href="https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/" target="_blank" rel="noopener" class="_">Ben のブログ</a> を読んでおくことをお勧めします。</p>
 
-<p>This guide contains instructions on how to:</p>
+<p>本ガイドでは以下の手順を説明します。</p>
 
 <ol>
-  <li>Set up continuous integration (CI) pipeline using GitHub Actions;</li>
-  <li>Enable Docker Hub access for continuous deployment (CD) tools;</li>
-  <li>Optimize your GitHub Actions-based CI/CD pipeline to reduce the number of pull requests and the total build time; and</li>
-  <li>Release only specific versions of your application to Docker Hub.</li>
+  <li>GitHub アクションを使って継続的インテグレーション (CI) のパイプラインを設定します。</li>
+  <li>継続的デプロイメント (CD) ツールに対して Docker Hub からのアクセスを有効にします。</li>
+  <li>GitHub アクションベースの CI/CD パイプラインを最適化して、プルリクエスト数と総ビルド時間を減らします。</li>
+  <li>指定したアプリケーションバージョンのみを Docker Hub にリリースします。</li>
 </ol>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>Before we begin, it must be said that Continuous Integration (CI) and Continuous Deployment (CD) each is a <em>huge</em> subject, with many different approaches and opinions. The approach chosen in this guide is optimised for pedagogical clarity and simplicity and is not meant to be the One True Way to test and release software.</p>
+  <p>話を進めるにあたり、継続的インテグレーション (CI) や継続的デプロイメント (CD) には、さまざまなアプローチや考え方がある、非常に「大きな」テーマであることをここで述べておきます。
+本ガイドで進めるアプローチは、説明をわかりやすく単純にするために最適化したものであって、ソフトウェアのテストやリリースを行う際に、これが唯一の方法であると主張するものではありません。</p>
 </blockquote>
 
-<h2 id="choose-a-sample-project">Choose a sample project</h2>
+<h2 id="choose-a-sample-project">サンプルプロジェクトの選定</h2>
 
 <p>Let’s get started. This guide uses a simple Go project as an example. In fact, it is the same project we got acquainted with in <a href="/docs.docker.jp.onthefly/language/golang/build-images/">Build Images</a> part of this guide. The <a href="https://github.com/olliefr/docker-gs-ping" target="_blank" rel="noopener" class="_">olliefr/docker-gs-ping</a> repository contains the full source code and the <code class="language-plaintext highlighter-rouge">Dockerfile</code>. You can either fork it or to follow along and set up one of your own Go projects in a fashion described in this section.</p>
 
@@ -139,19 +141,20 @@
 
 <p>In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any GitHub Actions workflow. But before setting out to build the images for releasing our software, let’s build a CI pipeline to run the tests first.</p>
 
-<p>To set up the workflow:</p>
+<p>ワークフローは以下のようにして設定します。</p>
 
 <ol>
-  <li>Go to your repository in GitHub and then click <strong>Actions</strong> &gt; <strong>New workflow</strong>.</li>
-  <li>Click <strong>set up a workflow yourself</strong> and update the starter template to match the following:</li>
+  <li>自分の GitHub リポジトリにアクセスして <strong>Actions</strong> &gt; <strong>New workflow</strong> をクリックします。</li>
+  <li><strong>set up a workflow yourself</strong>（ワークフローの独自設定）をクリックして、スターターテンプレートを以下に合致するように更新します。</li>
 </ol>
 
-<p>First, we will name this workflow:</p>
+<p>まずはこのワークフローを以下のように命名します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Run CI</span>
 </code></pre></div></div>
 
-<p>Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:</p>
+<p>そしてこのワークフローをいつ動作させるかを選びます。
+本例では、プロジェクトの main ブランチに対してプッシュが行われるたびに動作させるものとします。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
   <span class="na">push</span><span class="pi">:</span>
@@ -210,7 +213,7 @@
         <span class="na">run</span><span class="pi">:</span>  <span class="s">go test -v ./...</span>
 </code></pre></div></div>
 
-<p>As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project’s repo, under the name of <code class="language-plaintext highlighter-rouge">.github/workflow/ci.yml</code>.</p>
+<p>As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project’s repo, under the name of <code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code>.</p>
 
 <p>This should be enough to test our approach to CI. Change the workflow file name from <code class="language-plaintext highlighter-rouge">main.yml</code> to <code class="language-plaintext highlighter-rouge">ci.yml</code> and press <strong>Start commit</strong> button. Fill out the commit details in your preferred style and press <strong>Commit new file</strong>. GitHub Actions are saved as YAML files in <code class="language-plaintext highlighter-rouge">.github/workflows</code> directory and GitHub web interface would do that for us.</p>
 
@@ -438,19 +441,23 @@ docker.io/olliefr/docker-gs-ping:latest
 
 <p>GitHub Actions are an immensely powerful way to automate your CI and CD pipelines, and <a href="https://docs.github.com/en/actions">there is a lot of documentation</a> to aid you in that mission. It is not, however, the <em>only</em> way to integrate containers into your workflow. The aim of this section was to show you some of the basic things that are possible. There is a multitude of CI and CD tools on the market and you are very welcome to investigate what integration with the container ecosystem they provide. Well defined, automated CI pipelines can save you and your team a lot of effort.</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
-<p>In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.</p>
+<p>本節では、既存の Docker 化された Go 言語プロジェクトに対しての GitHub アクションワークフローの設定方法を学びました。
+次にワークフローを最適化して、ビルド時間の改善とプルリクエスト数の削減を行いました。
+そして特定のバージョンのみを Docker Hub にプッシュするようにしました。</p>
 
-<p>You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.</p>
+<p>そこでこのアプリケーションを、Azure や AWS のような公開クラウドプロバイダーにデプロイすることにしましょう。</p>
 
 <p>In the next module, we’ll look into some options for doing so:</p>
 
-<p><a href="/docs.docker.jp.onthefly/language/golang/deploy/" class="button outline-btn">Deploy to the Cloud</a></p>
+<p><a href="/docs.docker.jp.onthefly/language/golang/deploy/" class="button outline-btn">クラウドへのデプロイ</a></p>
 
-<h2 id="feedback">Feedback</h2>
+<h2 id="feedback">フィードバック</h2>
 
-<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs </a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+<p>本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば <a href="https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> の GitHub リポジトリに issue をあげてください。
+あるいは <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">PR の生成</a> により変更の提案を行ってください。</p>
 
 <p><br /></p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=ci">ci</a>, <a href="/docs.docker.jp.onthefly/search/?q=cd">cd</a>, <a href="/docs.docker.jp.onthefly/search/?q=ci/cd">ci/cd</a>, <a href="/docs.docker.jp.onthefly/search/?q=continuous integration">continuous integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=continuous deployment">continuous deployment</a>, <a href="/docs.docker.jp.onthefly/search/?q=deployment">deployment</a>, <a href="/docs.docker.jp.onthefly/search/?q=github">github</a>, <a href="/docs.docker.jp.onthefly/search/?q=github actions">github actions</a>, <a href="/docs.docker.jp.onthefly/search/?q=go">go</a>, <a href="/docs.docker.jp.onthefly/search/?q=golang">golang</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -486,14 +493,14 @@ docker.io/olliefr/docker-gs-ping:latest
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#choose-a-sample-project" class="nomunge">Choose a sample project</a></li>
+  <li><a href="#choose-a-sample-project" class="nomunge">サンプルプロジェクトの選定</a></li>
   <li><a href="#set-up-the-ci-workflow" class="nomunge">Set up the CI workflow</a></li>
   <li><a href="#enable-access-to-docker-hub" class="nomunge">Enable access to Docker Hub</a></li>
   <li><a href="#set-up-the-cd-workflow" class="nomunge">Set up the CD workflow</a></li>
   <li><a href="#optimizing-the-workflow" class="nomunge">Optimizing the workflow</a></li>
   <li><a href="#wrap-up" class="nomunge">Wrap up</a></li>
-  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
-  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
+  <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 
 </div>
