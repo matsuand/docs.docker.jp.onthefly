@@ -11,7 +11,7 @@ redirect_from:
 ---
 @y
 ---
-title: "Configure CI/CD for your application"
+title: "アプリケーションにおける CI/CD 設定"
 keywords: ci, cd, ci/cd, continuous integration, continuous deployment, deployment, github, github actions, go, golang, development
 description: Learn how to set up CI/CD pipeline for your application.
 redirect_from:
@@ -28,13 +28,14 @@ redirect_from:
 @x
 This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"} on CI/CD best practices.
 @y
-This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"} on CI/CD best practices.
+本ページでは Docker コンテナーを利用した GitHub アクションの CI/CD パイプライン（pipeline）の設定について説明します。
+新たなパイプラインを設定する前に、CI/CD のベストプラクティスとして [Ben のブログ](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"} を読んでおくことをお勧めします。
 @z
 
 @x
 This guide contains instructions on how to:
 @y
-This guide contains instructions on how to:
+本ガイドでは以下の手順を説明します。
 @z
 
 @x
@@ -43,10 +44,10 @@ This guide contains instructions on how to:
 3. Optimize your GitHub Actions-based CI/CD pipeline to reduce the number of pull requests and the total build time; and
 4. Release only specific versions of your application to Docker Hub.
 @y
-1. Set up continuous integration (CI) pipeline using GitHub Actions;
-2. Enable Docker Hub access for continuous deployment (CD) tools;
-3. Optimize your GitHub Actions-based CI/CD pipeline to reduce the number of pull requests and the total build time; and
-4. Release only specific versions of your application to Docker Hub.
+1. GitHub アクションを使って継続的インテグレーション (CI) のパイプラインを設定します。
+2. 継続的デプロイメント (CD) ツールに対して Docker Hub からのアクセスを有効にします。
+3. GitHub アクションベースの CI/CD パイプラインを最適化して、プルリクエスト数と総ビルド時間を減らします。
+4. 指定したアプリケーションバージョンのみを Docker Hub にリリースします。
 @z
 
 @x
@@ -54,15 +55,17 @@ This guide contains instructions on how to:
 >
 > Before we begin, it must be said that Continuous Integration (CI) and Continuous Deployment (CD) each is a _huge_ subject, with many different approaches and opinions. The approach chosen in this guide is optimised for pedagogical clarity and simplicity and is not meant to be the One True Way to test and release software.
 @y
-> **Note**
+> **メモ**
 >
-> Before we begin, it must be said that Continuous Integration (CI) and Continuous Deployment (CD) each is a _huge_ subject, with many different approaches and opinions. The approach chosen in this guide is optimised for pedagogical clarity and simplicity and is not meant to be the One True Way to test and release software.
+> 話を進めるにあたり、継続的インテグレーション (CI) や継続的デプロイメント (CD) には、さまざまなアプローチや考え方がある、非常に「大きな」テーマであることをここで述べておきます。
+> 本ガイドで進めるアプローチは、説明をわかりやすく単純にするために最適化したものであって、ソフトウェアのテストやリリースを行う際に、これが唯一の方法であると主張するものではありません。
 @z
 
 @x
 ## Choose a sample project
 @y
-## Choose a sample project
+{: #choose-a-sample-project }
+## サンプルプロジェクトの選定
 @z
 
 @x
@@ -92,21 +95,21 @@ In the previous section, we created a PAT and added it to GitHub to ensure we ca
 @x
 To set up the workflow:
 @y
-To set up the workflow:
+ワークフローは以下のようにして設定します。
 @z
 
 @x
 1. Go to your repository in GitHub and then click **Actions** > **New workflow**.
 2. Click **set up a workflow yourself** and update the starter template to match the following:
 @y
-1. Go to your repository in GitHub and then click **Actions** > **New workflow**.
-2. Click **set up a workflow yourself** and update the starter template to match the following:
+1. 自分の GitHub リポジトリにアクセスして **Actions** > **New workflow** をクリックします。
+2. **set up a workflow yourself**（ワークフローの独自設定）をクリックして、スターターテンプレートを以下に合致するように更新します。
 @z
 
 @x
 First, we will name this workflow:
 @y
-First, we will name this workflow:
+まずはこのワークフローを以下のように命名します。
 @z
 
 @x
@@ -126,7 +129,8 @@ name: Run CI
 @x
 Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
 @y
-Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
+そしてこのワークフローをいつ動作させるかを選びます。
+本例では、プロジェクトの main ブランチに対してプッシュが行われるたびに動作させるものとします。
 @z
 
 @x
@@ -288,9 +292,9 @@ The following sequence of `steps` achieves the goals we just set.
 @z
 
 @x
-As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project's repo, under the name of `.github/workflow/ci.yml`.
+As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project's repo, under the name of `.github/workflows/ci.yml`.
 @y
-As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project's repo, under the name of `.github/workflow/ci.yml`.
+As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project's repo, under the name of `.github/workflows/ci.yml`.
 @z
 
 @x
@@ -860,19 +864,22 @@ GitHub Actions are an immensely powerful way to automate your CI and CD pipeline
 @x
 ## Next steps
 @y
-## Next steps
+{: #next-steps }
+## 次のステップ
 @z
 
 @x
 In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. 
 @y
-In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. 
+本節では、既存の Docker 化された Go 言語プロジェクトに対しての GitHub アクションワークフローの設定方法を学びました。
+次にワークフローを最適化して、ビルド時間の改善とプルリクエスト数の削減を行いました。
+そして特定のバージョンのみを Docker Hub にプッシュするようにしました。
 @z
 
 @x
 You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.
 @y
-You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.
+そこでこのアプリケーションを、Azure や AWS のような公開クラウドプロバイダーにデプロイすることにしましょう。
 @z
 
 @x
@@ -884,19 +891,22 @@ In the next module, we’ll look into some options for doing so:
 @x
 [Deploy to the Cloud](deploy.md){: .button .outline-btn}
 @y
-[Deploy to the Cloud](deploy.md){: .button .outline-btn}
+[クラウドへのデプロイ](deploy.md){: .button .outline-btn}
 @z
 
 @x
 ## Feedback
 @y
-## Feedback
+{: #feedback } 
+## フィードバック
 @z
 
 @x
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} の GitHub リポジトリに issue をあげてください。
+あるいは [PR の生成](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} により変更の提案を行ってください。
 @z
 
 @x

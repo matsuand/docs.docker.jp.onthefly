@@ -2184,9 +2184,11 @@ These Official Images have exemplary `Dockerfile`s:
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
 * [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 @y
 * [Dockerfile リファレンス](../../engine/reference/builder.md)
 * [ベースイメージの詳細](baseimages.md)
 * [自動ビルドの詳細](../../docker-hub/builds/index.md)
 * [公式イメージ作成のガイドライン](../../docker-hub/official_images.md)
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 @z

@@ -565,7 +565,7 @@ I’ve truncated the output again for simplicity but you can see that our tests 
 @z
 
 @x
-Open the test/test.js fiole and change line 5 as follows.
+Open the test/test.js file and change line 5 as follows.
 @y
 test/test.js ファイルを開いて 5 行めを以下のように変更します。
 @z
