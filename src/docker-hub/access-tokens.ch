@@ -25,12 +25,12 @@ Docker Hub では、パスワードに代わるものとして個人用のアク
 @x
 Using personal access tokens provides some advantages over a password:
 * You can investigate the last usage of the access token and disable or delete it if you find any suspicious activity.
-* When logged in with an access token, you can't perform any admin activity on the account, including changing the password.
+* When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
 @y
 個人用のアクセストークンを利用すると、パスワードに比べて以下の利点があります。
 * アクセストークンの前回利用状況を確認できます。
   したがって何か疑わしい履歴が残っていたら、アクセストークンを無効化したり削除したりすることができます。
-* アクセストークンを使ってログインしている際には、ログインアカウントに対する管理操作、たとえばパスワードの変更といったことを行うことはできません。
+* アクセストークンを使うと、ログインアカウントに対する管理操作、たとえばパスワードの変更といったことを行うことはできません。コンピューターが危険にさらされた際に、アカウントを保護する目的があります。
 @z
 
 @x

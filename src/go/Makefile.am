@@ -14,6 +14,7 @@ ctie:
 
 bases = \
 	about                \
+	access-tokens        \
 	apple-silicon        \
 	attack-surface       \
 	buildkit             \
