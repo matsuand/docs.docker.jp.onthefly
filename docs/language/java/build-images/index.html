@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-07-29 11:03:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Java image | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Build your Java image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-29T11:03:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-29T11:03:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Build your Java image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/java/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -115,6 +115,37 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <p>Work through the orientation and setup in Get started <a href="/docs.docker.jp.onthefly/get-started/" target="_blank" rel="noopener" class="_">Part 1</a> to understand Docker concepts. Refer to the following section for Java prerequisites.</p>
+
+<!-- This text will be included in Build images topic in the Get started guides -->
+
+<h3 id="enable-buildkit">BuildKit の有効化</h3>
+
+<p>イメージビルドを行うにあたっては、マシン上において BuildKit が有効になっていることを確認してください。
+BuildKit が有効になっていれば、Docker イメージビルドを効率的に行うことができます。
+詳しくは <a href="../develop/develop-images/build_enhancements.md">BuildKit によるイメージ構築</a> を参照してください。</p>
+
+<p>BuildKit は Docker Desktop 上の全ユーザーに対して、デフォルトで有効になっています。
+Docker Desktop をインストールしているのであれば、手動で BuildKit を有効にする必要はありません。
+Linux 上において Docker を利用している場合は、環境変数を用いるか、あるいは BuildKit がデフォルト設定となるようにして、BuildKit を有効にします。</p>
+
+<blockquote>
+  <p>BuildKit を利用するには Docker 18.09 以上を利用する必要があります。</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ DOCKER_BUILDKIT=1 docker build .
+</code></pre></div></div>
+
+<p>デフォルトで BuildKit を有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>内のデーモン設定を<code class="language-plaintext highlighter-rouge">true</code>に設定して、デーモンを再起動します。
+<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルが存在していない場合は、この<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを新規生成して、以下の記述を追加します。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"features"</span><span class="p">:{</span><span class="nl">"buildkit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>そして Docker デーモンを再起動します。</p>
 
 <h2 id="overview">Overview</h2>
 
@@ -364,7 +395,11 @@ java-docker    	latest	b1b5f29f74f0	59 minutes ago	     567MB
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a>
+    <ul>
+      <li><a href="#enable-buildkit" class="nomunge">BuildKit の有効化</a></li>
+    </ul>
+  </li>
   <li><a href="#overview" class="nomunge">Overview</a></li>
   <li><a href="#sample-application" class="nomunge">Sample application</a></li>
   <li><a href="#test-the-application" class="nomunge">Test the application</a></li>

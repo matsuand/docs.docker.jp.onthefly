@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-07-29 11:03:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node.js と Mocha フレームワークを用いたテスト実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node.js と Mocha フレームワークを用いたテスト実行" />
   <meta property="og:description" content="How to Build and Run your Tests using Node.js and Mocha frameworks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-29T11:03:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-29T11:03:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node.js と Mocha フレームワークを用いたテスト実行","description":"How to Build and Run your Tests using Node.js and Mocha frameworks","url":"https://docs.docker.com/language/nodejs/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -250,10 +250,18 @@
 これによってテストビルドステージを指定してビルドします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
-Sending build context to Docker daemon  22.35MB
-...
-Successfully built fa583b97c4dd
-Successfully tagged node-docker:latest
+<span class="o">[</span>+] Building 66.5s <span class="o">(</span>12/12<span class="o">)</span> FINISHED
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                                                                                                 0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 662B                                                                                                                                 0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore
+ ...
+  <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context                                                                                                                                    4.2s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 9.00MB                                                                                                                                  4.1s
+ <span class="o">=&gt;</span> <span class="o">[</span>base 2/4] WORKDIR /code                                                                                                                                         0.2s
+ <span class="o">=&gt;</span> <span class="o">[</span>base 3/4] COPY package.json package.json                                                                                                                        0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span><span class="nb">test </span>1/2] RUN npm ci                                                                                                                                            6.5s
+ <span class="o">=&gt;</span> <span class="o">[</span><span class="nb">test </span>2/2] COPY <span class="nb">.</span> <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>テストイメージがビルドできたので、これをコンテナー内において実行しテストが実施できるかどうかを見てみます。</p>
@@ -307,17 +315,11 @@ CMD 命令はイメージビルド時には実行されません。
 <p>テストを実行するには、先ほどと同様に docker build コマンドを実行する必要があります。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
-<span class="go">Sending build context to Docker daemon  22.35MB
-Step 1/8 : FROM node:14.15.4 as base
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>f5be1883c8e0
-<span class="c">...
-</span><span class="go">Step 6/8 : RUN npm ci
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>Using cache
-<span class="gp"> ---&gt;</span><span class="w"> </span>bcc5cd4a6a1e
-<span class="go">Step 7/8 : COPY . .
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>1528ebcb73fa
-<span class="go">Step 8/8 : RUN npm run test
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>Running <span class="k">in </span>beadc36b293a
+<span class="go">[+] Building 8.9s (13/13) FINISHED
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile      0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 650B                      0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                         0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B
 <span class="go">
 </span><span class="gp">&gt;</span><span class="w"> </span>node-docker@1.0.0 <span class="nb">test</span> /code
 <span class="gp">&gt;</span><span class="w"> </span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js
