@@ -698,9 +698,9 @@ To interact with remote repositories:
 @z
 
 @x
-The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes/index.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
 @y
-Docker Dashboard の **Volumes** 画面では、[ボリューム](../storage/volumes/index.md) の生成削除や、どれが利用中であるかの確認が簡単にできます。
+Docker Dashboard の **Volumes** 画面では、[ボリューム](../storage/volumes.md) の生成削除や、どれが利用中であるかの確認が簡単にできます。
 Pro プランや Team プランを購入している開発者であれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
 @z
 

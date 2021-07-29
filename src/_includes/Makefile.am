@@ -18,6 +18,7 @@ bases = \
 	api-version-matrix   \
 	cli                  \
 	desktop-update       \
+	enable-buildkit      \
 	eula                 \
 	experimental         \
 	experimental-feature \

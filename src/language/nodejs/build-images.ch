@@ -39,6 +39,12 @@ Work through the orientation and setup in Get started [Part 1](../../get-started
 @z
 
 @x
+{% include enable-buildkit.md %}
+@y
+{% include enable-buildkit.md %}
+@z
+
+@x
 ## Overview
 @y
 {: #overview }
@@ -576,23 +582,27 @@ $ docker build --tag node-docker .
 
 @x
 ```shell
-Sending build context to Docker daemon  82.94kB
-Step 1/7 : FROM node:12.18.1
----> f5be1883c8e0
-Step 2/7 : WORKDIR /code
-...
-Successfully built e03018e56163
-Successfully tagged node-docker:latest
+[+] Building 93.8s (11/11) FINISHED
+ => [internal] load build definition from dockerfile                                          0.1s
+ => => transferring dockerfile: 617B                                                          0.0s
+ => [internal] load .dockerignore                                                             0.0s
+ ...
+ => [2/5] WORKDIR /app                                                                        0.4s
+ => [3/5] COPY [package.json, package-lock.json*, ./]                                         0.2s
+ => [4/5] RUN npm install --production                                                        9.8s
+ => [5/5] COPY . .
 ```
 @y
 ```shell
-Sending build context to Docker daemon  82.94kB
-Step 1/7 : FROM node:12.18.1
----> f5be1883c8e0
-Step 2/7 : WORKDIR /code
-...
-Successfully built e03018e56163
-Successfully tagged node-docker:latest
+[+] Building 93.8s (11/11) FINISHED
+ => [internal] load build definition from dockerfile                                          0.1s
+ => => transferring dockerfile: 617B                                                          0.0s
+ => [internal] load .dockerignore                                                             0.0s
+ ...
+ => [2/5] WORKDIR /app                                                                        0.4s
+ => [3/5] COPY [package.json, package-lock.json*, ./]                                         0.2s
+ => [4/5] RUN npm install --production                                                        9.8s
+ => [5/5] COPY . .
 ```
 @z
 
@@ -622,22 +632,20 @@ To list images, simply run the `images` command.
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-node                12.18.1             f5be1883c8e0        2 months ago         918MB
 ```
 @y
 ```shell
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-node                12.18.1             f5be1883c8e0        2 months ago         918MB
 ```
 @z
 
 @x
-You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
+Your exact output may vary, but you should see the image we just built `node-docker:latest` with the `latest` tag.
 @y
-一覧には少なくとも 2 つのイメージが表示されるはずです。
-1 つはベースイメージ`node:12.18.1`であり、もう 1 つは`node-docker:latest`としてビルドしたイメージです。
+出力結果は上とは異なるはずです。
+ただし上でビルドしたものとして、タグ`latest`を持つ`node-docker:latest`は表示されているはずです。
 @z
 
 @x
@@ -702,7 +710,6 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 @y
 ```
@@ -710,7 +717,6 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 @z
 
@@ -754,14 +760,12 @@ images コマンドを実行して確認してみます。
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 @y
 ```shell
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 @z
 

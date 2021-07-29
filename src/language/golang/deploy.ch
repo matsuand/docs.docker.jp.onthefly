@@ -64,9 +64,9 @@ The integration between Docker and Amazon ECS allows developers to use the Docke
 @z
 
 @x
-For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-integration.md).
+For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 @y
-For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-integration.md).
+For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 @z
 
 @x

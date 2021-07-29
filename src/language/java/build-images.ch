@@ -34,6 +34,12 @@ Work through the orientation and setup in Get started [Part 1](../../get-started
 @z
 
 @x
+{% include enable-buildkit.md %}
+@y
+{% include enable-buildkit.md %}
+@z
+
+@x
 ## Overview
 @y
 ## Overview

@@ -365,18 +365,34 @@ Now let’s rebuild our image and run our tests. We will run the same docker bui
 @x
 ```shell
 $ docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
-...
-Successfully built fa583b97c4dd
-Successfully tagged node-docker:latest
+[+] Building 66.5s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                 0.0s
+ => => transferring dockerfile: 662B                                                                                                                                 0.0s
+ => [internal] load .dockerignore
+ ...
+  => [internal] load build context                                                                                                                                    4.2s
+ => => transferring context: 9.00MB                                                                                                                                  4.1s
+ => [base 2/4] WORKDIR /code                                                                                                                                         0.2s
+ => [base 3/4] COPY package.json package.json                                                                                                                        0.0s
+ => [base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
+ => [test 1/2] RUN npm ci                                                                                                                                            6.5s
+ => [test 2/2] COPY . .
 ```
 @y
 ```shell
 $ docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
-...
-Successfully built fa583b97c4dd
-Successfully tagged node-docker:latest
+[+] Building 66.5s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                 0.0s
+ => => transferring dockerfile: 662B                                                                                                                                 0.0s
+ => [internal] load .dockerignore
+ ...
+  => [internal] load build context                                                                                                                                    4.2s
+ => => transferring context: 9.00MB                                                                                                                                  4.1s
+ => [base 2/4] WORKDIR /code                                                                                                                                         0.2s
+ => [base 3/4] COPY package.json package.json                                                                                                                        0.0s
+ => [base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
+ => [test 1/2] RUN npm ci                                                                                                                                            6.5s
+ => [test 2/2] COPY . .
 ```
 @z
 
@@ -494,17 +510,11 @@ Now to run our tests, we just need to run the docker build command as above.
 @x
 ```console
 $ docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
-Step 1/8 : FROM node:14.15.4 as base
- ---> f5be1883c8e0
-...
-Step 6/8 : RUN npm ci
- ---> Using cache
- ---> bcc5cd4a6a1e
-Step 7/8 : COPY . .
- ---> 1528ebcb73fa
-Step 8/8 : RUN npm run test
- ---> Running in beadc36b293a
+[+] Building 8.9s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile      0.0s
+ => => transferring dockerfile: 650B                      0.0s
+ => [internal] load .dockerignore                         0.0s
+ => => transferring context: 2B
 
 > node-docker@1.0.0 test /code
 > mocha ./**/*.js
@@ -526,17 +536,11 @@ Successfully tagged node-docker:latest
 @y
 ```console
 $ docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
-Step 1/8 : FROM node:14.15.4 as base
- ---> f5be1883c8e0
-...
-Step 6/8 : RUN npm ci
- ---> Using cache
- ---> bcc5cd4a6a1e
-Step 7/8 : COPY . .
- ---> 1528ebcb73fa
-Step 8/8 : RUN npm run test
- ---> Running in beadc36b293a
+[+] Building 8.9s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile      0.0s
+ => => transferring dockerfile: 650B                      0.0s
+ => [internal] load .dockerignore                         0.0s
+ => => transferring context: 2B
 
 > node-docker@1.0.0 test /code
 > mocha ./**/*.js

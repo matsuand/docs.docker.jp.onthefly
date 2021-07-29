@@ -57,11 +57,11 @@ Docker と Snyk が協力し、開発ワークフロー内にネイティブに�
 @z
 
 @x
-Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using [Synk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"}, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.
+Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using [Snyk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"}, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.
 @y
 Docker プラットフォームへのオプションとしてぜい弱性スキャン機能を含めておけば、すでに使い慣れたぜい弱性検出が、さらに拡張されます。
 そして開発プロセスの初期段階において、ぜい弱性への対処が可能となります。
-たとえば [Synk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"} を使えば、イメージのチェックはバックグラウンドで行われます。
+たとえば [Snyk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"} を使えば、イメージのチェックはバックグラウンドで行われます。
 このようにスキャンチェックが簡単かつ継続的に行われるので、Docker Hub 内にぜい弱性を取り込むことが少なくなります。
 こうして CI のサイクルをより短く、そして本番環境へのデプロイはより信頼できるようになります。
 @z

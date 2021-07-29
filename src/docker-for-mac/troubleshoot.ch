@@ -398,6 +398,20 @@ ways, and create reports.
 @z
 
 @x
+#### View the Docker Daemon logs
+@y
+#### View the Docker Daemon logs
+@z
+
+@x
+Refer to the [read the logs](../config/daemon/index.md#read-the-logs) section
+to learn how to view the Docker Daemon logs.
+@y
+Refer to the [read the logs](../config/daemon/index.md#read-the-logs) section
+to learn how to view the Docker Daemon logs.
+@z
+
+@x
 <a name="troubleshoot"></a>
 ## Troubleshooting
 @y
