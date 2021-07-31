@@ -16,10 +16,10 @@ description: Get oriented on some basics of Docker and install Docker Desktop.
 @z
 
 @x
-The portability and reproducibility of a containerized process mean we have an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Furthermore, as we scale our applications up, we'll want some tooling to help automate the maintenance of those applications, able to replace failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
+The portability and reproducibility of a containerized process provides an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Additionally, as we scale our applications up, we need some tooling to help automate the maintenance of those applications, enable the replacement of failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
 @y
-コンテナー化プロセスが可搬性や再生産性に優れているということは、つまりコンテナー化アプリケーションをクラウドやデータセンター間において移行させスケール変更が容易になるということです。
-コンテナーというものは、アプリケーションをどこで動作させても同じように動くことが保証されるものであり、すべての環境下においてその性能をすばやく簡単に利用することができます。
+コンテナー化プロセスが移植性や再生産性に優れているということは、つまりコンテナー化アプリケーションをクラウドやデータセンター間において移行させスケール変更が容易になるということです。
+コンテナーというものは、アプリケーションをどこで動作させても同じように動くことが保証されるものであり、すべての環境下においてその性能をすばやく簡単に利用できます。
 アプリケーションをスケールアップするときには、アプリケーションのメンテナンスを自動化するツールが必要になってきます。
 また動作不良をおこしたコンテナーを自動的に置き換えたり、コンテナー稼働中でのアップデートの適用や再設定の管理ができることが求められます。
 @z

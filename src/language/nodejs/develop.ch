@@ -556,9 +556,11 @@ Let’s change the source code and then set a breakpoint.
 @z
 
 @x
-Add the following code above the existing `server.use()` statement, and save the file.
+Add the following code above the existing `server.use()` statement, and save the file. Make sure that the `return` statement is on a line of its own, as shown here, so you can set the breakpoint appropriately.
 @y
 すでにある`server.use()`行の上に以下のコードを追加して、ファイルを保存します。
+以下に示すように、`return`文は単独の行であることに注目してください。
+こうしておけばわかりやすくブレークポイントを設定することができます。
 @z
 
 @x

@@ -7,7 +7,7 @@ title: "Build your Node image"
 keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push, run
 description: Learn how to build your first Docker image by writing a Dockerfile
 redirect_from:
-- /get-started/nodejs/build-images/
+  - /get-started/nodejs/build-images/
 ---
 @y
 ---
@@ -15,7 +15,7 @@ title: "Node イメージのビルド"
 keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push, run
 description: Learn how to build your first Docker image by writing a Dockerfile
 redirect_from:
-- /get-started/nodejs/build-images/
+  - /get-started/nodejs/build-images/
 ---
 @z
 
@@ -124,22 +124,22 @@ IDE 環境においてワーキングディレクトリを開きます。
 
 @x
 ```js
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
+const ronin = require('ronin-server')
+const mocks = require('ronin-mocks')
 
 const server = ronin.server()
 
-server.use( '/', mocks.server( server.Router(), false, true ) )
+server.use('/', mocks.server(server.Router(), false, true))
 server.start()
 ```
 @y
 ```js
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
+const ronin = require('ronin-server')
+const mocks = require('ronin-mocks')
 
 const server = ronin.server()
 
-server.use( '/', mocks.server( server.Router(), false, true ) )
+server.use('/', mocks.server(server.Router(), false, true))
 server.start()
 ```
 @z
@@ -396,7 +396,7 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 @z
 
 @x
-Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
+Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
 @y
 `npm install`を実行する前には、`package.json`と`package-lock.json`の両ファイルをイメージ内にコピーしておくことが必要です。
 `COPY`コマンドを使ってこれを行います。
@@ -417,8 +417,11 @@ COPY ["package.json", "package-lock.json*", "./"]
 @z
 
 @x
-Once we have our `package.json` files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
+Note that, rather than copying the entire working directory, we are only copying the package.json file. This allows us to take advantage of cached Docker layers.
+Once we have our files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
 @y
+なおここでは、ワーキングディレクトリ全体をコピーするのではなく、package.json ファイルだけをコピーしています。
+こうすることで Docker レイヤーのキャッシュをうまく利用するためです。
 `package.json`ファイルをイメージ内に置いたら`RUN`コマンドによって npm install を行います。
 この際の処理は npm install をマシン内でローカルに実行しているかのようにして動作します。
 ただし Node モジュール類のインストール先は、イメージ内の`node_modules`ディレクトリとなります。

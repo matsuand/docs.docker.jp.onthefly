@@ -15,7 +15,9 @@
 @z
 
 @x
-Before we start building images, ensure you have enabled BuildKit on your machine. BuildKit allows you to build Docker images efficiently. For more information, see [Building images with BuildKit](../develop/develop-images/build_enhancements.md).
+Before we start building images, ensure you have enabled BuildKit on your machine.
+BuildKit allows you to build Docker images efficiently. For more information,
+see [Building images with BuildKit](/develop/develop-images/build_enhancements/).
 @y
 イメージビルドを行うにあたっては、マシン上において BuildKit が有効になっていることを確認してください。
 BuildKit が有効になっていれば、Docker イメージビルドを効率的に行うことができます。
@@ -23,7 +25,10 @@ BuildKit が有効になっていれば、Docker イメージビルドを効率�
 @z
 
 @x
-BuildKit is enabled by default for all users on Docker Desktop. If you have installed Docker Desktop, you don't have to manually enable BuildKit. If you are running Docker on Linux, you can enable BuildKit either by using an environment variable or by making BuildKit the default setting.
+BuildKit is enabled by default for all users on Docker Desktop. If you have
+installed Docker Desktop, you don't have to manually enable BuildKit. If you are
+running Docker on Linux, you can enable BuildKit either by using an environment
+variable or by making BuildKit the default setting.
 @y
 BuildKit は Docker Desktop 上の全ユーザーに対して、デフォルトで有効になっています。
 Docker Desktop をインストールしているのであれば、手動で BuildKit を有効にする必要はありません。
@@ -31,13 +36,8 @@ Linux 上において Docker を利用している場合は、環境変数を用
 @z
 
 @x
-> You must be running Docker 18.09 or higher to use BuildKit.
-@y
-> BuildKit を利用するには Docker 18.09 以上を利用する必要があります。
-@z
-
-@x
-To set the BuildKit environment variable when running the `docker build` command, run:
+To set the BuildKit environment variable when running the `docker build` command,
+run:
 @y
 `docker build`コマンド時に環境変数 BuildKit を設定するには、以下のようにします。
 @z

@@ -395,11 +395,11 @@ And lastly, after adding the builder and build cache snippets to the top of the 
 @z
 
 @x
-Setting up the builder to use the output of the buildx step, and then
-Using the cache we set up earlier for it to store to and to retrieve
+ - Setting up the builder to use the output of the buildx step, and then
+ - Using the cache we set up earlier for it to store to and to retrieve
 @y
-buildx 処理の出力をビルダーにおいて利用するように設定します。
-そして上で設定したキャッシュを用いて、保存と抽出を行うようにします。
+ - buildx 処理の出力をビルダーにおいて利用するように設定します。
+ - そして上で設定したキャッシュを用いて、保存と抽出を行うようにします。
 @z
 
 @x

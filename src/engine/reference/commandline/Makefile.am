@@ -69,6 +69,7 @@ bases = \
 	compose \
 	compose_build \
 	compose_convert \
+	compose_cp \
 	compose_create \
 	compose_down \
 	compose_events \
@@ -78,9 +79,11 @@ bases = \
 	compose_logs \
 	compose_ls \
 	compose_pause \
+	compose_port \
 	compose_ps \
 	compose_pull \
 	compose_push \
+	compose_restart \
 	compose_rm \
 	compose_run \
 	compose_start \

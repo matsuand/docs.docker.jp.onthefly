@@ -40,9 +40,9 @@ The Docker Azure Integration enables developers to use native Docker commands to
 @z
 
 @x
-For detailed instructions, see [Deploying Docker containers on Azure](/cloud/aci-integration/).
+For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
 @y
-For detailed instructions, see [Deploying Docker containers on Azure](/cloud/aci-integration/).
+For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
 @z
 
 @x
