@@ -1,10 +1,10 @@
 <!-- Page generated 2021-07-31 12:42:55 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Hub 上の公式イメージ | Docker ドキュメント</title>
-  <meta name="description" content="Docker Hub 上の公式イメージに対するガイドライン。" />
-  <meta name="keywords" content="Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,image, documentation">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/official_images/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker compose cp | Docker ドキュメント</title>
+  <meta name="description" content="docker compose cp: Copy files/folders between a service container and the local filesystem" />
+  <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/reference/commandline/compose_cp/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,24 +28,24 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Docker Hub 上の公式イメージ"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:title" itemprop="title name" content="docker compose cp"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker compose cp: Copy files/folders between a service container and the local filesystem" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Docker Hub 上の公式イメージ" />
-  <meta property="og:description" content="Docker Hub 上の公式イメージに対するガイドライン。" />
+  <meta property="og:title" content="docker compose cp" />
+  <meta property="og:description" content="docker compose cp: Copy files/folders between a service container and the local filesystem" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-31T12:42:55+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/compose_cp/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2021-07-31T12:42:55+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Hub 上の公式イメージ","description":"Docker Hub 上の公式イメージに対するガイドライン。","url":"https://docs.docker.com/docker-hub/official_images/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker compose cp","description":"docker compose cp: Copy files/folders between a service container and the local filesystem","url":"https://docs.docker.com/engine/reference/commandline/compose_cp/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -91,7 +91,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/">Docker Hub</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/official_images/">公式イメージ</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/reference/">リファレンス</a></li><li><a>コマンドラインインターフェイス</a></li><li><a href="/docs.docker.jp.onthefly/engine/reference/run/">Docker CLI (docker)</a></li><li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose/">docker compose</a></li><li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_cp/">docker compose cp</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -103,93 +103,272 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Hub 上の公式イメージ</h1><p>Docker の <a href="https://hub.docker.com/search?q=&amp;type=image&amp;image_filter=official">公式イメージ</a> は Docker Hub 上において提供される、厳選された Docker リポジトリです。
-これは以下のことを意識して提供されています。</p>
+                        <section class="section"><h1>docker compose cp</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
+https://github.com/docker/compose-cli
+-->
+<!-- Make sure atom is using hard tabs -->
 
-<ul>
-  <li>
-    <p>基本的なベース OS となるリポジトリを提供します。
-（たとえば <a href="https://hub.docker.com/_/ubuntu/">ubuntu</a>, <a href="https://hub.docker.com/_/centos/">centos</a> などのように）数多くのユーザーにとってスタート地点となるものを提供します。</p>
-  </li>
-  <li>
-    <p>代表的なプログラミング言語環境、データストア、各種サービスといった、PAAS（Platform as a Service）が提供するものにも似た、一時的な実現環境を提供します。</p>
-  </li>
-  <li>
-    <p><a href="/engine/userguide/eng-image/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code>のベストプラクティス</a> の例として示し、わかりやすいドキュメントを提供します。
-これによって、<code class="language-plaintext highlighter-rouge">Dockerfile</code>を作成する際のリファレンスとなるようにします。</p>
-  </li>
-  <li>
-    <p>適切なタイミングでセキュリティアップデートを適用するようにします。
-これは特に重要なことです。
-Docker Hub 上における公式イメージは、人気を得ているものがあるからです。</p>
-  </li>
-</ul>
+<h2 id="description">説明</h2>
 
-<p>Docker 社としては、公式イメージに関わるさまざまな内容に関して、レビューと公開を担当する専門チームを支援しています。
-このチームは、ソフトウェア開発元の保守担当、セキュリティ専門家、Docker コミュニティの幅広い方々と共同して作業を進めています。</p>
+<p>Copy files/folders between a service container and the local filesystem</p>
 
-<p>ソフトウェア開発者が、担当している公式イメージを保守することが好ましいのは言うまでもありません。
-しかしこれを厳密に要求することはしていません。
-そもそも公式イメージを生成して保守していくことは、共同で行われている作業です。
-GitHub 上にて公開で行われているため、そこに参加することが大いに推奨されています。
-どなたであっても、フィードバック、コード提供、プロセス変更の提案、さらには新たな公式イメージの提案までもが提供できるわけです。</p>
+<h2 id="usage">利用方法</h2>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker compose <span class="nb">cp</span> <span class="o">[</span>OPTIONS] SERVICE:SRC_PATH DEST_PATH|-
+<span class="go">docker compose cp [OPTIONS] SRC_PATH|- SERVICE:DEST_PATH
+</span></code></pre></div></div>
 
-  <p>Docker 公式イメージは Docker の知的財産です。
-事前の許諾なしに Docker 公式イメージを配布することは、<a href="https://www.docker.com/legal/docker-terms-service" target="blank" rel="noopener">Docker 利用規約</a> に違反する可能性があります。</p>
-</blockquote>
+<h2 id="options">オプション</h2>
 
-<h2 id="when-to-use-official-images">公式イメージをいつ利用するのか</h2>
+<table>
+<thead>
+  <tr>
+    <td>名前／省略形</td>
+    <td>デフォルト</td>
+    <td>説明</td>
+  </tr>
+</thead>
+<tbody>
 
-<p>Docker を初めて利用するユーザーは、公式イメージを用いてプロジェクトを構築することをお勧めしています。
-このイメージには分かり易いドキュメントがあって、ベストプラクティスを示しています。
-そして一般的な利用を前提にして設計されています。
-上級者の方は<code class="language-plaintext highlighter-rouge">Dockerfile</code>を勉強する一環として、公式イメージを確認していただくことができます。</p>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--all</code></td>
+    <td></td>
+    <td>Copy to all the containers of the service.</td>
+  </tr>
 
-<p>公式イメージを取得した後に目指すことは、イメージサイズの最適化です。
-たとえばプログラミング言語イメージには、たいていは完全なビルドツールチェーンが含まれていて、最適化コードによるモジュールをインストールできるようにしています。
-上級者は独自のイメージをビルドする際には、プリコンパイル済ライブラリを必要な分のみ含めることで、容量を節約することができるかもしれません。</p>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--archive</code> , <code class="language-plaintext highlighter-rouge">-a</code></td>
+    <td></td>
+    <td>Archive mode (copy all uid/gid information)</td>
+  </tr>
 
-<p><a href="https://hub.docker.com/_/python/">python</a> や <a href="https://hub.docker.com/_/ruby/">ruby</a> のような数多くのプログラミング言語環境向けには<code class="language-plaintext highlighter-rouge">-slim</code>というタグをつけています。
-これは最適化への要求を満たす目的で作られています。
-この「slim」でも不十分に感じる方は、公式イメージ内のベース OS イメージから派生イメージを作り上げて、その後も保守を行っていただくことをお勧めします。
-同じやり方を繰り返しても無駄かもしれないからです。</p>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--follow-link</code> , <code class="language-plaintext highlighter-rouge">-L</code></td>
+    <td></td>
+    <td>Always follow symbol link in SRC_PATH</td>
+  </tr>
 
-<h2 id="submitting-feedback-for-official-images">公式イメージへのフィードバック送信</h2>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--index</code></td>
+    <td><code class="language-plaintext highlighter-rouge">1</code></td>
+    <td>Index of the container if there are multiple instances of a service [default: 1].</td>
+  </tr>
+ <!-- end for option -->
+</tbody>
+</table>
+<p><!-- end if options --></p>
 
-<p>すべての公式イメージのページにはドキュメントが含まれていて、そのリポジトリに対する詳細が説明されています。そしてその中に<strong>ユーザーフィードバック</strong>の節があります。
-たいていの場合 GitHub リポジトリには、公式リポジトリに対する Dockerfile が含まれており、さらに有効な issue トラッカーも提供されています。
-一般的なフィードバックやサポートに関する質問は、<a href="https://libera.chat">Libera.Chat IRC</a> 上の<code class="language-plaintext highlighter-rouge">#docker-library</code>に対して行ってください。</p>
+<h2 id="parent-command">上位コマンド</h2>
 
-<h2 id="creating-an-official-image">公式イメージの生成</h2>
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose/">docker compose</a></td>
+      <td>Docker Compose コマンド</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>高度なレベルで話をすると、公式リポジトリは、GitHub のプルリクエストという形での提案から始まります。
-詳細な具体的な提案のあり方については、以下の GitHub リポジトリに示されています。</p>
+<h2 id="related-commands">関連コマンド</h2>
 
-<ul>
-  <li>
-    <p><a href="https://github.com/docker-library/official-images">docker-library/official-images</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/docker-library/docs">docker-library/docs</a></p>
-  </li>
-</ul>
+<table>
+<thead>
+  <tr>
+    <td>コマンド</td>
+    <td>説明</td>
+  </tr>
+</thead>
+<tbody>
 
-<p>公式イメージの担当チームは、コミュニティに貢献する方々からの協力も得ながら、正式に各提案をレビューし、提案者へのフィードバックを行っています。
-ただし提案を受け付けてからレビューを開始するまでには、多少もたつくことがあるかもしれません。</p>
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_build/">docker compose build</a></td>
+    <td>サービスのビルドまたは再ビルド</td>
+  </tr>
 
-<p>レビューを行っていく際には、主観的な議論となることもあります。
-そのような主観的な疑問は、「このイメージは汎用的に使えますか？」といった単純な質問に帰着します。
-たとえば <a href="https://hub.docker.com/_/python/">python</a> の公式イメージは、幅広い Python 開発コミュニティにとって「汎用的に使えます」と言えます。
-ところが「先週作った Python のアドベンチャーゲーム」といったあいまいな文章では、何も答えられません。</p>
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_convert/">docker compose convert</a></td>
+    <td>Compose ファイルをプラットフォームの標準的な書式に変換します。</td>
+  </tr>
 
-<p>新たな提案が受け付けられたら、その提案者はイメージを常に最新状態とし、ユーザーフィードバックに返信する責任があります。
-公式リポジトリチームには、Docker Hub 上にイメージとドキュメントを公開する義務が発生します。
-公式イメージを更新していくことは、レビューを行うことは少ないかもしれませんが、プルリクエストの作業に似ています。
-公式イメージチームは、あらゆる活動を最大限管理し、品質リスクやセキュリティ問題の発生を抑えます。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="/docs.docker.jp.onthefly/search/?q=accounts">accounts</a>, <a href="/docs.docker.jp.onthefly/search/?q=plans">plans</a>, <a href="/docs.docker.jp.onthefly/search/?q=Dockerfile">Dockerfile</a>, <a href="/docs.docker.jp.onthefly/search/?q=Docker Hub">Docker Hub</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=official">official</a>, <a href="/docs.docker.jp.onthefly/search/?q=image">image</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_cp/">docker compose cp</a></td>
+    <td>Copy files/folders between a service container and the local filesystem</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_create/">docker compose create</a></td>
+    <td>サービスコンテナーを生成します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_down/">docker compose down</a></td>
+    <td>コンテナーとネットワークを停止して削除します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_events/">docker compose events</a></td>
+    <td>コンテナーからのリアルタイムイベントを受信します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_exec/">docker compose exec</a></td>
+    <td>実行中コンテナー内においてコマンドを実行します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_images/">docker compose images</a></td>
+    <td>生成されたコンテナーにおいて利用されているイメージを一覧表示します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_kill/">docker compose kill</a></td>
+    <td>サービスコンテナーを強制的に停止します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_logs/">docker compose logs</a></td>
+    <td>コンテナー出力を参照します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_ls/">docker compose ls</a></td>
+    <td>実行中の Compose プロジェクトを一覧表示します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_pause/">docker compose pause</a></td>
+    <td>サービスを一時停止します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_port/">docker compose port</a></td>
+    <td>Print the public port for a port binding.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_ps/">docker compose ps</a></td>
+    <td>コンテナーを一覧表示します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_pull/">docker compose pull</a></td>
+    <td>サービスイメージをプルします。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_push/">docker compose push</a></td>
+    <td>サービスイメージをプッシュします。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_restart/">docker compose restart</a></td>
+    <td>Restart containers</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_rm/">docker compose rm</a></td>
+    <td>停止しているサービスコンテナーを削除します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_run/">docker compose run</a></td>
+    <td>サービスに対するワンタッチ（one-off）のコマンドを実行します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_start/">docker compose start</a></td>
+    <td>サービスを起動します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_stop/">docker compose stop</a></td>
+    <td>サービスを停止します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_top/">docker compose top</a></td>
+    <td>実行中プロセスを表示します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_unpause/">docker compose unpause</a></td>
+    <td>停止中サービスを再開します。</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_up/">docker compose up</a></td>
+    <td>コンテナーを生成して起動します。</td>
+  </tr>
+
+</tbody>
+</table>
+
+<div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -203,7 +382,7 @@ GitHub 上にて公開で行われているため、そこに参加すること�
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/docker-hub/official_images.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-hub/official_images.ch](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/engine/reference/commandline/compose_cp.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [engine/reference/commandline/compose_cp.ch](https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/compose_cp/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -222,9 +401,11 @@ GitHub 上にて公開で行われているため、そこに参加すること�
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#when-to-use-official-images" class="nomunge">公式イメージをいつ利用するのか</a></li>
-  <li><a href="#submitting-feedback-for-official-images" class="nomunge">公式イメージへのフィードバック送信</a></li>
-  <li><a href="#creating-an-official-image" class="nomunge">公式イメージの生成</a></li>
+  <li><a href="#description" class="nomunge">説明</a></li>
+  <li><a href="#usage" class="nomunge">利用方法</a></li>
+  <li><a href="#options" class="nomunge">オプション</a></li>
+  <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 </div>
@@ -312,5 +493,5 @@ GitHub 上にて公開で行われているため、そこに参加すること�
     </div>
 
     </footer>
-    <script>const pageURL = "/docker-hub/official_images/";</script></body>
+    <script>const pageURL = "/engine/reference/commandline/compose_cp/";</script></body>
 </html>

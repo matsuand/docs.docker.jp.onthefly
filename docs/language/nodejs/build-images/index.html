@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-29 11:03:02 +0900-->
+<!-- Page generated 2021-07-31 12:42:55 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node イメージのビルド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-31T12:42:55+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-07-31T12:42:55+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/nodejs/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -128,10 +128,6 @@ BuildKit が有効になっていれば、Docker イメージビルドを効率�
 Docker Desktop をインストールしているのであれば、手動で BuildKit を有効にする必要はありません。
 Linux 上において Docker を利用している場合は、環境変数を用いるか、あるいは BuildKit がデフォルト設定となるようにして、BuildKit を有効にします。</p>
 
-<blockquote>
-  <p>BuildKit を利用するには Docker 18.09 以上を利用する必要があります。</p>
-</blockquote>
-
 <p><code class="language-plaintext highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ DOCKER_BUILDKIT=1 docker build .
@@ -181,12 +177,12 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>IDE 環境においてワーキングディレクトリを開きます。
 そして以下のコードを<code class="language-plaintext highlighter-rouge">server.js</code>ファイルとして書き込みます。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-server</span><span class="dl">'</span> <span class="p">)</span>
-<span class="kd">const</span> <span class="nx">mocks</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-mocks</span><span class="dl">'</span> <span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">ronin-server</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">mocks</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">ronin-mocks</span><span class="dl">'</span><span class="p">)</span>
 
 <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">ronin</span><span class="p">.</span><span class="nx">server</span><span class="p">()</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span> <span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span><span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
 </code></pre></div></div>
 
@@ -298,7 +294,9 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> ["package.json", "package-lock.json*", "./"]</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">package.json</code>ファイルをイメージ内に置いたら<code class="language-plaintext highlighter-rouge">RUN</code>コマンドによって npm install を行います。
+<p>なおここでは、ワーキングディレクトリ全体をコピーするのではなく、package.json ファイルだけをコピーしています。
+こうすることで Docker レイヤーのキャッシュをうまく利用するためです。
+<code class="language-plaintext highlighter-rouge">package.json</code>ファイルをイメージ内に置いたら<code class="language-plaintext highlighter-rouge">RUN</code>コマンドによって npm install を行います。
 この際の処理は npm install をマシン内でローカルに実行しているかのようにして動作します。
 ただし Node モジュール類のインストール先は、イメージ内の<code class="language-plaintext highlighter-rouge">node_modules</code>ディレクトリとなります。</p>
 
