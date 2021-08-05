@@ -57,6 +57,154 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.8
+2021-08-03
+@y
+## 20.10.8
+2021-08-03
+@z
+
+@x
+### Deprecation
+@y
+{: #deprecation }
+### 廃止決定
+@z
+
+@x
+- Deprecate support for encrypted TLS private keys. Legacy PEM encryption as
+  specified in RFC 1423 is insecure by design. Because it does not authenticate
+  the ciphertext, it is vulnerable to padding oracle attacks that can let an
+  attacker recover the plaintext. Support for encrypted TLS private keys is now
+  marked as deprecated, and will be removed in an upcoming release. [docker/cli#3219](https://github.com/docker/cli/pull/3219)
+- Deprecate Kubernetes stack support. Following the deprecation of [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes),
+  support for Kubernetes in the `stack` and `context` commands in the Docker CLI
+  is now marked as deprecated, and will be removed in an upcoming release [docker/cli#3174](https://github.com/docker/cli/pull/3174).
+@y
+- 暗号化 TLS の秘密鍵に対するサポートは廃止決定しました。
+  RFC 1423 において規定されている従来の PEM 暗号化は、設計の段階で安全でないものです。
+  これは暗号文を認証しないため、攻撃者が平文を解読可能となる padding oracle 攻撃に対してぜい弱です。
+  暗号化 TLS の秘密鍵に対するサポートは、現在、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
+  [docker/cli#3219](https://github.com/docker/cli/pull/3219)
+- Kubernetes のスタックサポートを廃止決定しました。
+  Docker CLI の`stack`と`context`のコマンドにおける Kubernetes サポートは、[Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes) が廃止決定されたことに対応して、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
+  [docker/cli#3174](https://github.com/docker/cli/pull/3174)
+@z
+
+@x
+### Client
+@y
+{: #client }
+### クライアント
+@z
+
+@x
+- Fix `Invalid standard handle identifier` errors on Windows [docker/cli#3132](https://github.com/docker/cli/pull/3132).
+@y
+- Windows における`Invalid standard handle identifier`エラーを修正しました。
+  [docker/cli#3132](https://github.com/docker/cli/pull/3132)
+@z
+
+@x
+### Rootless
+@y
+### Rootless
+@z
+
+@x
+- Avoid `can't open lock file /run/xtables.lock: Permission denied` error on
+  SELinux hosts [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+- Disable overlay2 when running with SELinux to prevent permission denied errors [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+- Fix `x509: certificate signed by unknown authority` error on openSUSE Tumbleweed [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+@y
+- SELinux ホストにおける`can't open lock file /run/xtables.lock: Permission denied`エラーを回避するようにしました。
+  [moby/moby#42462](https://github.com/moby/moby/pull/42462)
+- SELinux の動作中は、パーミッション拒否のエラーを防ぐために overlay2 を無効にしました。
+  [moby/moby#42462](https://github.com/moby/moby/pull/42462)
+- openSUSE Tumbleweed における`x509: certificate signed by unknown authority`エラーを修正しました。
+  [moby/moby#42462](https://github.com/moby/moby/pull/42462)
+@z
+
+@x
+### Runtime
+@y
+{: #runtime }
+### ランタイム
+@z
+
+@x
+- Print a warning when using the `--platform` option to pull a single-arch image
+  that does not match the specified architecture [moby/moby#42633](https://github.com/moby/moby/pull/42633).
+- Fix incorrect `Your kernel does not support swap memory limit` warning when
+  running with cgroups v2 [moby/moby#42479](https://github.com/moby/moby/pull/42479).
+- Windows: Fix a situation where containers were not stopped if `HcsShutdownComputeSystem`
+  returned an `ERROR_PROC_NOT_FOUND` error moby/moby#42613](https://github.com/moby/moby/pull/42613) 
+@y
+- シングルアーキテクチャーイメージに対して`--platform`オプションを利用する際に、指定のアーキテクチャーに一致しない場合には、警告を表示するようにしました。
+  [moby/moby#42633](https://github.com/moby/moby/pull/42633)
+- cgroups v2 の利用時に、`Your kernel does not support swap memory limit`という誤った警告表示を修正しました。
+  [moby/moby#42479](https://github.com/moby/moby/pull/42479)
+- Windows: `HcsShutdownComputeSystem`が`ERROR_PROC_NOT_FOUND`エラーを返した際に、コンテナーが止まっていない状況を修正しました。
+  [moby/moby#42613](https://github.com/moby/moby/pull/42613)
+@z
+
+@x
+## Swarm
+@y
+## Swarm
+@z
+
+@x
+- Fix a possibility where overlapping IP addresses could exist as a result of the
+  node failing to clean up its old loadbalancer IPs [moby/moby#42538](https://github.com/moby/moby/pull/42538)
+- Fix a deadlock in log broker ("dispatcher is stopped") [moby/moby#42537](https://github.com/moby/moby/pull/42537)
+@y
+- ノードにおいてロードバランサーの古い IP のクリアの失敗が起きることで、IP アドレスがかぶってしまう可能性を修正しました。
+  [moby/moby#42538](https://github.com/moby/moby/pull/42538)
+- log broker のデッドロックを修正しました ("dispatcher is stopped")。
+  [moby/moby#42537](https://github.com/moby/moby/pull/42537)
+@z
+
+@x
+### Packaging
+@y
+{: #packaging }
+### パッケージ
+@z
+
+@x
+> **Known issue**
+>
+> The `ctr` binary shipping with the static packages of this release is not
+> statically linked, and will not run in Docker images using alpine as a base
+> image. Users can install the `libc6-compat` package, or download a previous
+> version of the `ctr` binary as a workaround. Refer to the containerd ticket
+> related to this issue for more details: [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824).
+@y
+> **既知の問題**
+>
+> 当リリースの static パッケージに含まれる`ctr`バイナリは、スタティックリンクが行われていません。
+> したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
+> これを解消するためには、`libc6-compat`パッケージをインストールするか、`ctr`バイナリの一つ前のバージョンを利用するようにしてください。
+> 詳しくは、この問題に関連する containerd のチケット [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824) を参照してください。
+@z
+
+@x
+- Remove packaging for Ubuntu 16.04 "Xenial" and Fedora 32, as they reached EOL [docker/docker-ce-packaging#560](https://github.com/docker/docker-ce-packaging/pull/560)
+- Update Golang runtime to Go 1.16.6
+- Update the bundled buildx version to v0.6.1 for rpm and deb packages [docker/docker-ce-packaging#562](https://github.com/docker/docker-ce-packaging/pull/562)
+- Update static binaries and containerd.io rpm and deb packages to containerd v1.4.9 and runc v1.0.1: [docker/containerd-packaging#241](https://github.com/docker/containerd-packaging/pull/241), [docker/containerd-packaging#245](https://github.com/docker/containerd-packaging/pull/245), [docker/containerd-packaging#247](https://github.com/docker/containerd-packaging/pull/247).
+@y
+- Ubuntu 16.04 "Xenial" と Fedora 32 は EOL になったため、パッケージングからはずしました。
+  [docker/docker-ce-packaging#560](https://github.com/docker/docker-ce-packaging/pull/560)
+- Go 言語のランタイムを Go 1.16.6 に更新しました。
+- rpm と deb パッケージにバンドルする buildx バージョンを v0.6.1 に更新しました。
+  [docker/docker-ce-packaging#562](https://github.com/docker/docker-ce-packaging/pull/562)
+- rpm と deb パッケージにおけるスタティックライブラリを containerd v1.4.9 と runc v1.0.1 に更新しました。
+  [docker/containerd-packaging#241](https://github.com/docker/containerd-packaging/pull/241), [docker/containerd-packaging#245](https://github.com/docker/containerd-packaging/pull/245), [docker/containerd-packaging#247](https://github.com/docker/containerd-packaging/pull/247)
+@z
+
+@x
 ## 20.10.7
 2021-06-02
 @y

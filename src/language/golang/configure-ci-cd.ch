@@ -513,14 +513,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.repository }}:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:latest
 @y
       - name: Build and push Docker image
         id:   docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.repository }}:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:latest
 @z
 
 @x
@@ -869,7 +869,7 @@ GitHub Actions are an immensely powerful way to automate your CI and CD pipeline
 @z
 
 @x
-In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. 
+In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.
 @y
 本節では、既存の Docker 化された Go 言語プロジェクトに対しての GitHub アクションワークフローの設定方法を学びました。
 次にワークフローを最適化して、ビルド時間の改善とプルリクエスト数の削減を行いました。
@@ -877,9 +877,9 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 @z
 
 @x
-You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.
+You can also consider deploying your application to a public Cloud provider, such as Azure and AWS or to an orchestration platform such as Kubernetes.
 @y
-そこでこのアプリケーションを、Azure や AWS のような公開クラウドプロバイダーにデプロイすることにしましょう。
+そこでこのアプリケーションを、Azure や AWS のような公開クラウドプロバイダーに、あるいは Kubernetes のようなオーケストレーションプラットフォームにデプロイすることにしましょう。
 @z
 
 @x
@@ -889,9 +889,9 @@ In the next module, we’ll look into some options for doing so:
 @z
 
 @x
-[Deploy to the Cloud](deploy.md){: .button .outline-btn}
+[Deploy your app](deploy.md){: .button .outline-btn}
 @y
-[クラウドへのデプロイ](deploy.md){: .button .outline-btn}
+[アプリのデプロイ](deploy.md){: .button .outline-btn}
 @z
 
 @x

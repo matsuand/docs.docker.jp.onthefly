@@ -369,6 +369,7 @@ testuser:231072:65536
 - `IPAddress` shown in `docker inspect` and is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
+- NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
 @y
 - 以下のストレージドライバーのみがサポートされます。
   - `overlay2`（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）
@@ -387,6 +388,8 @@ testuser:231072:65536
 - `docker inspect`に表示される`IPAddress`は RootlessKit のネットワーク名前空間内で名前空間化されます。
   これはつまりこの IP アドレスへは、`nsenter`を使ってそのネットワーク名前空間にアクセスしない限りは、ホストからアクセスできないということです。
 - ホストネットワーク（`docker run --net=host`）も RootlessKit 内で名前空間化されます。
+- Docker の「data-root」としての NFS マウントはサポートされません。
+  この制約は rootless モードだけのものではありません。
 @z
 
 @x

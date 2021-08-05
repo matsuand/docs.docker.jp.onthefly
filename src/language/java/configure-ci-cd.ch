@@ -744,15 +744,15 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 @z
 
 @x
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application. For detailed instructions, see:
 @y
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application. For detailed instructions, see:
 @z
 
 @x
-[Deploy your application to the cloud](deploy.md){: .button .primary-btn}
+[Deploy your application](deploy.md){: .button .primary-btn}
 @y
-[Deploy your application to the cloud](deploy.md){: .button .primary-btn}
+[Deploy your application](deploy.md){: .button .primary-btn}
 @z
 
 @x

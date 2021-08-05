@@ -3,15 +3,15 @@
 
 @x
 ---
-title: "Deploy your app to the cloud"
+title: "Deploy your app"
 keywords: deploy, ACI, ECS, Java, local, development
-description: Learn how to deploy your application to the cloud.
+description: Learn how to deploy your application
 ---
 @y
 ---
-title: "Deploy your app to the cloud"
+title: "Deploy your app"
 keywords: deploy, ACI, ECS, Java, local, development
-description: Learn how to deploy your application to the cloud.
+description: Learn how to deploy your application
 ---
 @z
 
@@ -22,51 +22,9 @@ description: Learn how to deploy your application to the cloud.
 @z
 
 @x
-Now, that we have configured a CI/CD pipleline, let's look at how we can deploy the application to cloud. Docker supports deploying containers on Azure ACI and AWS ECS.
+{% include deploy.md %}
 @y
-Now, that we have configured a CI/CD pipleline, let's look at how we can deploy the application to cloud. Docker supports deploying containers on Azure ACI and AWS ECS.
-@z
-
-@x
-## Docker and ACI
-@y
-## Docker and ACI
-@z
-
-@x
-The Docker Azure Integration enables developers to use native Docker commands to run applications in Azure Container Instances (ACI) when building cloud-native applications. The new experience provides a tight integration between Docker Desktop and Microsoft Azure allowing developers to quickly run applications using the Docker CLI or VS Code extension, to switch seamlessly from local development to cloud deployment.
-@y
-The Docker Azure Integration enables developers to use native Docker commands to run applications in Azure Container Instances (ACI) when building cloud-native applications. The new experience provides a tight integration between Docker Desktop and Microsoft Azure allowing developers to quickly run applications using the Docker CLI or VS Code extension, to switch seamlessly from local development to cloud deployment.
-@z
-
-@x
-For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
-@y
-For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
-@z
-
-@x
-## Docker and ECS
-@y
-## Docker and ECS
-@z
-
-@x
-The Docker ECS Integration enables developers to use native Docker commands in Docker Compose CLI to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
-@y
-The Docker ECS Integration enables developers to use native Docker commands in Docker Compose CLI to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
-@z
-
-@x
-The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily simplify multi-container application development on Amazon ECS using Compose files.
-@y
-The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily simplify multi-container application development on Amazon ECS using Compose files.
-@z
-
-@x
-For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
-@y
-For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
+{% include deploy.md %}
 @z
 
 @x

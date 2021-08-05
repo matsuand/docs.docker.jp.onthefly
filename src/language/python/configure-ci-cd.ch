@@ -658,16 +658,16 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 @z
 
 @x
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application. For detailed instructions, see:
 @y
-そこでこのアプリケーションをクラウドにデプロイすることにしましょう。
+そこでこのアプリケーションをデプロイすることにしましょう。
 詳しい手順は以下です。
 @z
 
 @x
-[Deploy your application to the cloud](deploy.md){: .button .primary-btn}
+[Deploy your app](deploy.md){: .button .primary-btn}
 @y
-[クラウドへのアプリのデプロイ](deploy.md){: .button .primary-btn}
+[アプリのデプロイ](deploy.md){: .button .primary-btn}
 @z
 
 @x

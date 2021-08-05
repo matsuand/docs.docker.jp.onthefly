@@ -17,6 +17,7 @@ ctie:
 bases = \
 	api-version-matrix   \
 	cli                  \
+	deploy               \
 	desktop-update       \
 	enable-buildkit      \
 	eula                 \
