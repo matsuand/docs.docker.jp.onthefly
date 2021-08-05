@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-05 13:32:07 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-05T13:32:07+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-05T13:32:07+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -115,6 +115,81 @@
 
 <h1 id="version-2010">Version 20.10</h1>
 
+<h2 id="20108">20.10.8</h2>
+<p>2021-08-03</p>
+
+<h3 id="deprecation">廃止決定</h3>
+
+<ul>
+  <li>暗号化 TLS の秘密鍵に対するサポートは廃止決定しました。
+RFC 1423 において規定されている従来の PEM 暗号化は、設計の段階で安全でないものです。
+これは暗号文を認証しないため、攻撃者が平文を解読可能となる padding oracle 攻撃に対してぜい弱です。
+暗号化 TLS の秘密鍵に対するサポートは、現在、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
+<a href="https://github.com/docker/cli/pull/3219">docker/cli#3219</a></li>
+  <li>Kubernetes のスタックサポートを廃止決定しました。
+Docker CLI の<code class="language-plaintext highlighter-rouge">stack</code>と<code class="language-plaintext highlighter-rouge">context</code>のコマンドにおける Kubernetes サポートは、<a href="https://github.com/docker/compose-on-kubernetes">Compose on Kubernetes</a> が廃止決定されたことに対応して、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
+<a href="https://github.com/docker/cli/pull/3174">docker/cli#3174</a></li>
+</ul>
+
+<h3 id="client">クライアント</h3>
+
+<ul>
+  <li>Windows における<code class="language-plaintext highlighter-rouge">Invalid standard handle identifier</code>エラーを修正しました。
+<a href="https://github.com/docker/cli/pull/3132">docker/cli#3132</a></li>
+</ul>
+
+<h3 id="rootless">Rootless</h3>
+
+<ul>
+  <li>SELinux ホストにおける<code class="language-plaintext highlighter-rouge">can't open lock file /run/xtables.lock: Permission denied</code>エラーを回避するようにしました。
+<a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
+  <li>SELinux の動作中は、パーミッション拒否のエラーを防ぐために overlay2 を無効にしました。
+<a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
+  <li>openSUSE Tumbleweed における<code class="language-plaintext highlighter-rouge">x509: certificate signed by unknown authority</code>エラーを修正しました。
+<a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
+</ul>
+
+<h3 id="runtime">ランタイム</h3>
+
+<ul>
+  <li>シングルアーキテクチャーイメージに対して<code class="language-plaintext highlighter-rouge">--platform</code>オプションを利用する際に、指定のアーキテクチャーに一致しない場合には、警告を表示するようにしました。
+<a href="https://github.com/moby/moby/pull/42633">moby/moby#42633</a></li>
+  <li>cgroups v2 の利用時に、<code class="language-plaintext highlighter-rouge">Your kernel does not support swap memory limit</code>という誤った警告表示を修正しました。
+<a href="https://github.com/moby/moby/pull/42479">moby/moby#42479</a></li>
+  <li>Windows: <code class="language-plaintext highlighter-rouge">HcsShutdownComputeSystem</code>が<code class="language-plaintext highlighter-rouge">ERROR_PROC_NOT_FOUND</code>エラーを返した際に、コンテナーが止まっていない状況を修正しました。
+<a href="https://github.com/moby/moby/pull/42613">moby/moby#42613</a></li>
+</ul>
+
+<h2 id="swarm">Swarm</h2>
+
+<ul>
+  <li>ノードにおいてロードバランサーの古い IP のクリアの失敗が起きることで、IP アドレスがかぶってしまう可能性を修正しました。
+<a href="https://github.com/moby/moby/pull/42538">moby/moby#42538</a></li>
+  <li>log broker のデッドロックを修正しました (“dispatcher is stopped”)。
+<a href="https://github.com/moby/moby/pull/42537">moby/moby#42537</a></li>
+</ul>
+
+<h3 id="packaging">パッケージ</h3>
+
+<blockquote>
+  <p><strong>既知の問題</strong></p>
+
+  <p>当リリースの static パッケージに含まれる<code class="language-plaintext highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
+したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
+これを解消するためには、<code class="language-plaintext highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="language-plaintext highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
+詳しくは、この問題に関連する containerd のチケット <a href="https://github.com/containerd/containerd/issues/5824">containerd/containerd#5824</a> を参照してください。</p>
+</blockquote>
+
+<ul>
+  <li>Ubuntu 16.04 “Xenial” と Fedora 32 は EOL になったため、パッケージングからはずしました。
+<a href="https://github.com/docker/docker-ce-packaging/pull/560">docker/docker-ce-packaging#560</a></li>
+  <li>Go 言語のランタイムを Go 1.16.6 に更新しました。</li>
+  <li>rpm と deb パッケージにバンドルする buildx バージョンを v0.6.1 に更新しました。
+<a href="https://github.com/docker/docker-ce-packaging/pull/562">docker/docker-ce-packaging#562</a></li>
+  <li>rpm と deb パッケージにおけるスタティックライブラリを containerd v1.4.9 と runc v1.0.1 に更新しました。
+<a href="https://github.com/docker/containerd-packaging/pull/241">docker/containerd-packaging#241</a>, <a href="https://github.com/docker/containerd-packaging/pull/245">docker/containerd-packaging#245</a>, <a href="https://github.com/docker/containerd-packaging/pull/247">docker/containerd-packaging#247</a></li>
+</ul>
+
 <h2 id="20107">20.10.7</h2>
 <p>2021-06-02</p>
 
@@ -157,7 +232,7 @@ a breaking change in runc v1.0.0-rc94 and up. <a href="https://github.com/moby/b
   <li>Update the hcsshim SDK to make daemon logs on Windows less verbose <a href="https://github.com/moby/moby/pull/42292">moby/moby#42292</a>.</li>
 </ul>
 
-<h3 id="rootless">Rootless</h3>
+<h3 id="rootless-1">Rootless</h3>
 
 <ul>
   <li>Fix capabilities not being honored when an image was built on a daemon with
@@ -257,7 +332,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/42256">moby/moby#42256</a></li>
 </ul>
 
-<h3 id="rootless-1">Rootless</h3>
+<h3 id="rootless-2">Rootless</h3>
 
 <ul>
   <li>RootlessKit を <a href="https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.1">v0.14.1</a> に更新しました。
@@ -360,7 +435,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/41975">mobymoby#41975</a></li>
 </ul>
 
-<h3 id="rootless-2">Rootless</h3>
+<h3 id="rootless-3">Rootless</h3>
 
 <ul>
   <li>systemd の KillMode を mixed に設定することで、サービスが停止する際にハングしないようにしました。
@@ -380,7 +455,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/41971">moby/moby#41971</a></li>
 </ul>
 
-<h3 id="swarm">Swarm</h3>
+<h3 id="swarm-1">Swarm</h3>
 
 <ul>
   <li>再起動時にハートビートが維持されない問題を修正しました。
@@ -438,7 +513,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/libnetwork/pull/2604">moby/libnetwork#2604</a></li>
 </ul>
 
-<h3 id="swarm-1">Swarm</h3>
+<h3 id="swarm-2">Swarm</h3>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">replicated-job</code>と<code class="language-plaintext highlighter-rouge">global-job</code>のサービスモードに対するフィルタリングを修正。
@@ -672,7 +747,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>seccomp: Remove dependency in dockerd on libseccomp <a href="https://github.com/moby/moby/pull/41395">moby/moby#41395</a></li>
 </ul>
 
-<h3 id="rootless-3">Rootless</h3>
+<h3 id="rootless-4">Rootless</h3>
 
 <ul>
   <li>rootless: 試験的機能から格上げ。
@@ -696,7 +771,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>Fix seccomp profile for clone syscall <a href="https://github.com/moby/moby/pull/39308">moby/moby#39308</a></li>
 </ul>
 
-<h3 id="swarm-2">Swarm</h3>
+<h3 id="swarm-3">Swarm</h3>
 
 <ul>
   <li>Swarm ジョブへのサポートを追加。
@@ -750,6 +825,8 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#20108" class="nomunge">20.10.8</a></li>
+      <li><a href="#swarm" class="nomunge">Swarm</a></li>
       <li><a href="#20107" class="nomunge">20.10.7</a></li>
       <li><a href="#20106" class="nomunge">20.10.6</a></li>
       <li><a href="#20105" class="nomunge">20.10.5</a></li>

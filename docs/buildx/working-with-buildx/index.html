@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-05 13:32:07 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Buildx | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Buildx" />
   <meta property="og:description" content="Docker Buildx の利用" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-05T13:32:07+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-05T13:32:07+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Buildx","description":"Docker Buildx の利用","url":"https://docs.docker.com/buildx/working-with-buildx/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,9 +103,9 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="overview">概要</h2>
+                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><h2 id="overview">概要</h2>
 
-<p>Docker Buildx は Docker コマンドを拡張する CLI プラグインであり、<a href="https://github.com/moby/buildkit">Moby BuildKit</a> ビルダーツールキットにより提供される機能に完全対応するものです。
+<p>Docker Buildx は Docker コマンドを拡張する CLI プラグインであり、<a href="https://github.com/moby/buildkit" target="_blank" rel="noopener" class="_">Moby BuildKit</a> ビルダーツールキットにより提供される機能に完全対応するものです。
 Docker ビルドと同様のユーザー操作を提供し、さらにスコープ化されたビルダーインスタンス、複数ノードへの同時ビルドなど、数多くの新機能を提供します。</p>
 
 <h2 id="install">インストール</h2>
@@ -113,7 +113,19 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
 <p>Docker Buildx は Docker Desktop に含まれます。
 また <a href="/docs.docker.jp.onthefly/engine/install/">DEB または RPM パッケージ</a> により Linux 上にインストールする Docker パッケージに含まれます。</p>
 
-<p>また最新の<code class="language-plaintext highlighter-rouge">buildx</code>バイナリを GitHub 上の <a href="https://github.com/docker/buildx/">Docker buildx</a> リポジトリからダウンロードすることもできます。</p>
+<p>また最新の<code class="language-plaintext highlighter-rouge">buildx</code>バイナリを GitHub 上の <a href="https://github.com/docker/buildx/">Docker buildx</a> リリースページからダウンロードすることもできます。
+ダウンロードしたら、<code class="language-plaintext highlighter-rouge">~/.docker/cli-plugins</code>フォルダーにコピーして、名前を<code class="language-plaintext highlighter-rouge">docker-buildx</code>とします。
+そして以下のようにして実行権限を与えます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod </span>a+x ~/.docker/cli-plugins/docker-buildx
+</code></pre></div></div>
+
+<p>以下に示すのは、<a href="https://hub.docker.com/r/docker/buildx-bin"><code class="language-plaintext highlighter-rouge">docker/buildx-bin</code></a> イメージを使って、DOckerfile 内において buildx を利用する例です。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> docker</span>
+<span class="k">COPY</span><span class="s"> --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx</span>
+<span class="k">RUN </span>docker buildx version
+</code></pre></div></div>
 
 <h2 id="set-buildx-as-the-default-builder">デフォルトビルダーとして buildx を設定</h2>
 
@@ -151,8 +163,8 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
 
 <h2 id="work-with-builder-instances">ビルダーインスタンスを使った操作</h2>
 
-<p>Buildx は「docker」ドライバーが対応していれば、デフォルトでこのドライバーを利用します。
-ユーザー操作は、ネイティブな Docker ビルドと非常によく似ています。
+<p>Buildx は<code class="language-plaintext highlighter-rouge">docker</code>ドライバーが対応していれば、デフォルトでこのドライバーを利用します。
+ユーザー操作は、ネイティブな<code class="language-plaintext highlighter-rouge">docker build</code>と非常によく似ています。
 アプリケーションをビルドするには、ローカルで稼動する共有デーモンを利用する必要があります。</p>
 
 <p>Buildx allows you to create new instances of isolated builders. You can use this
@@ -176,9 +188,9 @@ builder.</p>
 
 <p>Docker also features a <a href="/docs.docker.jp.onthefly/engine/reference/commandline/context/"><code class="language-plaintext highlighter-rouge">docker context</code></a>
 command that you can use to provide names for remote Docker API endpoints. Buildx
-integrates with docker context to ensure all the contexts automatically get a
+integrates with <code class="language-plaintext highlighter-rouge">docker context</code> to ensure all the contexts automatically get a
 default builder instance. You can also set the context name as the target when
-you  create a new builder instance or when you add a node to it.</p>
+you create a new builder instance or when you add a node to it.</p>
 
 <h2 id="build-multi-platform-images">マルチプラットフォームのイメージビルド</h2>
 
@@ -189,7 +201,7 @@ you  create a new builder instance or when you add a node to it.</p>
 このフラグにターゲットプラットフォームを指定しビルド出力します。
 （たとえば<code class="language-plaintext highlighter-rouge">linux/amd64</code>、<code class="language-plaintext highlighter-rouge">linux/arm64</code>、darwin/amd64`）</p>
 
-<p>When the current builder instance is backed by the “docker-container” driver,
+<p>When the current builder instance is backed by the <code class="language-plaintext highlighter-rouge">docker-container</code> driver,
 you can specify multiple platforms together. In this case, it builds a manifest
 list which contains images for all specified architectures. When you use this
 image in <a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/"><code class="language-plaintext highlighter-rouge">docker run</code></a> or
@@ -212,11 +224,23 @@ are available. When BuildKit needs to run a binary for a different architecture,
 it automatically loads it through a binary registered in the <code class="language-plaintext highlighter-rouge">binfmt_misc</code>
 handler.</p>
 
+<p>For QEMU binaries registered with <code class="language-plaintext highlighter-rouge">binfmt_misc</code> on the host OS to work
+transparently inside containers they must be registered with the <code class="language-plaintext highlighter-rouge">fix_binary</code>
+flag. This requires a kernel &gt;= 4.8 and binfmt-support &gt;= 2.1.7. You can check
+for proper registration by checking if <code class="language-plaintext highlighter-rouge">F</code> is among the flags in
+<code class="language-plaintext highlighter-rouge">/proc/sys/fs/binfmt_misc/qemu-*</code>. While Docker Desktop comes preconfigured
+with <code class="language-plaintext highlighter-rouge">binfmt_misc</code> support for additional platforms, for other installations
+it likely needs to be installed using <a href="https://github.com/tonistiigi/binfmt" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">tonistiigi/binfmt</code></a>
+image.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--privileged</span> <span class="nt">--rm</span> tonistiigi/binfmt <span class="nt">--install</span> all
+</code></pre></div></div>
+
 <p>Using multiple native nodes provide better support for more complicated cases
 that are not handled by QEMU and generally have better performance. You can
 add additional nodes to the builder instance using the <code class="language-plaintext highlighter-rouge">--append</code> flag.</p>
 
-<p>Assuming contexts node-amd64 and node-arm64 exist in <code class="language-plaintext highlighter-rouge">docker context ls</code>;</p>
+<p>Assuming contexts <code class="language-plaintext highlighter-rouge">node-amd64</code> and <code class="language-plaintext highlighter-rouge">node-arm64</code> exist in <code class="language-plaintext highlighter-rouge">docker context ls</code>;</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker buildx create <span class="nt">--use</span> <span class="nt">--name</span> mybuild node-amd64
 <span class="go">mybuild
@@ -256,6 +280,13 @@ command called <a href="/docs.docker.jp.onthefly/engine/reference/commandline/bu
 <p>The <code class="language-plaintext highlighter-rouge">bake</code> command supports building images from compose files, similar to
 <a href="/docs.docker.jp.onthefly/compose/reference/build/"><code class="language-plaintext highlighter-rouge">docker-compose build</code></a>, but allowing all the
 services to be built concurrently as part of a single request.</p>
+
+<p>There is also support for custom build rules from HCL/JSON files allowing
+better code reuse and different target groups. The design of bake is in very
+early stages and we are looking for feedback from users. Let us know your
+feedback by creating an issue in the
+<a href="https://github.com/docker/buildx/issues" target="_blank" rel="noopener" class="_">Docker buildx</a>
+GitHub repository.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=buildx">buildx</a>, <a href="/docs.docker.jp.onthefly/search/?q=multi-arch">multi-arch</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
