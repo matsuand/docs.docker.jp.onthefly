@@ -65,6 +65,27 @@ for Docker Engine.
 @z
 
 @x
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+@y
+> **重要**
+>
+> [Go 1.16](https://golang.org/doc/go1.16#net/http) において [net/http changes](https://github.com/golang/go/issues/40909) (net/http の変更) があったため、環境変数`$HTTP_PROXY`を使った HTTP プロキシーの設定は、TLS (`https://`) 接続においては用いられなくなりました。
+> `https://` URL によるリクエストを扱う際には、環境変数`$HTTPS_PROXY`の設定も必要になることを忘れないでください。
+>
+> [HTTP/HTTPS プロキシーの節](../../config/daemon/systemd.md#httphttps-proxy) を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。
+{: .important }
+@z
+
+@x
 ### Deprecation
 @y
 {: #deprecation }
