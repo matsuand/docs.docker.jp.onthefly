@@ -93,14 +93,14 @@ Let’s create a simple Node.js application that we can use as our example. Crea
 @z
 
 @x
-```shell
+```console
 $ cd [path to your node-docker directory]
 $ npm init -y
 $ npm install ronin-server ronin-mocks
 $ touch server.js
 ```
 @y
-```shell
+```console
 $ cd [各自のnode-dockerディレクトリ]
 $ npm init -y
 $ npm install ronin-server ronin-mocks
@@ -167,11 +167,11 @@ Let’s start our application and make sure it’s running properly. Open your t
 @z
 
 @x
-```shell
+```console
 $ node server.js
 ```
 @y
-```shell
+```console
 $ node server.js
 ```
 @z
@@ -185,14 +185,14 @@ To test that the application is working properly, we’ll first POST some JSON t
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
   --data '{"msg": "testing" }'
 {"code":"success","payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -574,17 +574,9 @@ Let’s build our first Docker image.
 @z
 
 @x
-```shell
+```console
 $ docker build --tag node-docker .
-```
-@y
-```shell
-$ docker build --tag node-docker .
-```
-@z
 
-@x
-```shell
 [+] Building 93.8s (11/11) FINISHED
  => [internal] load build definition from dockerfile                                          0.1s
  => => transferring dockerfile: 617B                                                          0.0s
@@ -596,7 +588,9 @@ $ docker build --tag node-docker .
  => [5/5] COPY . .
 ```
 @y
-```shell
+```console
+$ docker build --tag node-docker .
+
 [+] Building 93.8s (11/11) FINISHED
  => [internal] load build definition from dockerfile                                          0.1s
  => => transferring dockerfile: 617B                                                          0.0s
@@ -631,13 +625,13 @@ To list images, simply run the `images` command.
 @z
 
 @x
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
 ```
 @y
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
@@ -684,11 +678,11 @@ To create a new tag for the image we built above, run the following command.
 @z
 
 @x
-```shell
+```console
 $ docker tag node-docker:latest node-docker:v1.0.0
 ```
 @y
-```shell
+```console
 $ docker tag node-docker:latest node-docker:v1.0.0
 ```
 @z
@@ -740,12 +734,12 @@ rmi コマンドは「remove image」を表しています。
 @z
 
 @x
-```shell
+```console
 $ docker rmi node-docker:v1.0.0
 Untagged: node-docker:v1.0.0
 ```
 @y
-```shell
+```console
 $ docker rmi node-docker:v1.0.0
 Untagged: node-docker:v1.0.0
 ```
@@ -759,13 +753,13 @@ images コマンドを実行して確認してみます。
 @z
 
 @x
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
 ```
 @y
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB

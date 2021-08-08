@@ -62,11 +62,11 @@ you can still access that documentation in the following ways:
 @z
 
 @x
-  ```bash
-  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```console
+  $ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
   ```
 @y
-  ```bash
-  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```console
+  $ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
   ```
 @z

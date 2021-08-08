@@ -72,10 +72,6 @@ Options:
 By default, this renders information about a machine as JSON. If a format is
 specified, the given template is executed for each result.
 @y
-{% comment %}
-By default, this renders information about a machine as JSON. If a format is
-specified, the given template is executed for each result.
-{% endcomment %}
 このコマンドが出力するマシン情報は、デフォルトでは JSON 形式です。
 フォーマットが指定された場合は、出力に対してそのフォーマットテンプレートが適用されます。
 @z
@@ -84,10 +80,6 @@ specified, the given template is executed for each result.
 Go's [text/template](http://golang.org/pkg/text/template/) package
 describes all the details of the format.
 @y
-{% comment %}
-Go's [text/template](http://golang.org/pkg/text/template/) package
-describes all the details of the format.
-{% endcomment %}
 Go 言語の [text/template](http://golang.org/pkg/text/template/) パッケージにおいて、フォーマットの詳細が説明されています。
 @z
 
@@ -95,11 +87,7 @@ Go 言語の [text/template](http://golang.org/pkg/text/template/) パッケー�
 In addition to the `text/template` syntax, there are some additional functions,
 `json` and `prettyjson`, which can be used to format the output as JSON (documented below).
 @y
-{% comment %}
-In addition to the `text/template` syntax, there are some additional functions,
-`json` and `prettyjson`, which can be used to format the output as JSON (documented below).
-{% endcomment %}
-`text/template` の文法に加えて、追加の機能として `json` と `prettyjson` があります。
+`text/template`の文法に加えて、追加の機能として`json`と`prettyjson`があります。
 これは JSON 書式の出力をフォーマットするために用いられます。
 （以降に説明します。）
 @z
@@ -107,9 +95,6 @@ In addition to the `text/template` syntax, there are some additional functions,
 @x
 ## Examples
 @y
-{% comment %}
-## Examples
-{% endcomment %}
 {: #examples }
 ## 利用例
 @z
@@ -117,26 +102,20 @@ In addition to the `text/template` syntax, there are some additional functions,
 @x
 **List all the details of a machine:**
 @y
-{% comment %}
-**List all the details of a machine:**
-{% endcomment %}
 **マシン情報詳細の一覧表示**
 @z
 
 @x
 This is the default usage of `inspect`.
 @y
-{% comment %}
-This is the default usage of `inspect`.
-{% endcomment %}
-これが `inspect` のデフォルトの利用方法です。
+これが`inspect`のデフォルトの利用方法です。
 @z
 
 @x
-```bash
+```console
 $ docker-machine inspect dev
 @y
-```bash
+```console
 $ docker-machine inspect dev
 @z
 
@@ -173,9 +152,6 @@ $ docker-machine inspect dev
 @x
 **Get a machine's IP address:**
 @y
-{% comment %}
-**Get a machine's IP address:**
-{% endcomment %}
 **マシンの IP アドレス取得**
 @z
 
@@ -183,20 +159,16 @@ $ docker-machine inspect dev
 For the most part, you can pick out any field from the JSON in a fairly
 straightforward manner.
 @y
-{% comment %}
-For the most part, you can pick out any field from the JSON in a fairly
-straightforward manner.
-{% endcomment %}
 JSON 書式においては、ほとんどの項目をごく普通の方法で引き出すことができます。
 @z
 
 @x
 {% raw %}
-```bash
+```console
 $ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 @y
 {% raw %}
-```bash
+```console
 $ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 @z
 
@@ -213,9 +185,6 @@ $ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 @x
 **Formatting details:**
 @y
-{% comment %}
-**Formatting details:**
-{% endcomment %}
 **詳細フォーマット**
 @z
 
@@ -223,18 +192,14 @@ $ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 If you want a subset of information formatted as JSON, you can use the `json`
 function in the template.
 @y
-{% comment %}
-If you want a subset of information formatted as JSON, you can use the `json`
-function in the template.
-{% endcomment %}
-JSON 書式から部分的に情報を引き出したい場合には、テンプレートとして `json` 機能を利用することができます。
+JSON 書式から部分的に情報を引き出したい場合には、テンプレートとして`json`機能を利用することができます。
 @z
 
 @x
-```bash
+```console
 $ docker-machine inspect --format='{{json .Driver}}' dev-fusion
 @y
-```bash
+```console
 $ docker-machine inspect --format='{{json .Driver}}' dev-fusion
 @z
 
@@ -250,21 +215,17 @@ $ docker-machine inspect --format='{{json .Driver}}' dev-fusion
 While this is usable, it's not very human-readable. For this reason, there is
 `prettyjson`:
 @y
-{% comment %}
-While this is usable, it's not very human-readable. For this reason, there is
-`prettyjson`:
-{% endcomment %}
 上は十分利用できるものですが、人間が読むには不便です。
-この理由から `prettyjson` があります。
+この理由から`prettyjson`があります。
 @z
 
 @x
 {% raw %}
-```bash
+```console
 $ docker-machine inspect --format='{{prettyjson .Driver}}' dev-fusion
 @y
 {% raw %}
-```bash
+```console
 $ docker-machine inspect --format='{{prettyjson .Driver}}' dev-fusion
 @z
 

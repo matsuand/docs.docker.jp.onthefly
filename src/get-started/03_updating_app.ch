@@ -72,12 +72,12 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @y
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @z
 
@@ -88,12 +88,12 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @z
 
@@ -105,12 +105,12 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-```bash
+```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
 (bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
 ```
 @y
-```bash
+```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
 (bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
 ```
@@ -159,12 +159,12 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-    ```bash
-    docker ps
+    ```console
+    $ docker ps
     ```
 @y
-    ```bash
-    docker ps
+    ```console
+    $ docker ps
     ```
 @z
 
@@ -175,14 +175,14 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-    ```bash
+    ```console
     # Swap out <the-container-id> with the ID from docker ps
-    docker stop <the-container-id>
+    $ docker stop <the-container-id>
     ```
 @y
-    ```bash
+    ```console
     # <the-container-id> は docker ps で得られた ID にします
-    docker stop <the-container-id>
+    $ docker stop <the-container-id>
     ```
 @z
 
@@ -193,12 +193,12 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-    ```bash
-    docker rm <the-container-id>
+    ```console
+    $ docker rm <the-container-id>
     ```
 @y
-    ```bash
-    docker rm <the-container-id>
+    ```console
+    $ docker rm <the-container-id>
     ```
 @z
 
@@ -271,12 +271,12 @@ Docker ダッシュボードを開いていたら、コンテナーの削除は�
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @z
 

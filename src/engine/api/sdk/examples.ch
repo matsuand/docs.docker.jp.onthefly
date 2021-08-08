@@ -269,13 +269,13 @@ print(client.containers.run("alpine", ["echo", "hello", "world"]))
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
@@ -532,13 +532,13 @@ print(container.id)
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "bfirsh/reticulate-splines"}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "bfirsh/reticulate-splines"}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
@@ -712,7 +712,7 @@ for container in client.containers.list():
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -722,7 +722,7 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engin
 }]
 ```
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -910,7 +910,7 @@ for container in client.containers.list():
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -919,7 +919,7 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engin
   ...
 }]
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -1103,7 +1103,7 @@ print(container.logs())
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/ca5f55cdb/logs?stdout=1"
 Reticulating spline 1...
 Reticulating spline 2...
@@ -1114,7 +1114,7 @@ Reticulating spline 5...
 </div>
 </div><!-- end tab-content -->
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/ca5f55cdb/logs?stdout=1"
 Reticulating spline 1...
 Reticulating spline 2...
@@ -1277,7 +1277,7 @@ for image in client.images.list():
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/images/json
 [{
   "Id":"sha256:31d9a31e1dd803470c5a151b8919ef1988ac3efd44281ac59d43ad623f275dcd",
@@ -1286,7 +1286,7 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engin
 }]
 ```
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/images/json
 [{
   "Id":"sha256:31d9a31e1dd803470c5a151b8919ef1988ac3efd44281ac59d43ad623f275dcd",
@@ -1454,7 +1454,7 @@ print(image.id)
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock \
   -X POST "http://localhost/v{{ site.latest_engine_api_version}}/images/create?fromImage=alpine"
 {"status":"Pulling from library/alpine","id":"3.1"}
@@ -1463,7 +1463,7 @@ $ curl --unix-socket /var/run/docker.sock \
 ...
 ```
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock \
   -X POST "http://localhost/v{{ site.latest_engine_api_version}}/images/create?fromImage=alpine"
 {"status":"Pulling from library/alpine","id":"3.1"}
@@ -1692,10 +1692,10 @@ JSON structure.
 @z
 
 @x
-```bash
+```console
 $ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "string"}' | base64)
 @y
-```bash
+```console
 $ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "string"}' | base64)
 @z
 
@@ -1927,7 +1927,7 @@ print(image.id)
 @z
 
 @x
-```bash
+```console
 $ docker run -d alpine touch /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 $ curl --unix-socket /var/run/docker.sock\
@@ -1935,7 +1935,7 @@ $ curl --unix-socket /var/run/docker.sock\
 {"Id":"sha256:6c86a5cd4b87f2771648ce619e319f3e508394b5bfc2cdbd2d60f59d52acda6c"}
 ```
 @y
-```bash
+```console
 $ docker run -d alpine touch /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 $ curl --unix-socket /var/run/docker.sock\

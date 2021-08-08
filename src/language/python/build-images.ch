@@ -90,14 +90,14 @@ Let’s create a simple Python application using the Flask framework that we’l
 @z
 
 @x
-```shell
+```console
 $ cd /path/to/python-docker
 $ pip3 install Flask
 $ pip3 freeze > requirements.txt
 $ touch app.py
 ```
 @y
-```shell
+```console
 $ cd /path/to/python-docker
 $ pip3 install Flask
 $ pip3 freeze > requirements.txt
@@ -113,11 +113,11 @@ Now, let’s add some code to handle simple web requests. Open this working dire
 @z
 
 @x
-```shell
+```python
 from flask import Flask
 app = Flask(__name__)
 @y
-```shell
+```python
 from flask import Flask
 app = Flask(__name__)
 @z
@@ -149,11 +149,11 @@ Let’s start our application and make sure it’s running properly. Open your t
 @z
 
 @x
-```shell
+```console
 $ python3 -m flask run
 ```
 @y
-```shell
+```console
 $ python3 -m flask run
 ```
 @z
@@ -499,7 +499,7 @@ Let’s build our first Docker image.
 @z
 
 @x
-```shell
+```console
 $ docker build --tag python-docker .
 [+] Building 2.7s (10/10) FINISHED
  => [internal] load build definition from Dockerfile
@@ -521,7 +521,7 @@ $ docker build --tag python-docker .
  => => naming to docker.io/library/python-docker
 ```
 @y
-```shell
+```console
 $ docker build --tag python-docker .
 [+] Building 2.7s (10/10) FINISHED
  => [internal] load build definition from Dockerfile
@@ -566,14 +566,14 @@ To list images, simply run the `docker images` command.
 @z
 
 @x
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 @y
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
@@ -622,11 +622,11 @@ To create a new tag for the image we’ve built above, run the following command
 @z
 
 @x
-```shell
+```console
 $ docker tag python-docker:latest python-docker:v1.0.0
 ```
 @y
-```shell
+```console
 $ docker tag python-docker:latest python-docker:v1.0.0
 ```
 @z
@@ -646,7 +646,7 @@ Now, run the `docker images` command to see a list of our local images.
 @z
 
 @x
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
@@ -654,7 +654,7 @@ python-docker   v1.0.0            8cae92a8fbd6   4 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 @y
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
@@ -680,12 +680,12 @@ Let’s remove the tag that we just created. To do this, we’ll use the `rmi` c
 @z
 
 @x
-```shell
+```console
 $ docker rmi python-docker:v1.0.0
 Untagged: python-docker:v1.0.0
 ```
 @y
-```shell
+```console
 $ docker rmi python-docker:v1.0.0
 Untagged: python-docker:v1.0.0
 ```
@@ -699,14 +699,14 @@ Docker の出力結果からわかるように、イメージは削除された�
 @z
 
 @x
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 @y
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB

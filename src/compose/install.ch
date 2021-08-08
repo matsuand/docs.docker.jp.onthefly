@@ -317,12 +317,12 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 @z
 
 @x
-    ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 @y
-    ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 @z
 
@@ -347,12 +347,12 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 @z
 
 @x
-    ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
+    ```console
+    $ sudo chmod +x /usr/local/bin/docker-compose
     ```
 @y
-    ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
+    ```console
+    $ sudo chmod +x /usr/local/bin/docker-compose
     ```
 @z
 
@@ -371,13 +371,13 @@ For example:
 @z
 
 @x
-```bash
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```console
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 @y
-    ```bash
-    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-    ```
+```console
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 @z
 
 @x
@@ -394,14 +394,14 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 @z
 
 @x
-    ```bash
+    ```console
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 @y
-    ```bash
+    ```console
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
@@ -458,24 +458,24 @@ Compose は`pip`を使って [pypi](https://pypi.python.org/pypi/docker-compose)
 @z
 
 @x
-```bash
-pip install docker-compose
+```console
+$ pip install docker-compose
 ```
 If you are not using virtualenv,
 @y
-```bash
-pip install docker-compose
+```console
+$ pip install docker-compose
 ```
 virtualenv を使わない場合は以下のようにします。
 @z
 
 @x
-```bash
-sudo pip install docker-compose
+```console
+$ sudo pip install docker-compose
 ```
 @y
-```bash
-sudo pip install docker-compose
+```console
+$ sudo pip install docker-compose
 ```
 @z
 
@@ -501,14 +501,14 @@ Compose は 簡易な bash のラッパースクリプトを用いて、コン�
 @z
 
 @x
-```bash
-sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+```console
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 @y
-```bash
-sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+```console
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 @z
 
@@ -601,12 +601,12 @@ Docker ラベルを持っていないコンテナーであることが検出さ�
 @z
 
 @x
-```bash
-docker-compose migrate-to-labels
+```console
+$ docker-compose migrate-to-labels
 ```
 @y
-```bash
-docker-compose migrate-to-labels
+```console
+$ docker-compose migrate-to-labels
 ```
 @z
 
@@ -619,12 +619,12 @@ Compose は新しくコンテナーを生成してくれます。
 @z
 
 @x
-```bash
-docker container rm -f -v myapp_web_1 myapp_db_1 ...
+```console
+$ docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 @y
-```bash
-docker container rm -f -v myapp_web_1 myapp_db_1 ...
+```console
+$ docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 @z
 
@@ -642,12 +642,12 @@ To uninstall Docker Compose if you installed using `curl`:
 @z
 
 @x
-```bash
-sudo rm /usr/local/bin/docker-compose
+```console
+$ sudo rm /usr/local/bin/docker-compose
 ```
 @y
-```bash
-sudo rm /usr/local/bin/docker-compose
+```console
+$ sudo rm /usr/local/bin/docker-compose
 ```
 @z
 
@@ -658,12 +658,12 @@ To uninstall Docker Compose if you installed using `pip`:
 @z
 
 @x
-```bash
-pip uninstall docker-compose
+```console
+$ pip uninstall docker-compose
 ```
 @y
-```bash
-pip uninstall docker-compose
+```console
+$ pip uninstall docker-compose
 ```
 @z
 

@@ -255,11 +255,11 @@ container.
 @z
 
 @x
-```bash
+```console
 $ docker volume create my-vol
 ```
 @y
-```bash
+```console
 $ docker volume create my-vol
 ```
 @z
@@ -271,10 +271,10 @@ $ docker volume create my-vol
 @z
 
 @x
-```bash
+```console
 $ docker volume ls
 @y
-```bash
+```console
 $ docker volume ls
 @z
 
@@ -293,7 +293,7 @@ local               my-vol
 @z
 
 @x
-```bash
+```console
 $ docker volume inspect my-vol
 [
     {
@@ -307,7 +307,7 @@ $ docker volume inspect my-vol
 ]
 ```
 @y
-```bash
+```console
 $ docker volume inspect my-vol
 [
     {
@@ -329,11 +329,11 @@ $ docker volume inspect my-vol
 @z
 
 @x
-```bash
+```console
 $ docker volume rm my-vol
 ```
 @y
-```bash
+```console
 $ docker volume rm my-vol
 ```
 @z
@@ -381,14 +381,14 @@ after running the first one.
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name devtest \
   --mount source=myvol2,target=/app \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name devtest \
   --mount source=myvol2,target=/app \
@@ -405,14 +405,14 @@ $ docker run -d \
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
@@ -485,7 +485,7 @@ step.
 @z
 
 @x
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -493,7 +493,7 @@ $ docker container rm devtest
 $ docker volume rm myvol2
 ```
 @y
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -615,7 +615,7 @@ uses a local volume called `myvol2`.
 @z
 
 @x
-```bash
+```console
 $ docker service create -d \
   --replicas=4 \
   --name devtest-service \
@@ -623,7 +623,7 @@ $ docker service create -d \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker service create -d \
   --replicas=4 \
   --name devtest-service \
@@ -639,10 +639,10 @@ Use `docker service ps devtest-service` to verify that the service is running:
 @z
 
 @x
-```bash
+```console
 $ docker service ps devtest-service
 @y
-```bash
+```console
 $ docker service ps devtest-service
 @z
 
@@ -664,11 +664,11 @@ Remove the service, which stops all its tasks:
 @z
 
 @x
-```bash
+```console
 $ docker service rm devtest-service
 ```
 @y
-```bash
+```console
 $ docker service rm devtest-service
 ```
 @z
@@ -750,14 +750,14 @@ The `--mount` and `-v` examples have the same end result.
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
@@ -774,14 +774,14 @@ $ docker run -d \
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
@@ -806,10 +806,10 @@ the containers and volumes.  Note volume removal is a separate step.
 @z
 
 @x
-```bash
+```console
 $ docker container stop nginxtest
 @y
-```bash
+```console
 $ docker container stop nginxtest
 @z
 
@@ -880,14 +880,14 @@ The `--mount` and `-v` examples have the same result.
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
@@ -904,14 +904,14 @@ $ docker run -d \
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
@@ -977,10 +977,10 @@ separate step.
 @z
 
 @x
-```bash
+```console
 $ docker container stop nginxtest
 @y
-```bash
+```console
 $ docker container stop nginxtest
 @z
 
@@ -1082,11 +1082,11 @@ Docker ホストでは`vieux/sshfs`プラグインをインストールします
 @z
 
 @x
-```bash
+```console
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 @y
-```bash
+```console
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 @z
@@ -1109,14 +1109,14 @@ configurable options, each of which is specified using an `-o` flag.
 @z
 
 @x
-```bash
+```console
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
   sshvolume
 ```
 @y
-```bash
+```console
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
@@ -1143,7 +1143,7 @@ must use the `--mount` flag to mount the volume, rather than `-v`.**
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
@@ -1151,7 +1151,7 @@ $ docker run -d \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker run -d \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
@@ -1182,14 +1182,14 @@ This example shows how you can create an NFS volume when creating a service. Thi
 @z
 
 @x
-```bash
+```console
 $ docker service create -d \
   --name nfs-service \
   --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
   nginx:latest
 ```
 @y
-```bash
+```console
 $ docker service create -d \
   --name nfs-service \
   --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
@@ -1204,14 +1204,14 @@ $ docker service create -d \
 @z
 
 @x
-```bash
+```console
 docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
     nginx:latest
 ```
 @y
-```bash
+```console
 docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
@@ -1233,8 +1233,8 @@ Samba 共有は、ホスト上でのマウントポイントを設定するこ�
 @z
 
 @x
-```bash
-docker volume create \
+```console
+$ docker volume create \
 	--driver local \
 	--opt type=cifs \
 	--opt device=//uxxxxx.your-server.de/backup \
@@ -1242,8 +1242,8 @@ docker volume create \
 	--name cif-volume
 ```
 @y
-```bash
-docker volume create \
+```console
+$ docker volume create \
 	--driver local \
 	--opt type=cifs \
 	--opt device=//uxxxxx.your-server.de/backup \

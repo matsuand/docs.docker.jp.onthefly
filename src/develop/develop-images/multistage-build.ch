@@ -285,11 +285,11 @@ Dockerfile はただ 1 つ用意するだけです。
 @z
 
 @x
-```bash
+```console
 $ docker build -t alexellis2/href-counter:latest .
 ```
 @y
-```bash
+```console
 $ docker build -t alexellis2/href-counter:latest .
 ```
 @z
@@ -393,11 +393,11 @@ the stage named `builder`:
 @z
 
 @x
-```bash
+```console
 $ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 @y
-```bash
+```console
 $ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 @z

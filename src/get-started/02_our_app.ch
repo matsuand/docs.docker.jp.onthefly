@@ -152,12 +152,12 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @y
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @z
 
@@ -221,12 +221,12 @@ command (remember that from earlier?).
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 @z
 

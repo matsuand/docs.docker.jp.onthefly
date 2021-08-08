@@ -77,30 +77,24 @@ Options:
 @x
 Regenerate TLS certificates and update the machine with new certs.
 @y
-{% comment %}
-Regenerate TLS certificates and update the machine with new certs.
-{% endcomment %}
 TLS 証明書を再生成し、この証明書を使ってマシンを更新します。
 @z
 
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下のとおりです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine regenerate-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
 Regenerating TLS certificates
 ```
 @y
-```bash
+```console
 $ docker-machine regenerate-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
@@ -112,15 +106,11 @@ Regenerating TLS certificates
 If your certificates have expired, you'll need to regenerate the client certs
 as well using the `--client-certs` option:
 @y
-{% comment %}
-If your certificates have expired, you'll need to regenerate the client certs
-as well using the `--client-certs` option:
-{% endcomment %}
-証明書の期限が切れている場合はクライアント証明書の再生成が必要になるため、その際には `--client-certs` オプションを利用します。
+証明書の期限が切れている場合はクライアント証明書の再生成が必要になるため、その際には`--client-certs`オプションを利用します。
 @z
 
 @x
-```bash
+```console
 $ docker-machine regenerate-certs --client-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
@@ -129,7 +119,7 @@ Regenerating local certificates
 ...
 ```
 @y
-```bash
+```console
 $ docker-machine regenerate-certs --client-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y

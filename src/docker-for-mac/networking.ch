@@ -308,11 +308,11 @@ is an example of this.
 @z
 
 @x
-```bash
+```console
 $ docker run -d -p 80:80 --name webserver nginx
 ```
 @y
-```bash
+```console
 $ docker run -d -p 80:80 --name webserver nginx
 ```
 @z
@@ -326,10 +326,10 @@ container to port `8000` on the host:
 @z
 
 @x
-```bash
+```console
 $ docker run --publish 8000:80 --name webserver nginx
 @y
-```bash
+```console
 $ docker run --publish 8000:80 --name webserver nginx
 @z
 
@@ -351,11 +351,11 @@ container to random ports on the host.
 @z
 
 @x
-```bash
+```console
 $ docker run -d -P --name webserver nginx
 ```
 @y
-```bash
+```console
 $ docker run -d -P --name webserver nginx
 ```
 @z

@@ -40,11 +40,11 @@ Create an empty file called `Dockerfile`:
 @z
 
 @x
-```bash
+```console
 $ touch Dockerfile
 ```
 @y
-```bash
+```console
 $ touch Dockerfile
 ```
 @z
@@ -222,12 +222,12 @@ sure it's at the same directory level as your `Dockerfile`:
 @z
 
 @x
-```bash
-touch supervisord.conf
+```console
+$ touch supervisord.conf
 ```
 @y
-```bash
-touch supervisord.conf
+```console
+$ touch supervisord.conf
 ```
 @z
 
@@ -284,11 +284,11 @@ Now you can build a Docker image for Riak:
 @z
 
 @x
-```bash
+```console
 $ docker build -t "<yourname>/riak" .
 ```
 @y
-```bash
+```console
 $ docker build -t "<yourname>/riak" .
 ```
 @z

@@ -72,11 +72,11 @@ To run an image inside of a container, we use the `docker run` command. The `doc
 @z
 
 @x
-```shell
+```console
 $ docker run node-docker
 ```
 @y
-```shell
+```console
 $ docker run node-docker
 ```
 @z
@@ -96,7 +96,7 @@ Let’s open a new terminal then make a GET request to the server using the curl
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -106,7 +106,7 @@ $ curl --request POST \
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -148,11 +148,11 @@ Start the container and expose port 8000 to port 8000 on the host.
 @z
 
 @x
-```shell
+```console
 $ docker run --publish 8000:8000 node-docker
 ```
 @y
-```shell
+```console
 $ docker run --publish 8000:8000 node-docker
 ```
 @z
@@ -165,7 +165,7 @@ Now let’s rerun the curl command from above. Remember to open a new terminal.
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -173,7 +173,7 @@ $ curl --request POST \
 {"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
 ```
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -220,12 +220,12 @@ Docker は先ほどと同じようにコンテナーを起動させますが、�
 @z
 
 @x
-```shell
+```console
 $ docker run -d -p 8000:8000 node-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 @y
-```shell
+```console
 $ docker run -d -p 8000:8000 node-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
@@ -245,7 +245,7 @@ Again, let’s make sure that our container is running properly. Run the same cu
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -255,7 +255,7 @@ $ curl --request POST \
 {"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
 ```
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -317,12 +317,12 @@ You are probably wondering where the name of our container is coming from. Since
 @z
 
 @x
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
 @y
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
@@ -335,12 +335,12 @@ Now rerun the `docker ps` command to see a list of running containers.
 @z
 
 @x
-```shell
+```console
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 @y
-```shell
+```console
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
@@ -363,7 +363,7 @@ Docker コンテナーは起動させ停止させ、再起動することがで�
 @z
 
 @x
-```shell
+```console
 $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   16 minutes ago      Exited (0) 5 minutes ago                        wonderful_kalam
@@ -371,7 +371,7 @@ ec45285c456d        node-docker         "docker-entrypoint.s…"   28 minutes ag
 fb7a41809e5d        node-docker         "docker-entrypoint.s…"   37 minutes ago      Exited (0) 36 minutes ago                       goofy_khayyam
 ```
 @y
-```shell
+```console
 $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   16 minutes ago      Exited (0) 5 minutes ago                        wonderful_kalam
@@ -395,11 +395,11 @@ Let’s restart the container that we just stopped. Locate the name of the conta
 @z
 
 @x
-```shell
+```console
 $ docker restart wonderful_kalam
 ```
 @y
-```shell
+```console
 $ docker restart wonderful_kalam
 ```
 @z
@@ -411,7 +411,7 @@ Now, list all the containers again using the ps command.
 @z
 
 @x
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -419,7 +419,7 @@ ec45285c456d        node-docker         "docker-entrypoint.s…"   31 minutes ag
 fb7a41809e5d        node-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
 @y
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -451,12 +451,12 @@ Stop the container we just started. Find the name of your running container and 
 @z
 
 @x
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
 @y
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
@@ -471,7 +471,7 @@ Now that all of our containers are stopped, let’s remove them. When a containe
 @z
 
 @x
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -479,7 +479,7 @@ ec45285c456d        node-docker         "docker-entrypoint.s…"   31 minutes ag
 fb7a41809e5d        node-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
 @y
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -502,14 +502,14 @@ Again, make sure you replace the containers names in the below command with the 
 @z
 
 @x
-```shell
+```console
 $ docker rm wonderful_kalam agitated_moser goofy_khayyam
 wonderful_kalam
 agitated_moser
 goofy_khayyam
 ```
 @y
-```shell
+```console
 $ docker rm wonderful_kalam agitated_moser goofy_khayyam
 wonderful_kalam
 agitated_moser
@@ -541,7 +541,7 @@ To name a container, we just need to pass the `--name` flag to the run command.
 @z
 
 @x
-```shell
+```console
 $ docker run -d -p 8000:8000 --name rest-server node-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
@@ -549,7 +549,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 1aa5d46418a6        node-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->8000/tcp   rest-server
 ```
 @y
-```shell
+```console
 $ docker run -d -p 8000:8000 --name rest-server node-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps

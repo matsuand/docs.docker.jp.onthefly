@@ -100,7 +100,7 @@ Compose ファイルが参照する環境変数、あるいは Compose の設定
 @z
 
 @x
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -111,7 +111,7 @@ services:
     image: "webapp:${TAG}"
 ```
 @y
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -135,7 +135,7 @@ config to the terminal:
 @z
 
 @x
-```shell
+```console
 $ docker-compose config
 
 version: '3'
@@ -144,7 +144,7 @@ services:
     image: 'webapp:v1.5'
 ```
 @y
-```shell
+```console
 $ docker-compose config
 
 version: '3'
@@ -168,7 +168,7 @@ uses that instead:
 @z
 
 @x
-```shell
+```console
 $ export TAG=v2.0
 $ docker-compose config
 
@@ -178,7 +178,7 @@ services:
     image: 'webapp:v2.0'
 ```
 @y
-```shell
+```console
 $ export TAG=v2.0
 $ docker-compose config
 
@@ -213,12 +213,12 @@ done using the `--env-file` option:
 @z
 
 @x
-```shell
-docker-compose --env-file ./config/.env.dev up 
+```console
+$ docker-compose --env-file ./config/.env.dev up 
 ```
 @y
-```shell
-docker-compose --env-file ./config/.env.dev up 
+```console
+$ docker-compose --env-file ./config/.env.dev up 
 ```
 @z
 
@@ -230,7 +230,7 @@ command is executed.
 @z
 
 @x
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -245,7 +245,7 @@ services:
     image: "webapp:${TAG}"
 ```
 @y
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -268,7 +268,7 @@ The `.env` file is loaded by default:
 @z
 
 @x
-```shell
+```console
 $ docker-compose config 
 version: '3'
 services:
@@ -276,7 +276,7 @@ services:
     image: 'webapp:v1.5'
 ```
 @y
-```shell
+```console
 $ docker-compose config 
 version: '3'
 services:
@@ -292,7 +292,7 @@ Passing the `--env-file ` argument overrides the default file path:
 @z
 
 @x
-```shell
+```console
 $ docker-compose --env-file ./config/.env.dev config 
 version: '3'
 services:
@@ -300,7 +300,7 @@ services:
     image: 'webapp:v1.6'
 ```
 @y
-```shell
+```console
 $ docker-compose --env-file ./config/.env.dev config 
 version: '3'
 services:
@@ -446,12 +446,12 @@ container with `docker-compose run -e`:
 @z
 
 @x
-```shell
-docker-compose run -e DEBUG=1 web python console.py
+```console
+$ docker-compose run -e DEBUG=1 web python console.py
 ```
 @y
-```shell
-docker-compose run -e DEBUG=1 web python console.py
+```console
+$ docker-compose run -e DEBUG=1 web python console.py
 ```
 @z
 
@@ -462,12 +462,12 @@ You can also pass a variable from the shell by not giving it a value:
 @z
 
 @x
-```shell
-docker-compose run -e DEBUG web python console.py
+```console
+$ docker-compose run -e DEBUG web python console.py
 ```
 @y
-```shell
-docker-compose run -e DEBUG web python console.py
+```console
+$ docker-compose run -e DEBUG web python console.py
 ```
 @z
 
@@ -508,11 +508,11 @@ file, and the Compose file:
 @z
 
 @x
-```shell
+```console
 $ cat ./Docker/api/api.env
 NODE_ENV=test
 @y
-```shell
+```console
 $ cat ./Docker/api/api.env
 NODE_ENV=test
 @z
@@ -549,10 +549,10 @@ file takes precedence.
 @z
 
 @x
-```shell
+```console
 $ docker-compose exec api node
 @y
-```shell
+```console
 $ docker-compose exec api node
 @z
 

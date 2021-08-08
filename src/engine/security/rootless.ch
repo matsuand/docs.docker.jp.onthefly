@@ -136,8 +136,8 @@ testuser:231072:65536
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 8, RHEL 8 and Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7 and RHEL 7</a></li>
 </ul>
 <div class="tab-content">
 
@@ -148,8 +148,8 @@ testuser:231072:65536
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 、RHEL 8、Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7、RHEL 7</a></li>
 </ul>
 <div class="tab-content">
 
@@ -279,10 +279,10 @@ testuser:231072:65536
 
 @x
 </div>
-<div id="hint-centos8-and-fedora" class="tab-pane fade in" markdown="1">
+<div id="hint-centos8-rhel8-fedora" class="tab-pane fade in" markdown="1">
 @y
 </div>
-<div id="hint-centos8-and-fedora" class="tab-pane fade in" markdown="1">
+<div id="hint-centos8-rhel8-fedora" class="tab-pane fade in" markdown="1">
 @z
 
 @x
@@ -316,10 +316,10 @@ testuser:231072:65536
 
 @x
 </div>
-<div id="hint-centos7" class="tab-pane fade in" markdown="1">
+<div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 @y
 </div>
-<div id="hint-centos7" class="tab-pane fade in" markdown="1">
+<div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 @z
 
 @x
@@ -494,9 +494,11 @@ $ sudo apt-get install -y docker-ce-rootless-extras
 @x
 If you do not have permission to run package managers like `apt-get` and `dnf`,
 consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+Since static packages are not available for `s390x`, hence it is not supported for `s390x`.
 @y
 If you do not have permission to run package managers like `apt-get` and `dnf`,
 consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+Since static packages are not available for `s390x`, hence it is not supported for `s390x`.
 @z
 
 @x

@@ -294,7 +294,7 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
@@ -434,7 +434,7 @@ macOS のバイナリには Docker クライアントのみが提供されます
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。

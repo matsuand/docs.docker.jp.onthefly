@@ -113,10 +113,10 @@ directly to your terminal.
 @z
 
 @x
-```bash
+```console
 $ dockerd
 @y
-```bash
+```console
 $ dockerd
 @z
 
@@ -234,16 +234,16 @@ configurations as above:
 @z
 
 @x
-```bash
-dockerd --debug \
+```console
+$ dockerd --debug \
   --tls=true \
   --tlscert=/var/docker/server.pem \
   --tlskey=/var/docker/serverkey.pem \
   --host tcp://192.168.59.3:2376
 ```
 @y
-```bash
-dockerd --debug \
+```console
+$ dockerd --debug \
   --tls=true \
   --tlscert=/var/docker/server.pem \
   --tlskey=/var/docker/serverkey.pem \
@@ -652,11 +652,11 @@ Docker platform.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo kill -SIGHUP $(pidof dockerd)
     ```
 @y
-    ```bash
+    ```console
     $ sudo kill -SIGHUP $(pidof dockerd)
     ```
 @z
@@ -699,11 +699,11 @@ by sending a `SIGUSR1` signal to the daemon.
 @z
 
 @x
-  ```bash
+  ```console
   $ sudo kill -SIGUSR1 $(pidof dockerd)
   ```
 @y
-  ```bash
+  ```console
   $ sudo kill -SIGUSR1 $(pidof dockerd)
   ```
 @z

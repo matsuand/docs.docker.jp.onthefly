@@ -122,7 +122,7 @@ If you run `docker-compose pull ServiceName` in the same directory as the `docke
 @z
 
 @x
-```bash
+```console
 $ docker-compose pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres
@@ -143,7 +143,7 @@ Digest: sha256:fd6c0e2a9d053bebb294bb13765b3e01be7817bf77b01d58c2377ff27a4a46dc
 Status: Downloaded newer image for postgres:latest
 ```
 @y
-```bash
+```console
 $ docker-compose pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres

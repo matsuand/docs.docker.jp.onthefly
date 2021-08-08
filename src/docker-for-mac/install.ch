@@ -141,12 +141,12 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-  ```bash
-    softwareupdate --install-rosetta
+  ```console
+  $ softwareupdate --install-rosetta
   ```
 @y
-  ```bash
-    softwareupdate --install-rosetta
+  ```console
+  $ softwareupdate --install-rosetta
   ```
 @z
 

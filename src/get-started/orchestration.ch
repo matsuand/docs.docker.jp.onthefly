@@ -147,12 +147,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 @y
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 @z
 
@@ -163,12 +163,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 @y
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 @z
 
@@ -197,12 +197,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 @y
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 @z
 
@@ -237,12 +237,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 @y
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 @z
 
@@ -330,12 +330,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 @y
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 @z
 
@@ -346,12 +346,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 @y
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 @z
 
@@ -380,12 +380,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 @y
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 @z
 
@@ -420,12 +420,12 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
 @z
 
 @x
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 @y
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 @z
 
@@ -489,12 +489,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 @y
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 @z
 
@@ -534,12 +534,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 @y
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 @z
 
@@ -550,12 +550,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 @y
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 @z
 
@@ -584,12 +584,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 @y
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 @z
 
@@ -624,12 +624,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 @y
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 @z
 
@@ -664,12 +664,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 @y
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 @z
 
@@ -715,12 +715,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 @y
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 @z
 
@@ -731,12 +731,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 @y
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 @z
 
@@ -765,12 +765,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 @y
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 @z
 
@@ -805,12 +805,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @z
 
 @x
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 @y
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 @z
 

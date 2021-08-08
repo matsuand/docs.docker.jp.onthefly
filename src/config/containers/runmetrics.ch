@@ -47,10 +47,10 @@ The following is a sample output from the `docker stats` command
 @z
 
 @x
-```bash
+```console
 $ docker stats redis1 redis2
 @y
-```bash
+```console
 $ docker stats redis1 redis2
 @z
 
@@ -124,11 +124,11 @@ To figure out where your control groups are mounted, you can run:
 @z
 
 @x
-```bash
+```console
 $ grep cgroup /proc/mounts
 ```
 @y
-```bash
+```console
 $ grep cgroup /proc/mounts
 ```
 @z
@@ -668,11 +668,11 @@ traffic on a web server:
 @z
 
 @x
-```bash
+```console
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 @y
-```bash
+```console
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 @z
@@ -693,11 +693,11 @@ Later, you can check the values of the counters, with:
 @z
 
 @x
-```bash
+```console
 $ iptables -nxvL OUTPUT
 ```
 @y
-```bash
+```console
 $ iptables -nxvL OUTPUT
 ```
 @z
@@ -786,11 +786,11 @@ The exact format of the command is:
 @z
 
 @x
-```bash
+```console
 $ ip netns exec <nsname> <command...>
 ```
 @y
-```bash
+```console
 $ ip netns exec <nsname> <command...>
 ```
 @z
@@ -802,11 +802,11 @@ For example:
 @z
 
 @x
-```bash
+```console
 $ ip netns exec mycontainer netstat -i
 ```
 @y
-```bash
+```console
 $ ip netns exec mycontainer netstat -i
 ```
 @z
@@ -874,7 +874,7 @@ the environment variable `$CID`, then you can do this:
 @z
 
 @x
-```bash
+```console
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
 $ PID=$(head -n 1 $TASKS)
 $ mkdir -p /var/run/netns
@@ -882,7 +882,7 @@ $ ln -sf /proc/$PID/ns/net /var/run/netns/$CID
 $ ip netns exec $CID netstat -i
 ```
 @y
-```bash
+```console
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
 $ PID=$(head -n 1 $TASKS)
 $ mkdir -p /var/run/netns

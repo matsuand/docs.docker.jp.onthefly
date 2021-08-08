@@ -48,11 +48,11 @@ mechanism to verify other storage back-ends against, in a testing environment.
 @z
 
 @x
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @y
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @z
@@ -116,11 +116,11 @@ mechanism to verify other storage back-ends against, in a testing environment.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @z
@@ -134,10 +134,10 @@ mechanism to verify other storage back-ends against, in a testing environment.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker info
 @y
-    ```bash
+    ```console
     $ docker info
 @z
 
@@ -204,10 +204,10 @@ image comprising five layers.
 @z
 
 @x
-```bash
+```console
 $ docker pull ubuntu
 @y
-```bash
+```console
 $ docker pull ubuntu
 @z
 
@@ -250,10 +250,10 @@ human-readable value.
 @z
 
 @x
-```bash
+```console
 $ ls -l /var/lib/docker/vfs/dir/
 @y
-```bash
+```console
 $ ls -l /var/lib/docker/vfs/dir/
 @z
 
@@ -278,10 +278,10 @@ drwxr-xr-x. 21 root root 224 Aug  2 18:23 e92be7a4a4e3ccbb7dd87695bca1a0ea373d4f
 @z
 
 @x
-```bash
+```console
 $ du -sh /var/lib/docker/vfs/dir/*
 @y
-```bash
+```console
 $ du -sh /var/lib/docker/vfs/dir/*
 @z
 

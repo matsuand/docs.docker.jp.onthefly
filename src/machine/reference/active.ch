@@ -19,19 +19,15 @@ title: docker-machine active
 See which machine is "active" (a machine is considered active if the
 `DOCKER_HOST` environment variable points to it).
 @y
-{% comment %}
-See which machine is "active" (a machine is considered active if the
-`DOCKER_HOST` environment variable points to it).
-{% endcomment %}
 どのマシンが「アクティブ」であるかを確認します。
-（環境変数 `DOCKER_HOST` が設定されている場合は、そのマシンがアクティブとみなされます。）
+（環境変数`DOCKER_HOST`が設定されている場合は、そのマシンがアクティブとみなされます。）
 @z
 
 @x
-```bash
+```console
 $ docker-machine ls
 @y
-```bash
+```console
 $ docker-machine ls
 @z
 

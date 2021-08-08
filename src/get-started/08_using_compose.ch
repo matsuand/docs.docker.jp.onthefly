@@ -67,12 +67,12 @@ After installation, you should be able to run the following and see version info
 @z
 
 @x
-```bash
-docker-compose version
+```console
+$ docker-compose version
 ```
 @y
-```bash
-docker-compose version
+```console
+$ docker-compose version
 ```
 @z
 
@@ -150,8 +150,8 @@ To remember, this was the command we were using to define our app container.
 @z
 
 @x
-```bash
-docker run -dp 3000:3000 \
+```console
+$ docker run -dp 3000:3000 \
   -w /app -v "$(pwd):/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
@@ -162,8 +162,8 @@ docker run -dp 3000:3000 \
   sh -c "yarn install && yarn run dev"
 ```
 @y
-```bash
-docker run -dp 3000:3000 \
+```console
+$ docker run -dp 3000:3000 \
   -w /app -v "$(pwd):/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
@@ -405,8 +405,8 @@ Now, it's time to define the MySQL service. The command that we used for that co
 @z
 
 @x
-```bash
-docker run -d \
+```console
+$ docker run -d \
   --network todo-app --network-alias mysql \
   -v todo-mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=secret \
@@ -414,8 +414,8 @@ docker run -d \
   mysql:5.7
 ```
 @y
-```bash
-docker run -d \
+```console
+$ docker run -d \
   --network todo-app --network-alias mysql \
   -v todo-mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=secret \
@@ -673,12 +673,12 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 @z
 
 @x
-    ```bash
-    docker-compose up -d
+    ```console
+    $ docker-compose up -d
     ```
 @y
-    ```bash
-    docker-compose up -d
+    ```console
+    $ docker-compose up -d
     ```
 @z
 

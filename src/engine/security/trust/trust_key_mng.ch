@@ -137,11 +137,11 @@ Before backing them up, you should `tar` them into an archive:
 @z
 
 @x
-```bash
+```console
 $ umask 077; tar -zcvf private_keys_backup.tar.gz ~/.docker/trust/private; umask 022
 ```
 @y
-```bash
+```console
 $ umask 077; tar -zcvf private_keys_backup.tar.gz ~/.docker/trust/private; umask 022
 ```
 @z

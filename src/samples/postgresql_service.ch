@@ -181,11 +181,11 @@ Dockerfile からイメージをビルドして名前を与えます。
 @z
 
 @x
-```bash
+```console
 $ docker build -t eg_postgresql .
 ```
 @y
-```bash
+```console
 $ docker build -t eg_postgresql .
 ```
 @z
@@ -197,11 +197,11 @@ PostgreSQL サーバーコンテナーを（フォアグラウンドで）実行
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -P --name pg_test eg_postgresql
 ```
 @y
-```bash
+```console
 $ docker run --rm -P --name pg_test eg_postgresql
 ```
 @z
@@ -244,10 +244,10 @@ variables that can then be used to connect:
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
 @y
-```bash
+```console
 $ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
 @z
 
@@ -279,10 +279,10 @@ first:
 @z
 
 @x
-```bash
+```console
 $ docker ps
 @y
-```bash
+```console
 $ docker ps
 @z
 
@@ -373,10 +373,10 @@ to backup your configuration and data:
 @z
 
 @x
-```bash
+```console
 $ docker run --rm --volumes-from pg_test -t -i busybox sh
 @y
-```bash
+```console
 $ docker run --rm --volumes-from pg_test -t -i busybox sh
 @z
 

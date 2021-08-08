@@ -58,7 +58,7 @@ The **Spring Pet Clinic** source code has already tests defined in the test dire
 @z
 
 @x
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 ...
 [INFO] Results:
@@ -71,7 +71,7 @@ $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 [INFO] Total time:  01:49 min
 ```
 @y
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 ...
 [INFO] Results:
@@ -188,7 +188,7 @@ Now let’s rebuild our image and run our tests. We will run the `docker build` 
 @z
 
 @x
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 0.7s (6/6) FINISHED
 ...
@@ -196,7 +196,7 @@ $ docker build -t java-docker --target test .
  => => naming to docker.io/library/java-docker
 ```
 @y
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 0.7s (6/6) FINISHED
 ...
@@ -212,7 +212,7 @@ Now that our test image is built, we can run it as a container and see if our te
 @z
 
 @x
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker
 [INFO] Scanning for projects...
 [INFO]
@@ -220,7 +220,7 @@ $ docker run -it --rm --name springboot-test java-docker
 [INFO] Building petclinic 2.4.2
 ...
 @y
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker
 [INFO] Scanning for projects...
 [INFO]
@@ -354,7 +354,7 @@ Now, to run our tests, we just need to run the `docker build` command as above.
 @z
 
 @x
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 27.6s (11/12)
  => CACHED [base 3/6] COPY .mvn/ .mvn
@@ -368,7 +368,7 @@ $ docker build -t java-docker --target test .
 => => naming to docker.io/library/java-docker
 ```
 @y
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 27.6s (11/12)
  => CACHED [base 3/6] COPY .mvn/ .mvn
@@ -418,7 +418,7 @@ Now, run the `docker build` command from above and observe that the build fails 
 @z
 
 @x
-```shell
+```console
 $ docker build -t java-docker --target test .
  => [base 6/6] COPY src ./src
  => ERROR [test 1/1] RUN ["./mvnw", "test"]
@@ -427,7 +427,7 @@ $ docker build -t java-docker --target test .
 executor failed running [./mvnw test]: exit code: 1
 ```
 @y
-```shell
+```console
 $ docker build -t java-docker --target test .
  => [base 6/6] COPY src ./src
  => ERROR [test 1/1] RUN ["./mvnw", "test"]
@@ -508,11 +508,11 @@ Now, let's run the Compose application. You should now see that application beha
 @z
 
 @x
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @y
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @z

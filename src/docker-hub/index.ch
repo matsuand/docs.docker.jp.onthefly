@@ -327,19 +327,17 @@ Docker Hub.
 @z
 
 @x
-    ```shell
-    cat > Dockerfile <<EOF
-    FROM busybox
-    CMD echo "Hello world! This is my first Docker image."
-    EOF
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM busybox
+   CMD echo "Hello world! This is my first Docker image."
+   ```
 @y
-    ```shell
-    cat > Dockerfile <<EOF
-    FROM busybox
-    CMD echo "Hello world! This is my first Docker image."
-    EOF
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM busybox
+   CMD echo "Hello world! This is my first Docker image."
+   ```
 @z
 
 @x

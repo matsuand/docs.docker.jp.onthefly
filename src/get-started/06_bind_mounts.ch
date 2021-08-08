@@ -119,15 +119,15 @@ So, let's do it!
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
         -w /app -v "$(pwd):/app" \
         node:12-alpine \
         sh -c "yarn install && yarn run dev"
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
         -w /app -v "$(pwd):/app" \
         node:12-alpine \
         sh -c "yarn install && yarn run dev"
@@ -185,9 +185,9 @@ So, let's do it!
 @z
 
 @x
-    ```bash
-    docker logs -f <container-id>
-    $ nodemon src/index.js
+    ```console
+    $ docker logs -f <container-id>
+    nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*
@@ -196,9 +196,9 @@ So, let's do it!
     Listening on port 3000
     ```
 @y
-    ```bash
-    docker logs -f <container-id>
-    $ nodemon src/index.js
+    ```console
+    $ docker logs -f <container-id>
+    nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*

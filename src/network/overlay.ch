@@ -143,11 +143,11 @@ Swarm サービスに対して利用するオーバーレイネットワーク�
 @z
 
 @x
-```bash
+```console
 $ docker network create -d overlay my-overlay
 ```
 @y
-```bash
+```console
 $ docker network create -d overlay my-overlay
 ```
 @z
@@ -161,11 +161,11 @@ other Docker daemons, add the `--attachable` flag:
 @z
 
 @x
-```bash
+```console
 $ docker network create -d overlay --attachable my-attachable-overlay
 ```
 @y
-```bash
+```console
 $ docker network create -d overlay --attachable my-attachable-overlay
 ```
 @z
@@ -248,11 +248,11 @@ You can use the overlay network feature with both `--opt encrypted --attachable`
 @z
 
 @x
-```bash
+```console
 $ docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 ```
 @y
-```bash
+```console
 $ docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 ```
 @z
@@ -316,7 +316,7 @@ services which publish ports, such as a WordPress service which publishes port
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -326,7 +326,7 @@ services which publish ports, such as a WordPress service which publishes port
     Are you sure you want to continue? [y/N]
     ```
 @y
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -348,7 +348,7 @@ services which publish ports, such as a WordPress service which publishes port
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -358,7 +358,7 @@ services which publish ports, such as a WordPress service which publishes port
       my-ingress
     ```
 @y
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -422,10 +422,10 @@ Docker ホストのカーネル内に存在するものです。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo ip link set docker_gwbridge down
 @y
-    ```bash
+    ```console
     $ sudo ip link set docker_gwbridge down
 @z
 
@@ -457,7 +457,7 @@ Docker ホストのカーネル内に存在するものです。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -466,7 +466,7 @@ Docker ホストのカーネル内に存在するものです。
     docker_gwbridge
     ```
 @y
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \

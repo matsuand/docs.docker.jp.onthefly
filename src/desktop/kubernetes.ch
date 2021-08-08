@@ -59,12 +59,12 @@ Kubernetes のクライアントコマンドである`kubectl`は、ローカル
 @z
 
 @x
-```bash
+```console
 $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
 @y
-```bash
+```console
 $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
@@ -171,15 +171,15 @@ You can test the command by listing the available nodes:
 @z
 
 @x
-```bash
-kubectl get nodes
+```console
+$ kubectl get nodes
 
 NAME                 STATUS    ROLES     AGE       VERSION
 docker-desktop       Ready     master    3h        v1.19.7
 ```
 @y
-```bash
-kubectl get nodes
+```console
+$ kubectl get nodes
 
 NAME                 STATUS    ROLES     AGE       VERSION
 docker-desktop       Ready     master    3h        v1.19.7

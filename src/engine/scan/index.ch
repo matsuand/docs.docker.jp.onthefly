@@ -71,36 +71,36 @@ The `docker scan` command allows you to scan existing Docker images using the im
 @z
 
 @x
-```shell
-$  docker scan hello-world
+```console
+$ docker scan hello-world
 
-  Testing hello-world...
+Testing hello-world...
 
-  Organization:      docker-desktop-test
-  Package manager:   linux
-  Project name:      docker-image|hello-world
-  Docker image:      hello-world
-  Licenses:          enabled
+Organization:      docker-desktop-test
+Package manager:   linux
+Project name:      docker-image|hello-world
+Docker image:      hello-world
+Licenses:          enabled
 
-  ✓ Tested 0 dependencies for known issues, no vulnerable paths found.
+✓ Tested 0 dependencies for known issues, no vulnerable paths found.
 
-  Note that we do not currently have vulnerability data for your image.
+Note that we do not currently have vulnerability data for your image.
 ```
 @y
-```shell
-$  docker scan hello-world
+```console
+$ docker scan hello-world
 
-  Testing hello-world...
+Testing hello-world...
 
-  Organization:      docker-desktop-test
-  Package manager:   linux
-  Project name:      docker-image|hello-world
-  Docker image:      hello-world
-  Licenses:          enabled
+Organization:      docker-desktop-test
+Package manager:   linux
+Project name:      docker-image|hello-world
+Docker image:      hello-world
+Licenses:          enabled
 
-  ✓ Tested 0 dependencies for known issues, no vulnerable paths found.
+✓ Tested 0 dependencies for known issues, no vulnerable paths found.
 
-  Note that we do not currently have vulnerability data for your image.
+Note that we do not currently have vulnerability data for your image.
 ```
 @z
 
@@ -125,7 +125,7 @@ For example, if you apply the option to the `docker-scan` test image, it display
 @z
 
 @x
-```shell
+```console
 $ docker scan --file Dockerfile docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -152,7 +152,7 @@ Tested 200 dependencies for known issues, found 157 issues.
 According to our scan, you are currently using the most secure version of the selected base image
 ```
 @y
-```shell
+```console
 $ docker scan --file Dockerfile docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -196,7 +196,7 @@ When using docker scan with the `--file` flag, you can also add the `--exclude-b
 @z
 
 @x
-```shell
+```console
 $ docker scan --file Dockerfile --exclude-base docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -223,7 +223,7 @@ Licenses:          enabled
 Tested 200 dependencies for known issues, found 16 issues.
 ```
 @y
-```shell
+```console
 $ docker scan --file Dockerfile --exclude-base docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -266,7 +266,7 @@ You can also display the scan result as a JSON output by adding the `--json` fla
 @z
 
 @x
-```shell
+```console
 $ docker scan --json hello-world
 {
   "vulnerabilities": [],
@@ -317,7 +317,7 @@ $ docker scan --json hello-world
 }
 ```
 @y
-```shell
+```console
 $ docker scan --json hello-world
 {
   "vulnerabilities": [],
@@ -377,7 +377,7 @@ In addition to the `--json` flag, you can also use the `--group-issues` flag to 
 @z
 
 @x
-```shell
+```console
 $ docker scan --json --group-issues docker-scan:e2e
 {
     {
@@ -425,7 +425,7 @@ $ docker scan --json --group-issues docker-scan:e2e
 }
 ```
 @y
-```shell
+```console
 $ docker scan --json --group-issues docker-scan:e2e
 {
     {
@@ -496,7 +496,7 @@ To view the dependency tree of your image, use the --dependency-tree flag. This 
 @z
 
 @x
-```shell
+```console
 $ docker scan --dependency-tree debian:buster
 
 $ docker-image|99138c65ebc7 @ latest
@@ -559,7 +559,7 @@ Tested 200 dependencies for known issues, found 157 issues.
 For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp.
 ```
 @y
-```shell
+```console
 $ docker scan --dependency-tree debian:buster
 
 $ docker-image|99138c65ebc7 @ latest
@@ -734,13 +734,13 @@ If you have an existing Snyk account, you can directly use your Snyk [API token]
 @z
 
 @x
-```shell
+```console
 $ docker scan --login --token SNYK_AUTH_TOKEN
 
 Your account has been authenticated. Snyk is now ready to be used.
 ```
 @y
-```shell
+```console
 $ docker scan --login --token <Synk認証トークン>
 
 Your account has been authenticated. Snyk is now ready to be used.
@@ -809,14 +809,14 @@ Check your installation by running `docker scan --version`, it should print the 
 @z
 
 @x
-```shell
+```console
 $ docker scan --version
 Version:    v0.5.0
 Git commit: 5a09266
 Provider:   Snyk (1.432.0)
 ```
 @y
-```shell
+```console
 $ docker scan --version
 Version:    v0.5.0
 Git commit: 5a09266

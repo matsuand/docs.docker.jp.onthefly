@@ -158,14 +158,14 @@ You can set the logging driver for a specific container by using the
 @z
 
 @x
-```bash
-docker run \
+```console
+$ docker run \
       --log-driver syslog --log-opt syslog-address=udp://1.2.3.4:1111 \
       alpine echo hello world
 ```
 @y
-```bash
-docker run \
+```console
+$ docker run \
       --log-driver syslog --log-opt syslog-address=udp://1.2.3.4:1111 \
       alpine echo hello world
 ```

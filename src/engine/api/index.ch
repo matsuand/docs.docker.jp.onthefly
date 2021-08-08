@@ -165,10 +165,10 @@ Docker デーモンとクライアントが対応している最新 API バー�
 @z
 
 @x
-```bash
+```console
 $ docker version
 @y
-```bash
+```console
 $ docker version
 @z
 
@@ -248,12 +248,12 @@ You can specify the API version to use, in one of the following ways:
 @z
 
 @x
-  ```bash
-  DOCKER_API_VERSION='1.41'
+  ```console
+  $ DOCKER_API_VERSION='1.41'
   ```
 @y
-  ```bash
-  DOCKER_API_VERSION='1.41'
+  ```console
+  $ DOCKER_API_VERSION='1.41'
   ```
 @z
 

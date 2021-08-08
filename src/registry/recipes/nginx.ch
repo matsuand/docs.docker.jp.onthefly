@@ -212,12 +212,12 @@ Review the [requirements](index.md#requirements), then follow these steps.
 @z
 
 @x
-    ```bash
-    mkdir -p auth data
+    ```console
+    $ mkdir -p auth data
     ```
 @y
-    ```bash
-    mkdir -p auth data
+    ```console
+    $ mkdir -p auth data
     ```
 @z
 
@@ -392,11 +392,11 @@ Review the [requirements](index.md#requirements), then follow these steps.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword > auth/nginx.htpasswd
     ```
 @y
-    ```bash
+    ```console
     $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword > auth/nginx.htpasswd
     ```
 @z
@@ -414,12 +414,12 @@ Review the [requirements](index.md#requirements), then follow these steps.
 @z
 
 @x
-    ```bash
+    ```console
     $ cp domain.crt auth
     $ cp domain.key auth
     ```
 @y
-    ```bash
+    ```console
     $ cp domain.crt auth
     $ cp domain.key auth
     ```

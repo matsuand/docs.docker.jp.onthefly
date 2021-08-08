@@ -20,13 +20,8 @@ Create a machine.  Requires the `--driver` flag to indicate which provider
 (VirtualBox, DigitalOcean, AWS, etc.) the machine should be created on, and an
 argument to indicate the name of the created machine.
 @y
-{% comment %}
-Create a machine.  Requires the `--driver` flag to indicate which provider
-(VirtualBox, DigitalOcean, AWS, etc.) the machine should be created on, and an
-argument to indicate the name of the created machine.
-{% endcomment %}
 マシン（machine）を生成します。
-このマシンをどのプロバイダー（VirtualBox、DigitalOcean、AWS など）のもとに生成するのかを、`--driver` フラグを使って指定する必要があります。
+このマシンをどのプロバイダー（VirtualBox、DigitalOcean、AWS など）のもとに生成するのかを、`--driver`フラグを使って指定する必要があります。
 1 つだけ指定される引数は、生成されるマシン名を表わします。
 @z
 
@@ -37,25 +32,15 @@ argument to indicate the name of the created machine.
 information on how to use them, see [Machine drivers](../drivers/index.md).
 {: .important}
 @y
-{% comment %}
-> Looking for the full list of available drivers?
->
->For a full list of drivers that work with `docker-machine create` and
-information on how to use them, see [Machine drivers](../drivers/index.md).
-{: .important}
-{% endcomment %}
 > 利用可能なドライバーの一覧を探していますか？
 >
-> `docker-machine create` において指定可能なドライバーの全一覧およびその利用法については、[マシンドライバー](../drivers/index.md) を参照してください。
+> `docker-machine create`において指定可能なドライバーの全一覧およびその利用法については、[マシンドライバー](../drivers/index.md) を参照してください。
 {: .important}
 @z
 
 @x
 ## Example
 @y
-{% comment %}
-## Example
-{% endcomment %}
 {: #example }
 ## 利用例
 @z
@@ -63,17 +48,14 @@ information on how to use them, see [Machine drivers](../drivers/index.md).
 @x
 Here is an example of using the `--virtualbox` driver to create a machine called `dev`.
 @y
-{% comment %}
-Here is an example of using the `--virtualbox` driver to create a machine called `dev`.
-{% endcomment %}
-以下の例は `--driver virtualbox` を用いて `dev` という名前のマシンを生成するものです。
+以下の例は`--driver virtualbox`を用いて`dev`という名前のマシンを生成するものです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create --driver virtualbox dev
 @y
-```bash
+```console
 $ docker-machine create --driver virtualbox dev
 @z
 
@@ -106,9 +88,6 @@ To see how to connect Docker to this machine, run: docker-machine env dev
 @x
 ## Accessing driver-specific flags in the help text
 @y
-{% comment %}
-## Accessing driver-specific flags in the help text
-{% endcomment %}
 {: #accessing-driver-specific-flags-in-the-help-text }
 ## ドライバー固有フラグのヘルプ表示
 @z
@@ -119,20 +98,14 @@ drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
 @y
-{% comment %}
-The `docker-machine create` command has some flags which apply to all
-drivers.  These largely control aspects of Machine's provisioning process
-(including the creation of Docker Swarm containers) that the user may wish to
-customize.
-{% endcomment %}
-`docker-machine create` コマンドのフラグの中には、全ドライバーに共通して適用されるものがあります。
+`docker-machine create`コマンドのフラグの中には、全ドライバーに共通して適用されるものがあります。
 そのフラグは Docker Machine のプロビジョニング処理関連を、幅広く制御するものです。
 （そこには Swarm コンテナーの生成も含みます。）
 そういった機能は、カスタマイズ指定を行いたくなる部分です。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create
 
 Docker Machine Version: 0.5.0 (45e3688)
@@ -170,7 +143,7 @@ Options:
 <div class="tab-content">
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker-machine create
 
 Docker Machine Version: 0.5.0 (45e3688)
@@ -205,7 +178,7 @@ Options:
 </div>
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker-machine create
 
 Docker Machine Version: 0.5.0 (45e3688)
@@ -247,12 +220,6 @@ plugin code.  These allow users to customize the provider-specific parameters of
 the created machine, such as size (`--amazonec2-instance-type m1.medium`),
 geographical region (`--amazonec2-region us-west-1`), and so on.
 @y
-{% comment %}
-Additionally, drivers can specify flags that Machine can accept as part of their
-plugin code.  These allow users to customize the provider-specific parameters of
-the created machine, such as size (`--amazonec2-instance-type m1.medium`),
-geographical region (`--amazonec2-region us-west-1`), and so on.
-{% endcomment %}
 上に加えて、Docker Machine がプラグインコードの一部として受け付けるフラグを指定できます。
 生成したマシンに対して、プロバイダー固有のパラメーターをカスタマイズできるものです。
 たとえばサイズ変更（`--amazonec2-instance-type m1.medium`）やリージョン指定（`--amazonec2-region us-west-1`）などです。
@@ -262,15 +229,11 @@ geographical region (`--amazonec2-region us-west-1`), and so on.
 To see the provider-specific flags, simply pass a value for `--driver` when
 invoking the `create` help text.
 @y
-{% comment %}
-To see the provider-specific flags, simply pass a value for `--driver` when
-invoking the `create` help text.
-{% endcomment %}
-プロバイダー固有のフラグを確認するには、`create` のヘルプを表示する際に、単に `--driver` にドライバーを指定するだけです。
+プロバイダー固有のフラグを確認するには、`create`のヘルプを表示する際に、単に`--driver`にドライバーを指定するだけです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create --driver virtualbox --help
 Usage: docker-machine create [OPTIONS] [arg...]
 
@@ -317,7 +280,7 @@ Options:
 <div class="tab-content">
   <div id="origin2" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker-machine create --driver virtualbox --help
 Usage: docker-machine create [OPTIONS] [arg...]
 
@@ -361,7 +324,7 @@ Options:
 </div>
 <div id="japanese2" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker-machine create --driver virtualbox --help
 利用方法: docker-machine create [オプション] [arg...]
 
@@ -412,23 +375,14 @@ associated with as well (located to the far left hand side of the row).  If
 these environment variables are set when `docker-machine create` is invoked,
 Docker Machine uses them for the default value of the flag.
 @y
-{% comment %}
-You may notice that some flags specify environment variables that they are
-associated with as well (located to the far left hand side of the row).  If
-these environment variables are set when `docker-machine create` is invoked,
-Docker Machine uses them for the default value of the flag.
-{% endcomment %}
 上をよく見れば、環境変数に関連づいているフラグがあるのがわかります。
 （一番右に表記されています。）
-`docker-machine create` の実行時に、その環境変数が設定されている場合、Docker Machine は対応するフラグのデフォルト値として、その設定値を利用します。
+`docker-machine create`の実行時に、その環境変数が設定されている場合、Docker Machine は対応するフラグのデフォルト値として、その設定値を利用します。
 @z
 
 @x
 ## Specifying configuration options for the created Docker engine
 @y
-{% comment %}
-## Specifying configuration options for the created Docker engine
-{% endcomment %}
 {: #specifying-configuration-options-for-the-created-docker-engine }
 ## 生成マシンに対する設定オプションの指定
 @z
@@ -440,13 +394,6 @@ from the outside world over TCP with TLS-based encryption and defaults to AUFS
 as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
 when available.
 @y
-{% comment %}
-As part of the process of creation, Docker Machine installs Docker and
-configures it with some sensible defaults. For instance, it allows connection
-from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
-when available.
-{% endcomment %}
 Docker Machine の生成処理において、Docker Machine はマシンをインストールし、実用的なデフォルト値をいくつか利用して設定を行います。
 たとえば、ネットワークにおいては TCP を介して外部との接続を可能とし、TLS ベースの暗号化を利用します。
 また [ストレージドライバー](/engine/reference/commandline/dockerd/#daemon-storage-driver-option) として AUFS が利用可能であれば、これをデフォルト設定します。
@@ -460,17 +407,9 @@ that they are running themselves using the `--insecure-registry` flag for the
 daemon. Docker Machine supports the configuration of such options for the
 created engines via the `create` command flags which begin with `--engine`.
 @y
-{% comment %}
-There are several cases where the user might want to set options for the created
-Docker engine (also known as the Docker _daemon_) themselves. For example, they
-may want to allow connection to a [registry](../../registry/index.md)
-that they are running themselves using the `--insecure-registry` flag for the
-daemon. Docker Machine supports the configuration of such options for the
-created engines via the `create` command flags which begin with `--engine`.
-{% endcomment %}
 設定済みの Docker Engine（Docker **デーモン** とも呼ぶ）に対して、設定を行いたいケースがいくつかあります。
-たとえばデーモンに対する `--insecure-registry` フラグ指定を使って、[Registry](../../registry/index.md) への接続可能とするような場合です。
-Docker Machine では、構築済みの Engine に対しての設定オプションを `create` コマンドのフラグから指定することを可能としており、そのフラグは、先頭に `--engine` がつきます。
+たとえばデーモンに対する`--insecure-registry`フラグ指定を使って、[Registry](../../registry/index.md) への接続可能とするような場合です。
+Docker Machine では、構築済みの Engine に対しての設定オプションを`create`コマンドのフラグから指定することを可能としており、そのフラグは、先頭に`--engine`がつきます。
 @z
 
 @x
@@ -480,29 +419,19 @@ specify that the created daemon should use `btrfs` as a storage driver, you
 still must ensure that the proper dependencies are installed, the BTRFS
 filesystem has been created, and so on.
 @y
-{% comment %}
-Docker Machine only sets the configured parameters on the daemon
-and does not set up any of the "dependencies" for you. For instance, if you
-specify that the created daemon should use `btrfs` as a storage driver, you
-still must ensure that the proper dependencies are installed, the BTRFS
-filesystem has been created, and so on.
-{% endcomment %}
 Docker Machine がデーモン向けに設定するのは、指定されたパラメーター内容だけです。
 つまりそこに「依存する内容」までは設定しません。
-たとえばデーモンに対して、ストレージドライバーとして `btrfs` の利用を設定したとしても、そこに依存する内容、つまり BTRFS の適切な生成などは、あらかじめ行っておかなければなりません。
+たとえばデーモンに対して、ストレージドライバーとして`btrfs`の利用を設定したとしても、そこに依存する内容、つまり BTRFS の適切な生成などは、あらかじめ行っておかなければなりません。
 @z
 
 @x
 The following is an example usage:
 @y
-{% comment %}
-The following is an example usage:
-{% endcomment %}
 以下がその利用例です。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-label foo=bar \
     --engine-label spam=eggs \
@@ -511,7 +440,7 @@ $ docker-machine create -d virtualbox \
     foobarmachine
 ```
 @y
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-label foo=bar \
     --engine-label spam=eggs \
@@ -528,25 +457,18 @@ labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the
 output of `docker info`:
 @y
-{% comment %}
-This creates a virtual machine running locally in VirtualBox which uses the
-`overlay` storage backend, has the key-value pairs `foo=bar` and `spam=eggs` as
-labels on the engine, and allows pushing / pulling from the insecure registry
-located at `registry.myco.com`. You can verify much of this by inspecting the
-output of `docker info`:
-{% endcomment %}
-上の例は VirtualBox 上にローカルで動作する仮想マシンを生成し、バックエンドとして `overlay` ストレージドライバーを利用します。
-また Engine 上において、キーバリューペア `foo=bar`、`spam=eggs` によるラベルを保持します。
-そして `registry.myco.com` という安全でない（insecure）レジストリとの間でプッシュ、プルを可能とします。
-このような設定は `docker info` の出力から確認することができます。
+上の例は VirtualBox 上にローカルで動作する仮想マシンを生成し、バックエンドとして`overlay`ストレージドライバーを利用します。
+また Engine 上において、キーバリューペア`foo=bar`、`spam=eggs`によるラベルを保持します。
+そして`registry.myco.com`という安全でない（insecure）レジストリとの間でプッシュ、プルを可能とします。
+このような設定は`docker info`の出力から確認することができます。
 @z
 
 @x
-```bash
+```console
 $ eval $(docker-machine env foobarmachine)
 $ docker info
 @y
-```bash
+```console
 $ eval $(docker-machine env foobarmachine)
 $ docker info
 @z
@@ -580,9 +502,6 @@ Labels:
 @x
 The supported flags are as follows:
 @y
-{% comment %}
-The supported flags are as follows:
-{% endcomment %}
 サポートされているフラグは以下のとおりです。
 @z
 
@@ -592,12 +511,6 @@ The supported flags are as follows:
 -   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
 -   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
 @y
-{% comment %}
--   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli/#insecure-registries) to allow with the created engine
--   `--engine-registry-mirror`: Specify [registry mirrors](../../registry/recipes/mirror.md) to use
--   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
--   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
-{% endcomment %}
 -   `--engine-insecure-registry`:
     Engine に対して [安全ではない Registry](/engine/reference/commandline/cli/#insecure-registries) の利用を許可します。
 -   `--engine-registry-mirror`:
@@ -612,11 +525,7 @@ The supported flags are as follows:
 If the engine supports specifying the flag multiple times (such as with
 `--label`), then so does Docker Machine.
 @y
-{% comment %}
-If the engine supports specifying the flag multiple times (such as with
-`--label`), then so does Docker Machine.
-{% endcomment %}
-Engine に対してフラグの複数指定がサポートされている場合（たとえば `--label` など）、Docker Machine においてもサポートされます。
+Engine に対してフラグの複数指定がサポートされている場合（たとえば`--label`など）、Docker Machine においてもサポートされます。
 @z
 
 @x
@@ -627,28 +536,20 @@ For example, to specify that the daemon should use `8.8.8.8` as the DNS server
 for all containers, and always use the `syslog` [log driver](../../config/containers/logging/configure.md)
 you could run the following create command:
 @y
-{% comment %}
-In addition to this subset of daemon flags which are directly supported, Docker
-Machine also supports an additional flag, `--engine-opt`, which can be used to
-specify arbitrary daemon options with the syntax `--engine-opt flagname=value`.
-For example, to specify that the daemon should use `8.8.8.8` as the DNS server
-for all containers, and always use the `syslog` [log driver](../../config/containers/logging/configure.md)
-you could run the following create command:
-{% endcomment %}
 デーモンに対するフラグが直接サポートされていることに加えて、Docker Machine では、さらに追加のフラグがサポートされています。
-それは `--engine-opt` というものであり、任意のデーモンオプションを `--engine-opt フラグ名=値` という文法により指定できるものです。
-たとえば、デーモンが全コンテナーにおいて DNS サーバーとして `8.8.8.8` を利用する場合で、さらに[ログドライバー](../../config/containers/logging/configure.md)として `syslog` を利用する場合には、create コマンドは以下のように実行することができます。
+それは`--engine-opt`というものであり、任意のデーモンオプションを`--engine-opt フラグ名=値`という文法により指定できるものです。
+たとえば、デーモンが全コンテナーにおいて DNS サーバーとして`8.8.8.8`を利用する場合で、さらに [ログドライバー](../../config/containers/logging/configure.md) として`syslog`を利用する場合には、create コマンドは以下のように実行することができます。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-opt dns=8.8.8.8 \
     --engine-opt log-driver=syslog \
     gdns
 ```
 @y
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-opt dns=8.8.8.8 \
     --engine-opt log-driver=syslog \
@@ -660,17 +561,13 @@ $ docker-machine create -d virtualbox \
 Additionally, Docker Machine supports a flag, `--engine-env`, which can be used to
 specify arbitrary environment variables to be set within the engine with the syntax `--engine-env name=value`. For example, to specify that the engine should use `example.com` as the proxy server, you could run the following create command:
 @y
-{% comment %}
-Additionally, Docker Machine supports a flag, `--engine-env`, which can be used to
-specify arbitrary environment variables to be set within the engine with the syntax `--engine-env name=value`. For example, to specify that the engine should use `example.com` as the proxy server, you could run the following create command:
-{% endcomment %}
-さらに Docker Machine では `--engine-env` フラグがサポートされます。
-これは任意の環境変数を Engine において設定するもので、`--engine-env 変数名=値` という文法により指定します。
-たとえば Engine がプロキシーサーバーとして `example.com` を利用する場合、create コマンドの実行は以下のようになります。
+さらに Docker Machine では`--engine-env`フラグがサポートされます。
+これは任意の環境変数を Engine において設定するもので、`--engine-env 変数名=値`という文法により指定します。
+たとえば Engine がプロキシーサーバーとして`example.com`を利用する場合、create コマンドの実行は以下のようになります。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-env HTTP_PROXY=http://example.com:8080 \
     --engine-env HTTPS_PROXY=https://example.com:8080 \
@@ -678,7 +575,7 @@ $ docker-machine create -d virtualbox \
     proxbox
 ```
 @y
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-env HTTP_PROXY=http://example.com:8080 \
     --engine-env HTTPS_PROXY=https://example.com:8080 \
@@ -690,9 +587,6 @@ $ docker-machine create -d virtualbox \
 @x
 ## Specifying Docker Swarm options for the created machine
 @y
-{% comment %}
-## Specifying Docker Swarm options for the created machine
-{% endcomment %}
 {: #specifying-docker-swarm-options-for-the-created-machine }
 ## 生成マシンに対する Docker Swarm オプションの指定
 @z
@@ -711,27 +605,13 @@ to over-commit resources. There is also the `--swarm-experimental` flag, that
 allows you to access [experimental features](https://github.com/docker/swarm/tree/master/experimental)
 in Docker Swarm.
 @y
-{% comment %}
-In addition to configuring Docker Engine options as listed above,
-you can use Machine to specify how the created swarm manager is
-configured. There is a `--swarm-strategy` flag, which you can use to specify
-the [scheduling strategy](../../swarm/scheduler/strategy.md)
-which Docker Swarm should use (Machine defaults to the `spread` strategy).
-There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
-for the `swarm manage` command (used to boot a master node) instead of the base
-command. You can use this to configure features that power users might be
-interested in, such as configuring the heartbeat interval or Swarm's willingness
-to over-commit resources. There is also the `--swarm-experimental` flag, that
-allows you to access [experimental features](https://github.com/docker/swarm/tree/master/experimental)
-in Docker Swarm.
-{% endcomment %}
 上で示した Docker Engine のオプション設定に加えて、Swarm マネージャーを生成する際のオプションを指定することもできます。
-`--swarm-strategy` フラグがあり、これによって [スケジュールストラテジー](../../swarm/scheduler/strategy.md)（scheduling strategy）を指定することができます。
-Docker Swarm においては、この指定が必要になります（Docker Machine は `spread` ストラテジーをデフォルトとしています）。
-もう一つ、汎用目的で `--swarm-opt` オプションがあり、前述した `--engine-opt` オプションと同様に動作しますが、ただしこれは、ベースコマンドに対してではなく、`swarm manage` コマンドに対するオプションを指定するものです（マスターノードの起動の際によく用います）。
+`--swarm-strategy`フラグがあり、これによって [スケジュールストラテジー](../../swarm/scheduler/strategy.md)（scheduling strategy）を指定することができます。
+Docker Swarm においては、この指定が必要になります（Docker Machine は`spread`ストラテジーをデフォルトとしています）。
+もう一つ、汎用目的で`--swarm-opt`オプションがあり、前述した`--engine-opt`オプションと同様に動作しますが、ただしこれは、ベースコマンドに対してではなく、`swarm manage`コマンドに対するオプションを指定するものです（マスターノードの起動の際によく用います）。
 パワーユーザーであれば、これを利用して必要な設定を行うことができます。
 たとえばハートビート間隔の設定や、リソースに対するオーバーコミットを積極的に行うような設定などが可能になります。
-`--swarm-experimental` というフラグもあります。
+`--swarm-experimental`というフラグもあります。
 これは Docker Swarm において [試験的機能](https://github.com/docker/swarm/tree/master/experimental) にアクセスできるようにするものです。
 @z
 
@@ -740,11 +620,6 @@ If you're not sure how to configure these options, it is best to not specify
 configuration at all. Docker Machine chooses sensible defaults for you and
 you don't need to worry about it.
 @y
-{% comment %}
-If you're not sure how to configure these options, it is best to not specify
-configuration at all. Docker Machine chooses sensible defaults for you and
-you don't need to worry about it.
-{% endcomment %}
 こういったオプションをどのように設定してよいかわからない場合、一番なのは何も指定しないことです。
 Docker Machine が適切なデフォルト値を選定するので、心配には及びません。
 @z
@@ -752,14 +627,11 @@ Docker Machine が適切なデフォルト値を選定するので、心配に�
 @x
 Example create:
 @y
-{% comment %}
-Example create:
-{% endcomment %}
 以下は create の利用例です。
 @z
 
 @x
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --swarm \
     --swarm-master \
@@ -769,7 +641,7 @@ $ docker-machine create -d virtualbox \
     upbeat
 ```
 @y
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --swarm \
     --swarm-master \
@@ -785,11 +657,6 @@ This sets the swarm scheduling strategy to "binpack" (pack in containers as
 tightly as possible per host instead of spreading them out), and the "heartbeat"
 interval to 5 seconds.
 @y
-{% comment %}
-This sets the swarm scheduling strategy to "binpack" (pack in containers as
-tightly as possible per host instead of spreading them out), and the "heartbeat"
-interval to 5 seconds.
-{% endcomment %}
 上の例では Swarm のスケジューリングストラテジーを「binpack」に設定しています。
 （コンテナーの割り振りを全体に広く行うのでなく、各ホストごとにできるだけ詰めるようにします。）
 そして「ハートビート」間隔を 5 秒に設定しています。
@@ -798,9 +665,6 @@ interval to 5 seconds.
 @x
 ## Pre-create check
 @y
-{% comment %}
-## Pre-create check
-{% endcomment %}
 {: #pre-create-check }
 ## 生成時の事前チェック
 @z
@@ -811,14 +675,8 @@ machines can be created. For instance, VirtualBox needs to be installed before
 the `virtualbox` driver can be used. For this reason, Docker Machine has a
 "pre-create check" which is specified at the driver level.
 @y
-{% comment %}
-Many drivers require a certain set of conditions to be in place before
-machines can be created. For instance, VirtualBox needs to be installed before
-the `virtualbox` driver can be used. For this reason, Docker Machine has a
-"pre-create check" which is specified at the driver level.
-{% endcomment %}
 マシンを生成するにあたっては、多くのドライバーが一定の条件を満たしておく必要があります。
-たとえば `virtualbox` ドライバーの利用にあたっては、あらかじめ VirtualBox をインストールしておくことが必要です。
+たとえば`virtualbox`ドライバーの利用にあたっては、あらかじめ VirtualBox をインストールしておくことが必要です。
 この理由から Docker Machine には「生成時の事前チェック」があり、ドライバーレベルで指定されています。
 @z
 
@@ -828,12 +686,6 @@ as normal.  If the pre-create check fails, the Docker Machine process exits
 with status code 3 to indicate that the source of the non-zero exit was the
 pre-create check failing.
 @y
-{% comment %}
-If this pre-create check succeeds, Docker Machine proceeds with the creation
-as normal.  If the pre-create check fails, the Docker Machine process exits
-with status code 3 to indicate that the source of the non-zero exit was the
-pre-create check failing.
-{% endcomment %}
 事前チェックが成功すると、Docker Machine は通常どおり生成処理に進みます。
 事前チェックに失敗した場合、Docker Machine はステータスコード 3 を返して終了します。
 ゼロ以外による終了は、事前チェックに失敗したことを示しています。

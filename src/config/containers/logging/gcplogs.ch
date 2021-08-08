@@ -200,7 +200,7 @@ logging destination which is discovered by querying the GCE metadata server.
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
     --log-opt labels=location \
@@ -211,7 +211,7 @@ $ docker run \
     your/application
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
     --log-opt labels=location \
@@ -242,7 +242,7 @@ configured with GOOGLE_APPLICATION_CREDENTIALS):
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
     --log-opt gcp-project=test-project
@@ -251,7 +251,7 @@ $ docker run \
     your/application
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
     --log-opt gcp-project=test-project

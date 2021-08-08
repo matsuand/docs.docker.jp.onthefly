@@ -71,11 +71,11 @@ To run an image inside of a container, we use the `docker run` command. It requi
 @z
 
 @x
-```shell
+```console
 $ docker run docker-gs-ping
 ```
 @y
-```shell
+```console
 $ docker run docker-gs-ping
 ```
 @z
@@ -121,12 +121,12 @@ Let’s make a GET request to the server using the curl command.
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:8080/
 curl: (7) Failed to connect to localhost port 8080: Connection refused
 ```
 @y
-```shell
+```console
 $ curl http://localhost:8080/
 curl: (7) Failed to connect to localhost port 8080: Connection refused
 ```
@@ -163,11 +163,11 @@ Start the container and expose port `8080` to port `8080` on the host.
 @z
 
 @x
-```shell
+```console
 $ docker run --publish 8080:8080 docker-gs-ping
 ```
 @y
-```shell
+```console
 $ docker run --publish 8080:8080 docker-gs-ping
 ```
 @z
@@ -179,12 +179,12 @@ Now let’s rerun the curl command from above.
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
 @y
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -222,12 +222,12 @@ Docker は先ほどと同じようにコンテナーを起動させますが、�
 @z
 
 @x
-```shell
+```console
 $ docker run -d -p 8080:8080 docker-gs-ping
 d75e61fcad1e0c0eca69a3f767be6ba28a66625ce4dc42201a8a323e8313c14e
 ```
 @y
-```shell
+```console
 $ docker run -d -p 8080:8080 docker-gs-ping
 d75e61fcad1e0c0eca69a3f767be6ba28a66625ce4dc42201a8a323e8313c14e
 ```
@@ -247,12 +247,12 @@ Again, let’s make sure that our container is running properly. Run the same `c
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
 @y
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -276,11 +276,11 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには`p
 @z
 
 @x
-```shell
+```console
 $ docker ps
 ```
 @y
-```shell
+```console
 $ docker ps
 ```
 @z
@@ -317,12 +317,12 @@ You are probably wondering where the name of our container is coming from. Since
 @z
 
 @x
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
 @y
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
@@ -335,12 +335,12 @@ Now rerun the `docker ps` command to see a list of running containers.
 @z
 
 @x
-```shell
+```console
 $ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 @y
-```shell
+```console
 $ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
@@ -363,11 +363,11 @@ Docker コンテナーは起動させ停止させ、再起動することがで�
 @z
 
 @x
-```shell
+```console
 $ docker ps -a
 ```
 @y
-```shell
+```console
 $ docker ps -a
 ```
 @z
@@ -405,11 +405,11 @@ Let’s restart the container that we have just stopped. Locate the name of the 
 @z
 
 @x
-```shell
+```console
 $ docker restart inspiring_ishizaka
 ```
 @y
-```shell
+```console
 $ docker restart inspiring_ishizaka
 ```
 @z
@@ -421,11 +421,11 @@ Now, list all the containers again using the `ps` command:
 @z
 
 @x
-```shell
+```console
 $ docker ps --all
 ```
 @y
-```shell
+```console
 $ docker ps --all
 ```
 @z
@@ -471,12 +471,12 @@ Stop the container we just started. Find the name of your running container and 
 @z
 
 @x
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
 @y
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
@@ -504,11 +504,11 @@ Again, make sure you replace the containers names in the below command with the 
 @z
 
 @x
-```shell
+```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
 ```
 @y
-```shell
+```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
 ```
 @z
@@ -553,23 +553,23 @@ To name a container, we must pass the `--name` flag to the `run` command:
 @z
 
 @x
-```shell
+```console
 $ docker run -d -p 8080:8080 --name rest-server docker-gs-ping
 3bbc6a3102ea368c8b966e1878a5ea9b1fc61187afaac1276c41db22e4b7f48f
 ```
 @y
-```shell
+```console
 $ docker run -d -p 8080:8080 --name rest-server docker-gs-ping
 3bbc6a3102ea368c8b966e1878a5ea9b1fc61187afaac1276c41db22e4b7f48f
 ```
 @z
 
 @x
-```shell
+```console
 $ docker ps
 ```
 @y
-```shell
+```console
 $ docker ps
 ```
 @z

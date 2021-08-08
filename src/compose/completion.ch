@@ -130,13 +130,13 @@ available.
 @z
 
 @x
-   ```shell
+   ```bash
    if [ -f $(brew --prefix)/etc/bash_completion ]; then
        . $(brew --prefix)/etc/bash_completion
    fi
    ```
 @y
-   ```shell
+   ```bash
    if [ -f $(brew --prefix)/etc/bash_completion ]; then
        . $(brew --prefix)/etc/bash_completion
    fi
@@ -170,13 +170,13 @@ completion.
 @z
 
 @x
-   ```shell
+   ```bash
    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
        . /opt/local/etc/profile.d/bash_completion.sh
    fi
    ```
 @y
-   ```shell
+   ```bash
    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
        . /opt/local/etc/profile.d/bash_completion.sh
    fi

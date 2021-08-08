@@ -601,7 +601,7 @@ Docker Desktop においては試験的機能は有効無効を切り替える�
 #### Experimental features
 @y
 {: #experimental-features }
-#### Experimental features
+#### 試験的機能
 @z
 
 @x
@@ -615,17 +615,17 @@ Run `docker version` to verify whether you have enabled experimental features. E
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
 running in experimental mode, as shown here:
 @y
-`docker version`を実行すると、試験的機能が有効であるかどうかを確認することができます。
+`docker version`を実行すると、試験的機能 (experimental feature) が有効であるかどうかを確認することができます。
 試験的モードは`Server`項目の中に示されています。
 `Experimental`が`true`であれば、Docker は試験的モードで起動しています。
 たとえば以下のように表示されます。
 @z
 
 @x
-```shell
+```console
 > docker version
 @y
-```shell
+```console
 > docker version
 @z
 

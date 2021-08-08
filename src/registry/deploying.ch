@@ -59,11 +59,11 @@ Use a command like the following to start the registry container:
 @z
 
 @x
-```bash
+```console
 $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 @y
-```bash
+```console
 $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 @z
@@ -115,11 +115,11 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 @z
 
 @x
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
     ```
 @y
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
     ```
 @z
@@ -136,11 +136,11 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 @z
 
 @x
-    ```bash
+    ```console
     $ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
     ```
 @y
-    ```bash
+    ```console
     $ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
     ```
 @z
@@ -152,11 +152,11 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 @z
 
 @x
-    ```bash
+    ```console
     $ docker push localhost:5000/my-ubuntu
     ```
 @y
-    ```bash
+    ```console
     $ docker push localhost:5000/my-ubuntu
     ```
 @z
@@ -172,12 +172,12 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 @z
 
 @x
-    ```bash
+    ```console
     $ docker image remove ubuntu:16.04
     $ docker image remove localhost:5000/my-ubuntu
     ```
 @y
-    ```bash
+    ```console
     $ docker image remove ubuntu:16.04
     $ docker image remove localhost:5000/my-ubuntu
     ```
@@ -190,11 +190,11 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 @z
 
 @x
-    ```bash
+    ```console
     $ docker pull localhost:5000/my-ubuntu
     ```
 @y
-    ```bash
+    ```console
     $ docker pull localhost:5000/my-ubuntu
     ```
 @z
@@ -214,11 +214,11 @@ Registry を停止するには、コンテナーの場合と同じように`dock
 @z
 
 @x
-```bash
+```console
 $ docker container stop registry
 ```
 @y
-```bash
+```console
 $ docker container stop registry
 ```
 @z
@@ -230,11 +230,11 @@ To remove the container, use `docker container rm`.
 @z
 
 @x
-```bash
+```console
 $ docker container stop registry && docker container rm -v registry
 ```
 @y
-```bash
+```console
 $ docker container stop registry && docker container rm -v registry
 ```
 @z
@@ -279,7 +279,7 @@ registry.
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -287,7 +287,7 @@ $ docker run -d \
   registry:2
 ```
 @y
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -318,14 +318,14 @@ registry listens on port `5000` by default.
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   -p 5001:5000 \
   --name registry-test \
   registry:2
 ```
 @y
-```bash
+```console
 $ docker run -d \
   -p 5001:5000 \
   --name registry-test \
@@ -343,7 +343,7 @@ causes the registry to listen on port 5001 within the container:
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
   -p 5001:5001 \
@@ -351,7 +351,7 @@ $ docker run -d \
   registry:2
 ```
 @y
-```bash
+```console
 $ docker run -d \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
   -p 5001:5001 \
@@ -393,7 +393,7 @@ in many situations. The following example bind-mounts the host directory
 @z
 
 @x
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -402,7 +402,7 @@ $ docker run -d \
   registry:2
 ```
 @y
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -498,11 +498,11 @@ If you have been issued an _intermediate_ certificate instead, see
 @z
 
 @x
-    ```bash
+    ```console
     $ mkdir -p certs
     ```
 @y
-    ```bash
+    ```console
     $ mkdir -p certs
     ```
 @z
@@ -524,11 +524,11 @@ If you have been issued an _intermediate_ certificate instead, see
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 @y
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 @z
@@ -546,7 +546,7 @@ If you have been issued an _intermediate_ certificate instead, see
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run -d \
       --restart=always \
       --name registry \
@@ -558,7 +558,7 @@ If you have been issued an _intermediate_ certificate instead, see
       registry:2
     ```
 @y
-    ```bash
+    ```console
     $ docker run -d \
       --restart=always \
       --name registry \
@@ -580,14 +580,14 @@ If you have been issued an _intermediate_ certificate instead, see
 @z
 
 @x
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
     $ docker tag ubuntu:16.04 myregistry.domain.com/my-ubuntu
     $ docker push myregistry.domain.com/my-ubuntu
     $ docker pull myregistry.domain.com/my-ubuntu
     ```
 @y
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
     $ docker tag ubuntu:16.04 myregistry.domain.com/my-ubuntu
     $ docker push myregistry.domain.com/my-ubuntu
@@ -613,11 +613,11 @@ form a *certificate bundle*. You can do this using the `cat` command:
 @z
 
 @x
-```bash
+```console
 cat domain.crt intermediate-certificates.pem > certs/domain.crt
 ```
 @y
-```bash
+```console
 cat domain.crt intermediate-certificates.pem > certs/domain.crt
 ```
 @z
@@ -739,10 +739,10 @@ First, save the TLS certificate and key as secrets:
 @z
 
 @x
-```bash
+```console
 $ docker secret create domain.crt certs/domain.crt
 @y
-```bash
+```console
 $ docker secret create domain.crt certs/domain.crt
 @z
 
@@ -765,11 +765,11 @@ To get the node's name, use `docker node ls`. Substitute your node's name for
 @z
 
 @x
-```bash
+```console
 $ docker node update --label-add registry=true node1
 ```
 @y
-```bash
+```console
 $ docker node update --label-add registry=true node1
 ```
 @z
@@ -799,7 +799,7 @@ By default, secrets are mounted into a service at `/run/secrets/<secret-name>`.
 @z
 
 @x
-```bash
+```console
 $ docker service create \
   --name registry \
   --secret domain.crt \
@@ -814,7 +814,7 @@ $ docker service create \
   registry:2
 ```
 @y
-```bash
+```console
 $ docker service create \
   --name registry \
   --secret domain.crt \
@@ -1013,14 +1013,14 @@ secrets.
 @z
 
 @x
-    ```bash
+    ```console
     $ mkdir auth
     $ docker run \
       --entrypoint htpasswd \
       httpd:2 -Bbn testuser testpassword > auth/htpasswd
     ```
 @y
-    ```bash
+    ```console
     $ mkdir auth
     $ docker run \
       --entrypoint htpasswd \
@@ -1051,11 +1051,11 @@ secrets.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 @y
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 @z
@@ -1067,7 +1067,7 @@ secrets.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run -d \
       -p 5000:5000 \
       --restart=always \
@@ -1082,7 +1082,7 @@ secrets.
       registry:2
       ```
 @y
-    ```bash
+    ```console
     $ docker run -d \
       -p 5000:5000 \
       --restart=always \
@@ -1113,11 +1113,11 @@ secrets.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker login myregistrydomain.com:5000
     ```
 @y
-    ```bash
+    ```console
     $ docker login myregistrydomain.com:5000
     ```
 @z
@@ -1257,11 +1257,11 @@ the `docker-compose.yml` file:
 @z
 
 @x
-```bash
+```console
 $ docker-compose up -d
 ```
 @y
-```bash
+```console
 $ docker-compose up -d
 ```
 @z

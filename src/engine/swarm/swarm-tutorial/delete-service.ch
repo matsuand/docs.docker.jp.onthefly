@@ -21,11 +21,7 @@ notoc: true
 The remaining steps in the tutorial don't use the `helloworld` service, so now
 you can delete the service from the swarm.
 @y
-{% comment %}
-The remaining steps in the tutorial don't use the `helloworld` service, so now
-you can delete the service from the swarm.
-{% endcomment %}
-このチュートリアルの残りの手順では `helloworld` サービスを使いません。
+このチュートリアルの残りの手順では`helloworld`サービスを使いません。
 したがって Swarm からこのサービスを削除します。
 @z
 
@@ -34,30 +30,22 @@ you can delete the service from the swarm.
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
 @y
-{% comment %}
-1.  If you haven't already, open a terminal and ssh into the machine where you
-    run your manager node. For example, the tutorial uses a machine named
-    `manager1`.
-{% endcomment %}
 1.  マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
     接続先はマネージャーノードを起動したマシンです。
-    たとえばこのチュートリアルでは `manager1` というマシンを利用します。
+    たとえばこのチュートリアルでは`manager1`というマシンを利用します。
 @z
 
 @x
 2.  Run `docker service rm helloworld` to remove the `helloworld` service.
 @y
-{% comment %}
-2.  Run `docker service rm helloworld` to remove the `helloworld` service.
-{% endcomment %}
-2.  `docker service rm helloworld` を実行して `helloworld` サービスを削除します。
+2.  `docker service rm helloworld`を実行して`helloworld`サービスを削除します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm helloworld
 @y
-    ```bash
+    ```console
     $ docker service rm helloworld
 @z
 
@@ -74,23 +62,18 @@ you can delete the service from the swarm.
     removed the service. The CLI returns a message that the service is not
     found:
 @y
-{% comment %}
-3.  Run `docker service inspect <SERVICE-ID>` to verify that the swarm manager
-    removed the service. The CLI returns a message that the service is not
-    found:
-{% endcomment %}
-3.  `docker service inspect <サービスID>` を実行し、Swarm マネージャーがこのサービスを削除していることを確認します。
+3.  `docker service inspect <サービスID>`を実行し、Swarm マネージャーがこのサービスを削除していることを確認します。
     CLI の実行結果として、サービスが見つからなかったというメッセージが表示されます。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service inspect helloworld
     []
     Error: no such service: helloworld
     ```
 @y
-    ```bash
+    ```console
     $ docker service inspect helloworld
     []
     Error: no such service: helloworld
@@ -102,20 +85,15 @@ you can delete the service from the swarm.
     seconds to clean up. You can use `docker ps` on the nodes to verify when the
     tasks have been removed.
 @y
-{% comment %}
-4.  Even though the service no longer exists, the task containers take a few
-    seconds to clean up. You can use `docker ps` on the nodes to verify when the
-    tasks have been removed.
-{% endcomment %}
 4.  そのサービスはもう存在しないわけですが、タスクコンテナーが削除の処理を終えるには数分を要します。
-    そのノード上において `docker ps` を実行すれば、タスクが削除されたことが確認できます。
+    そのノード上において`docker ps`を実行すれば、タスクが削除されたことが確認できます。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker ps
 @y
-    ```bash
+    ```console
     $ docker ps
 @z
 
@@ -152,9 +130,6 @@ you can delete the service from the swarm.
 @x
 ## What's next?
 @y
-{% comment %}
-## What's next?
-{% endcomment %}
 {: #whats-next }
 ## 次にすることは
 @z
@@ -163,9 +138,5 @@ you can delete the service from the swarm.
 In the next step of the tutorial, you set up a new service and apply a
 [rolling update](rolling-update.md).
 @y
-{% comment %}
-In the next step of the tutorial, you set up a new service and apply a
-[rolling update](rolling-update.md).
-{% endcomment %}
 チュートリアルの次のステップでは、新たなサービスを設定して [ローリングアップデート](rolling-update.md) を適用します。
 @z

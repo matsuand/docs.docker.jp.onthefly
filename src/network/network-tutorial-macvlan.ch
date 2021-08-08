@@ -22,14 +22,7 @@ requests for multiple MAC addresses at its IP address, and routes those requests
 to the appropriate container. For other networking topics, see the
 [overview](index.md).
 @y
-{% comment %}
-This series of tutorials deals with networking standalone containers which
-connect to `macvlan` networks. In this type of network, the Docker host accepts
-requests for multiple MAC addresses at its IP address, and routes those requests
-to the appropriate container. For other networking topics, see the
-[overview](index.md).
-{% endcomment %}
-ここに示すチュートリアルは、`macvlan` ネットワークに接続するスタンドアロンコンテナーのネットワークを扱います。
+ここに示すチュートリアルは、`macvlan`ネットワークに接続するスタンドアロンコンテナーのネットワークを扱います。
 この種類のネットワークでは、Docker ホストは IP アドレスにおいて、複数の MAC アドレスへのリクエストを受けつけます。
 そしてそのリクエストを適切なコンテナーにルーティングします。
 これ以外のネットワークに関しては、[ネットワーク概要](index.md) を参照してください。
@@ -38,9 +31,6 @@ to the appropriate container. For other networking topics, see the
 @x
 ## Goal
 @y
-{% comment %}
-## Goal
-{% endcomment %}
 {: #goal }
 ## 目指すこと
 @z
@@ -50,21 +40,13 @@ The goal of these tutorials is to set up a bridged `macvlan` network and attach
 a container to it, then set up an 802.1q trunked `macvlan` network and attach a
 container to it.
 @y
-{% comment %}
-The goal of these tutorials is to set up a bridged `macvlan` network and attach
-a container to it, then set up an 802.1q trunked `macvlan` network and attach a
-container to it.
-{% endcomment %}
-本チュートリアルの目標は、ブリッジネットワークである `macvlan` を設定し、そこにコンテナーをアタッチすることです。
-その後に 802.1q によってトランク設定された `macvlan` ネットワークを設定し、そこにコンテナーをアタッチします。
+本チュートリアルの目標は、ブリッジネットワークである`macvlan`を設定し、そこにコンテナーをアタッチすることです。
+その後に 802.1q によってトランク設定された`macvlan`ネットワークを設定し、そこにコンテナーをアタッチします。
 @z
 
 @x
 ## Prerequisites
 @y
-{% comment %}
-## Prerequisites
-{% endcomment %}
 {: #prerequisites }
 ## 前提条件
 @z
@@ -73,11 +55,7 @@ container to it.
 - Most cloud providers block `macvlan` networking. You may need physical access
   to your networking equipment.
 @y
-{% comment %}
-- Most cloud providers block `macvlan` networking. You may need physical access
-  to your networking equipment.
-{% endcomment %}
-- クラウドプロバイダーでは、ほとんどが `macvlan` ネットワークをブロックします。
+- クラウドプロバイダーでは、ほとんどが`macvlan`ネットワークをブロックします。
   したがってネットワーク機器からは、物理アクセスが必要となる場合があります。
 @z
 
@@ -85,11 +63,7 @@ container to it.
 - The `macvlan` networking driver only works on Linux hosts, and is not supported
   on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 @y
-{% comment %}
-- The `macvlan` networking driver only works on Linux hosts, and is not supported
-  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
-{% endcomment %}
-- `macvlan` 用のネットワークドライバーは Linux ホスト上でのみ動作します。
+- `macvlan`用のネットワークドライバーは Linux ホスト上でのみ動作します。
   一方、Docker Desktop for Mac、Docker Desktop for Windows、Docker EE for Windows Server ではサポートされていません。
 @z
 
@@ -97,10 +71,6 @@ container to it.
 - You need at least version 3.9 of the Linux kernel, and version 4.0 or higher
   is recommended.
 @y
-{% comment %}
-- You need at least version 3.9 of the Linux kernel, and version 4.0 or higher
-  is recommended.
-{% endcomment %}
 - Linux カーネルは最低でも 3.9 が必要です。
   4.0 またはそれ以降が推奨されます。
 @z
@@ -109,20 +79,13 @@ container to it.
 - The examples assume your ethernet interface is `eth0`. If your device has a
   different name, use that instead.
 @y
-{% comment %}
-- The examples assume your ethernet interface is `eth0`. If your device has a
-  different name, use that instead.
-{% endcomment %}
-- 本例において、イーサネットインターフェースは `eth0` であるとします。
+- 本例において、イーサネットインターフェースは`eth0`であるとします。
   利用するデバイス名が異なる場合は、その名前を用いてください。
 @z
 
 @x
 ## Bridge example
 @y
-{% comment %}
-## Bridge example
-{% endcomment %}
 {: #bridge-example }
 ## ブリッジ例
 @z
@@ -132,12 +95,7 @@ In the simple bridge example, your traffic flows through `eth0` and Docker
 routes traffic to your container using its MAC address. To network devices
 on your network, your container appears to be physically attached to the network.
 @y
-{% comment %}
-In the simple bridge example, your traffic flows through `eth0` and Docker
-routes traffic to your container using its MAC address. To network devices
-on your network, your container appears to be physically attached to the network.
-{% endcomment %}
-この単純なブリッジ例では、トラフィックは `eth0` を通じて送受信されます。
+この単純なブリッジ例では、トラフィックは`eth0`を通じて送受信されます。
 そして Docker はコンテナーへのトラフィックを、MAC アドレスを使ってルーティングします。
 ネットワーク上のデバイスにとって、コンテナーは物理的にネットワークにアタッチされたものとして見えます。
 @z
@@ -146,16 +104,12 @@ on your network, your container appears to be physically attached to the network
 1.  Create a `macvlan` network called `my-macvlan-net`. Modify the `subnet`, `gateway`,
     and `parent` values to values that make sense in your environment.
 @y
-{% comment %}
-1.  Create a `macvlan` network called `my-macvlan-net`. Modify the `subnet`, `gateway`,
-    and `parent` values to values that make sense in your environment.
-{% endcomment %}
-1.  `my-macvlan-net` という名前の `macvlan` ネットワークを生成します。
-    `subnet`、`gateway`、`parent` の値は、利用環境に合わせて修正してください。
+1.  `my-macvlan-net`という名前の`macvlan`ネットワークを生成します。
+    `subnet`、`gateway`、`parent`の値は、利用環境に合わせて修正してください。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -163,7 +117,7 @@ on your network, your container appears to be physically attached to the network
       my-macvlan-net
     ```
 @y
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -176,11 +130,7 @@ on your network, your container appears to be physically attached to the network
     You can use `docker network ls` and `docker network inspect my-macvlan-net`
     commands to verify that the network exists and is a `macvlan` network.
 @y
-    {% comment %}
-    You can use `docker network ls` and `docker network inspect my-macvlan-net`
-    commands to verify that the network exists and is a `macvlan` network.
-    {% endcomment %}
-    `docker network ls` や `docker network inspect my-macvlan-net` を実行すれば、ネットワークが確認でき、それが `macvlan` ネットワークであることがわかります。
+    `docker network ls`や`docker network inspect my-macvlan-net`を実行すれば、ネットワークが確認でき、それが`macvlan`ネットワークであることがわかります。
 @z
 
 @x
@@ -188,19 +138,14 @@ on your network, your container appears to be physically attached to the network
     `-dit` flags start the container in the background but allow you to attach
     to it. The `--rm` flag means the container is removed when it is stopped.
 @y
-{% comment %}
-2.  Start an `alpine` container and attach it to the `my-macvlan-net` network. The
-    `-dit` flags start the container in the background but allow you to attach
-    to it. The `--rm` flag means the container is removed when it is stopped.
-{% endcomment %}
-2.  `alpine` コンテナーを起動し `my-macvlan-net` ネットワークにアタッチします。
-    `-dit` フラグは、コンテナーをバックグラウンドで起動します。
+2.  `alpine`コンテナーを起動し`my-macvlan-net`ネットワークにアタッチします。
+    `-dit`フラグは、コンテナーをバックグラウンドで起動します。
     そしてコンテナーへのアクセスを可能とします。
-    `--rm` フラグは、コンテナーが停止されたときに削除するためのものです。
+    `--rm`フラグは、コンテナーが停止されたときに削除するためのものです。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network my-macvlan-net \
       --name my-macvlan-alpine \
@@ -208,7 +153,7 @@ on your network, your container appears to be physically attached to the network
       ash
     ```
 @y
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network my-macvlan-net \
       --name my-macvlan-alpine \
@@ -221,12 +166,8 @@ on your network, your container appears to be physically attached to the network
 3.  Inspect the `my-macvlan-alpine` container and notice the `MacAddress` key
     within the `Networks` key:
 @y
-{% comment %}
-3.  Inspect the `my-macvlan-alpine` container and notice the `MacAddress` key
-    within the `Networks` key:
-{% endcomment %}
-3.  `my-macvlan-alpine` コンテナーを確認します。
-    `Networks` キーの中に `MacAddress` キーがあるのがわかります。
+3.  `my-macvlan-alpine`コンテナーを確認します。
+    `Networks`キーの中に`MacAddress`キーがあるのがわかります。
 @z
 
 @x
@@ -297,19 +238,15 @@ on your network, your container appears to be physically attached to the network
 4.  Check out how the container sees its own network interfaces by running a
     couple of `docker exec` commands.
 @y
-{% comment %}
-4.  Check out how the container sees its own network interfaces by running a
-    couple of `docker exec` commands.
-{% endcomment %}
 4.  コンテナーからネットワークインターフェースがどのように見えているかを確認します。
-    以下のように `docker exec` コマンドを何回か実行します。
+    以下のように`docker exec`コマンドを何回か実行します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip addr show eth0
 @y
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip addr show eth0
 @z
 
@@ -328,10 +265,10 @@ on your network, your container appears to be physically attached to the network
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip route
 @y
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip route
 @z
 
@@ -349,19 +286,15 @@ on your network, your container appears to be physically attached to the network
 5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
     the network.
 @y
-{% comment %}
-5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
-    the network.
-{% endcomment %}
-5.  コンテナーを停止します（`--rm` フラグを用いていたため Docker はコンテナーを削除します）。
+5.  コンテナーを停止します（`--rm`フラグを用いていたため Docker はコンテナーを削除します）。
     そしてネットワークを停止します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container stop my-macvlan-alpine
 @y
-    ```bash
+    ```console
     $ docker container stop my-macvlan-alpine
 @z
 
@@ -376,9 +309,6 @@ on your network, your container appears to be physically attached to the network
 @x
 ## 802.1q trunked bridge example
 @y
-{% comment %}
-## 802.1q trunked bridge example
-{% endcomment %}
 {: #8021q-trunked-bridge-example }
 ## 802.1q トランク設定によるブリッジ例
 @z
@@ -389,13 +319,7 @@ of `eth0` (called `eth0.10`) and Docker routes traffic to your container using
 its MAC address. To network devices on your network, your container appears to
 be physically attached to the network.
 @y
-{% comment %}
-In the 802.1q trunked bridge example, your traffic flows through a sub-interface
-of `eth0` (called `eth0.10`) and Docker routes traffic to your container using
-its MAC address. To network devices on your network, your container appears to
-be physically attached to the network.
-{% endcomment %}
-802.1q トランク設定によるブリッジ例では、`eth0` のサブインターフェース（`eth0.10`）を通じてトラフィックがやりとりされます。
+802.1q トランク設定によるブリッジ例では、`eth0`のサブインターフェース（`eth0.10`）を通じてトラフィックがやりとりされます。
 そして Docker はコンテナーへのトラフィックを、MAC アドレスを使ってルーティングします。
 ネットワーク上のデバイスにとって、コンテナーは物理的にネットワークにアタッチされたものとして見えます。
 @z
@@ -405,17 +329,12 @@ be physically attached to the network.
     `subnet`, `gateway`, and `parent` values to values that make sense in your
     environment.
 @y
-{% comment %}
-1.  Create a `macvlan` network called `my-8021q-macvlan-net`. Modify the
-    `subnet`, `gateway`, and `parent` values to values that make sense in your
-    environment.
-{% endcomment %}
-1.  `my-8021q-macvlan-net` という名前の `macvlan` ネットワークを生成します。
-    `subnet`、`gateway`、`parent` の値は、利用環境に合わせて修正してください。
+1.  `my-8021q-macvlan-net`という名前の`macvlan`ネットワークを生成します。
+    `subnet`、`gateway`、`parent`の値は、利用環境に合わせて修正してください。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -423,7 +342,7 @@ be physically attached to the network.
       my-8021q-macvlan-net
     ```
 @y
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -438,15 +357,9 @@ be physically attached to the network.
     has parent `eth0.10`. You can use `ip addr show` on the Docker host to
     verify that the interface `eth0.10` exists and has a separate IP address
 @y
-    {% comment %}
-    You can use `docker network ls` and `docker network inspect my-8021q-macvlan-net`
-    commands to verify that the network exists, is a `macvlan` network, and
-    has parent `eth0.10`. You can use `ip addr show` on the Docker host to
-    verify that the interface `eth0.10` exists and has a separate IP address
-    {% endcomment %}
-    `docker network ls` や `docker network inspect my-macvlan-net` を実行すれば、ネットワークが確認でき、それが `macvlan` ネットワークであることがわかります。
-    また親として `eth0.10` があることもわかります。
-    Docker ホスト上で `ip addr show` を実行すると、インターフェース `eth0.10` が存在し、別の IP アドレスを持つことが確認できます。
+    `docker network ls`や`docker network inspect my-macvlan-net`を実行すれば、ネットワークが確認でき、それが`macvlan`ネットワークであることがわかります。
+    また親として`eth0.10`があることもわかります。
+    Docker ホスト上で`ip addr show`を実行すると、インターフェース`eth0.10`が存在し、別の IP アドレスを持つことが確認できます。
 @z
 
 @x
@@ -455,20 +368,14 @@ be physically attached to the network.
     you to attach to it. The `--rm` flag means the container is removed when it
     is stopped.
 @y
-{% comment %}
-2.  Start an `alpine` container and attach it to the `my-8021q-macvlan-net`
-    network. The `-dit` flags start the container in the background but allow
-    you to attach to it. The `--rm` flag means the container is removed when it
-    is stopped.
-{% endcomment %}
-2.  `alpine` コンテナーを起動し `my-8021q-macvlan-net` ネットワークにアタッチします。
-    `-dit` フラグは、コンテナーをバックグラウンドで起動します。
+2.  `alpine`コンテナーを起動し`my-8021q-macvlan-net`ネットワークにアタッチします。
+    `-dit`フラグは、コンテナーをバックグラウンドで起動します。
     そしてコンテナーへのアクセスを可能とします。
-    `--rm` フラグは、コンテナーが停止されたときに削除するためのものです。
+    `--rm`フラグは、コンテナーが停止されたときに削除するためのものです。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run --rm -itd \
       --network my-8021q-macvlan-net \
       --name my-second-macvlan-alpine \
@@ -476,7 +383,7 @@ be physically attached to the network.
       ash
     ```
 @y
-    ```bash
+    ```console
     $ docker run --rm -itd \
       --network my-8021q-macvlan-net \
       --name my-second-macvlan-alpine \
@@ -489,12 +396,8 @@ be physically attached to the network.
 3.  Inspect the `my-second-macvlan-alpine` container and notice the `MacAddress`
     key within the `Networks` key:
 @y
-{% comment %}
-3.  Inspect the `my-second-macvlan-alpine` container and notice the `MacAddress`
-    key within the `Networks` key:
-{% endcomment %}
-3.  `my-second-macvlan-alpine` コンテナーを確認します。
-    `Networks` キーの中に `MacAddress` キーがあるのがわかります。
+3.  `my-second-macvlan-alpine`コンテナーを確認します。
+    `Networks`キーの中に`MacAddress`キーがあるのがわかります。
 @z
 
 @x
@@ -565,19 +468,15 @@ be physically attached to the network.
 4.  Check out how the container sees its own network interfaces by running a
     couple of `docker exec` commands.
 @y
-{% comment %}
-4.  Check out how the container sees its own network interfaces by running a
-    couple of `docker exec` commands.
-{% endcomment %}
 4.  コンテナーからネットワークインターフェースがどのように見えているかを確認します。
-    以下のように `docker exec` コマンドを何回か実行します。
+    以下のように`docker exec`コマンドを何回か実行します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip addr show eth0
 @y
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip addr show eth0
 @z
 
@@ -596,10 +495,10 @@ be physically attached to the network.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip route
 @y
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip route
 @z
 
@@ -617,19 +516,15 @@ be physically attached to the network.
 5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
     the network.
 @y
-{% comment %}
-5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
-    the network.
-{% endcomment %}
-5.  コンテナーを停止します（`--rm` フラグを用いていたため Docker はコンテナーを削除します）。
+5.  コンテナーを停止します（`--rm`フラグを用いていたため Docker はコンテナーを削除します）。
     そしてネットワークを停止します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container stop my-second-macvlan-alpine
 @y
-    ```bash
+    ```console
     $ docker container stop my-second-macvlan-alpine
 @z
 
@@ -644,9 +539,6 @@ be physically attached to the network.
 @x
 ## Other networking tutorials
 @y
-{% comment %}
-## Other networking tutorials
-{% endcomment %}
 {: #other-networking-tutorials }
 ## その他のネットワークチュートリアル
 @z
@@ -655,11 +547,7 @@ be physically attached to the network.
 Now that you have completed the networking tutorial for `macvlan` networks,
 you might want to run through these other networking tutorials:
 @y
-{% comment %}
-Now that you have completed the networking tutorial for `macvlan` networks,
-you might want to run through these other networking tutorials:
-{% endcomment %}
-`macvlan` ネットワークのチュートリアルをここに終えました。
+`macvlan`ネットワークのチュートリアルをここに終えました。
 以下に示すような別のネットワークチュートリアルも見てください。
 @z
 
@@ -668,11 +556,6 @@ you might want to run through these other networking tutorials:
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Host networking tutorial](network-tutorial-host.md)
 @y
-{% comment %}
-- [Standalone networking tutorial](network-tutorial-standalone.md)
-- [Overlay networking tutorial](network-tutorial-overlay.md)
-- [Host networking tutorial](network-tutorial-host.md)
-{% endcomment %}
 - [スタンドアロンネットワークのチュートリアル](network-tutorial-standalone.md)
 - [オーバーレイネットワークのチュートリアル](network-tutorial-overlay.md)
 - [ホストネットワークのチュートリアル](network-tutorial-host.md)

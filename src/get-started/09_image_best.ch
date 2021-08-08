@@ -38,12 +38,12 @@ For example, to scan the `getting-started` image you created earlier in the tuto
 @z
 
 @x
-```bash
-docker scan getting-started
+```console
+$ docker scan getting-started
 ```
 @y
-```bash
-docker scan getting-started
+```console
+$ docker scan getting-started
 ```
 @z
 
@@ -153,12 +153,12 @@ command, you can see the command that was used to create each layer within an im
 @z
 
 @x
-    ```bash
-    docker image history getting-started
+    ```console
+    $ docker image history getting-started
     ```
 @y
-    ```bash
-    docker image history getting-started
+    ```console
+    $ docker image history getting-started
     ```
 @z
 
@@ -224,12 +224,12 @@ command, you can see the command that was used to create each layer within an im
 @z
 
 @x
-    ```bash
-    docker image history --no-trunc getting-started
+    ```console
+    $ docker image history --no-trunc getting-started
     ```
 @y
-    ```bash
-    docker image history --no-trunc getting-started
+    ```console
+    $ docker image history --no-trunc getting-started
     ```
 @z
 
@@ -373,12 +373,12 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 @z
 
 @x
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @y
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 @z
 

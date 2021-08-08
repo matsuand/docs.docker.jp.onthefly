@@ -102,11 +102,11 @@ a throwaway registry, which you can discard afterward.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create --name registry --publish published=5000,target=5000 registry:2
     ```
 @y
-    ```bash
+    ```console
     $ docker service create --name registry --publish published=5000,target=5000 registry:2
     ```
 @z
@@ -118,10 +118,10 @@ a throwaway registry, which you can discard afterward.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ls
 @y
-    ```bash
+    ```console
     $ docker service ls
 @z
 
@@ -150,10 +150,10 @@ a throwaway registry, which you can discard afterward.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl http://localhost:5000/v2/
 @y
-    ```bash
+    ```console
     $ curl http://localhost:5000/v2/
 @z
 
@@ -190,12 +190,12 @@ counter whenever you visit it.
 @z
 
 @x
-    ```bash
+    ```console
     $ mkdir stackdemo
     $ cd stackdemo
     ```
 @y
-    ```bash
+    ```console
     $ mkdir stackdemo
     $ cd stackdemo
     ```
@@ -416,10 +416,10 @@ counter whenever you visit it.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker-compose ps
 @y
-    ```bash
+    ```console
     $ docker-compose ps
 @z
 
@@ -444,11 +444,11 @@ counter whenever you visit it.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl http://localhost:8000
     Hello World! I have been seen 1 times.
 @y
-    ```bash
+    ```console
     $ curl http://localhost:8000
     Hello World! I have been seen 1 times.
 @z
@@ -478,10 +478,10 @@ counter whenever you visit it.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker-compose down --volumes
 @y
-    ```bash
+    ```console
     $ docker-compose down --volumes
 @z
 
@@ -516,10 +516,10 @@ registry you set up earlier. With Compose, this is very simple:
 @z
 
 @x
-```bash
+```console
 $ docker-compose push
 @y
-```bash
+```console
 $ docker-compose push
 @z
 
@@ -564,10 +564,10 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker stack deploy --compose-file docker-compose.yml stackdemo
 @y
-    ```bash
+    ```console
     $ docker stack deploy --compose-file docker-compose.yml stackdemo
 @z
 
@@ -604,10 +604,10 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker stack services stackdemo
 @y
-    ```bash
+    ```console
     $ docker stack services stackdemo
 @z
 
@@ -640,11 +640,11 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl http://localhost:8000
     Hello World! I have been seen 1 times.
 @y
-    ```bash
+    ```console
     $ curl http://localhost:8000
     Hello World! I have been seen 1 times.
 @z
@@ -676,12 +676,12 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl http://address-of-other-node:8000
     Hello World! I have been seen 4 times.
     ```
 @y
-    ```bash
+    ```console
     $ curl http://address-of-other-node:8000
     Hello World! I have been seen 4 times.
     ```
@@ -694,10 +694,10 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker stack rm stackdemo
 @y
-    ```bash
+    ```console
     $ docker stack rm stackdemo
 @z
 
@@ -720,11 +720,11 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm registry
     ```
 @y
-    ```bash
+    ```console
     $ docker service rm registry
     ```
 @z
@@ -738,10 +738,10 @@ The stack is now ready to be deployed.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker swarm leave --force
 @y
-    ```bash
+    ```console
     $ docker swarm leave --force
 @z
 

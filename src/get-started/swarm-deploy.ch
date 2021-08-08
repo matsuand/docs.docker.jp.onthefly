@@ -152,12 +152,12 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 @z
 
 @x
-    ```shell
-    docker stack deploy -c bb-stack.yaml demo
+    ```console
+    $ docker stack deploy -c bb-stack.yaml demo
     ```
 @y
-    ```shell
-    docker stack deploy -c bb-stack.yaml demo
+    ```console
+    $ docker stack deploy -c bb-stack.yaml demo
     ```
 @z
 
@@ -192,12 +192,12 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 @z
 
 @x
-    ```shell
-    docker service ls
+    ```console
+    $ docker service ls
     ```
 @y
-    ```shell
-    docker service ls
+    ```console
+    $ docker service ls
     ```
 @z
 
@@ -241,12 +241,12 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 @z
 
 @x
-    ```shell
-    docker stack rm demo
+    ```console
+    $ docker stack rm demo
     ```
 @y
-    ```shell
-    docker stack rm demo
+    ```console
+    $ docker stack rm demo
     ```
 @z
 

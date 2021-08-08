@@ -116,12 +116,12 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```bash
-    docker network create todo-app
+    ```console
+    $ docker network create todo-app
     ```
 @y
-    ```bash
-    docker network create todo-app
+    ```console
+    $ docker network create todo-app
     ```
 @z
 
@@ -135,8 +135,8 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```bash
-    docker run -d \
+    ```console
+    $ docker run -d \
         --network todo-app --network-alias mysql \
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
@@ -144,8 +144,8 @@ For now, we will create the network first and attach the MySQL container at star
         mysql:5.7
     ```
 @y
-    ```bash
-    docker run -d \
+    ```console
+    $ docker run -d \
         --network todo-app --network-alias mysql \
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
@@ -207,12 +207,12 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```bash
-    docker exec -it <mysql-container-id> mysql -u root -p
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -u root -p
     ```
 @y
-    ```bash
-    docker exec -it <mysql-container-id> mysql -u root -p
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -u root -p
     ```
 @z
 
@@ -308,12 +308,12 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
 @z
 
 @x
-    ```bash
-    docker run -it --network todo-app nicolaka/netshoot
+    ```console
+    $ docker run -it --network todo-app nicolaka/netshoot
     ```
 @y
-    ```bash
-    docker run -it --network todo-app nicolaka/netshoot
+    ```console
+    $ docker run -it --network todo-app nicolaka/netshoot
     ```
 @z
 
@@ -327,12 +327,12 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
 @z
 
 @x
-    ```bash
-    dig mysql
+    ```console
+    $ dig mysql
     ```
 @y
-    ```bash
-    dig mysql
+    ```console
+    $ dig mysql
     ```
 @z
 
@@ -478,8 +478,8 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
       -e MYSQL_HOST=mysql \
@@ -490,8 +490,8 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
       -e MYSQL_HOST=mysql \
@@ -581,12 +581,12 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```bash
-    docker exec -it <mysql-container-id> mysql -p todos
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -p todos
     ```
 @y
-    ```bash
-    docker exec -it <mysql-container-id> mysql -p todos
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -p todos
     ```
 @z
 

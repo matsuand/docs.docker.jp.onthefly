@@ -62,14 +62,11 @@ Description:
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下のとおりです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine ls
 
 NAME   ACTIVE   DRIVER       STATE     URL
@@ -82,7 +79,7 @@ NAME   ACTIVE   DRIVER       STATE     URL
 dev    *        virtualbox   Stopped
 ```
 @y
-```bash
+```console
 $ docker-machine ls
 
 NAME   ACTIVE   DRIVER       STATE     URL

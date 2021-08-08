@@ -111,11 +111,11 @@ flag on the `docker run` command.
 @z
 
 @x
-```bash
+```console
 $ docker run --log-driver=journald ...
 ```
 @y
-```bash
+```console
 $ docker run --log-driver=journald ...
 ```
 @z
@@ -169,7 +169,7 @@ Below is an example of the logging options required to log to journald.
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=journald \
     --log-opt labels=location \
@@ -179,7 +179,7 @@ $ docker run \
     your/application
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=journald \
     --log-opt labels=location \
@@ -239,11 +239,11 @@ container:
 @z
 
 @x
-```bash
+```console
 $ sudo journalctl CONTAINER_NAME=webserver
 ```
 @y
-```bash
+```console
 $ sudo journalctl CONTAINER_NAME=webserver
 ```
 @z
@@ -257,11 +257,11 @@ flag only retrieves messages generated since the last system boot:
 @z
 
 @x
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver
 ```
 @y
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver
 ```
 @z
@@ -275,11 +275,11 @@ to return the log messages in JSON format.
 @z
 
 @x
-```bash
+```console
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 @y
-```bash
+```console
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 @z
@@ -303,11 +303,11 @@ The reason for that is that `\r` is appended to the end of the line and
 @z
 
 @x
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver --all
 ```
 @y
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver --all
 ```
 @z

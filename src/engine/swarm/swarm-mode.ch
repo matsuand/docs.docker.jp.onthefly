@@ -20,21 +20,13 @@ When you first install and start working with Docker Engine, swarm mode is
 disabled by default. When you enable swarm mode, you work with the concept of
 services managed through the `docker service` command.
 @y
-{% comment %}
-When you first install and start working with Docker Engine, swarm mode is
-disabled by default. When you enable swarm mode, you work with the concept of
-services managed through the `docker service` command.
-{% endcomment %}
 Docker Engine を初めてインストールして起動した状態では、Swarm モードはデフォルトで無効になっています。
-Swarm モードを有効にすると、`docker service` コマンドを通じて管理される、サービスという考え方に従って操作していきます。
+Swarm モードを有効にすると、`docker service`コマンドを通じて管理される、サービスという考え方に従って操作していきます。
 @z
 
 @x
 There are two ways to run the Engine in swarm mode:
 @y
-{% comment %}
-There are two ways to run the Engine in swarm mode:
-{% endcomment %}
 Engine を Swarm モードで実行するには 2 つの方法があります。
 @z
 
@@ -42,10 +34,6 @@ Engine を Swarm モードで実行するには 2 つの方法があります。
 * Create a new swarm, covered in this article.
 * [Join an existing swarm](join-nodes.md).
 @y
-{% comment %}
-* Create a new swarm, covered in this article.
-* [Join an existing swarm](join-nodes.md).
-{% endcomment %}
 * 新たな Swarm を生成します。本文で取り扱います。
 * [既存 Swarm への参加](join-nodes.md) を行います。
 @z
@@ -56,12 +44,6 @@ test services based upon images you've created or other available images. In
 your production environment, swarm mode provides a fault-tolerant platform with
 cluster management features to keep your services running and available.
 @y
-{% comment %}
-When you run the Engine in swarm mode on your local machine, you can create and
-test services based upon images you've created or other available images. In
-your production environment, swarm mode provides a fault-tolerant platform with
-cluster management features to keep your services running and available.
-{% endcomment %}
 ローカルマシン上において Engine を Swarm モードで実行すれば、自分で生成したイメージや他から入手したイメージに基づいて、サービスの生成と確認を行うことができます。
 本番環境においては Swarm モードにより、クラスター管理機能を有するフォールトトレラントなプラットフォームを提供し、そこにサービスを実行して利用することができます。
 @z
@@ -70,10 +52,6 @@ cluster management features to keep your services running and available.
 These instructions assume you have installed the Docker Engine 1.12 or later on
 a machine to serve as a manager node in your swarm.
 @y
-{% comment %}
-These instructions assume you have installed the Docker Engine 1.12 or later on
-a machine to serve as a manager node in your swarm.
-{% endcomment %}
 ここに示す手順においては Docker Engine 1.12 またはそれ以降がマシンにインストール済であって、Swarm のマネージャーノードとすることができるものとします。
 @z
 
@@ -81,19 +59,12 @@ a machine to serve as a manager node in your swarm.
 If you haven't already, read through the [swarm mode key concepts](key-concepts.md)
 and try the [swarm mode tutorial](swarm-tutorial/index.md).
 @y
-{% comment %}
-If you haven't already, read through the [swarm mode key concepts](key-concepts.md)
-and try the [swarm mode tutorial](swarm-tutorial/index.md).
-{% endcomment %}
 準備ができていない場合は [Swarm モードの重要な考え方](key-concepts.md) を一読して、[Swarm モードをはじめる](swarm-tutorial/index.md) を試してみてください。
 @z
 
 @x
 ## Create a swarm
 @y
-{% comment %}
-## Create a swarm
-{% endcomment %}
 {: #create-a-swarm }
 ## Swarm の生成
 @z
@@ -101,9 +72,6 @@ and try the [swarm mode tutorial](swarm-tutorial/index.md).
 @x
 When you run the command to create a swarm, the Docker Engine starts running in swarm mode.
 @y
-{% comment %}
-When you run the command to create a swarm, the Docker Engine starts running in swarm mode.
-{% endcomment %}
 Swarm を生成するコマンドを実行すると、Docker Engine が Swarm モードとして起動します。
 @z
 
@@ -112,11 +80,6 @@ Run [`docker swarm init`](../reference/commandline/swarm_init.md)
 to create a single-node swarm on the current node. The Engine sets up the swarm
 as follows:
 @y
-{% comment %}
-Run [`docker swarm init`](../reference/commandline/swarm_init.md)
-to create a single-node swarm on the current node. The Engine sets up the swarm
-as follows:
-{% endcomment %}
 [`docker swarm init`](../reference/commandline/swarm_init.md) コマンドを実行すると、現在のノード上に、単一ノードからなる Swarm が生成されます。
 Engine は以下のようにして Swarm を作り出します。
 @z
@@ -138,25 +101,8 @@ swarm.
 external to the swarm.
 * creates an overlay default IP addresses and subnet mask for your networks
 @y
-{% comment %}
-* switches the current node into swarm mode.
-* creates a swarm named `default`.
-* designates the current node as a leader manager node for the swarm.
-* names the node with the machine hostname.
-* configures the manager to listen on an active network interface on port 2377.
-* sets the current node to `Active` availability, meaning it can receive tasks
-from the scheduler.
-* starts an internal distributed data store for Engines participating in the
-swarm to maintain a consistent view of the swarm and all services running on it.
-* by default, generates a self-signed root CA for the swarm.
-* by default, generates tokens for worker and manager nodes to join the
-swarm.
-* creates an overlay network named `ingress` for publishing service ports
-external to the swarm.
-* creates an overlay default IP addresses and subnet mask for your networks
-{% endcomment %}
 * 現在のノードを Swarm モードに切り替えます。
-* `default` という名前の Swarm を生成します。
+* `default`という名前の Swarm を生成します。
 * 現在のノードを、Swarm におけるマネージャーノードのリーダーとします。
 * ノードの名前をマシンホスト名にします。
 * マネージャーがアクティブなネットワークインターフェースのポート 2377 を待ち受けるように設定します。
@@ -164,7 +110,7 @@ external to the swarm.
 * 内部分散データストアの利用を開始します。これは Swarm 内に Engine を参加させ、Swarm の一貫した参照を実現するとともに、すべてのサービスをここで実行します。
 * デフォルトで、自己署名のルート CA を Swarm 用に生成します。
 * Swarm への参加のために、デフォルトでワーカーノードとマネージャーノードのトークンを生成します。
-* `ingress` という名前の overlay ネットワークを生成し、Swarm 外部に向けてサービスポートを公開します。
+* `ingress`という名前の overlay ネットワークを生成し、Swarm 外部に向けてサービスポートを公開します。
 * overlay のデフォルト IP アドレスとサブネットマスクを生成します。
 @z
 
@@ -172,15 +118,11 @@ external to the swarm.
 The output for `docker swarm init` provides the connection command to use when
 you join new worker nodes to the swarm:
 @y
-{% comment %}
-The output for `docker swarm init` provides the connection command to use when
-you join new worker nodes to the swarm:
-{% endcomment %}
 `docker swarm init`コマンドの出力結果には、Swarm にワーカーノードを参加させるための接続コマンドが表示されます。
 @z
 
 @x
-```bash
+```console
 $ docker swarm init
 Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager.
 
@@ -200,7 +142,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 <div class="tab-content">
   <div id="origin1" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker swarm init
 Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager.
 
@@ -217,7 +159,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 </div>
 <div id="japanese1" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker swarm init
 Swarm が初期化されました: カレントノード (dxn1zf6l61qsb1josjja83ngz) がマネージャーになりました。
 
@@ -239,9 +181,6 @@ Swarm が初期化されました: カレントノード (dxn1zf6l61qsb1josjja83
 @x
 ### Configuring default address pools
 @y
-{% comment %}
-### Configuring default address pools
-{% endcomment %}
 {: #configuring-default-address-pools }
 ### デフォルトのアドレスプールの設定
 @z
@@ -251,11 +190,6 @@ By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scop
 network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In 
 some circumstances it may be desirable to use a different default IP address pool for networks. 
 @y
-{% comment %}
-By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scope (overlay) networks. Every 
-network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In 
-some circumstances it may be desirable to use a different default IP address pool for networks. 
-{% endcomment %}
 Docker Swarm はグローバルスコープの（overlay）ネットワークにおいて、デフォルトのアドレスプール`10.0.0.0/8`を利用します。
 ネットワークにサブネットが指定されていない場合、サブネットがこのプールから順次割り当てられます。
 場合によっては、ネットワークに対してのデフォルトアドレスプールを別の値にしたくなることもあります。
@@ -266,11 +200,6 @@ For example, if the default `10.0.0.0/8` range conflicts with already allocated 
 then it is desirable to ensure that networks use a different range without requiring Swarm users to specify 
 each subnet with the `--subnet` command. 
 @y
-{% comment %}
-For example, if the default `10.0.0.0/8` range conflicts with already allocated address space in your network, 
-then it is desirable to ensure that networks use a different range without requiring Swarm users to specify 
-each subnet with the `--subnet` command. 
-{% endcomment %}
 たとえば、このデフォルトの`10.0.0.0/8`によるアドレス範囲が、すでにネットワーク内に割り当てたアドレス空間と衝突するとします。
 そんなときに Swarm のユーザーがわざわざ`--subnet`コマンドを指定しなくても、ネットワークが異なるアドレス範囲を選んでくれるのがありがたいところです。
 @z
@@ -280,11 +209,6 @@ To configure custom default address pools, you must define pools at Swarm initia
 `--default-addr-pool` command line option. This command line option uses CIDR notation for defining the subnet mask.
 To create the custom address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. For example, for the `10.0.0.0/27`, use the value `27`.
 @y
-{% comment %}
-To configure custom default address pools, you must define pools at Swarm initialization using the 
-`--default-addr-pool` command line option. This command line option uses CIDR notation for defining the subnet mask.
-To create the custom address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. For example, for the `10.0.0.0/27`, use the value `27`.
-{% endcomment %}
 そこで独自にデフォルトのアドレスプールを設定するためには、Swarm の初期化にあたってコマンドラインオプション`--default-addr-pool`を使って、アドレスプールを定義することが必要です。
 このオプションは CIDR 記法によりサブネットマスクを定義します。
 Swarm に対する独自のアドレスプールを生成するには、最低でも 1 つのデフォルトアドレスプールの定義が必要であり、任意の定義としてデフォルトアドレスプールのサブネットマスクを指定します。
@@ -294,9 +218,6 @@ Swarm に対する独自のアドレスプールを生成するには、最低�
 @x
 Docker allocates subnet addresses from the address ranges specified by the `--default-addr-pool` option. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
 @y
-{% comment %}
-Docker allocates subnet addresses from the address ranges specified by the `--default-addr-pool` option. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
-{% endcomment %}
 Docker は`--default-addr-pool`オプションによってアドレス範囲が指定されると、そこからサブネットアドレスを割り当てます。
 たとえばコマンドラインから`--default-addr-pool 10.10.0.0/16`を指定すると、`/16`で示されるアドレス範囲からサブネットを割り当てていきます。
 `--default-addr-pool-mask-len`が指定されていないか、あるいは明示的に 24 に設定されている場合、`10.10.X.0/24`の形式で表わされる 256 個の`/24`ネットワークが作られることになります。
@@ -305,9 +226,6 @@ Docker は`--default-addr-pool`オプションによってアドレス範囲が�
 @x
 The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-addr-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
 @y
-{% comment %}
-The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-addr-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
-{% endcomment %}
 サブネットの範囲は`--default-addr-pool`により定まります（たとえば`10.10.0.0/16`）。
 ここで 16 というサイズは、`default-addr-pool`の範囲内に生成できるネットワーク数を表わします。
 この`--default-addr-pool`オプションは、オーバーレイサブネットの利用の際には、それぞれのアドレスを設定するオプションごとに複数回指定することもあります。
@@ -316,18 +234,15 @@ The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`).
 @x
 The format of the command is:
 @y
-{% comment %}
-The format of the command is:
-{% endcomment %}
 コマンドの書式は以下のようになります。
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
 ```
 @y
-```bash
+```console
 $ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
 ```
 @z
@@ -335,18 +250,15 @@ $ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool 
 @x
 To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
 @y
-{% comment %}
-To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
-{% endcomment %}
 デフォルトアドレスプールとして、10.20.0.0 のネットワークに対し /16（クラス B）を生成するには、以下のように指定します。
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16
 ```
 @y
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16
 ```
 @z
@@ -355,19 +267,15 @@ $ docker swarm init --default-addr-pool 10.20.0.0/16
 To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
 create a subnet mask of `/26` for each network looks like this:
 @y
-{% comment %}
-To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
-create a subnet mask of `/26` for each network looks like this:
-{% endcomment %}
 デフォルトアドレスプールとして`10.20.0.0`と`10.30.0.0`のネットワークに対し /16（クラス B）、また各ネットワークのサブネットマスクとして`/26`を生成するには、以下のように指定します。
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool 10.30.0.0/16 --default-addr-pool-mask-length 26
 ```
 @y
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool 10.30.0.0/16 --default-addr-pool-mask-length 26
 ```
 @z
@@ -377,11 +285,6 @@ In this example, `docker network create -d overlay net1` will result in `10.20.0
 and `docker network create -d overlay net2` will result in `10.20.0.64/26` as the allocated subnet for `net2`. This continues until 
 all the subnets are exhausted. 
 @y
-{% comment %}
-In this example, `docker network create -d overlay net1` will result in `10.20.0.0/26` as the allocated subnet for `net1`, 
-and `docker network create -d overlay net2` will result in `10.20.0.64/26` as the allocated subnet for `net2`. This continues until 
-all the subnets are exhausted. 
-{% endcomment %}
 この例から`docker network create -d overlay net1`を実行すると、`net1`に対して割り当てられるサブネットが`10.20.0.0/26`になり、`docker network create -d overlay net2`を実行すると、`net2`に対して`10.20.0.64/26`が割り当てられます。
 サブネットを使い切るまでこれが続きます。
 @z
@@ -391,11 +294,6 @@ Refer to the following pages for more information:
 - [Swarm networking](./networking.md) for more information about the default address pool usage
 - `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-addr-pool` flag.
 @y
-{% comment %}
-Refer to the following pages for more information:
-- [Swarm networking](./networking.md) for more information about the default address pool usage
-- `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-addr-pool` flag.
-{% endcomment %}
 詳しくは以下のページを参照してください。
 - デフォルトアドレスプールの利用に関する情報は [Swarm のネットワーク](./networking.md) を参照してください。
 - `--default-addr-pool`フラグの詳細は [CLI リファレンス](../reference/commandline/swarm_init.md) の`docker swarm init`を参照してください。
@@ -404,9 +302,6 @@ Refer to the following pages for more information:
 @x
 ### Configure the advertise address
 @y
-{% comment %}
-### Configure the advertise address
-{% endcomment %}
 {: #configure-the-advertise-address }
 ### advertise アドレスの設定
 @z
@@ -416,11 +311,6 @@ Manager nodes use an advertise address to allow other nodes in the swarm access
 to the Swarmkit API and overlay networking. The other nodes on the swarm must be
 able to access the manager node on its advertise address.
 @y
-{% comment %}
-Manager nodes use an advertise address to allow other nodes in the swarm access
-to the Swarmkit API and overlay networking. The other nodes on the swarm must be
-able to access the manager node on its advertise address.
-{% endcomment %}
 マネージャーノードは advertise アドレスを利用します。
 Swarm 内の他のノードは、これを使って Swarmkit API や overlay ネットワーク機能へのアクセスができるようになります。
 Swarm 上の他のノードは、マネージャーノードへはこの advertise アドレスを使ってアクセスできなければなりません。
@@ -433,24 +323,17 @@ single IP address. If so, Docker uses the IP address with the listening port
 correct `--advertise-addr` to enable inter-manager communication and overlay
 networking:
 @y
-{% comment %}
-If you don't specify an advertise address, Docker checks if the system has a
-single IP address. If so, Docker uses the IP address with the listening port
-`2377` by default. If the system has multiple IP addresses, you must specify the
-correct `--advertise-addr` to enable inter-manager communication and overlay
-networking:
-{% endcomment %}
 advertise アドレスを指定しなかった場合、Docker はシステムが単一の IP アドレスを利用しているかどうかを確認します。
 単一であれば、Docker はその IP アドレスを利用し、待ち受けるポートをデフォルトで`2377`とします。
 システムに複数の IP アドレスがある場合は、適切に`--advertise-addr`を設定して、マネージャー間通信やオーバーレイネットワーク機能を有効にすることが必要です。
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --advertise-addr <MANAGER-IP>
 ```
 @y
-```bash
+```console
 $ docker swarm init --advertise-addr <MANAGER-IP>
 ```
 @z
@@ -464,15 +347,6 @@ you use for access from outside that region. In this case, specify the external
 address with `--advertise-addr` so that the node can propagate that information
 to other nodes that subsequently connect to it.
 @y
-{% comment %}
-You must also specify the `--advertise-addr` if the address where other nodes
-reach the first manager node is not the same address the manager sees as its
-own. For instance, in a cloud setup that spans different regions, hosts have
-both internal addresses for access within the region and external addresses that
-you use for access from outside that region. In this case, specify the external
-address with `--advertise-addr` so that the node can propagate that information
-to other nodes that subsequently connect to it.
-{% endcomment %}
 ノードが最初に到達したマネージャーノードのアドレスと、そのマネージャーが自分のアドレスとして把握しているアドレスが同一とならない場合は、`--advertise-addr`の指定が必要になります。
 たとえばクラウドとして、さまざまな地域にわたる設定があったとします。
 つまりホストの設定として、特定リージョン内でのアクセスに用いる内部アドレスと、そのリージョン外からアクセスするために用いる外部アドレスを持つものとします。
@@ -483,19 +357,12 @@ to other nodes that subsequently connect to it.
 Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
 for more detail on the advertise address.
 @y
-{% comment %}
-Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
-for more detail on the advertise address.
-{% endcomment %}
 advertise アドレスに関する詳細は [CLI リファレンス](../reference/commandline/swarm_init.md) の`docker swarm init`を参照してください。
 @z
 
 @x
 ### View the join command or update a swarm join token
 @y
-{% comment %}
-### View the join command or update a swarm join token
-{% endcomment %}
 {: #view-the-join-command-or-update-a-swarm-join-token }
 ### join コマンドの表示と参加トークンの更新
 @z
@@ -508,14 +375,6 @@ joined a swarm does not affect the node's swarm membership. Token rotation
 ensures an old token cannot be used by any new nodes attempting to join the
 swarm.
 @y
-{% comment %}
-Nodes require a secret token to join the swarm. The token for worker nodes is
-different from the token for manager nodes. Nodes only use the join-token at the
-moment they join the swarm. Rotating the join token after a node has already
-joined a swarm does not affect the node's swarm membership. Token rotation
-ensures an old token cannot be used by any new nodes attempting to join the
-swarm.
-{% endcomment %}
 ノードを Swarm に参加させる際にはシークレットトークンが必要になります。
 このトークンは、ワーカーノード用とマネージャーノード用では異なります。
 ノードは Swarm に参加する際に、参加トークン（join-token）を使うだけです。
@@ -526,14 +385,11 @@ swarm.
 @x
 To retrieve the join command including the join token for worker nodes, run:
 @y
-{% comment %}
-To retrieve the join command including the join token for worker nodes, run:
-{% endcomment %}
 ワーカーノード用に、参加トークンの表示も込みで join コマンドを表示するには、以下を実行します。
 @z
 
 @x
-```bash
+```console
 $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
@@ -552,7 +408,7 @@ This node joined a swarm as a worker.
 <div class="tab-content">
   <div id="origin2" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
@@ -568,7 +424,7 @@ This node joined a swarm as a worker.
 </div>
 <div id="japanese2" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker swarm join-token worker
 
 Swarm にワーカーを追加するには、以下のコマンドを実行してください。
@@ -588,14 +444,11 @@ Swarm にワーカーを追加するには、以下のコマンドを実行し�
 @x
 To view the join command and token for manager nodes, run:
 @y
-{% comment %}
-To view the join command and token for manager nodes, run:
-{% endcomment %}
 マネージャーノード用の join コマンドとトークンを表示するには、以下を実行します。
 @z
 
 @x
-```bash
+```console
 $ docker swarm join-token manager
 
 To add a worker to this swarm, run the following command:
@@ -612,7 +465,7 @@ To add a worker to this swarm, run the following command:
 <div class="tab-content">
   <div id="origin3" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker swarm join-token manager
 
 To add a worker to this swarm, run the following command:
@@ -626,7 +479,7 @@ To add a worker to this swarm, run the following command:
 </div>
 <div id="japanese3" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker swarm join-token manager
 
 Swarm にマネージャーを追加するには、以下のコマンドを実行してください。
@@ -644,20 +497,17 @@ Swarm にマネージャーを追加するには、以下のコマンドを実�
 @x
 Pass the `--quiet` flag to print only the token:
 @y
-{% comment %}
-Pass the `--quiet` flag to print only the token:
-{% endcomment %}
 `--quiet`フラグを指定するとトークンのみが表示されます。
 @z
 
 @x
-```bash
+```console
 $ docker swarm join-token --quiet worker
 
 SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c
 ```
 @y
-```bash
+```console
 $ docker swarm join-token --quiet worker
 
 SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c
@@ -672,14 +522,6 @@ code to add new nodes to the swarm. Manager tokens are especially sensitive
 because they allow a new manager node to join and gain control over the whole
 swarm.
 @y
-{% comment %}
-Be careful with the join tokens because they are the secrets necessary to join
-the swarm. In particular, checking a secret into version control is a bad
-practice because it would allow anyone with access to the application source
-code to add new nodes to the swarm. Manager tokens are especially sensitive
-because they allow a new manager node to join and gain control over the whole
-swarm.
-{% endcomment %}
 参加トークンの取り扱いには注意してください。
 これは Swarm への参加時に必要となる機密情報です。
 したがって特に、この機密情報をバージョン管理システムに含めることは、誤ったやり方になります。
@@ -691,9 +533,6 @@ swarm.
 @x
 We recommend that you rotate the join tokens in the following circumstances:
 @y
-{% comment %}
-We recommend that you rotate the join tokens in the following circumstances:
-{% endcomment %}
 参加トークンは、以下のような状況になったらローテートすることをお勧めします。
 @z
 
@@ -703,12 +542,6 @@ chat or accidentally printed to your logs.
 * If you suspect a node has been compromised.
 * If you wish to guarantee that no new nodes can join the swarm.
 @y
-{% comment %}
-* If a token was checked-in by accident into a version control system, group
-chat or accidentally printed to your logs.
-* If you suspect a node has been compromised.
-* If you wish to guarantee that no new nodes can join the swarm.
-{% endcomment %}
 * トークンを誤ってバージョン管理システム、グループチャット、ログに出力してしまった場合。
 * ノードが被害を受けたと疑われる場合。
 * 新たなノードが参加できない状況を確実に作り出したい場合。
@@ -719,11 +552,6 @@ Additionally, it is a best practice to implement a regular rotation schedule for
 any secret including swarm join tokens. We recommend that you rotate your tokens
 at least every 6 months.
 @y
-{% comment %}
-Additionally, it is a best practice to implement a regular rotation schedule for
-any secret including swarm join tokens. We recommend that you rotate your tokens
-at least every 6 months.
-{% endcomment %}
 さらに Swarm の参加トークンを含めた機密情報は、定期的にローテートするようにスケジュールすることが大切です。
 トークンのローテートは、少なくとも 6 ヶ月に 1 回行うことをお勧めします。
 @z
@@ -733,17 +561,12 @@ Run `swarm join-token --rotate` to invalidate the old token and generate a new
 token. Specify whether you want to rotate the token for `worker` or `manager`
 nodes:
 @y
-{% comment %}
-Run `swarm join-token --rotate` to invalidate the old token and generate a new
-token. Specify whether you want to rotate the token for `worker` or `manager`
-nodes:
-{% endcomment %}
 `swarm join-token --rotate`を実行すれば、それまでのトークンを無効化して、新たなトークンを生成します。
 実行にあたっては`worker`、`manager`のいずれのノード用のトークンをローテートするかを指定します。
 @z
 
 @x
-```bash
+```console
 $ docker swarm join-token  --rotate worker
 
 To add a worker to this swarm, run the following command:
@@ -760,7 +583,7 @@ To add a worker to this swarm, run the following command:
 <div class="tab-content">
   <div id="origin4" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker swarm join-token  --rotate worker
 
 To add a worker to this swarm, run the following command:
@@ -774,7 +597,7 @@ To add a worker to this swarm, run the following command:
 </div>
 <div id="japanese4" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker swarm join-token  --rotate worker
 
 Swarm にワーカーを追加するには、以下のコマンドを実行してください。
@@ -792,9 +615,6 @@ Swarm にワーカーを追加するには、以下のコマンドを実行し�
 @x
 ## Learn more
 @y
-{% comment %}
-## Learn more
-{% endcomment %}
 {: #learn-more }
 ## さらに詳しく
 @z
@@ -804,11 +624,6 @@ Swarm にワーカーを追加するには、以下のコマンドを実行し�
 * `swarm init` [command line reference](../reference/commandline/swarm_init.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
 @y
-{% comment %}
-* [Join nodes to a swarm](join-nodes.md)
-* `swarm init` [command line reference](../reference/commandline/swarm_init.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
-{% endcomment %}
 * [Swarm へのノード参加](join-nodes.md)
 * [コマンドラインリファレンス](../reference/commandline/swarm_init.md) の`swarm init`
 * [Swarm モードチュートリアル](swarm-tutorial/index.md)

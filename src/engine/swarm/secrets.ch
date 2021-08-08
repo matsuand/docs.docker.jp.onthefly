@@ -372,11 +372,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 @y
-    ```bash
+    ```console
     $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 @z
@@ -392,11 +392,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service  create --name redis --secret my_secret_data redis:alpine
     ```
 @y
-    ```bash
+    ```console
     $ docker service  create --name redis --secret my_secret_data redis:alpine
     ```
 @z
@@ -410,10 +410,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ps redis
 @y
-    ```bash
+    ```console
     $ docker service ps redis
 @z
 
@@ -436,10 +436,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ps redis
 @y
-    ```bash
+    ```console
     $ docker service ps redis
 @z
 
@@ -478,10 +478,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 @y
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 @z
 
@@ -556,14 +556,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
-@y
-    ```bash
-@z
-
-@x
+    ```console
     $ docker secret ls
 @y
+    ```console
     $ docker secret ls
 @z
 
@@ -600,11 +596,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service update --secret-rm my_secret_data redis
     ```
 @y
-    ```bash
+    ```console
     $ docker service update --secret-rm my_secret_data redis
     ```
 @z
@@ -642,10 +638,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm redis
 @y
-    ```bash
+    ```console
     $ docker service rm redis
 @z
 
@@ -854,11 +850,11 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 @y
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 @z
@@ -870,14 +866,14 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA'
     ```
 @y
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
@@ -918,14 +914,14 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
                    root_ca
     ```
 @y
-    ```bash
+    ```console
     $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
@@ -940,11 +936,11 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 @y
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 @z
@@ -956,12 +952,12 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
 @y
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
@@ -1008,13 +1004,13 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
     ```
 @y
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
@@ -1106,10 +1102,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 @y
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 @z
 
@@ -1128,10 +1124,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker secret ls
 @y
-    ```bash
+    ```console
     $ docker secret ls
 @z
 
@@ -1190,7 +1186,7 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1201,7 +1197,7 @@ generate the site key and certificate, name the files `site.key` and
          sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
     ```
 @y
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1226,7 +1222,7 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1237,7 +1233,7 @@ generate the site key and certificate, name the files `site.key` and
          sh -c "exec nginx -g 'daemon off;'"
     ```
 @y
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1278,10 +1274,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ls
 @y
-    ```bash
+    ```console
     $ docker service ls
 @z
 
@@ -1318,10 +1314,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://localhost:3000
 @y
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://localhost:3000
 @z
 
@@ -1386,10 +1382,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl s_client -connect localhost:3000 -CAfile root-ca.crt
 @y
-    ```bash
+    ```console
     $ openssl s_client -connect localhost:3000 -CAfile root-ca.crt
 @z
 
@@ -1480,10 +1476,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm nginx
 @y
-    ```bash
+    ```console
     $ docker service rm nginx
 @z
 
@@ -1590,10 +1586,10 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password -
 @y
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password -
 @z
 
@@ -1624,11 +1620,11 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_root_password -
     ```
 @y
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_root_password -
     ```
 @z
@@ -1640,10 +1636,10 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker secret ls
 @y
-    ```bash
+    ```console
     $ docker secret ls
 @z
 
@@ -1676,11 +1672,11 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create -d overlay mysql_private
     ```
 @y
-    ```bash
+    ```console
     $ docker network create -d overlay mysql_private
     ```
 @z
@@ -1744,7 +1740,7 @@ line.
 @z
 
 @x
-      ```bash
+      ```console
       $ docker service create \
            --name mysql \
            --replicas 1 \
@@ -1759,7 +1755,7 @@ line.
            mysql:latest
       ```
 @y
-      ```bash
+      ```console
       $ docker service create \
            --name mysql \
            --replicas 1 \
@@ -1782,10 +1778,10 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ls
 @y
-    ```bash
+    ```console
     $ docker service ls
 @z
 
@@ -1872,7 +1868,7 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create \
          --name wordpress \
          --replicas 1 \
@@ -1887,7 +1883,7 @@ line.
          wordpress:latest
     ```
 @y
-    ```bash
+    ```console
     $ docker service create \
          --name wordpress \
          --replicas 1 \
@@ -1912,10 +1908,10 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ls
 @y
-    ```bash
+    ```console
     $ docker service ls
 @z
 
@@ -1932,10 +1928,10 @@ line.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ps wordpress
 @y
-    ```bash
+    ```console
     $ docker service ps wordpress
 @z
 
@@ -2036,11 +2032,11 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password_v2 -
     ```
 @y
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password_v2 -
     ```
 @z
@@ -2056,11 +2052,11 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password mysql
 @y
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password mysql
 @z
@@ -2132,10 +2128,10 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker ps --filter name=mysql -q
 @y
-    ```bash
+    ```console
     $ docker ps --filter name=mysql -q
 @z
 
@@ -2156,12 +2152,12 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 @y
-    ```bash
+    ```console
     $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
@@ -2174,12 +2170,12 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker container exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 @y
-    ```bash
+    ```console
     $ docker container exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
@@ -2198,14 +2194,14 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
          wordpress    
     ```
 @y
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
@@ -2240,16 +2236,12 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
-@y
-    ```bash
-@z
-
-@x
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          mysql
 @y
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          mysql
@@ -2276,10 +2268,10 @@ use it, then remove the old secret.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm wordpress mysql
 @y
-    ```bash
+    ```console
     $ docker service rm wordpress mysql
 @z
 

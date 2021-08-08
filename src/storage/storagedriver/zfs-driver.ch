@@ -140,10 +140,10 @@ use unless you have substantial experience with ZFS on Linux.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
 @y
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
 @z
 
@@ -168,11 +168,11 @@ use unless you have substantial experience with ZFS on Linux.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo zpool create -f zpool-docker -m /var/lib/docker /dev/xvdf /dev/xvdg
     ```
 @y
-    ```bash
+    ```console
     $ sudo zpool create -f zpool-docker -m /var/lib/docker /dev/xvdf /dev/xvdg
     ```
 @z
@@ -188,10 +188,10 @@ use unless you have substantial experience with ZFS on Linux.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo zfs list
 @y
-    ```bash
+    ```console
     $ sudo zfs list
 @z
 
@@ -242,7 +242,7 @@ use unless you have substantial experience with ZFS on Linux.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo docker info
       Containers: 0
        Running: 0
@@ -261,7 +261,7 @@ use unless you have substantial experience with ZFS on Linux.
     <...>
     ```
 @y
-    ```bash
+    ```console
     $ sudo docker info
       Containers: 0
        Running: 0
@@ -302,11 +302,11 @@ the Docker host, and then add it to the `zpool` using the `zpool add` command:
 @z
 
 @x
-```bash
+```console
 $ sudo zpool add zpool-docker /dev/xvdh
 ```
 @y
-```bash
+```console
 $ sudo zpool add zpool-docker /dev/xvdh
 ```
 @z

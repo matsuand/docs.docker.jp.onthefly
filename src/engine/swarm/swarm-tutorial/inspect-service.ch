@@ -21,10 +21,6 @@ notoc: true
 When you have [deployed a service](deploy-service.md) to your swarm, you can use
 the Docker CLI to see details about the service running in the swarm.
 @y
-{% comment %}
-When you have [deployed a service](deploy-service.md) to your swarm, you can use
-the Docker CLI to see details about the service running in the swarm.
-{% endcomment %}
 Swarm に対して [サービスのデプロイ](deploy-service.md) を行ったので、Docker CLI を利用して Swarm 内で起動しているサービスの詳細を確認していきます。
 @z
 
@@ -33,42 +29,30 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
 @y
-{% comment %}
-1.  If you haven't already, open a terminal and ssh into the machine where you
-    run your manager node. For example, the tutorial uses a machine named
-    `manager1`.
-{% endcomment %}
 1.  マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
     接続先はマネージャーノードを起動したマシンです。
-    たとえばこのチュートリアルでは `manager1` というマシンを利用します。
+    たとえばこのチュートリアルでは`manager1`というマシンを利用します。
 @z
 
 @x
 2.  Run `docker service inspect --pretty <SERVICE-ID>` to display the details
     about a service in an easily readable format.
 @y
-{% comment %}
-2.  Run `docker service inspect --pretty <SERVICE-ID>` to display the details
-    about a service in an easily readable format.
-{% endcomment %}
-2.  `docker service inspect --pretty <SERVICE-ID>` を実行します。
+2.  `docker service inspect --pretty <SERVICE-ID>`を実行します。
     サービスの詳細が非常にわかりやすく表示されます。
 @z
 
 @x
     To see the details on the `helloworld` service:
 @y
-    {% comment %}
-    To see the details on the `helloworld` service:
-    {% endcomment %}
-    `helloworld` サービスの詳細を見るには、以下のようにします。
+    `helloworld`サービスの詳細を見るには、以下のようにします。
 @z
 
 @x
-    ```bash
+    ```console
     [manager1]$ docker service inspect --pretty helloworld
 @y
-    ```bash
+    ```console
     [manager1]$ docker service inspect --pretty helloworld
 @z
 
@@ -106,15 +90,11 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     >**Tip**: To return the service details in json format, run the same command
     without the `--pretty` flag.
 @y
-    {% comment %}
-    >**Tip**: To return the service details in json format, run the same command
-    without the `--pretty` flag.
-    {% endcomment %}
-    >**ヒント**: サービスの詳細表示を JSON 形式に戻すには、`--pretty` フラグを除いて同じコマンドを実行します。
+    >**ヒント**: サービスの詳細表示を JSON 形式に戻すには、`--pretty`フラグを除いて同じコマンドを実行します。
 @z
 
 @x
-    ```bash
+    ```console
     [manager1]$ docker service inspect helloworld
     [
     {
@@ -163,7 +143,7 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     ]
     ```
 @y
-    ```bash
+    ```console
     [manager1]$ docker service inspect helloworld
     [
     {
@@ -217,19 +197,15 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 4.  Run `docker service ps <SERVICE-ID>` to see which nodes are running the
     service:
 @y
-{% comment %}
-4.  Run `docker service ps <SERVICE-ID>` to see which nodes are running the
-    service:
-{% endcomment %}
-4.  `docker service ps <SERVICE-ID>` を実行します。
+4.  `docker service ps <SERVICE-ID>`を実行します。
     サービスがどのノード上で動いているかがわかります。
 @z
 
 @x
-    ```bash
+    ```console
     [manager1]$ docker service ps helloworld
 @y
-    ```bash
+    ```console
     [manager1]$ docker service ps helloworld
 @z
 
@@ -248,12 +224,7 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     `worker2` node. You may see the service running on your manager node. By
     default, manager nodes in a swarm can execute tasks just like worker nodes.
 @y
-    {% comment %}
-    In this case, the one instance of the `helloworld` service is running on the
-    `worker2` node. You may see the service running on your manager node. By
-    default, manager nodes in a swarm can execute tasks just like worker nodes.
-    {% endcomment %}
-    この例では `helloworld` サービスの 1 インスタンスが `worker2` ノード上で動いているのがわかります。
+    この例では`helloworld`サービスの 1 インスタンスが`worker2`ノード上で動いているのがわかります。
     マネージャーノード上においても、サービスが動いているかもしれません。
     デフォルトにおいて Swarm のマネージャーノードは、ワーカーノードと同じようにタスクを実行することができます。
 @z
@@ -263,11 +234,6 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     task so you can see if tasks are running according to the service
     definition.
 @y
-    {% comment %}
-    Swarm also shows you the `DESIRED STATE` and `CURRENT STATE` of the service
-    task so you can see if tasks are running according to the service
-    definition.
-    {% endcomment %}
     Swarm においては、サービスタスクに対して `DESIRED STATE`（期待される状態）と `CURRENT STATE`（現在の状態）が示されます。
     サービス定義に従ってタスクが実行されているかどうかが、これによってわかります。
 @z
@@ -276,11 +242,7 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 4.  Run `docker ps` on the node where the task is running to see details about
     the container for the task.
 @y
-{% comment %}
-4.  Run `docker ps` on the node where the task is running to see details about
-    the container for the task.
-{% endcomment %}
-4.  タスクが動いているノード上において `docker ps` を実行します。
+4.  タスクが動いているノード上において`docker ps`を実行します。
     これにより、そのタスクに応じたコンテナーの詳細を確認することができます。
 @z
 
@@ -288,18 +250,14 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     >**Tip**: If `helloworld` is running on a node other than your manager node,
     you must ssh to that node.
 @y
-    {% comment %}
-    >**Tip**: If `helloworld` is running on a node other than your manager node,
-    you must ssh to that node.
-    {% endcomment %}
-    >**ヒント**: `helloworld` がマネージャーノードではない、別のノード上で動いている場合は、そのノードに SSH でアクセスしておくことが必要です。
+    >**ヒント**: `helloworld`がマネージャーノードではない、別のノード上で動いている場合は、そのノードに SSH でアクセスしておくことが必要です。
 @z
 
 @x
-    ```bash
+    ```console
     [worker2]$ docker ps
 @y
-    ```bash
+    ```console
     [worker2]$ docker ps
 @z
 
@@ -316,9 +274,6 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 @x
 ## What's next?
 @y
-{% comment %}
-## What's next?
-{% endcomment %}
 {: #whats-next }
 ## 次にすることは
 @z
@@ -327,9 +282,5 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 Next, you can [change the scale](scale-service.md) for the service running in
 the swarm.
 @y
-{% comment %}
-Next, you can [change the scale](scale-service.md) for the service running in
-the swarm.
-{% endcomment %}
 次は、Swarm 内で起動しているサービスに対して [スケールの変更](scale-service.md) を行います。
 @z

@@ -176,17 +176,23 @@ $ docker-compose disable-v2
 @z
 
 @x
-You can install the new Compose CLI, including Compose V2, using the following install script:
+You can install Compose V2 by downloading the adequate binary for your system 
+from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 @y
-You can install the new Compose CLI, including Compose V2, using the following install script:
+You can install Compose V2 by downloading the adequate binary for your system 
+from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 @z
 
 @x
 ```console
-$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ mkdir -p ~/.docker/cli-plugins/
+$ curl -SL https://github.com/docker/compose-cli/releases/download/v2.0.0-beta.6/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
+$ chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 @y
 ```console
-$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ mkdir -p ~/.docker/cli-plugins/
+$ curl -SL https://github.com/docker/compose-cli/releases/download/v2.0.0-beta.6/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
+$ chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 @z

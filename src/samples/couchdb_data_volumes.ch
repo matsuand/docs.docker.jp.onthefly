@@ -52,11 +52,11 @@ We're marking `/var/lib/couchdb` as a data volume.
 @z
 
 @x
-```bash
+```console
 $ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
 ```
 @y
-```bash
+```console
 $ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
 ```
 @z
@@ -76,13 +76,13 @@ replace `localhost` with the public IP of your Docker host.
 @z
 
 @x
-```bash
+```console
 $ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser, and use the couch interface to add data"
 ```
 @y
-```bash
+```console
 $ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser, and use the couch interface to add data"
@@ -102,11 +102,11 @@ This time, we're requesting shared access to `$COUCH1`'s volumes.
 @z
 
 @x
-```bash
+```console
 $ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
 ```
 @y
-```bash
+```console
 $ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
 ```
 @z
@@ -118,13 +118,13 @@ $ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-0
 @z
 
 @x
-```bash
+```console
 $ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
 ```
 @y
-```bash
+```console
 $ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'

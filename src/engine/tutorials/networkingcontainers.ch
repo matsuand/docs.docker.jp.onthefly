@@ -26,11 +26,6 @@ If you are working your way through the user guide, you just built and ran a
 simple application. You've also built in your own images. This section teaches
 you how to network your containers.
 @y
-{% comment %}
-If you are working your way through the user guide, you just built and ran a
-simple application. You've also built in your own images. This section teaches
-you how to network your containers.
-{% endcomment %}
 ユーザーガイドに従って作業を進めてきたら、単純なアプリケーションはビルドし実行できているはずです。
 また自分の Docker イメージもビルドできているでしょう。
 ここではそのコンテナーに対するネットワーク設定方法について説明します。
@@ -39,9 +34,6 @@ you how to network your containers.
 @x
 ## Launch a container on the default network
 @y
-{% comment %}
-## Launch a container on the default network
-{% endcomment %}
 ## デフォルトネットワークによるコンテナーの起動
 {: #launch-a-container-on-the-default-network }
 @z
@@ -52,14 +44,8 @@ drivers**. By default, Docker provides two network drivers for you, the
 `bridge` and the `overlay` drivers. You can also write a network driver plugin so
 that you can create your own drivers but that is an advanced task.
 @y
-{% comment %}
-Docker includes support for networking containers through the use of **network
-drivers**. By default, Docker provides two network drivers for you, the
-`bridge` and the `overlay` drivers. You can also write a network driver plugin so
-that you can create your own drivers but that is an advanced task.
-{% endcomment %}
 Docker では **ネットワークドライバー** を用いて、コンテナーのネットワーク設定を行う機能がサポートされています。
-デフォルトで提供されているネットワークドライバーは 2 つ、つまり `bridge` ドライバーと `overlay` ドライバーです。
+デフォルトで提供されているネットワークドライバーは 2 つ、つまり`bridge`ドライバーと`overlay`ドライバーです。
 ネットワークドライバーはプラグインとして記述することが可能であり、独自のドライバーを生成することができます。
 ただしこれは高度な作業になります。
 @z
@@ -67,9 +53,6 @@ Docker では **ネットワークドライバー** を用いて、コンテナ�
 @x
 Every installation of the Docker Engine automatically includes three default networks. You can list them:
 @y
-{% comment %}
-Every installation of the Docker Engine automatically includes three default networks. You can list them:
-{% endcomment %}
 Docker Engine をインストールしたときには、自動的に 3 つのデフォルトネットワークが生成されます。
 その一覧は以下のようにして見ることができます。
 @z
@@ -95,10 +78,7 @@ Docker Engine をインストールしたときには、自動的に 3 つのデ
 @x
 The network named `bridge` is a special network. Unless you tell it otherwise, Docker always launches your containers in this network. Try this now:
 @y
-{% comment %}
-The network named `bridge` is a special network. Unless you tell it otherwise, Docker always launches your containers in this network. Try this now:
-{% endcomment %}
-`bridge` という名前のネットワークは特別なものです。
+`bridge`という名前のネットワークは特別なものです。
 ネットワークに関しての指定を行わなければ、Docker は常にこのネットワーク内にコンテナーを起動します。
 このことを試してみます。
 @z
@@ -124,17 +104,14 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 @x
 Inspecting the network is an easy way to find out the container's IP address.
 @y
-{% comment %}
-Inspecting the network is an easy way to find out the container's IP address.
-{% endcomment %}
 ネットワークを調べてみれば、コンテナーの IP アドレスは簡単に分かります。
 @z
 
 @x
-```bash
+```console
 $ docker network inspect bridge
 @y
-```bash
+```console
 $ docker network inspect bridge
 @z
 
@@ -223,9 +200,6 @@ $ docker network inspect bridge
 @x
 You can remove a container from a network by disconnecting the container. To do this, you supply both the network name and the container name. You can also use the container ID. In this example, though, the name is faster.
 @y
-{% comment %}
-You can remove a container from a network by disconnecting the container. To do this, you supply both the network name and the container name. You can also use the container ID. In this example, though, the name is faster.
-{% endcomment %}
 ネットワークからコンテナーを削除するには、そのコンテナーを切り離すことで行います。
 そのときには、ネットワーク名とコンテナー名を両方指定します。
 あるいはコンテナー ID を用いることもできます。
@@ -244,13 +218,7 @@ builtin `bridge` network named `bridge`. Networks are natural ways to isolate
 containers from other containers or other networks. So, as you get more
 experienced with Docker, create your own networks.
 @y
-{% comment %}
-While you can disconnect a container from a network, you cannot remove the
-builtin `bridge` network named `bridge`. Networks are natural ways to isolate
-containers from other containers or other networks. So, as you get more
-experienced with Docker, create your own networks.
-{% endcomment %}
-ネットワークからコンテナーを切り離すことはできますが、ビルトインの `bridge` ネットワークを削除することはできません。
+ネットワークからコンテナーを切り離すことはできますが、ビルトインの`bridge`ネットワークを削除することはできません。
 他のコンテナーや他のネットワークから、目的のコンテナーを独立させるようなネットワークとすることは、よく行うことです。
 そこで Docker について十分に経験を積んだ方は、独自のネットワークを生成してください。
 @z
@@ -258,9 +226,6 @@ experienced with Docker, create your own networks.
 @x
 ## Create your own bridge network
 @y
-{% comment %}
-## Create your own bridge network
-{% endcomment %}
 ## ブリッジネットワークの生成
 {: #create-your-own-bridge-network }
 @z
@@ -268,9 +233,6 @@ experienced with Docker, create your own networks.
 @x
 Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, create a bridge network:
 @y
-{% comment %}
-Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, create a bridge network:
-{% endcomment %}
 Docker Engine は、ブリッジネットワークとオーバーレイネットワークを両方ともサポートしています。
 ブリッジネットワークは Docker Engine が稼動する単一ホストでの利用に限定されます。
 オーバーレイネットワークは複数ホストを含めることが可能であり、より高度な手段です。
@@ -286,12 +248,9 @@ Docker Engine は、ブリッジネットワークとオーバーレイネット
 @x
 The `-d` flag tells Docker to use the `bridge` driver for the new network. You could have left this flag off as `bridge` is the default value for this flag. Go ahead and list the networks on your machine:
 @y
-{% comment %}
-The `-d` flag tells Docker to use the `bridge` driver for the new network. You could have left this flag off as `bridge` is the default value for this flag. Go ahead and list the networks on your machine:
-{% endcomment %}
-`-d` フラグは、新たなネットワークに対して `bridge` ドライバーを利用することを指示するものです。
+`-d`フラグは、新たなネットワークに対して`bridge`ドライバーを利用することを指示するものです。
 このフラグは省略することができます。
-`bridge` がこのフラグのデフォルト値であるからです。
+`bridge`がこのフラグのデフォルト値であるからです。
 次にマシン上のネットワークの一覧を確認します。
 @z
 
@@ -318,9 +277,6 @@ The `-d` flag tells Docker to use the `bridge` driver for the new network. You c
 @x
 If you inspect the network, it has nothing in it.
 @y
-{% comment %}
-If you inspect the network, it has nothing in it.
-{% endcomment %}
 ネットワークを調べてみると、中には何も入っていません。
 @z
 
@@ -377,9 +333,6 @@ If you inspect the network, it has nothing in it.
 @x
 ## Add containers to a network
 @y
-{% comment %}
-## Add containers to a network
-{% endcomment %}
 ## ネットワークへのコンテナーの追加
 @z
 
@@ -388,11 +341,6 @@ To build web applications that act in concert but do so securely, create a
 network. Networks, by definition, provide complete isolation for containers. You
 can add containers to a network when you first run a container.
 @y
-{% comment %}
-To build web applications that act in concert but do so securely, create a
-network. Networks, by definition, provide complete isolation for containers. You
-can add containers to a network when you first run a container.
-{% endcomment %}
 ウェブアプリケーションを構築する際に、まわりと連携動作をしつつ、十分に安全に動作させるためには、ネットワークを生成します。
 ネットワークとは元々の意味からすれば、コンテナーを完全に独立して取り扱うものです。
 ネットワークへのコンテナー追加は、コンテナーを起動するときに行うことができます。
@@ -401,10 +349,7 @@ can add containers to a network when you first run a container.
 @x
 Launch a container running a PostgreSQL database and pass it the `--net=my_bridge` flag to connect it to your new network:
 @y
-{% comment %}
-Launch a container running a PostgreSQL database and pass it the `--net=my_bridge` flag to connect it to your new network:
-{% endcomment %}
-PostgreSQL データベースを実行するコンテナーを起動させ、その際に `--net=my_bridge` フラグを与えます。
+PostgreSQL データベースを実行するコンテナーを起動させ、その際に`--net=my_bridge`フラグを与えます。
 こうして指定したネットワークに接続されます。
 @z
 
@@ -418,11 +363,7 @@ PostgreSQL データベースを実行するコンテナーを起動させ、そ
 If you inspect your `my_bridge` you can see it has a container attached.
 You can also inspect your container to see where it is connected:
 @y
-{% comment %}
-If you inspect your `my_bridge` you can see it has a container attached.
-You can also inspect your container to see where it is connected:
-{% endcomment %}
-`my_bridge` を調べてみると、コンテナーが接続されているのがわかります。
+`my_bridge`を調べてみると、コンテナーが接続されているのがわかります。
 逆にコンテナーを調べてみると、どこに接続しているかもわかります。
 @z
 
@@ -447,9 +388,6 @@ You can also inspect your container to see where it is connected:
 @x
 Now, go ahead and start your by now familiar web application. This time don't specify a network.
 @y
-{% comment %}
-Now, go ahead and start your by now familiar web application. This time don't specify a network.
-{% endcomment %}
 そこで次に、おなじみのウェブアプリケーションを起動してみます。
 ここではネットワークを指定しません。
 @z
@@ -469,12 +407,9 @@ Now, go ahead and start your by now familiar web application. This time don't sp
 @x
 Which network is your `web` application running under? Inspect the application to verify that it is running in the default `bridge` network.
 @y
-{% comment %}
-Which network is your `web` application running under? Inspect the application to verify that it is running in the default `bridge` network.
-{% endcomment %}
-`web` アプリケーションはどのネットワーク上にあるでしょう？
+`web`アプリケーションはどのネットワーク上にあるでしょう？
 アプリケーションを調べてみてください。
-これはデフォルトの `bridge` ネットワーク上に稼動しています。
+これはデフォルトの`bridge`ネットワーク上に稼動しています。
 @z
 
 @x
@@ -498,10 +433,7 @@ Which network is your `web` application running under? Inspect the application t
 @x
 Then, get the IP address of your `web`
 @y
-{% comment %}
-Then, get the IP address of your `web`
-{% endcomment %}
-そこで `web` の IP アドレスを取得します。
+そこで`web`の IP アドレスを取得します。
 @z
 
 @x
@@ -523,10 +455,7 @@ Then, get the IP address of your `web`
 @x
 Now, open a shell to your running `db` container:
 @y
-{% comment %}
-Now, open a shell to your running `db` container:
-{% endcomment %}
-稼動している `db` コンテナーに対してシェルを開きます。
+稼動している`db`コンテナーに対してシェルを開きます。
 @z
 
 @x
@@ -554,25 +483,19 @@ Now, open a shell to your running `db` container:
 @x
 After a bit, use `CTRL-C` to end the `ping` and notice that the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the `exit` command to close the container.
 @y
-{% comment %}
-After a bit, use `CTRL-C` to end the `ping` and notice that the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the `exit` command to close the container.
-{% endcomment %}
-少ししたら、`CTRL-C` により `ping` を終了させます。
+少ししたら、`CTRL-C`により`ping`を終了させます。
 ping は失敗しているのがわかります。
 これは 2 つのコンテナーが別々のネットワーク上で動作しているからです。
 これを修正します。
-まずは `exit` コマンドを実行して、コンテナーへのアクセスを閉じます。
+まずは`exit`コマンドを実行して、コンテナーへのアクセスを閉じます。
 @z
 
 @x
 Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running `web` app to the `my_bridge`.
 @y
-{% comment %}
-Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running `web` app to the `my_bridge`.
-{% endcomment %}
 Docker のネットワーク機能では、複数のネットワークを必要に応じて 1 つのコンテナーに割り当てることができます。
 すでに稼動済のコンテナーであっても割り当てられます。
-次は稼動している `web` アプリを `my_bridge` に割り当てます。
+次は稼動している`web`アプリを`my_bridge`に割り当てます。
 @z
 
 @x
@@ -590,12 +513,9 @@ Docker のネットワーク機能では、複数のネットワークを必要�
 @x
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
 @y
-{% comment %}
-Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
-{% endcomment %}
-もう一度、稼動している `db` コンテナーに対してシェルを開きます。
+もう一度、稼動している`db`コンテナーに対してシェルを開きます。
 そして ping コマンドを入力してみます。
-今回は IP アドレスではなく、コンテナー名 `web` を用います。
+今回は IP アドレスではなく、コンテナー名`web`を用います。
 @z
 
 @x
@@ -629,27 +549,18 @@ Open a shell into the `db` application again and try the ping command. This time
 @x
 The `ping` shows it is contacting a different IP address, the address on the `my_bridge` which is different from its address on the `bridge` network.
 @y
-{% comment %}
-The `ping` shows it is contacting a different IP address, the address on the `my_bridge` which is different from its address on the `bridge` network.
-{% endcomment %}
-`ping` の結果から、別の IP アドレスに接続しているのがわかります。
-`my_bridge` 上にあるアドレスは、`bridge` ネットワーク上のアドレスとは異なっているわけです。
+`ping`の結果から、別の IP アドレスに接続しているのがわかります。
+`my_bridge`上にあるアドレスは、`bridge`ネットワーク上のアドレスとは異なっているわけです。
 @z
 
 @x
 ## Next steps
 @y
-{% comment %}
-## Next steps
-{% endcomment %}
 ## 次のステップ
 @z
 
 @x
 Now that you know how to network containers, see [how to manage data in containers](../../storage/volumes.md).
 @y
-{% comment %}
-Now that you know how to network containers, see [how to manage data in containers](../../storage/volumes.md).
-{% endcomment %}
 コンテナーのネットワーク設定方法がわかったら、次は [コンテナーにおけるデータ管理方法](../../storage/volumes.md) に進んでください。
 @z

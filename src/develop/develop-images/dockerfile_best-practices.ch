@@ -169,21 +169,21 @@ context.
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > Move `Dockerfile` and `hello` into separate directories and build a second
 > version of the image (without relying on cache from the last build). Use `-f`
 > to point to the Dockerfile and specify the directory of the build context:
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 @y
 > ビルドコンテキストの例
@@ -192,20 +192,20 @@ context.
 > テキストファイル`hello`に "hello" と書き込み、Dockerfile 上でそのファイルに対して`cat`コマンドを与えるようにします。
 > ビルドコンテキスト（`.`）の中からイメージをビルドします。
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > `Dockerfile`と`hello`をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュは用いずに）2 つめのイメージをビルドします。
 > Dockerfile に対して`-f`を使い、ビルドコンテキストとなるディレクトリを指定します。
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 @z
 
@@ -1551,10 +1551,10 @@ RUN unset ADMIN_USER
 @z
 
 @x
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 @y
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 @z
 
@@ -1605,10 +1605,10 @@ CMD sh
 @z
 
 @x
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 @y
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 @z
 
@@ -1789,11 +1789,11 @@ Now the image can be run like this to show the command's help:
 @z
 
 @x
-```bash
+```console
 $ docker run s3cmd
 ```
 @y
-```bash
+```console
 $ docker run s3cmd
 ```
 @z
@@ -1805,11 +1805,11 @@ Or using the right parameters to execute a command:
 @z
 
 @x
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 @y
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 @z
@@ -1932,11 +1932,11 @@ It can simply start Postgres:
 @z
 
 @x
-```bash
+```console
 $ docker run postgres
 ```
 @y
-```bash
+```console
 $ docker run postgres
 ```
 @z
@@ -1948,11 +1948,11 @@ Or, it can be used to run Postgres and pass parameters to the server:
 @z
 
 @x
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 @y
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 @z
@@ -1964,11 +1964,11 @@ Lastly, it could also be used to start a totally different tool, such as Bash:
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 @y
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 @z

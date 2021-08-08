@@ -33,10 +33,10 @@ redirect_from:
 
 @x
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"} is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](/get-started/).
+* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](../../get-started/index.md).
 @y
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"} is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](/get-started/).
+* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](../../get-started/index.md).
 @z
 
 @x
@@ -108,11 +108,11 @@ For our present study, we clone it to our local machine:
 @z
 
 @x
-```shell
+```console
 $ git clone https://github.com/olliefr/docker-gs-ping
 ```
 @y
-```shell
+```console
 $ git clone https://github.com/olliefr/docker-gs-ping
 ```
 @z
@@ -230,11 +230,11 @@ Let’s start our application and make sure it’s running properly. Open your t
 @z
 
 @x
-```shell
+```console
 $ go run main.go
 ```
 @y
-```shell
+```console
 $ go run main.go
 ```
 @z
@@ -278,12 +278,12 @@ Let's run a quick _smoke test_ on the application. **In a new terminal**, run a 
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
 @y
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -634,11 +634,11 @@ Let's build our first Docker image!
 @z
 
 @x
-```shell
+```console
 $ docker build --tag docker-gs-ping .
 ```
 @y
-```shell
+```console
 $ docker build --tag docker-gs-ping .
 ```
 @z
@@ -710,9 +710,9 @@ Your exact output will vary, but provided there aren't any errors, you should se
 @z
 
 @x
-To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](/products/docker-desktop). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
+To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/index.md). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
 @y
-To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](/products/docker-desktop). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
+To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/index.md). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
 @z
 
 @x
@@ -722,11 +722,11 @@ To list images, simply run the `images` command:
 @z
 
 @x
-```shell
+```console
 $ docker images
 ```
 @y
-```shell
+```console
 $ docker images
 ```
 @z
@@ -776,11 +776,11 @@ To create a new tag for our image, run the following command.
 @z
 
 @x
-```shell
+```console
 $ docker tag docker-gs-ping:latest docker-gs-ping:v1.0
 ```
 @y
-```shell
+```console
 $ docker tag docker-gs-ping:latest docker-gs-ping:v1.0
 ```
 @z
@@ -798,11 +798,11 @@ Now run the `docker images` command to see the updated list of local images:
 @z
 
 @x
-```shell
+```console
 $ docker images
 ```
 @y
-```shell
+```console
 $ docker images
 ```
 @z
@@ -836,12 +836,12 @@ Let’s remove the tag that we had just created. To do this, we’ll use the `rm
 @z
 
 @x
-```shell
+```console
 $ docker rmi docker-gs-ping:v1.0
 Untagged: docker-gs-ping:v1.0
 ```
 @y
-```shell
+```console
 $ docker rmi docker-gs-ping:v1.0
 Untagged: docker-gs-ping:v1.0
 ```
@@ -854,11 +854,11 @@ Notice that the response from Docker tells us that the image has not been remove
 @z
 
 @x
-```shell
+```console
 $ docker images
 ```
 @y
-```shell
+```console
 $ docker images
 ```
 @z
@@ -1012,12 +1012,12 @@ Since we have two dockerfiles now, we have to tell Docker that we want to build 
 @z
 
 @x
-```shell
-docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
+```console
+$ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 ```
 @y
-```shell
-docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
+```console
+$ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 ```
 @z
 
@@ -1048,9 +1048,9 @@ This is due to the fact that the ["distroless" base image](https://github.com/Go
 @z
 
 @x
-For more information on multi-stage builds, please feel free to check out [other parts](/develop/develop-images/multistage-build/) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
+For more information on multi-stage builds, please feel free to check out [other parts](../../develop/develop-images/multistage-build.md) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
 @y
-For more information on multi-stage builds, please feel free to check out [other parts](/develop/develop-images/multistage-build/) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
+For more information on multi-stage builds, please feel free to check out [other parts](../../develop/develop-images/multistage-build.md) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
 @z
 
 @x

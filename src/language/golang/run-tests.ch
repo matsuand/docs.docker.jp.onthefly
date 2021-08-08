@@ -170,22 +170,14 @@ In order to run the tests, we must make sure that our application Docker image i
 @z
 
 @x
-```shell
-docker build -t docker-gs-ping:latest .
-```
-@y
-```shell
-docker build -t docker-gs-ping:latest .
-```
-@z
-
-@x
-```
+```console
+$ docker build -t docker-gs-ping:latest .
 [+] Building 3.0s (13/13) FINISHED
 ...
 ```
 @y
-```
+```console
+$ docker build -t docker-gs-ping:latest .
 [+] Building 3.0s (13/13) FINISHED
 ...
 ```
@@ -210,13 +202,13 @@ Now that the Docker image for our application had been built, we can run the tes
 @z
 
 @x
-```shell
-go test ./...
+```console
+$ go test ./...
 ok      github.com/olliefr/docker-gs-ping       2.564s
 ```
 @y
-```shell
-go test ./...
+```console
+$ go test ./...
 ok      github.com/olliefr/docker-gs-ping       2.564s
 ```
 @z
@@ -228,12 +220,12 @@ That was a bit... underwhelming? Let's ask it to print a bit more detail, just t
 @z
 
 @x
-```shell
-go test -v ./...
+```console
+$ go test -v ./...
 ```
 @y
-```shell
-go test -v ./...
+```console
+$ go test -v ./...
 ```
 @z
 

@@ -21,12 +21,6 @@ operating system and its applications from security threats. To use it, a system
 administrator associates an AppArmor security profile with each program. Docker
 expects to find an AppArmor policy loaded and enforced.
 @y
-{% comment %}
-AppArmor (Application Armor) is a Linux security module that protects an
-operating system and its applications from security threats. To use it, a system
-administrator associates an AppArmor security profile with each program. Docker
-expects to find an AppArmor policy loaded and enforced.
-{% endcomment %}
 AppArmor (Application Armor) は Linux におけるモジュールの一つであり、オペレーティングシステムやアプリケーションをセキュリティの脅威から保護するものです。
 これを利用するには、システム管理者が各プログラムに対して AppArmor セキュリティプロファイルを関連づけます。
 Docker は、AppArmor ポリシーがロードされ適用されているかどうかを調べます。
@@ -37,22 +31,16 @@ Docker automatically generates and loads a default profile for containers named
 `docker-default`. The Docker binary generates this profile in `tmpfs` and then
 loads it into the kernel.
 @y
-{% comment %}
-Docker automatically generates and loads a default profile for containers named
-`docker-default`. The Docker binary generates this profile in `tmpfs` and then
-loads it into the kernel.
-{% endcomment %}
 Docker はコンテナーに対するデフォルトプロファイルとして`docker-default`というものを、自動的に生成してロードします。
-Docker 実行モジュールが `tmpfs` にこのプロファイルを生成してカーネルにロードします。
+Docker 実行モジュールが`tmpfs`にこのプロファイルを生成してカーネルにロードします。
 @z
 
 @x
 > **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 @y
-{% comment %}
-> **Note**: This profile is used on containers, _not_ on the Docker Daemon.
-{% endcomment %}
-> **メモ**: このプロファイルはコンテナーが利用するものであって、Docker デーモンが利用するものでは **ありません**。
+> **メモ**
+>
+> このプロファイルはコンテナーが利用するものであって、Docker デーモンが利用するものでは **ありません**。
 @z
 
 @x
@@ -62,23 +50,13 @@ profile, it is located in
 [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 @y
-{% comment %}
-A profile for the Docker Engine daemon exists but it is not currently installed
-with the `deb` packages. If you are interested in the source for the daemon
-profile, it is located in
-[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
-in the Docker Engine source repository.
-{% endcomment %}
-Docker Engine のデーモン用のプロファイルというものが存在していますが、それは現時点において `deb` パッケージからはインストールされません。
+Docker Engine のデーモン用のプロファイルというものが存在していますが、それは現時点において`deb`パッケージからはインストールされません。
 デーモン用のプロファイルソースに興味のある方は、Docker Engine のソースディレクトリ内の [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor) にあるので参照してください。
 @z
 
 @x
 ## Understand the policies
 @y
-{% comment %}
-## Understand the policies
-{% endcomment %}
 {: #understand-the-policies }
 ## ポリシーの理解
 @z
@@ -89,13 +67,7 @@ moderately protective while providing wide application compatibility. The
 profile is generated from the following
 [template](https://github.com/moby/moby/blob/master/profiles/apparmor/template.go).
 @y
-{% comment %}
-The `docker-default` profile is the default for running containers. It is
-moderately protective while providing wide application compatibility. The
-profile is generated from the following
-[template](https://github.com/moby/moby/blob/master/profiles/apparmor/template.go).
-{% endcomment %}
-`docker-default` プロファイルは、コンテナーを起動させるためのデフォルトとなるものです。
+`docker-default`プロファイルは、コンテナーを起動させるためのデフォルトとなるものです。
 これは幅広くアプリケーションとの互換性を提供しつつ、適度なセキュリティ保護を実現します。
 このプロファイルは [Go 言語のテンプレート](https://github.com/moby/moby/blob/master/profiles/apparmor/template.go) から生成されます。
 @z
@@ -105,22 +77,17 @@ When you run a container, it uses the `docker-default` policy unless you
 override it with the `security-opt` option. For example, the following
 explicitly specifies the default policy:
 @y
-{% comment %}
-When you run a container, it uses the `docker-default` policy unless you
-override it with the `security-opt` option. For example, the following
-explicitly specifies the default policy:
-{% endcomment %}
 コンテナーを起動するとき、通常は `docker-default` ポリシーが適用されます。
-ただし `security-opt` オプションを指定すれば、それがオーバーライドされま
+ただし`security-opt`オプションを指定すれば、それがオーバーライドされま
 たとえば以下に示すのは、明示的にデフォルトポリシーを指定する例です。
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 ```
 @y
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 ```
 @z
@@ -128,9 +95,6 @@ $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 @x
 ## Load and unload profiles
 @y
-{% comment %}
-## Load and unload profiles
-{% endcomment %}
 {: #load-and-unload-profiles }
 ## プロファイルのロード、アンロード
 @z
@@ -138,18 +102,15 @@ $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 @x
 To load a new profile into AppArmor for use with containers:
 @y
-{% comment %}
-To load a new profile into AppArmor for use with containers:
-{% endcomment %}
 コンテナーが利用できるように、AppArmor 内に新たなプロファイルをロードします。
 @z
 
 @x
-```bash
+```console
 $ apparmor_parser -r -W /path/to/your_profile
 ```
 @y
-```bash
+```console
 $ apparmor_parser -r -W /path/to/your_profile
 ```
 @z
@@ -157,18 +118,15 @@ $ apparmor_parser -r -W /path/to/your_profile
 @x
 Then, run the custom profile with `--security-opt` like so:
 @y
-{% comment %}
-Then, run the custom profile with `--security-opt` like so:
-{% endcomment %}
-そして `--security-opt` を利用して、ユーザー独自のプロファイルを実行します。
+そして`--security-opt`を利用して、ユーザー独自のプロファイルを実行します。
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=your_profile hello-world
 ```
 @y
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=your_profile hello-world
 ```
 @z
@@ -176,19 +134,16 @@ $ docker run --rm -it --security-opt apparmor=your_profile hello-world
 @x
 To unload a profile from AppArmor:
 @y
-{% comment %}
-To unload a profile from AppArmor:
-{% endcomment %}
 AppArmor からプロファイルをアンロードするには、以下のようにします。
 @z
 
 @x
-```bash
+```console
 # unload the profile
 $ apparmor_parser -R /path/to/profile
 ```
 @y
-```bash
+```console
 # unload the profile
 $ apparmor_parser -R /path/to/profile
 ```
@@ -197,9 +152,6 @@ $ apparmor_parser -R /path/to/profile
 @x
 ### Resources for writing profiles
 @y
-{% comment %}
-### Resources for writing profiles
-{% endcomment %}
 {: #resources-for-writing-profiles }
 ### プロファイル記述のための情報
 @z
@@ -209,11 +161,6 @@ The syntax for file globbing in AppArmor is a bit different than some other
 globbing implementations. It is highly suggested you take a look at some of the
 below resources with regard to AppArmor profile syntax.
 @y
-{% comment %}
-The syntax for file globbing in AppArmor is a bit different than some other
-globbing implementations. It is highly suggested you take a look at some of the
-below resources with regard to AppArmor profile syntax.
-{% endcomment %}
 AppArmor におけるワイルドカード検索（globbing）の文法は、他のワイルドカード検索とは多少異なります。
 AppArmor プロファイルの文法に関しては、以下に示す情報を確認することを強くお勧めします。
 @z
@@ -222,10 +169,6 @@ AppArmor プロファイルの文法に関しては、以下に示す情報を�
 - [Quick Profile Language](https://gitlab.com/apparmor/apparmor/wikis/QuickProfileLanguage)
 - [Globbing Syntax](https://gitlab.com/apparmor/apparmor/wikis/AppArmor_Core_Policy_Reference#AppArmor_globbing_syntax)
 @y
-{% comment %}
-- [Quick Profile Language](https://gitlab.com/apparmor/apparmor/wikis/QuickProfileLanguage)
-- [Globbing Syntax](https://gitlab.com/apparmor/apparmor/wikis/AppArmor_Core_Policy_Reference#AppArmor_globbing_syntax)
-{% endcomment %}
 - [Quick Profile Language](https://gitlab.com/apparmor/apparmor/wikis/QuickProfileLanguage)
 - [Globbing Syntax](https://gitlab.com/apparmor/apparmor/wikis/AppArmor_Core_Policy_Reference#AppArmor_globbing_syntax)
 @z
@@ -233,9 +176,6 @@ AppArmor プロファイルの文法に関しては、以下に示す情報を�
 @x
 ## Nginx example profile
 @y
-{% comment %}
-## Nginx example profile
-{% endcomment %}
 {: #nginx-example-profile }
 ## Nginx 用のプロファイル例
 @z
@@ -244,10 +184,6 @@ AppArmor プロファイルの文法に関しては、以下に示す情報を�
 In this example, you create a custom AppArmor profile for Nginx. Below is the
 custom profile.
 @y
-{% comment %}
-In this example, you create a custom AppArmor profile for Nginx. Below is the
-custom profile.
-{% endcomment %}
 ここに示す例では、Nginx 用に AppArmor プロファイルをカスタマイズします。
 以下がそのカスタムプロファイルです。
 @z
@@ -432,21 +368,13 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 1. Save the custom profile to disk in the
 `/etc/apparmor.d/containers/docker-nginx` file.
 @y
-{% comment %}
-1. Save the custom profile to disk in the
-`/etc/apparmor.d/containers/docker-nginx` file.
-{% endcomment %}
-1. このカスタムプロファイルを `/etc/apparmor.d/containers/docker-nginx` というファイルに保存します。
+1. このカスタムプロファイルを`/etc/apparmor.d/containers/docker-nginx`というファイルに保存します。
 @z
 
 @x
    The file path in this example is not a requirement. In production, you could
    use another.
 @y
-   {% comment %}
-   The file path in this example is not a requirement. In production, you could
-   use another.
-   {% endcomment %}
    この例におけるファイルパスは必須のものではありません。
    本番環境においては別のものにすることができます。
 @z
@@ -454,18 +382,15 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 @x
 2. Load the profile.
 @y
-{% comment %}
-2. Load the profile.
-{% endcomment %}
 2. プロファイルをロードします。
 @z
 
 @x
-   ```bash
+   ```console
    $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
    ```
 @y
-   ```bash
+   ```console
    $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
    ```
 @z
@@ -473,28 +398,22 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 @x
 3. Run a container with the profile.
 @y
-{% comment %}
-3. Run a container with the profile.
-{% endcomment %}
 3. このプロファイルを使ってコンテナーを起動します。
 @z
 
 @x
    To run nginx in detached mode:
 @y
-   {% comment %}
-   To run nginx in detached mode:
-   {% endcomment %}
    nginx をデタッチモードで起動します。
 @z
 
 @x
-   ```bash
+   ```console
    $ docker run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
    ```
 @y
-   ```bash
+   ```console
    $ docker run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
    ```
@@ -503,18 +422,15 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 @x
 4. Exec into the running container.
 @y
-{% comment %}
-4. Exec into the running container.
-{% endcomment %}
 4. exec により実行中のコンテナーに入ります。
 @z
 
 @x
-   ```bash
+   ```console
    $ docker container exec -it apparmor-nginx bash
    ```
 @y
-   ```bash
+   ```console
    $ docker container exec -it apparmor-nginx bash
    ```
 @z
@@ -522,18 +438,15 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 @x
 5. Try some operations to test the profile.
 @y
-{% comment %}
-5. Try some operations to test the profile.
-{% endcomment %}
 5. 適当な操作を通じてプロファイルを確認します。
 @z
 
 @x
-   ```bash
+   ```console
    root@6da5a2a930b9:~# ping 8.8.8.8
    ping: Lacking privilege for raw socket.
 @y
-   ```bash
+   ```console
    root@6da5a2a930b9:~# ping 8.8.8.8
    ping: Lacking privilege for raw socket.
 @z
@@ -575,9 +488,6 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 @x
 Congrats! You just deployed a container secured with a custom apparmor profile!
 @y
-{% comment %}
-Congrats! You just deployed a container secured with a custom apparmor profile!
-{% endcomment %}
 おめでとうございます。
 カスタムな AppArmor プロファイルを利用した、セキュアなコンテナーがデプロイできました。
 @z
@@ -585,9 +495,6 @@ Congrats! You just deployed a container secured with a custom apparmor profile!
 @x
 ## Debug AppArmor
 @y
-{% comment %}
-## Debug AppArmor
-{% endcomment %}
 {: #debug-apparmor }
 ## AppArmor のデバッグ
 @z
@@ -595,19 +502,13 @@ Congrats! You just deployed a container secured with a custom apparmor profile!
 @x
 You can use `dmesg` to debug problems and `aa-status` check the loaded profiles.
 @y
-{% comment %}
-You can use `dmesg` to debug problems and `aa-status` check the loaded profiles.
-{% endcomment %}
-`dmesg` を使ってデバッグすることができます。
-また `aa-status` を使えば、ロード済みプロファイルを確認することができます。
+`dmesg`を使ってデバッグすることができます。
+また`aa-status`を使えば、ロード済みプロファイルを確認することができます。
 @z
 
 @x
 ### Use dmesg
 @y
-{% comment %}
-### Use dmesg
-{% endcomment %}
 {: #use-dmesg }
 ### dmesg の利用
 @z
@@ -616,10 +517,6 @@ You can use `dmesg` to debug problems and `aa-status` check the loaded profiles.
 Here are some helpful tips for debugging any problems you might be facing with
 regard to AppArmor.
 @y
-{% comment %}
-Here are some helpful tips for debugging any problems you might be facing with
-regard to AppArmor.
-{% endcomment %}
 AppArmor に関して問題が発生したとしても、デバッグに役立つヒントをここに示します。
 @z
 
@@ -627,11 +524,7 @@ AppArmor に関して問題が発生したとしても、デバッグに役立�
 AppArmor sends quite verbose messaging to `dmesg`. Usually an AppArmor line
 looks like the following:
 @y
-{% comment %}
-AppArmor sends quite verbose messaging to `dmesg`. Usually an AppArmor line
-looks like the following:
-{% endcomment %}
-AppArmor は `dmesg` に対して極めて詳細なメッセージ出力を行います。
+AppArmor は`dmesg`に対して極めて詳細なメッセージ出力を行います。
 通常 AppArmor の出力は以下のようなものです。
 @z
 
@@ -649,11 +542,7 @@ AppArmor は `dmesg` に対して極めて詳細なメッセージ出力を行�
 In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 @y
-{% comment %}
-In the above example, you can see `profile=/usr/bin/docker`. This means the
-user has the `docker-engine` (Docker Engine Daemon) profile loaded.
-{% endcomment %}
-上の例では `profile=/usr/bin/docker` という記述があります。
+上の例では`profile=/usr/bin/docker`という記述があります。
 これはユーザーが、`docker-engine`（Docker Engine のデーモン）をロードしていることを意味します。
 @z
 
@@ -661,19 +550,14 @@ user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 > **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
 > users might run into some issues when trying to `docker container exec`.
 @y
-{% comment %}
-> **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
-> users might run into some issues when trying to `docker container exec`.
-{% endcomment %}
-> **メモ**: Ubuntu のバージョンが 14.04 より新しい場合は、何も問題はありませんが Trusty を利用している場合、`docker container exec` を実行することで問題が発生する場合があります。
+> **メモ**
+>
+> Ubuntu のバージョンが 14.04 より新しい場合は、何も問題はありませんが Trusty を利用している場合、`docker container exec`を実行することで問題が発生する場合があります。
 @z
 
 @x
 Look at another log line:
 @y
-{% comment %}
-Look at another log line:
-{% endcomment %}
 別のログ行を見てみます。
 @z
 
@@ -692,22 +576,14 @@ This time the profile is `docker-default`, which is run on containers by
 default unless in `privileged` mode. This line shows that apparmor has denied
 `ptrace` in the container. This is exactly as expected.
 @y
-{% comment %}
-This time the profile is `docker-default`, which is run on containers by
-default unless in `privileged` mode. This line shows that apparmor has denied
-`ptrace` in the container. This is exactly as expected.
-{% endcomment %}
-この場合、プロファイルは `docker-default` であり、`privileged` モードでない限り、デフォルトでコンテナー上に実行されているものです。
-このログ行は、AppArmor がコンテナー内の `ptrace` を拒否していることがわかります。
+この場合、プロファイルは`docker-default`であり、`privileged`モードでない限り、デフォルトでコンテナー上に実行されているものです。
+このログ行は、AppArmor がコンテナー内の`ptrace`を拒否していることがわかります。
 これはまさに期待どおりの動作です。
 @z
 
 @x
 ### Use aa-status
 @y
-{% comment %}
-### Use aa-status
-{% endcomment %}
 {: #use-aa-status }
 ### aa-status の利用
 @z
@@ -716,16 +592,12 @@ default unless in `privileged` mode. This line shows that apparmor has denied
 If you need to check which profiles are loaded,  you can use `aa-status`. The
 output looks like:
 @y
-{% comment %}
-If you need to check which profiles are loaded,  you can use `aa-status`. The
-output looks like:
-{% endcomment %}
-どのプロファイルがロードされているかを確認するには `aa-status` を使います。
+どのプロファイルがロードされているかを確認するには`aa-status`を使います。
 出力は以下のようになります。
 @z
 
 @x
-```bash
+```console
 $ sudo aa-status
 apparmor module is loaded.
 14 profiles are loaded.
@@ -755,7 +627,7 @@ apparmor module is loaded.
 0 processes are unconfined but have a profile defined.
 ```
 @y
-```bash
+```console
 $ sudo aa-status
 apparmor module is loaded.
 14 profiles are loaded.
@@ -792,14 +664,8 @@ container PIDs is in `enforce` mode. This means AppArmor is actively blocking
 and auditing in `dmesg` anything outside the bounds of the `docker-default`
 profile.
 @y
-{% comment %}
-The above output shows that the `docker-default` profile running on various
-container PIDs is in `enforce` mode. This means AppArmor is actively blocking
-and auditing in `dmesg` anything outside the bounds of the `docker-default`
-profile.
-{% endcomment %}
-上の出力からわかることは、`docker-default` プロファイルがさまざまなコンテナー PID 上において実行していて、`enforce` モードにより動作しているということです。
-つまり `docker-default` プロファイルの範囲外のところで AppArmor は、`dmesg` においてブロックと監査を効果的に行っているということです。
+上の出力からわかることは、`docker-default`プロファイルがさまざまなコンテナー PID 上において実行していて、`enforce`モードにより動作しているということです。
+つまり`docker-default`プロファイルの範囲外のところで AppArmor は、`dmesg`においてブロックと監査を効果的に行っているということです。
 @z
 
 @x
@@ -808,23 +674,14 @@ is running in `complain` mode. This means AppArmor _only_ logs to `dmesg`
 activity outside the bounds of the profile. (Except in the case of Ubuntu
 Trusty, where some interesting behaviors are enforced.)
 @y
-{% comment %}
-The output above also shows the `/usr/bin/docker` (Docker Engine daemon) profile
-is running in `complain` mode. This means AppArmor _only_ logs to `dmesg`
-activity outside the bounds of the profile. (Except in the case of Ubuntu
-Trusty, where some interesting behaviors are enforced.)
-{% endcomment %}
-さらに `/usr/bin/docker`（Docker Engine デーモン）プロファイルは `complain` モードにより動作していることもわかります。
-これは AppArmor がプロファイルの範囲外にて、`dmesg` に対して **のみ** ログ出力を行っているということです。
-（Ubuntu Trusty の場合は例外で、`enforce` モードにより動作するものがあります。）
+さらに `/usr/bin/docker`（Docker Engine デーモン）プロファイルは`complain`モードにより動作していることもわかります。
+これは AppArmor がプロファイルの範囲外にて、`dmesg`に対して **のみ** ログ出力を行っているということです。
+（Ubuntu Trusty の場合は例外で、`enforce`モードにより動作するものがあります。）
 @z
 
 @x
 ## Contribute Docker's AppArmor code
 @y
-{% comment %}
-## Contribute Docker's AppArmor code
-{% endcomment %}
 {: #contribute-dockers-apparmor-code }
 ## Docker 向け AppArmor コードの提供
 @z
@@ -835,12 +692,6 @@ Advanced users and package managers can find a profile for `/usr/bin/docker`
 [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 @y
-{% comment %}
-Advanced users and package managers can find a profile for `/usr/bin/docker`
-(Docker Engine Daemon) underneath
-[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
-in the Docker Engine source repository.
-{% endcomment %}
 上級ユーザーやパッケージ管理者は、`/usr/bin/docker`（Docker Engine デーモン）に対するプロファイルを、Docker Engine ソースリポジトリ内の [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor) から検索し利用しています。
 @z
 
@@ -848,9 +699,5 @@ in the Docker Engine source repository.
 The `docker-default` profile for containers lives in
 [profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor).
 @y
-{% comment %}
-The `docker-default` profile for containers lives in
-[profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor).
-{% endcomment %}
-コンテナー向けの `docker-default` プロファイルは [profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor) にあります。
+コンテナー向けの`docker-default`プロファイルは [profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor) にあります。
 @z

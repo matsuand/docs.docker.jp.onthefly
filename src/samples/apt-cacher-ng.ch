@@ -104,11 +104,11 @@ To build the image using:
 @z
 
 @x
-```bash
+```console
 $ docker build -t eg_apt_cacher_ng .
 ```
 @y
-```bash
+```console
 $ docker build -t eg_apt_cacher_ng .
 ```
 @z
@@ -120,11 +120,11 @@ Then run it, mapping the exposed port to one on the host
 @z
 
 @x
-```bash
+```console
 $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 ```
 @y
-```bash
+```console
 $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 ```
 @z
@@ -138,11 +138,11 @@ use:
 @z
 
 @x
-```bash
+```console
 $ docker logs -f test_apt_cacher_ng
 ```
 @y
-```bash
+```console
 $ docker logs -f test_apt_cacher_ng
 ```
 @z
@@ -218,11 +218,11 @@ which obey `http_proxy`, such as `curl`, `wget` and others:
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 ```
 @y
-```bash
+```console
 $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 ```
 @z
@@ -242,11 +242,11 @@ from your `Dockerfile` too.
 @z
 
 @x
-```bash
+```console
 $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
 ```
 @y
-```bash
+```console
 $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
 ```
 @z
@@ -258,13 +258,13 @@ $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_
 @z
 
 @x
-```bash
+```console
 $ docker network create mynetwork
 $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
 $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
 ```
 @y
-```bash
+```console
 $ docker network create mynetwork
 $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
 $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
@@ -282,10 +282,10 @@ instruction, and the image we built to run the service:
 @z
 
 @x
-```bash
+```console
 $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 @y
-```bash
+```console
 $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 @z
 
@@ -346,13 +346,13 @@ container, and then removing the image.
 @z
 
 @x
-```bash
+```console
 $ docker container stop test_apt_cacher_ng
 $ docker container rm test_apt_cacher_ng
 $ docker image rm eg_apt_cacher_ng
 ```
 @y
-```bash
+```console
 $ docker container stop test_apt_cacher_ng
 $ docker container rm test_apt_cacher_ng
 $ docker image rm eg_apt_cacher_ng

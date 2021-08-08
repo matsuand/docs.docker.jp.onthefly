@@ -522,14 +522,14 @@ This ensures that the main CI will only trigger if we tag our commits with `V.n.
 @z
 
 @x
-```bash
-git tag -a v1.0.2
-git push origin v1.0.2
+```console
+$ git tag -a v1.0.2
+$ git push origin v1.0.2
 ```
 @y
-```bash
-git tag -a v1.0.2
-git push origin v1.0.2
+```console
+$ git tag -a v1.0.2
+$ git push origin v1.0.2
 ```
 @z
 

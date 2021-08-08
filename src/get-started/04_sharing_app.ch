@@ -172,12 +172,12 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-    ```bash
-    docker tag getting-started YOUR-USER-NAME/getting-started
+    ```console
+    $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
 @y
-    ```bash
-    docker tag getting-started YOUR-USER-NAME/getting-started
+    ```console
+    $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
 @z
 
@@ -193,12 +193,12 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-    ```bash
-    docker push YOUR-USER-NAME/getting-started
+    ```console
+    $ docker push YOUR-USER-NAME/getting-started
     ```
 @y
-    ```bash
-    docker push YOUR-USER-NAME/getting-started
+    ```console
+    $ docker push YOUR-USER-NAME/getting-started
     ```
 @z
 
@@ -247,7 +247,7 @@ new instance that has never seen this container image! To do this, we will use P
 @x
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
 @y
-   ![Play with Docker から新たなインスタンス追加](images/pwd-add-new-instance.png){: style=width:75% }
+    ![Play with Docker から新たなインスタンス追加](images/pwd-add-new-instance.png){: style=width:75% }
 @z
 
 @x
@@ -257,12 +257,12 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+    ```console
+    $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
     ```
 @y
-   ```bash
-   docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+    ```console
+    $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
    ```
 @z
 

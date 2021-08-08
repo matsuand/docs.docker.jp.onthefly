@@ -119,13 +119,13 @@ Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b273
 
 @x
 Docker is installed. The `docker` service starts automatically on Debian based
-distributions. On `RPM` based distributions, such as CentOS or Fedora, you need
-to start it manually using the appropriate `systemctl` or `service` command.
+distributions. On `RPM` based distributions, such as CentOS, Fedora, RHEL or SLES,
+you need to start it manually using the appropriate `systemctl` or `service` command.
 As the message indicates, non-root users cannot run Docker commands by default.
 @y
 上により Docker がインストールされます。
 Debian ベースのディストリビューションでは Docker が自動的に開始されます。
-`RPM`ベースの場合は手動での実行が必要となるため、 `systemctl`か`service`のいずれか適当なものを実行します。
+CentOS、Fedora、RHEL、SLES といった`RPM`ベースの場合は手動での実行が必要となるため、`systemctl`か`service`のいずれか適当なものを実行します。
 上の出力メッセージに示されているように、デフォルトでは非 root ユーザーによる Docker コマンド実行はできません。
 @z
 

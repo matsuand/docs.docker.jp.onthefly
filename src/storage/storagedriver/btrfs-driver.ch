@@ -110,10 +110,10 @@ Btrfs Filesystem as Btrfs.
 @z
 
 @x
-  ```bash
+  ```console
   $ grep btrfs /proc/filesystems
 @y
-  ```bash
+  ```console
   $ grep btrfs /proc/filesystems
 @z
 
@@ -162,12 +162,12 @@ This procedure is essentially identical on SLES and Ubuntu.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
     $ sudo rm -rf /var/lib/docker/*
     ```
 @y
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
     $ sudo rm -rf /var/lib/docker/*
     ```
@@ -186,11 +186,11 @@ This procedure is essentially identical on SLES and Ubuntu.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
     ```
 @y
-    ```bash
+    ```console
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
     ```
 @z
@@ -212,11 +212,11 @@ This procedure is essentially identical on SLES and Ubuntu.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
     ```
 @z
@@ -236,11 +236,11 @@ This procedure is essentially identical on SLES and Ubuntu.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker.bk/* /var/lib/docker/
     ```
 @y
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker.bk/* /var/lib/docker/
     ```
 @z
@@ -292,10 +292,10 @@ This procedure is essentially identical on SLES and Ubuntu.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker info
 @y
-    ```bash
+    ```console
     $ docker info
 @z
 
@@ -362,10 +362,10 @@ To add a block device to a Btrfs volume, use the `btrfs device add` and
 @z
 
 @x
-```bash
+```console
 $ sudo btrfs device add /dev/svdh /var/lib/docker
 @y
-```bash
+```console
 $ sudo btrfs device add /dev/svdh /var/lib/docker
 @z
 

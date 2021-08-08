@@ -110,31 +110,33 @@ system.
 @x
 > Uninstall Docker Desktop from the command line
 >
->To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
->--uninstall`. If your instance is installed in the default location, this
->command provides a clean uninstall:
+> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
+> --uninstall`. If your instance is installed in the default location, this
+> command provides a clean uninstall:
 >
->```shell
->$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
->Docker is running, exiting...
->Docker uninstalled successfully. You can move the Docker application to the trash.
->```
->You might want to use the command-line uninstall if, for example, you find that
->the app is non-functional, and you cannot uninstall it from the menu.
+> ```console
+> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+> Docker is running, exiting...
+> Docker uninstalled successfully. You can move the Docker application to the trash.
+> ```
+>
+> You might want to use the command-line uninstall if, for example, you find that
+> the app is non-functional, and you cannot uninstall it from the menu.
 @y
 > Uninstall Docker Desktop from the command line
 >
->To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
->--uninstall`. If your instance is installed in the default location, this
->command provides a clean uninstall:
+> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
+> --uninstall`. If your instance is installed in the default location, this
+> command provides a clean uninstall:
 >
->```shell
->$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
->Docker is running, exiting...
->Docker uninstalled successfully. You can move the Docker application to the trash.
->```
->You might want to use the command-line uninstall if, for example, you find that
->the app is non-functional, and you cannot uninstall it from the menu.
+> ```console
+> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+> Docker is running, exiting...
+> Docker uninstalled successfully. You can move the Docker application to the trash.
+> ```
+>
+> You might want to use the command-line uninstall if, for example, you find that
+> the app is non-functional, and you cannot uninstall it from the menu.
 @z
 
 @x
@@ -162,11 +164,11 @@ the log data. Before reporting an issue, we recommend that you read the informat
 @z
 
 @x
->**Note**
+> **Note**
 >
 > Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 @y
->**Note**
+> **Note**
 >
 > Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 @z
@@ -234,11 +236,11 @@ To create *and upload* diagnostics, run:
 @z
 
 @x
-```sh
+```console
 $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
 ```
 @y
-```sh
+```console
 $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
 ```
 @z
@@ -284,11 +286,11 @@ To view the contents of the diagnostic file, run:
 @z
 
 @x
-```sh
+```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 @y
-```sh
+```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 @z
@@ -326,13 +328,13 @@ To watch the live flow of Docker Desktop logs in the command line, run the follo
 @z
 
 @x
-```bash
+```console
 $ pred='process matches ".*(ocker|vpnkit).*"
   || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
 $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
 ```
 @y
-```bash
+```console
 $ pred='process matches ".*(ocker|vpnkit).*"
   || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
 $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
@@ -346,11 +348,11 @@ Alternatively, to collect the last day of logs (`1d`) in a file, run:
 @z
 
 @x
-```
+```console
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 @y
-```
+```console
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 @z
@@ -532,12 +534,12 @@ To check if your Mac supports the Hypervisor framework, run the following comman
 @z
 
 @x
-```bash
-sysctl kern.hv_support
+```console
+$ sysctl kern.hv_support
 ```
 @y
-```bash
-sysctl kern.hv_support
+```console
+$ sysctl kern.hv_support
 ```
 @z
 
@@ -734,12 +736,12 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @z
 
 @x
-  ```bash
-  export DOCKER_HOST=unix:///var/run/docker.sock
+  ```console
+  $ export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 @y
-  ```bash
-  export DOCKER_HOST=unix:///var/run/docker.sock
+  ```console
+  $ export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 @z
 

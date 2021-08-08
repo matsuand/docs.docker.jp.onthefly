@@ -465,11 +465,11 @@ here. (If `false`, Experimental mode is off.)
 @z
 
 @x
-```bash
-> docker version
+```console
+$ docker version
 @y
-```bash
-> docker version
+```console
+$ docker version
 @z
 
 @x
@@ -640,11 +640,11 @@ an example:
 @z
 
 @x
-```bash
+```console
 $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 @y
-```bash
+```console
 $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 @z
@@ -882,11 +882,11 @@ Add the following to your `~/.bash_profile`:
 @z
 
 @x
-```shell
+```bash
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 ```
 @y
-```shell
+```bash
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 ```
 @z
@@ -898,13 +898,13 @@ OR
 @z
 
 @x
-```shell
+```bash
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
 . $(brew --prefix)/etc/bash_completion
 fi
 ```
 @y
-```shell
+```bash
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
 . $(brew --prefix)/etc/bash_completion
 fi
@@ -967,12 +967,12 @@ Create the `completions` directory:
 @z
 
 @x
-```bash
-mkdir -p ~/.config/fish/completions
+```console
+$ mkdir -p ~/.config/fish/completions
 ```
 @y
-```bash
-mkdir -p ~/.config/fish/completions
+```console
+$ mkdir -p ~/.config/fish/completions
 ```
 @z
 
@@ -983,14 +983,14 @@ Docker の Fish 入力補完を追加します。
 @z
 
 @x
-```bash
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
+```console
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
 @y
-```bash
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
+```console
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
 @z
 

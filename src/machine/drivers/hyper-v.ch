@@ -256,12 +256,12 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 @z
 
 @x
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
     ```
 @y
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
     ```
 @z
 
@@ -272,7 +272,7 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 @z
 
 @x
-    ```shell
+    ```console
     PS C:\WINDOWS\system32>  docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" manager1
     Running pre-create checks...
     Creating machine...
@@ -300,7 +300,7 @@ Reboot your desktop system to clear out any routing table problems. Without a re
     ```
 *   Use the same process, driver, and network switch to create the other nodes.
 @y
-    ```shell
+    ```console
     PS C:\WINDOWS\system32>  docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" manager1
     Running pre-create checks...
     Creating machine...
@@ -336,14 +336,14 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 @z
 
 @x
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
     ```
 @y
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
     ```
 @z
 

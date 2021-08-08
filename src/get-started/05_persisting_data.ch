@@ -66,12 +66,12 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-    ```bash
-    docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+    ```console
+    $ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
     ```
 @y
-    ```bash
-    docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+    ```console
+    $ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
     ```
 @z
 
@@ -107,12 +107,12 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-    ```bash
-    cat /data.txt
+    ```console
+    $ cat /data.txt
     ```
 @y
-    ```bash
-    cat /data.txt
+    ```console
+    $ cat /data.txt
     ```
 @z
 
@@ -126,12 +126,12 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-    ```bash
-    docker exec <container-id> cat /data.txt
+    ```console
+    $ docker exec <container-id> cat /data.txt
     ```
 @y
-    ```bash
-    docker exec <container-id> cat /data.txt
+    ```console
+    $ docker exec <container-id> cat /data.txt
     ```
 @z
 
@@ -150,12 +150,12 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-    ```bash
-    docker run -it ubuntu ls /
+    ```console
+    $ docker run -it ubuntu ls /
     ```
 @y
-    ```bash
-    docker run -it ubuntu ls /
+    ```console
+    $ docker run -it ubuntu ls /
     ```
 @z
 
@@ -260,12 +260,12 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-    ```bash
-    docker volume create todo-db
+    ```console
+    $ docker volume create todo-db
     ```
 @y
-    ```bash
-    docker volume create todo-db
+    ```console
+    $ docker volume create todo-db
     ```
 @z
 
@@ -287,12 +287,12 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-    ```bash
-    docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+    ```console
+    $ docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+    ```console
+    $ docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
     ```
 @z
 
@@ -377,8 +377,8 @@ you can use the `docker volume inspect` command.
 @z
 
 @x
-```bash
-docker volume inspect todo-db
+```console
+$ docker volume inspect todo-db
 [
     {
         "CreatedAt": "2019-09-26T02:18:36Z",
@@ -392,8 +392,8 @@ docker volume inspect todo-db
 ]
 ```
 @y
-```bash
-docker volume inspect todo-db
+```console
+$ docker volume inspect todo-db
 [
     {
         "CreatedAt": "2019-09-26T02:18:36Z",

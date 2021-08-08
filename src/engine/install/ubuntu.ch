@@ -81,9 +81,9 @@ Docker Engine をインストールするには、以下に示す Ubuntu の 64 
 @z
 
 @x
-Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x` architectures.
 @y
-Docker Engine は`x86_64`（または`amd64`）、`armhf`、`arm64`の各アーキテクチャーをサポートします。
+Docker Engine は`x86_64`（または`amd64`）、`armhf`、`arm64`、`s390x`の各アーキテクチャーをサポートします。
 @z
 
 @x
@@ -322,6 +322,7 @@ from the repository.
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
       <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">s390x</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -330,6 +331,7 @@ from the repository.
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
       <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">s390x</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -389,6 +391,28 @@ from the repository.
     ```console
     $ echo \
       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+@z
+
+@x
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
+@y
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
+@z
+
+@x
+    ```console
+    $ echo \
+      "deb [arch=s390x signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+@y
+    ```console
+    $ echo \
+      "deb [arch=s390x signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 @z
@@ -516,7 +540,7 @@ from the repository.
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
@@ -569,16 +593,18 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 @x
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
+    `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
     version you want to install.
 @y
 1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }
     にアクセスして、インストールしたい Ubuntu バージョンを選びます。
-    そして`pool/stable/`にアクセスし、`amd64`、`armhf`、`arm64`のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する`.deb`ファイルをダウンロードします。
+    そして`pool/stable/`にアクセスし、`amd64`、`armhf`、`arm64`、`s390x`のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する`.deb`ファイルをダウンロードします。
 @z
 
 @x
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 @y
@@ -632,7 +658,7 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。

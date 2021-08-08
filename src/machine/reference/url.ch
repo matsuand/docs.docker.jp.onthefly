@@ -18,20 +18,17 @@ title: docker-machine url
 @x
 Get the URL of a host
 @y
-{% comment %}
-Get the URL of a host
-{% endcomment %}
 ホストの URL を取得します。
 @z
 
 @x
-```bash
+```console
 $ docker-machine url dev
 
 tcp://192.168.99.109:2376
 ```
 @y
-```bash
+```console
 $ docker-machine url dev
 
 tcp://192.168.99.109:2376

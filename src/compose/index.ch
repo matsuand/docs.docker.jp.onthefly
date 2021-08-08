@@ -389,13 +389,13 @@ Compose ではテストスイートに対応して、分離されたテスト環
 @z
 
 @x
-```bash
+```console
 $ docker-compose up -d
 $ ./run_tests
 $ docker-compose down
 ```
 @y
-```bash
+```console
 $ docker-compose up -d
 $ ./run_tests
 $ docker-compose down

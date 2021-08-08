@@ -65,12 +65,12 @@ installed and coexist together.
 @z
 
 @x
-```bash
-go get github.com/docker/docker/client
+```console
+$ go get github.com/docker/docker/client
 ```
 @y
-```bash
-go get github.com/docker/docker/client
+```console
+$ go get github.com/docker/docker/client
 ```
 @z
 
@@ -380,13 +380,13 @@ print client.containers.run("alpine", ["echo", "hello", "world"])
 @z
 
 @x
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 @y
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create

@@ -62,20 +62,17 @@ Description:
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下のとおりです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine start dev
 
 Starting VM...
 ```
 @y
-```bash
+```console
 $ docker-machine start dev
 
 Starting VM...

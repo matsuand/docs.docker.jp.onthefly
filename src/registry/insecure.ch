@@ -162,10 +162,10 @@ This is more secure than the insecure registry solution.
 @z
 
 @x
-    ```bash
+    ```console
     $ mkdir -p certs
 @y
-    ```bash
+    ```console
     $ mkdir -p certs
 @z
 
@@ -336,12 +336,12 @@ certificate at the OS level.
 @z
 
 @x
-```bash
+```console
 $ cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
 update-ca-certificates
 ```
 @y
-```bash
+```console
 $ cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
 update-ca-certificates
 ```
@@ -354,13 +354,13 @@ update-ca-certificates
 @z
 
 @x
-```bash
-cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
+```console
+$ cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
 update-ca-trust
 ```
 @y
-```bash
-cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
+```console
+$ cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
 update-ca-trust
 ```
 @z
@@ -372,11 +372,11 @@ update-ca-trust
 @z
 
 @x
-```bash
+```console
 $ update-ca-trust enable
 ```
 @y
-```bash
+```console
 $ update-ca-trust enable
 ```
 @z

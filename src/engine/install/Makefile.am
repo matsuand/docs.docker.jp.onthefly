@@ -13,12 +13,14 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	binaries \
-	centos \
-	debian \
-	fedora \
-	index \
+	binaries          \
+	centos            \
+	debian            \
+	fedora            \
+	index             \
 	linux-postinstall \
+	rhel              \
+	sles              \
 	ubuntu
 
 ch_mds = $(bases:=.ch) # ch means change files

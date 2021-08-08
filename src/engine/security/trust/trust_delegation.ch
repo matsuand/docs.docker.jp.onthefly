@@ -162,13 +162,13 @@ If you do not log in, you will see:
 @z
 
 @x
-```bash
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
 Adding signer "jeff" to registry.example.com/user/repo...
 Initializing signed repository for registry.example.com/user/repo...
 you are not authorized to perform this operation: server returned 401.
 @y
-```bash
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
 Adding signer "jeff" to registry.example.com/user/repo...
 Initializing signed repository for registry.example.com/user/repo...
@@ -280,10 +280,10 @@ Docker トラストには、委任鍵ペアを生成するビルトインのコ�
 @z
 
 @x
-```bash
+```console
 $ docker trust key generate jeff
 @y
-```bash
+```console
 $ docker trust key generate jeff
 @z
 
@@ -324,10 +324,10 @@ must be at least 2048 bits):
 @z
 
 @x
-```bash
+```console
 $ openssl genrsa -out delegation.key 2048
 @y
-```bash
+```console
 $ openssl genrsa -out delegation.key 2048
 @z
 
@@ -363,11 +363,11 @@ signing request):
 @z
 
 @x
-```bash
+```console
 $ openssl req -new -sha256 -key delegation.key -out delegation.csr
 ```
 @y
-```bash
+```console
 $ openssl req -new -sha256 -key delegation.key -out delegation.csr
 ```
 @z
@@ -383,11 +383,11 @@ valid for 1 year):
 @z
 
 @x
-```bash
+```console
 $ openssl x509 -req -sha256 -days 365 -in delegation.csr -signkey delegation.key -out delegation.crt
 ```
 @y
-```bash
+```console
 $ openssl x509 -req -sha256 -days 365 -in delegation.csr -signkey delegation.key -out delegation.crt
 ```
 @z
@@ -407,10 +407,10 @@ Finally you will need to add the private key into your local Docker trust store.
 @z
 
 @x
-```bash
+```console
 $ docker trust key load delegation.key --name jeff
 @y
-```bash
+```console
 $ docker trust key load delegation.key --name jeff
 @z
 
@@ -443,10 +443,10 @@ Docker トラストのローカルの保存場所にインポートされてい�
 @z
 
 @x
-```bash
+```console
 $ notary key list
 @y
-```bash
+```console
 $ notary key list
 @z
 
@@ -528,10 +528,10 @@ advanced use cases of Notary additional delegations are used for hierarchy.
 @z
 
 @x
-```bash
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 @z
 
@@ -564,10 +564,10 @@ with the `$ docker trust inspect` command.
 @z
 
 @x
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @z
 
@@ -616,10 +616,10 @@ clearly see the keys were attached to `targets/releases` and `targets/jeff`.
 @z
 
 @x
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @y
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @z
 
@@ -668,10 +668,10 @@ the `targets/release` role.
 @z
 
 @x
-```bash
+```console
 $ docker trust signer add --key ben.pub ben registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust signer add --key ben.pub ben registry.example.com/admin/demo
 @z
 
@@ -694,10 +694,10 @@ Check to prove that there are now 2 delegations (Signer).
 @z
 
 @x
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @z
 
@@ -766,10 +766,10 @@ will automatically handle adding this new key to `targets/releases`.
 @z
 
 @x
-```bash
+```console
 $ docker trust signer add --key cert2.pem jeff registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust signer add --key cert2.pem jeff registry.example.com/admin/demo
 @z
 
@@ -792,10 +792,10 @@ Check to prove that the delegation (Signer) now contains multiple Key IDs.
 @z
 
 @x
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @y
-```bash
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo
 @z
 
@@ -860,14 +860,14 @@ attached to the `targets/releases` role, you can use the
 @z
 
 @x
-```bash
+```console
 $ docker trust signer remove registry.example.com/admin/demo
 Removing signer "ben" from registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
 Successfully removed ben from registry.example.com/admin/demo
 ```
 @y
-```bash
+```console
 $ docker trust signer remove registry.example.com/admin/demo
 Removing signer "ben" from registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
@@ -928,11 +928,11 @@ Resigning the delegation file is done with the `$ notary witness` command
 @z
 
 @x
-```bash
+```console
 $ notary witness registry.example.com/admin/demo targets/releases --publish
 ```
 @y
-```bash
+```console
 $ notary witness registry.example.com/admin/demo targets/releases --publish
 ```
 @z
@@ -974,10 +974,10 @@ and the role specific to that signer `targets/<name>`.
 @z
 
 @x
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @y
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @z
 
@@ -1006,10 +1006,10 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 @z
 
 @x
-```bash
+```console
 $ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 @y
-```bash
+```console
 $ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 @z
 
@@ -1036,10 +1036,10 @@ Successfully published changes for repository registry.example.com/admin/demo
 @z
 
 @x
-```bash
+```console
 $ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 @y
-```bash
+```console
 $ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 @z
 
@@ -1072,10 +1072,10 @@ Successfully published changes for repository registry.example.com/admin/demo
 @z
 
 @x
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @y
-```bash
+```console
 $ notary delegation list registry.example.com/admin/demo
 @z
 
@@ -1116,10 +1116,10 @@ the `$ notary key remove` command.
 @z
 
 @x
-```bash
+```console
 $ notary key list
 @y
-```bash
+```console
 $ notary key list
 @z
 
@@ -1148,10 +1148,10 @@ targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fd
 @z
 
 @x
-```bash
+```console
 $ notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
 @y
-```bash
+```console
 $ notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
 @z
 
@@ -1192,10 +1192,10 @@ can be deleted.
 @z
 
 @x
-```bash
+```console
 $ notary delete registry.example.com/admin/demo --remote
 @y
-```bash
+```console
 $ notary delete registry.example.com/admin/demo --remote
 @z
 

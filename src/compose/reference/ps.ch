@@ -71,7 +71,7 @@ Lists containers.
 @z
 
 @x
-```bash
+```console
 $ docker-compose ps
          Name                        Command                 State             Ports
 ---------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ mywordpress_db_1          docker-entrypoint.sh mysqld      Up (healthy)  3306/tc
 mywordpress_wordpress_1   /entrypoint.sh apache2-for ...   Restarting    0.0.0.0:8000->80/tcp
 ```
 @y
-```bash
+```console
 $ docker-compose ps
          Name                        Command                 State             Ports
 ---------------------------------------------------------------------------------------------

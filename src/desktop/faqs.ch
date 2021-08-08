@@ -113,12 +113,12 @@ For example:
 @z
 
 @x
-```bash
-export DOCKER_HOST=unix:///var/run/docker.sock
+```console
+$ export DOCKER_HOST=unix:///var/run/docker.sock
 ```
 @y
-```bash
-export DOCKER_HOST=unix:///var/run/docker.sock
+```console
+$ export DOCKER_HOST=unix:///var/run/docker.sock
 ```
 @z
 

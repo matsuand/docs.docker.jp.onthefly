@@ -182,12 +182,12 @@ Docker イメージは`docker build`コマンドによってビルドするこ�
 @z
 
 @x
-```bash
-docker build --tag hello .
+```console
+$ docker build --tag hello .
 ```
 @y
-```bash
-docker build --tag hello .
+```console
+$ docker build --tag hello .
 ```
 @z
 
@@ -204,7 +204,7 @@ current directory.
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
 >
-> ```bash
+> ```console
 > $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
@@ -217,7 +217,7 @@ current directory.
 > Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
 > Docker コンテナーを使って以下のようにビルドします。
 >
-> ```bash
+> ```console
 > $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
@@ -233,12 +233,12 @@ To run your new image, use the `docker run` command:
 @z
 
 @x
-```bash
-docker run --rm hello
+```console
+$ docker run --rm hello
 ```
 @y
-```bash
-docker run --rm hello
+```console
+$ docker run --rm hello
 ```
 @z
 

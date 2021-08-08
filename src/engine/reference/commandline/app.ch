@@ -974,10 +974,10 @@ architecture required, you can add the `--platform` flag.
 @z
 
 @x
-```bash
+```console
 $ docker login 
 @y
-```bash
+```console
 $ docker login 
 @z
 

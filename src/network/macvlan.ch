@@ -120,14 +120,14 @@ physically go through on the Docker host.
 @z
 
 @x
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=172.16.86.0/24 \
   --gateway=172.16.86.1 \
   -o parent=eth0 pub_net
 ```
 @y
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=172.16.86.0/24 \
   --gateway=172.16.86.1 \
@@ -144,7 +144,7 @@ as when a given IP address is already in use, use `--aux-addresses`:
 @z
 
 @x
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=192.168.32.0/24 \
   --ip-range=192.168.32.128/25 \
@@ -153,7 +153,7 @@ $ docker network create -d macvlan \
   -o parent=eth0 macnet32
 ```
 @y
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=192.168.32.0/24 \
   --ip-range=192.168.32.128/25 \
@@ -180,14 +180,14 @@ automatically.
 @z
 
 @x
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.50.0/24 \
     --gateway=192.168.50.1 \
     -o parent=eth0.50 macvlan50
 ```
 @y
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.50.0/24 \
     --gateway=192.168.50.1 \
@@ -210,7 +210,7 @@ instead, and get an L2 bridge. Specify `-o ipvlan_mode=l2`.
 @z
 
 @x
-```bash
+```console
 $ docker network create -d ipvlan \
     --subnet=192.168.210.0/24 \
     --subnet=192.168.212.0/24 \
@@ -219,7 +219,7 @@ $ docker network create -d ipvlan \
      -o ipvlan_mode=l2 -o parent=eth0 ipvlan210
 ```
 @y
-```bash
+```console
 $ docker network create -d ipvlan \
     --subnet=192.168.210.0/24 \
     --subnet=192.168.212.0/24 \
@@ -244,7 +244,7 @@ you can use dual-stack IPv4/IPv6 `macvlan` networks.
 @z
 
 @x
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.216.0/24 --subnet=192.168.218.0/24 \
     --gateway=192.168.216.1 --gateway=192.168.218.1 \
@@ -253,7 +253,7 @@ $ docker network create -d macvlan \
      -o macvlan_mode=bridge macvlan216
 ```
 @y
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.216.0/24 --subnet=192.168.218.0/24 \
     --gateway=192.168.216.1 --gateway=192.168.218.1 \

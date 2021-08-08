@@ -374,11 +374,11 @@ local command-line session, and runs `/bin/bash`.
 @z
 
 @x
-```bash
+```console
 $ docker run -i -t ubuntu /bin/bash
 ```
 @y
-```bash
+```console
 $ docker run -i -t ubuntu /bin/bash
 ```
 @z

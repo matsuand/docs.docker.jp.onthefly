@@ -53,7 +53,7 @@ Displays the running processes.
 @z
 
 @x
-```bash
+```console
 $ docker-compose top
 compose_service_a_1
 PID    USER   TIME   COMMAND
@@ -66,7 +66,7 @@ PID    USER   TIME   COMMAND
 4115   root   0:00   top
 ```
 @y
-```bash
+```console
 $ docker-compose top
 compose_service_a_1
 PID    USER   TIME   COMMAND

@@ -92,12 +92,12 @@ Let’s create our volumes now. We’ll create one for the data and one for conf
 @z
 
 @x
-```shell
+```console
 $ docker volume create mongodb
 $ docker volume create mongodb_config
 ```
 @y
-```shell
+```console
 $ docker volume create mongodb
 $ docker volume create mongodb_config
 ```
@@ -111,11 +111,11 @@ Now we’ll create a network that our application and database will use to talk 
 @z
 
 @x
-```shell
+```console
 $ docker network create mongodb
 ```
 @y
-```shell
+```console
 $ docker network create mongodb
 ```
 @z
@@ -129,7 +129,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 @z
 
 @x
-```shell
+```console
 $ docker run -it --rm -d -v mongodb:/data/db \
   -v mongodb_config:/data/configdb -p 27017:27017 \
   --network mongodb \
@@ -137,7 +137,7 @@ $ docker run -it --rm -d -v mongodb:/data/db \
   mongo
 ```
 @y
-```shell
+```console
 $ docker run -it --rm -d -v mongodb:/data/db \
   -v mongodb_config:/data/configdb -p 27017:27017 \
   --network mongodb \
@@ -192,11 +192,11 @@ First let’s add the `ronin-database` module to our application using npm.
 @z
 
 @x
-```shell
+```console
 $ npm install ronin-database
 ```
 @y
-```shell
+```console
 $ npm install ronin-database
 ```
 @z
@@ -208,11 +208,11 @@ Now we can build our image.
 @z
 
 @x
-```shell
+```console
 $ docker build --tag node-docker .
 ```
 @y
-```shell
+```console
 $ docker build --tag node-docker .
 ```
 @z
@@ -227,7 +227,7 @@ Now, let’s run our container. But this time we’ll need to set the `CONNECTIO
 @z
 
 @x
-```shell
+```console
 $ docker run \
   -it --rm -d \
   --network mongodb \
@@ -237,7 +237,7 @@ $ docker run \
   node-docker
 ```
 @y
-```shell
+```console
 $ docker run \
   -it --rm -d \
   --network mongodb \
@@ -255,7 +255,7 @@ Let’s test that our application is connected to the database and is able to ad
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/notes \
   --header 'content-type: application/json' \
@@ -266,7 +266,7 @@ $ curl --request POST \
 }'
 ```
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/notes \
   --header 'content-type: application/json' \
@@ -449,11 +449,11 @@ Let’s start our application and confirm that it is running properly.
 @z
 
 @x
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @y
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @z
@@ -485,11 +485,11 @@ Now let’s test our API endpoint. Run the following curl command:
 @z
 
 @x
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/notes
 ```
 @y
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/notes
 ```
 @z
@@ -597,11 +597,11 @@ Chrome の DevTools 画面に戻り、`return res.json({ "foo": "bar" })`があ�
 @z
 
 @x
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/foo
 ```
 @y
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/foo
 ```
 @z

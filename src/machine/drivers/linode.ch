@@ -60,12 +60,12 @@ Then, install the latest release of the Linode machine driver for your environme
 @z
 
 @x
-```bash
-docker-machine create -d linode --linode-token=<linode-token> linode
+```console
+$ docker-machine create -d linode --linode-token=<linode-token> linode
 ```
 @y
-```bash
-docker-machine create -d linode --linode-token=<linode-token> linode
+```console
+$ docker-machine create -d linode --linode-token=<linode-token> linode
 ```
 @z
 
@@ -148,11 +148,11 @@ Detailed run output will be emitted when using the LinodeGo `LINODE_DEBUG=1` opt
 @z
 
 @x
-```bash
-LINODE_DEBUG=1 docker-machine --debug  create -d linode --linode-token=$LINODE_TOKEN machinename
+```console
+$ LINODE_DEBUG=1 docker-machine --debug  create -d linode --linode-token=$LINODE_TOKEN machinename
 ```
 @y
-```bash
-LINODE_DEBUG=1 docker-machine --debug  create -d linode --linode-token=$LINODE_TOKEN machinename
+```console
+$ LINODE_DEBUG=1 docker-machine --debug  create -d linode --linode-token=$LINODE_TOKEN machinename
 ```
 @z

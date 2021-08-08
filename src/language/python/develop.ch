@@ -88,12 +88,12 @@ Let’s create our volumes now. We’ll create one for the data and one for conf
 @z
 
 @x
-```shell
+```console
 $ docker volume create mysql
 $ docker volume create mysql_config
 ```
 @y
-```shell
+```console
 $ docker volume create mysql
 $ docker volume create mysql_config
 ```
@@ -107,11 +107,11 @@ Now we’ll create a network that our application and database will use to talk 
 @z
 
 @x
-```shell
+```console
 $ docker network create mysqlnet
 ```
 @y
-```shell
+```console
 $ docker network create mysqlnet
 ```
 @z
@@ -128,7 +128,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 @z
 
 @x
-```shell
+```console
 $ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
@@ -137,7 +137,7 @@ $ docker run --rm -d -v mysql:/var/lib/mysql \
   mysql
 ```
 @y
-```shell
+```console
 $ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
@@ -156,7 +156,7 @@ MySQL データベースが起動されていて、そこに接続できるこ�
 @z
 
 @x
-```shell
+```console
 $ docker exec -ti mysqldb mysql -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -174,7 +174,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 @y
-```shell
+```console
 $ docker exec -ti mysqldb mysql -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -223,14 +223,14 @@ Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL
 @z
 
 @x
-```shell
+```python
 import mysql.connector
 import json
 from flask import Flask
 
 app = Flask(__name__)
 @y
-```shell
+```python
 import mysql.connector
 import json
 from flask import Flask
@@ -396,12 +396,12 @@ First, let’s add the `mysql-connector-python` module to our application using 
 @z
 
 @x
-```shell
+```console
 $ pip3 install mysql-connector-python
 $ pip3 freeze > requirements.txt
 ```
 @y
-```shell
+```console
 $ pip3 install mysql-connector-python
 $ pip3 freeze > requirements.txt
 ```
@@ -414,11 +414,11 @@ Now we can build our image.
 @z
 
 @x
-```shell
+```console
 $ docker build --tag python-docker-dev .
 ```
 @y
-```shell
+```console
 $ docker build --tag python-docker-dev .
 ```
 @z
@@ -431,7 +431,7 @@ Now, let’s add the container to the database network and then run our containe
 @z
 
 @x
-```shell
+```console
 $ docker run \
   --rm -d \
   --network mysqlnet \
@@ -440,7 +440,7 @@ $ docker run \
   python-docker-dev
 ```
 @y
-```shell
+```console
 $ docker run \
   --rm -d \
   --network mysqlnet \
@@ -457,12 +457,12 @@ Let’s test that our application is connected to the database and is able to ad
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
 @y
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
@@ -475,11 +475,11 @@ You should receive the following JSON back from our service.
 @z
 
 @x
-```shell
+```json
 []
 ```
 @y
-```shell
+```json
 []
 ```
 @z
@@ -597,11 +597,11 @@ Now, to start our application and to confirm that it is running properly, run th
 @z
 
 @x
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @y
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @z
@@ -621,12 +621,12 @@ Now let’s test our API endpoint. Open a new terminal then make a GET request t
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
 @y
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
@@ -639,11 +639,11 @@ You should receive the following response:
 @z
 
 @x
-```shell
+```json
 []
 ```
 @y
-```shell
+```json
 []
 ```
 @z

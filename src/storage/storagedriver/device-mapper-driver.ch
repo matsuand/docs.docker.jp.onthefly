@@ -63,7 +63,7 @@ a filesystem at the operating system (OS) level.
 
 @x
 - `devicemapper` is supported on Docker Engine - Community running on CentOS, Fedora,
-  Ubuntu, or Debian.
+  SLES 15, Ubuntu, Debian, or RHEL.
 - `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
   to be installed.
 - Changing the storage driver makes any containers you have already
@@ -72,7 +72,7 @@ a filesystem at the operating system (OS) level.
   not need to recreate them later.
 @y
 - `devicemapper` is supported on Docker Engine - Community running on CentOS, Fedora,
-  Ubuntu, or Debian.
+  SLES 15, Ubuntu, Debian, or RHEL.
 - `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
   to be installed.
 - Changing the storage driver makes any containers you have already
@@ -144,11 +144,11 @@ For production systems, see
 @z
 
 @x
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @y
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @z
@@ -196,11 +196,11 @@ For production systems, see
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @z
@@ -214,10 +214,10 @@ For production systems, see
 @z
 
 @x
-    ```bash
+    ```console
     $ docker info
 @y
-    ```bash
+    ```console
     $ docker info
 @z
 
@@ -492,11 +492,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo systemctl stop docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo systemctl stop docker
     ```
 @z
@@ -516,10 +516,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    - **Ubuntu / Debian**: `thin-provisioning-tools`, `lvm2`, and all
+    - **Ubuntu / Debian / SLES 15**: `thin-provisioning-tools`, `lvm2`, and all
       dependencies
 @y
-    - **Ubuntu / Debian**: `thin-provisioning-tools`, `lvm2`, and all
+    - **Ubuntu / Debian / SLES 15**: `thin-provisioning-tools`, `lvm2`, and all
       dependencies
 @z
 
@@ -540,10 +540,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo pvcreate /dev/xvdf
 @y
-    ```bash
+    ```console
     $ sudo pvcreate /dev/xvdf
 @z
 
@@ -564,10 +564,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo vgcreate docker /dev/xvdf
 @y
-    ```bash
+    ```console
     $ sudo vgcreate docker /dev/xvdf
 @z
 
@@ -592,10 +592,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvcreate --wipesignatures y -n thinpool docker -l 95%VG
 @y
-    ```bash
+    ```console
     $ sudo lvcreate --wipesignatures y -n thinpool docker -l 95%VG
 @z
 
@@ -628,14 +628,14 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvconvert -y \
     --zero n \
     -c 512K \
     --thinpool docker/thinpool \
     --poolmetadata docker/thinpoolmeta
 @y
-    ```bash
+    ```console
     $ sudo lvconvert -y \
     --zero n \
     -c 512K \
@@ -664,11 +664,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo vi /etc/lvm/profile/docker-thinpool.profile
     ```
 @y
-    ```bash
+    ```console
     $ sudo vi /etc/lvm/profile/docker-thinpool.profile
     ```
 @z
@@ -734,10 +734,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
 @y
-    ```bash
+    ```console
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
 @z
 
@@ -756,10 +756,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvs -o+seg_monitor
 @y
-    ```bash
+    ```console
     $ sudo lvs -o+seg_monitor
 @z
 
@@ -786,11 +786,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvchange --monitor y docker/thinpool
     ```
 @y
-    ```bash
+    ```console
     $ sudo lvchange --monitor y docker/thinpool
     ```
 @z
@@ -816,14 +816,14 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo su -
     # mkdir /var/lib/docker.bk
     # mv /var/lib/docker/* /var/lib/docker.bk
     # exit
     ```
 @y
-    ```bash
+    ```console
     $ sudo su -
     # mkdir /var/lib/docker.bk
     # mv /var/lib/docker/* /var/lib/docker.bk
@@ -886,11 +886,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @z
@@ -902,11 +902,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo service docker start
     ```
 @y
-    ```bash
+    ```console
     $ sudo service docker start
     ```
 @z
@@ -918,10 +918,10 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker info
 @y
-    ```bash
+    ```console
     $ docker info
 @z
 
@@ -1000,11 +1000,11 @@ assumes that the Docker daemon is in the `stopped` state.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker.bk
     ```
 @y
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker.bk
     ```
 @z
@@ -1040,11 +1040,11 @@ To view the LVM logs, you can use `journalctl`:
 @z
 
 @x
-```bash
+```console
 $ sudo journalctl -fu dm-event.service
 ```
 @y
-```bash
+```console
 $ sudo journalctl -fu dm-event.service
 ```
 @z
@@ -1146,11 +1146,11 @@ If you do not want to use `device_tool`, you can [resize the thin pool manually]
 @z
 
 @x
-    ```bash
+    ```console
     $ ./device_tool resize 200GB
     ```
 @y
-    ```bash
+    ```console
     $ ./device_tool resize 200GB
     ```
 @z
@@ -1188,10 +1188,10 @@ paths for `Data loop file` and `Metadata loop file`:
 @z
 
 @x
-```bash
+```console
 $ docker info |grep 'loop file'
 @y
-```bash
+```console
 $ docker info |grep 'loop file'
 @z
 
@@ -1220,10 +1220,10 @@ thin pool is 100 GB, and is increased to 200 GB.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 @y
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 @z
 
@@ -1250,11 +1250,11 @@ thin pool is 100 GB, and is increased to 200 GB.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo truncate -s 200G /var/lib/docker/devicemapper/data
     ```
 @y
-    ```bash
+    ```console
     $ sudo truncate -s 200G /var/lib/docker/devicemapper/data
     ```
 @z
@@ -1266,10 +1266,10 @@ thin pool is 100 GB, and is increased to 200 GB.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 @y
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 @z
 
@@ -1296,10 +1296,10 @@ thin pool is 100 GB, and is increased to 200 GB.
 @z
 
 @x
-    ```bash
+    ```console
     $ echo $[ $(sudo blockdev --getsize64 /dev/loop0) / 1024 / 1024 / 1024 ]
 @y
-    ```bash
+    ```console
     $ echo $[ $(sudo blockdev --getsize64 /dev/loop0) / 1024 / 1024 / 1024 ]
 @z
 
@@ -1450,10 +1450,10 @@ block device and other parameters to suit your situation.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo pvdisplay |grep 'VG Name'
 @y
-    ```bash
+    ```console
     $ sudo pvdisplay |grep 'VG Name'
 @z
 
@@ -1484,10 +1484,10 @@ block device and other parameters to suit your situation.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo vgextend docker /dev/xvdg
 @y
-    ```bash
+    ```console
     $ sudo vgextend docker /dev/xvdg
 @z
 
@@ -1512,10 +1512,10 @@ block device and other parameters to suit your situation.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo lvextend -l+100%FREE -n docker/thinpool
 @y
-    ```bash
+    ```console
     $ sudo lvextend -l+100%FREE -n docker/thinpool
 @z
 
@@ -1592,12 +1592,12 @@ logical volumes with this command:
 @z
 
 @x
-```bash
-sudo lvchange -ay docker/thinpool
+```console
+$ sudo lvchange -ay docker/thinpool
 ```
 @y
-```bash
-sudo lvchange -ay docker/thinpool
+```console
+$ sudo lvchange -ay docker/thinpool
 ```
 @z
 
@@ -1624,10 +1624,10 @@ system's point of view:
 @z
 
 @x
-```bash
+```console
 $ sudo lsblk
 @y
-```bash
+```console
 $ sudo lsblk
 @z
 
@@ -1660,12 +1660,12 @@ Use the `mount` command to see the mount-point Docker is using:
 @z
 
 @x
-```bash
+```console
 $ mount |grep devicemapper
 /dev/xvda1 on /var/lib/docker/devicemapper type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 ```
 @y
-```bash
+```console
 $ mount |grep devicemapper
 /dev/xvda1 on /var/lib/docker/devicemapper type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 ```

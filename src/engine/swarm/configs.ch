@@ -344,11 +344,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ echo "This is a config" | docker config create my-config -
     ```
 @y
-    ```bash
+    ```console
     $ echo "This is a config" | docker config create my-config -
     ```
 @z
@@ -364,11 +364,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create --name redis --config my-config redis:alpine
     ```
 @y
-    ```bash
+    ```console
     $ docker service create --name redis --config my-config redis:alpine
     ```
 @z
@@ -382,10 +382,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ps redis
 @y
-    ```bash
+    ```console
     $ docker service ps redis
 @z
 
@@ -415,10 +415,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 @y
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 @z
 
@@ -464,9 +464,9 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
 @y
-    ```bash
+    ```console
 @z
 
 @x
@@ -507,11 +507,11 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service update --config-rm my-config redis
     ```
 @y
-    ```bash
+    ```console
     $ docker service update --config-rm my-config redis
     ```
 @z
@@ -551,10 +551,10 @@ real-world example, continue to
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm redis
 @y
-    ```bash
+    ```console
     $ docker service rm redis
 @z
 
@@ -752,11 +752,11 @@ name as its argument. The template will be rendered when container is created.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker config create --template-driver golang homepage index.html.tmpl
     ```
 @y
-    ```bash
+    ```console
     $ docker config create --template-driver golang homepage index.html.tmpl
     ```
 @z
@@ -770,7 +770,7 @@ name as its argument. The template will be rendered when container is created.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create \
          --name hello-template \
          --env HELLO="Docker" \
@@ -779,7 +779,7 @@ name as its argument. The template will be rendered when container is created.
          nginx:alpine
     ```
 @y
-    ```bash
+    ```console
     $ docker service create \
          --name hello-template \
          --env HELLO="Docker" \
@@ -798,7 +798,7 @@ name as its argument. The template will be rendered when container is created.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl http://0.0.0.0:3000
 
     <html lang="en">
@@ -809,7 +809,7 @@ name as its argument. The template will be rendered when container is created.
     </html>
     ```
 @y
-    ```bash
+    ```console
     $ curl http://0.0.0.0:3000
 
     <html lang="en">
@@ -878,11 +878,11 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 @y
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 @z
@@ -894,14 +894,14 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA'
     ```
 @y
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
@@ -942,14 +942,14 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl x509 -req -days 3650 -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
                    root_ca
     ```
 @y
-    ```bash
+    ```console
     $ openssl x509 -req -days 3650 -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
@@ -964,11 +964,11 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 @y
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 @z
@@ -980,12 +980,12 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
 @y
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
@@ -1031,13 +1031,13 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key" -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
     ```
 @y
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key" -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
@@ -1123,10 +1123,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 @y
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 @z
 
@@ -1147,11 +1147,11 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker config create site.conf site.conf
     ```
 @y
-    ```bash
+    ```console
     $ docker config create site.conf site.conf
     ```
 @z
@@ -1163,10 +1163,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker config ls
 @y
-    ```bash
+    ```console
     $ docker config ls
 @z
 
@@ -1190,7 +1190,7 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1201,7 +1201,7 @@ generate the site key and certificate, name the files `site.key` and
          sh -c "exec nginx -g 'daemon off;'"
     ```
 @y
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -1236,10 +1236,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ls
 @y
-    ```bash
+    ```console
     $ docker service ls
 @z
 
@@ -1276,10 +1276,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://0.0.0.0:3000
 @y
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://0.0.0.0:3000
 @z
 
@@ -1344,10 +1344,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ openssl s_client -connect 0.0.0.0:3000 -CAfile root-ca.crt
 @y
-    ```bash
+    ```console
     $ openssl s_client -connect 0.0.0.0:3000 -CAfile root-ca.crt
 @z
 
@@ -1438,10 +1438,10 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm nginx
 @y
-    ```bash
+    ```console
     $ docker service rm nginx
 @z
 
@@ -1550,14 +1550,14 @@ config を入れ替えるには、まず新たな config を、現在利用し�
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service update \
       --config-rm site.conf \
       --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
       nginx
     ```
 @y
-    ```bash
+    ```console
     $ docker service update \
       --config-rm site.conf \
       --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
@@ -1575,11 +1575,11 @@ config を入れ替えるには、まず新たな config を、現在利用し�
 @z
 
 @x
-    ```bash
+    ```console
     $ docker config rm site.conf
     ```
 @y
-    ```bash
+    ```console
     $ docker config rm site.conf
     ```
 @z
@@ -1593,10 +1593,10 @@ config を入れ替えるには、まず新たな config を、現在利用し�
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service rm nginx
 @y
-    ```bash
+    ```console
     $ docker service rm nginx
 @z
 

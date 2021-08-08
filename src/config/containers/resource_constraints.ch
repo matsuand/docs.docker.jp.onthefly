@@ -441,12 +441,12 @@ CPU が 1 つである場合に、以下のコマンドはコンテナーに対�
 @z
 
 @x
-```bash
-docker run -it --cpus=".5" ubuntu /bin/bash
+```console
+$ docker run -it --cpus=".5" ubuntu /bin/bash
 ```
 @y
-```bash
-docker run -it --cpus=".5" ubuntu /bin/bash
+```console
+$ docker run -it --cpus=".5" ubuntu /bin/bash
 ```
 @z
 
@@ -457,11 +457,11 @@ Which is the equivalent to manually specifying `--cpu-period` and `--cpu-quota`;
 @z
 
 @x
-```bash
+```console
 $ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 @y
-```bash
+```console
 $ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 @z
@@ -583,7 +583,7 @@ container.
 @z
 
 @x
-```bash
+```console
 $ docker run -it \
     --cpu-rt-runtime=950000 \
     --ulimit rtprio=99 \
@@ -591,7 +591,7 @@ $ docker run -it \
     debian:jessie
 ```
 @y
-```bash
+```console
 $ docker run -it \
     --cpu-rt-runtime=950000 \
     --ulimit rtprio=99 \
@@ -656,11 +656,11 @@ and then run this command:
 @z
 
 @x
-```bash
+```console
 $ apt-get install nvidia-container-runtime
 ```
 @y
-```bash
+```console
 $ apt-get install nvidia-container-runtime
 ```
 @z
@@ -672,11 +672,11 @@ Ensure the `nvidia-container-runtime-hook` is accessible from `$PATH`.
 @z
 
 @x
-```bash
+```console
 $ which nvidia-container-runtime-hook
 ```
 @y
-```bash
+```console
 $ which nvidia-container-runtime-hook
 ```
 @z
@@ -704,11 +704,11 @@ Specify how many GPUs to use. For example:
 @z
 
 @x
-```bash
+```console
 $ docker run -it --rm --gpus all ubuntu nvidia-smi
 ```
 @y
-```bash
+```console
 $ docker run -it --rm --gpus all ubuntu nvidia-smi
 ```
 @z
@@ -765,11 +765,11 @@ Use the `device` option to specify GPUs. For example:
 @z
 
 @x
-```bash
+```console
 $ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 ```
 @y
-```bash
+```console
 $ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 ```
 @z
@@ -781,11 +781,11 @@ Exposes that specific GPU.
 @z
 
 @x
-```bash
+```console
 $ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
 ```
 @y
-```bash
+```console
 $ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
 ```
 @z
@@ -822,11 +822,11 @@ following:
 @z
 
 @x
-```bash
+```console
 $ docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
 ```
 @y
-```bash
+```console
 $ docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
 ```
 @z

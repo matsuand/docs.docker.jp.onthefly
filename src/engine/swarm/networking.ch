@@ -156,13 +156,13 @@ To create an overlay network, specify the `overlay` driver when using the
 @z
 
 @x
-```bash
+```console
 $ docker network create \
   --driver overlay \
   my-network
 ```
 @y
-```bash
+```console
 $ docker network create \
   --driver overlay \
   my-network
@@ -188,7 +188,7 @@ not very exciting:
 @z
 
 @x
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -215,7 +215,7 @@ $ docker network inspect my-network
 ]
 ```
 @y
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -268,7 +268,7 @@ connected to it.
 @z
 
 @x
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -328,7 +328,7 @@ $ docker network inspect my-network
 ]
 ```
 @y
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -426,7 +426,7 @@ example extends the previous one by configuring the subnet and gateway.
 @z
 
 @x
-```bash
+```console
 $ docker network create \
   --driver overlay \
   --subnet 10.0.9.0/24 \
@@ -434,7 +434,7 @@ $ docker network create \
   my-network
 ```
 @y
-```bash
+```console
 $ docker network create \
   --driver overlay \
   --subnet 10.0.9.0/24 \
@@ -462,11 +462,11 @@ For example, the following command is used when initializing Swarm:
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
 ```
 @y
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
 ```
 @z
@@ -564,7 +564,7 @@ To attach a service to an existing overlay network, pass the `--network` flag to
 @z
 
 @x
-```bash
+```console
 $ docker service create \
   --replicas 3 \
   --name my-web \
@@ -572,7 +572,7 @@ $ docker service create \
   nginx
 ```
 @y
-```bash
+```console
 $ docker service create \
   --replicas 3 \
   --name my-web \
@@ -740,10 +740,10 @@ services which publish ports, such as a WordPress service which publishes port
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network rm ingress
 @y
-    ```bash
+    ```console
     $ docker network rm ingress
 @z
 
@@ -774,7 +774,7 @@ services which publish ports, such as a WordPress service which publishes port
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -784,7 +784,7 @@ services which publish ports, such as a WordPress service which publishes port
       my-ingress
     ```
 @y
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -876,7 +876,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -885,7 +885,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
     docker_gwbridge
     ```
 @y
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -950,11 +950,11 @@ traffic relating to services.
 @z
 
 @x
-```bash
+```console
 $ docker swarm init --advertise-addr 10.0.0.1 --data-path-addr 192.168.0.1
 ```
 @y
-```bash
+```console
 $ docker swarm init --advertise-addr 10.0.0.1 --data-path-addr 192.168.0.1
 ```
 @z
@@ -968,7 +968,7 @@ This example joins the swarm managed by host `192.168.99.100:2377` and sets the
 @z
 
 @x
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
   --advertise-addr eth0 \
@@ -976,7 +976,7 @@ $ docker swarm join \
   192.168.99.100:2377
 ```
 @y
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
   --advertise-addr eth0 \

@@ -176,11 +176,11 @@ need to use the legacy `overlay` driver, specify it instead.
 @z
 
 @x
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @y
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 @z
@@ -192,11 +192,11 @@ need to use the legacy `overlay` driver, specify it instead.
 @z
 
 @x
-    ```bash
+    ```console
     $ cp -au /var/lib/docker /var/lib/docker.bk
     ```
 @y
-    ```bash
+    ```console
     $ cp -au /var/lib/docker /var/lib/docker.bk
     ```
 @z
@@ -246,11 +246,11 @@ need to use the legacy `overlay` driver, specify it instead.
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @y
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 @z
@@ -266,10 +266,10 @@ need to use the legacy `overlay` driver, specify it instead.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker info
 @y
-    ```bash
+    ```console
     $ docker info
 @z
 
@@ -376,10 +376,10 @@ six directories under `/var/lib/docker/overlay2`.
 @z
 
 @x
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2
 @y
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2
 @z
 
@@ -414,10 +414,10 @@ limitation on arguments to the `mount` command.
 @z
 
 @x
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2/l
 @y
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2/l
 @z
 
@@ -450,10 +450,10 @@ layer's contents.
 @z
 
 @x
-```bash
+```console
 $ ls /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
 @y
-```bash
+```console
 $ ls /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
 @z
 
@@ -504,10 +504,10 @@ internally by OverlayFS.
 @z
 
 @x
-```bash
+```console
 $ ls /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
 @y
-```bash
+```console
 $ ls /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
 @z
 
@@ -552,10 +552,10 @@ Docker, use the `mount` command. The output below is truncated for readability.
 @z
 
 @x
-```bash
+```console
 $ mount | grep overlay
 @y
-```bash
+```console
 $ mount | grep overlay
 @z
 
@@ -690,10 +690,10 @@ image comprising five layers.
 @z
 
 @x
-```bash
+```console
 $ docker pull ubuntu
 @y
-```bash
+```console
 $ docker pull ubuntu
 @z
 
@@ -750,10 +750,10 @@ the directory IDs.
 @z
 
 @x
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/
 @y
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/
 @z
 
@@ -786,10 +786,10 @@ efficient use of disk space.
 @z
 
 @x
-```bash
+```console
 $ ls -i /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 @y
-```bash
+```console
 $ ls -i /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 @z
 
@@ -830,10 +830,10 @@ using the `ls -l` command, three directories and one file exist:
 @z
 
 @x
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/<directory-of-running-container>
 @y
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/<directory-of-running-container>
 @z
 
@@ -862,10 +862,10 @@ is based on, which is the OverlayFS `lowerdir`.
 @z
 
 @x
-```bash
+```console
 $ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 @y
-```bash
+```console
 $ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 @z
 
@@ -908,10 +908,10 @@ Docker, use the `mount` command. The output below is truncated for readability.
 @z
 
 @x
-```bash
+```console
 $ mount | grep overlay
 @y
-```bash
+```console
 $ mount | grep overlay
 @z
 

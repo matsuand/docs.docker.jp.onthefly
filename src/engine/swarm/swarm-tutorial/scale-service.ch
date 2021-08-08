@@ -22,11 +22,6 @@ Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
 to use the Docker CLI to scale the number of containers in
 the service. Containers running in a service are called "tasks."
 @y
-{% comment %}
-Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
-to use the Docker CLI to scale the number of containers in
-the service. Containers running in a service are called "tasks."
-{% endcomment %}
 Swarm に対して [サービスのデプロイ](deploy-service.md) を行ったら、次は Docker CLI を使って、サービス内のコンテナー数のスケール変更を行います。
 サービス内に起動しているコンテナーは「タスク」と呼びます。
 @z
@@ -36,38 +31,24 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
 @y
-{% comment %}
-1.  If you haven't already, open a terminal and ssh into the machine where you
-    run your manager node. For example, the tutorial uses a machine named
-    `manager1`.
-{% endcomment %}
 1.  マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
     接続先はマネージャーノードを起動したマシンです。
-    たとえばこのチュートリアルでは `manager1` というマシンを利用します。
+    たとえばこのチュートリアルでは`manager1`というマシンを利用します。
 @z
 
 @x
 2.  Run the following command to change the desired state of the
     service running in the swarm:
 @y
-{% comment %}
-2.  Run the following command to change the desired state of the
-    service running in the swarm:
-{% endcomment %}
 2.  Swarm 内で起動しているサービスの状態を変更するため、以下のコマンドを実行します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service scale <SERVICE-ID>=<NUMBER-OF-TASKS>
     ```
 @y
-    {% comment %}
-    ```bash
-    $ docker service scale <SERVICE-ID>=<NUMBER-OF-TASKS>
-    ```
-    {% endcomment %}
-    ```bash
+    ```console
     $ docker service scale <サービスID>=<タスク数>
     ```
 @z
@@ -75,17 +56,14 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 @x
     For example:
 @y
-    {% comment %}
-    For example:
-    {% endcomment %}
     たとえば以下のとおりです。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service scale helloworld=5
 @y
-    ```bash
+    ```console
     $ docker service scale helloworld=5
 @z
 
@@ -100,17 +78,14 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 @x
 3.  Run `docker service ps <SERVICE-ID>` to see the updated task list:
 @y
-{% comment %}
-3.  Run `docker service ps <SERVICE-ID>` to see the updated task list:
-{% endcomment %}
-3.  `docker service ps <サービスID>` を実行して、タスク一覧が更新されていることを確認します。
+3.  `docker service ps <サービスID>`を実行して、タスク一覧が更新されていることを確認します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker service ps helloworld
 @y
-    ```bash
+    ```console
     $ docker service ps helloworld
 @z
 
@@ -137,33 +112,24 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     running instances of Alpine Linux. The tasks are distributed between the
     three nodes of the swarm. One is running on `manager1`.
 @y
-    {% comment %}
-    You can see that swarm has created 4 new tasks to scale to a total of 5
-    running instances of Alpine Linux. The tasks are distributed between the
-    three nodes of the swarm. One is running on `manager1`.
-    {% endcomment %}
     この結果から Alpine Linux の実行インスタンスが合計で 5 つのタスクとなるように Swarm が 4 つの新たなタスクを実行したことがわかります。
     このタスクは Swarm 上の 3 つのノード間に分散されています。
-    そのうちの 1 つが `manager1` 上で実行されています。
+    そのうちの 1 つが`manager1`上で実行されています。
 @z
 
 @x
 4.  Run `docker ps` to see the containers running on the node where you're
     connected. The following example shows the tasks running on `manager1`:
 @y
-{% comment %}
-4.  Run `docker ps` to see the containers running on the node where you're
-    connected. The following example shows the tasks running on `manager1`:
-{% endcomment %}
-4.  `docker ps` を実行して、接続しているノード上で実行されているコンテナーを確認します。
-    以下の例では `manager1` 上において実行されているタスクが示されます。
+4.  `docker ps`を実行して、接続しているノード上で実行されているコンテナーを確認します。
+    以下の例では`manager1`上において実行されているタスクが示されます。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker ps
 @y
-    ```bash
+    ```console
     $ docker ps
 @z
 
@@ -181,19 +147,12 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
     If you want to see the containers running on other nodes, ssh into
     those nodes and run the `docker ps` command.
 @y
-    {% comment %}
-    If you want to see the containers running on other nodes, ssh into
-    those nodes and run the `docker ps` command.
-    {% endcomment %}
-    他のノード上で起動しているコンテナーを確認するには、そのノードに SSH によりログインし、`docker ps` コマンドを実行します。
+    他のノード上で起動しているコンテナーを確認するには、そのノードに SSH によりログインし、`docker ps`コマンドを実行します。
 @z
 
 @x
 ## What's next?
 @y
-{% comment %}
-## What's next?
-{% endcomment %}
 {: #whats-next }
 ## 次にすることは
 @z
@@ -202,10 +161,6 @@ Swarm に対して [サービスのデプロイ](deploy-service.md) を行った
 At this point in the tutorial, you're finished with the `helloworld` service.
 The next step shows how to [delete the service](delete-service.md).
 @y
-{% comment %}
-At this point in the tutorial, you're finished with the `helloworld` service.
-The next step shows how to [delete the service](delete-service.md).
-{% endcomment %}
-チュートリアルのこの時点までで、`helloworld` サービスによる作業は終了です。
+チュートリアルのこの時点までで、`helloworld`サービスによる作業は終了です。
 次の手順では [サービスの削除](delete-service.md) について示します。
 @z

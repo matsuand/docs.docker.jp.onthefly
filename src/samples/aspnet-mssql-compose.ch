@@ -90,11 +90,11 @@ configure this app to use our SQL Server database, and then create a
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
     ```
 @y
-    ```bash
+    ```console
     $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
     ```
 @z
@@ -420,11 +420,11 @@ configure this app to use our SQL Server database, and then create a
 @z
 
 @x
-    ```bash
+    ```console
     $ docker-compose build
     ```
 @y
-    ```bash
+    ```console
     $ docker-compose build
     ```
 @z
@@ -456,11 +456,11 @@ configure this app to use our SQL Server database, and then create a
 @z
 
 @x
-    ```bash
+    ```console
     $ docker-compose up
     ```
 @y
-    ```bash
+    ```console
     $ docker-compose up
     ```
 @z
@@ -508,8 +508,7 @@ to try out .NET Framework and more SQL Server tutorials.
 @x
 ## More Compose documentation
 @y
-{: #more-compose-documentation }
-## その他の Compose ドキュメント
+## More Compose documentation
 @z
 
 @x
@@ -520,10 +519,10 @@ to try out .NET Framework and more SQL Server tutorials.
 - [Compose file reference](../compose/compose-file/index.md)
 - [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @y
-- [Docker Compose 概要](../compose/index.md)
-- [Docker Compose のインストール](../compose/install.md)
-- [Docker Compose をはじめよう](../compose/gettingstarted.md)
-- [Docker Compose コマンドラインリファレンス](../compose/reference/index.md)
-- [Compose ファイルリファレンス](../compose/compose-file/index.md)
-- [Awesome Compose サンプル](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @z

@@ -20,12 +20,7 @@ If you want to completely disable the networking stack on a container, you can
 use the `--network none` flag when starting the container. Within the container,
 only the loopback device is created. The following example illustrates this.
 @y
-{% comment %}
-If you want to completely disable the networking stack on a container, you can
-use the `--network none` flag when starting the container. Within the container,
-only the loopback device is created. The following example illustrates this.
-{% endcomment %}
-コンテナーにおけるネットワーク機能を完全に無効にしたい場合は、コンテナーの起動時に `--network none` を指定します。
+コンテナーにおけるネットワーク機能を完全に無効にしたい場合は、コンテナーの起動時に`--network none`を指定します。
 コンテナー内部では、ループバックデバイスだけが生成されます。
 以下にこの例を示します。
 @z
@@ -33,14 +28,11 @@ only the loopback device is created. The following example illustrates this.
 @x
 1.  Create the container.
 @y
-{% comment %}
-1.  Create the container.
-{% endcomment %}
 1.  コンテナーを生成します。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network none \
       --name no-net-alpine \
@@ -48,7 +40,7 @@ only the loopback device is created. The following example illustrates this.
       ash
     ```
 @y
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network none \
       --name no-net-alpine \
@@ -61,20 +53,16 @@ only the loopback device is created. The following example illustrates this.
 2.  Check the container's network stack, by executing some common networking
     commands within the container. Notice that no `eth0` was created.
 @y
-{% comment %}
-2.  Check the container's network stack, by executing some common networking
-    commands within the container. Notice that no `eth0` was created.
-{% endcomment %}
 2.  コンテナーのネットワーク機能を確認します。
     これには、コンテナー内において標準的なネットワークコマンドを実行します。
-    なお `eth0` は生成されていません。
+    なお`eth0`は生成されていません。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip link show
 @y
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip link show
 @z
 
@@ -97,11 +85,11 @@ only the loopback device is created. The following example illustrates this.
 @z
 
 @x
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip route
     ```
 @y
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip route
     ```
 @z
@@ -109,9 +97,6 @@ only the loopback device is created. The following example illustrates this.
 @x
     The second command returns empty because there is no routing table.
 @y
-    {% comment %}
-    The second command returns empty because there is no routing table.
-    {% endcomment %}
     2 つめのコマンドは何も返しません。
     ルーティングテーブルがないためです。
 @z
@@ -120,20 +105,16 @@ only the loopback device is created. The following example illustrates this.
 3.  Stop the container. It is removed automatically because it was created with
     the `--rm` flag.
 @y
-{% comment %}
-3.  Stop the container. It is removed automatically because it was created with
-    the `--rm` flag.
-{% endcomment %}
 3.  コンテナーを停止します。
-    `--rm` フラグを使って生成しているため、コンテナーは自動的に削除されます。
+    `--rm`フラグを使って生成しているため、コンテナーは自動的に削除されます。
 @z
 
 @x
-    ```bash
+    ```console
     $ docker stop no-net-alpine
     ```
 @y
-    ```bash
+    ```console
     $ docker stop no-net-alpine
     ```
 @z
@@ -141,9 +122,6 @@ only the loopback device is created. The following example illustrates this.
 @x
 ## Next steps
 @y
-{% comment %}
-## Next steps
-{% endcomment %}
 {: #next-steps }
 ## 次のステップ
 @z
@@ -155,13 +133,6 @@ only the loopback device is created. The following example illustrates this.
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)
 @y
-{% comment %}
--  Go through the [host networking tutorial](network-tutorial-host.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
-- Learn about [bridge networks](bridge.md)
-- Learn about [overlay networks](overlay.md)
-- Learn about [Macvlan networks](macvlan.md)
-{% endcomment %}
 - [ホストネットワークチュートリアル](network-tutorial-host.md) を一通り読む
 - [コンテナーから見たネットワーク](../config/containers/container-networking.md) について
 - [ブリッジネットワーク](bridge.md) について

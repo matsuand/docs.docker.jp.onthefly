@@ -216,12 +216,12 @@ data exists for the tag `latest`, the following build should succeed:
 @z
 
 @x
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 Using default tag: latest
 latest: Pulling from docker/trusttest
 @y
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 Using default tag: latest
 latest: Pulling from docker/trusttest
@@ -247,12 +247,12 @@ without trust data, causes the build command to fail:
 @z
 
 @x
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 unable to process Dockerfile: No trust data for notrust
 ```
 @y
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 unable to process Dockerfile: No trust data for notrust
 ```

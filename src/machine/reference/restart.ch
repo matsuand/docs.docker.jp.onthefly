@@ -64,24 +64,19 @@ Restart a machine. Oftentimes this is equivalent to
 `docker-machine stop; docker-machine start`. But some cloud driver try to implement a clever restart which keeps the same
 IP address.
 @y
-{% comment %}
-Restart a machine. Oftentimes this is equivalent to
-`docker-machine stop; docker-machine start`. But some cloud driver try to implement a clever restart which keeps the same
-IP address.
-{% endcomment %}
 マシンを再起動します。
-普通は `docker-machine stop; docker-machine start` を実行することと同じです。
+普通は`docker-machine stop; docker-machine start`を実行することと同じです。
 ただしクラウドドライバーによっては、IP アドレスを変更せずに再起動を行うように実装されているものもあります。
 @z
 
 @x
-```bash
+```console
 $ docker-machine restart dev
 
 Waiting for VM to start...
 ```
 @y
-```bash
+```console
 $ docker-machine restart dev
 
 Waiting for VM to start...

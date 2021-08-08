@@ -74,14 +74,11 @@ Options:
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下のとおりです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine config dev \
     --tlsverify \
     --tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \
@@ -90,7 +87,7 @@ $ docker-machine config dev \
     -H tcp://192.168.99.103:2376
 ```
 @y
-```bash
+```console
 $ docker-machine config dev \
     --tlsverify \
     --tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \

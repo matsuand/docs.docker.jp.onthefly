@@ -96,11 +96,11 @@ environment variable when invoking the `docker build` command, such as:
 @z
 
 @x
-```bash
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 @y
-```bash
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 @z
@@ -537,11 +537,11 @@ the SSH agent.
 @z
 
 @x
-```bash
+```console
 $ docker build --ssh default .
 ```
 @y
-```bash
+```console
 $ docker build --ssh default .
 ```
 @z

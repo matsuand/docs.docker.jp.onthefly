@@ -560,10 +560,10 @@ Let's save this workflow and check the _Actions_ page for the repository on GitH
 @z
 
 @x
-```shell
+```console
 $ git tag -a 0.0.1 -m "Test release workflow"
 @y
-```shell
+```console
 $ git tag -a 0.0.1 -m "Test release workflow"
 @z
 
@@ -624,13 +624,13 @@ To remove the tag on the `remote`:
 @z
 
 @x
-```shell
+```console
 $ git push origin :refs/tags/0.0.1
 To https://github.com/olliefr/docker-gs-ping.git
  - [deleted]         0.0.1
 ```
 @y
-```shell
+```console
 $ git push origin :refs/tags/0.0.1
 To https://github.com/olliefr/docker-gs-ping.git
  - [deleted]         0.0.1
@@ -644,7 +644,7 @@ And to re-apply it locally and push:
 @z
 
 @x
-```shell
+```console
 $ git tag -fa 0.0.1 -m "Test release workflow"
 Updated tag '0.0.1' (was d7d3edc)
 $ git push origin --tags
@@ -656,7 +656,7 @@ To https://github.com/olliefr/docker-gs-ping.git
  * [new tag]         0.0.1 -> 0.0.1
 ```
 @y
-```shell
+```console
 $ git tag -fa 0.0.1 -m "Test release workflow"
 Updated tag '0.0.1' (was d7d3edc)
 $ git push origin --tags
@@ -688,7 +688,7 @@ Since the image we've just pushed to Docker Hub is public, now it can be pulled 
 @z
 
 @x
-```shell
+```console
 $ docker pull olliefr/docker-gs-ping
 Using default tag: latest
 latest: Pulling from olliefr/docker-gs-ping
@@ -708,7 +708,7 @@ Status: Downloaded newer image for olliefr/docker-gs-ping:latest
 docker.io/olliefr/docker-gs-ping:latest
 ```
 @y
-```shell
+```console
 $ docker pull olliefr/docker-gs-ping
 Using default tag: latest
 latest: Pulling from olliefr/docker-gs-ping

@@ -142,13 +142,13 @@ You can set the logging driver for a specific container by using the
 @z
 
 @x
-```bash
+```console
 $ docker run \
       --log-driver json-file --log-opt max-size=10m \
       alpine echo hello world
 ```
 @y
-```bash
+```console
 $ docker run \
       --log-driver json-file --log-opt max-size=10m \
       alpine echo hello world
@@ -204,11 +204,11 @@ files no larger than 10 megabytes each.
 @z
 
 @x
-```bash
+```console
 $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
 @y
-```bash
+```console
 $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
 @z

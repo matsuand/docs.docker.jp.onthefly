@@ -79,12 +79,12 @@ Rosetta 2 のインストールはコマンドラインから手動で、以下�
 @z
 
 @x
-```shell
-softwareupdate --install-rosetta
+```console
+$ softwareupdate --install-rosetta
 ```
 @y
-```shell
-softwareupdate --install-rosetta
+```console
+$ softwareupdate --install-rosetta
 ```
 @z
 

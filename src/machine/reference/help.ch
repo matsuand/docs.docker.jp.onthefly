@@ -53,22 +53,17 @@ Shows a list of commands or help for one command
 @x
 Usage: docker-machine help _subcommand_
 @y
-{% comment %}
-Usage: docker-machine help _subcommand_
-{% endcomment %}
+利用方法: docker-machine help _subcommand_
 @z
 
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下のとおりです。
 @z
 
 @x
-```bash
+```console
 $ docker-machine help config
 
 Usage: docker-machine config [OPTIONS] [arg...]
@@ -90,7 +85,7 @@ Options:
 <div class="tab-content">
   <div id="origin2" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker-machine help config
 
 Usage: docker-machine config [OPTIONS] [arg...]
@@ -109,7 +104,7 @@ Options:
 </div>
 <div id="japanese2" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker-machine help config
 
 利用方法: docker-machine config [オプション] [arg...]

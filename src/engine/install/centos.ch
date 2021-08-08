@@ -7,20 +7,13 @@ description: Instructions for installing Docker Engine on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /ee/docker-ee/centos/
-- /ee/docker-ee/rhel/
-- /engine/installation/centos/
 - /engine/installation/centos/
 - /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
 - /engine/installation/linux/docker-ee/centos/
-- /engine/installation/linux/docker-ee/rhel/
-- /engine/installation/linux/rhel/
-- /engine/installation/rhel/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
 - /install/linux/docker-ee/centos/
-- /install/linux/docker-ee/rhel/
-- /installation/rhel/
 title: Install Docker Engine on CentOS
 toc_max: 4
 ---
@@ -30,20 +23,13 @@ description: CentOS 上に Docker Engine をインストールする手順を説
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /ee/docker-ee/centos/
-- /ee/docker-ee/rhel/
-- /engine/installation/centos/
 - /engine/installation/centos/
 - /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
 - /engine/installation/linux/docker-ee/centos/
-- /engine/installation/linux/docker-ee/rhel/
-- /engine/installation/linux/rhel/
-- /engine/installation/rhel/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
 - /install/linux/docker-ee/centos/
-- /install/linux/docker-ee/rhel/
-- /installation/rhel/
 title: Docker Engine インストール（CentOS 向け）
 toc_max: 4
 ---
@@ -348,10 +334,11 @@ $ sudo yum-config-manager \
 @z
 
 @x
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 @y
-    Docker はインストールされましたが、まだ起動はしていません。
-    グループ`docker`が生成されていますが、このグループにはまだユーザーが存在していない状態です。
+    このコマンドにより Docker がインストールされましたが、まだ起動はしていません。
+    グループ`docker`が生成されていますが、このグループには、デフォルトではまだユーザーが存在していない状態です。
 @z
 
 @x
@@ -422,10 +409,11 @@ $ sudo yum-config-manager \
 @z
 
 @x
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 @y
-    Docker はインストールされましたが、まだ起動はしていません。
-    グループ`docker`が追加されていますが、このグループにはまだユーザーが存在していない状態です。
+    このコマンドにより Docker がインストールされましたが、まだ起動はしていません。
+    グループ`docker`が追加されていますが、このグループには、デフォルトではまだユーザーが存在していない状態です。
 @z
 
 @x
@@ -463,19 +451,19 @@ $ sudo yum-config-manager \
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
 @z
 
 @x
-Docker Engine is installed and running. You need to use `sudo` to run Docker
+This installs and runs Docker Engine. Use `sudo` to run Docker
 commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 @y
-Docker Engine がインストールされ、実行できました。
+こうして Docker Engine をインストールし、実行しました。
 Docker コマンドの実行には`sudo`が必要になります。
 続いて [Linux のインストール後](linux-postinstall.md) に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 @z
@@ -519,7 +507,9 @@ Docker リポジトリを利用した Docker インストールができない�
 @z
 
 @x
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 @y
@@ -592,19 +582,19 @@ Docker リポジトリを利用した Docker インストールができない�
 
 @x
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 @y
     このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
 @z
 
 @x
-Docker Engine is installed and running. You need to use `sudo` to run Docker commands.
+This installs and runs Docker Engine. Use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 @y
-Docker Engine がインストールされ、実行できました。
+こうして Docker Engine をインストールし、実行しました。
 Docker コマンドの実行には`sudo`が必要になります。
 続いて [Linux のインストール後](linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 @z
@@ -619,7 +609,7 @@ Docker コマンドの実行には`sudo`が必要になります。
 @x
 To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
-instead of `yum -y install`, and pointing to the new file.
+instead of `yum -y install`, and point to the new file.
 @y
 Docker Engine をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](#install-from-a-package) をもう一度行います。
 その際には`yum -y install`でなく`yum -y upgrade`を実行します。

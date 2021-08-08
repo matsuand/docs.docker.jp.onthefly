@@ -46,11 +46,11 @@ these details:
 @z
 
 @x
-```bash
+```console
 $ docker-machine create -d azure --azure-subscription-id="SUB_ID" --azure-subscription-cert="mycert.pem" A-VERY-UNIQUE-NAME
 ```
 @y
-```bash
+```console
 $ docker-machine create -d azure --azure-subscription-id="SUB_ID" --azure-subscription-cert="mycert.pem" A-VERY-UNIQUE-NAME
 ```
 @z

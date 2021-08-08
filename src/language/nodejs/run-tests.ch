@@ -66,11 +66,11 @@ Let's define a Mocha test in a `./test` directory within our application.
 @z
 
 @x
-```shell
+```console
 $ mkdir -p test
 ```
 @y
-```shell
+```console
 $ mkdir -p test
 ```
 @z
@@ -120,11 +120,11 @@ Docker イメージをビルドして正常動作することを確認します�
 @z
 
 @x
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @y
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 @z
@@ -137,7 +137,7 @@ Now let’s test our application by POSTing a JSON payload and then make an HTTP
 @z
 
 @x
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -146,7 +146,7 @@ $ curl --request POST \
 }'
 ```
 @y
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -164,10 +164,10 @@ Now, perform a GET request to the same endpoint to make sure our JSON payload wa
 @z
 
 @x
-```shell
+```console
 $ curl http://localhost:8000/test
 @y
-```shell
+```console
 $ curl http://localhost:8000/test
 @z
 
@@ -194,11 +194,11 @@ Run the following command to install Mocha and add it to the developer dependenc
 @z
 
 @x
-```shell
+```console
 $ npm install --save-dev mocha
 ```
 @y
-```shell
+```console
 $ npm install --save-dev mocha
 ```
 @z
@@ -251,11 +251,11 @@ Below is the Docker command to start the container and run tests:
 @z
 
 @x
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml run notes npm run test
 Creating node-docker_notes_run ... 
 @y
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml run notes npm run test
 Creating node-docker_notes_run ... 
 @z
@@ -363,7 +363,7 @@ Now let’s rebuild our image and run our tests. We will run the same docker bui
 @z
 
 @x
-```shell
+```console
 $ docker build -t node-docker --target test .
 [+] Building 66.5s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                                                                                                 0.0s
@@ -379,7 +379,7 @@ $ docker build -t node-docker --target test .
  => [test 2/2] COPY . .
 ```
 @y
-```shell
+```console
 $ docker build -t node-docker --target test .
 [+] Building 66.5s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                                                                                                 0.0s
@@ -403,14 +403,14 @@ Now that our test image is built, we can run it in a container and see if our te
 @z
 
 @x
-```shell
-docker run -it --rm -p 8000:8000 node-docker
+```console
+$ docker run -it --rm -p 8000:8000 node-docker
 
 > node-docker@1.0.0 test /code
 > mocha ./**/*.js
 @y
-```shell
-docker run -it --rm -p 8000:8000 node-docker
+```console
+$ docker run -it --rm -p 8000:8000 node-docker
 
 > node-docker@1.0.0 test /code
 > mocha ./**/*.js

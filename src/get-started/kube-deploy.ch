@@ -209,12 +209,12 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 @z
 
 @x
-    ```shell
-    kubectl apply -f bb.yaml
+    ```console
+    $ kubectl apply -f bb.yaml
     ```
 @y
-    ```shell
-    kubectl apply -f bb.yaml
+    ```console
+    $ kubectl apply -f bb.yaml
     ```
 @z
 
@@ -244,12 +244,12 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 @z
 
 @x
-    ```shell
-    kubectl get deployments
+    ```console
+    $ kubectl get deployments
     ```
 @y
-    ```shell
-    kubectl get deployments
+    ```console
+    $ kubectl get deployments
     ```
 @z
 
@@ -279,11 +279,11 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 @z
 
 @x
-    ```shell
-    kubectl get services
+    ```console
+    $ kubectl get services
 @y
-    ```shell
-    kubectl get services
+    ```console
+    $ kubectl get services
 @z
 
 @x
@@ -320,12 +320,12 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 @z
 
 @x
-    ```shell
-    kubectl delete -f bb.yaml
+    ```console
+    $ kubectl delete -f bb.yaml
     ```
 @y
-    ```shell
-    kubectl delete -f bb.yaml
+    ```console
+    $ kubectl delete -f bb.yaml
     ```
 @z
 

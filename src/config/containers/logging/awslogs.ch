@@ -96,11 +96,11 @@ You can set the logging driver for a specific container by using the
 @z
 
 @x
-```bash
+```console
 $ docker run --log-driver=awslogs ...
 ```
 @y
-```bash
+```console
 $ docker run --log-driver=awslogs ...
 ```
 @z
@@ -164,11 +164,11 @@ and no region is set, the driver uses the instance's region.
 @z
 
 @x
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 ```
 @y
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 ```
 @z
@@ -224,11 +224,11 @@ for the `awslogs` logging driver. You can specify the log group with the
 @z
 
 @x
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
 ```
 @y
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
 ```
 @z
@@ -282,7 +282,7 @@ The `awslogs-create-group` option defaults to `false`.
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -291,7 +291,7 @@ $ docker run \
     ...
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -400,7 +400,7 @@ that expression:
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -409,7 +409,7 @@ $ docker run \
     ...
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -580,7 +580,7 @@ You can use the regular expression of `^INFO`:
 @z
 
 @x
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -589,7 +589,7 @@ $ docker run \
     ...
 ```
 @y
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \

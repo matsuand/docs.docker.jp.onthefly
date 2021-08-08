@@ -19,16 +19,12 @@ title: docker-machine rm
 Remove a machine. This removes the local reference and deletes it
 on the cloud provider or virtualization management platform.
 @y
-{% comment %}
-Remove a machine. This removes the local reference and deletes it
-on the cloud provider or virtualization management platform.
-{% endcomment %}
 マシンを削除します。
 これはクラウドプロバイダーや仮想化管理システムへのローカル参照と、そのシステム上でのマシンを削除します。
 @z
 
 @x
-```bash
+```console
 $ docker-machine rm --help
 
 Usage: docker-machine rm [OPTIONS] [arg...]
@@ -51,7 +47,7 @@ Options:
 <div class="tab-content">
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
-```bash
+```console
 $ docker-machine rm --help
 
 Usage: docker-machine rm [OPTIONS] [arg...]
@@ -71,7 +67,7 @@ Options:
 </div>
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```bash
+```console
 $ docker-machine rm --help
 
 利用方法: docker-machine rm [オプション] [arg...]
@@ -95,18 +91,15 @@ $ docker-machine rm --help
 @x
 ## Examples
 @y
-{% comment %}
-## Examples
-{% endcomment %}
 {: #examples }
 ## 利用例
 @z
 
 @x
-```bash
+```console
 $ docker-machine ls
 @y
-```bash
+```console
 $ docker-machine ls
 @z
 
