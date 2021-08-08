@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm 内サービスのスケール変更 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm 内サービスのスケール変更" />
   <meta property="og:description" content="Scale the service running in the swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/scale-service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm 内サービスのスケール変更","description":"Scale the service running in the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/scale-service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -97,63 +97,62 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm 内サービスのスケール変更</h1>
-<p>Swarm に対して <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/deploy-service/">サービスのデプロイ</a> を行ったら、次は Docker CLI を使って、サービス内のコンテナー数のスケール変更を行います。
+                        <section class="section"><h1>Swarm 内サービスのスケール変更</h1><p>Swarm に対して <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/deploy-service/">サービスのデプロイ</a> を行ったら、次は Docker CLI を使って、サービス内のコンテナー数のスケール変更を行います。
 サービス内に起動しているコンテナーは「タスク」と呼びます。</p>
 
 <ol>
   <li>
     <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
 接続先はマネージャーノードを起動したマシンです。
-たとえばこのチュートリアルでは <code class="language-plaintext highlighter-rouge">manager1</code> というマシンを利用します。</p>
+たとえばこのチュートリアルでは<code class="language-plaintext highlighter-rouge">manager1</code>というマシンを利用します。</p>
   </li>
   <li>
     <p>Swarm 内で起動しているサービスの状態を変更するため、以下のコマンドを実行します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service scale &lt;サービスID&gt;<span class="o">=</span>&lt;タスク数&gt;
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service scale &lt;サービスID&gt;<span class="o">=</span>&lt;タスク数&gt;
 </code></pre></div>    </div>
 
     <p>たとえば以下のとおりです。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service scale <span class="nv">helloworld</span><span class="o">=</span>5
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service scale <span class="nv">helloworld</span><span class="o">=</span>5
+<span class="go">
 helloworld scaled to 5
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service ps &lt;サービスID&gt;</code> を実行して、タスク一覧が更新されていることを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker service ps &lt;サービスID&gt;</code>を実行して、タスク一覧が更新されていることを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps helloworld
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service ps helloworld
+<span class="go">
 NAME                                    IMAGE   NODE      DESIRED STATE  CURRENT STATE
 helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2   Running        Running 7 minutes
 helloworld.2.c7a7tcdq5s0uk3qr88mf8xco6  alpine  worker1   Running        Running 24 seconds
 helloworld.3.6crl09vdcalvtfehfh69ogfb1  alpine  worker1   Running        Running 24 seconds
 helloworld.4.auky6trawmdlcne8ad8phb0f1  alpine  manager1  Running        Running 24 seconds
 helloworld.5.ba19kca06l18zujfwxyc5lkyn  alpine  worker2   Running        Running 24 seconds
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>この結果から Alpine Linux の実行インスタンスが合計で 5 つのタスクとなるように Swarm が 4 つの新たなタスクを実行したことがわかります。
 このタスクは Swarm 上の 3 つのノード間に分散されています。
-そのうちの 1 つが <code class="language-plaintext highlighter-rouge">manager1</code> 上で実行されています。</p>
+そのうちの 1 つが<code class="language-plaintext highlighter-rouge">manager1</code>上で実行されています。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker ps</code> を実行して、接続しているノード上で実行されているコンテナーを確認します。
-以下の例では <code class="language-plaintext highlighter-rouge">manager1</code> 上において実行されているタスクが示されます。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker ps</code>を実行して、接続しているノード上で実行されているコンテナーを確認します。
+以下の例では<code class="language-plaintext highlighter-rouge">manager1</code>上において実行されているタスクが示されます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-528d68040f95        alpine:latest       <span class="s2">"ping docker.com"</span>   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
-</code></pre></div>    </div>
+528d68040f95        alpine:latest       "ping docker.com"   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
+</span></code></pre></div>    </div>
 
-    <p>他のノード上で起動しているコンテナーを確認するには、そのノードに SSH によりログインし、<code class="language-plaintext highlighter-rouge">docker ps</code> コマンドを実行します。</p>
+    <p>他のノード上で起動しているコンテナーを確認するには、そのノードに SSH によりログインし、<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行します。</p>
   </li>
 </ol>
 
 <h2 id="whats-next">次にすることは</h2>
 
-<p>チュートリアルのこの時点までで、<code class="language-plaintext highlighter-rouge">helloworld</code> サービスによる作業は終了です。
+<p>チュートリアルのこの時点までで、<code class="language-plaintext highlighter-rouge">helloworld</code>サービスによる作業は終了です。
 次の手順では <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/delete-service/">サービスの削除</a> について示します。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=tutorial">tutorial</a>, <a href="/docs.docker.jp.onthefly/search/?q=cluster management">cluster management</a>, <a href="/docs.docker.jp.onthefly/search/?q=swarm mode">swarm mode</a>, <a href="/docs.docker.jp.onthefly/search/?q=scale">scale</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

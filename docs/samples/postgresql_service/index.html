@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>PostgreSQL を Docker 化する | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="PostgreSQL を Docker 化する" />
   <meta property="og:description" content="Running and installing a PostgreSQL service" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/postgresql_service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"PostgreSQL を Docker 化する","description":"Running and installing a PostgreSQL service","url":"https://docs.docker.com/samples/postgresql_service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -168,12 +168,12 @@ suitably secure.</p>
 
 <p>Dockerfile からイメージをビルドして名前を与えます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> eg_postgresql <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> eg_postgresql <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>PostgreSQL サーバーコンテナーを（フォアグラウンドで）実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-P</span> <span class="nt">--name</span> pg_test eg_postgresql
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-P</span> <span class="nt">--name</span> pg_test eg_postgresql
 </code></pre></div></div>
 
 <p>PostgreSQL サーバーへの接続方法は２通りあります。
@@ -192,9 +192,9 @@ suitably secure.</p>
 <code class="language-plaintext highlighter-rouge">docker run</code>. This sets a number of environment
 variables that can then be used to connect:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--link</span> pg_test:pg eg_postgresql bash
-
-postgres@7ef98b1b7243:/<span class="nv">$ </span>psql <span class="nt">-h</span> <span class="nv">$PG_PORT_5432_TCP_ADDR</span> <span class="nt">-p</span> <span class="nv">$PG_PORT_5432_TCP_PORT</span> <span class="nt">-d</span> docker <span class="nt">-U</span> docker <span class="nt">--password</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--link</span> pg_test:pg eg_postgresql bash
+<span class="go">
+</span><span class="gp">postgres@7ef98b1b7243:/$</span><span class="w"> </span>psql <span class="nt">-h</span> <span class="nv">$PG_PORT_5432_TCP_ADDR</span> <span class="nt">-p</span> <span class="nv">$PG_PORT_5432_TCP_PORT</span> <span class="nt">-d</span> docker <span class="nt">-U</span> docker <span class="nt">--password</span>
 </code></pre></div></div>
 
 <h3 id="connect-from-your-host-system">ホストシステムからの接続</h3>
@@ -204,12 +204,12 @@ host-mapped port to test as well. You need to use <code class="language-plaintex
 to find out what local host port the container is mapped to
 first:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">
 CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS              PORTS                                      NAMES
-5e24362f27f6        eg_postgresql:latest   /usr/lib/postgresql/   About an hour ago   Up About an hour    0.0.0.0:49153-&gt;5432/tcp                    pg_test
-
-<span class="nv">$ </span>psql <span class="nt">-h</span> localhost <span class="nt">-p</span> 49153 <span class="nt">-d</span> docker <span class="nt">-U</span> docker <span class="nt">--password</span>
+</span><span class="gp">5e24362f27f6        eg_postgresql:latest   /usr/lib/postgresql/   About an hour ago   Up About an hour    0.0.0.0:49153-&gt;</span>5432/tcp                    pg_test
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>psql <span class="nt">-h</span> localhost <span class="nt">-p</span> 49153 <span class="nt">-d</span> docker <span class="nt">-U</span> docker <span class="nt">--password</span>
 </code></pre></div></div>
 
 <h3 id="test-the-database">データベースの動作確認</h3>
@@ -239,17 +239,17 @@ prompt, you can create a table and populate it.</p>
 <p>You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> pg_test <span class="nt">-t</span> <span class="nt">-i</span> busybox sh
-
-/ <span class="c"># ls</span>
-bin      etc      lib      linuxrc  mnt      proc     run      sys      usr
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> pg_test <span class="nt">-t</span> <span class="nt">-i</span> busybox sh
+<span class="go">
+</span><span class="gp">/ #</span><span class="w"> </span><span class="nb">ls</span>
+<span class="go">bin      etc      lib      linuxrc  mnt      proc     run      sys      usr
 dev      home     lib64    media    opt      root     sbin     tmp      var
-/ <span class="c"># ls /etc/postgresql/9.3/main/</span>
-environment      pg_hba.conf      postgresql.conf
+</span><span class="gp">/ #</span><span class="w"> </span><span class="nb">ls</span> /etc/postgresql/9.3/main/
+<span class="go">environment      pg_hba.conf      postgresql.conf
 pg_ctl.conf      pg_ident.conf    start.conf
-/tmp <span class="c"># ls /var/log</span>
-ldconfig    postgresql
-</code></pre></div></div>
+</span><span class="gp">/tmp #</span><span class="w"> </span><span class="nb">ls</span> /var/log
+<span class="go">ldconfig    postgresql
+</span></code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=example">example</a>, <a href="/docs.docker.jp.onthefly/search/?q=package installation">package installation</a>, <a href="/docs.docker.jp.onthefly/search/?q=postgresql">postgresql</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

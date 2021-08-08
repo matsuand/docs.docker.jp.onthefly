@@ -1,7 +1,7 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker ストレージドライバー | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker storage drivers | Docker ドキュメント</title>
   <meta name="description" content="Learn how to select the proper storage driver for your container." />
   <meta name="keywords" content="container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/storage/storagedriver/select-storage-driver/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Docker ストレージドライバー"/>
+  <meta name="twitter:title" itemprop="title name" content="Docker storage drivers"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Docker ストレージドライバー" />
+  <meta property="og:title" content="Docker storage drivers" />
   <meta property="og:description" content="Learn how to select the proper storage driver for your container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/select-storage-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker ストレージドライバー","description":"Learn how to select the proper storage driver for your container.","url":"https://docs.docker.com/storage/storagedriver/select-storage-driver/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker storage drivers","description":"Learn how to select the proper storage driver for your container.","url":"https://docs.docker.com/storage/storagedriver/select-storage-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -103,165 +103,167 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker ストレージドライバー</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>理想を言えば、コンテナーの書き込みレイヤーへのデータの書き込みは最小とし、データ出力先には Docker ボリュームを利用します。
-しかし処理内容によっては、書き込みレイヤーにデータを書き込めるようにする必要が出てきます。
-これがあるからこそストレージドライバーが必要になります。</p>
+                        <section class="section"><h1>Docker storage drivers</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p><p>Ideally, very little data is written to a container’s writable layer, and you
+use Docker volumes to write data. However, some workloads require you to be able
+to write to the container’s writable layer. This is where storage drivers come
+in.</p>
 
-<p>Docker では複数のストレージドライバーがサポートされ、これは交換可能な、つまりプラガブルなアーキテクチャーに基づいています。
-ストレージドライバーは Docker ホスト上において、イメージやコンテナーが行うデータ保存や管理を制御します。</p>
+<p>Docker supports several storage drivers, using a pluggable architecture. The
+storage driver controls how images and containers are stored and managed on your
+Docker host. After you have read the <a href="/docs.docker.jp.onthefly/storage/storagedriver/">storage driver overview</a>, the
+next step is to choose the best storage driver for your workloads. Use the storage
+driver with the best overall performance and stability in the most usual scenarios.</p>
 
-<p><a href="/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバーの概要</a> を読み終えたら、次は作業に必要となる最良のストレージドライバーを選択することです。
-ドライバーを決定するにあたっては、考えておくべき高度な要因が 3 つあります。</p>
-
-<p>利用するカーネルが複数のストレージドライバーに対応している場合に Docker は、ストレージドライバーが設定されていなかったとしても、どのストレージドライバーを用いるべきであるかを示す優先リストを持ちます。
-あくまでストレージドライバーが利用できる前提条件を満たしている場合に限ります。</p>
-
-<p>ストレージドライバーは多くの利用状況において、最大限の性能と安定性を持つものを利用します。</p>
-
-<p>Docker は以下のストレージドライバーをサポートします。</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">overlay2</code>は、現在サポートしている Linux ディストリビューションの中で、よく用いられているストレージドライバーです。
- 特別な設定は必要ありません。</li>
-  <li><code class="language-plaintext highlighter-rouge">aufs</code>は Docker 18.06 あるいはそれ以前においては、よく用いられていました。
- これはカーネル 3.13 を利用する Ubuntu 14.04 において稼動していて、<code class="language-plaintext highlighter-rouge">overlay2</code>がサポートされていないときでした。</li>
-  <li>rootless の<code class="language-plaintext highlighter-rouge">overlay2</code>をサポートしていないホスト上において rootless Docker だけを実行するのであれば、<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>が推奨されます。
-Ubuntu や Debian 10 の場合、<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>ドライバーは rootless モードであっても、<code class="language-plaintext highlighter-rouge">overlay2</code>が動作している必要はありません。
-詳しくは <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モードのドキュメント</a> を参照してください。</li>
-  <li><code class="language-plaintext highlighter-rouge">devicemapper</code>はサポートされていますが、本番環境においては<code class="language-plaintext highlighter-rouge">direct-lvm</code>を必要とします。
- というのも<code class="language-plaintext highlighter-rouge">loopback-lvm</code>は何も設定する必要がないのですが、処理性能が極めて低いためです。
- <code class="language-plaintext highlighter-rouge">devicemapper</code>は CentOS や RHEL において<code class="language-plaintext highlighter-rouge">overlay2</code>をサポートしていなかったときには、利用が推奨されていました。
- 最新の CentOS と RHEL においては<code class="language-plaintext highlighter-rouge">overlay2</code>がサポートされ、今では<code class="language-plaintext highlighter-rouge">overlay2</code>が推奨ドライバーとなっています。</li>
-  <li><code class="language-plaintext highlighter-rouge">btrfs</code>と<code class="language-plaintext highlighter-rouge">zfs</code>というストレージドライバーは、その名前が示すファイルシステム上において利用します。
-（ファイルシステムは Docker がインストールされているホスト上のファイルシステムを表わします。）
-このファイルシステムに対しては「snapshots」を生成するような高度なオプションがありますが、他に比べて設定と保守を必要とします。
-このドライバーを利用するためには、それぞれのファイルシステムが適切に設定できていることが必要です。</li>
-  <li><code class="language-plaintext highlighter-rouge">vfs</code>ストレージドライバーはテスト目的で利用します。
-またはコピーオンライト方式のファイルシステムを利用しなくて構わない状況での利用を意図しています。
-このストレージドライバーの性能は低く、一般に本番環境での利用は推奨されません。</li>
-</ul>
-
-<p>Docker のソースコードにおいては優先順位を定義しています。
-その順番は <a href="https://github.com/moby/moby/blob/20.10/daemon/graphdriver/driver_linux.go#L52-L53">Docker Engine 20.10 のソースコード</a> を見ればわかります。</p>
-
-<p id="storage-driver-order">上のサイトのファイル参照画面において Docker バージョンが利用するものと異なっている場合は、画面上部にあるブランチ切り替えボタンを使って、利用しているバージョンブランチに切り替えてください。</p>
-
-<p>ストレージドライバーにおいては、それが基づいているファイルシステムに対応した所定のフォーマットを必要とします。
-特定のファイルシステムを利用するべき理由がある場合には、ドライバーの選択肢が少なくなるかもしれません。
-<a href="#supported-backing-filesystems">対応するファイルシステム</a> を参照してください。</p>
-
-<p>どのストレージドライバーを利用するべきかが絞り込めてきたら、開発作業の特性や必要となる安定性に基づいて最終決定を行います。
-<a href="#other-considerations">その他の考慮事項</a> を参考にして、最終的な決定を行ってください。</p>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>ドライバーの選択はオペレーティングシステム、ディストリビューションにより限定されることがあります。
-たとえば<code class="language-plaintext highlighter-rouge">aufs</code>は Ubuntu と Debian においてのみサポートされるものであって、しかも追加パッケージのインストールを必要とします。
-また<code class="language-plaintext highlighter-rouge">btrfs</code>は SLES に対してのみサポートされ、さらに Docker Enterprise にしか対応していません。
-詳しくは <a href="#supported-storage-drivers-per-linux-distribution">Linux ディストリビューションがサポートするストレージドライバー</a> を参照してください。</p>
-</blockquote>
-
-<h2 id="supported-storage-drivers-per-linux-distribution">Linux ディストリビューションがサポートするストレージドライバー</h2>
-
-<p>高度なレベルでの利用を考えると、利用できるストレージドライバーは Docker エディションによってほぼ決まります。</p>
-
-<p>また Docker では、オペレーティングシステムのセキュリティ機能を無効にしなければならないような設定は推奨しません。
-たとえば CentOS において<code class="language-plaintext highlighter-rouge">overlay</code>や<code class="language-plaintext highlighter-rouge">overlay2</code>を利用するために<code class="language-plaintext highlighter-rouge">selinux</code>を無効にするような場合です。</p>
-
-<h3 id="docker-engine---community">Docker Engine - Community</h3>
-
-<p>For Docker Engine - Community, only some configurations are tested, and your operating
-system’s kernel may not support every storage driver. In general, the following
-configurations work on recent versions of the Linux distribution:</p>
+<p>The Docker Engine provides the following storage drivers on Linux:</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Linux ディストリビューション</th>
-      <th style="text-align: left">推奨ストレージドライバー</th>
-      <th style="text-align: left">その他のドライバー</th>
+      <th>Driver</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Docker Engine - Community、Ubuntu</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>または<code class="language-plaintext highlighter-rouge">aufs</code>（Ubuntu 14.04、カーネル 3.13）</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td><code class="language-plaintext highlighter-rouge">overlay2</code> is the preferred storage driver for all currently supported Linux distributions, and requires no extra configuration.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community、Debian</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>（Debian Stretch）、<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">devicemapper</code>（旧版の場合）</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>is preferred only for running Rootless Docker on a host that does not provide support for rootless <code class="language-plaintext highlighter-rouge">overlay2</code>. On Ubuntu and Debian 10, the <code class="language-plaintext highlighter-rouge">fuse-overlayfs</code> driver does not need to be used, and <code class="language-plaintext highlighter-rouge">overlay2</code> works even in rootless mode. Refer to the <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless mode documentation</a> for details.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community、CentOS</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">btrfs</code> and <code class="language-plaintext highlighter-rouge">zfs</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">btrfs</code> and <code class="language-plaintext highlighter-rouge">zfs</code> storage drivers allow for advanced options, such as creating “snapshots”, but require more maintenance and setup. Each of these relies on the backing filesystem being configured correctly.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community、Fedora</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">vfs</code> storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">aufs</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">aufs</code> storage driver Was the preferred storage driver for Docker 18.06 and older, when running on Ubuntu 14.04 on kernel 3.13 which had no support for <code class="language-plaintext highlighter-rouge">overlay2</code>. However, current versions of Ubuntu and Debian now have support for <code class="language-plaintext highlighter-rouge">overlay2</code>, which is now the recommended driver.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">devicemapper</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver requires <code class="language-plaintext highlighter-rouge">direct-lvm</code> for production environments, because <code class="language-plaintext highlighter-rouge">loopback-lvm</code>, while zero-configuration, has very poor performance. <code class="language-plaintext highlighter-rouge">devicemapper</code> was the recommended storage driver for CentOS and RHEL, as their kernel version did not support <code class="language-plaintext highlighter-rouge">overlay2</code>. However, current versions of CentOS and RHEL now have support for <code class="language-plaintext highlighter-rouge">overlay2</code>, which is now the recommended driver.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">overlay</code></td>
+      <td>The legacy <code class="language-plaintext highlighter-rouge">overlay</code> driver was used for kernels that did not support the “multiple-lowerdir” feature required for <code class="language-plaintext highlighter-rouge">overlay2</code> All currently supported Linux distributions now provide support for this, and it is therefore deprecated.</td>
     </tr>
   </tbody>
 </table>
 
-<p>¹) ストレージドライバー<code class="language-plaintext highlighter-rouge">overlay</code>は非推奨であり、将来のリリースにおいて削除されます。
-   ストレージドライバー<code class="language-plaintext highlighter-rouge">overlay</code>のユーザーは<code class="language-plaintext highlighter-rouge">overlay2</code>に移行することが推奨されています。</p>
+<p id="storage-driver-order">The Docker Engine has a prioritized list of which storage driver to use if no
+storage driver is explicitly configured, assuming that the storage driver meets
+the prerequisites, and automatically selects a compatible storage driver. You
+can see the order in the <a href="https://github.com/moby/moby/blob/20.10/daemon/graphdriver/driver_linux.go#L52-L53">source code for Docker Engine 20.10</a>.</p>
 
-<p>²) ストレージドライバー<code class="language-plaintext highlighter-rouge">devicemapper</code>は非推奨であり、将来のリリースにおいて削除されます。
-   ストレージドライバー<code class="language-plaintext highlighter-rouge">devicemapper</code>のユーザーは<code class="language-plaintext highlighter-rouge">overlay2</code>に移行することが推奨されています。</p>
+<p>Some storage drivers require you to use a specific format for the backing filesystem.
+If you have external  requirements to use a specific backing filesystem, this may
+limit your choices. See <a href="#supported-backing-filesystems">Supported backing filesystems</a>.</p>
+
+<p>After you have narrowed down which storage drivers you can choose from, your choice
+is determined by the  characteristics of your workload and the level of stability
+you need. See <a href="#other-considerations">Other considerations</a> for help in making
+the final decision.</p>
+
+<h2 id="supported-storage-drivers-per-linux-distribution">Supported storage drivers per Linux distribution</h2>
 
 <blockquote>
-  <p><strong>メモ</strong></p>
+  <p>Docker Desktop, and Docker in Rootless mode</p>
 
-  <p>上記の一覧表は Rootless モードに対しては当てはまりません。
-Rootless モードにおいて利用可能なドライバーは、<a href="/docs.docker.jp.onthefly/engine/security/rootless/">Rootless モードのドキュメント</a> を参照してください。</p>
+  <p>Modifying the storage-driver is not supported on Docker Desktop for Mac and
+Docker Desktop for Windows, and only the default storage driver can be used.
+The comparison table below is also not applicable for Rootless mode. For the
+drivers available in rootless mode, see the <a href="/docs.docker.jp.onthefly/engine/security/rootless/">Rootless mode documentation</a>.</p>
 </blockquote>
 
-<p>When possible, <code class="language-plaintext highlighter-rouge">overlay2</code> is the recommended storage driver. When installing
-Docker for the first time, <code class="language-plaintext highlighter-rouge">overlay2</code> is used by default. Previously, <code class="language-plaintext highlighter-rouge">aufs</code> was
-used by default when available, but this is no longer the case. If you want to
-use <code class="language-plaintext highlighter-rouge">aufs</code> on new installations going forward, you need to explicitly configure
-it, and you may need to install extra packages, such as <code class="language-plaintext highlighter-rouge">linux-image-extra</code>.
-See <a href="/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/">aufs</a>.</p>
+<p>Your operating system and kernel may not support every storage driver. For
+instance, <code class="language-plaintext highlighter-rouge">aufs</code> is only supported on Ubuntu and Debian, and may require extra
+packages to be installed, while <code class="language-plaintext highlighter-rouge">btrfs</code> is only supported if your system uses
+<code class="language-plaintext highlighter-rouge">btrfs</code> as storage.  In general, the following configurations work on recent
+versions of the Linux distribution:</p>
 
-<p>On existing installations using <code class="language-plaintext highlighter-rouge">aufs</code>, it is still used.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Linux distribution</th>
+      <th style="text-align: left">Recommended storage drivers</th>
+      <th style="text-align: left">Alternative drivers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Ubuntu</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">aufs</code>³, <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Debian</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">aufs</code>³, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CentOS</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Fedora</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SLES 15</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RHEL</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">vfs</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>¹) The <code class="language-plaintext highlighter-rouge">overlay</code> storage driver is deprecated, and will be removed in a future
+release. It is recommended that users of the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver migrate to <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
+
+<p>²) The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver is deprecated, and will be removed in a future
+release. It is recommended that users of the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver migrate
+to <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
+
+<p>³) The <code class="language-plaintext highlighter-rouge">aufs</code> storage driver is deprecated, and will be removed in a future
+release. It is recommended that users of the <code class="language-plaintext highlighter-rouge">aufs</code> storage driver migrate
+to <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
 
 <p>When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver, and to
 use Docker volumes for write-heavy workloads instead of relying on writing data
 to the container’s writable layer.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">vfs</code> storage driver is usually not the best choice. Before using the <code class="language-plaintext highlighter-rouge">vfs</code>
-storage driver, be sure to read about
+<p>The <code class="language-plaintext highlighter-rouge">vfs</code> storage driver is usually not the best choice, and primarily intended
+for debugging purposes in situations where no other storage-driver is supported.
+Before using the <code class="language-plaintext highlighter-rouge">vfs</code> storage driver, be sure to read about
 <a href="/docs.docker.jp.onthefly/storage/storagedriver/vfs-driver/">its performance and storage characteristics and limitations</a>.</p>
 
-<blockquote>
-  <p><strong>Expectations for non-recommended storage drivers</strong>: Commercial support is
-not available for Docker Engine - Community, and you can technically use any storage driver
-that is available for your platform. For instance, you can use <code class="language-plaintext highlighter-rouge">btrfs</code> with
-Docker Engine - Community, even though it is not recommended on any platform for
-Docker Engine - Community, and you do so at your own risk.</p>
-
-  <p>The recommendations in the table above are based on automated regression
-testing and the configurations that are known to work for a large number of
+<p>The recommendations in the table above are known to work for a large number of
 users. If you use a recommended configuration and find a reproducible issue,
 it is likely to be fixed very quickly. If the driver that you want to use is
 not recommended according to this table, you can run it at your own risk. You
 can and should still report any issues you run into. However, such issues
 have a lower priority than issues encountered when using a recommended
 configuration.</p>
-</blockquote>
 
-<h3 id="docker-desktop-for-mac-and-docker-desktop-for-windows">Docker Desktop for Mac and Docker Desktop for Windows</h3>
+<p>Depending on your Linux distribution, other storage-drivers, such as <code class="language-plaintext highlighter-rouge">btrfs</code> may
+be available. These storage drivers can have advantages for specific use-cases,
+but may require additional set-up or maintenance, which make them not recommended
+for common scenarios. Refer to the documentation for those storage drivers for
+details.</p>
 
-<p>Docker Desktop for Mac and Docker Desktop for Windows are intended for development, rather
-than production. Modifying the storage driver on these platforms is not
-possible.</p>
-
-<h2 id="supported-backing-filesystems">サポートされているファイルシステム</h2>
+<h2 id="supported-backing-filesystems">Supported backing filesystems</h2>
 
 <p>With regard to Docker, the backing filesystem is the filesystem where
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> is located. Some storage drivers only work with specific
@@ -270,14 +272,18 @@ backing filesystems.</p>
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">ストレージドライバー</th>
-      <th style="text-align: left">サポートするファイルシステム</th>
+      <th style="text-align: left">Storage driver</th>
+      <th style="text-align: left">Supported backing filesystems</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>, <code class="language-plaintext highlighter-rouge">overlay</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">xfs</code> ftype=1 利用時、 <code class="language-plaintext highlighter-rouge">ext4</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">xfs</code> with ftype=1, <code class="language-plaintext highlighter-rouge">ext4</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code></td>
+      <td style="text-align: left">any filesystem</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">aufs</code></td>
@@ -297,12 +303,12 @@ backing filesystems.</p>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">vfs</code></td>
-      <td style="text-align: left">どのファイルシステムでも可。</td>
+      <td style="text-align: left">any filesystem</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="other-considerations">その他の考慮事項</h2>
+<h2 id="other-considerations">Other considerations</h2>
 
 <h3 id="suitability-for-your-workload">Suitability for your workload</h3>
 
@@ -340,11 +346,12 @@ example, if using the ZFS storage driver on top of a shared storage system, be
 sure to follow best practices for operating ZFS filesystems on top of that
 specific shared storage system.</p>
 
-<h3 id="stability">安定性</h3>
+<h3 id="stability">Stability</h3>
 
-<p>ユーザーにとっては、処理性能よりも安定性が重要視されることがあります。
-ここに説明するストレージドライバーはすべて安定していると考えられますが、中には更新され活発に開発中であるものもあります。
-一般に<code class="language-plaintext highlighter-rouge">overlay2</code>、<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">devicemapper</code>は最も安定したものとして選ぶことができます。</p>
+<p>For some users, stability is more important than performance. Though Docker
+considers all of the storage drivers mentioned here to be stable, some are newer
+and are still under active development. In general, <code class="language-plaintext highlighter-rouge">overlay2</code>, <code class="language-plaintext highlighter-rouge">aufs</code>, and
+<code class="language-plaintext highlighter-rouge">devicemapper</code> are the choices with the highest stability.</p>
 
 <h3 id="test-with-your-own-workloads">Test with your own workloads</h3>
 
@@ -353,7 +360,7 @@ storage drivers. Make sure to use equivalent hardware and workloads to match
 production conditions, so you can see which storage driver offers the best
 overall performance.</p>
 
-<h2 id="check-your-current-storage-driver">利用中のストレージドライバーの確認</h2>
+<h2 id="check-your-current-storage-driver">Check your current storage driver</h2>
 
 <p>The detailed documentation for each individual storage driver details all of the
 set-up steps to use a given storage driver.</p>
@@ -361,36 +368,38 @@ set-up steps to use a given storage driver.</p>
 <p>To see what storage driver Docker is currently using, use <code class="language-plaintext highlighter-rouge">docker info</code> and look
 for the <code class="language-plaintext highlighter-rouge">Storage Driver</code> line:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+<span class="go">
 Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
-&lt;...&gt;
-</code></pre></div></div>
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div></div>
 
 <p>To change the storage driver, see the specific instructions for the new storage
 driver. Some drivers require additional configuration, including configuration
 to physical or logical disks on the Docker host.</p>
 
 <blockquote class="important">
-  <p><strong>重要</strong></p>
+  <p><strong>Important</strong></p>
 
-  <p>ストレージドライバーを変更すると、既存のイメージやコンテナーは接続不能になります。
-新しいストレージドライバーからは、元々あるレイヤーを利用できないためです。
-変更を元に戻すことで、元々のイメージやコンテナーにアクセスできるようになりますが、今度は、新たなドライバーを使って行ったプルや生成処理内容にアクセスできなくなります。</p>
+  <p>When you change the storage driver, any existing images and containers become
+inaccessible. This is because their layers cannot be used by the new storage
+driver. If you revert your changes, you can access the old images and containers
+again, but any that you pulled or created using the new driver are then
+inaccessible.</p>
 </blockquote>
 
-<h2 id="related-information">関連情報</h2>
+<h2 id="related-information">Related information</h2>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/">About images, containers, and storage drivers</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/"><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーの利用</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/"><code class="language-plaintext highlighter-rouge">devicemapper</code>ストレージドライバーの利用</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/"><code class="language-plaintext highlighter-rouge">overlay</code>と<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーの利用</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/"><code class="language-plaintext highlighter-rouge">btrfs</code>ストレージドライバーの利用</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/"><code class="language-plaintext highlighter-rouge">zfs</code>ストレージドライバーの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/"><code class="language-plaintext highlighter-rouge">aufs</code> storage driver in practice</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/"><code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver in practice</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/"><code class="language-plaintext highlighter-rouge">overlay</code> and <code class="language-plaintext highlighter-rouge">overlay2</code> storage drivers in practice</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/"><code class="language-plaintext highlighter-rouge">btrfs</code> storage driver in practice</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/"><code class="language-plaintext highlighter-rouge">zfs</code> storage driver in practice</a></li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=container">container</a>, <a href="/docs.docker.jp.onthefly/search/?q=storage">storage</a>, <a href="/docs.docker.jp.onthefly/search/?q=driver">driver</a>, <a href="/docs.docker.jp.onthefly/search/?q=aufs">aufs</a>, <a href="/docs.docker.jp.onthefly/search/?q=btrfs">btrfs</a>, <a href="/docs.docker.jp.onthefly/search/?q=devicemapper">devicemapper</a>, <a href="/docs.docker.jp.onthefly/search/?q=zfs">zfs</a>, <a href="/docs.docker.jp.onthefly/search/?q=overlay">overlay</a>, <a href="/docs.docker.jp.onthefly/search/?q=overlay2">overlay2</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -425,23 +434,18 @@ to physical or logical disks on the Docker host.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#supported-storage-drivers-per-linux-distribution" class="nomunge">Linux ディストリビューションがサポートするストレージドライバー</a>
-    <ul>
-      <li><a href="#docker-engine---community" class="nomunge">Docker Engine - Community</a></li>
-      <li><a href="#docker-desktop-for-mac-and-docker-desktop-for-windows" class="nomunge">Docker Desktop for Mac and Docker Desktop for Windows</a></li>
-    </ul>
-  </li>
-  <li><a href="#supported-backing-filesystems" class="nomunge">サポートされているファイルシステム</a></li>
-  <li><a href="#other-considerations" class="nomunge">その他の考慮事項</a>
+  <li><a href="#supported-storage-drivers-per-linux-distribution" class="nomunge">Supported storage drivers per Linux distribution</a></li>
+  <li><a href="#supported-backing-filesystems" class="nomunge">Supported backing filesystems</a></li>
+  <li><a href="#other-considerations" class="nomunge">Other considerations</a>
     <ul>
       <li><a href="#suitability-for-your-workload" class="nomunge">Suitability for your workload</a></li>
       <li><a href="#shared-storage-systems-and-the-storage-driver" class="nomunge">Shared storage systems and the storage driver</a></li>
-      <li><a href="#stability" class="nomunge">安定性</a></li>
+      <li><a href="#stability" class="nomunge">Stability</a></li>
       <li><a href="#test-with-your-own-workloads" class="nomunge">Test with your own workloads</a></li>
     </ul>
   </li>
-  <li><a href="#check-your-current-storage-driver" class="nomunge">利用中のストレージドライバーの確認</a></li>
-  <li><a href="#related-information" class="nomunge">関連情報</a></li>
+  <li><a href="#check-your-current-storage-driver" class="nomunge">Check your current storage driver</a></li>
+  <li><a href="#related-information" class="nomunge">Related information</a></li>
 </ul>
 
 </div>

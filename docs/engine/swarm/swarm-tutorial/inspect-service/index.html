@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm 上のサービスの確認 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm 上のサービスの確認" />
   <meta property="og:description" content="アプリケーションを確認します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/inspect-service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm 上のサービスの確認","description":"アプリケーションを確認します。","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/inspect-service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -97,23 +97,22 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm 上のサービスの確認</h1>
-<p>Swarm に対して <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/deploy-service/">サービスのデプロイ</a> を行ったので、Docker CLI を利用して Swarm 内で起動しているサービスの詳細を確認していきます。</p>
+                        <section class="section"><h1>Swarm 上のサービスの確認</h1><p>Swarm に対して <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/deploy-service/">サービスのデプロイ</a> を行ったので、Docker CLI を利用して Swarm 内で起動しているサービスの詳細を確認していきます。</p>
 
 <ol>
   <li>
     <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
 接続先はマネージャーノードを起動したマシンです。
-たとえばこのチュートリアルでは <code class="language-plaintext highlighter-rouge">manager1</code> というマシンを利用します。</p>
+たとえばこのチュートリアルでは<code class="language-plaintext highlighter-rouge">manager1</code>というマシンを利用します。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service inspect --pretty &lt;SERVICE-ID&gt;</code> を実行します。
+    <p><code class="language-plaintext highlighter-rouge">docker service inspect --pretty &lt;SERVICE-ID&gt;</code>を実行します。
 サービスの詳細が非常にわかりやすく表示されます。</p>
 
-    <p><code class="language-plaintext highlighter-rouge">helloworld</code> サービスの詳細を見るには、以下のようにします。</p>
+    <p><code class="language-plaintext highlighter-rouge">helloworld</code>サービスの詳細を見るには、以下のようにします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>manager1]<span class="nv">$ </span>docker service inspect <span class="nt">--pretty</span> helloworld
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">[manager1]$</span><span class="w"> </span>docker service inspect <span class="nt">--pretty</span> helloworld
+<span class="go">
 ID:		9uk4639qpg7npwf3fn2aasksr
 Name:		helloworld
 Service Mode:	REPLICATED
@@ -126,71 +125,71 @@ ContainerSpec:
  Args:	ping docker.com
 Resources:
 Endpoint Mode:  vip
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <blockquote>
-      <p><strong>ヒント</strong>: サービスの詳細表示を JSON 形式に戻すには、<code class="language-plaintext highlighter-rouge">--pretty</code> フラグを除いて同じコマンドを実行します。</p>
+      <p><strong>ヒント</strong>: サービスの詳細表示を JSON 形式に戻すには、<code class="language-plaintext highlighter-rouge">--pretty</code>フラグを除いて同じコマンドを実行します。</p>
     </blockquote>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>manager1]<span class="nv">$ </span>docker service inspect helloworld
-<span class="o">[</span>
-<span class="o">{</span>
-    <span class="s2">"ID"</span>: <span class="s2">"9uk4639qpg7npwf3fn2aasksr"</span>,
-    <span class="s2">"Version"</span>: <span class="o">{</span>
-        <span class="s2">"Index"</span>: 418
-    <span class="o">}</span>,
-    <span class="s2">"CreatedAt"</span>: <span class="s2">"2016-06-16T21:57:11.622222327Z"</span>,
-    <span class="s2">"UpdatedAt"</span>: <span class="s2">"2016-06-16T21:57:11.622222327Z"</span>,
-    <span class="s2">"Spec"</span>: <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"helloworld"</span>,
-        <span class="s2">"TaskTemplate"</span>: <span class="o">{</span>
-            <span class="s2">"ContainerSpec"</span>: <span class="o">{</span>
-                <span class="s2">"Image"</span>: <span class="s2">"alpine"</span>,
-                <span class="s2">"Args"</span>: <span class="o">[</span>
-                    <span class="s2">"ping"</span>,
-                    <span class="s2">"docker.com"</span>
-                <span class="o">]</span>
-            <span class="o">}</span>,
-            <span class="s2">"Resources"</span>: <span class="o">{</span>
-                <span class="s2">"Limits"</span>: <span class="o">{}</span>,
-                <span class="s2">"Reservations"</span>: <span class="o">{}</span>
-            <span class="o">}</span>,
-            <span class="s2">"RestartPolicy"</span>: <span class="o">{</span>
-                <span class="s2">"Condition"</span>: <span class="s2">"any"</span>,
-                <span class="s2">"MaxAttempts"</span>: 0
-            <span class="o">}</span>,
-            <span class="s2">"Placement"</span>: <span class="o">{}</span>
-        <span class="o">}</span>,
-        <span class="s2">"Mode"</span>: <span class="o">{</span>
-            <span class="s2">"Replicated"</span>: <span class="o">{</span>
-                <span class="s2">"Replicas"</span>: 1
-            <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"UpdateConfig"</span>: <span class="o">{</span>
-            <span class="s2">"Parallelism"</span>: 1
-        <span class="o">}</span>,
-        <span class="s2">"EndpointSpec"</span>: <span class="o">{</span>
-            <span class="s2">"Mode"</span>: <span class="s2">"vip"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>,
-    <span class="s2">"Endpoint"</span>: <span class="o">{</span>
-        <span class="s2">"Spec"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">[manager1]$</span><span class="w"> </span>docker service inspect helloworld
+<span class="go">[
+{
+    "ID": "9uk4639qpg7npwf3fn2aasksr",
+    "Version": {
+        "Index": 418
+    },
+    "CreatedAt": "2016-06-16T21:57:11.622222327Z",
+    "UpdatedAt": "2016-06-16T21:57:11.622222327Z",
+    "Spec": {
+        "Name": "helloworld",
+        "TaskTemplate": {
+            "ContainerSpec": {
+                "Image": "alpine",
+                "Args": [
+                    "ping",
+                    "docker.com"
+                ]
+            },
+            "Resources": {
+                "Limits": {},
+                "Reservations": {}
+            },
+            "RestartPolicy": {
+                "Condition": "any",
+                "MaxAttempts": 0
+            },
+            "Placement": {}
+        },
+        "Mode": {
+            "Replicated": {
+                "Replicas": 1
+            }
+        },
+        "UpdateConfig": {
+            "Parallelism": 1
+        },
+        "EndpointSpec": {
+            "Mode": "vip"
+        }
+    },
+    "Endpoint": {
+        "Spec": {}
+    }
+}
+]
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service ps &lt;SERVICE-ID&gt;</code> を実行します。
+    <p><code class="language-plaintext highlighter-rouge">docker service ps &lt;SERVICE-ID&gt;</code>を実行します。
 サービスがどのノード上で動いているかがわかります。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>manager1]<span class="nv">$ </span>docker service ps helloworld
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">[manager1]$</span><span class="w"> </span>docker service ps helloworld
+<span class="go">
 NAME                                    IMAGE   NODE     DESIRED STATE  CURRENT STATE           ERROR               PORTS
 helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2  Running        Running 3 minutes
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
-    <p>この例では <code class="language-plaintext highlighter-rouge">helloworld</code> サービスの 1 インスタンスが <code class="language-plaintext highlighter-rouge">worker2</code> ノード上で動いているのがわかります。
+    <p>この例では<code class="language-plaintext highlighter-rouge">helloworld</code>サービスの 1 インスタンスが<code class="language-plaintext highlighter-rouge">worker2</code>ノード上で動いているのがわかります。
 マネージャーノード上においても、サービスが動いているかもしれません。
 デフォルトにおいて Swarm のマネージャーノードは、ワーカーノードと同じようにタスクを実行することができます。</p>
 
@@ -198,18 +197,18 @@ helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2  Running        Running 
 サービス定義に従ってタスクが実行されているかどうかが、これによってわかります。</p>
   </li>
   <li>
-    <p>タスクが動いているノード上において <code class="language-plaintext highlighter-rouge">docker ps</code> を実行します。
+    <p>タスクが動いているノード上において<code class="language-plaintext highlighter-rouge">docker ps</code>を実行します。
 これにより、そのタスクに応じたコンテナーの詳細を確認することができます。</p>
 
     <blockquote>
-      <p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">helloworld</code> がマネージャーノードではない、別のノード上で動いている場合は、そのノードに SSH でアクセスしておくことが必要です。</p>
+      <p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">helloworld</code>がマネージャーノードではない、別のノード上で動いている場合は、そのノードに SSH でアクセスしておくことが必要です。</p>
     </blockquote>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>worker2]<span class="nv">$ </span>docker ps
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">[worker2]$</span><span class="w"> </span>docker ps
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-e609dde94e47        alpine:latest       <span class="s2">"ping docker.com"</span>   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35
-</code></pre></div>    </div>
+e609dde94e47        alpine:latest       "ping docker.com"   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35
+</span></code></pre></div>    </div>
   </li>
 </ol>
 

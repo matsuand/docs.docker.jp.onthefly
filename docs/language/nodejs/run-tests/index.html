@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-29 11:03:02 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node.js と Mocha フレームワークを用いたテスト実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node.js と Mocha フレームワークを用いたテスト実行" />
   <meta property="og:description" content="How to Build and Run your Tests using Node.js and Mocha frameworks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node.js と Mocha フレームワークを用いたテスト実行","description":"How to Build and Run your Tests using Node.js and Mocha frameworks","url":"https://docs.docker.com/language/nodejs/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -128,7 +128,7 @@
 
 <p>そこでアプリケーション内の<code class="language-plaintext highlighter-rouge">./test</code>ディレクトリに Mocha テストを定義します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nb">test</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nb">test</span>
 </code></pre></div></div>
 
 <p>以下のコードを<code class="language-plaintext highlighter-rouge">./test/test.js</code>として保存します。</p>
@@ -148,34 +148,34 @@
 <p>Docker イメージをビルドして正常動作することを確認します。
 以下のコマンドを入力して、Docker イメージをコンテナーとして実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
 <p>そこでアプリケーションに対して JSON データを POST して、HTTP GET リクエストを取得します。
 これによって JSON データが正しく返ってくることを確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
-</code></pre></div></div>
+</span><span class="go">	"msg": "testing"
+}'
+</span></code></pre></div></div>
 
 <p>同じエンドポイントに対して GET リクエストを実行して、JSON データが正しく返されることを確認します。
 以下において「id」や「createDate」は、処理環境によって異なります。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8000/test
-
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"e88acedb-203d-4a7d-8269-1df6c1377512"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-10-11T23:21:16.378Z"</span><span class="o">}]}</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000/test
+<span class="go">
+{"code":"success","payload":[{"msg":"testing","id":"e88acedb-203d-4a7d-8269-1df6c1377512","createDate":"2020-10-11T23:21:16.378Z"}]}
+</span></code></pre></div></div>
 
 <h2 id="install-mocha">Mocha のインストール</h2>
 
 <p>以下のコマンドを実行して Mocha をインストールします。
 そして開発用の依存パッケージを追加します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
 </code></pre></div></div>
 
 <h2 id="update-package-json-and-dockerfile-to-run-tests">テスト実行のための package.json と Dockerfile の変更</h2>
@@ -198,22 +198,22 @@
 
 <p>そして以下の Docker コマンドによって、コンテナーを起動してテストを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml run notes npm run <span class="nb">test
-</span>Creating node-docker_notes_run ...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml run notes npm run <span class="nb">test</span>
+<span class="go">Creating node-docker_notes_run ...
 
-<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
-<span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
-
+</span><span class="gp">&gt;</span><span class="w"> </span>node-docker@1.0.0 <span class="nb">test</span> /code
+<span class="gp">&gt;</span><span class="w"> </span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js
+<span class="go">
 
 
   Array
-    <span class="c">#indexOf()</span>
-      ✓ should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+</span><span class="gp">    #</span>indexOf<span class="o">()</span>
+<span class="go">      ✓ should return -1 when the value is not present
 
 
-  1 passing <span class="o">(</span>11ms<span class="o">)</span>
+  1 passing (11ms)
 
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="multi-stage-dockerfile-for-testing">テスト用 Dockerfile のマルチステージ化</h3>
 
@@ -249,38 +249,38 @@
 ここで実行する docker build コマンドは上と同様ですが、今回は<code class="language-plaintext highlighter-rouge">--target test</code>というフラグをつけます。
 これによってテストビルドステージを指定してビルドします。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
-<span class="o">[</span>+] Building 66.5s <span class="o">(</span>12/12<span class="o">)</span> FINISHED
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                                                                                                 0.0s
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 662B                                                                                                                                 0.0s
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore
- ...
-  <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context                                                                                                                                    4.2s
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 9.00MB                                                                                                                                  4.1s
- <span class="o">=&gt;</span> <span class="o">[</span>base 2/4] WORKDIR /code                                                                                                                                         0.2s
- <span class="o">=&gt;</span> <span class="o">[</span>base 3/4] COPY package.json package.json                                                                                                                        0.0s
- <span class="o">=&gt;</span> <span class="o">[</span>base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
- <span class="o">=&gt;</span> <span class="o">[</span><span class="nb">test </span>1/2] RUN npm ci                                                                                                                                            6.5s
- <span class="o">=&gt;</span> <span class="o">[</span><span class="nb">test </span>2/2] COPY <span class="nb">.</span> <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
+<span class="go">[+] Building 66.5s (12/12) FINISHED
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile                                                                                                                 0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 662B                                                                                                                                 0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore
+<span class="c"> ...
+</span><span class="gp">  =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context                                                                                                                                    4.2s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 9.00MB                                                                                                                                  4.1s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>base 2/4] WORKDIR /code                                                                                                                                         0.2s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>base 3/4] COPY package.json package.json                                                                                                                        0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span><span class="nb">test </span>1/2] RUN npm ci                                                                                                                                            6.5s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span><span class="nb">test </span>2/2] COPY <span class="nb">.</span> <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>テストイメージがビルドできたので、これをコンテナー内において実行しテストが実施できるかどうかを見てみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-p</span> 8000:8000 node-docker
-
-<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
-<span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-p</span> 8000:8000 node-docker
+<span class="go">
+</span><span class="gp">&gt;</span><span class="w"> </span>node-docker@1.0.0 <span class="nb">test</span> /code
+<span class="gp">&gt;</span><span class="w"> </span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js
+<span class="go">
 
 
   Array
-    <span class="c">#indexOf()</span>
-      ✓ should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+</span><span class="gp">    #</span>indexOf<span class="o">()</span>
+<span class="go">      ✓ should return -1 when the value is not present
 
 
-  1 passing <span class="o">(</span>12ms<span class="o">)</span>
+  1 passing (12ms)
 
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>ビルド処理の結果は上では省略しましたが、Mocha test runner の実行は完了し、テストが正常終了していることがわかります。</p>
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-05 13:32:07 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node イメージのビルド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/nodejs/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -165,10 +165,10 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>例として用いる簡単な Node.js アプリケーションを作っていきます。
 ローカルマシン内に<code class="language-plaintext highlighter-rouge">node-docker</code>という名前のディレクトリを生成し、以下の手順により簡単な REST API を生成します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="o">[</span>各自のnode-dockerディレクトリ]
-<span class="nv">$ </span>npm init <span class="nt">-y</span>
-<span class="nv">$ </span>npm <span class="nb">install </span>ronin-server ronin-mocks
-<span class="nv">$ </span><span class="nb">touch </span>server.js
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="o">[</span>各自のnode-dockerディレクトリ]
+<span class="gp">$</span><span class="w"> </span>npm init <span class="nt">-y</span>
+<span class="gp">$</span><span class="w"> </span>npm <span class="nb">install </span>ronin-server ronin-mocks
+<span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>server.js
 </code></pre></div></div>
 
 <p>そこで REST 要求を行うコードを追加してみます。
@@ -195,22 +195,22 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>ここからアプリケーションを起動させて正しく動作することを確認します。
 ターミナルを開いて、上で生成したワーキングディレクトリに移動します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>node server.js
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>node server.js
 </code></pre></div></div>
 
 <p>アプリケーションが適切に動作していることを確認するため、初めに API に対して JSON データを POST します。
 そして GET リクエストを送信して、データがどのように保存されるかを見てみます。
 新たなターミナルを開いて、以下の curl コマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"msg": "testing" }'</span>
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-08-28T21:53:07.157Z"</span><span class="o">}]}</span>
+<span class="go">{"code":"success","payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
 
-<span class="nv">$ </span>curl http://localhost:8000/test
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"meta"</span>:<span class="o">{</span><span class="s2">"total"</span>:1,<span class="s2">"count"</span>:1<span class="o">}</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-08-28T21:53:07.157Z"</span><span class="o">}]}</span>
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000/test
+<span class="go">{"code":"success","meta":{"total":1,"count":1},"payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
+</span></code></pre></div></div>
 
 <p>サーバーを起動しているターミナルに戻ります。
 サーバーログとして以下のようなリクエストが表示されているはずです。</p>
@@ -360,18 +360,17 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 
 <p>では初めての Docker イメージをビルドしてみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
-</code></pre></div></div>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Building 93.8s <span class="o">(</span>11/11<span class="o">)</span> FINISHED
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from dockerfile                                          0.1s
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 617B                                                          0.0s
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                             0.0s
- ...
- <span class="o">=&gt;</span> <span class="o">[</span>2/5] WORKDIR /app                                                                        0.4s
- <span class="o">=&gt;</span> <span class="o">[</span>3/5] COPY <span class="o">[</span>package.json, package-lock.json<span class="k">*</span>, ./]                                         0.2s
- <span class="o">=&gt;</span> <span class="o">[</span>4/5] RUN npm <span class="nb">install</span> <span class="nt">--production</span>                                                        9.8s
- <span class="o">=&gt;</span> <span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+<span class="go">
+[+] Building 93.8s (11/11) FINISHED
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from dockerfile                                          0.1s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 617B                                                          0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                             0.0s
+<span class="c"> ...
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>2/5] WORKDIR /app                                                                        0.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>3/5] COPY <span class="o">[</span>package.json, package-lock.json<span class="k">*</span>, ./]                                         0.2s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>4/5] RUN npm <span class="nb">install</span> <span class="nt">--production</span>                                                        9.8s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
 </code></pre></div></div>
 
 <h2 id="view-local-images">ローカルイメージの確認</h2>
@@ -382,10 +381,10 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 
 <p>イメージを一覧表示するには、単純に<code class="language-plaintext highlighter-rouge">images</code>コマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>出力結果は上とは異なるはずです。
 ただし上でビルドしたものとして、タグ<code class="language-plaintext highlighter-rouge">latest</code>を持つ<code class="language-plaintext highlighter-rouge">node-docker:latest</code>は表示されているはずです。</p>
@@ -405,7 +404,7 @@ node-docker         latest              3809733582bc        About a minute ago  
 
 <p>イメージに対して新たなタグを生成するには、以下のコマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker tag node-docker:latest node-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag node-docker:latest node-docker:v1.0.0
 </code></pre></div></div>
 
 <p>docker tag コマンドはイメージに対するタグを生成します。
@@ -428,17 +427,17 @@ IMAGE ID 列を見てみれば、その 2 つのイメージは同一のもの�
 これを行うには rmi コマンドを使います。
 rmi コマンドは「remove image」を表しています。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker rmi node-docker:v1.0.0
-Untagged: node-docker:v1.0.0
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker rmi node-docker:v1.0.0
+<span class="go">Untagged: node-docker:v1.0.0
+</span></code></pre></div></div>
 
 <p>Docker の出力結果からわかるように、イメージは削除されたわけではなく「タグづけ解除」が行われただけです。
 images コマンドを実行して確認してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="language-plaintext highlighter-rouge">node-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
 

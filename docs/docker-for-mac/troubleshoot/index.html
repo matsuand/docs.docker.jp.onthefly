@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-29 11:03:02 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ログ機能とトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ログ機能とトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-29T11:03:02+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログ機能とトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-mac/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -151,10 +151,11 @@ system.</p>
 --uninstall</code>. If your instance is installed in the default location, this
 command provides a clean uninstall:</p>
 
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/Applications/Docker.app/Contents/MacOS/Docker <span class="nt">--uninstall</span>
-Docker is running, exiting...
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>/Applications/Docker.app/Contents/MacOS/Docker <span class="nt">--uninstall</span>
+<span class="go">Docker is running, exiting...
 Docker uninstalled successfully. You can move the Docker application to the trash.
-</code></pre></div>  </div>
+</span></code></pre></div>  </div>
+
   <p>You might want to use the command-line uninstall if, for example, you find that
 the app is non-functional, and you cannot uninstall it from the menu.</p>
 </blockquote>
@@ -204,7 +205,7 @@ Docker Desktop cannot start.</p>
 
 <p>To create <em>and upload</em> diagnostics, run:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather <span class="nt">-upload</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>/Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather <span class="nt">-upload</span>
 </code></pre></div></div>
 
 <p>After the diagnostics have finished, you should have the following output,
@@ -222,7 +223,7 @@ composed of your user ID (BE9AFAAF-F68B-41D0-9D12-84760E6B8740) and a timestamp
 
 <p>To view the contents of the diagnostic file, run:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 </code></pre></div></div>
 
 <p><a name="logs"></a></p>
@@ -236,14 +237,14 @@ browse the logs yourself.</p>
 
 <p>To watch the live flow of Docker Desktop logs in the command line, run the following script from your favorite shell.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ pred</span><span class="o">=</span><span class="s1">'process matches ".*(ocker|vpnkit).*"
-  || (process in {"taskgated-helper", "launchservicesd", "kernel"} &amp;&amp; eventMessage contains[c] "docker")'</span>
-<span class="nv">$ </span>/usr/bin/log stream <span class="nt">--style</span> syslog <span class="nt">--level</span><span class="o">=</span>debug <span class="nt">--color</span><span class="o">=</span>always <span class="nt">--predicate</span> <span class="s2">"</span><span class="nv">$pred</span><span class="s2">"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">pred</span><span class="o">=</span><span class="s1">'process matches ".*(ocker|vpnkit).*"
+</span><span class="go">  || (process in {"taskgated-helper", "launchservicesd", "kernel"} &amp;&amp; eventMessage contains[c] "docker")'
+</span><span class="gp">$</span><span class="w"> </span>/usr/bin/log stream <span class="nt">--style</span> syslog <span class="nt">--level</span><span class="o">=</span>debug <span class="nt">--color</span><span class="o">=</span>always <span class="nt">--predicate</span> <span class="s2">"</span><span class="nv">$pred</span><span class="s2">"</span>
 </code></pre></div></div>
 
 <p>Alternatively, to collect the last day of logs (<code class="language-plaintext highlighter-rouge">1d</code>) in a file, run:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" &gt;/tmp/logs.txt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>/usr/bin/log show <span class="nt">--debug</span> <span class="nt">--info</span> <span class="nt">--style</span> syslog <span class="nt">--last</span> 1d <span class="nt">--predicate</span> <span class="s2">"</span><span class="nv">$pred</span><span class="s2">"</span> <span class="o">&gt;</span>/tmp/logs.txt
 </code></pre></div></div>
 
 <h4 id="in-the-console-app">In the Console app</h4>
@@ -310,7 +311,7 @@ Tables (EPT) and Unrestricted Mode are supported.</em></p>
 
 <p>To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sysctl kern.hv_support
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sysctl kern.hv_support
 </code></pre></div></div>
 
 <p>If your Mac supports the Hypervisor Framework, the command prints
@@ -445,7 +446,7 @@ Maven</a> that expect settings for <code class="language-plaintext highlighter-r
 <code class="language-plaintext highlighter-rouge">DOCKER_CERT_PATH</code> environment variables, specify these to connect to Docker
 instances through Unix sockets. For example:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>unix:///var/run/docker.sock
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>unix:///var/run/docker.sock
 </code></pre></div>    </div>
   </li>
   <li>

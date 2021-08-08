@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the OverlayFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the OverlayFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of OverlayFS driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the OverlayFS storage driver","description":"Learn how to optimize your use of OverlayFS driver.","url":"https://docs.docker.com/storage/storagedriver/overlayfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -175,13 +175,13 @@ need to use the legacy <code class="language-plaintext highlighter-rouge">overla
   <li>
     <p>Stop Docker.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop docker
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker</code> to a temporary location.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
 </code></pre></div>    </div>
   </li>
   <li>
@@ -203,7 +203,7 @@ that the file was empty, add the following contents.</p>
   <li>
     <p>Start Docker.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
 </code></pre></div>    </div>
   </li>
   <li>
@@ -211,16 +211,16 @@ that the file was empty, add the following contents.</p>
 Use the <code class="language-plaintext highlighter-rouge">docker info</code> command and look for <code class="language-plaintext highlighter-rouge">Storage Driver</code> and
 <code class="language-plaintext highlighter-rouge">Backing filesystem</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+<span class="go">
 Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
- Supports d_type: <span class="nb">true
- </span>Native Overlay Diff: <span class="nb">true</span>
-&lt;...&gt;
-</code></pre></div>    </div>
+ Supports d_type: true
+ Native Overlay Diff: true
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -258,8 +258,8 @@ six directories under <code class="language-plaintext highlighter-rouge">/var/li
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2
+<span class="go">
 total 24
 drwx------ 5 root root 4096 Jun 20 07:36 223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
 drwx------ 3 root root 4096 Jun 20 07:36 3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b
@@ -267,38 +267,38 @@ drwx------ 5 root root 4096 Jun 20 07:36 4e9fa83caff3e8f4cc83693fa407a4a9fac9573
 drwx------ 5 root root 4096 Jun 20 07:36 e8876a226237217ec61c4baf238a32992291d059fdac95ed6303bdff3f59cff5
 drwx------ 5 root root 4096 Jun 20 07:36 eca1e4e1694283e001f200a667bb3cb40853cf2d1b12c29feda7422fed78afed
 drwx------ 2 root root 4096 Jun 20 07:36 l
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The new <code class="language-plaintext highlighter-rouge">l</code> (lowercase <code class="language-plaintext highlighter-rouge">L</code>) directory contains shortened layer identifiers as
 symbolic links. These identifiers are used to avoid hitting the page size
 limitation on arguments to the <code class="language-plaintext highlighter-rouge">mount</code> command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2/l
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2/l
+<span class="go">
 total 20
-lrwxrwxrwx 1 root root 72 Jun 20 07:36 6Y5IM2XC7TSNIJZZFLJCS6I4I4 -&gt; ../3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/diff
-lrwxrwxrwx 1 root root 72 Jun 20 07:36 B3WWEFKBG3PLLV737KZFIASSW7 -&gt; ../4e9fa83caff3e8f4cc83693fa407a4a9fac9573deaf481506c102d484dd1e6a1/diff
-lrwxrwxrwx 1 root root 72 Jun 20 07:36 JEYMODZYFCZFYSDABYXD5MF6YO -&gt; ../eca1e4e1694283e001f200a667bb3cb40853cf2d1b12c29feda7422fed78afed/diff
-lrwxrwxrwx 1 root root 72 Jun 20 07:36 NFYKDW6APBCCUCTOUSYDH4DXAT -&gt; ../223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/diff
-lrwxrwxrwx 1 root root 72 Jun 20 07:36 UL2MW33MSE3Q5VYIKBRN4ZAGQP -&gt; ../e8876a226237217ec61c4baf238a32992291d059fdac95ed6303bdff3f59cff5/diff
+</span><span class="gp">lrwxrwxrwx 1 root root 72 Jun 20 07:36 6Y5IM2XC7TSNIJZZFLJCS6I4I4 -&gt;</span><span class="w"> </span>../3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/diff
+<span class="gp">lrwxrwxrwx 1 root root 72 Jun 20 07:36 B3WWEFKBG3PLLV737KZFIASSW7 -&gt;</span><span class="w"> </span>../4e9fa83caff3e8f4cc83693fa407a4a9fac9573deaf481506c102d484dd1e6a1/diff
+<span class="gp">lrwxrwxrwx 1 root root 72 Jun 20 07:36 JEYMODZYFCZFYSDABYXD5MF6YO -&gt;</span><span class="w"> </span>../eca1e4e1694283e001f200a667bb3cb40853cf2d1b12c29feda7422fed78afed/diff
+<span class="gp">lrwxrwxrwx 1 root root 72 Jun 20 07:36 NFYKDW6APBCCUCTOUSYDH4DXAT -&gt;</span><span class="w"> </span>../223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/diff
+<span class="gp">lrwxrwxrwx 1 root root 72 Jun 20 07:36 UL2MW33MSE3Q5VYIKBRN4ZAGQP -&gt;</span><span class="w"> </span>../e8876a226237217ec61c4baf238a32992291d059fdac95ed6303bdff3f59cff5/diff
 </code></pre></div></div>
 
 <p>The lowest layer contains a file called <code class="language-plaintext highlighter-rouge">link</code>, which contains the name of the
 shortened identifier, and a directory called <code class="language-plaintext highlighter-rouge">diff</code> which contains the
 layer’s contents.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
+<span class="go">
+diff  link
 
-diff  <span class="nb">link</span>
-
-<span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/link
-
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/link
+<span class="go">
 6Y5IM2XC7TSNIJZZFLJCS6I4I4
 
-<span class="nv">$ </span><span class="nb">ls</span>  /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/diff
-
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span>  /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/diff
+<span class="go">
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The second-lowest layer, and each higher layer, contain a file called <code class="language-plaintext highlighter-rouge">lower</code>,
 which denotes its parent, and a directory called <code class="language-plaintext highlighter-rouge">diff</code> which contains its
@@ -306,30 +306,30 @@ contents. It also contains a <code class="language-plaintext highlighter-rouge">
 contents of its parent layer and itself, and a <code class="language-plaintext highlighter-rouge">work</code> directory which is used
 internally by OverlayFS.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
+<span class="go">
+diff  link  lower  merged  work
 
-diff  <span class="nb">link  </span>lower  merged  work
-
-<span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/lower
-
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/lower
+<span class="go">
 l/6Y5IM2XC7TSNIJZZFLJCS6I4I4
 
-<span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/diff/
-
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/diff/
+<span class="go">
 etc  sbin  usr  var
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>To view the mounts which exist when you use the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver with
 Docker, use the <code class="language-plaintext highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mount | <span class="nb">grep </span>overlay
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount | <span class="nb">grep </span>overlay
+<span class="go">
 overlay on /var/lib/docker/overlay2/9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/merged
-<span class="nb">type </span>overlay <span class="o">(</span>rw,relatime,
-<span class="nv">lowerdir</span><span class="o">=</span>l/DJA75GUWHWG7EWICFYX54FIOVT:l/B3WWEFKBG3PLLV737KZFIASSW7:l/JEYMODZYFCZFYSDABYXD5MF6YO:l/UL2MW33MSE3Q5VYIKBRN4ZAGQP:l/NFYKDW6APBCCUCTOUSYDH4DXAT:l/6Y5IM2XC7TSNIJZZFLJCS6I4I4,
-<span class="nv">upperdir</span><span class="o">=</span>9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/diff,
-<span class="nv">workdir</span><span class="o">=</span>9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/work<span class="o">)</span>
-</code></pre></div></div>
+type overlay (rw,relatime,
+lowerdir=l/DJA75GUWHWG7EWICFYX54FIOVT:l/B3WWEFKBG3PLLV737KZFIASSW7:l/JEYMODZYFCZFYSDABYXD5MF6YO:l/UL2MW33MSE3Q5VYIKBRN4ZAGQP:l/NFYKDW6APBCCUCTOUSYDH4DXAT:l/6Y5IM2XC7TSNIJZZFLJCS6I4I4,
+upperdir=9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/diff,
+workdir=9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/work)
+</span></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">rw</code> on the second line shows that the <code class="language-plaintext highlighter-rouge">overlay</code> mount is read-write.</p>
 
@@ -377,19 +377,19 @@ the container is the <code class="language-plaintext highlighter-rouge">upperdir
 <p>The following <code class="language-plaintext highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
 image comprising five layers.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu
+<span class="go">
 Using default tag: latest
 latest: Pulling from library/ubuntu
 
-5ba4f30e5bea: Pull <span class="nb">complete
-</span>9d7d19c9dc56: Pull <span class="nb">complete
-</span>ac6ad7efd0f9: Pull <span class="nb">complete
-</span>e7491a747824: Pull <span class="nb">complete
-</span>a3ed95caeb02: Pull <span class="nb">complete
-</span>Digest: sha256:46fb5d001b88ad904c5c732b086b596b92cfb4a4840a3abd0e35dbb6870585e4
-Status: Downloaded newer image <span class="k">for </span>ubuntu:latest
-</code></pre></div></div>
+5ba4f30e5bea: Pull complete
+9d7d19c9dc56: Pull complete
+ac6ad7efd0f9: Pull complete
+e7491a747824: Pull complete
+a3ed95caeb02: Pull complete
+Digest: sha256:46fb5d001b88ad904c5c732b086b596b92cfb4a4840a3abd0e35dbb6870585e4
+Status: Downloaded newer image for ubuntu:latest
+</span></code></pre></div></div>
 
 <h4 id="the-image-layers">The image layers</h4>
 
@@ -402,28 +402,28 @@ the directory IDs.</p>
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/
+<span class="go">
 total 20
 drwx------ 3 root root 4096 Jun 20 16:11 38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8
 drwx------ 3 root root 4096 Jun 20 16:11 55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
 drwx------ 3 root root 4096 Jun 20 16:11 824c8a961a4f5e8fe4f4243dab57c5be798e7fd195f6d88ab06aea92ba931654
 drwx------ 3 root root 4096 Jun 20 16:11 ad0fe55125ebf599da124da175174a4b8c1878afe6907bf7c78570341f308461
 drwx------ 3 root root 4096 Jun 20 16:11 edab9b5e5bf73f2997524eebeac1de4cf9c8b904fa8ad3ec43b3504196aa3801
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The image layer directories contain the files unique to that layer as well as
 hard links to the data that is shared with lower layers. This allows for
 efficient use of disk space.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-i</span> /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-i</span> /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
+<span class="go">
 19793696 /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 
-<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-i</span> /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
-
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-i</span> /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
+<span class="go">
 19793696 /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h4 id="the-container-layer">The container layer</h4>
 
@@ -431,22 +431,22 @@ efficient use of disk space.</p>
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/overlay/</code>. If you list a running container’s subdirectory
 using the <code class="language-plaintext highlighter-rouge">ls -l</code> command, three directories and one file exist:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/&lt;directory-of-running-container&gt;
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/&lt;directory-of-running-container&gt;
+<span class="go">
 total 16
-<span class="nt">-rw-r--r--</span> 1 root root   64 Jun 20 16:39 lower-id
+-rw-r--r-- 1 root root   64 Jun 20 16:39 lower-id
 drwxr-xr-x 1 root root 4096 Jun 20 16:39 merged
 drwxr-xr-x 4 root root 4096 Jun 20 16:39 upper
 drwx------ 3 root root 4096 Jun 20 16:39 work
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">lower-id</code> file contains the ID of the top layer of the image the container
 is based on, which is the OverlayFS <code class="language-plaintext highlighter-rouge">lowerdir</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
+<span class="go">
 55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">upper</code> directory contains the contents of the container’s read-write layer,
 which corresponds to the OverlayFS <code class="language-plaintext highlighter-rouge">upperdir</code>.</p>
@@ -459,13 +459,13 @@ comprises the view of the filesystem from within the running container.</p>
 <p>To view the mounts which exist when you use the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver with
 Docker, use the <code class="language-plaintext highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mount | <span class="nb">grep </span>overlay
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount | <span class="nb">grep </span>overlay
+<span class="go">
 overlay on /var/lib/docker/overlay/ec444863a55a.../merged
-<span class="nb">type </span>overlay <span class="o">(</span>rw,relatime,lowerdir<span class="o">=</span>/var/lib/docker/overlay/55f1e14c361b.../root,
-<span class="nv">upperdir</span><span class="o">=</span>/var/lib/docker/overlay/ec444863a55a.../upper,
-<span class="nv">workdir</span><span class="o">=</span>/var/lib/docker/overlay/ec444863a55a.../work<span class="o">)</span>
-</code></pre></div></div>
+type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay/55f1e14c361b.../root,
+upperdir=/var/lib/docker/overlay/ec444863a55a.../upper,
+workdir=/var/lib/docker/overlay/ec444863a55a.../work)
+</span></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">rw</code> on the second line shows that the <code class="language-plaintext highlighter-rouge">overlay</code> mount is read-write.</p>
 

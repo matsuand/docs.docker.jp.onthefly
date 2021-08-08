@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-24 18:28:44 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerfile 記述のベストプラクティス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerfile 記述のベストプラクティス" />
   <meta property="og:description" content="Hints, tips and guidelines for writing clean, reliable Dockerfiles" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-24T18:28:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-24T18:28:44+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerfile 記述のベストプラクティス","description":"Hints, tips and guidelines for writing clean, reliable Dockerfiles","url":"https://docs.docker.com/develop/develop-images/dockerfile_best-practices/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -161,18 +161,18 @@
 テキストファイル<code class="language-plaintext highlighter-rouge">hello</code>に “hello” と書き込み、Dockerfile 上でそのファイルに対して<code class="language-plaintext highlighter-rouge">cat</code>コマンドを与えるようにします。
 ビルドコンテキスト（<code class="language-plaintext highlighter-rouge">.</code>）の中からイメージをビルドします。</p>
 
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>myproject <span class="o">&amp;&amp;</span> <span class="nb">cd </span>myproject
-<span class="nb">echo</span> <span class="s2">"hello"</span> <span class="o">&gt;</span> hello
-<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"FROM busybox</span><span class="se">\n</span><span class="s2">COPY /hello /</span><span class="se">\n</span><span class="s2">RUN cat /hello"</span> <span class="o">&gt;</span> Dockerfile
-docker build <span class="nt">-t</span> helloapp:v1 <span class="nb">.</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>myproject <span class="o">&amp;&amp;</span> <span class="nb">cd </span>myproject
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"hello"</span> <span class="o">&gt;</span> hello
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"FROM busybox</span><span class="se">\n</span><span class="s2">COPY /hello /</span><span class="se">\n</span><span class="s2">RUN cat /hello"</span> <span class="o">&gt;</span> Dockerfile
+<span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> helloapp:v1 <span class="nb">.</span>
 </code></pre></div>  </div>
 
   <p><code class="language-plaintext highlighter-rouge">Dockerfile</code>と<code class="language-plaintext highlighter-rouge">hello</code>をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュは用いずに）2 つめのイメージをビルドします。
 Dockerfile に対して<code class="language-plaintext highlighter-rouge">-f</code>を使い、ビルドコンテキストとなるディレクトリを指定します。</p>
 
-  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> dockerfiles context
-<span class="nb">mv </span>Dockerfile dockerfiles <span class="o">&amp;&amp;</span> <span class="nb">mv </span>hello context
-docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> helloapp:v2 <span class="nt">-f</span> dockerfiles/Dockerfile context
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> dockerfiles context
+<span class="gp">$</span><span class="w"> </span><span class="nb">mv </span>Dockerfile dockerfiles <span class="o">&amp;&amp;</span> <span class="nb">mv </span>hello context
+<span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> helloapp:v2 <span class="nt">-f</span> dockerfiles/Dockerfile context
 </code></pre></div>  </div>
 </blockquote>
 
@@ -704,10 +704,10 @@ Docker のリンク機能においては環境変数が利用できます。
 <span class="k">RUN </span><span class="nb">unset </span>ADMIN_USER
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
+<span class="go">
 mark
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>このようにはならないように、つまり本当に環境変数を無効化したい場合には、シェルコマンドを用いた<code class="language-plaintext highlighter-rouge">RUN</code>コマンドを利用します。
 そして環境変数への値設定、利用、無効化を、すべて 1 つのレイヤー内にて行うようにします。
@@ -725,9 +725,9 @@ Linux における Dockerfile では行継続文字を表わす<code class="lang
 <span class="k">CMD</span><span class="s"> sh</span>
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
-
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
+<span class="go">
+</span></code></pre></div></div>
 
 <h3 id="add-or-copy">ADD と COPY</h3>
 
@@ -791,12 +791,12 @@ Linux における Dockerfile では行継続文字を表わす<code class="lang
 
 <p>このイメージが実行されると、コマンドのヘルプが表示されます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run s3cmd
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run s3cmd
 </code></pre></div></div>
 
 <p>あるいは適正なパラメーターを指定してコマンドを実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run s3cmd <span class="nb">ls </span>s3://mybucket
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run s3cmd <span class="nb">ls </span>s3://mybucket
 </code></pre></div></div>
 
 <p>このコマンドのようにして、イメージ名がバイナリへの参照としても使えるので便利です。</p>
@@ -843,17 +843,17 @@ Linux における Dockerfile では行継続文字を表わす<code class="lang
 
 <p>以下は単純に Postgres を起動します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run postgres
 </code></pre></div></div>
 
 <p>あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡すことができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres postgres <span class="nt">--help</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run postgres postgres <span class="nt">--help</span>
 </code></pre></div></div>
 
 <p>または Bash のような全く異なるツールを起動するために利用することもできます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> postgres bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> postgres bash
 </code></pre></div></div>
 
 <h3 id="volume">VOLUME</h3>

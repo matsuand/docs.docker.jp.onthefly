@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>journald ログドライバー | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="journald ログドライバー" />
   <meta property="og:description" content="Describes how to use the Journald logging driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/journald/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"journald ログドライバー","description":"Describes how to use the Journald logging driver.","url":"https://docs.docker.com/config/containers/logging/journald/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -151,7 +151,7 @@
 
 <p>このログドライバーを特定のコンテナーに対して設定するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--log-driver</code>フラグを指定します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>journald ...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>journald ...
 </code></pre></div></div>
 
 <h2 id="options">オプション</h2>
@@ -201,7 +201,7 @@ message.</p>
 
 <p>Below is an example of the logging options required to log to journald.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
     <span class="nt">--log-driver</span><span class="o">=</span>journald <span class="se">\</span>
     <span class="nt">--log-opt</span> <span class="nv">labels</span><span class="o">=</span>location <span class="se">\</span>
     <span class="nt">--log-opt</span> <span class="nb">env</span><span class="o">=</span>TEST <span class="se">\</span>
@@ -228,19 +228,19 @@ to use the original name.</p>
 expressions to limit the retrieved messages to those associated with a specific
 container:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>journalctl <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
 </code></pre></div></div>
 
 <p>You can use additional filters to further limit the messages retrieved. The <code class="language-plaintext highlighter-rouge">-b</code>
 flag only retrieves messages generated since the last system boot:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">-o</code> flag specifies the format for the retried log messages. Use <code class="language-plaintext highlighter-rouge">-o json</code>
 to return the log messages in JSON format.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-o</span> json <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>journalctl <span class="nt">-o</span> json <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
 </code></pre></div></div>
 
 <h3 id="view-logs-for-a-container-with-a-tty-enabled">View logs for a container with a TTY enabled</h3>
@@ -250,7 +250,7 @@ when retrieving log messages.
 The reason for that is that <code class="language-plaintext highlighter-rouge">\r</code> is appended to the end of the line and
 <code class="language-plaintext highlighter-rouge">journalctl</code> doesn’t strip it automatically unless <code class="language-plaintext highlighter-rouge">--all</code> is set:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver <span class="nt">--all</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver <span class="nt">--all</span>
 </code></pre></div></div>
 
 <h2 id="retrieve-log-messages-with-the-journal-api">Retrieve log messages with the <code class="language-plaintext highlighter-rouge">journal</code> API</h2>

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize a CouchDB service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize a CouchDB service" />
   <meta property="og:description" content="Sharing data between 2 couchdb databases" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/couchdb_data_volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize a CouchDB service","description":"Sharing data between 2 couchdb databases","url":"https://docs.docker.com/samples/couchdb_data_volumes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -117,7 +117,7 @@ different versions of CouchDB on the same data, etc.</p>
 
 <p>We’re marking <code class="language-plaintext highlighter-rouge">/var/lib/couchdb</code> as a data volume.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ COUCH1</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">-v</span> /var/lib/couchdb shykes/couchdb:2013-05-03<span class="si">)</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">COUCH1</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">-v</span> /var/lib/couchdb shykes/couchdb:2013-05-03<span class="si">)</span>
 </code></pre></div></div>
 
 <h2 id="add-data-to-the-first-database">Add data to the first database</h2>
@@ -125,23 +125,23 @@ different versions of CouchDB on the same data, etc.</p>
 <p>We’re assuming your Docker host is reachable at <code class="language-plaintext highlighter-rouge">localhost</code>. If not,
 replace <code class="language-plaintext highlighter-rouge">localhost</code> with the public IP of your Docker host.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ HOST</span><span class="o">=</span>localhost
-<span class="nv">$ URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH1</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser, and use the couch interface to add data"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">HOST</span><span class="o">=</span>localhost
+<span class="gp">$</span><span class="w"> </span><span class="nv">URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH1</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser, and use the couch interface to add data"</span>
 </code></pre></div></div>
 
 <h2 id="create-second-database">Create second database</h2>
 
 <p>This time, we’re requesting shared access to <code class="language-plaintext highlighter-rouge">$COUCH1</code>’s volumes.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ COUCH2</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">--volumes-from</span> <span class="nv">$COUCH1</span> shykes/couchdb:2013-05-03<span class="si">)</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">COUCH2</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">--volumes-from</span> <span class="nv">$COUCH1</span> shykes/couchdb:2013-05-03<span class="si">)</span>
 </code></pre></div></div>
 
 <h2 id="browse-data-on-the-second-database">Browse data on the second database</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ HOST</span><span class="o">=</span>localhost
-<span class="nv">$ URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH2</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser. You should see the same data as in the first database"</span><span class="s1">'!'</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">HOST</span><span class="o">=</span>localhost
+<span class="gp">$</span><span class="w"> </span><span class="nv">URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH2</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser. You should see the same data as in the first database"</span><span class="s1">'!'</span>
 </code></pre></div></div>
 
 <p>Congratulations, you are now running two Couchdb containers, completely

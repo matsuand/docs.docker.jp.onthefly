@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker と iptables | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker と iptables" />
   <meta property="og:description" content="Docker と iptables がどのように動作するか、その基本を説明します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/iptables/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker と iptables","description":"Docker と iptables がどのように動作するか、その基本を説明します。","url":"https://docs.docker.com/network/iptables/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,9 +103,8 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker と iptables</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p>
-<p>Linux 上において Docker は <code class="language-plaintext highlighter-rouge">iptables</code> ルールを利用して、ネットワークを分離します。
-このことは実装に関わることであって、Docker が <code class="language-plaintext highlighter-rouge">iptables</code> ポリシーに挿入するルールを修正するべきではありません。
+                        <section class="section"><h1>Docker と iptables</h1><p>Linux 上において Docker は<code class="language-plaintext highlighter-rouge">iptables</code>ルールを利用して、ネットワークを分離します。
+このことは実装に関わることであって、Docker が<code class="language-plaintext highlighter-rouge">iptables</code>ポリシーに挿入するルールを修正するべきではありません。
 Docker が管理するポリシーとは別に、独自のポリシーを追加しようとする場合は、そこには重要な観点がいくつかあります。</p>
 
 <p>Docker を起動するホストがインターネットに接続しているとします。
@@ -114,69 +113,69 @@ Docker が管理するポリシーとは別に、独自のポリシーを追加�
 
 <h2 id="add-iptables-policies-before-dockers-rules">Docker ルール前への iptables ポリシー追加</h2>
 
-<p>Docker は <code class="language-plaintext highlighter-rouge">DOCKER-USER</code>、<code class="language-plaintext highlighter-rouge">DOCKER</code> という独自の iptables チェーンをインストールします。
+<p>Docker は<code class="language-plaintext highlighter-rouge">DOCKER-USER</code>、<code class="language-plaintext highlighter-rouge">DOCKER</code>という独自の iptables チェーンをインストールします。
 これによって受信パケットは、常にこの 2 つのチェーンによって最初にチェックが行われます。</p>
 
-<p>Docker の <code class="language-plaintext highlighter-rouge">iptables</code> ルールはすべて、この <code class="language-plaintext highlighter-rouge">DOCKER</code> チェーンに追加されます。
+<p>Docker の<code class="language-plaintext highlighter-rouge">iptables</code>ルールはすべて、この<code class="language-plaintext highlighter-rouge">DOCKER</code>チェーンに追加されます。
 このチェーンを手動で操作してはなりません。
-Docker のルールよりも前にロードしたいルールがある場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code> チェーンにそのルールを追加します。
+Docker のルールよりも前にロードしたいルールがある場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code>チェーンにそのルールを追加します。
 こういったルールは、Docker が自動生成するどのルールよりも先に適用されます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">FORWARD</code> チェーンに追加されたルールは、手動によるもの、あるいは iptables ベースのファイアウォールによるものであっても、Docker のチェーンの後で評価されます。
+<p><code class="language-plaintext highlighter-rouge">FORWARD</code>チェーンに追加されたルールは、手動によるもの、あるいは iptables ベースのファイアウォールによるものであっても、Docker のチェーンの後で評価されます。
 これが何を意味するかといえば、Docker によってポートを公開したら、ファイアウォールでどのような設定を行っていても、そのポートは必ず公開されるということです。
-Docker によってポートを公開している状態で、ファイアウォールによるルールを適用したい場合は、そのルールを <code class="language-plaintext highlighter-rouge">DOCKER-USER</code> チェーンに追加しなければ <strong>なりません</strong>。</p>
+Docker によってポートを公開している状態で、ファイアウォールによるルールを適用したい場合は、そのルールを<code class="language-plaintext highlighter-rouge">DOCKER-USER</code>チェーンに追加しなければ <strong>なりません</strong>。</p>
 
 <h3 id="restrict-connections-to-the-docker-host">Docker ホストへの接続制限</h3>
 
 <p>外部のソース IP は、Docker ホストに対する接続がデフォルトですべて許可されます。
-コンテナーへの接続を特定の IP やネットワークのみとする場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code> フィルターチェーンの上位に、除外ルールを設定します。
-たとえば以下のルールは、<code class="language-plaintext highlighter-rouge">192.168.1.1</code> は除く残りの IP アドレスからの外部アクセスを制限します。</p>
+コンテナーへの接続を特定の IP やネットワークのみとする場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code>フィルターチェーンの上位に、除外ルールを設定します。
+たとえば以下のルールは、<code class="language-plaintext highlighter-rouge">192.168.1.1</code>は除く残りの IP アドレスからの外部アクセスを制限します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.1 <span class="nt">-j</span> DROP
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.1 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">ext_if</code> の部分は、利用するホストの実際の外部インターフェースに合わせて変更することを忘れないでください。
+<p><code class="language-plaintext highlighter-rouge">ext_if</code>の部分は、利用するホストの実際の外部インターフェースに合わせて変更することを忘れないでください。
 このかわりに、ソースサブネットからの接続を許可する方法もあります。
-以下のルールは、サブネット <code class="language-plaintext highlighter-rouge">192.168.1.0/24</code> からのアクセスのみ許可します。</p>
+以下のルールは、サブネット<code class="language-plaintext highlighter-rouge">192.168.1.0/24</code>からのアクセスのみ許可します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.0/24 <span class="nt">-j</span> DROP
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.0/24 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p>また <code class="language-plaintext highlighter-rouge">--src-range</code> を使えば、アクセスを許可する IP アドレスを範囲指定することができます。
-（<code class="language-plaintext highlighter-rouge">--src-range</code> や <code class="language-plaintext highlighter-rouge">--dst-range</code> を用いる際には、<code class="language-plaintext highlighter-rouge">-m iprange</code> を合わせて指定する必要があります。）</p>
+<p>また<code class="language-plaintext highlighter-rouge">--src-range</code>を使えば、アクセスを許可する IP アドレスを範囲指定することができます。
+（<code class="language-plaintext highlighter-rouge">--src-range</code>や<code class="language-plaintext highlighter-rouge">--dst-range</code>を用いる際には、<code class="language-plaintext highlighter-rouge">-m iprange</code>を合わせて指定する必要があります。）</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-m</span> iprange <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">--src-range</span> 192.168.1.1-192.168.1.3 <span class="nt">-j</span> DROP
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-m</span> iprange <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">--src-range</span> 192.168.1.1-192.168.1.3 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">-s</code> あるいは <code class="language-plaintext highlighter-rouge">--src-range</code> と <code class="language-plaintext highlighter-rouge">-d</code> あるいは <code class="language-plaintext highlighter-rouge">--dst-range</code> を組み合わせて、ソース、デスティネーションの双方を制御することができます。
-たとえば Docker デーモンが <code class="language-plaintext highlighter-rouge">192.168.1.99</code> と <code class="language-plaintext highlighter-rouge">10.1.2.3</code> を待ち受けている場合、<code class="language-plaintext highlighter-rouge">10.1.2.3</code> を指定するルールを生成し、<code class="language-plaintext highlighter-rouge">192.168.1.99</code> をそのまま残すようにします。</p>
+<p><code class="language-plaintext highlighter-rouge">-s</code>あるいは<code class="language-plaintext highlighter-rouge">--src-range</code>と<code class="language-plaintext highlighter-rouge">-d</code>あるいは<code class="language-plaintext highlighter-rouge">--dst-range</code>を組み合わせて、ソース、デスティネーションの双方を制御することができます。
+たとえば Docker デーモンが<code class="language-plaintext highlighter-rouge">192.168.1.99</code>と<code class="language-plaintext highlighter-rouge">10.1.2.3</code>を待ち受けている場合、<code class="language-plaintext highlighter-rouge">10.1.2.3</code>を指定するルールを生成し、<code class="language-plaintext highlighter-rouge">192.168.1.99</code>をそのまま残すようにします。</p>
 
-<p><code class="language-plaintext highlighter-rouge">iptables</code> は複雑なものであり、<code class="language-plaintext highlighter-rouge">iptables</code> ルールはさらに複雑であることから、ここでの説明範囲を超えます。
+<p><code class="language-plaintext highlighter-rouge">iptables</code>は複雑なものであり、<code class="language-plaintext highlighter-rouge">iptables</code>ルールはさらに複雑であることから、ここでの説明範囲を超えます。
 より詳しくは <a href="https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html">Netfilter.org HOWTO</a> を参照してください。</p>
 
 <h2 id="docker-on-a-router">ルーター上の Docker</h2>
 
-<p>Docker では <code class="language-plaintext highlighter-rouge">FORWARD</code> チェーンに対して <code class="language-plaintext highlighter-rouge">DROP</code> も設定します。
+<p>Docker では<code class="language-plaintext highlighter-rouge">FORWARD</code>チェーンに対して<code class="language-plaintext highlighter-rouge">DROP</code>も設定します。
 Docker ホストがルーターとしても動作している場合、ルーターはもはや、どのトラフィックもフォワードしないということになります。
-システム内においてルーターとしての機能を維持したい場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code> チェーンに明示的に <code class="language-plaintext highlighter-rouge">ACCEPT</code> ルールを追加して、これを許可するようにします。</p>
+システム内においてルーターとしての機能を維持したい場合は、<code class="language-plaintext highlighter-rouge">DOCKER-USER</code>チェーンに明示的に<code class="language-plaintext highlighter-rouge">ACCEPT</code>ルールを追加して、これを許可するようにします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> src_if <span class="nt">-o</span> dst_if <span class="nt">-j</span> ACCEPT
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> src_if <span class="nt">-o</span> dst_if <span class="nt">-j</span> ACCEPT
 </code></pre></div></div>
 
 <h2 id="prevent-docker-from-manipulating-iptables">Docker による iptables 操作の防止</h2>
 
-<p>Docker Engine の設定ファイル <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> において、<code class="language-plaintext highlighter-rouge">iptables</code> キーを <code class="language-plaintext highlighter-rouge">false</code> に設定することができますが、たいていのユーザーにとって、これを行うのは適切ではありません。
-Docker が <code class="language-plaintext highlighter-rouge">iptables</code> ルールを作らないようにすることは、完全にはできません。
+<p>Docker Engine の設定ファイル<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>において、<code class="language-plaintext highlighter-rouge">iptables</code>キーを<code class="language-plaintext highlighter-rouge">false</code>に設定することができますが、たいていのユーザーにとって、これを行うのは適切ではありません。
+Docker が<code class="language-plaintext highlighter-rouge">iptables</code>ルールを作らないようにすることは、完全にはできません。
 生成されるルールは非常に複雑なものであり、ここでの説明の範囲を超えています。
-<code class="language-plaintext highlighter-rouge">iptables</code> に <code class="language-plaintext highlighter-rouge">false</code> を設定すると、Docker Engine におけるコンテナーネットワーク機能が壊れる可能性が高くなります。</p>
+<code class="language-plaintext highlighter-rouge">iptables</code>に<code class="language-plaintext highlighter-rouge">false</code>を設定すると、Docker Engine におけるコンテナーネットワーク機能が壊れる可能性が高くなります。</p>
 
-<p>システムインテグレーターの方が、別のアプリケーション内に Docker ランタイムを含めてビルドしたい場合は、<a href="https://mobyproject.org/"><code class="language-plaintext highlighter-rouge">moby</code> プロジェクト</a> を調べてみてください。</p>
+<p>システムインテグレーターの方が、別のアプリケーション内に Docker ランタイムを含めてビルドしたい場合は、<a href="https://mobyproject.org/"><code class="language-plaintext highlighter-rouge">moby</code>プロジェクト</a> を調べてみてください。</p>
 
 <h2 id="setting-the-default-bind-address-for-containers">コンテナーへのデフォルトバインドアドレス設定</h2>
 
-<p>デフォルトで Docker デーモンは、ホスト上でのあらゆるアドレスを意味する <code class="language-plaintext highlighter-rouge">0.0.0.0</code> において、ポートを公開します。
-この状態を変更して、公開するポートは内部 IP アドレスに対してのみとする場合は、<code class="language-plaintext highlighter-rouge">--ip</code> オプションを使って、別の IP アドレスを指定します。
-ただし <code class="language-plaintext highlighter-rouge">--ip</code> による設定は <strong>デフォルトを</strong> 変更するだけであり、その IP に対してサービスを <strong>限定</strong> するものではありません。</p>
+<p>デフォルトで Docker デーモンは、ホスト上でのあらゆるアドレスを意味する<code class="language-plaintext highlighter-rouge">0.0.0.0</code>において、ポートを公開します。
+この状態を変更して、公開するポートは内部 IP アドレスに対してのみとする場合は、<code class="language-plaintext highlighter-rouge">--ip</code>オプションを使って、別の IP アドレスを指定します。
+ただし<code class="language-plaintext highlighter-rouge">--ip</code>による設定は <strong>デフォルトを</strong> 変更するだけであり、その IP に対してサービスを <strong>限定</strong> するものではありません。</p>
 
 <h2 id="integration-with-firewalld">Firewalld との統合</h2>
 
@@ -184,9 +183,9 @@ Docker が <code class="language-plaintext highlighter-rouge">iptables</code> �
 
 <p>Docker のネットワークインターフェースをゾーンから除くには、以下の<code class="language-plaintext highlighter-rouge">firewalld</code>コマンドを実行することを覚えておいてください。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ゾーンと Docker インターフェースは適切なものに書き換えてください。</span>
-<span class="nv">$ </span>firewall-cmd <span class="nt">--zone</span><span class="o">=</span>trusted <span class="nt">--remove-interface</span><span class="o">=</span>docker0 <span class="nt">--permanent</span>
-<span class="nv">$ </span>firewall-cmd <span class="nt">--reload</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ゾーンと Docker インターフェースは適切なものに書き換えてください。
+<span class="gp">$</span><span class="w"> </span>firewall-cmd <span class="nt">--zone</span><span class="o">=</span>trusted <span class="nt">--remove-interface</span><span class="o">=</span>docker0 <span class="nt">--permanent</span>
+<span class="gp">$</span><span class="w"> </span>firewall-cmd <span class="nt">--reload</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">dockerd</code>デーモンを再起動すれば、インターフェースが<code class="language-plaintext highlighter-rouge">docker</code>ゾーンに挿入されます。</p>

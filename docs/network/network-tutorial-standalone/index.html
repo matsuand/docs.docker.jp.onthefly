@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>スタンドアロンコンテナーのネットワークチュートリアル | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="スタンドアロンコンテナーのネットワークチュートリアル" />
   <meta property="og:description" content="Tutorials for networking with standalone containers" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-standalone/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"スタンドアロンコンテナーのネットワークチュートリアル","description":"Tutorials for networking with standalone containers","url":"https://docs.docker.com/network/network-tutorial-standalone/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>スタンドアロンコンテナーのネットワークチュートリアル</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p>
-<p>ここに示すチュートリアルは、スタンドアロンの Docker コンテナーに対するネットワークを扱います。
+                        <section class="section"><h1>スタンドアロンコンテナーのネットワークチュートリアル</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><p>ここに示すチュートリアルは、スタンドアロンの Docker コンテナーに対するネットワークを扱います。
 Swarm サービスにおけるネットワークについては、<a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">Swarm サービスにおけるネットワーク</a> を参照してください。
 Docker ネットワークの全般的なことを確認したい場合は <a href="/docs.docker.jp.onthefly/network/">ネットワーク概要</a> を参照してください。</p>
 
@@ -114,7 +113,7 @@ Docker ネットワークの全般的なことを確認したい場合は <a hre
 
 <ul>
   <li>
-    <p><a href="#use-the-default-bridge-network">デフォルトのブリッジネットワーク利用</a> では、Docker が自動的に設定するデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークの利用方法を示します。
+    <p><a href="#use-the-default-bridge-network">デフォルトのブリッジネットワーク利用</a> では、Docker が自動的に設定するデフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークの利用方法を示します。
 このネットワークは、本番環境向けには適していません。</p>
   </li>
   <li>
@@ -129,7 +128,7 @@ Docker ネットワークの全般的なことを確認したい場合は <a hre
 
 <h2 id="use-the-default-bridge-network">デフォルトのブリッジネットワーク利用</h2>
 
-<p>以下の例では、2 つの <code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを同じ Docker ホスト上に稼動させます。
+<p>以下の例では、2 つの<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを同じ Docker ホスト上に稼動させます。
 そしてテストを行ってみて、コンテナー同士がどのようにやりとりを行うかを見ていきます。
 Docker がインストール済みであり、起動していることを確認してください。</p>
 
@@ -141,563 +140,563 @@ Docker がインストール済みであり、起動していることを確認�
 複数のネットワークが表示されるはずであり、最低で以下のものがあるはずです。
 （ネットワーク ID は異なります。）</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+17e324f45964        bridge              bridge              local
+6ed54d316334        host                host                local
+7092879f2cc8        none                null                local
+</span></code></pre></div>    </div>
 
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-17e324f45964        bridge              bridge              <span class="nb">local
-</span>6ed54d316334        host                host                <span class="nb">local
-</span>7092879f2cc8        none                null                <span class="nb">local</span>
-</code></pre></div>    </div>
-
-    <p>デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークが一覧に表示されます。
-これとともに <code class="language-plaintext highlighter-rouge">host</code> と <code class="language-plaintext highlighter-rouge">none</code> があります。
+    <p>デフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークが一覧に表示されます。
+これとともに<code class="language-plaintext highlighter-rouge">host</code>と<code class="language-plaintext highlighter-rouge">none</code>があります。
 この 2 つは完全なネットワークではありませんが、コンテナーを起動して Docker デーモンホストのネットワークに直接接続するために、あるいはネットワークデバイスのないコンテナーを起動するために必要となります。
-<strong>このチュートリアルでは、2 つのコンテナーを <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続します。</strong></p>
+<strong>このチュートリアルでは、2 つのコンテナーを<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続します。</strong></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを 2 つ起動して <code class="language-plaintext highlighter-rouge">ash</code> を実行します。
-Alpine のデフォルトシェルが <code class="language-plaintext highlighter-rouge">bash</code> ではなく <code class="language-plaintext highlighter-rouge">ash</code> です。
-<code class="language-plaintext highlighter-rouge">-dit</code> フラグは、コンテナーをデタッチモードで（バックグラウンドで）実行し、対話を行い（入力を可能とし）、TTY を利用する（入出力が確認できる）ことを意味します。
+    <p><code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを 2 つ起動して<code class="language-plaintext highlighter-rouge">ash</code>を実行します。
+Alpine のデフォルトシェルが<code class="language-plaintext highlighter-rouge">bash</code>ではなく<code class="language-plaintext highlighter-rouge">ash</code>です。
+<code class="language-plaintext highlighter-rouge">-dit</code>フラグは、コンテナーをデタッチモードで（バックグラウンドで）実行し、対話を行い（入力を可能とし）、TTY を利用する（入出力が確認できる）ことを意味します。
 デタッチモードで起動するため、コンテナーに即座に接続されるわけではありません。
 その前にコンテナー ID が出力されます。
-<code class="language-plaintext highlighter-rouge">--network</code> フラグを何も指定しなかったので、コンテナーはデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続されます。</p>
+<code class="language-plaintext highlighter-rouge">--network</code>フラグを何も指定しなかったので、コンテナーはデフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続されます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 alpine ash
-
-<span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 alpine ash
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 alpine ash
 </code></pre></div>    </div>
 
     <p>2 つのコンテナーが実際に開始されたことを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">ls
-
-</span>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-602dbf1edc81        alpine              <span class="s2">"ash"</span>               4 seconds ago       Up 3 seconds                            alpine2
-da33b7aa74b0        alpine              <span class="s2">"ash"</span>               17 seconds ago      Up 16 seconds                           alpine1
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">ls</span>
+<span class="go">
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+602dbf1edc81        alpine              "ash"               4 seconds ago       Up 3 seconds                            alpine2
+da33b7aa74b0        alpine              "ash"               17 seconds ago      Up 16 seconds                           alpine1
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">bridge</code> ネットワークを参照して、どのコンテナーがこれに接続しているかを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">bridge</code>ネットワークを参照して、どのコンテナーがこれに接続しているかを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect bridge
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect bridge
+<span class="go">
+[
+    {
+        "Name": "bridge",
+        "Id": "17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10",
+        "Created": "2017-06-22T20:27:43.826654485Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Containers": {
+            "602dbf1edc81813304b6cf0a647e65333dc6fe6ee6ed572dc0f686a3307c6a2c": {
+                "Name": "alpine2",
+                "EndpointID": "03b6aafb7ca4d7e531e292901b43719c0e34cc7eef565b38a6bf84acf50f38cd",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "da33b7aa74b0bf3bda3ebd502d404320ca112a268aafe05b4851d1e3312ed168": {
+                "Name": "alpine1",
+                "EndpointID": "46c044a645d6afc42ddd7857d19e9dcfb89ad790afb5c239a35ac0af5e8a5bc5",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+</span></code></pre></div>    </div>
 
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"Id"</span>: <span class="s2">"17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10"</span>,
-        <span class="s2">"Created"</span>: <span class="s2">"2017-06-22T20:27:43.826654485Z"</span>,
-        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>,
-        <span class="s2">"Driver"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"EnableIPv6"</span>: <span class="nb">false</span>,
-        <span class="s2">"IPAM"</span>: <span class="o">{</span>
-            <span class="s2">"Driver"</span>: <span class="s2">"default"</span>,
-            <span class="s2">"Options"</span>: null,
-            <span class="s2">"Config"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"Subnet"</span>: <span class="s2">"172.17.0.0/16"</span>,
-                    <span class="s2">"Gateway"</span>: <span class="s2">"172.17.0.1"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">"Internal"</span>: <span class="nb">false</span>,
-        <span class="s2">"Attachable"</span>: <span class="nb">false</span>,
-        <span class="s2">"Containers"</span>: <span class="o">{</span>
-            <span class="s2">"602dbf1edc81813304b6cf0a647e65333dc6fe6ee6ed572dc0f686a3307c6a2c"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine2"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"03b6aafb7ca4d7e531e292901b43719c0e34cc7eef565b38a6bf84acf50f38cd"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:03"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.3/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>,
-            <span class="s2">"da33b7aa74b0bf3bda3ebd502d404320ca112a268aafe05b4851d1e3312ed168"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine1"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"46c044a645d6afc42ddd7857d19e9dcfb89ad790afb5c239a35ac0af5e8a5bc5"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:02"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.2/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"Options"</span>: <span class="o">{</span>
-            <span class="s2">"com.docker.network.bridge.default_bridge"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_icc"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_ip_masquerade"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.host_binding_ipv4"</span>: <span class="s2">"0.0.0.0"</span>,
-            <span class="s2">"com.docker.network.bridge.name"</span>: <span class="s2">"docker0"</span>,
-            <span class="s2">"com.docker.network.driver.mtu"</span>: <span class="s2">"1500"</span>
-        <span class="o">}</span>,
-        <span class="s2">"Labels"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
-
-    <p>上の方に <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに関する情報が一覧表示されます。
-Docker ホストと <code class="language-plaintext highlighter-rouge">bridge</code> ネットワーク間のゲートウェイに対する IP アドレス（<code class="language-plaintext highlighter-rouge">172.17.0.1</code>）も表示されています。
-<code class="language-plaintext highlighter-rouge">Containers</code> キーの配下に、接続されているコンテナーがそれぞれ表示されています。
-そこには IP アドレスの情報もあります（<code class="language-plaintext highlighter-rouge">alpine1</code> が <code class="language-plaintext highlighter-rouge">172.17.0.2</code>、<code class="language-plaintext highlighter-rouge">alpine2</code> が <code class="language-plaintext highlighter-rouge">172.17.0.3</code> となっています）。</p>
+    <p>上の方に<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに関する情報が一覧表示されます。
+Docker ホストと<code class="language-plaintext highlighter-rouge">bridge</code>ネットワーク間のゲートウェイに対する IP アドレス（<code class="language-plaintext highlighter-rouge">172.17.0.1</code>）も表示されています。
+<code class="language-plaintext highlighter-rouge">Containers</code>キーの配下に、接続されているコンテナーがそれぞれ表示されています。
+そこには IP アドレスの情報もあります（<code class="language-plaintext highlighter-rouge">alpine1</code>が<code class="language-plaintext highlighter-rouge">172.17.0.2</code>、<code class="language-plaintext highlighter-rouge">alpine2</code>が<code class="language-plaintext highlighter-rouge">172.17.0.3</code>となっています）。</p>
   </li>
   <li>
     <p>コンテナーはバックグラウンドで実行しています。
-<code class="language-plaintext highlighter-rouge">docker attach</code> コマンドを使って <code class="language-plaintext highlighter-rouge">alpine1</code> に接続してみます。</p>
+<code class="language-plaintext highlighter-rouge">docker attach</code>コマンドを使って<code class="language-plaintext highlighter-rouge">alpine1</code>に接続してみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker attach alpine1
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker attach alpine1
+<span class="go">
+</span><span class="gp">/ #</span><span class="w">
+</span></code></pre></div>    </div>
 
-/ <span class="c">#</span>
-</code></pre></div>    </div>
+    <p>プロンプトが<code class="language-plaintext highlighter-rouge">#</code>に変わりました。
+これはコンテナー内の<code class="language-plaintext highlighter-rouge">root</code>ユーザーであることを意味します。
+<code class="language-plaintext highlighter-rouge">ip addr show</code>コマンドを使って、コンテナー内部から<code class="language-plaintext highlighter-rouge">alpine1</code>のネットワークインターフェースを見てみます。</p>
 
-    <p>プロンプトが <code class="language-plaintext highlighter-rouge">#</code> に変わりました。
-これはコンテナー内の <code class="language-plaintext highlighter-rouge">root</code> ユーザーであることを意味します。
-<code class="language-plaintext highlighter-rouge">ip addr show</code> コマンドを使って、コンテナー内部から <code class="language-plaintext highlighter-rouge">alpine1</code> のネットワークインターフェースを見てみます。</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ip addr show</span>
-
-1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1
-    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ip addr show
+<span class="go">
+</span><span class="gp">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-27: eth0@if28: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue state UP
-    <span class="nb">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+</span><span class="gp">27: eth0@if28: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UP
+<span class="go">    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.2/16 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe11:2/64 scope <span class="nb">link
-       </span>valid_lft forever preferred_lft forever
-</code></pre></div>    </div>
+    inet6 fe80::42:acff:fe11:2/64 scope link
+       valid_lft forever preferred_lft forever
+</span></code></pre></div>    </div>
 
     <p>1 つめのインターフェースはループバックデバイスです。
 今はこれを無視します。
-2 つめのインターフェースの IP アドレスは <code class="language-plaintext highlighter-rouge">172.17.0.2</code> となっています。
-前の手順で確認した <code class="language-plaintext highlighter-rouge">alpine1</code> のアドレスと同じです。</p>
+2 つめのインターフェースの IP アドレスは<code class="language-plaintext highlighter-rouge">172.17.0.2</code>となっています。
+前の手順で確認した<code class="language-plaintext highlighter-rouge">alpine1</code>のアドレスと同じです。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code> の内部から <code class="language-plaintext highlighter-rouge">google.com</code> への ping を行って、インターネットに接続してみます。
-<code class="language-plaintext highlighter-rouge">-c 2</code> フラグにより 2 回だけ <code class="language-plaintext highlighter-rouge">ping</code> を行います。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>の内部から<code class="language-plaintext highlighter-rouge">google.com</code>への ping を行って、インターネットに接続してみます。
+<code class="language-plaintext highlighter-rouge">-c 2</code>フラグにより 2 回だけ<code class="language-plaintext highlighter-rouge">ping</code>を行います。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 google.com</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 google.com
+<span class="go">
+PING google.com (172.217.3.174): 56 data bytes
+64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.841 ms
+64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.897 ms
 
-PING google.com <span class="o">(</span>172.217.3.174<span class="o">)</span>: 56 data bytes
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.841 ms
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.897 ms
-
-<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+--- google.com ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 9.841/9.869/9.897 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 9.841/9.869/9.897 ms
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>そこで 2 つめのコンテナーに対して ping してみます。
-最初は IP アドレス <code class="language-plaintext highlighter-rouge">172.17.0.3</code> を使って ping します。</p>
+最初は IP アドレス<code class="language-plaintext highlighter-rouge">172.17.0.3</code>を使って ping します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 172.17.0.3</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 172.17.0.3
+<span class="go">
+PING 172.17.0.3 (172.17.0.3): 56 data bytes
+64 bytes from 172.17.0.3: seq=0 ttl=64 time=0.086 ms
+64 bytes from 172.17.0.3: seq=1 ttl=64 time=0.094 ms
 
-PING 172.17.0.3 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.086 ms
-64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.094 ms
-
-<span class="nt">---</span> 172.17.0.3 ping statistics <span class="nt">---</span>
+--- 172.17.0.3 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.086/0.090/0.094 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 0.086/0.090/0.094 ms
+</span></code></pre></div>    </div>
 
     <p>成功しました。
-次に <code class="language-plaintext highlighter-rouge">alpine2</code> コンテナーに向けて、コンテナー名により ping をしてみます。
+次に<code class="language-plaintext highlighter-rouge">alpine2</code>コンテナーに向けて、コンテナー名により ping をしてみます。
 これは失敗します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 alpine2</span>
-
-ping: bad address <span class="s1">'alpine2'</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine2
+<span class="go">
+ping: bad address 'alpine2'
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code> を停止させることなくデタッチします。
-これはデタッチを行うキー操作、つまり <code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">q</code> により行います（<code class="language-plaintext highlighter-rouge">CTRL</code> を押したまま、<code class="language-plaintext highlighter-rouge">p</code> と <code class="language-plaintext highlighter-rouge">q</code> を順に押します）。
-この後 <code class="language-plaintext highlighter-rouge">alpine2</code> に対して同じことをするなら、手順の 4、5、6 をもう一度行います。
-<code class="language-plaintext highlighter-rouge">alpine1</code> のところは <code class="language-plaintext highlighter-rouge">alpine2</code> に変えて実施します。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>を停止させることなくデタッチします。
+これはデタッチを行うキー操作、つまり<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">q</code>により行います（<code class="language-plaintext highlighter-rouge">CTRL</code>を押したまま、<code class="language-plaintext highlighter-rouge">p</code>と<code class="language-plaintext highlighter-rouge">q</code>を順に押します）。
+この後<code class="language-plaintext highlighter-rouge">alpine2</code>に対して同じことをするなら、手順の 4、5、6 をもう一度行います。
+<code class="language-plaintext highlighter-rouge">alpine1</code>のところは<code class="language-plaintext highlighter-rouge">alpine2</code>に変えて実施します。</p>
   </li>
   <li>
     <p>2 つのコンテナーを停止させ削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop alpine1 alpine2
-<span class="nv">$ </span>docker container <span class="nb">rm </span>alpine1 alpine2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop alpine1 alpine2
+<span class="gp">$</span><span class="w"> </span>docker container <span class="nb">rm </span>alpine1 alpine2
 </code></pre></div>    </div>
   </li>
 </ol>
 
-<p>デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークは、本番環境向けとしては推奨されない点を覚えておいてください。
+<p>デフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークは、本番環境向けとしては推奨されない点を覚えておいてください。
 ユーザー定義のブリッジネットワークについては、<a href="#use-user-defined-bridge-networks">次のチュートリアル</a> に進んでください。</p>
 
 <h2 id="use-user-defined-bridge-networks">ユーザー定義のブリッジネットワーク利用</h2>
 
-<p>以下の例では、すでに生成している 2 つの <code class="language-plaintext highlighter-rouge">alpine</code> コンテナーをもう一度使います。
-ただしこれをアタッチするのは、<code class="language-plaintext highlighter-rouge">alpine-net</code> という名前のユーザー定義ネットワークです。
-もうデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークへの接続は行いません。
-そして 3 つめの <code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを用意します。
-これは <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続させるものの、<code class="language-plaintext highlighter-rouge">alpine-net</code> には接続しません。
-さらに 4 つめの <code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを、その両方のネットワークに接続するようにします。</p>
+<p>以下の例では、すでに生成している 2 つの<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーをもう一度使います。
+ただしこれをアタッチするのは、<code class="language-plaintext highlighter-rouge">alpine-net</code>という名前のユーザー定義ネットワークです。
+もうデフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークへの接続は行いません。
+そして 3 つめの<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを用意します。
+これは<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続させるものの、<code class="language-plaintext highlighter-rouge">alpine-net</code>には接続しません。
+さらに 4 つめの<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを、その両方のネットワークに接続するようにします。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークを生成します。
-<code class="language-plaintext highlighter-rouge">--driver bridge</code> フラグは不要です。
+    <p><code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークを生成します。
+<code class="language-plaintext highlighter-rouge">--driver bridge</code>フラグは不要です。
 なぜならそれがデフォルトであるからです。
 ただし以下の例では、指定方法を示すために含めます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--driver</span> bridge alpine-net
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">--driver</span> bridge alpine-net
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Docker のネットワーク一覧を表示します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+e9261a8c9a19        alpine-net          bridge              local
+17e324f45964        bridge              bridge              local
+6ed54d316334        host                host                local
+7092879f2cc8        none                null                local
+</span></code></pre></div>    </div>
 
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-e9261a8c9a19        alpine-net          bridge              <span class="nb">local
-</span>17e324f45964        bridge              bridge              <span class="nb">local
-</span>6ed54d316334        host                host                <span class="nb">local
-</span>7092879f2cc8        none                null                <span class="nb">local</span>
-</code></pre></div>    </div>
-
-    <p><code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークを確認します。
+    <p><code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークを確認します。
 そこから IP アドレスがわかります。
 また接続されているコンテナーが 1 つもないことがわかります。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect alpine-net
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect alpine-net
+<span class="go">
+[
+    {
+        "Name": "alpine-net",
+        "Id": "e9261a8c9a19eabf2bf1488bf5f208b99b1608f330cff585c273d39481c9b0ec",
+        "Created": "2017-09-25T21:38:12.620046142Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+</span></code></pre></div>    </div>
 
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"alpine-net"</span>,
-        <span class="s2">"Id"</span>: <span class="s2">"e9261a8c9a19eabf2bf1488bf5f208b99b1608f330cff585c273d39481c9b0ec"</span>,
-        <span class="s2">"Created"</span>: <span class="s2">"2017-09-25T21:38:12.620046142Z"</span>,
-        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>,
-        <span class="s2">"Driver"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"EnableIPv6"</span>: <span class="nb">false</span>,
-        <span class="s2">"IPAM"</span>: <span class="o">{</span>
-            <span class="s2">"Driver"</span>: <span class="s2">"default"</span>,
-            <span class="s2">"Options"</span>: <span class="o">{}</span>,
-            <span class="s2">"Config"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"Subnet"</span>: <span class="s2">"172.18.0.0/16"</span>,
-                    <span class="s2">"Gateway"</span>: <span class="s2">"172.18.0.1"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">"Internal"</span>: <span class="nb">false</span>,
-        <span class="s2">"Attachable"</span>: <span class="nb">false</span>,
-        <span class="s2">"Containers"</span>: <span class="o">{}</span>,
-        <span class="s2">"Options"</span>: <span class="o">{}</span>,
-        <span class="s2">"Labels"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
-
-    <p>ネットワークのゲートウェイは <code class="language-plaintext highlighter-rouge">172.18.0.1</code> となっています。
-デフォルトのブリッジネットワークのときとは違っていて、その際には <code class="language-plaintext highlighter-rouge">172.17.0.1</code> でした。
+    <p>ネットワークのゲートウェイは<code class="language-plaintext highlighter-rouge">172.18.0.1</code>となっています。
+デフォルトのブリッジネットワークのときとは違っていて、その際には<code class="language-plaintext highlighter-rouge">172.17.0.1</code>でした。
 IP アドレスの実際は、システムによって異なるかもしれません。</p>
   </li>
   <li>
     <p>4 つのコンテナーを生成します。
-それぞれの <code class="language-plaintext highlighter-rouge">--network</code> フラグに注目してください。
-<code class="language-plaintext highlighter-rouge">docker run</code> コマンドの実行において、接続指定できるネットワークはただ 1 つです。
-したがって <code class="language-plaintext highlighter-rouge">alpine4</code> を <code class="language-plaintext highlighter-rouge">bridge</code> にも接続させるために、後から <code class="language-plaintext highlighter-rouge">docker network connect</code> を実行することが必要になります。</p>
+それぞれの<code class="language-plaintext highlighter-rouge">--network</code>フラグに注目してください。
+<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行において、接続指定できるネットワークはただ 1 つです。
+したがって<code class="language-plaintext highlighter-rouge">alpine4</code>を<code class="language-plaintext highlighter-rouge">bridge</code>にも接続させるために、後から<code class="language-plaintext highlighter-rouge">docker network connect</code>を実行することが必要になります。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 <span class="nt">--network</span> alpine-net alpine ash
-
-<span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 <span class="nt">--network</span> alpine-net alpine ash
-
-<span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine3 alpine ash
-
-<span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine4 <span class="nt">--network</span> alpine-net alpine ash
-
-<span class="nv">$ </span>docker network connect bridge alpine4
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 <span class="nt">--network</span> alpine-net alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 <span class="nt">--network</span> alpine-net alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine3 alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine4 <span class="nt">--network</span> alpine-net alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker network connect bridge alpine4
 </code></pre></div>    </div>
 
     <p>コンテナーすべてが実行していることを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">ls
-
-</span>CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
-156849ccd902        alpine              <span class="s2">"ash"</span>               41 seconds ago       Up 41 seconds                           alpine4
-fa1340b8d83e        alpine              <span class="s2">"ash"</span>               51 seconds ago       Up 51 seconds                           alpine3
-a535d969081e        alpine              <span class="s2">"ash"</span>               About a minute ago   Up About a minute                       alpine2
-0a02c449a6e9        alpine              <span class="s2">"ash"</span>               About a minute ago   Up About a minute                       alpine1
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">ls</span>
+<span class="go">
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+156849ccd902        alpine              "ash"               41 seconds ago       Up 41 seconds                           alpine4
+fa1340b8d83e        alpine              "ash"               51 seconds ago       Up 51 seconds                           alpine3
+a535d969081e        alpine              "ash"               About a minute ago   Up About a minute                       alpine2
+0a02c449a6e9        alpine              "ash"               About a minute ago   Up About a minute                       alpine1
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">bridge</code> ネットワークと <code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークを再度確認してみます。</p>
+    <p><code class="language-plaintext highlighter-rouge">bridge</code>ネットワークと<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークを再度確認してみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect bridge
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect bridge
+<span class="go">
+[
+    {
+        "Name": "bridge",
+        "Id": "17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10",
+        "Created": "2017-06-22T20:27:43.826654485Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Containers": {
+            "156849ccd902b812b7d17f05d2d81532ccebe5bf788c9a79de63e12bb92fc621": {
+                "Name": "alpine4",
+                "EndpointID": "7277c5183f0da5148b33d05f329371fce7befc5282d2619cfb23690b2adf467d",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "fa1340b8d83eef5497166951184ad3691eb48678a3664608ec448a687b047c53": {
+                "Name": "alpine3",
+                "EndpointID": "5ae767367dcbebc712c02d49556285e888819d4da6b69d88cd1b0d52a83af95f",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+</span></code></pre></div>    </div>
 
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"Id"</span>: <span class="s2">"17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10"</span>,
-        <span class="s2">"Created"</span>: <span class="s2">"2017-06-22T20:27:43.826654485Z"</span>,
-        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>,
-        <span class="s2">"Driver"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"EnableIPv6"</span>: <span class="nb">false</span>,
-        <span class="s2">"IPAM"</span>: <span class="o">{</span>
-            <span class="s2">"Driver"</span>: <span class="s2">"default"</span>,
-            <span class="s2">"Options"</span>: null,
-            <span class="s2">"Config"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"Subnet"</span>: <span class="s2">"172.17.0.0/16"</span>,
-                    <span class="s2">"Gateway"</span>: <span class="s2">"172.17.0.1"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">"Internal"</span>: <span class="nb">false</span>,
-        <span class="s2">"Attachable"</span>: <span class="nb">false</span>,
-        <span class="s2">"Containers"</span>: <span class="o">{</span>
-            <span class="s2">"156849ccd902b812b7d17f05d2d81532ccebe5bf788c9a79de63e12bb92fc621"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine4"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"7277c5183f0da5148b33d05f329371fce7befc5282d2619cfb23690b2adf467d"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:03"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.3/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>,
-            <span class="s2">"fa1340b8d83eef5497166951184ad3691eb48678a3664608ec448a687b047c53"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine3"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"5ae767367dcbebc712c02d49556285e888819d4da6b69d88cd1b0d52a83af95f"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:02"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.2/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"Options"</span>: <span class="o">{</span>
-            <span class="s2">"com.docker.network.bridge.default_bridge"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_icc"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_ip_masquerade"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.host_binding_ipv4"</span>: <span class="s2">"0.0.0.0"</span>,
-            <span class="s2">"com.docker.network.bridge.name"</span>: <span class="s2">"docker0"</span>,
-            <span class="s2">"com.docker.network.driver.mtu"</span>: <span class="s2">"1500"</span>
-        <span class="o">}</span>,
-        <span class="s2">"Labels"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">alpine3</code>と<code class="language-plaintext highlighter-rouge">alpine4</code>は<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続されています。</p>
 
-    <p><code class="language-plaintext highlighter-rouge">alpine3</code> と <code class="language-plaintext highlighter-rouge">alpine4</code> は <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続されています。</p>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect alpine-net
+<span class="go">
+[
+    {
+        "Name": "alpine-net",
+        "Id": "e9261a8c9a19eabf2bf1488bf5f208b99b1608f330cff585c273d39481c9b0ec",
+        "Created": "2017-09-25T21:38:12.620046142Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Containers": {
+            "0a02c449a6e9a15113c51ab2681d72749548fb9f78fae4493e3b2e4e74199c4a": {
+                "Name": "alpine1",
+                "EndpointID": "c83621678eff9628f4e2d52baf82c49f974c36c05cba152db4c131e8e7a64673",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            },
+            "156849ccd902b812b7d17f05d2d81532ccebe5bf788c9a79de63e12bb92fc621": {
+                "Name": "alpine4",
+                "EndpointID": "058bc6a5e9272b532ef9a6ea6d7f3db4c37527ae2625d1cd1421580fd0731954",
+                "MacAddress": "02:42:ac:12:00:04",
+                "IPv4Address": "172.18.0.4/16",
+                "IPv6Address": ""
+            },
+            "a535d969081e003a149be8917631215616d9401edcb4d35d53f00e75ea1db653": {
+                "Name": "alpine2",
+                "EndpointID": "198f3141ccf2e7dba67bce358d7b71a07c5488e3867d8b7ad55a4c695ebb8740",
+                "MacAddress": "02:42:ac:12:00:03",
+                "IPv4Address": "172.18.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+</span></code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect alpine-net
-
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"alpine-net"</span>,
-        <span class="s2">"Id"</span>: <span class="s2">"e9261a8c9a19eabf2bf1488bf5f208b99b1608f330cff585c273d39481c9b0ec"</span>,
-        <span class="s2">"Created"</span>: <span class="s2">"2017-09-25T21:38:12.620046142Z"</span>,
-        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>,
-        <span class="s2">"Driver"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"EnableIPv6"</span>: <span class="nb">false</span>,
-        <span class="s2">"IPAM"</span>: <span class="o">{</span>
-            <span class="s2">"Driver"</span>: <span class="s2">"default"</span>,
-            <span class="s2">"Options"</span>: <span class="o">{}</span>,
-            <span class="s2">"Config"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"Subnet"</span>: <span class="s2">"172.18.0.0/16"</span>,
-                    <span class="s2">"Gateway"</span>: <span class="s2">"172.18.0.1"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">"Internal"</span>: <span class="nb">false</span>,
-        <span class="s2">"Attachable"</span>: <span class="nb">false</span>,
-        <span class="s2">"Containers"</span>: <span class="o">{</span>
-            <span class="s2">"0a02c449a6e9a15113c51ab2681d72749548fb9f78fae4493e3b2e4e74199c4a"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine1"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"c83621678eff9628f4e2d52baf82c49f974c36c05cba152db4c131e8e7a64673"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:12:00:02"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.18.0.2/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>,
-            <span class="s2">"156849ccd902b812b7d17f05d2d81532ccebe5bf788c9a79de63e12bb92fc621"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine4"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"058bc6a5e9272b532ef9a6ea6d7f3db4c37527ae2625d1cd1421580fd0731954"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:12:00:04"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.18.0.4/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>,
-            <span class="s2">"a535d969081e003a149be8917631215616d9401edcb4d35d53f00e75ea1db653"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine2"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"198f3141ccf2e7dba67bce358d7b71a07c5488e3867d8b7ad55a4c695ebb8740"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:12:00:03"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.18.0.3/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"Options"</span>: <span class="o">{}</span>,
-        <span class="s2">"Labels"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
-
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code>、<code class="language-plaintext highlighter-rouge">alpine2</code>、<code class="language-plaintext highlighter-rouge">alpine4</code> は <code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークに接続されています。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>、<code class="language-plaintext highlighter-rouge">alpine2</code>、<code class="language-plaintext highlighter-rouge">alpine4</code>は<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークに接続されています。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine-net</code> のようなユーザー定義ネットワークでは、IP アドレスによる通信が可能です。
+    <p><code class="language-plaintext highlighter-rouge">alpine-net</code>のようなユーザー定義ネットワークでは、IP アドレスによる通信が可能です。
 さらにコンテナー名から IP アドレスを解決することもできます。
 この機能のことを <strong>自動サービス検出</strong> と呼びます。
-では <code class="language-plaintext highlighter-rouge">alpine1</code> に接続して、いろいろテストしてみます。
-<code class="language-plaintext highlighter-rouge">alpine1</code> は、<code class="language-plaintext highlighter-rouge">alpine2</code> と <code class="language-plaintext highlighter-rouge">alpine4</code>（そして <code class="language-plaintext highlighter-rouge">alpine1</code> そのもの）の IP アドレスが解決できなければなりません。</p>
+では<code class="language-plaintext highlighter-rouge">alpine1</code>に接続して、いろいろテストしてみます。
+<code class="language-plaintext highlighter-rouge">alpine1</code>は、<code class="language-plaintext highlighter-rouge">alpine2</code>と<code class="language-plaintext highlighter-rouge">alpine4</code>（そして<code class="language-plaintext highlighter-rouge">alpine1</code>そのもの）の IP アドレスが解決できなければなりません。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container attach alpine1
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container attach alpine1
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine2
+<span class="go">
+PING alpine2 (172.18.0.3): 56 data bytes
+64 bytes from 172.18.0.3: seq=0 ttl=64 time=0.085 ms
+64 bytes from 172.18.0.3: seq=1 ttl=64 time=0.090 ms
 
-<span class="c"># ping -c 2 alpine2</span>
-
-PING alpine2 <span class="o">(</span>172.18.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.085 ms
-64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.090 ms
-
-<span class="nt">---</span> alpine2 ping statistics <span class="nt">---</span>
+--- alpine2 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.085/0.087/0.090 ms
+round-trip min/avg/max = 0.085/0.087/0.090 ms
 
-<span class="c"># ping -c 2 alpine4</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine4
+<span class="go">
+PING alpine4 (172.18.0.4): 56 data bytes
+64 bytes from 172.18.0.4: seq=0 ttl=64 time=0.076 ms
+64 bytes from 172.18.0.4: seq=1 ttl=64 time=0.091 ms
 
-PING alpine4 <span class="o">(</span>172.18.0.4<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.4: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.076 ms
-64 bytes from 172.18.0.4: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.091 ms
-
-<span class="nt">---</span> alpine4 ping statistics <span class="nt">---</span>
+--- alpine4 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.076/0.083/0.091 ms
+round-trip min/avg/max = 0.076/0.083/0.091 ms
 
-<span class="c"># ping -c 2 alpine1</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine1
+<span class="go">
+PING alpine1 (172.18.0.2): 56 data bytes
+64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.026 ms
+64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.054 ms
 
-PING alpine1 <span class="o">(</span>172.18.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.026 ms
-64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.054 ms
-
-<span class="nt">---</span> alpine1 ping statistics <span class="nt">---</span>
+--- alpine1 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.026/0.040/0.054 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 0.026/0.040/0.054 ms
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code> から <code class="language-plaintext highlighter-rouge">alpine3</code> へはまったく接続できないはずです。
-<code class="language-plaintext highlighter-rouge">alpine3</code> は <code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワーク上にないからです。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>から<code class="language-plaintext highlighter-rouge">alpine3</code>へはまったく接続できないはずです。
+<code class="language-plaintext highlighter-rouge">alpine3</code>は<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワーク上にないからです。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 alpine3</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine3
+<span class="go">
+ping: bad address 'alpine3'
+</span></code></pre></div>    </div>
 
-ping: bad address <span class="s1">'alpine3'</span>
-</code></pre></div>    </div>
-
-    <p>それだけでなく、<code class="language-plaintext highlighter-rouge">alpine1</code> から <code class="language-plaintext highlighter-rouge">alpine3</code> へは、IP アドレスを利用しても接続できません。
-<code class="language-plaintext highlighter-rouge">docker network inspect</code> を使った <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークの確認時の出力結果をもう一度確認してください。
-<code class="language-plaintext highlighter-rouge">alpine3</code> の IP アドレスは <code class="language-plaintext highlighter-rouge">172.17.0.2</code> であったはずです。
+    <p>それだけでなく、<code class="language-plaintext highlighter-rouge">alpine1</code>から<code class="language-plaintext highlighter-rouge">alpine3</code>へは、IP アドレスを利用しても接続できません。
+<code class="language-plaintext highlighter-rouge">docker network inspect</code>を使った<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークの確認時の出力結果をもう一度確認してください。
+<code class="language-plaintext highlighter-rouge">alpine3</code>の IP アドレスは<code class="language-plaintext highlighter-rouge">172.17.0.2</code>であったはずです。
 そこで ping を行ってみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 172.17.0.2</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 172.17.0.2
+<span class="go">
+PING 172.17.0.2 (172.17.0.2): 56 data bytes
 
-PING 172.17.0.2 <span class="o">(</span>172.17.0.2<span class="o">)</span>: 56 data bytes
-
-<span class="nt">---</span> 172.17.0.2 ping statistics <span class="nt">---</span>
+--- 172.17.0.2 ping statistics ---
 2 packets transmitted, 0 packets received, 100% packet loss
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
-    <p>デタッチキー操作により <code class="language-plaintext highlighter-rouge">alpine1</code> をデタッチします。
-<code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">q</code> を行います（<code class="language-plaintext highlighter-rouge">CTRL</code> を押したまま、<code class="language-plaintext highlighter-rouge">p</code> と <code class="language-plaintext highlighter-rouge">q</code> を順に押します）。</p>
+    <p>デタッチキー操作により<code class="language-plaintext highlighter-rouge">alpine1</code>をデタッチします。
+<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">q</code>を行います（<code class="language-plaintext highlighter-rouge">CTRL</code>を押したまま、<code class="language-plaintext highlighter-rouge">p</code>と<code class="language-plaintext highlighter-rouge">q</code>を順に押します）。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine4</code> は、デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークと <code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークの両方に接続していました。
+    <p><code class="language-plaintext highlighter-rouge">alpine4</code>は、デフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークと<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークの両方に接続していました。
 このコンテナーは、別のコンテナーすべてに接続できるはずです。
-ただしそれを行うには、<code class="language-plaintext highlighter-rouge">alpine3</code> の IP アドレスを知っておく必要があります。
-そこで <code class="language-plaintext highlighter-rouge">alpine3</code> にアタッチして、いろいろ確認してみます。</p>
+ただしそれを行うには、<code class="language-plaintext highlighter-rouge">alpine3</code>の IP アドレスを知っておく必要があります。
+そこで<code class="language-plaintext highlighter-rouge">alpine3</code>にアタッチして、いろいろ確認してみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container attach alpine4
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container attach alpine4
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine1
+<span class="go">
+PING alpine1 (172.18.0.2): 56 data bytes
+64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.074 ms
+64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.082 ms
 
-<span class="c"># ping -c 2 alpine1</span>
-
-PING alpine1 <span class="o">(</span>172.18.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.074 ms
-64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.082 ms
-
-<span class="nt">---</span> alpine1 ping statistics <span class="nt">---</span>
+--- alpine1 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.074/0.078/0.082 ms
+round-trip min/avg/max = 0.074/0.078/0.082 ms
 
-<span class="c"># ping -c 2 alpine2</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine2
+<span class="go">
+PING alpine2 (172.18.0.3): 56 data bytes
+64 bytes from 172.18.0.3: seq=0 ttl=64 time=0.075 ms
+64 bytes from 172.18.0.3: seq=1 ttl=64 time=0.080 ms
 
-PING alpine2 <span class="o">(</span>172.18.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.075 ms
-64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.080 ms
-
-<span class="nt">---</span> alpine2 ping statistics <span class="nt">---</span>
+--- alpine2 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.075/0.077/0.080 ms
+round-trip min/avg/max = 0.075/0.077/0.080 ms
 
-<span class="c"># ping -c 2 alpine3</span>
-ping: bad address <span class="s1">'alpine3'</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine3
+<span class="go">ping: bad address 'alpine3'
 
-<span class="c"># ping -c 2 172.17.0.2</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 172.17.0.2
+<span class="go">
+PING 172.17.0.2 (172.17.0.2): 56 data bytes
+64 bytes from 172.17.0.2: seq=0 ttl=64 time=0.089 ms
+64 bytes from 172.17.0.2: seq=1 ttl=64 time=0.075 ms
 
-PING 172.17.0.2 <span class="o">(</span>172.17.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.089 ms
-64 bytes from 172.17.0.2: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.075 ms
-
-<span class="nt">---</span> 172.17.0.2 ping statistics <span class="nt">---</span>
+--- 172.17.0.2 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.075/0.082/0.089 ms
+round-trip min/avg/max = 0.075/0.082/0.089 ms
 
-<span class="c"># ping -c 2 alpine4</span>
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine4
+<span class="go">
+PING alpine4 (172.18.0.4): 56 data bytes
+64 bytes from 172.18.0.4: seq=0 ttl=64 time=0.033 ms
+64 bytes from 172.18.0.4: seq=1 ttl=64 time=0.064 ms
 
-PING alpine4 <span class="o">(</span>172.18.0.4<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.4: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.033 ms
-64 bytes from 172.18.0.4: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.064 ms
-
-<span class="nt">---</span> alpine4 ping statistics <span class="nt">---</span>
+--- alpine4 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.033/0.048/0.064 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 0.033/0.048/0.064 ms
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p>確認の最後として、どのコンテナーもインターネットには接続できるはずですから、<code class="language-plaintext highlighter-rouge">google.com</code> への ping を行ってみます。
-<code class="language-plaintext highlighter-rouge">alpine4</code> はすでにアタッチしていますから、そこから始めます。
-そして <code class="language-plaintext highlighter-rouge">alpine4</code> のデタッチの後に <code class="language-plaintext highlighter-rouge">alpine3</code> （これは唯一 <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続しているものです）に接続して、同じことを確認します。
-最終的に（<code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークにのみ接続している）<code class="language-plaintext highlighter-rouge">alpine1</code> への接続と同様の確認まで進めます。</p>
+    <p>確認の最後として、どのコンテナーもインターネットには接続できるはずですから、<code class="language-plaintext highlighter-rouge">google.com</code>への ping を行ってみます。
+<code class="language-plaintext highlighter-rouge">alpine4</code>はすでにアタッチしていますから、そこから始めます。
+そして<code class="language-plaintext highlighter-rouge">alpine4</code>のデタッチの後に<code class="language-plaintext highlighter-rouge">alpine3</code>（これは唯一<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続しているものです）に接続して、同じことを確認します。
+最終的に（<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークにのみ接続している）<code class="language-plaintext highlighter-rouge">alpine1</code>への接続と同様の確認まで進めます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 google.com</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 google.com
+<span class="go">
+PING google.com (172.217.3.174): 56 data bytes
+64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.778 ms
+64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.634 ms
 
-PING google.com <span class="o">(</span>172.217.3.174<span class="o">)</span>: 56 data bytes
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.778 ms
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.634 ms
-
-<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+--- google.com ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 9.634/9.706/9.778 ms
+round-trip min/avg/max = 9.634/9.706/9.778 ms
 
 CTRL+p CTRL+q
 
-<span class="nv">$ </span>docker container attach alpine3
+</span><span class="gp">$</span><span class="w"> </span>docker container attach alpine3
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 google.com
+<span class="go">
+PING google.com (172.217.3.174): 56 data bytes
+64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.706 ms
+64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.851 ms
 
-<span class="c"># ping -c 2 google.com</span>
-
-PING google.com <span class="o">(</span>172.217.3.174<span class="o">)</span>: 56 data bytes
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.706 ms
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.851 ms
-
-<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+--- google.com ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 9.706/9.778/9.851 ms
+round-trip min/avg/max = 9.706/9.778/9.851 ms
 
 CTRL+p CTRL+q
 
-<span class="nv">$ </span>docker container attach alpine1
+</span><span class="gp">$</span><span class="w"> </span>docker container attach alpine1
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 google.com
+<span class="go">
+PING google.com (172.217.3.174): 56 data bytes
+64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.606 ms
+64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.603 ms
 
-<span class="c"># ping -c 2 google.com</span>
-
-PING google.com <span class="o">(</span>172.217.3.174<span class="o">)</span>: 56 data bytes
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.606 ms
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.603 ms
-
-<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+--- google.com ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 9.603/9.604/9.606 ms
+round-trip min/avg/max = 9.603/9.604/9.606 ms
 
 CTRL+p CTRL+q
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>コンテナーすべてを停止し削除します。
-そして <code class="language-plaintext highlighter-rouge">alpine-net</code> ネットワークを削除します。</p>
+そして<code class="language-plaintext highlighter-rouge">alpine-net</code>ネットワークを削除します。</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container stop alpine1 alpine2 alpine3 alpine4
 

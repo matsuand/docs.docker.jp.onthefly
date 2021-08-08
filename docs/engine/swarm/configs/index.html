@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker configs を利用した設定データの保存 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker configs を利用した設定データの保存" />
   <meta property="og:description" content="How to store configuration data separate from the runtime" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker configs を利用した設定データの保存","description":"How to store configuration data separate from the runtime","url":"https://docs.docker.com/engine/swarm/configs/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -237,7 +237,7 @@ Linux コンテナーを例に用いますが、Windows コンテナーでも co
 この <code class="language-plaintext highlighter-rouge">docker config create</code> コマンドは、最後の引数により標準入力から読み込みを行います。
 最後の引数は config をどのファイルから読み込むかを示すものであって、ここではそれを <code class="language-plaintext highlighter-rouge">-</code> としています。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"This is a config"</span> | docker config create my-config -
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"This is a config"</span> | docker config create my-config -
 </code></pre></div>    </div>
   </li>
   <li>
@@ -245,18 +245,18 @@ Linux コンテナーを例に用いますが、Windows コンテナーでも co
 デフォルトでコンテナーは <code class="language-plaintext highlighter-rouge">/my-config</code> にある config へのアクセスが可能です。
 コンテナー内のそのファイル名は、<code class="language-plaintext highlighter-rouge">target</code> オプションを使って変更することができます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> redis <span class="nt">--config</span> my-config redis:alpine
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> redis <span class="nt">--config</span> my-config redis:alpine
 </code></pre></div>    </div>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">docker service ps</code> を実行して、タスクが問題なく実行しているかを確認します。
 問題がなければ、出力結果は以下のようになります。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps redis
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service ps redis
+<span class="go">
 ID            NAME     IMAGE         NODE              DESIRED STATE  CURRENT STATE          ERROR  PORTS
 bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 seconds ago
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">docker ps</code> を実行して、<code class="language-plaintext highlighter-rouge">redis</code> サービスのタスクコンテナーに対する ID を取得します。
@@ -265,41 +265,41 @@ config データファイルはデフォルトで誰でも読むことができ�
 以下の最初のコマンドは、コンテナー ID を調べるものです。
 そして 2 つめと 3 つめは、シェルのコマンド補完を用いて自動的に入力しました。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span>
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span>
+<span class="go">
 5cb1c2348a59
 
-<span class="nv">$ </span>docker container <span class="nb">exec</span> <span class="si">$(</span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span><span class="si">)</span> <span class="nb">ls</span> <span class="nt">-l</span> /my-config
+</span><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">exec</span> <span class="si">$(</span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span><span class="si">)</span> <span class="nb">ls</span> <span class="nt">-l</span> /my-config
+<span class="go">
+-r--r--r--    1 root     root            12 Jun  5 20:49 my-config
 
-<span class="nt">-r--r--r--</span>    1 root     root            12 Jun  5 20:49 my-config
-
-<span class="nv">$ </span>docker container <span class="nb">exec</span> <span class="si">$(</span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span><span class="si">)</span> <span class="nb">cat</span> /my-config
-
+</span><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">exec</span> <span class="si">$(</span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span><span class="si">)</span> <span class="nb">cat</span> /my-config
+<span class="go">
 This is a config
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>config を削除してみます。
 ただし削除には失敗します。
 これは <code class="language-plaintext highlighter-rouge">redis</code> サービスが稼働中であり、config にアクセスしているためです。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nv">$ </span>docker config <span class="nb">ls
-
-</span>ID                          NAME                CREATED             UPDATED
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">ls</span>
+<span class="go">
+ID                          NAME                CREATED             UPDATED
 fzwcfuqjkvo5foqu7ts7ls578   hello               31 minutes ago      31 minutes ago
 
 
-<span class="nv">$ </span>docker config <span class="nb">rm </span>my-config
-
-Error response from daemon: rpc error: code <span class="o">=</span> 3 desc <span class="o">=</span> config <span class="s1">'my-config'</span> is
-<span class="k">in </span>use by the following service: redis
-</code></pre></div>    </div>
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">rm </span>my-config
+<span class="go">
+Error response from daemon: rpc error: code = 3 desc = config 'my-config' is
+in use by the following service: redis
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">redis</code> サービスを更新して、稼働中のサービスからの config へのアクセスを取り除きます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--config-rm</span> my-config redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--config-rm</span> my-config redis
 </code></pre></div>    </div>
   </li>
   <li>
@@ -317,9 +317,9 @@ cat: can't open '/my-config': No such file or directory
     <p>サービスを停止して削除します。
 そして Docker から config も削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>redis
-
-<span class="nv">$ </span>docker config <span class="nb">rm </span>my-config
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>redis
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">rm </span>my-config
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -402,14 +402,14 @@ name as its argument. The template will be rendered when container is created.</
     <p>Save the <code class="language-plaintext highlighter-rouge">index.html.tmpl</code> file as a swarm config named <code class="language-plaintext highlighter-rouge">homepage</code>. Provide
 parameter <code class="language-plaintext highlighter-rouge">--template-driver</code> and specify <code class="language-plaintext highlighter-rouge">golang</code> as template engine.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create <span class="nt">--template-driver</span> golang homepage index.html.tmpl
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create <span class="nt">--template-driver</span> golang homepage index.html.tmpl
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Create a service that runs Nginx and has access to the environment variable
 HELLO and to the config.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
      <span class="nt">--name</span> hello-template <span class="se">\</span>
      <span class="nt">--env</span> <span class="nv">HELLO</span><span class="o">=</span><span class="s2">"Docker"</span> <span class="se">\</span>
      <span class="nt">--config</span> <span class="nb">source</span><span class="o">=</span>homepage,target<span class="o">=</span>/usr/share/nginx/html/index.html <span class="se">\</span>
@@ -421,14 +421,14 @@ HELLO and to the config.</p>
     <p>Verify that the service is operational: you can reach the Nginx server, and
 that the correct output is being served.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://0.0.0.0:3000
-
-&lt;html <span class="nv">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="o">&gt;</span>
-  &lt;<span class="nb">head</span><span class="o">&gt;</span>&lt;title&gt;Hello Docker&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Hello Docker! I<span class="s1">'m service hello-template.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://0.0.0.0:3000
+<span class="go">
+</span><span class="gp">&lt;html lang="en"&gt;</span><span class="w">
+</span><span class="gp">  &lt;head&gt;</span>&lt;title&gt;Hello Docker&lt;/title&gt;&lt;/head&gt;
+<span class="gp">  &lt;body&gt;</span><span class="w">
+</span><span class="gp">    &lt;p&gt;</span>Hello Docker! I<span class="s1">'m service hello-template.&lt;/p&gt;
+</span><span class="gp">  &lt;/body&gt;</span><span class="w">
+</span><span class="gp">&lt;/html&gt;</span><span class="w">
 </span></code></pre></div>    </div>
   </li>
 </ol>
@@ -455,13 +455,13 @@ Docker configs とは直接関係がありません。
   <li>
     <p>root 鍵を生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"root-ca.key"</span> 4096
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"root-ca.key"</span> 4096
 </code></pre></div>    </div>
   </li>
   <li>
     <p>root 鍵を使って CSR を生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl req <span class="se">\</span>
           <span class="nt">-new</span> <span class="nt">-key</span> <span class="s2">"root-ca.key"</span> <span class="se">\</span>
           <span class="nt">-out</span> <span class="s2">"root-ca.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
           <span class="nt">-subj</span> <span class="s1">'/C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA'</span>
@@ -481,7 +481,7 @@ subjectKeyIdentifier=hash
   <li>
     <p>証明書にサインします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 3650 <span class="nt">-in</span> <span class="s2">"root-ca.csr"</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 3650 <span class="nt">-in</span> <span class="s2">"root-ca.csr"</span> <span class="se">\</span>
                <span class="nt">-signkey</span> <span class="s2">"root-ca.key"</span> <span class="nt">-sha256</span> <span class="nt">-out</span> <span class="s2">"root-ca.crt"</span> <span class="se">\</span>
                <span class="nt">-extfile</span> <span class="s2">"root-ca.cnf"</span> <span class="nt">-extensions</span> <span class="se">\</span>
                root_ca
@@ -490,13 +490,13 @@ subjectKeyIdentifier=hash
   <li>
     <p>サイト鍵を生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"site.key"</span> 4096
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"site.key"</span> 4096
 </code></pre></div>    </div>
   </li>
   <li>
     <p>サイト証明書を生成し、サイト鍵を用いてサインします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="nt">-new</span> <span class="nt">-key</span> <span class="s2">"site.key"</span> <span class="nt">-out</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-new</span> <span class="nt">-key</span> <span class="s2">"site.key"</span> <span class="nt">-out</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
           <span class="nt">-subj</span> <span class="s1">'/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'</span>
 </code></pre></div>    </div>
   </li>
@@ -517,7 +517,7 @@ subjectKeyIdentifier=hash
   <li>
     <p>サイト証明書にサインします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 750 <span class="nt">-in</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 750 <span class="nt">-in</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
     <span class="nt">-CA</span> <span class="s2">"root-ca.crt"</span> <span class="nt">-CAkey</span> <span class="s2">"root-ca.key"</span> <span class="nt">-CAcreateserial</span> <span class="se">\</span>
     <span class="nt">-out</span> <span class="s2">"site.crt"</span> <span class="nt">-extfile</span> <span class="s2">"site.cnf"</span> <span class="nt">-extensions</span> server
 </code></pre></div>    </div>
@@ -558,31 +558,31 @@ Docker secrets はどのようなファイルであっても、サイズが 500 
 こうして鍵と証明書は、これを利用するサービスから切り離すことができます。
 ここでの例では、secrets とファイル名は同一にしています。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker secret create site.key site.key
-
-<span class="nv">$ </span>docker secret create site.crt site.crt
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker secret create site.key site.key
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker secret create site.crt site.crt
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Docker config の中に <code class="language-plaintext highlighter-rouge">site.conf</code> ファイルを保存します。
 第 1 パラメーターは config 名、第 2 パラメーターはそれを読み込むファイル名です。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create site.conf site.conf
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create site.conf site.conf
 </code></pre></div>    </div>
 
     <p>configs の一覧を確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config <span class="nb">ls
-
-</span>ID                          NAME                CREATED             UPDATED
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">ls</span>
+<span class="go">
+ID                          NAME                CREATED             UPDATED
 4ory233120ccg7biwvy11gl5z   site.conf           4 seconds ago       4 seconds ago
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Nginx を起動するサービスを生成し、2 つの secrets と config へのアクセスを許可します。
 モードは <code class="language-plaintext highlighter-rouge">0440</code> とし、読み込み可とするのは所有者とそのグループのみ、つまりすべてへの読み込み許可は与えないようにします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
      <span class="nt">--name</span> nginx <span class="se">\</span>
      <span class="nt">--secret</span> site.key <span class="se">\</span>
      <span class="nt">--secret</span> site.crt <span class="se">\</span>
@@ -603,73 +603,73 @@ Docker secrets はどのようなファイルであっても、サイズが 500 
   <li>
     <p>Nginx サービスが起動していることを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID            NAME   MODE        REPLICAS  IMAGE
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID            NAME   MODE        REPLICAS  IMAGE
 zeskcec62q24  nginx  replicated  1/1       nginx:latest
 
-<span class="nv">$ </span>docker service ps nginx
-
+</span><span class="gp">$</span><span class="w"> </span>docker service ps nginx
+<span class="go">
 NAME                  IMAGE         NODE  DESIRED STATE  CURRENT STATE          ERROR  PORTS
 nginx.1.9ls3yo9ugcls  nginx:latest  moby  Running        Running 3 minutes ago
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>そのサービスが操作可能であることを確認します。
 つまり Nginx サーバーへアクセスができ、正しい TLS 証明書が用いられていることを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--cacert</span> root-ca.crt https://0.0.0.0:3000
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--cacert</span> root-ca.crt https://0.0.0.0:3000
+<span class="go">
+</span><span class="gp">&lt;!DOCTYPE html&gt;</span><span class="w">
+</span><span class="gp">&lt;html&gt;</span><span class="w">
+</span><span class="gp">&lt;head&gt;</span><span class="w">
+</span><span class="gp">&lt;title&gt;</span>Welcome to nginx!&lt;/title&gt;
+<span class="gp">&lt;style&gt;</span><span class="w">
+</span><span class="go">    body {
+</span><span class="gp">        width: 35em;</span><span class="w">
+</span><span class="gp">        margin: 0 auto;</span><span class="w">
+</span><span class="gp">        font-family: Tahoma, Verdana, Arial, sans-serif;</span><span class="w">
+</span><span class="go">    }
+</span><span class="gp">&lt;/style&gt;</span><span class="w">
+</span><span class="gp">&lt;/head&gt;</span><span class="w">
+</span><span class="gp">&lt;body&gt;</span><span class="w">
+</span><span class="gp">&lt;h1&gt;</span>Welcome to nginx!&lt;/h1&gt;
+<span class="gp">&lt;p&gt;</span>If you see this page, the nginx web server is successfully installed and
+<span class="gp">working. Further configuration is required.&lt;/p&gt;</span><span class="w">
+</span><span class="go">
+</span><span class="gp">&lt;p&gt;</span>For online documentation and support, refer to
+<span class="gp">&lt;a href="https://nginx.org"&gt;</span>nginx.org&lt;/a&gt;.&lt;br/&gt;
+<span class="go">Commercial support is available at
+</span><span class="gp">&lt;a href="https://www.nginx.com"&gt;</span>www.nginx.com&lt;/a&gt;.&lt;/p&gt;
+<span class="go">
+</span><span class="gp">&lt;p&gt;</span>&lt;em&gt;Thank you <span class="k">for </span>using nginx.&lt;/em&gt;&lt;/p&gt;
+<span class="gp">&lt;/body&gt;</span><span class="w">
+</span><span class="gp">&lt;/html&gt;</span><span class="w">
+</span></code></pre></div>    </div>
 
-&lt;<span class="o">!</span>DOCTYPE html&gt;
-&lt;html&gt;
-&lt;<span class="nb">head</span><span class="o">&gt;</span>
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;
-&lt;style&gt;
-    body <span class="o">{</span>
-        width: 35em<span class="p">;</span>
-        margin: 0 auto<span class="p">;</span>
-        font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span>
-    <span class="o">}</span>
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
-&lt;p&gt;If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.&lt;/p&gt;
-
-&lt;p&gt;For online documentation and support, refer to
-&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"https://nginx.org"</span><span class="o">&gt;</span>nginx.org&lt;/a&gt;.&lt;br/&gt;
-Commercial support is available at
-&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"https://www.nginx.com"</span><span class="o">&gt;</span>www.nginx.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Thank you <span class="k">for </span>using nginx.&lt;/em&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre></div>    </div>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl s_client <span class="nt">-connect</span> 0.0.0.0:3000 <span class="nt">-CAfile</span> root-ca.crt
-
-CONNECTED<span class="o">(</span>00000003<span class="o">)</span>
-<span class="nv">depth</span><span class="o">=</span>1 /C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>Swarm Secret Example CA
-verify <span class="k">return</span>:1
-<span class="nv">depth</span><span class="o">=</span>0 /C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>localhost
-verify <span class="k">return</span>:1
-<span class="nt">---</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl s_client <span class="nt">-connect</span> 0.0.0.0:3000 <span class="nt">-CAfile</span> root-ca.crt
+<span class="go">
+CONNECTED(00000003)
+depth=1 /C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA
+verify return:1
+depth=0 /C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost
+verify return:1
+---
 Certificate chain
- 0 s:/C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>localhost
-   i:/C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>Swarm Secret Example CA
-<span class="nt">---</span>
+ 0 s:/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost
+   i:/C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA
+---
 Server certificate
-<span class="nt">-----BEGIN</span> CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
 …
-<span class="nt">-----END</span> CERTIFICATE-----
-<span class="nv">subject</span><span class="o">=</span>/C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>localhost
-<span class="nv">issuer</span><span class="o">=</span>/C<span class="o">=</span>US/ST<span class="o">=</span>CA/L<span class="o">=</span>San Francisco/O<span class="o">=</span>Docker/CN<span class="o">=</span>Swarm Secret Example CA
-<span class="nt">---</span>
+-----END CERTIFICATE-----
+subject=/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost
+issuer=/C=US/ST=CA/L=San Francisco/O=Docker/CN=Swarm Secret Example CA
+---
 No client certificate CA names sent
-<span class="nt">---</span>
-SSL handshake has <span class="nb">read </span>1663 bytes and written 712 bytes
-<span class="nt">---</span>
+---
+SSL handshake has read 1663 bytes and written 712 bytes
+---
 New, TLSv1/SSLv3, Cipher is AES256-SHA
 Server public key is 4096 bit
 Secure Renegotiation IS supported
@@ -683,18 +683,18 @@ SSL-Session:
     Master-Key: F39D1B12274BA16D3A906F390A61438221E381952E9E1E05D3DD784F0135FB81353DA38C6D5C021CB926E844DFC49FC4
     Key-Arg   : None
     Start Time: 1481685096
-    Timeout   : 300 <span class="o">(</span>sec<span class="o">)</span>
-    Verify <span class="k">return </span>code: 0 <span class="o">(</span>ok<span class="o">)</span>
-</code></pre></div>    </div>
+    Timeout   : 300 (sec)
+    Verify return code: 0 (ok)
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>この例を実行した後に、次に示す例は確認しないのであれば、<code class="language-plaintext highlighter-rouge">nginx</code> サービスと保存した secrets、config を削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>nginx
-
-<span class="nv">$ </span>docker secret <span class="nb">rm </span>site.crt site.key
-
-<span class="nv">$ </span>docker config <span class="nb">rm </span>site.conf
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>nginx
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker secret <span class="nb">rm </span>site.crt site.key
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">rm </span>site.conf
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -735,7 +735,7 @@ SSL-Session:
   <li>
     <p><code class="language-plaintext highlighter-rouge">nginx</code> サービスを更新して、古い config から新しい config を利用するようにします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="se">\</span>
   <span class="nt">--config-rm</span> site.conf <span class="se">\</span>
   <span class="nt">--config-add</span> <span class="nb">source</span><span class="o">=</span>site-v2.conf,target<span class="o">=</span>/etc/nginx/conf.d/site.conf,mode<span class="o">=</span>0440 <span class="se">\</span>
   nginx
@@ -745,18 +745,18 @@ SSL-Session:
     <p><code class="language-plaintext highlighter-rouge">docker service ps nginx</code> を実行して、<code class="language-plaintext highlighter-rouge">nginx</code> サービスが問題なく再デプロイされていることを確認します。
 正常であれば、古い config つまり <code class="language-plaintext highlighter-rouge">site.conf</code> を削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config <span class="nb">rm </span>site.conf
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">rm </span>site.conf
 </code></pre></div>    </div>
   </li>
   <li>
     <p>クリーンアップします。
 <code class="language-plaintext highlighter-rouge">nginx</code> サービスを削除し、同じく secrets と configs も削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>nginx
-
-<span class="nv">$ </span>docker secret <span class="nb">rm </span>site.crt site.key
-
-<span class="nv">$ </span>docker config <span class="nb">rm </span>site-v2.conf
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>nginx
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker secret <span class="nb">rm </span>site.crt site.key
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">rm </span>site-v2.conf
 </code></pre></div>    </div>
   </li>
 </ol>

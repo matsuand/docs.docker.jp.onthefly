@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けのコンテナー利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>開発向けのコンテナー利用</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
+                        <section class="section"><h1>開発向けのコンテナー利用</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -138,14 +138,14 @@
 <p>それではここでボリュームを生成します。
 作り出すボリュームは 1 つは MySQL のデータ用、そしてもう 1 つは MySQL の設定用です。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create mysql
-<span class="nv">$ </span>docker volume create mysql_config
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume create mysql
+<span class="gp">$</span><span class="w"> </span>docker volume create mysql_config
 </code></pre></div></div>
 
 <p>またここでネットワークを生成して、アプリケーションとデータベースが互いにやりとりできるようにします。
 ネットワークはユーザー定義によるブリッジネットワークであり、DNS 検索サービスが提供されるため、接続文字列を使った設定が利用可能になります。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mysqlnet
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create mysqlnet
 </code></pre></div></div>
 
 <p>コンテナーとして MySQL を実行します。
@@ -154,7 +154,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 以下のコマンドにおいては<code class="language-plaintext highlighter-rouge">-v</code>オプションの指定により、ボリュームを使ってコンテナーを起動します。
 詳しくは <a href="/docs.docker.jp.onthefly/storage/volumes/">Docker ボリューム</a> を参照してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
   <span class="nt">-v</span> mysql_config:/etc/mysql <span class="nt">-p</span> 3306:3306 <span class="se">\</span>
   <span class="nt">--network</span> mysqlnet <span class="se">\</span>
   <span class="nt">--name</span> mysqldb <span class="se">\</span>
@@ -166,22 +166,22 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。
 なおパスワードプロンプトには「p@ssw0rd1」を入力します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> mysqldb mysql <span class="nt">-u</span> root <span class="nt">-p</span>
-Enter password:
-Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span><span class="nb">.</span>
-Your MySQL connection <span class="nb">id </span>is 8
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> mysqldb mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+<span class="go">Enter password:
+</span><span class="gp">Welcome to the MySQL monitor.  Commands end with ;</span><span class="w"> </span>or <span class="se">\g</span><span class="nb">.</span>
+<span class="go">Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
 
-Copyright <span class="o">(</span>c<span class="o">)</span> 2000, 2021, Oracle and/or its affiliates.
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
 
-Type <span class="s1">'help;'</span> or <span class="s1">'\h'</span> <span class="k">for </span>help. Type <span class="s1">'\c'</span> to clear the current input statement.
-
-mysql&gt;
-</code></pre></div></div>
+</span><span class="gp">Type 'help;</span><span class="s1">' or '</span><span class="se">\h</span><span class="s1">' for help. Type '</span><span class="se">\c</span><span class="s1">' to clear the current input statement.
+</span><span class="go">
+</span><span class="gp">mysql&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <h3 id="connect-the-application-to-the-database">アプリケーションからのデータベース接続</h3>
 
@@ -195,69 +195,69 @@ Python アプリのディレクトリ構造を確認するには、<a href="/doc
 さらにサーバーへの接続内容も追加することにします。
 1 つはレコード取得であり、1 つはレコード挿入です。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import mysql.connector
-import json
-from flask import Flask
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
-app <span class="o">=</span> Flask<span class="o">(</span>__name__<span class="o">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-@app.route<span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
-def hello_world<span class="o">()</span>:
-  <span class="k">return</span> <span class="s1">'Hello, Docker!'</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
+  <span class="k">return</span> <span class="s">'Hello, Docker!'</span>
 
-@app.route<span class="o">(</span><span class="s1">'/widgets'</span><span class="o">)</span>
-def get_widgets<span class="o">()</span> :
-  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
-    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
-    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
-    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>,
-    <span class="nv">database</span><span class="o">=</span><span class="s2">"inventory"</span>
-  <span class="o">)</span>
-  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/widgets'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_widgets</span><span class="p">()</span> <span class="p">:</span>
+  <span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">"mysqldb"</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s">"p@ssw0rd1"</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s">"inventory"</span>
+  <span class="p">)</span>
+  <span class="n">cursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
 
 
-  cursor.execute<span class="o">(</span><span class="s2">"SELECT * FROM widgets"</span><span class="o">)</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM widgets"</span><span class="p">)</span>
 
-  <span class="nv">row_headers</span><span class="o">=[</span>x[0] <span class="k">for </span>x <span class="k">in </span>cursor.description] <span class="c">#this will extract row headers</span>
+  <span class="n">row_headers</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">.</span><span class="n">description</span><span class="p">]</span> <span class="c1">#this will extract row headers
+</span>
+  <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+  <span class="n">json_data</span><span class="o">=</span><span class="p">[]</span>
+  <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">json_data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">row_headers</span><span class="p">,</span><span class="n">result</span><span class="p">)))</span>
 
-  results <span class="o">=</span> cursor.fetchall<span class="o">()</span>
-  <span class="nv">json_data</span><span class="o">=[]</span>
-  <span class="k">for </span>result <span class="k">in </span>results:
-    json_data.append<span class="o">(</span>dict<span class="o">(</span>zip<span class="o">(</span>row_headers,result<span class="o">)))</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
-  cursor.close<span class="o">()</span>
+  <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
 
-  <span class="k">return </span>json.dumps<span class="o">(</span>json_data<span class="o">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/initdb'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">db_init</span><span class="p">():</span>
+  <span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">"mysqldb"</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s">"p@ssw0rd1"</span>
+  <span class="p">)</span>
+  <span class="n">cursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
 
-@app.route<span class="o">(</span><span class="s1">'/initdb'</span><span class="o">)</span>
-def db_init<span class="o">()</span>:
-  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
-    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
-    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
-    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>
-  <span class="o">)</span>
-  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DROP DATABASE IF EXISTS inventory"</span><span class="p">)</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE DATABASE inventory"</span><span class="p">)</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
-  cursor.execute<span class="o">(</span><span class="s2">"DROP DATABASE IF EXISTS inventory"</span><span class="o">)</span>
-  cursor.execute<span class="o">(</span><span class="s2">"CREATE DATABASE inventory"</span><span class="o">)</span>
-  cursor.close<span class="o">()</span>
+  <span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">"mysqldb"</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s">"p@ssw0rd1"</span><span class="p">,</span>
+    <span class="n">database</span><span class="o">=</span><span class="s">"inventory"</span>
+  <span class="p">)</span>
+  <span class="n">cursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
 
-  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
-    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
-    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
-    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>,
-    <span class="nv">database</span><span class="o">=</span><span class="s2">"inventory"</span>
-  <span class="o">)</span>
-  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DROP TABLE IF EXISTS widgets"</span><span class="p">)</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))"</span><span class="p">)</span>
+  <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
-  cursor.execute<span class="o">(</span><span class="s2">"DROP TABLE IF EXISTS widgets"</span><span class="o">)</span>
-  cursor.execute<span class="o">(</span><span class="s2">"CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))"</span><span class="o">)</span>
-  cursor.close<span class="o">()</span>
+  <span class="k">return</span> <span class="s">'init database'</span>
 
-  <span class="k">return</span> <span class="s1">'init database'</span>
-
-<span class="k">if </span>__name__ <span class="o">==</span> <span class="s2">"__main__"</span>:
-  app.run<span class="o">(</span>host <span class="o">=</span><span class="s1">'0.0.0.0'</span><span class="o">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+  <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span> <span class="o">=</span><span class="s">'0.0.0.0'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>ここでは MySQL モジュールを追加して、データベースサーバーに接続するようなコードに変更しました。
@@ -267,19 +267,19 @@ def db_init<span class="o">()</span>:
 
 <p>まずは pip を使ってアプリケーションに<code class="language-plaintext highlighter-rouge">mysql-connector-python</code>モジュールを追加します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install </span>mysql-connector-python
-<span class="nv">$ </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>pip3 <span class="nb">install </span>mysql-connector-python
+<span class="gp">$</span><span class="w"> </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
 </code></pre></div></div>
 
 <p>そしてイメージをビルドします。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> python-docker-dev <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> python-docker-dev <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>ではこのコンテナーをデータベースのネットワークに追加して実行します。
 これによってデータベースへのアクセスは、コンテナー名を使って行えるようになります。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
   <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--network</span> mysqlnet <span class="se">\</span>
   <span class="nt">--name</span> rest-server <span class="se">\</span>
@@ -289,14 +289,14 @@ def db_init<span class="o">()</span>:
 
 <p>アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
-<span class="nv">$ </span>curl http://localhost:5000/widgets
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/initdb
+<span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/widgets
 </code></pre></div></div>
 
 <p>サービスからは以下のような JSON データが返ってくるはずです。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[]</span>
-</code></pre></div></div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[]</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発環境</h2>
 
@@ -345,7 +345,7 @@ def db_init<span class="o">()</span>:
 
 <p>アプリケーションを起動して正常に動作していることを確認するために、以下のコマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
 <p>ここでは<code class="language-plaintext highlighter-rouge">--build</code>フラグを指定しました。
@@ -354,14 +354,14 @@ def db_init<span class="o">()</span>:
 <p>では API エンドポイントを確認します。
 新たな端末を開き、curl コマンドを使って、サーバーへ GET リクエストを投げてみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
-<span class="nv">$ </span>curl http://localhost:5000/widgets
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/initdb
+<span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/widgets
 </code></pre></div></div>
 
 <p>以下のようなレスポンスが返ってくるはずです。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[]</span>
-</code></pre></div></div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>この結果になったのは、データベースが空であるからです。</p>
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm へのサービスデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm へのサービスデプロイ" />
   <meta property="og:description" content="Deploy services to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/services/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm へのサービスデプロイ","description":"Deploy services to a swarm","url":"https://docs.docker.com/engine/swarm/services/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 39 分</em></p>
-<p>Swarm サービスは <strong>宣言型</strong> モデルを採用しています。
+                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 39 分</em></p><p>Swarm サービスは <strong>宣言型</strong> モデルを採用しています。
 サービスに望むべき状態を定義して、その状態維持を Docker に委ねるものです。
 この状態には以下のような情報があります（ただしこれだけではありません）。</p>
 
@@ -129,17 +128,17 @@
 これではあまりおもしろくありません。
 Nginx サービスとやりとりできないからです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create nginx
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create nginx
 </code></pre></div></div>
 
 <p>サービスは利用可能なノード上にスケジューリングされます。
 サービスが生成され正しく起動していることを確認するには<code class="language-plaintext highlighter-rouge">docker service ls</code>コマンドを実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE                                                                                             PORTS
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID                  NAME                MODE                REPLICAS            IMAGE                                                                                             PORTS
 a3iixnklxuem        quizzical_lamarr    replicated          1/1                 docker.io/library/nginx@sha256:41ad9967ea448d7c2b203c699b429abe1ed5af331cd92533900c6d77490e0268
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>作成されたサービスは、必ずしもすぐに実行されるとは限りません。
 イメージが利用不能であるとか、サービスに設定した条件を満たすノードがないなどの理由で、サービスが保留状態（pending）になることがあります。
@@ -147,19 +146,19 @@ a3iixnklxuem        quizzical_lamarr    replicated          1/1                 
 
 <p>サービスに名前をつけるには<code class="language-plaintext highlighter-rouge">--name</code>フラグを指定します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> my_web nginx
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> my_web nginx
 </code></pre></div></div>
 
 <p>スタンドアロンなコンテナーと同じように、サービスコンテナーに起動させるコマンドは、イメージ名の後に追加して指定します。
 以下の例では、<code class="language-plaintext highlighter-rouge">alpine</code>イメージを用いて<code class="language-plaintext highlighter-rouge">helloworld</code>という名前のサービスを起動し、コマンド<code class="language-plaintext highlighter-rouge">ping docker.com</code>を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> helloworld alpine ping docker.com
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> helloworld alpine ping docker.com
 </code></pre></div></div>
 
 <p>サービスの実行にあたってイメージタグを指定することもできます。
 以下の例は先ほどの例を修正して<code class="language-plaintext highlighter-rouge">alpine:3.6</code>タグを用います。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> helloworld alpine:3.6 ping docker.com
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> helloworld alpine:3.6 ping docker.com
 </code></pre></div></div>
 
 <p>イメージタグ指定の詳細は <a href="#specify-the-image-version-a-service-should-use">サービスが利用するイメージバージョンの指定</a> を参照してください。</p>
@@ -175,12 +174,12 @@ a3iixnklxuem        quizzical_lamarr    replicated          1/1                 
 
 <p>資格情報仕様として Config を利用するには、まず資格情報仕様を含んだ Docker Config を生成します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create credspec credspec.json
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create credspec credspec.json
 </code></pre></div></div>
 
 <p>Now, you should have a Docker Config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create <span class="nt">--credential-spec</span><span class="o">=</span><span class="s2">"config://credspec"</span> &lt;your image&gt;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--credential-spec</span><span class="o">=</span><span class="s2">"config://credspec"</span> &lt;your image&gt;
 </code></pre></div></div>
 
 <p>Your service will use the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec will not be mounted into the container.</p>
@@ -192,9 +191,9 @@ a3iixnklxuem        quizzical_lamarr    replicated          1/1                 
 your image is stored on <code class="language-plaintext highlighter-rouge">registry.example.com</code>, which is a private registry, use
 a command like the following:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker login registry.example.com
-
-<span class="nv">$ </span>docker service  create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker login registry.example.com
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker service  create <span class="se">\</span>
   <span class="nt">--with-registry-auth</span> <span class="se">\</span>
   <span class="nt">--name</span> my_service <span class="se">\</span>
   registry.example.com/acme/my_image:latest
@@ -227,7 +226,6 @@ The credential spec contained in the specified <code class="language-plaintext h
 contents="{...}"
 echo $contents &gt; contents.json
 </code></pre></div></div>
-
 <p>Make sure that the nodes to which you are deploying are correctly configured for the gMSA.</p>
 
 <p>To use a Config as a credential spec, create a Docker Config in a credential spec file named <code class="language-plaintext highlighter-rouge">credpspec.json</code>.
@@ -235,7 +233,6 @@ echo $contents &gt; contents.json
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
 </code></pre></div></div>
-
 <p>Now you can create a service using this credential spec. Specify the <code class="language-plaintext highlighter-rouge">--credential-spec</code> flag with the config name:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create --credential-spec="config://credspec" &lt;your image&gt;
 </code></pre></div></div>
@@ -257,15 +254,15 @@ was previously published.</p>
 <p>Assuming that the <code class="language-plaintext highlighter-rouge">my_web</code> service from the previous section still exists, use
 the following command to update it to publish port 80.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--publish-add</span> 80 my_web
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--publish-add</span> 80 my_web
 </code></pre></div></div>
 
 <p>To verify that it worked, use <code class="language-plaintext highlighter-rouge">docker service ls</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE                                                                                             PORTS
-4nhxl7oxw5vz        my_web              replicated          1/1                 docker.io/library/nginx@sha256:41ad9967ea448d7c2b203c699b429abe1ed5af331cd92533900c6d77490e0268   <span class="k">*</span>:0-&gt;80/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID                  NAME                MODE                REPLICAS            IMAGE                                                                                             PORTS
+</span><span class="gp">4nhxl7oxw5vz        my_web              replicated          1/1                 docker.io/library/nginx@sha256:41ad9967ea448d7c2b203c699b429abe1ed5af331cd92533900c6d77490e0268   *:0-&gt;</span>80/tcp
 </code></pre></div></div>
 
 <p>For more information on how publishing ports works, see
@@ -281,7 +278,7 @@ including the image name and tag it runs. See
 service by its ID or name, as shown in the output of the <code class="language-plaintext highlighter-rouge">docker service ls</code>
 command. The following command removes the <code class="language-plaintext highlighter-rouge">my_web</code> service.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service remove my_web
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service remove my_web
 </code></pre></div></div>
 
 <h2 id="service-configuration-details">Service configuration details</h2>
@@ -311,7 +308,7 @@ container:</p>
 set to <code class="language-plaintext highlighter-rouge">myvalue</code>, run from the <code class="language-plaintext highlighter-rouge">/tmp/</code> directory, and run as the
 <code class="language-plaintext highlighter-rouge">my_user</code> user.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> helloworld <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> helloworld <span class="se">\</span>
   <span class="nt">--env</span> <span class="nv">MYVAR</span><span class="o">=</span>myvalue <span class="se">\</span>
   <span class="nt">--workdir</span> /tmp <span class="se">\</span>
   <span class="nt">--user</span> my_user <span class="se">\</span>
@@ -325,7 +322,7 @@ The following example updates an existing service called <code class="language-p
 it runs the command <code class="language-plaintext highlighter-rouge">ping docker.com</code> instead of whatever command it was running
 before:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--args</span> <span class="s2">"ping docker.com"</span> helloworld
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--args</span> <span class="s2">"ping docker.com"</span> helloworld
 </code></pre></div></div>
 
 <h3 id="specify-the-image-version-a-service-should-use">サービスが利用するイメージバージョンの指定</h3>
@@ -344,7 +341,7 @@ different ways, depending on your desired outcome.</p>
 When the request to create a container task is received on a worker node, the
 worker node only sees the digest, not the tag.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu:16.04
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu:16.04
 </code></pre></div>    </div>
 
     <p>Some tags represent discrete releases, such as <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>. Tags like this
@@ -363,16 +360,16 @@ the service task.</p>
 
     <p>Thus, the following two commands are equivalent:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu
-
-<span class="nv">$ </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu:latest
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> ubuntu:latest
 </code></pre></div>    </div>
   </li>
   <li>
     <p>If you specify a digest directly, that exact version of the image is always
 used when creating service tasks.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
     <span class="nt">--name</span><span class="o">=</span><span class="s2">"myservice"</span> <span class="se">\</span>
     ubuntu:16.04@sha256:35bc48a1ca97c3971611dc4662d08d131869daa692acb281c7e9e052924e38b1
 </code></pre></div>    </div>
@@ -408,7 +405,7 @@ following is logged, substituting the placeholders for real information.</p>
 following is the current digest for <code class="language-plaintext highlighter-rouge">ubuntu:latest</code> at the time this content
 was written. The output is truncated for clarity.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect ubuntu:latest
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect ubuntu:latest
 </code></pre></div></div>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"RepoDigests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -542,7 +539,7 @@ more details about swarm service networking, see
 <p>Imagine that you have a 10-node swarm, and you deploy an Nginx service running
 three tasks on a 10-node swarm:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> my_web <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> my_web <span class="se">\</span>
                         <span class="nt">--replicas</span> 3 <span class="se">\</span>
                         <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>8080,target<span class="o">=</span>80 <span class="se">\</span>
                         nginx
@@ -557,15 +554,15 @@ host, substitute the host’s IP address or resolvable host name.</p>
 
 <p>The HTML output is truncated:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8080
-
-&lt;<span class="o">!</span>DOCTYPE html&gt;
-&lt;html&gt;
-&lt;<span class="nb">head</span><span class="o">&gt;</span>
-&lt;title&gt;Welcome to nginx!&lt;/title&gt;
-...truncated...
-&lt;/html&gt;
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl localhost:8080
+<span class="go">
+</span><span class="gp">&lt;!DOCTYPE html&gt;</span><span class="w">
+</span><span class="gp">&lt;html&gt;</span><span class="w">
+</span><span class="gp">&lt;head&gt;</span><span class="w">
+</span><span class="gp">&lt;title&gt;</span>Welcome to nginx!&lt;/title&gt;
+<span class="go">...truncated...
+</span><span class="gp">&lt;/html&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Subsequent connections may be routed to the same swarm node or a different one.</p>
 
@@ -599,7 +596,7 @@ web page for (effectively) <strong>a random swarm node</strong> running the serv
 <p>The following example runs nginx as a service on each node in your swarm and
 exposes nginx port locally on each swarm node.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--mode</span> global <span class="se">\</span>
   <span class="nt">--publish</span> <span class="nv">mode</span><span class="o">=</span>host,target<span class="o">=</span>80,published<span class="o">=</span>8080 <span class="se">\</span>
   <span class="nt">--name</span><span class="o">=</span>nginx <span class="se">\</span>
@@ -623,7 +620,7 @@ this topic.</p>
 <p>First, create overlay network on a manager node using the <code class="language-plaintext highlighter-rouge">docker network create</code>
 command with the <code class="language-plaintext highlighter-rouge">--driver overlay</code> flag.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--driver</span> overlay my-network
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">--driver</span> overlay my-network
 </code></pre></div></div>
 
 <p>After you create an overlay network in swarm mode, all manager nodes have access
@@ -632,7 +629,7 @@ to the network.</p>
 <p>You can create a new service and pass the <code class="language-plaintext highlighter-rouge">--network</code> flag to attach the service
 to the overlay network:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 3 <span class="se">\</span>
   <span class="nt">--network</span> my-network <span class="se">\</span>
   <span class="nt">--name</span> my-web <span class="se">\</span>
@@ -644,12 +641,12 @@ to the overlay network:</p>
 <p>You can also connect an existing service to an overlay network using the
 <code class="language-plaintext highlighter-rouge">--network-add</code> flag.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--network-add</span> my-network my-web
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--network-add</span> my-network my-web
 </code></pre></div></div>
 
 <p>To disconnect a running service from a network, use the <code class="language-plaintext highlighter-rouge">--network-rm</code> flag.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--network-rm</span> my-network my-web
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--network-rm</span> my-network my-web
 </code></pre></div></div>
 
 <p>For more information on overlay networking and service discovery, refer to
@@ -754,7 +751,7 @@ mode, the service defaults to <code class="language-plaintext highlighter-rouge"
 the number of replica tasks you want to start using the <code class="language-plaintext highlighter-rouge">--replicas</code> flag. For
 example, to start a replicated nginx service with 3 replica tasks:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> my_web <span class="se">\</span>
   <span class="nt">--replicas</span> 3 <span class="se">\</span>
   nginx
@@ -765,7 +762,7 @@ example, to start a replicated nginx service with 3 replica tasks:</p>
 places a task for the global service on the new node. For example to start a
 service that runs alpine on every node in the swarm:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> myservice <span class="se">\</span>
   <span class="nt">--mode</span> global <span class="se">\</span>
   alpine top
@@ -809,7 +806,7 @@ services run on the same node, or each node only runs one replica, or that some
 nodes don’t run any replicas. For global services, the service runs on every
 node that meets the placement constraint and any <a href="#reserve-memory-or-cpus-for-a-service">resource requirements</a>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> my-nginx <span class="se">\</span>
   <span class="nt">--replicas</span> 5 <span class="se">\</span>
   <span class="nt">--constraint</span> node.labels.region<span class="o">==</span>east <span class="se">\</span>
@@ -823,7 +820,7 @@ file.</p>
 nodes where they are all met. The following example limits the service to run on
 all nodes where <code class="language-plaintext highlighter-rouge">region</code> is set to <code class="language-plaintext highlighter-rouge">east</code> and <code class="language-plaintext highlighter-rouge">type</code> is not set to <code class="language-plaintext highlighter-rouge">devel</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> my-nginx <span class="se">\</span>
   <span class="nt">--mode</span> global <span class="se">\</span>
   <span class="nt">--constraint</span> node.labels.region<span class="o">==</span>east <span class="se">\</span>
@@ -860,7 +857,7 @@ based on the value of the <code class="language-plaintext highlighter-rouge">dat
 <code class="language-plaintext highlighter-rouge">datacenter=us-east</code> and others have <code class="language-plaintext highlighter-rouge">datacenter=us-west</code>, the service is
 deployed as evenly as possible across the two sets of nodes.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 9 <span class="se">\</span>
   <span class="nt">--name</span> redis_2 <span class="se">\</span>
   <span class="nt">--placement-pref</span> <span class="s1">'spread=node.labels.datacenter'</span> <span class="se">\</span>
@@ -884,7 +881,7 @@ order they are encountered. The following example sets up a service with
 multiple placement preferences. Tasks are spread first over the various
 datacenters, and then over racks (as indicated by the respective labels):</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 9 <span class="se">\</span>
   <span class="nt">--name</span> redis_2 <span class="se">\</span>
   <span class="nt">--placement-pref</span> <span class="s1">'spread=node.labels.datacenter'</span> <span class="se">\</span>
@@ -931,7 +928,7 @@ flag for <code class="language-plaintext highlighter-rouge">docker service creat
 replicas at a time. When an updated task returns either <code class="language-plaintext highlighter-rouge">RUNNING</code> or <code class="language-plaintext highlighter-rouge">FAILED</code>,
 the scheduler waits 10 seconds before stopping the next task to update:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 10 <span class="se">\</span>
   <span class="nt">--name</span> my_web <span class="se">\</span>
   <span class="nt">--update-delay</span> 10s <span class="se">\</span>
@@ -963,11 +960,11 @@ to the configuration that was in place before the most recent
 <p>Other options can be combined with <code class="language-plaintext highlighter-rouge">--rollback</code>; for example,
 <code class="language-plaintext highlighter-rouge">--update-delay 0s</code> to execute the rollback without a delay between tasks:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="se">\</span>
   <span class="nt">--rollback</span> <span class="se">\</span>
   <span class="nt">--update-delay</span> 0s
-  my_web
-</code></pre></div></div>
+<span class="go">  my_web
+</span></code></pre></div></div>
 
 <p>You can configure a service to roll back automatically if a service update fails
 to deploy. See <a href="#automatically-roll-back-if-an-update-fails">Automatically roll back if an update fails</a>.</p>
@@ -1027,7 +1024,7 @@ parallel. Tasks are monitored for 20 seconds after rollback to be sure they do
 not exit, and a maximum failure ratio of 20% is tolerated. Default values are
 used for <code class="language-plaintext highlighter-rouge">--rollback-delay</code> and <code class="language-plaintext highlighter-rouge">--rollback-failure-action</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span><span class="o">=</span>my_redis <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span><span class="o">=</span>my_redis <span class="se">\</span>
                         <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
                         <span class="nt">--rollback-parallelism</span><span class="o">=</span>2 <span class="se">\</span>
                         <span class="nt">--rollback-monitor</span><span class="o">=</span>20s <span class="se">\</span>
@@ -1058,7 +1055,7 @@ created automatically according to the volume specification on the service.</p>
 
 <p>To use existing data volumes with a service use the <code class="language-plaintext highlighter-rouge">--mount</code> flag:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--mount</span> <span class="nv">src</span><span class="o">=</span>&lt;VOLUME-NAME&gt;,dst<span class="o">=</span>&lt;CONTAINER-PATH&gt; <span class="se">\</span>
   <span class="nt">--name</span> myservice <span class="se">\</span>
   &lt;IMAGE&gt;
@@ -1069,11 +1066,11 @@ scheduled to a particular host, then one is created. The default volume
 driver is <code class="language-plaintext highlighter-rouge">local</code>.  To use a different volume driver with this create-on-demand
 pattern, specify the driver and its options with the <code class="language-plaintext highlighter-rouge">--mount</code> flag:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span>volume,src<span class="o">=</span>&lt;VOLUME-NAME&gt;,dst<span class="o">=</span>&lt;CONTAINER-PATH&gt;,volume-driver<span class="o">=</span>&lt;DRIVER&gt;,volume-opt<span class="o">=</span>&lt;KEY0&gt;<span class="o">=</span>&lt;VALUE0&gt;,volume-opt<span class="o">=</span>&lt;KEY1&gt;<span class="o">=</span>&lt;VALUE1&gt;
-  <span class="nt">--name</span> myservice <span class="se">\</span>
-  &lt;IMAGE&gt;
-</code></pre></div></div>
+<span class="gp">  --name myservice \
+  &lt;IMAGE&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>For more information on how to create data volumes and the use of volume
 drivers, see <a href="/docs.docker.jp.onthefly/storage/volumes/">Use volumes</a>.</p>
@@ -1091,7 +1088,7 @@ task.</p>
   <li>
     <p>To mount a read-write bind:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,src<span class="o">=</span>&lt;HOST-PATH&gt;,dst<span class="o">=</span>&lt;CONTAINER-PATH&gt; <span class="se">\</span>
   <span class="nt">--name</span> myservice <span class="se">\</span>
   &lt;IMAGE&gt;
@@ -1100,7 +1097,7 @@ task.</p>
   <li>
     <p>To mount a read-only bind:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,src<span class="o">=</span>&lt;HOST-PATH&gt;,dst<span class="o">=</span>&lt;CONTAINER-PATH&gt;,readonly <span class="se">\</span>
   <span class="nt">--name</span> myservice <span class="se">\</span>
   &lt;IMAGE&gt;
@@ -1193,7 +1190,7 @@ package.</p>
 <p>This example sets the template of the created containers based on the
 service’s name and the ID of the node where the container is running:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> hosttempl <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> hosttempl <span class="se">\</span>
                         <span class="nt">--hostname</span><span class="o">=</span><span class="s2">"{{.Node.ID}}-{{.Service.Name}}"</span><span class="se">\</span>
                          busybox top
 </code></pre></div></div>
@@ -1201,13 +1198,13 @@ service’s name and the ID of the node where the container is running:</p>
 <p>To see the result of using the template, use the <code class="language-plaintext highlighter-rouge">docker service ps</code> and
 <code class="language-plaintext highlighter-rouge">docker inspect</code> commands.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps va8ew30grofhjoychbr6iot8c
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service ps va8ew30grofhjoychbr6iot8c
+<span class="go">
 ID            NAME         IMAGE                                                                                   NODE          DESIRED STATE  CURRENT STATE               ERROR  PORTS
 wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31eea4aaf4ad3bec43daf19026a7ce69912  2e7a8a9c4da2  Running        Running about a minute ago
-</code></pre></div></div>
+</span></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s2">"{{.Config.Hostname}}"</span> hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s2">"{{.Config.Hostname}}"</span> hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
 </code></pre></div></div>
 
 <h2 id="learn-more">Learn More</h2>

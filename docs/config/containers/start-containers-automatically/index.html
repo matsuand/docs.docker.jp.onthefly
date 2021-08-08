@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーの自動起動 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテナーの自動起動" />
   <meta property="og:description" content="コンテナーを自動起動する方法。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/start-containers-automatically/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーの自動起動","description":"コンテナーを自動起動する方法。","url":"https://docs.docker.com/config/containers/start-containers-automatically/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,20 +103,19 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナーの自動起動</h1>
-<p>Docker では <a href="/docs.docker.jp.onthefly/engine/reference/run/#restart-policies---restart">再起動ポリシー</a> (restart policy) が提供されています。
+                        <section class="section"><h1>コンテナーの自動起動</h1><p>Docker では <a href="/docs.docker.jp.onthefly/engine/reference/run/#restart-policies---restart">再起動ポリシー</a> (restart policy) が提供されています。
 これは Docker の停止や再起動を指示した場合に、コンテナーを自動的に起動するかどうかを制御するものです。
 再起動ポリシーを使えば、リンクしているコンテナーは確実に正しい順番で起動させることができます。
 Docker ではこの再起動ポリシーを利用することが推奨されています。
 プロセスマネージャーを利用してコンテナーを起動することはやめてください。</p>
 
-<p>再起動ポリシーは <code class="language-plaintext highlighter-rouge">dockerd</code> コマンドの <code class="language-plaintext highlighter-rouge">--live-restore</code> フラグとは異なります。
-<code class="language-plaintext highlighter-rouge">--live-restore</code> は Docker のアップグレード中にコンテナーを起動し続けるものですが、ネットワーク接続やユーザー入力は遮断されます。</p>
+<p>再起動ポリシーは<code class="language-plaintext highlighter-rouge">dockerd</code>コマンドの<code class="language-plaintext highlighter-rouge">--live-restore</code>フラグとは異なります。
+<code class="language-plaintext highlighter-rouge">--live-restore</code>は Docker のアップグレード中にコンテナーを起動し続けるものですが、ネットワーク接続やユーザー入力は遮断されます。</p>
 
 <h2 id="use-a-restart-policy">再起動ポリシーの利用</h2>
 
-<p>コンテナーに対して再起動ポリシーを設定するには、<code class="language-plaintext highlighter-rouge">docker run</code> コマンド実行時の <code class="language-plaintext highlighter-rouge">--restart</code> フラグを用います。
-<code class="language-plaintext highlighter-rouge">--restart</code> フラグには以下に示す値を指定することができます。</p>
+<p>コンテナーに対して再起動ポリシーを設定するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンド実行時の<code class="language-plaintext highlighter-rouge">--restart</code>フラグを用います。
+<code class="language-plaintext highlighter-rouge">--restart</code>フラグには以下に示す値を指定することができます。</p>
 
 <table>
   <thead>
@@ -140,24 +139,24 @@ Docker ではこの再起動ポリシーを利用することが推奨されて�
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">unless-stopped</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">always</code> と同様。ただしコンテナーが（手動またはその他によって）停止した場合は除きます。Docker デーモンが再起動した場合には再起動しません。</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">always</code>と同様。ただしコンテナーが（手動またはその他によって）停止した場合は除きます。Docker デーモンが再起動した場合には再起動しません。</td>
     </tr>
   </tbody>
 </table>
 
 <p>以下の例は Redis コンテナーを起動する際に、常に (always) 再起動するように設定していますが、ただし明示的に停止した場合や Docker が再起動された場合には再起動しないという設定です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">--restart</span> unless-stopped redis
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--restart</span> unless-stopped redis
 </code></pre></div></div>
 
-<p>以下のコマンドは、<code class="language-plaintext highlighter-rouge">redis</code> というすでに起動されているコンテナーの再起動ポリシーを変更します。</p>
+<p>以下のコマンドは、<code class="language-plaintext highlighter-rouge">redis</code>というすでに起動されているコンテナーの再起動ポリシーを変更します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker update <span class="nt">--restart</span> unless-stopped redis
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker update <span class="nt">--restart</span> unless-stopped redis
 </code></pre></div></div>
 
 <p>また以下のコマンドは、現在あるコンテナーの中で、停止されていてないものはすべて再起動します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker update <span class="nt">--restart</span> unless-stopped <span class="si">$(</span>docker ps <span class="nt">-q</span><span class="si">)</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker update <span class="nt">--restart</span> unless-stopped <span class="si">$(</span>docker ps <span class="nt">-q</span><span class="si">)</span>
 </code></pre></div></div>
 
 <h3 id="restart-policy-details">再起動ポリシーの詳細</h3>
@@ -194,7 +193,7 @@ Swarm サービスに対する再起動ポリシーは、別の方法により�
 </blockquote>
 
 <p>プロセスマネージャーを利用する場合は、普段コンテナー起動を手動で行っているときと同じコマンド
-<code class="language-plaintext highlighter-rouge">docker start</code> または <code class="language-plaintext highlighter-rouge">docker service</code> を使って、コンテナーを起動するように設定してください。
+<code class="language-plaintext highlighter-rouge">docker start</code>または<code class="language-plaintext highlighter-rouge">docker service</code>を使って、コンテナーを起動するように設定してください。
 詳しくは個々のプロセスマネージャーのドキュメントを参照してください。</p>
 
 <h3 id="using-a-process-manager-inside-containers">コンテナー内部のプロセスマネージャーの利用</h3>

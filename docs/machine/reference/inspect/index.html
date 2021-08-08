@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-machine inspect | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-machine inspect" />
   <meta property="og:description" content="マシンに関する情報を表示します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/inspect/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-machine inspect","description":"マシンに関する情報を表示します。","url":"https://docs.docker.com/machine/reference/inspect/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -135,7 +135,7 @@ Options:
 
 <p>Go 言語の <a href="http://golang.org/pkg/text/template/">text/template</a> パッケージにおいて、フォーマットの詳細が説明されています。</p>
 
-<p><code class="language-plaintext highlighter-rouge">text/template</code> の文法に加えて、追加の機能として <code class="language-plaintext highlighter-rouge">json</code> と <code class="language-plaintext highlighter-rouge">prettyjson</code> があります。
+<p><code class="language-plaintext highlighter-rouge">text/template</code>の文法に加えて、追加の機能として<code class="language-plaintext highlighter-rouge">json</code>と<code class="language-plaintext highlighter-rouge">prettyjson</code>があります。
 これは JSON 書式の出力をフォーマットするために用いられます。
 （以降に説明します。）</p>
 
@@ -143,66 +143,66 @@ Options:
 
 <p><strong>マシン情報詳細の一覧表示</strong></p>
 
-<p>これが <code class="language-plaintext highlighter-rouge">inspect</code> のデフォルトの利用方法です。</p>
+<p>これが<code class="language-plaintext highlighter-rouge">inspect</code>のデフォルトの利用方法です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine inspect dev
-
-<span class="o">{</span>
-    <span class="s2">"DriverName"</span>: <span class="s2">"virtualbox"</span>,
-    <span class="s2">"Driver"</span>: <span class="o">{</span>
-        <span class="s2">"MachineName"</span>: <span class="s2">"docker-host-128be8d287b2028316c0ad5714b90bcfc11f998056f2f790f7c1f43f3d1e6eda"</span>,
-        <span class="s2">"SSHPort"</span>: 55834,
-        <span class="s2">"Memory"</span>: 1024,
-        <span class="s2">"DiskSize"</span>: 20000,
-        <span class="s2">"Boot2DockerURL"</span>: <span class="s2">""</span>,
-        <span class="s2">"IPAddress"</span>: <span class="s2">"192.168.5.99"</span>
-    <span class="o">}</span>,
-    ...
-<span class="o">}</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine inspect dev
+<span class="go">
+{
+    "DriverName": "virtualbox",
+    "Driver": {
+        "MachineName": "docker-host-128be8d287b2028316c0ad5714b90bcfc11f998056f2f790f7c1f43f3d1e6eda",
+        "SSHPort": 55834,
+        "Memory": 1024,
+        "DiskSize": 20000,
+        "Boot2DockerURL": "",
+        "IPAddress": "192.168.5.99"
+    },
+</span><span class="c">    ...
+</span><span class="go">}
+</span></code></pre></div></div>
 
 <p><strong>マシンの IP アドレス取得</strong></p>
 
 <p>JSON 書式においては、ほとんどの項目をごく普通の方法で引き出すことができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{.Driver.IPAddress}}'</span> dev
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{.Driver.IPAddress}}'</span> dev
+<span class="go">
 192.168.5.99
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><strong>詳細フォーマット</strong></p>
 
-<p>JSON 書式から部分的に情報を引き出したい場合には、テンプレートとして <code class="language-plaintext highlighter-rouge">json</code> 機能を利用することができます。</p>
+<p>JSON 書式から部分的に情報を引き出したい場合には、テンプレートとして<code class="language-plaintext highlighter-rouge">json</code>機能を利用することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">''</span> dev-fusion
-
-<span class="o">{</span><span class="s2">"Boot2DockerURL"</span>:<span class="s2">""</span>,<span class="s2">"CPUS"</span>:8,<span class="s2">"CPUs"</span>:8,<span class="s2">"CaCertPath"</span>:<span class="s2">"/Users/hairyhenderson/.docker/machine/certs/ca.pem"</span>,<span class="s2">"DiskSize"</span>:20000,<span class="s2">"IPAddress"</span>:<span class="s2">"172.16.62.129"</span>,<span class="s2">"ISO"</span>:<span class="s2">"/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso"</span>,<span class="s2">"MachineName"</span>:<span class="s2">"dev-fusion"</span>,<span class="s2">"Memory"</span>:1024,<span class="s2">"PrivateKeyPath"</span>:<span class="s2">"/Users/hairyhenderson/.docker/machine/certs/ca-key.pem"</span>,<span class="s2">"SSHPort"</span>:22,<span class="s2">"SSHUser"</span>:<span class="s2">"docker"</span>,<span class="s2">"SwarmDiscovery"</span>:<span class="s2">""</span>,<span class="s2">"SwarmHost"</span>:<span class="s2">"tcp://0.0.0.0:3376"</span>,<span class="s2">"SwarmMaster"</span>:false<span class="o">}</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">''</span> dev-fusion
+<span class="go">
+{"Boot2DockerURL":"","CPUS":8,"CPUs":8,"CaCertPath":"/Users/hairyhenderson/.docker/machine/certs/ca.pem","DiskSize":20000,"IPAddress":"172.16.62.129","ISO":"/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso","MachineName":"dev-fusion","Memory":1024,"PrivateKeyPath":"/Users/hairyhenderson/.docker/machine/certs/ca-key.pem","SSHPort":22,"SSHUser":"docker","SwarmDiscovery":"","SwarmHost":"tcp://0.0.0.0:3376","SwarmMaster":false}
+</span></code></pre></div></div>
 
 <p>上は十分利用できるものですが、人間が読むには不便です。
-この理由から <code class="language-plaintext highlighter-rouge">prettyjson</code> があります。</p>
+この理由から<code class="language-plaintext highlighter-rouge">prettyjson</code>があります。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{prettyjson .Driver}}'</span> dev-fusion
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{prettyjson .Driver}}'</span> dev-fusion
+<span class="go">
+{
+  "Boot2DockerURL": "",
+  "CPUS": 8,
+  "CPUs": 8,
+  "CaCertPath": "/Users/hairyhenderson/.docker/machine/certs/ca.pem",
+  "DiskSize": 20000,
+  "IPAddress": "172.16.62.129",
+  "ISO": "/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso",
+  "MachineName": "dev-fusion",
+  "Memory": 1024,
+  "PrivateKeyPath": "/Users/hairyhenderson/.docker/machine/certs/ca-key.pem",
+  "SSHPort": 22,
+  "SSHUser": "docker",
+  "SwarmDiscovery": "",
+  "SwarmHost": "tcp://0.0.0.0:3376",
+  "SwarmMaster": false
+}
 
-<span class="o">{</span>
-  <span class="s2">"Boot2DockerURL"</span>: <span class="s2">""</span>,
-  <span class="s2">"CPUS"</span>: 8,
-  <span class="s2">"CPUs"</span>: 8,
-  <span class="s2">"CaCertPath"</span>: <span class="s2">"/Users/hairyhenderson/.docker/machine/certs/ca.pem"</span>,
-  <span class="s2">"DiskSize"</span>: 20000,
-  <span class="s2">"IPAddress"</span>: <span class="s2">"172.16.62.129"</span>,
-  <span class="s2">"ISO"</span>: <span class="s2">"/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso"</span>,
-  <span class="s2">"MachineName"</span>: <span class="s2">"dev-fusion"</span>,
-  <span class="s2">"Memory"</span>: 1024,
-  <span class="s2">"PrivateKeyPath"</span>: <span class="s2">"/Users/hairyhenderson/.docker/machine/certs/ca-key.pem"</span>,
-  <span class="s2">"SSHPort"</span>: 22,
-  <span class="s2">"SSHUser"</span>: <span class="s2">"docker"</span>,
-  <span class="s2">"SwarmDiscovery"</span>: <span class="s2">""</span>,
-  <span class="s2">"SwarmHost"</span>: <span class="s2">"tcp://0.0.0.0:3376"</span>,
-  <span class="s2">"SwarmMaster"</span>: <span class="nb">false</span>
-<span class="o">}</span>
-
-</code></pre></div></div>
+</span></code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=machine">machine</a>, <a href="/docs.docker.jp.onthefly/search/?q=inspect">inspect</a>, <a href="/docs.docker.jp.onthefly/search/?q=subcommand">subcommand</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

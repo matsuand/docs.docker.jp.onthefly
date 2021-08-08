@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the ZFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the ZFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of ZFS driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the ZFS storage driver","description":"Learn how to optimize your use of ZFS driver.","url":"https://docs.docker.com/storage/storagedriver/zfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -165,9 +165,9 @@ later because <code class="language-plaintext highlighter-rouge">dockerd</code> 
     <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> to <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> and remove
 the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
-
-<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -176,18 +176,18 @@ into <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.
 have specified the correct devices, because this is a destructive operation.
 This example adds two devices to the pool.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zpool create <span class="nt">-f</span> zpool-docker <span class="nt">-m</span> /var/lib/docker /dev/xvdf /dev/xvdg
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zpool create <span class="nt">-f</span> zpool-docker <span class="nt">-m</span> /var/lib/docker /dev/xvdf /dev/xvdg
 </code></pre></div>    </div>
 
     <p>The command creates the <code class="language-plaintext highlighter-rouge">zpool</code> and names it <code class="language-plaintext highlighter-rouge">zpool-docker</code>. The name is for
 display purposes only, and you can use a different name. Check that the pool
 was created and mounted correctly using <code class="language-plaintext highlighter-rouge">zfs list</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zfs list
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zfs list
+<span class="go">
 NAME           USED  AVAIL  REFER  MOUNTPOINT
 zpool-docker    55K  96.4G    19K  /var/lib/docker
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Configure Docker to use <code class="language-plaintext highlighter-rouge">zfs</code>. Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> and set the
@@ -204,8 +204,8 @@ like this:</p>
   <li>
     <p>Start Docker. Use <code class="language-plaintext highlighter-rouge">docker info</code> to verify that the storage driver is <code class="language-plaintext highlighter-rouge">zfs</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker info
-  Containers: 0
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker info
+<span class="go">  Containers: 0
    Running: 0
    Paused: 0
    Stopped: 0
@@ -219,8 +219,8 @@ like this:</p>
    Space Available: 103498395648
    Parent Quota: no
    Compression: off
-&lt;...&gt;
-</code></pre></div>    </div>
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -231,7 +231,7 @@ like this:</p>
 <p>To increase the size of the <code class="language-plaintext highlighter-rouge">zpool</code>, you need to add a dedicated block device to
 the Docker host, and then add it to the <code class="language-plaintext highlighter-rouge">zpool</code> using the <code class="language-plaintext highlighter-rouge">zpool add</code> command:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zpool add zpool-docker /dev/xvdh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zpool add zpool-docker /dev/xvdh
 </code></pre></div></div>
 
 <h3 id="limit-a-containers-writable-storage-quota">Limit a container’s writable storage quota</h3>

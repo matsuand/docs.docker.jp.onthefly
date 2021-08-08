@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the VFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the VFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of VFS driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/vfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the VFS storage driver","description":"Learn how to optimize your use of VFS driver.","url":"https://docs.docker.com/storage/storagedriver/vfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,7 +116,7 @@ mechanism to verify other storage back-ends against, in a testing environment.</
   <li>
     <p>Stop Docker.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl stop docker
 </code></pre></div>    </div>
   </li>
   <li>
@@ -142,18 +142,18 @@ driver can use, set the <code class="language-plaintext highlighter-rouge">size<
   <li>
     <p>Start Docker.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Verify that the daemon is using the <code class="language-plaintext highlighter-rouge">vfs</code> storage driver.
 Use the <code class="language-plaintext highlighter-rouge">docker info</code> command and look for <code class="language-plaintext highlighter-rouge">Storage Driver</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+<span class="go">
 Storage Driver: vfs
-...
-</code></pre></div>    </div>
+</span><span class="c">...
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -177,18 +177,18 @@ it is a deep copy of its parent layer. These layers are all located under
 <p>The following <code class="language-plaintext highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
 image comprising five layers.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu
+<span class="go">
 Using default tag: latest
 latest: Pulling from library/ubuntu
-e0a742c2abfd: Pull <span class="nb">complete
-</span>486cb8339a27: Pull <span class="nb">complete
-</span>dc6f0d824617: Pull <span class="nb">complete
-</span>4f7a5649a30e: Pull <span class="nb">complete
-</span>672363445ad2: Pull <span class="nb">complete
-</span>Digest: sha256:84c334414e2bfdcae99509a6add166bbb4fa4041dc3fa6af08046a66fed3005f
-Status: Downloaded newer image <span class="k">for </span>ubuntu:latest
-</code></pre></div></div>
+e0a742c2abfd: Pull complete
+486cb8339a27: Pull complete
+dc6f0d824617: Pull complete
+4f7a5649a30e: Pull complete
+672363445ad2: Pull complete
+Digest: sha256:84c334414e2bfdcae99509a6add166bbb4fa4041dc3fa6af08046a66fed3005f
+Status: Downloaded newer image for ubuntu:latest
+</span></code></pre></div></div>
 
 <p>After pulling, each of these layers is represented as a subdirectory of
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/vfs/dir/</code>. The directory names do not correlate with the
@@ -196,8 +196,8 @@ image layer IDs shown in the <code class="language-plaintext highlighter-rouge">
 disk by each layer, you can use the <code class="language-plaintext highlighter-rouge">du -sh</code> command, which gives the size as a
 human-readable value.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/vfs/dir/
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/vfs/dir/
+<span class="go">
 total 0
 drwxr-xr-x.  2 root root  19 Aug  2 18:19 3262dfbe53dac3e1ab7dcc8ad5d8c4d586a11d2ac3c4234892e34bff7f6b821e
 drwxr-xr-x. 21 root root 224 Aug  2 18:23 6af21814449345f55d88c403e66564faad965d6afa84b294ae6e740c9ded2561
@@ -205,17 +205,17 @@ drwxr-xr-x. 21 root root 224 Aug  2 18:23 6d3be4585ba32f9f5cbff0110e8d07aea5f5b9
 drwxr-xr-x. 21 root root 224 Aug  2 18:23 9ecd2d88ca177413ab89f987e1507325285a7418fc76d0dcb4bc021447ba2bab
 drwxr-xr-x. 21 root root 224 Aug  2 18:23 a292ac6341a65bf3a5da7b7c251e19de1294bd2ec32828de621d41c7ad31f895
 drwxr-xr-x. 21 root root 224 Aug  2 18:23 e92be7a4a4e3ccbb7dd87695bca1a0ea373d4f673f455491b1342b33ed91446b
-</code></pre></div></div>
+</span></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">du</span> <span class="nt">-sh</span> /var/lib/docker/vfs/dir/<span class="k">*</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">du</span> <span class="nt">-sh</span> /var/lib/docker/vfs/dir/<span class="k">*</span>
+<span class="go">
 4.0K	/var/lib/docker/vfs/dir/3262dfbe53dac3e1ab7dcc8ad5d8c4d586a11d2ac3c4234892e34bff7f6b821e
 125M	/var/lib/docker/vfs/dir/6af21814449345f55d88c403e66564faad965d6afa84b294ae6e740c9ded2561
 104M	/var/lib/docker/vfs/dir/6d3be4585ba32f9f5cbff0110e8d07aea5f5b9fbb1439677c27e7dfee263171c
 125M	/var/lib/docker/vfs/dir/9ecd2d88ca177413ab89f987e1507325285a7418fc76d0dcb4bc021447ba2bab
 104M	/var/lib/docker/vfs/dir/a292ac6341a65bf3a5da7b7c251e19de1294bd2ec32828de621d41c7ad31f895
 104M	/var/lib/docker/vfs/dir/e92be7a4a4e3ccbb7dd87695bca1a0ea373d4f673f455491b1342b33ed91446b
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The above output shows that three layers each take 104M and two take 125M. These
 directories have only small differences from each other, but take up nearly the

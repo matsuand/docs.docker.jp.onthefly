@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine の Swarm 管理と保守 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine の Swarm 管理と保守" />
   <meta property="og:description" content="Manager administration guide" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/admin_guide/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine の Swarm 管理と保守","description":"Manager administration guide","url":"https://docs.docker.com/engine/swarm/admin_guide/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Engine の Swarm 管理と保守</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p>
-<p>Docker Engine において Swarm を起動している場合、<strong>マネージャーノード</strong> が主要な要素であり、Swarm を管理し、Swarm の状態を保持します。
+                        <section class="section"><h1>Docker Engine の Swarm 管理と保守</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>Docker Engine において Swarm を起動している場合、<strong>マネージャーノード</strong> が主要な要素であり、Swarm を管理し、Swarm の状態を保持します。
 ですからマネージャーノードの主な機能を理解しておくことが重要です。
 これを知ることによって、適切なデプロイと Swarm の保守が可能になります。</p>
 
@@ -276,7 +275,7 @@ quorum を維持するためには、マネージャーが多数いるという�
 
 <p>マネージャーノード処理への影響を避けるためには、マネージャーノードを排出（drain）させて、ワーカーノードとしては利用できなくします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node update <span class="nt">--availability</span> drain &lt;NODE&gt;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node update <span class="nt">--availability</span> drain &lt;NODE&gt;
 </code></pre></div></div>
 
 <p>ノードを排出したらそのノード上の実行タスクは、スケジューラーが Swarm 内の別のワーカーノードに再割り当てします。
@@ -292,21 +291,21 @@ quorum を維持するためには、マネージャーが多数いるという�
 
 <h2 id="swarm-の健康状態の監視">Swarm の健康状態の監視</h2>
 
-<p>マネージャーノードの健康状態（health）を監視するには、Docker の<code class="language-plaintext highlighter-rouge">nodes</code> API を使い、HTTP のエンドポイント<code class="language-plaintext highlighter-rouge">/nodes</code>から JSON 書式により確認することができます。
+<p>マネージャーノードの健康状態（health）を監視するには、Docker の<code class="language-plaintext highlighter-rouge">nodes</code>API を使い、HTTP のエンドポイント<code class="language-plaintext highlighter-rouge">/nodes</code>から JSON 書式により確認することができます。
 詳しくは <a href="/engine/api/v1.25/#tag/Node">nodes API のドキュメント</a> を参照してください。</p>
 
 <p>コマンドラインからは<code class="language-plaintext highlighter-rouge">docker node inspect &lt;id-node&gt;</code>を実行して、ノードを調べることができます。
 たとえばノードに、マネージャーとしての到達性能（reachability）があるかどうかを調べるには、以下を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .ManagerStatus.Reachability }}"</span>
-reachable
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .ManagerStatus.Reachability }}"</span>
+<span class="go">reachable
+</span></code></pre></div></div>
 
 <p>ワーカーノードとしてタスクの受け入れが可能であるかを確認するには、以下を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .Status.State }}"</span>
-ready
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .Status.State }}"</span>
+<span class="go">ready
+</span></code></pre></div></div>
 
 <p>上のコマンドから<code class="language-plaintext highlighter-rouge">manager1</code>は、マネージャーとしては<code class="language-plaintext highlighter-rouge">reachable</code>（到達可能）であり、ワーカーとしては<code class="language-plaintext highlighter-rouge">ready</code>（受け入れ可能）であることがわかります。</p>
 
@@ -322,16 +321,15 @@ ready
 
 <p>上とは別に、Swarm の健康状態の概要を確認するには、マネージャーノードから以下のように<code class="language-plaintext highlighter-rouge">docker node ls</code>を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-docker node <span class="nb">ls
-</span>ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span>
+<span class="go">ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 1mhtdwhvsgr3c26xxbnzdc3yp    node05    Accepted    Ready   Active
 516pacagkqp2xc3fk9t1dhjor    node02    Accepted    Ready   Active        Reachable
-9ifojw8of78kkusuc4a6c23fx <span class="k">*</span>  node01    Accepted    Ready   Active        Leader
+9ifojw8of78kkusuc4a6c23fx *  node01    Accepted    Ready   Active        Leader
 ax11wdpwrrb6db3mfjydscgk7    node04    Accepted    Ready   Active
 bb1nrq2cswhtbg4mrsqnlx1ck    node03    Accepted    Ready   Active        Reachable
 di9wxgz8dtuh9d2hn089ecqkf    node06    Accepted    Ready   Active
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="troubleshoot-a-manager-node">マネージャーノードのトラブルシューティング</h2>
 
@@ -443,7 +441,7 @@ Node node9 removed from swarm
 これを行うのは、このノードが古い Swarm に属していたノードに接続しに行かないようにするためです。
 もっとも古いノードは、すでに存在していないはずです。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init <span class="nt">--force-new-cluster</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--force-new-cluster</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -489,8 +487,9 @@ quorum を失った状態で、Swarm 上で管理操作を行おうとすると�
 マネージャーがたった 1 つになるのですから quorum は維持されます。
 この後には、マネージャーノードが必要な数に達するまで、ノードをマネージャーに昇格させていきます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># From the node to recover</span>
-docker swarm init <span class="nt">--force-new-cluster</span> <span class="nt">--advertise-addr</span> node01:2377
+<p>回復させたいノード上から、以下を実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--force-new-cluster</span> <span class="nt">--advertise-addr</span> node01:2377
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker swarm init</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--force-new-cluster</code>フラグをつけて実行すると、コマンド実行した Docker Engine は、単一ノードからなる Swarm のマネージャーノードとなり、サービスの管理と実行が可能となります。

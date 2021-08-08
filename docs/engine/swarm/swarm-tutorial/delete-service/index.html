@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm 上で稼動するサービスの削除 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm 上で稼動するサービスの削除" />
   <meta property="og:description" content="Remove the service from the swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/delete-service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm 上で稼動するサービスの削除","description":"Remove the service from the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/delete-service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -97,50 +97,49 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm 上で稼動するサービスの削除</h1>
-<p>このチュートリアルの残りの手順では <code class="language-plaintext highlighter-rouge">helloworld</code> サービスを使いません。
+                        <section class="section"><h1>Swarm 上で稼動するサービスの削除</h1><p>このチュートリアルの残りの手順では<code class="language-plaintext highlighter-rouge">helloworld</code>サービスを使いません。
 したがって Swarm からこのサービスを削除します。</p>
 
 <ol>
   <li>
     <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
 接続先はマネージャーノードを起動したマシンです。
-たとえばこのチュートリアルでは <code class="language-plaintext highlighter-rouge">manager1</code> というマシンを利用します。</p>
+たとえばこのチュートリアルでは<code class="language-plaintext highlighter-rouge">manager1</code>というマシンを利用します。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service rm helloworld</code> を実行して <code class="language-plaintext highlighter-rouge">helloworld</code> サービスを削除します。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker service rm helloworld</code>を実行して<code class="language-plaintext highlighter-rouge">helloworld</code>サービスを削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>helloworld
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>helloworld
+<span class="go">
 helloworld
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service inspect &lt;サービスID&gt;</code> を実行し、Swarm マネージャーがこのサービスを削除していることを確認します。
+    <p><code class="language-plaintext highlighter-rouge">docker service inspect &lt;サービスID&gt;</code>を実行し、Swarm マネージャーがこのサービスを削除していることを確認します。
 CLI の実行結果として、サービスが見つからなかったというメッセージが表示されます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service inspect helloworld
-<span class="o">[]</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service inspect helloworld
+<span class="go">[]
 Error: no such service: helloworld
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>そのサービスはもう存在しないわけですが、タスクコンテナーが削除の処理を終えるには数分を要します。
-そのノード上において <code class="language-plaintext highlighter-rouge">docker ps</code> を実行すれば、タスクが削除されたことが確認できます。</p>
+そのノード上において<code class="language-plaintext highlighter-rouge">docker ps</code>を実行すれば、タスクが削除されたことが確認できます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">
     CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
-    db1651f50347        alpine:latest       <span class="s2">"ping docker.com"</span>        44 minutes ago      Up 46 seconds                           helloworld.5.9lkmos2beppihw95vdwxy1j3w
-    43bf6e532a92        alpine:latest       <span class="s2">"ping docker.com"</span>        44 minutes ago      Up 46 seconds                           helloworld.3.a71i8rp6fua79ad43ycocl4t2
-    5a0fb65d8fa7        alpine:latest       <span class="s2">"ping docker.com"</span>        44 minutes ago      Up 45 seconds                           helloworld.2.2jpgensh7d935qdc857pxulfr
-    afb0ba67076f        alpine:latest       <span class="s2">"ping docker.com"</span>        44 minutes ago      Up 46 seconds                           helloworld.4.1c47o7tluz7drve4vkm2m5olx
-    688172d3bfaa        alpine:latest       <span class="s2">"ping docker.com"</span>        45 minutes ago      Up About a minute                       helloworld.1.74nbhb3fhud8jfrhigd7s29we
+    db1651f50347        alpine:latest       "ping docker.com"        44 minutes ago      Up 46 seconds                           helloworld.5.9lkmos2beppihw95vdwxy1j3w
+    43bf6e532a92        alpine:latest       "ping docker.com"        44 minutes ago      Up 46 seconds                           helloworld.3.a71i8rp6fua79ad43ycocl4t2
+    5a0fb65d8fa7        alpine:latest       "ping docker.com"        44 minutes ago      Up 45 seconds                           helloworld.2.2jpgensh7d935qdc857pxulfr
+    afb0ba67076f        alpine:latest       "ping docker.com"        44 minutes ago      Up 46 seconds                           helloworld.4.1c47o7tluz7drve4vkm2m5olx
+    688172d3bfaa        alpine:latest       "ping docker.com"        45 minutes ago      Up About a minute                       helloworld.1.74nbhb3fhud8jfrhigd7s29we
 
-<span class="nv">$ </span>docker ps
-   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS
+</span><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS
 
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
 </ol>
 

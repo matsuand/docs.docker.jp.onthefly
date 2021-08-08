@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Deploy a stack to a swarm | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Deploy a stack to a swarm" />
   <meta property="og:description" content="How to deploy a stack to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/stack-deploy/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Deploy a stack to a swarm","description":"How to deploy a stack to a swarm","url":"https://docs.docker.com/engine/swarm/stack-deploy/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -140,17 +140,17 @@ a throwaway registry, which you can discard afterward.</p>
   <li>
     <p>Start the registry as a service on your swarm:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> registry <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>5000,target<span class="o">=</span>5000 registry:2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> registry <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>5000,target<span class="o">=</span>5000 registry:2
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Check its status with <code class="language-plaintext highlighter-rouge">docker service ls</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID            NAME      REPLICAS  IMAGE                                                                               COMMAND
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID            NAME      REPLICAS  IMAGE                                                                               COMMAND
 l7791tpuwkco  registry  1/1       registry:2@sha256:1152291c7f93a4ea2ddc95e46d142c31e743b6dd70e194af9e6ebe530f782c17
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>Once it reads <code class="language-plaintext highlighter-rouge">1/1</code> under <code class="language-plaintext highlighter-rouge">REPLICAS</code>, it’s running. If it reads <code class="language-plaintext highlighter-rouge">0/1</code>, it’s
 probably still pulling the image.</p>
@@ -158,10 +158,10 @@ probably still pulling the image.</p>
   <li>
     <p>Check that it’s working with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/v2/
-
-<span class="o">{}</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/v2/
+<span class="go">
+{}
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -176,8 +176,8 @@ counter whenever you visit it.</p>
   <li>
     <p>Create a directory for the project:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>stackdemo
-<span class="nv">$ </span><span class="nb">cd </span>stackdemo
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>stackdemo
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>stackdemo
 </code></pre></div>    </div>
   </li>
   <li>
@@ -269,37 +269,37 @@ Creating stackdemo_web_1
   <li>
     <p>Check that the app is running with <code class="language-plaintext highlighter-rouge">docker-compose ps</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose ps
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose ps
+<span class="go">
       Name                     Command               State           Ports
-<span class="nt">-----------------------------------------------------------------------------------</span>
+-----------------------------------------------------------------------------------
 stackdemo_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
-stackdemo_web_1     python app.py                    Up      0.0.0.0:8000-&gt;8000/tcp
+</span><span class="gp">stackdemo_web_1     python app.py                    Up      0.0.0.0:8000-&gt;</span>8000/tcp
 </code></pre></div>    </div>
 
     <p>You can test the app with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 1 times.
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 1 times.
 
-<span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 2 times.
+</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 2 times.
 
-<span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 3 times.
-</code></pre></div>    </div>
+</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 3 times.
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Bring the app down:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose down <span class="nt">--volumes</span>
-
-Stopping stackdemo_web_1 ... <span class="k">done
-</span>Stopping stackdemo_redis_1 ... <span class="k">done
-</span>Removing stackdemo_web_1 ... <span class="k">done
-</span>Removing stackdemo_redis_1 ... <span class="k">done
-</span>Removing network stackdemo_default
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose down <span class="nt">--volumes</span>
+<span class="go">
+Stopping stackdemo_web_1 ... done
+Stopping stackdemo_redis_1 ... done
+Removing stackdemo_web_1 ... done
+Removing stackdemo_redis_1 ... done
+Removing network stackdemo_default
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -308,17 +308,17 @@ Stopping stackdemo_web_1 ... <span class="k">done
 <p>To distribute the web app’s image across the swarm, it needs to be pushed to the
 registry you set up earlier. With Compose, this is very simple:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose push
-
-Pushing web <span class="o">(</span>127.0.0.1:5000/stackdemo:latest<span class="o">)</span>...
-The push refers to a repository <span class="o">[</span>127.0.0.1:5000/stackdemo]
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose push
+<span class="go">
+Pushing web (127.0.0.1:5000/stackdemo:latest)...
+The push refers to a repository [127.0.0.1:5000/stackdemo]
 5b5a49501a76: Pushed
 be44185ce609: Pushed
 bd7330a79bcf: Pushed
 c9fc143a069a: Pushed
 011b303988d2: Pushed
 latest: digest: sha256:a81840ebf5ac24b42c1c676cbda3b2cb144580ee347c07e1bc80e35e5ca76507 size: 1372
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The stack is now ready to be deployed.</p>
 
@@ -328,14 +328,14 @@ latest: digest: sha256:a81840ebf5ac24b42c1c676cbda3b2cb144580ee347c07e1bc80e35e5
   <li>
     <p>Create the stack with <code class="language-plaintext highlighter-rouge">docker stack deploy</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml stackdemo
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml stackdemo
+<span class="go">
 Ignoring unsupported options: build
 
 Creating network stackdemo_default
 Creating service stackdemo_web
 Creating service stackdemo_redis
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>The last argument is a name for the stack. Each network, volume and service
 name is prefixed with the stack name.</p>
@@ -343,12 +343,12 @@ name is prefixed with the stack name.</p>
   <li>
     <p>Check that it’s running with <code class="language-plaintext highlighter-rouge">docker stack services stackdemo</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack services stackdemo
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack services stackdemo
+<span class="go">
 ID            NAME             MODE        REPLICAS  IMAGE
 orvjk2263y1p  stackdemo_redis  replicated  1/1       redis:3.2-alpine@sha256:f1ed3708f538b537eb9c2a7dd50dc90a706f7debd7e1196c9264edeea521a86d
 s1nf0xy8t1un  stackdemo_web    replicated  1/1       127.0.0.1:5000/stackdemo@sha256:adb070e0805d04ba2f92c724298370b7a4eb19860222120d43e0f6351ddbc26f
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>Once it’s running, you should see <code class="language-plaintext highlighter-rouge">1/1</code> under <code class="language-plaintext highlighter-rouge">REPLICAS</code> for both services.
 This might take some time if you have a multi-node swarm, as images need to
@@ -356,47 +356,47 @@ be pulled.</p>
 
     <p>As before, you can test the app with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 1 times.
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 1 times.
 
-<span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 2 times.
+</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 2 times.
 
-<span class="nv">$ </span>curl http://localhost:8000
-Hello World! I have been seen 3 times.
-</code></pre></div>    </div>
+</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+<span class="go">Hello World! I have been seen 3 times.
+</span></code></pre></div>    </div>
 
     <p>Thanks to Docker’s built-in routing mesh, you can access any node in the
 swarm on port 8000 and get routed to the app:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://address-of-other-node:8000
-Hello World! I have been seen 4 times.
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://address-of-other-node:8000
+<span class="go">Hello World! I have been seen 4 times.
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Bring the stack down with <code class="language-plaintext highlighter-rouge">docker stack rm</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack <span class="nb">rm </span>stackdemo
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack <span class="nb">rm </span>stackdemo
+<span class="go">
 Removing service stackdemo_web
 Removing service stackdemo_redis
 Removing network stackdemo_default
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Bring the registry down with <code class="language-plaintext highlighter-rouge">docker service rm</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>registry
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>registry
 </code></pre></div>    </div>
   </li>
   <li>
     <p>If you’re just testing things out on a local machine and want to bring your
 Docker Engine out of swarm mode, use <code class="language-plaintext highlighter-rouge">docker swarm leave</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm leave <span class="nt">--force</span>
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm leave <span class="nt">--force</span>
+<span class="go">
 Node left the swarm.
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
 </ol>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=guide">guide</a>, <a href="/docs.docker.jp.onthefly/search/?q=swarm mode">swarm mode</a>, <a href="/docs.docker.jp.onthefly/search/?q=composefile">composefile</a>, <a href="/docs.docker.jp.onthefly/search/?q=stack">stack</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>

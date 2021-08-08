@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize an apt-cacher-ng service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize an apt-cacher-ng service" />
   <meta property="og:description" content="Installing and running an apt-cacher-ng service" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/apt-cacher-ng/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize an apt-cacher-ng service","description":"Installing and running an apt-cacher-ng service","url":"https://docs.docker.com/samples/apt-cacher-ng/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -140,18 +140,18 @@ the second download of any package almost instant.</p>
 
 <p>To build the image using:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> eg_apt_cacher_ng <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> eg_apt_cacher_ng <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>Then run it, mapping the exposed port to one on the host</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 3142:3142 <span class="nt">--name</span> test_apt_cacher_ng eg_apt_cacher_ng
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 3142:3142 <span class="nt">--name</span> test_apt_cacher_ng eg_apt_cacher_ng
 </code></pre></div></div>
 
 <p>To see the logfiles that are <code class="language-plaintext highlighter-rouge">tailed</code> in the default command, you can
 use:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker logs <span class="nt">-f</span> test_apt_cacher_ng
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker logs <span class="nt">-f</span> test_apt_cacher_ng
 </code></pre></div></div>
 
 <p>To get your Debian-based containers to use the proxy, you have
@@ -184,7 +184,7 @@ a local version of a common base:</p>
 <p><strong>Option 2</strong> is good for testing, but breaks other HTTP clients
 which obey <code class="language-plaintext highlighter-rouge">http_proxy</code>, such as <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">wget</code> and others:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://dockerhost:3142/ debian bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://dockerhost:3142/ debian bash
 </code></pre></div></div>
 
 <p><strong>Option 3</strong> is the least portable, but you might need to do it and you can do it
@@ -192,48 +192,48 @@ from your <code class="language-plaintext highlighter-rouge">Dockerfile</code> t
 
 <p><strong>Option 4</strong> links Debian-containers to the proxy server using following command:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">--link</span> test_apt_cacher_ng:apt_proxy <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://apt_proxy:3142/ debian bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">--link</span> test_apt_cacher_ng:apt_proxy <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://apt_proxy:3142/ debian bash
 </code></pre></div></div>
 
 <p><strong>Option 5</strong> creates a custom network of APT proxy server and Debian-based containers:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mynetwork
-<span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 3142:3142 <span class="nt">--network</span><span class="o">=</span>mynetwork <span class="nt">--name</span> test_apt_cacher_ng eg_apt_cacher_ng
-<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--network</span><span class="o">=</span>mynetwork <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://test_apt_cacher_ng:3142/ debian bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create mynetwork
+<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 3142:3142 <span class="nt">--network</span><span class="o">=</span>mynetwork <span class="nt">--name</span> test_apt_cacher_ng eg_apt_cacher_ng
+<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--network</span><span class="o">=</span>mynetwork <span class="nt">-e</span> <span class="nv">http_proxy</span><span class="o">=</span>http://test_apt_cacher_ng:3142/ debian bash
 </code></pre></div></div>
 
 <p>Apt-cacher-ng has some tools that allow you to manage the repository,
 and they can be used by leveraging the <code class="language-plaintext highlighter-rouge">VOLUME</code>
 instruction, and the image we built to run the service:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--volumes-from</span> test_apt_cacher_ng eg_apt_cacher_ng bash
-
-root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
-Scanning /var/cache/apt-cacher-ng, please wait...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--volumes-from</span> test_apt_cacher_ng eg_apt_cacher_ng bash
+<span class="go">
+</span><span class="gp">root@f38c87f2a42d:/#</span><span class="w"> </span>/usr/lib/apt-cacher-ng/distkill.pl
+<span class="go">Scanning /var/cache/apt-cacher-ng, please wait...
 Found distributions:
 bla, taggedcount: 0
-     1. precise-security <span class="o">(</span>36 index files<span class="o">)</span>
-     2. wheezy <span class="o">(</span>25 index files<span class="o">)</span>
-     3. precise-updates <span class="o">(</span>36 index files<span class="o">)</span>
-     4. precise <span class="o">(</span>36 index files<span class="o">)</span>
-     5. wheezy-updates <span class="o">(</span>18 index files<span class="o">)</span>
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
 
 Found architectures:
-     6. amd64 <span class="o">(</span>36 index files<span class="o">)</span>
-     7. i386 <span class="o">(</span>24 index files<span class="o">)</span>
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
 
 WARNING: The removal action may wipe out whole directories containing
          index files. Select d to see detailed list.
 
-<span class="o">(</span>Number nn: tag distribution or architecture nn<span class="p">;</span> 0: <span class="nb">exit</span><span class="p">;</span> d: show details<span class="p">;</span> r: remove tagged<span class="p">;</span> q: quit<span class="o">)</span>: q
+</span><span class="gp">(Number nn: tag distribution or architecture nn;</span><span class="w"> </span>0: <span class="nb">exit</span><span class="p">;</span> d: show details<span class="p">;</span> r: remove tagged<span class="p">;</span> q: quit<span class="o">)</span>: q
 </code></pre></div></div>
 
 <p>Finally, clean up after your test by stopping and removing the
 container, and then removing the image.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop test_apt_cacher_ng
-<span class="nv">$ </span>docker container <span class="nb">rm </span>test_apt_cacher_ng
-<span class="nv">$ </span>docker image <span class="nb">rm </span>eg_apt_cacher_ng
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop test_apt_cacher_ng
+<span class="gp">$</span><span class="w"> </span>docker container <span class="nb">rm </span>test_apt_cacher_ng
+<span class="gp">$</span><span class="w"> </span>docker image <span class="nb">rm </span>eg_apt_cacher_ng
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=example">example</a>, <a href="/docs.docker.jp.onthefly/search/?q=package installation">package installation</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a>, <a href="/docs.docker.jp.onthefly/search/?q=debian">debian</a>, <a href="/docs.docker.jp.onthefly/search/?q=ubuntu">ubuntu</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ボリュームエラーに関するトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ボリュームエラーに関するトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting volume errors" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/troubleshooting_volume_errors/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームエラーに関するトラブルシューティング","description":"Troubleshooting volume errors","url":"https://docs.docker.com/storage/troubleshooting_volume_errors/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,15 +103,14 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ボリュームエラーに関するトラブルシューティング</h1>
-<p>ここでは Docker ボリュームやバインドマウントの利用時に発生しやすいエラーについて示します。</p>
+                        <section class="section"><h1>ボリュームエラーに関するトラブルシューティング</h1><p>ここでは Docker ボリュームやバインドマウントの利用時に発生しやすいエラーについて示します。</p>
 
 <h2 id="error-unable-to-remove-filesystem"><code class="language-plaintext highlighter-rouge">Error: Unable to remove filesystem</code></h2>
 
-<p><a href="https://github.com/google/cadvisor">Google cAdvisor</a> のようなコンテナーベースのユーティリティーにおいては、<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> といった Docker システムのディレクトリをコンテナーにマウントするものがあります。
-たとえば <code class="language-plaintext highlighter-rouge">cadvisor</code> のドキュメントには、<code class="language-plaintext highlighter-rouge">cadvisor</code> コンテナーを以下のようにして実行するように説明しています。</p>
+<p><a href="https://github.com/google/cadvisor">Google cAdvisor</a> のようなコンテナーベースのユーティリティーにおいては、<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>といった Docker システムのディレクトリをコンテナーにマウントするものがあります。
+たとえば<code class="language-plaintext highlighter-rouge">cadvisor</code>のドキュメントには、<code class="language-plaintext highlighter-rouge">cadvisor</code>コンテナーを以下のようにして実行するように説明しています。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/:/rootfs:ro <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/var/run:/var/run:rw <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/sys:/sys:ro <span class="se">\</span>
@@ -144,7 +143,7 @@ However, <code class="language-plaintext highlighter-rouge">cAdvisor</code> requ
 be busy and preventing it from being removed, you can use the <code class="language-plaintext highlighter-rouge">lsof</code> command
 to find its process. For instance, for the error above:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>lsof /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>lsof /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm
 </code></pre></div></div>
 
 <p>To work around this problem, stop the container which bind-mounts

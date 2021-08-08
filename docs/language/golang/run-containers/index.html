@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-22 14:23:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーとしてのイメージ実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテナーとしてのイメージ実行" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-22T14:23:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-22T14:23:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーとしてのイメージ実行","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/golang/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -131,7 +131,7 @@
 ここまでに作り出したイメージを使って、正しく動作することを確認します。
 ターミナルから以下のコマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run docker-gs-ping
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run docker-gs-ping
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ____    __
@@ -151,9 +151,9 @@ ____________________________________O/_______
 
 <p>さてそこで、このサーバーに対して<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8080/
-curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8080: Connection refused
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8080/
+<span class="go">curl: (7) Failed to connect to localhost port 8080: Connection refused
+</span></code></pre></div></div>
 
 <p>上の curl コマンドは、サーバーへの接続が拒否されたために失敗しました。
 localhost のポート 8080 には接続できなかったということです。
@@ -169,14 +169,14 @@ localhost のポート 8080 には接続できなかったということです�
 
 <p>コンテナーを起動させ、ポート<code class="language-plaintext highlighter-rouge">8080</code>をホスト上のポート<code class="language-plaintext highlighter-rouge">8080</code>として公開します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8080:8080 docker-gs-ping
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--publish</span> 8080:8080 docker-gs-ping
 </code></pre></div></div>
 
 <p>そこで先ほどの curl コマンドを再度実行してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8080/
-Hello, Docker! &lt;3
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8080/
+<span class="go">Hello, Docker! &lt;3
+</span></code></pre></div></div>
 
 <p>成功しました。
 コンテナー内部で実行されているアプリケーションに対して、ポート 8000 による接続ができました。
@@ -192,18 +192,18 @@ Docker ではコンテナーをデタッチモード（detached mode）、つま
 これを行うには<code class="language-plaintext highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="language-plaintext highlighter-rouge">-d</code>フラグを指定します。
 Docker は先ほどと同じようにコンテナーを起動させますが、今回はコンテナーから「デタッチされた」つまり切り離されて実行されるので、ターミナルにプロンプトが戻ってきます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 docker-gs-ping
-d75e61fcad1e0c0eca69a3f767be6ba28a66625ce4dc42201a8a323e8313c14e
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 docker-gs-ping
+<span class="go">d75e61fcad1e0c0eca69a3f767be6ba28a66625ce4dc42201a8a323e8313c14e
+</span></code></pre></div></div>
 
 <p>Docker はバックグラウンドでコンテナーを起動させ、ターミナル上にそのコンテナー ID を出力します。</p>
 
 <p>同じようにコンテナーが適切に動作していることを確認します。
 前とまったく同じ<code class="language-plaintext highlighter-rouge">curl</code>コマンドを実行してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8080/
-Hello, Docker! &lt;3
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8080/
+<span class="go">Hello, Docker! &lt;3
+</span></code></pre></div></div>
 
 <h2 id="list-containers">コンテナーの一覧表示</h2>
 
@@ -213,7 +213,7 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには<c
 同じように Docker では<code class="language-plaintext highlighter-rouge">docker ps</code>を実行します。
 このコマンドによって、マシン上で稼働しているコンテナーの一覧が表示されます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
@@ -231,15 +231,15 @@ d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"   41 seconds ago   Up 40 secon
 このコマンドはそのとおりにコンテナーを停止させます。
 この際にはコンテナー名あるいはコンテナー ID を指定します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop inspiring_ishizaka
-inspiring_ishizaka
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop inspiring_ishizaka
+<span class="go">inspiring_ishizaka
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドをもう一度実行して、実行中コンテナーの一覧を確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+</span></code></pre></div></div>
 
 <h2 id="stop-start-and-name-containers">コンテナーの停止、起動、名前変更</h2>
 
@@ -248,7 +248,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 <code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行したときに、出力されるコンテナーはデフォルトでは実行中コンテナーのみです。
 <code class="language-plaintext highlighter-rouge">--all</code>または<code class="language-plaintext highlighter-rouge">-a</code>を指定すると、システム上にあるコンテナーすべて、つまり停止、起動にかかわらずすべてが表示されます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS                      PORTS     NAMES
@@ -264,12 +264,12 @@ aade1bf3d330   docker-gs-ping   "/docker-gs-ping"        3 minutes ago        Ex
 <p>停止したコンテナーをここで再起動してみましょう。
 停止したコンテナーの名前を確認して、再起動を行う以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker restart inspiring_ishizaka
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker restart inspiring_ishizaka
 </code></pre></div></div>
 
 <p>そこで再び<code class="language-plaintext highlighter-rouge">ps</code>コマンドを使ってコンテナー一覧を確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">--all</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                     PORTS                    NAMES
@@ -289,9 +289,9 @@ aade1bf3d330   docker-gs-ping   "/docker-gs-ping"        4 minutes ago    Exited
 <p>起動したばかりのコンテナーを停止させます。
 システム上の実行中コンテナーの名前を確認して、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop inspiring_ishizaka
-inspiring_ishizaka
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop inspiring_ishizaka
+<span class="go">inspiring_ishizaka
+</span></code></pre></div></div>
 
 <p>こうしてコンテナーはすべて停止したので削除します。
 コンテナーを削除するということは、実行することも停止状態にすることもできなくなります。
@@ -302,7 +302,7 @@ inspiring_ishizaka
 
 <p>同じように、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm </span>inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">rm </span>inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inspiring_ishizaka
@@ -322,11 +322,11 @@ gifted_mestorf
 
 <p>コンテナー名をつけるには<code class="language-plaintext highlighter-rouge">run</code>コマンドに<code class="language-plaintext highlighter-rouge">--name</code>フラグをつけます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 <span class="nt">--name</span> rest-server docker-gs-ping
-3bbc6a3102ea368c8b966e1878a5ea9b1fc61187afaac1276c41db22e4b7f48f
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 <span class="nt">--name</span> rest-server docker-gs-ping
+<span class="go">3bbc6a3102ea368c8b966e1878a5ea9b1fc61187afaac1276c41db22e4b7f48f
+</span></code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES

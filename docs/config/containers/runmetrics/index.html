@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ランタイムメトリックス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ランタイムメトリックス" />
   <meta property="og:description" content="Measure the behavior of running containers" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/runmetrics/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ランタイムメトリックス","description":"Measure the behavior of running containers","url":"https://docs.docker.com/config/containers/runmetrics/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,12 +110,12 @@
 
 <p>以下は<code class="language-plaintext highlighter-rouge">docker stats</code>コマンドの出力例です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stats redis1 redis2
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stats redis1 redis2
+<span class="go">
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O
 redis1              0.07%               796 KB / 64 MB        1.21%               788 B / 648 B       3.568 MB / 512 KB
 redis2              0.07%               2.746 MB / 64 MB      4.29%               1.266 KB / 648 B    12.4 MB / 0 B
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/stats/">docker stats</a> のリファレンスページでは、より詳細に<code class="language-plaintext highlighter-rouge">docker stats</code>コマンドについて説明しています。</p>
 
@@ -136,7 +136,7 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 
 <p>コントロールグループがどこにマウントされているかを確認するには、以下を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep </span>cgroup /proc/mounts
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>cgroup /proc/mounts
 </code></pre></div></div>
 
 <h3 id="enumerate-cgroups">cgroups の確認</h3>
@@ -411,7 +411,7 @@ CPU メトリックスは<code class="language-plaintext highlighter-rouge">cpua
 
 <p>たとえばウェブサーバー上におけるアウトバウンド HTTP トラフィックを計算するルールを設定することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">--sport</span> 80
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">--sport</span> 80
 </code></pre></div></div>
 
 <p>ここでは<code class="language-plaintext highlighter-rouge">-j</code>フラグや<code class="language-plaintext highlighter-rouge">-g</code>フラグは用いません。
@@ -419,7 +419,7 @@ CPU メトリックスは<code class="language-plaintext highlighter-rouge">cpua
 
 <p>このカウンター値は以下のようにして確認できます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-nxvL</span> OUTPUT
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-nxvL</span> OUTPUT
 </code></pre></div></div>
 
 <p>技術的なことだけで言えば<code class="language-plaintext highlighter-rouge">-n</code>は必要ありません。
@@ -450,12 +450,12 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
 
 <p>このコマンドの正確な書式は以下のとおりです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip netns <span class="nb">exec</span> &lt;nsname&gt; &lt;command...&gt;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec</span> &lt;nsname&gt; &lt;command...&gt;
 </code></pre></div></div>
 
 <p>たとえば以下のように実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip netns <span class="nb">exec </span>mycontainer netstat <span class="nt">-i</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec </span>mycontainer netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">ip netns</code>コマンドは、名前空間の擬似ファイルからコンテナー「mycontainer」を探します。
@@ -482,11 +482,11 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
 <p>環境変数<code class="language-plaintext highlighter-rouge">$CID</code>にはコンテナーの「短めの ID」が設定されているとします。
 これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ TASKS</span><span class="o">=</span>/sys/fs/cgroup/devices/docker/<span class="nv">$CID</span><span class="k">*</span>/tasks
-<span class="nv">$ PID</span><span class="o">=</span><span class="si">$(</span><span class="nb">head</span> <span class="nt">-n</span> 1 <span class="nv">$TASKS</span><span class="si">)</span>
-<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /var/run/netns
-<span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-sf</span> /proc/<span class="nv">$PID</span>/ns/net /var/run/netns/<span class="nv">$CID</span>
-<span class="nv">$ </span>ip netns <span class="nb">exec</span> <span class="nv">$CID</span> netstat <span class="nt">-i</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">TASKS</span><span class="o">=</span>/sys/fs/cgroup/devices/docker/<span class="nv">$CID</span><span class="k">*</span>/tasks
+<span class="gp">$</span><span class="w"> </span><span class="nv">PID</span><span class="o">=</span><span class="si">$(</span><span class="nb">head</span> <span class="nt">-n</span> 1 <span class="nv">$TASKS</span><span class="si">)</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> /var/run/netns
+<span class="gp">$</span><span class="w"> </span><span class="nb">ln</span> <span class="nt">-sf</span> /proc/<span class="nv">$PID</span>/ns/net /var/run/netns/<span class="nv">$CID</span>
+<span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec</span> <span class="nv">$CID</span> netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
 <h2 id="tips-for-high-performance-metric-collection">詳細なメトリックスを収集するためのヒント</h2>

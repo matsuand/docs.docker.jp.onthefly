@@ -1,0 +1,616 @@
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Install Docker Engine on SLES | Docker ドキュメント</title>
+  <meta name="description" content="Instructions for installing Docker Engine on SLES" />
+  <meta name="keywords" content="requirements, apt, installation, centos, rpm, sles, install, uninstall, upgrade, update, s390x, ibm-z">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/install/sles/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Install Docker Engine on SLES"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Install Docker Engine on SLES" />
+  <meta property="og:description" content="Instructions for installing Docker Engine on SLES" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/sles/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Install Docker Engine on SLES","description":"Instructions for installing Docker Engine on SLES","url":"https://docs.docker.com/engine/install/sles/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/engine/">Docker Engine</a></li><li><a href="/docs.docker.jp.onthefly/engine/install/centos/">ディストリビューション別インストール</a></li><li><a href="/docs.docker.jp.onthefly/engine/install/sles/">SLES でのインストール</a></li></ol>
+    </nav>
+</div></div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Install Docker Engine on SLES</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>To get started with Docker Engine on SLES, make sure you
+<a href="#prerequisites">meet the prerequisites</a>, then
+<a href="#installation-methods">install Docker</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>We currently only provide packages for SLES on s390x (IBM Z). Other architectures
+are not yet supported for SLES.</p>
+</blockquote>
+
+<h3 id="os-requirements">OS requirements</h3>
+
+<p>To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+Archived versions aren’t supported or tested.</p>
+
+<p>The <a href="https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&amp;version=15.2&amp;arch=s390x"><code class="language-plaintext highlighter-rouge">SCC SUSE</code></a>
+repositories must be enabled.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">SELinux (SLE_15_SP2)</code>repository must be enabled. This repository is not added by
+default, you need to
+<a href="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo">add it</a>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver is recommended.</p>
+
+<h3 id="uninstall-old-versions">Uninstall old versions</h3>
+
+<p>Older versions of Docker were called <code class="language-plaintext highlighter-rouge">docker</code> or <code class="language-plaintext highlighter-rouge">docker-engine</code>. If these are
+installed, uninstall them, along with associated dependencies.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper remove docker <span class="se">\</span>
+                  docker-client <span class="se">\</span>
+                  docker-client-latest <span class="se">\</span>
+                  docker-common <span class="se">\</span>
+                  docker-latest <span class="se">\</span>
+                  docker-latest-logrotate <span class="se">\</span>
+                  docker-logrotate <span class="se">\</span>
+                  docker-engine <span class="se">\</span>
+                  runc
+</code></pre></div></div>
+
+<p>It’s OK if <code class="language-plaintext highlighter-rouge">zypper</code> reports that none of these packages are installed.</p>
+
+<p>The contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>, including images, containers, volumes, and
+networks, are preserved. The Docker Engine package is now called <code class="language-plaintext highlighter-rouge">docker-ce</code>.</p>
+
+<h2 id="installation-methods">Installation methods</h2>
+
+<p>You can install Docker Engine in different ways, depending on your needs:</p>
+
+<ul>
+  <li>
+    <p>Most users
+<a href="#install-using-the-repository">set up Docker’s repositories</a> and install
+from them, for ease of installation and upgrade tasks. This is the
+recommended approach.</p>
+  </li>
+  <li>
+    <p>Some users download the RPM package and
+<a href="#install-from-a-package">install it manually</a> and manage
+upgrades completely manually. This is useful in situations such as installing
+Docker on air-gapped systems with no access to the internet.</p>
+  </li>
+  <li>
+    <p>In testing and development environments, some users choose to use automated
+<a href="#install-using-the-convenience-script">convenience scripts</a> to install Docker.</p>
+  </li>
+</ul>
+
+<h3 id="install-using-the-repository">Install using the repository</h3>
+
+<p>Before you install Docker Engine for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker
+from the repository.</p>
+
+<h4 id="set-up-the-repository">Set up the repository</h4>
+
+<p>Set up the <strong>stable</strong> repository.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="se">\</span>
+    addrepo <span class="se">\</span>
+    https://download.docker.com/linux/sles/docker-ce.repo
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Optional</strong>: Enable the <strong>nightly</strong> or <strong>test</strong> repositories.</p>
+
+  <p>These repositories are included in the <code class="language-plaintext highlighter-rouge">docker.repo</code> file above but are disabled
+by default. You can enable them alongside the stable repository.  The following
+command enables the <strong>nightly</strong> repository.</p>
+
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper mr <span class="nt">-e</span> docker-ce-nightly
+</code></pre></div>  </div>
+
+  <p>To enable the <strong>test</strong> channel, run the following command:</p>
+
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper mr <span class="nt">-e</span> docker-ce-test
+</code></pre></div>  </div>
+
+  <p>You can disable the <strong>nightly</strong> or <strong>test</strong> repository by running the</p>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper mr <span class="nt">-d</span> docker-ce-nightly
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper mr <span class="nt">-d</span> docker-ce-test
+</code></pre></div>  </div>
+
+  <p><a href="/docs.docker.jp.onthefly/engine/install/">Learn about <strong>nightly</strong> and <strong>test</strong> channels</a>.</p>
+</blockquote>
+
+<h4 id="install-docker-engine">Install Docker Engine</h4>
+
+<ol>
+  <li>
+    <p>Install the <em>latest version</em> of Docker Engine and containerd, or go to the next step to install a specific version:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="nb">install </span>docker-ce docker-ce-cli containerd.io
+</code></pre></div>    </div>
+
+    <p>If prompted to accept the GPG key, verify that the fingerprint matches
+<code class="language-plaintext highlighter-rouge">060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</code>, and if so, accept it.</p>
+
+    <blockquote>
+      <p>Got multiple Docker repositories?</p>
+
+      <p>If you have multiple Docker repositories enabled, installing
+or updating without specifying a version in the <code class="language-plaintext highlighter-rouge">zypper install</code> or
+<code class="language-plaintext highlighter-rouge">zypper update</code> command always installs the highest possible version,
+which may not be appropriate for your stability needs.</p>
+    </blockquote>
+
+    <p>This command installs Docker, but it doesn’t start Docker. It also creates a
+<code class="language-plaintext highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
+  </li>
+  <li>
+    <p>To install a <em>specific version</em> of Docker Engine, list the available versions
+in the repo, then select and install:</p>
+
+    <p>a. List and sort the versions available in your repo. This example sorts
+   results by version number, highest to lowest, and is truncated:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper se docker-ce <span class="nt">--match-exact</span>  | <span class="nb">sort</span> <span class="nt">-r</span>
+</code></pre></div>    </div>
+
+    <p>The list returned depends on which repositories are enabled, and is specific
+to your version of SLES.</p>
+
+    <p>b. Install a specific version by its fully qualified package name, which is
+   the package name (<code class="language-plaintext highlighter-rouge">docker-ce</code>) plus the version string (2nd column)
+   starting at the first colon (<code class="language-plaintext highlighter-rouge">:</code>), up to the first hyphen, separated by
+   a hyphen (<code class="language-plaintext highlighter-rouge">-</code>). For example, <code class="language-plaintext highlighter-rouge">docker-ce-18.09.1</code>.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="nb">install </span>docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io
+</code></pre></div>    </div>
+
+    <p>This command installs Docker, but it doesn’t start Docker. It also creates a
+<code class="language-plaintext highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
+  </li>
+  <li>
+    <p>Start Docker.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify that Docker Engine is installed correctly by running the <code class="language-plaintext highlighter-rouge">hello-world</code>
+image.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run hello-world
+</code></pre></div>    </div>
+
+    <p>This command downloads a test image and runs it in a container. When the
+container runs, it prints a message and exits.</p>
+  </li>
+</ol>
+
+<p>This installs and runs Docker Engine. Use <code class="language-plaintext highlighter-rouge">sudo</code> to run Docker
+commands. Continue to <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/">Linux postinstall</a> to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.</p>
+
+<h4 id="upgrade-docker-engine">Upgrade Docker Engine</h4>
+
+<p>To upgrade Docker Engine, follow the <a href="#install-using-the-repository">installation instructions</a>,
+choosing the new version you want to install.</p>
+
+<h3 id="install-from-a-package">Install from a package</h3>
+
+<p>If you cannot use Docker’s repository to install Docker, you can download the
+<code class="language-plaintext highlighter-rouge">.rpm</code> file for your release and install it manually. You need to download
+a new file each time you want to upgrade Docker Engine.</p>
+
+<ol>
+  <li>
+    <p>Go to <a href="https://download.docker.com/linux/sles/" target="_blank" rel="noopener" class="_">https://download.docker.com/linux/sles/</a>
+and choose your version of SLES. Then browse to <code class="language-plaintext highlighter-rouge">15/s390x/stable/Packages/</code>
+and download the <code class="language-plaintext highlighter-rouge">.rpm</code> file for the Docker version you want to install.</p>
+
+    <blockquote>
+      <p><strong>Note</strong></p>
+
+      <p>To install a <strong>nightly</strong> or <strong>test</strong> (pre-release) package,
+change the word <code class="language-plaintext highlighter-rouge">stable</code> in the above URL to <code class="language-plaintext highlighter-rouge">nightly</code> or <code class="language-plaintext highlighter-rouge">test</code>.
+<a href="/docs.docker.jp.onthefly/engine/install/">Learn about <strong>nightly</strong> and <strong>test</strong> channels</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Install Docker Engine, changing the path below to the path where you downloaded
+the Docker package.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="nb">install</span> /path/to/package.rpm
+</code></pre></div>    </div>
+
+    <p>Docker is installed but not started. The <code class="language-plaintext highlighter-rouge">docker</code> group is created, but no
+users are added to the group.</p>
+  </li>
+  <li>
+    <p>Start Docker.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify that Docker Engine is installed correctly by running the <code class="language-plaintext highlighter-rouge">hello-world</code>
+image.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run hello-world
+</code></pre></div>    </div>
+
+    <p>This command downloads a test image and runs it in a container. When the
+container runs, it prints a message and exits.</p>
+  </li>
+</ol>
+
+<p>This installs and runs Docker Engine. Use <code class="language-plaintext highlighter-rouge">sudo</code> to run Docker commands.
+Continue to <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/">Post-installation steps for Linux</a> to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.</p>
+
+<h4 id="upgrade-docker-engine-1">Upgrade Docker Engine</h4>
+
+<p>To upgrade Docker Engine, download the newer package file and repeat the
+<a href="#install-from-a-package">installation procedure</a>, using <code class="language-plaintext highlighter-rouge">zypper -y upgrade</code>
+instead of <code class="language-plaintext highlighter-rouge">zypper -y install</code>, and point to the new file.</p>
+
+<!-- This file is included in Docker Engine - Community or EE installation docs for Linux. -->
+
+<h3 id="install-using-the-convenience-script">便利スクリプトを使ったインストール</h3>
+
+<p>Docker では <a href="https://get.docker.com/">get.docker.com</a> において便利なスクリプトを提供しています。
+これは Docker を開発マシンに対話形式をとらずにすばやくインストールするものです。
+このスクリプトを本番環境において利用することはお勧めしませんが、環境に適したプロビジョニングを行うサンプルとして活用することはできます。
+また <a href="#install-using-the-repository">リポジトリを利用したインストール</a> における作業手順に従うことで、パッケージリポジトリを利用したインストール手順を身につけることができます。
+このスクリプトのソースコードはオープンソースであり、<a href="https://github.com/docker/docker-install" target="_blank" rel="noopener" class="_">GitHub 上の<code class="language-plaintext highlighter-rouge">docker-install</code>リポジトリ</a> から入手可能です。</p>
+
+<p class="warning">インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してからローカル実行してください。
+インストールにあたっては、この便利スクリプトの潜在的リスクや制限について、よく理解してください。</p>
+
+<ul>
+  <li>スクリプトを実行するには<code class="language-plaintext highlighter-rouge">root</code>権限か<code class="language-plaintext highlighter-rouge">sudo</code>が必要です。</li>
+  <li>スクリプトは自動的に情報取得を行い、利用している Linux ディストリビューション、そのバージョン、そしてパッケージ管理システムの設定を行います。
+なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。</li>
+  <li>スクリプトは依存パッケージや推奨パッケージをすべてインストールします。
+その際にはインストールして良いかどうかを問いません。
+したがって相当数のパッケージがインストールされることもあります。
+これはホストマシンのその時点での設定によります。</li>
+  <li>このスクリプトはデフォルトでは、最新版の Docker、containerd、runc をインストールします。
+このスクリプトを使ってマシンをプロビジョニングした場合、Docker のメジャーバージョンへのアップグレードにより、予期しない結果を引き起こすことがあります。
+本番環境へのデプロイを行う際には、必ず (メジャーバージョンへの) アップグレードをテスト環境においてテストしておいてください。</li>
+  <li>このスクリプトは、既にインストールされている Docker をアップグレードするように設計されていません。
+このスクリプトを利用して既存インストールをアップデートする際には、依存パッケージが思いどおりにアップデートされない場合があります。
+それによって古いバージョンのまま利用する状況となる場合があります。</li>
+</ul>
+
+<blockquote>
+  <p>ヒント：  スクリプト実行前のインストールステップ確認</p>
+
+  <p>本スクリプトの実行にあたって<code class="language-plaintext highlighter-rouge">DRY_RUN=1</code>オプションを指定すると、このスクリプトのインストールステップを確認することができます。</p>
+
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
+<span class="gp">$</span><span class="w"> </span><span class="nv">DRY_RUN</span><span class="o">=</span>1 sh ./get-docker.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<p>以下は、このスクリプトを <a href="https://get.docker.com/">get.docker.com</a> からダウンロードして実行することで、Linux 上に最新安定版をインストールする例です。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh get-docker.sh
+<span class="go">Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div></div>
+
+<p>上により Docker がインストールされます。
+Debian ベースのディストリビューションでは Docker が自動的に開始されます。
+CentOS、Fedora、RHEL、SLES といった<code class="language-plaintext highlighter-rouge">RPM</code>ベースの場合は手動での実行が必要となるため、<code class="language-plaintext highlighter-rouge">systemctl</code>か<code class="language-plaintext highlighter-rouge">service</code>のいずれか適当なものを実行します。
+上の出力メッセージに示されているように、デフォルトでは非 root ユーザーによる Docker コマンド実行はできません。</p>
+
+<blockquote>
+  <p><strong>非特権ユーザーでの Docker 利用、rootless モードでのインストール？</strong></p>
+
+  <p>このインストールスクリプトでは、Docker をインストールして利用するために<code class="language-plaintext highlighter-rouge">root</code>あるいは<code class="language-plaintext highlighter-rouge">sudo</code>を用いた権限が必要です。
+非 root ユーザーに Docker の利用を許可する場合は、<a href="/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">Linux インストール後の作業</a> を参照してください。
+Docker は<code class="language-plaintext highlighter-rouge">root</code>権限がなくてもインストールできます。
+つまり rootless モードにより実行することができます。
+rootless モードにより Docker を実行する手順については <a href="/docs.docker.jp.onthefly/engine/security/rootless/">root ユーザー以外による Docker デーモン起動（rootless モード）</a> を参照してください。</p>
+</blockquote>
+
+<h4 id="install-pre-releases">プレリリース版のインストール</h4>
+
+<p>Docker ではこの便利スクリプトを <a href="https://test.docker.com/">test.docker.com</a> からも提供しています。
+これを使って Linux 上にプレリリース版の Docker をインストールできます。
+このスクリプトは<code class="language-plaintext highlighter-rouge">get.docker.com</code>から入手するものと同等ですが、パッケージリポジトリ内の「テスト」チャネルから、パッケージマネージャーがインストールするものとして設定されています。
+このスクリプトには Docker の安定版とプレリリース版（ベータ版、リリース候補版）が含まれています。
+このスクリプトを利用すれば、新規リリース機能をいち早く利用できます。
+またそういった機能が安定版として提供されるよりも前に、テスト環境において評価することができます。</p>
+
+<p>Linux への Docker 最新版のインストールを「テスト」チャネルから行うには、以下を実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://test.docker.com <span class="nt">-o</span> test-docker.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh test-docker.sh
+<span class="c">&lt;...&gt;
+</span></code></pre></div></div>
+
+<h4 id="upgrade-docker-after-using-the-convenience-script">便利スクリプトを使った後の Docker のアップグレード</h4>
+
+<p>便利スクリプトを使って Docker をインストールした場合、Docker のアップグレードはパッケージマネージャーを直接使って行ってください。
+便利スクリプトは再実行する意味はありません。
+ホストマシンにリポジトリが追加されているところに、このスクリプトを再実行したとすると、そのリポジトリを再度追加してしまうため、問題になることがあります。</p>
+
+<h2 id="uninstall-docker-engine">Uninstall Docker Engine</h2>
+
+<ol>
+  <li>
+    <p>Uninstall the Docker Engine, CLI, and Containerd packages:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper remove docker-ce docker-ce-cli containerd.io
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Images, containers, volumes, or customized configuration files on your host
+are not automatically removed. To delete all images, containers, and
+volumes:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/containerd
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>You must delete any edited configuration files manually.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<ul>
+  <li>Continue to <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/">Post-installation steps for Linux</a>.</li>
+  <li>Review the topics in <a href="/docs.docker.jp.onthefly/develop/">Develop with Docker</a> to learn how to build new applications using Docker.</li>
+</ul>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=requirements">requirements</a>, <a href="/docs.docker.jp.onthefly/search/?q=apt">apt</a>, <a href="/docs.docker.jp.onthefly/search/?q=installation">installation</a>, <a href="/docs.docker.jp.onthefly/search/?q=centos">centos</a>, <a href="/docs.docker.jp.onthefly/search/?q=rpm">rpm</a>, <a href="/docs.docker.jp.onthefly/search/?q=sles">sles</a>, <a href="/docs.docker.jp.onthefly/search/?q=install">install</a>, <a href="/docs.docker.jp.onthefly/search/?q=uninstall">uninstall</a>, <a href="/docs.docker.jp.onthefly/search/?q=upgrade">upgrade</a>, <a href="/docs.docker.jp.onthefly/search/?q=update">update</a>, <a href="/docs.docker.jp.onthefly/search/?q=s390x">s390x</a>, <a href="/docs.docker.jp.onthefly/search/?q=ibm-z">ibm-z</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/engine/install/sles.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [engine/install/sles.ch](https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/sles/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a>
+    <ul>
+      <li><a href="#os-requirements" class="nomunge">OS requirements</a></li>
+      <li><a href="#uninstall-old-versions" class="nomunge">Uninstall old versions</a></li>
+    </ul>
+  </li>
+  <li><a href="#installation-methods" class="nomunge">Installation methods</a>
+    <ul>
+      <li><a href="#install-using-the-repository" class="nomunge">Install using the repository</a>
+        <ul>
+          <li><a href="#set-up-the-repository" class="nomunge">Set up the repository</a></li>
+          <li><a href="#install-docker-engine" class="nomunge">Install Docker Engine</a></li>
+          <li><a href="#upgrade-docker-engine" class="nomunge">Upgrade Docker Engine</a></li>
+        </ul>
+      </li>
+      <li><a href="#install-from-a-package" class="nomunge">Install from a package</a>
+        <ul>
+          <li><a href="#upgrade-docker-engine-1" class="nomunge">Upgrade Docker Engine</a></li>
+        </ul>
+      </li>
+      <li><a href="#install-using-the-convenience-script" class="nomunge">便利スクリプトを使ったインストール</a>
+        <ul>
+          <li><a href="#install-pre-releases" class="nomunge">プレリリース版のインストール</a></li>
+          <li><a href="#upgrade-docker-after-using-the-convenience-script" class="nomunge">便利スクリプトを使った後の Docker のアップグレード</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#uninstall-docker-engine" class="nomunge">Uninstall Docker Engine</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                        <li><a href="https://docker.events.cube365.net/dockercon/">DockerCon</a></li>
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/engine/install/sles/";</script></body>
+</html>

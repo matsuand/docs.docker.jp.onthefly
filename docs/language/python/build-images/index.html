@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-05 13:32:07 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Python イメージのビルド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Python イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Python イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/python/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Python イメージのビルド</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Python イメージのビルド</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><ul class="pagination">
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -165,21 +165,21 @@ Linux 上において Docker を利用している場合は、環境変数を用
 これは Flask フレームワークを利用します。
 ローカルマシン内に<code class="language-plaintext highlighter-rouge">python-docker</code>という名前のディレクトリを生成し、以下の手順により簡単なウェブサーバーを生成します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /path/to/python-docker
-<span class="nv">$ </span>pip3 <span class="nb">install </span>Flask
-<span class="nv">$ </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
-<span class="nv">$ </span><span class="nb">touch </span>app.py
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/python-docker
+<span class="gp">$</span><span class="w"> </span>pip3 <span class="nb">install </span>Flask
+<span class="gp">$</span><span class="w"> </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>app.py
 </code></pre></div></div>
 
 <p>そこで簡単なウェブリクエストを扱うコードを追加してみます。
 好みの IDE 内においてワーキングディレクトリを開いて、<code class="language-plaintext highlighter-rouge">app.py</code>ファイルに以下のコードを記述します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from flask import Flask
-app <span class="o">=</span> Flask<span class="o">(</span>__name__<span class="o">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-@app.route<span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
-def hello_world<span class="o">()</span>:
-    <span class="k">return</span> <span class="s1">'Hello, Docker!'</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'Hello, Docker!'</span>
 </code></pre></div></div>
 
 <h2 id="test-the-application">アプリケーションのテスト</h2>
@@ -187,7 +187,7 @@ def hello_world<span class="o">()</span>:
 <p>ここからアプリケーションを起動させて正しく動作することを確認します。
 ターミナルを開いて、上で生成したワーキングディレクトリに移動します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python3 <span class="nt">-m</span> flask run
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python3 <span class="nt">-m</span> flask run
 </code></pre></div></div>
 
 <p>アプリケーションが適切に動作していることを確認するために、ブラウザーを開いて<code class="language-plaintext highlighter-rouge">http://localhost:5000</code>にアクセスします。</p>
@@ -333,25 +333,25 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 
 <p>では初めての Docker イメージをビルドしてみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
-<span class="o">[</span>+] Building 2.7s <span class="o">(</span>10/10<span class="o">)</span> FINISHED
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 203B
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
- <span class="o">=&gt;</span> <span class="o">[</span>1/6] FROM docker.io/library/python:3.8-slim-buster
- <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 953B
- <span class="o">=&gt;</span> CACHED <span class="o">[</span>2/6] WORKDIR /app
- <span class="o">=&gt;</span> <span class="o">[</span>3/6] COPY requirements.txt requirements.txt
- <span class="o">=&gt;</span> <span class="o">[</span>4/6] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
- <span class="o">=&gt;</span> <span class="o">[</span>5/6] COPY <span class="nb">.</span> <span class="nb">.</span>
- <span class="o">=&gt;</span> <span class="o">[</span>6/6] CMD <span class="o">[</span> <span class="s2">"python3"</span>, <span class="s2">"-m"</span>, <span class="s2">"flask"</span>, <span class="s2">"run"</span>, <span class="s2">"--host=0.0.0.0"</span><span class="o">]</span>
- <span class="o">=&gt;</span> exporting to image
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> exporting layers
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/python-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
+<span class="go">[+] Building 2.7s (10/10) FINISHED
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 203B
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>1/6] FROM docker.io/library/python:3.8-slim-buster
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 953B
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>2/6] WORKDIR /app
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>3/6] COPY requirements.txt requirements.txt
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>4/6] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>5/6] COPY <span class="nb">.</span> <span class="nb">.</span>
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>6/6] CMD <span class="o">[</span> <span class="s2">"python3"</span>, <span class="s2">"-m"</span>, <span class="s2">"flask"</span>, <span class="s2">"run"</span>, <span class="s2">"--host=0.0.0.0"</span><span class="o">]</span>
+<span class="gp"> =&gt;</span><span class="w"> </span>exporting to image
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/library/python-docker
 </code></pre></div></div>
 
 <h2 id="view-local-images">ローカルイメージの確認</h2>
@@ -362,11 +362,11 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 
 <p>イメージを一覧表示するには、単純に<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>一覧には少なくとも 2 つのイメージが表示されるはずです。
 1 つはベースイメージ<code class="language-plaintext highlighter-rouge">3.8-slim-buster</code>であり、もう 1 つは<code class="language-plaintext highlighter-rouge">python-docker:latest</code>としてビルドしたイメージです。</p>
@@ -387,7 +387,7 @@ python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 
 <p>イメージに対して新たなタグを生成するには、以下のコマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker tag python-docker:latest python-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag python-docker:latest python-docker:v1.0.0
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker tag</code>コマンドはイメージに対するタグを生成します。
@@ -396,12 +396,12 @@ python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 
 <p>そこで<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
 python-docker   v1.0.0            8cae92a8fbd6   4 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">python-docker</code>で始まるイメージが一覧に 2 つ表示されています。
 <code class="language-plaintext highlighter-rouge">IMAGE ID</code>列を見てみれば、その 2 つのイメージは同一のものであることがわかります。
@@ -411,18 +411,18 @@ python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 これを行うには<code class="language-plaintext highlighter-rouge">rmi</code>コマンドを使います。
 <code class="language-plaintext highlighter-rouge">rmi</code>コマンドは「remove image」を表しています。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker rmi python-docker:v1.0.0
-Untagged: python-docker:v1.0.0
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker rmi python-docker:v1.0.0
+<span class="go">Untagged: python-docker:v1.0.0
+</span></code></pre></div></div>
 
 <p>Docker の出力結果からわかるように、イメージは削除されたわけではなく「タグづけ解除」が行われただけです。
 <code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行して確認してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="language-plaintext highlighter-rouge">python-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
 

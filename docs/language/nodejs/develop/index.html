@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-05 13:32:07 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けコンテナーの利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="開発向けコンテナーの利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-05T13:32:07+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けコンテナーの利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/nodejs/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>開発向けコンテナーの利用</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
+                        <section class="section"><h1>開発向けコンテナーの利用</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/nodejs/develop/">開発向けコンテナー利用</a></li>
@@ -139,21 +139,21 @@
 <p>それではここでボリュームを生成します。
 作り出すボリュームは 1 つは MongoDB のデータ用、そしてもう 1 つは MongoDB の設定用です。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create mongodb
-<span class="nv">$ </span>docker volume create mongodb_config
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume create mongodb
+<span class="gp">$</span><span class="w"> </span>docker volume create mongodb_config
 </code></pre></div></div>
 
 <p>またここでネットワークを生成して、アプリケーションとデータベースが互いにやりとりできるようにします。
 ネットワークはユーザー定義によるブリッジネットワークであり、DNS 検索サービスが提供されるため、接続文字列を使った設定が利用可能になります。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mongodb
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create mongodb
 </code></pre></div></div>
 
 <p>コンテナーとして MongoDB を実行します。
 そして上で生成したボリュームとネットワークをこれに結びつけます。
 Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mongodb:/data/db <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mongodb:/data/db <span class="se">\</span>
   <span class="nt">-v</span> mongodb_config:/data/configdb <span class="nt">-p</span> 27017:27017 <span class="se">\</span>
   <span class="nt">--network</span> mongodb <span class="se">\</span>
   <span class="nt">--name</span> mongodb <span class="se">\</span>
@@ -179,12 +179,12 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 
 <p>まずは npm を使ってアプリケーションに<code class="language-plaintext highlighter-rouge">ronin-database</code>モジュールを追加します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>ronin-database
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>npm <span class="nb">install </span>ronin-database
 </code></pre></div></div>
 
 <p>そしてイメージをビルドします。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>ではコンテナーを実行してみます。
@@ -192,7 +192,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 つまりデータベースにアクセスする際の接続文字列をアプリケーションに伝える必要があります。
 これを<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて実現します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
   <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--network</span> mongodb <span class="se">\</span>
   <span class="nt">--name</span> rest-server <span class="se">\</span>
@@ -203,15 +203,15 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 
 <p>アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/notes <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{
-"name": "this is a note",
+</span><span class="go">"name": "this is a note",
 "text": "this is a note that I wanted to take while I was working on writing a blog post.",
 "owner": "peter"
-}'</span>
-</code></pre></div></div>
+}'
+</span></code></pre></div></div>
 
 <p>サービスからは以下のような JSON データが返ってくるはずです。</p>
 
@@ -283,7 +283,7 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 
 <p>アプリケーションを起動して、正常に動作していることを確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
 <p>ここでは<code class="language-plaintext highlighter-rouge">--build</code>フラグを指定しました。
@@ -296,7 +296,7 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 <p>では API エンドポイントを確認します。
 以下の curl コマンドを実行してみましょう。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/notes
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/notes
 </code></pre></div></div>
 
 <p>以下のようなレスポンスが返ってくるはずです。</p>
@@ -336,7 +336,7 @@ DevTools が開いて、コンテナー内部で稼働する Node.js プロセ�
 <p>Chrome の DevTools 画面に戻り、<code class="language-plaintext highlighter-rouge">return res.json({ "foo": "bar" })</code>がある行にブレークポイントを設定します。
 そして以下の curl コマンドを実行してブレークポイントまで実行されるようにします。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/foo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/foo
 </code></pre></div></div>
 
 <p>コード実行がブレークポイント行において停止するので、ふだん利用している際と同じようにしてデバッガーを利用することができます。

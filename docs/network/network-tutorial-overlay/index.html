@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>オーバーレイネットワークのチュートリアル | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="オーバーレイネットワークのチュートリアル" />
   <meta property="og:description" content="Tutorials for networking with swarm services and standalone containers on multiple Docker daemons" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-overlay/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"オーバーレイネットワークのチュートリアル","description":"Tutorials for networking with swarm services and standalone containers on multiple Docker daemons","url":"https://docs.docker.com/network/network-tutorial-overlay/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>オーバーレイネットワークのチュートリアル</h1><p><em class="reading-time">読む時間の目安: 13 分</em></p>
-<p>ここに示すチュートリアルは、Swarm サービスに対するネットワークを扱います。
+                        <section class="section"><h1>オーバーレイネットワークのチュートリアル</h1><p><em class="reading-time">読む時間の目安: 12 分</em></p><p>ここに示すチュートリアルは、Swarm サービスに対するネットワークを扱います。
 スタンドアロンコンテナーに対するネットワークについては、<a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/">スタンドアロンコンテナーのネットワークチュートリアル</a> を参照してください。
 Docker ネットワークの全般的なことを確認したい場合は <a href="/docs.docker.jp.onthefly/network/">ネットワーク概要</a> を参照してください。</p>
 
@@ -133,12 +132,12 @@ Docker ネットワークの全般的なことを確認したい場合は <a hre
 <h2 id="prerequisites">前提条件</h2>
 
 <p>最低でも単一ノードからなる Swarm が必要です。
-つまり Docker ホスト上にデーモンが起動している状態で <code class="language-plaintext highlighter-rouge">docker swarm init</code> を実行します。
+つまり Docker ホスト上にデーモンが起動している状態で<code class="language-plaintext highlighter-rouge">docker swarm init</code>を実行します。
 もちろん複数ノードの Swarm 上でも、利用例を試すことができます。</p>
 
 <h2 id="use-the-default-overlay-network">デフォルトのオーバーレイネットワーク利用</h2>
 
-<p>以下の例では <code class="language-plaintext highlighter-rouge">alpine</code> サービスを起動し、コンテナーの個々から見たネットワークの特徴を確認していきます。</p>
+<p>以下の例では<code class="language-plaintext highlighter-rouge">alpine</code>サービスを起動し、コンテナーの個々から見たネットワークの特徴を確認していきます。</p>
 
 <p>このチュートリアルでは、オーバーレイネットワークがどのように実装されているかといった、システム詳細については立ち入った説明はしません。
 ただしサービスの観点から、オーバーレイ機能がどのようなものかは、詳しく見ていきます。</p>
@@ -148,10 +147,10 @@ Docker ネットワークの全般的なことを確認したい場合は <a hre
 <p>このチュートリアルでは、物理ホスト、仮想ホストは問わず Docker ホストを 3 つ利用して、互いに通信を行うようにします。
 この 3 つは、同一のネットワーク上にファイアウォールなしに稼動しているものとします。</p>
 
-<p>各ホストは <code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code> とします。
-<code class="language-plaintext highlighter-rouge">manager</code> ホストは、マネージャーとワーカーの両方の役割を持つものです。
+<p>各ホストは<code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code>とします。
+<code class="language-plaintext highlighter-rouge">manager</code>ホストは、マネージャーとワーカーの両方の役割を持つものです。
 つまりこれは、サービスタスクが稼動すると同時に、Swarm の管理も行います。
-<code class="language-plaintext highlighter-rouge">worker-1</code> と <code class="language-plaintext highlighter-rouge">worker-2</code> は、ワーカーとしてのみ動作します。</p>
+<code class="language-plaintext highlighter-rouge">worker-1</code>と<code class="language-plaintext highlighter-rouge">worker-2</code>は、ワーカーとしてのみ動作します。</p>
 
 <p>3 つのホストを手元で自由に使えないといったときには、簡単な策として Amazon EC2 などのクラウドプロバイダー上に 3 つの Ubuntu ホストを設定するという方法があります。
 そうすれば同一のネットワーク上において、各ホストが確実に通信できるようになります（EC2 のセキュリティグループなどの機能を利用して実現されます）。
@@ -161,84 +160,84 @@ Docker ネットワークの全般的なことを確認したい場合は <a hre
 
 <h4 id="create-the-swarm">Swarm の生成</h4>
 
-<p>この手順を進めることで、最終的には 3 つの Docker ホストが Swarm に参加し、<code class="language-plaintext highlighter-rouge">ingress</code> というオーバーレイネットワークを使って互いに通信できる状態になります。</p>
+<p>この手順を進めることで、最終的には 3 つの Docker ホストが Swarm に参加し、<code class="language-plaintext highlighter-rouge">ingress</code>というオーバーレイネットワークを使って互いに通信できる状態になります。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code> において Swarm を初期化します。
-このホストがただ 1 つのネットワークインターフェースしかない場合は <code class="language-plaintext highlighter-rouge">--advertise-addr</code> フラグの指定は任意です。</p>
+    <p><code class="language-plaintext highlighter-rouge">manager</code>において Swarm を初期化します。
+このホストがただ 1 つのネットワークインターフェースしかない場合は<code class="language-plaintext highlighter-rouge">--advertise-addr</code>フラグの指定は任意です。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init <span class="nt">--advertise-addr</span><span class="o">=</span>&lt;managerのIPアドレス&gt;
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--advertise-addr</span><span class="o">=</span>&lt;managerのIPアドレス&gt;
 </code></pre></div>    </div>
 
     <p>出力される文字列は書きとめておいてください。
 そこにはトークンが出力されます。
-この後に <code class="language-plaintext highlighter-rouge">worker-1</code> と <code class="language-plaintext highlighter-rouge">worker-2</code> を Swarm に参加させる際に必要となります。
+この後に<code class="language-plaintext highlighter-rouge">worker-1</code>と<code class="language-plaintext highlighter-rouge">worker-2</code>を Swarm に参加させる際に必要となります。
 パスワード管理ツールがあれば、そこにトークンを保存しておくのでもよいでしょう。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">worker-1</code> 上から、これを Swarm に参加させます。
-このホストがただ 1 つのネットワークインターフェースしかない場合は <code class="language-plaintext highlighter-rouge">--advertise-addr</code> フラグの指定は任意です。</p>
+    <p><code class="language-plaintext highlighter-rouge">worker-1</code>上から、これを Swarm に参加させます。
+このホストがただ 1 つのネットワークインターフェースしかない場合は<code class="language-plaintext highlighter-rouge">--advertise-addr</code>フラグの指定は任意です。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; <span class="se">\</span>
   <span class="nt">--advertise-addr</span> &lt;worker-1のIPアドレス&gt; <span class="se">\</span>
   &lt;managerのIPアドレス&gt;:2377
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">worker-2</code> 上から、これを Swarm に参加させます。
-このホストがただ 1 つのネットワークインターフェースしかない場合は <code class="language-plaintext highlighter-rouge">--advertise-addr</code> フラグの指定は任意です。</p>
+    <p><code class="language-plaintext highlighter-rouge">worker-2</code>上から、これを Swarm に参加させます。
+このホストがただ 1 つのネットワークインターフェースしかない場合は<code class="language-plaintext highlighter-rouge">--advertise-addr</code>フラグの指定は任意です。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; <span class="se">\</span>
   <span class="nt">--advertise-addr</span> &lt;worker-2のIPアドレス&gt; <span class="se">\</span>
   &lt;managerのIPアドレス&gt;:2377
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code> においてノード一覧を確認します。
+    <p><code class="language-plaintext highlighter-rouge">manager</code>においてノード一覧を確認します。
 このコマンドはマネージャーからしか実行することができません。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls
-
-</span>ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-d68ace5iraw6whp7llvgjpu48 <span class="k">*</span>   ip-172-31-34-146    Ready               Active              Leader
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span>
+<span class="go">
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+d68ace5iraw6whp7llvgjpu48 *   ip-172-31-34-146    Ready               Active              Leader
 nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
 ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">--filter</code> フラグを使って役割（role）を絞ることができます。</p>
+    <p><code class="language-plaintext highlighter-rouge">--filter</code>フラグを使って役割（role）を絞ることができます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls</span> <span class="nt">--filter</span> <span class="nv">role</span><span class="o">=</span>manager
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span> <span class="nt">--filter</span> <span class="nv">role</span><span class="o">=</span>manager
+<span class="go">
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-d68ace5iraw6whp7llvgjpu48 <span class="k">*</span>   ip-172-31-34-146    Ready               Active              Leader
+d68ace5iraw6whp7llvgjpu48 *   ip-172-31-34-146    Ready               Active              Leader
 
-<span class="nv">$ </span>docker node <span class="nb">ls</span> <span class="nt">--filter</span> <span class="nv">role</span><span class="o">=</span>worker
-
+</span><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span> <span class="nt">--filter</span> <span class="nv">role</span><span class="o">=</span>worker
+<span class="go">
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
 nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
 ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code> のそれぞれにおいて、Docker ネットワークの一覧を表示します。
-そこにはいずれも <code class="language-plaintext highlighter-rouge">ingress</code> というオーバーレイネットワークがあり、<code class="language-plaintext highlighter-rouge">docker_gwbridge</code> というブリッジネットワークがあることを確認してください。
-なお以下では <code class="language-plaintext highlighter-rouge">manager</code> におけるネットワーク一覧のみを示します。</p>
+    <p><code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code>のそれぞれにおいて、Docker ネットワークの一覧を表示します。
+そこにはいずれも<code class="language-plaintext highlighter-rouge">ingress</code>というオーバーレイネットワークがあり、<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>というブリッジネットワークがあることを確認してください。
+なお以下では<code class="language-plaintext highlighter-rouge">manager</code>におけるネットワーク一覧のみを示します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
-
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-495c570066be        bridge              bridge              <span class="nb">local
-</span>961c6cae9945        docker_gwbridge     bridge              <span class="nb">local
-</span>ff35ceda3643        host                host                <span class="nb">local
-</span>trtnl4tqnc3n        ingress             overlay             swarm
-c8357deec9cb        none                null                <span class="nb">local</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+495c570066be        bridge              bridge              local
+961c6cae9945        docker_gwbridge     bridge              local
+ff35ceda3643        host                host                local
+trtnl4tqnc3n        ingress             overlay             swarm
+c8357deec9cb        none                null                local
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
-<p><code class="language-plaintext highlighter-rouge">docker_gwbridge</code> は <code class="language-plaintext highlighter-rouge">ingress</code> ネットワークを Docker ホストのネットワークインターフェースに接続するものであり、これがあることで、Swarm マネージャーとワーカーとの間でのトラフィックが通信できるようになります。
-Swarm サービスを生成する際にネットワーク指定を行わない場合は、そのサービスは <code class="language-plaintext highlighter-rouge">ingress</code> ネットワークに接続されます。
+<p><code class="language-plaintext highlighter-rouge">docker_gwbridge</code>は<code class="language-plaintext highlighter-rouge">ingress</code>ネットワークを Docker ホストのネットワークインターフェースに接続するものであり、これがあることで、Swarm マネージャーとワーカーとの間でのトラフィックが通信できるようになります。
+Swarm サービスを生成する際にネットワーク指定を行わない場合は、そのサービスは<code class="language-plaintext highlighter-rouge">ingress</code>ネットワークに接続されます。
 いくつかのアプリケーションがまとまって動作するような場合には、各アプリケーションごとにオーバーレイネットワークを用いることが推奨されます。
 次の手順では、オーバーレイネットワークを 2 つ生成して、サービスをそこに接続します。</p>
 
@@ -246,16 +245,16 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code> において、<code class="language-plaintext highlighter-rouge">nginx-net</code> という名前の新たなオーバーレイネットワークを生成します。</p>
+    <p><code class="language-plaintext highlighter-rouge">manager</code>において、<code class="language-plaintext highlighter-rouge">nginx-net</code>という名前の新たなオーバーレイネットワークを生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay nginx-net
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> overlay nginx-net
 </code></pre></div>    </div>
 
     <p>このオーバーレイネットワークは、他のノード上で生成する必要はありません。
 それぞれのノードにおいて、このネットワークを必要とするサービスタスクが起動した際に、ネットワークは自動生成されます。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code> において、<code class="language-plaintext highlighter-rouge">nginx-net</code> に接続する Nginx サービスをレプリカ数 5 で生成します。
+    <p><code class="language-plaintext highlighter-rouge">manager</code>において、<code class="language-plaintext highlighter-rouge">nginx-net</code>に接続する Nginx サービスをレプリカ数 5 で生成します。
 このサービスは外部に対してはポート 80 を公開します。
 サービスタスクを実行するコンテナーは、ポートを公開しなくても互いに通信できるようになっています。</p>
 
@@ -263,7 +262,7 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
       <p><strong>メモ</strong>: サービスはマネージャー上からしか生成できません。</p>
     </blockquote>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> my-nginx <span class="se">\</span>
   <span class="nt">--publish</span> <span class="nv">target</span><span class="o">=</span>80,published<span class="o">=</span>80 <span class="se">\</span>
   <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
@@ -271,43 +270,43 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
   nginx
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">ingress</code> のデフォルトの公開モードは、<code class="language-plaintext highlighter-rouge">--publish</code> フラグに対して <code class="language-plaintext highlighter-rouge">mode</code> を指定しなかった場合に用いられます。
-  そして <code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code> のポート 80 にアクセスしたときに、5 つのサービスタスクのどれか 1 つのポート 80 に接続できるものであり、たとえ接続したノードそのものにおいて、その時点でサービスタスクが稼動していなくても接続が可能なものです。
-  <code class="language-plaintext highlighter-rouge">host</code> モードを利用してポートを公開したい場合は、<code class="language-plaintext highlighter-rouge">--publish</code> において <code class="language-plaintext highlighter-rouge">mode=host</code> を追加します。
-  ただしその場合は、<code class="language-plaintext highlighter-rouge">--replicas=5</code> を指定するのではなく <code class="language-plaintext highlighter-rouge">--mode global</code> としなければなりません。
+    <p><code class="language-plaintext highlighter-rouge">ingress</code>のデフォルトの公開モードは、<code class="language-plaintext highlighter-rouge">--publish</code>フラグに対して<code class="language-plaintext highlighter-rouge">mode</code>を指定しなかった場合に用いられます。
+  そして<code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code>のポート 80 にアクセスしたときに、5 つのサービスタスクのどれか 1 つのポート 80 に接続できるものであり、たとえ接続したノードそのものにおいて、その時点でサービスタスクが稼動していなくても接続が可能なものです。
+  <code class="language-plaintext highlighter-rouge">host</code>モードを利用してポートを公開したい場合は、<code class="language-plaintext highlighter-rouge">--publish</code>において<code class="language-plaintext highlighter-rouge">mode=host</code>を追加します。
+  ただしその場合は、<code class="language-plaintext highlighter-rouge">--replicas=5</code>を指定するのではなく<code class="language-plaintext highlighter-rouge">--mode global</code>としなければなりません。
   そのときには、指定されたノード上の指定されたポートに割り当てることができるサービスタスクは、ただ 1 つになるからです。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service ls</code> を実行して、サービスの稼働状況を確認してみます。
+    <p><code class="language-plaintext highlighter-rouge">docker service ls</code>を実行して、サービスの稼働状況を確認してみます。
 これには数秒かかります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code> 上の <code class="language-plaintext highlighter-rouge">nginx-net</code> ネットワークを確認します。
-<code class="language-plaintext highlighter-rouge">worker-1</code> と <code class="language-plaintext highlighter-rouge">worker-2</code> においては、ネットワークを手動で生成する必要はなく、Docker が生成してくれるものであることは、前に説明しました。
-出力結果は長いものになりますが、<code class="language-plaintext highlighter-rouge">Containers</code> と <code class="language-plaintext highlighter-rouge">Peers</code> という項をよく確認してください。
-<code class="language-plaintext highlighter-rouge">Containers</code> には、ホストからオーバーレイネットワークに接続されたサービスタスク（あるいはスタンドアロンコンテナー）の一覧が出力されています。</p>
+    <p><code class="language-plaintext highlighter-rouge">manager</code>、<code class="language-plaintext highlighter-rouge">worker-1</code>、<code class="language-plaintext highlighter-rouge">worker-2</code>上の<code class="language-plaintext highlighter-rouge">nginx-net</code>ネットワークを確認します。
+<code class="language-plaintext highlighter-rouge">worker-1</code>と<code class="language-plaintext highlighter-rouge">worker-2</code>においては、ネットワークを手動で生成する必要はなく、Docker が生成してくれるものであることは、前に説明しました。
+出力結果は長いものになりますが、<code class="language-plaintext highlighter-rouge">Containers</code>と<code class="language-plaintext highlighter-rouge">Peers</code>という項をよく確認してください。
+<code class="language-plaintext highlighter-rouge">Containers</code>には、ホストからオーバーレイネットワークに接続されたサービスタスク（あるいはスタンドアロンコンテナー）の一覧が出力されています。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">manager</code> において、<code class="language-plaintext highlighter-rouge">docker service inspect my-nginx</code> を実行してサービスを確認します。
+    <p><code class="language-plaintext highlighter-rouge">manager</code>において、<code class="language-plaintext highlighter-rouge">docker service inspect my-nginx</code>を実行してサービスを確認します。
 サービスによって利用されているポートとエンドポイントの情報を確認してください。</p>
   </li>
   <li>
-    <p>新たに <code class="language-plaintext highlighter-rouge">nginx-net-2</code> というネットワークを生成します。
-そしてそれまでの <code class="language-plaintext highlighter-rouge">nginx-net</code> の代わりとして、このネットワークをサービスが利用するようにアップデートします。</p>
+    <p>新たに<code class="language-plaintext highlighter-rouge">nginx-net-2</code>というネットワークを生成します。
+そしてそれまでの<code class="language-plaintext highlighter-rouge">nginx-net</code>の代わりとして、このネットワークをサービスが利用するようにアップデートします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay nginx-net-2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> overlay nginx-net-2
 </code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="se">\</span>
   <span class="nt">--network-add</span> nginx-net-2 <span class="se">\</span>
   <span class="nt">--network-rm</span> nginx-net <span class="se">\</span>
   my-nginx
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service ls</code> を実行して、サービスがアップデートされたことと、タスクがすべて再デプロイされたことを確認します。
-そして <code class="language-plaintext highlighter-rouge">docker network inspect nginx-net</code> を実行して、このネットワークに接続しているコンテナーは 1 つもないことを確認します。
-同様のコマンドを <code class="language-plaintext highlighter-rouge">nginx-net-2</code> に対しても実行し、サービスタスクコンテナーがすべて、そのネットワークに接続されていることを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker service ls</code>を実行して、サービスがアップデートされたことと、タスクがすべて再デプロイされたことを確認します。
+そして<code class="language-plaintext highlighter-rouge">docker network inspect nginx-net</code>を実行して、このネットワークに接続しているコンテナーは 1 つもないことを確認します。
+同様のコマンドを<code class="language-plaintext highlighter-rouge">nginx-net-2</code>に対しても実行し、サービスタスクコンテナーがすべて、そのネットワークに接続されていることを確認します。</p>
 
     <blockquote>
       <p><strong>メモ</strong>: Swarm ワーカーノードにおいては、処理状況に応じてオーバーレイネットワークが自動生成されますが、これは自動的には削除されません。</p>
@@ -315,11 +314,11 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
   </li>
   <li>
     <p>サービスとネットワークを削除します。
-<code class="language-plaintext highlighter-rouge">manager</code> 上から、以下のコマンドを実行します。
+<code class="language-plaintext highlighter-rouge">manager</code>上から、以下のコマンドを実行します。
 マネージャーからは、ワーカーに対してネットワークを削除するよう、自動的に指示が送られます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>my-nginx
-<span class="nv">$ </span>docker network <span class="nb">rm </span>nginx-net nginx-net-2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>my-nginx
+<span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>nginx-net nginx-net-2
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -330,20 +329,20 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
 
 <p>このチュートリアルでは、Swarm がすでに設定済みであり、マネージャーにアクセスできているものとします。</p>
 
-<h3 id="walkthrough-1">ウォークスルー</h3>
+<h3 id="walkthrough">ウォークスルー</h3>
 
 <ol>
   <li>
     <p>ユーザー定義のオーバーレイネットワークを生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay my-overlay
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> overlay my-overlay
 </code></pre></div>    </div>
   </li>
   <li>
     <p>そのオーバーレイネットワークを使ってサービスを起動します。
 ポート 80 を Docker ホストのポート 8080 に公開します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> my-nginx <span class="se">\</span>
   <span class="nt">--network</span> my-overlay <span class="se">\</span>
   <span class="nt">--replicas</span> 1 <span class="se">\</span>
@@ -352,15 +351,15 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker network inspect my-overlay</code> を実行して、<code class="language-plaintext highlighter-rouge">my-nginx</code> サービスタスクが <code class="language-plaintext highlighter-rouge">my-overlay</code> に接続されていることを確認します。
-確認は <code class="language-plaintext highlighter-rouge">Containers</code> の項を見ます。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker network inspect my-overlay</code>を実行して、<code class="language-plaintext highlighter-rouge">my-nginx</code>サービスタスクが<code class="language-plaintext highlighter-rouge">my-overlay</code>に接続されていることを確認します。
+確認は<code class="language-plaintext highlighter-rouge">Containers</code>の項を見ます。</p>
   </li>
   <li>
     <p>サービスとネットワークを削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">rm </span>my-nginx
-
-<span class="nv">$ </span>docker network <span class="nb">rm </span>my-overlay
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>my-nginx
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>my-overlay
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -371,12 +370,12 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
 特に、オーバーレイネットワークを利用する複数の Docker デーモン上に、スタンドアロンコンテナーが稼動していて、その間での通信情報を確認していきます。</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">host1</code> では、Swarm としてノードを初期化します。（マネージャー）</li>
-  <li><code class="language-plaintext highlighter-rouge">host2</code> では、Swarm に対してノード参加します。（ワーカー）</li>
-  <li><code class="language-plaintext highlighter-rouge">host1</code> では、アタッチ可能なオーバーレイネットワークを生成します。（<code class="language-plaintext highlighter-rouge">test-net</code>）</li>
-  <li><code class="language-plaintext highlighter-rouge">host1</code> では、対話的な <a href="https://hub.docker.com/_/alpine/">alpine</a> コンテナー（<code class="language-plaintext highlighter-rouge">alpine1</code>）を <code class="language-plaintext highlighter-rouge">test-net</code> 上で実行します。</li>
-  <li><code class="language-plaintext highlighter-rouge">host2</code> では、対話的な <a href="https://hub.docker.com/_/alpine/">alpine</a> コンテナー（<code class="language-plaintext highlighter-rouge">alpine2</code>）を、デタッチモードにより <code class="language-plaintext highlighter-rouge">test-net</code> 上で実行します。</li>
-  <li><code class="language-plaintext highlighter-rouge">host1</code> では、<code class="language-plaintext highlighter-rouge">alpine1</code> のセッション内部から <code class="language-plaintext highlighter-rouge">alpine2</code> に対して ping を行います。</li>
+  <li><code class="language-plaintext highlighter-rouge">host1</code>では、Swarm としてノードを初期化します。（マネージャー）</li>
+  <li><code class="language-plaintext highlighter-rouge">host2</code>では、Swarm に対してノード参加します。（ワーカー）</li>
+  <li><code class="language-plaintext highlighter-rouge">host1</code>では、アタッチ可能なオーバーレイネットワークを生成します。（<code class="language-plaintext highlighter-rouge">test-net</code>）</li>
+  <li><code class="language-plaintext highlighter-rouge">host1</code>では、対話的な <a href="https://hub.docker.com/_/alpine/">alpine</a> コンテナー（<code class="language-plaintext highlighter-rouge">alpine1</code>）を<code class="language-plaintext highlighter-rouge">test-net</code>上で実行します。</li>
+  <li><code class="language-plaintext highlighter-rouge">host2</code>では、対話的な <a href="https://hub.docker.com/_/alpine/">alpine</a> コンテナー（<code class="language-plaintext highlighter-rouge">alpine2</code>）を、デタッチモードにより<code class="language-plaintext highlighter-rouge">test-net</code>上で実行します。</li>
+  <li><code class="language-plaintext highlighter-rouge">host1</code>では、<code class="language-plaintext highlighter-rouge">alpine1</code>のセッション内部から<code class="language-plaintext highlighter-rouge">alpine2</code>に対して ping を行います。</li>
 </ul>
 
 <h3 id="prerequisites-3">前提条件</h3>
@@ -395,7 +394,7 @@ Swarm サービスを生成する際にネットワーク指定を行わない�
 AWS や同様のクラウドコンピューティングプラットフォームを利用している場合は、セキュリティグループを利用すれば、ごく簡単に設定ができます。
 これを使えば、2 つのホスト間での入力ポートはすべて開放され、手元のクライアントからは IP アドレスを使って SSH 接続することができます。</p>
 
-<p>この例では、Swarm 上に配置する 2 つのノードを <code class="language-plaintext highlighter-rouge">host1</code>、<code class="language-plaintext highlighter-rouge">host2</code> とします。
+<p>この例では、Swarm 上に配置する 2 つのノードを<code class="language-plaintext highlighter-rouge">host1</code>、<code class="language-plaintext highlighter-rouge">host2</code>とします。
 またこの例では Linux ホストを用いますが、同じコマンドは Windows 上でも動作します。</p>
 
 <h3 id="walk-through">ウォークスルー</h3>
@@ -404,98 +403,98 @@ AWS や同様のクラウドコンピューティングプラットフォーム�
   <li>
     <p>Swarm を設定します。</p>
 
-    <p>a.  <code class="language-plaintext highlighter-rouge">host1</code> において Swarm を初期化します。
-    （プロンプトが出る場合は <code class="language-plaintext highlighter-rouge">--advertise-addr</code> を指定します。
+    <p>a.  <code class="language-plaintext highlighter-rouge">host1</code>において Swarm を初期化します。
+    （プロンプトが出る場合は<code class="language-plaintext highlighter-rouge">--advertise-addr</code>を指定します。
      これを使って、Swarm 内の別ホストの間で通信を行うインターフェースの IP アドレスを指定します。
      たとえば AWS 上であれば、プライベート IP アドレスを指定します。）</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init
-Swarm initialized: current node <span class="o">(</span>vz1mm9am11qcmo979tlrlox42<span class="o">)</span> is now a manager.
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init
+<span class="go">Swarm initialized: current node (vz1mm9am11qcmo979tlrlox42) is now a manager.
 
-To add a worker to this swarm, run the following <span class="nb">command</span>:
+To add a worker to this swarm, run the following command:
 
-    docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-5g90q48weqrtqryq4kj6ow0e8xm9wmv9o6vgqc5j320ymybd5c-8ex8j0bc40s6hgvy5ui5gl4gy 172.31.47.252:2377
+    docker swarm join --token SWMTKN-1-5g90q48weqrtqryq4kj6ow0e8xm9wmv9o6vgqc5j320ymybd5c-8ex8j0bc40s6hgvy5ui5gl4gy 172.31.47.252:2377
 
-To add a manager to this swarm, run <span class="s1">'docker swarm join-token manager'</span> and follow the instructions.
-</code></pre></div>    </div>
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+</span></code></pre></div>    </div>
 
-    <p>b.  <code class="language-plaintext highlighter-rouge">host2</code> において、上のコマンド実行により出力された Swarm への参加を行います。</p>
+    <p>b.  <code class="language-plaintext highlighter-rouge">host2</code>において、上のコマンド実行により出力された Swarm への参加を行います。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; &lt;IPアドレス&gt;:2377
-This node joined a swarm as a worker.
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> &lt;トークン&gt; &lt;IPアドレス&gt;:2377
+<span class="go">This node joined a swarm as a worker.
+</span></code></pre></div>    </div>
 
-    <p>Swarm へのノード参加に失敗すると、<code class="language-plaintext highlighter-rouge">docker swarm join</code> コマンドはタイムアウトします。
-これを解消するには <code class="language-plaintext highlighter-rouge">host2</code> 上で <code class="language-plaintext highlighter-rouge">docker swarm leave --force</code> を実行して、ネットワークとファイアウォールの設定を正しくした上で、再度コマンド実行を試してみてください。</p>
+    <p>Swarm へのノード参加に失敗すると、<code class="language-plaintext highlighter-rouge">docker swarm join</code>コマンドはタイムアウトします。
+これを解消するには<code class="language-plaintext highlighter-rouge">host2</code>上で<code class="language-plaintext highlighter-rouge">docker swarm leave --force</code>を実行して、ネットワークとファイアウォールの設定を正しくした上で、再度コマンド実行を試してみてください。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host1</code> において <code class="language-plaintext highlighter-rouge">test-net</code> という名前の、アタッチ可能なオーバーレイネットワークを生成します。</p>
+    <p><code class="language-plaintext highlighter-rouge">host1</code>において<code class="language-plaintext highlighter-rouge">test-net</code>という名前の、アタッチ可能なオーバーレイネットワークを生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--driver</span><span class="o">=</span>overlay <span class="nt">--attachable</span> test-net
-uqsof8phj3ak0rq9k86zta6ht
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">--driver</span><span class="o">=</span>overlay <span class="nt">--attachable</span> test-net
+<span class="go">uqsof8phj3ak0rq9k86zta6ht
+</span></code></pre></div>    </div>
 
     <blockquote>
       <p>ここで出力される <strong>ネットワーク ID</strong> を覚えておいてください。
-同じものが <code class="language-plaintext highlighter-rouge">host2</code> から接続した際にも表示されます。</p>
+同じものが<code class="language-plaintext highlighter-rouge">host2</code>から接続した際にも表示されます。</p>
     </blockquote>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host1</code> において、<code class="language-plaintext highlighter-rouge">test-net</code> に接続する対話形式（<code class="language-plaintext highlighter-rouge">-it</code>）のコンテナー（<code class="language-plaintext highlighter-rouge">alpine1</code>）を起動します。</p>
+    <p><code class="language-plaintext highlighter-rouge">host1</code>において、<code class="language-plaintext highlighter-rouge">test-net</code>に接続する対話形式（<code class="language-plaintext highlighter-rouge">-it</code>）のコンテナー（<code class="language-plaintext highlighter-rouge">alpine1</code>）を起動します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--name</span> alpine1 <span class="nt">--network</span> test-net alpine
-/ <span class="c">#</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--name</span> alpine1 <span class="nt">--network</span> test-net alpine
+<span class="gp">/ #</span><span class="w">
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host2</code> において利用可能なネットワーク一覧を表示します。
-なお <code class="language-plaintext highlighter-rouge">test-net</code> はこの時点ではまだ存在しません。</p>
+    <p><code class="language-plaintext highlighter-rouge">host2</code>において利用可能なネットワーク一覧を表示します。
+なお<code class="language-plaintext highlighter-rouge">test-net</code>はこの時点ではまだ存在しません。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-ec299350b504        bridge              bridge              <span class="nb">local
-</span>66e77d0d0e9a        docker_gwbridge     bridge              <span class="nb">local
-</span>9f6ae26ccb82        host                host                <span class="nb">local
-</span>omvdxqrda80z        ingress             overlay             swarm
-b65c952a4b2b        none                null                <span class="nb">local</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">NETWORK ID          NAME                DRIVER              SCOPE
+ec299350b504        bridge              bridge              local
+66e77d0d0e9a        docker_gwbridge     bridge              local
+9f6ae26ccb82        host                host                local
+omvdxqrda80z        ingress             overlay             swarm
+b65c952a4b2b        none                null                local
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host2</code> において、<code class="language-plaintext highlighter-rouge">test-net</code> に接続するデタッチモード（<code class="language-plaintext highlighter-rouge">-d</code>）かつ対話形式（<code class="language-plaintext highlighter-rouge">-it</code>）のコンテナー（<code class="language-plaintext highlighter-rouge">alpine2</code>）を起動します。</p>
+    <p><code class="language-plaintext highlighter-rouge">host2</code>において、<code class="language-plaintext highlighter-rouge">test-net</code>に接続するデタッチモード（<code class="language-plaintext highlighter-rouge">-d</code>）かつ対話形式（<code class="language-plaintext highlighter-rouge">-it</code>）のコンテナー（<code class="language-plaintext highlighter-rouge">alpine2</code>）を起動します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 <span class="nt">--network</span> test-net alpine
-fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 <span class="nt">--network</span> test-net alpine
+<span class="go">fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
+</span></code></pre></div>    </div>
 
     <blockquote>
       <p>DNS のコンテナー自動検出の機能は、一意のコンテナー名に対してのみ動作します。</p>
     </blockquote>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host2</code> において <code class="language-plaintext highlighter-rouge">test-net</code> が生成されていることを確認します。
-（そして <code class="language-plaintext highlighter-rouge">host1</code> 上から見た <code class="language-plaintext highlighter-rouge">test-net</code> と同じように、同一のネットワーク ID となっていることを確認します。）</p>
+    <p><code class="language-plaintext highlighter-rouge">host2</code>において<code class="language-plaintext highlighter-rouge">test-net</code>が生成されていることを確認します。
+（そして<code class="language-plaintext highlighter-rouge">host1</code>上から見た<code class="language-plaintext highlighter-rouge">test-net</code>と同じように、同一のネットワーク ID となっていることを確認します。）</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>docker network <span class="nb">ls
- </span>NETWORK ID          NAME                DRIVER              SCOPE
- ...
- uqsof8phj3ak        test-net            overlay             swarm
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go"> NETWORK ID          NAME                DRIVER              SCOPE
+</span><span class="c"> ...
+</span><span class="go"> uqsof8phj3ak        test-net            overlay             swarm
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host1</code> において、<code class="language-plaintext highlighter-rouge">alpine1</code> の対話型ターミナル内から <code class="language-plaintext highlighter-rouge">alpine2</code> に向けて ping を行います。</p>
+    <p><code class="language-plaintext highlighter-rouge">host1</code>において、<code class="language-plaintext highlighter-rouge">alpine1</code>の対話型ターミナル内から<code class="language-plaintext highlighter-rouge">alpine2</code>に向けて ping を行います。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ <span class="c"># ping -c 2 alpine2</span>
-PING alpine2 <span class="o">(</span>10.0.0.5<span class="o">)</span>: 56 data bytes
-64 bytes from 10.0.0.5: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.600 ms
-64 bytes from 10.0.0.5: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.555 ms
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">/ #</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine2
+<span class="go">PING alpine2 (10.0.0.5): 56 data bytes
+64 bytes from 10.0.0.5: seq=0 ttl=64 time=0.600 ms
+64 bytes from 10.0.0.5: seq=1 ttl=64 time=0.555 ms
 
-<span class="nt">---</span> alpine2 ping statistics <span class="nt">---</span>
+--- alpine2 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.555/0.577/0.600 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 0.555/0.577/0.600 ms
+</span></code></pre></div>    </div>
 
     <p>2 つのコンテナーは、2 つのホストに接続しているオーバーレイネットワークを使って、互いに通信します。
-<code class="language-plaintext highlighter-rouge">host2</code> からもう一つ別の alpine コンテナーを、<strong>デタッチモードではなく</strong> 起動すると、<code class="language-plaintext highlighter-rouge">hosts</code> から <code class="language-plaintext highlighter-rouge">alpine1</code> へ ping を行うことができます。
+<code class="language-plaintext highlighter-rouge">host2</code>からもう一つ別の alpine コンテナーを、<strong>デタッチモードではなく</strong> 起動すると、<code class="language-plaintext highlighter-rouge">hosts</code>から<code class="language-plaintext highlighter-rouge">alpine1</code>へ ping を行うことができます。
 （そしてここでは <a href="https://docs.docker.com/engine/reference/run/#clean-up---rm">rm オプション</a> を指定に加えて、コンテナーの自動削除を行うことにします。）</p>
 
     <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> alpine3 <span class="nt">--network</span> test-net alpine
@@ -504,10 +503,10 @@ round-trip min/avg/max <span class="o">=</span> 0.555/0.577/0.600 ms
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host1</code> において <code class="language-plaintext highlighter-rouge">alpine1</code> のセッションを閉じます。
+    <p><code class="language-plaintext highlighter-rouge">host1</code>において<code class="language-plaintext highlighter-rouge">alpine1</code>のセッションを閉じます。
 （さらにコンテナーも停止します。）</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ <span class="c"># exit</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">/ #</span><span class="w"> </span><span class="nb">exit</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -515,28 +514,28 @@ round-trip min/avg/max <span class="o">=</span> 0.555/0.577/0.600 ms
 
     <p>コンテナーの停止と削除は、個々のホスト上においてそれぞれ行うことが必要です。
 Docker デーモンはそれぞれに動作しているからであり、コンテナーはすべてスタンドアロンだからです。
-ネットワークを削除するのは <code class="language-plaintext highlighter-rouge">host1</code> 上だけで十分です。
-<code class="language-plaintext highlighter-rouge">host2</code> 上にて <code class="language-plaintext highlighter-rouge">alpine2</code> を停止したら <code class="language-plaintext highlighter-rouge">test-net</code> はなくなります。</p>
+ネットワークを削除するのは<code class="language-plaintext highlighter-rouge">host1</code>上だけで十分です。
+<code class="language-plaintext highlighter-rouge">host2</code>上にて<code class="language-plaintext highlighter-rouge">alpine2</code>を停止したら<code class="language-plaintext highlighter-rouge">test-net</code>はなくなります。</p>
 
-    <p>a.  <code class="language-plaintext highlighter-rouge">host2</code> において <code class="language-plaintext highlighter-rouge">alpine2</code> を停止させます。
-    そして <code class="language-plaintext highlighter-rouge">test-net</code> が削除されていることを確認した上で <code class="language-plaintext highlighter-rouge">alpine2</code> を削除します。</p>
+    <p>a.  <code class="language-plaintext highlighter-rouge">host2</code>において<code class="language-plaintext highlighter-rouge">alpine2</code>を停止させます。
+    そして<code class="language-plaintext highlighter-rouge">test-net</code>が削除されていることを確認した上で<code class="language-plaintext highlighter-rouge">alpine2</code>を削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop alpine2
-<span class="nv">$ </span>docker network <span class="nb">ls</span>
-<span class="nv">$ </span>docker container <span class="nb">rm </span>alpine2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop alpine2
+<span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="gp">$</span><span class="w"> </span>docker container <span class="nb">rm </span>alpine2
 </code></pre></div>    </div>
 
-    <p>a.  <code class="language-plaintext highlighter-rouge">host1</code> において <code class="language-plaintext highlighter-rouge">alpine1</code> と <code class="language-plaintext highlighter-rouge">test-net</code> を削除します。</p>
+    <p>a.  <code class="language-plaintext highlighter-rouge">host1</code>において<code class="language-plaintext highlighter-rouge">alpine1</code>と<code class="language-plaintext highlighter-rouge">test-net</code>を削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">rm </span>alpine1
-<span class="nv">$ </span>docker network <span class="nb">rm </span>test-net
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">rm </span>alpine1
+<span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>test-net
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h2 id="communicate-between-a-container-and-a-swarm-service">コンテナー、Swarm サービス間の通信</h2>
 
-<p>この例では、2 つの <code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを同一の Docker ホスト上に稼動させます。
+<p>この例では、2 つの<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを同一の Docker ホスト上に稼動させます。
 そしてテストを行って、コンテナー間の通信がどのように行われるかを確認します。
 Docker がインストール済みであり起動していることを確認いてください。</p>
 
@@ -548,189 +547,189 @@ Docker がインストール済みであり起動していることを確認い�
 複数のネットワークが表示されるはずであり、最低で以下のものがあるはずです。
 （ネットワーク ID は異なります。）</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+17e324f45964        bridge              bridge              local
+6ed54d316334        host                host                local
+7092879f2cc8        none                null                local
+</span></code></pre></div>    </div>
 
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-17e324f45964        bridge              bridge              <span class="nb">local
-</span>6ed54d316334        host                host                <span class="nb">local
-</span>7092879f2cc8        none                null                <span class="nb">local</span>
-</code></pre></div>    </div>
-
-    <p>デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークが一覧に表示されます。
-これとともに <code class="language-plaintext highlighter-rouge">host</code> と <code class="language-plaintext highlighter-rouge">none</code> があります。
+    <p>デフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークが一覧に表示されます。
+これとともに<code class="language-plaintext highlighter-rouge">host</code>と<code class="language-plaintext highlighter-rouge">none</code>があります。
 この 2 つは完全なネットワークではありませんが、コンテナーを起動して Docker デーモンホストのネットワークに直接接続するために、あるいはネットワークデバイスのないコンテナーを起動するために必要となります。
-<strong>このチュートリアルでは、2 つのコンテナーを <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続します。</strong></p>
+<strong>このチュートリアルでは、2 つのコンテナーを<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続します。</strong></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine</code> コンテナーを 2 つ起動して <code class="language-plaintext highlighter-rouge">ash</code> を実行します。
-Alpine のデフォルトシェルが <code class="language-plaintext highlighter-rouge">bash</code> ではなく <code class="language-plaintext highlighter-rouge">ash</code> です。
-<code class="language-plaintext highlighter-rouge">-dit</code> フラグは、コンテナーをデタッチモードで（バックグラウンドで）実行し、対話を行い（入力を可能とし）、TTY を利用する（入出力が確認できる）ことを意味します。
+    <p><code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを 2 つ起動して<code class="language-plaintext highlighter-rouge">ash</code>を実行します。
+Alpine のデフォルトシェルが<code class="language-plaintext highlighter-rouge">bash</code>ではなく<code class="language-plaintext highlighter-rouge">ash</code>です。
+<code class="language-plaintext highlighter-rouge">-dit</code>フラグは、コンテナーをデタッチモードで（バックグラウンドで）実行し、対話を行い（入力を可能とし）、TTY を利用する（入出力が確認できる）ことを意味します。
 デタッチモードで起動するため、コンテナーに即座に接続されるわけではありません。
 その前にコンテナー ID が出力されます。
-<code class="language-plaintext highlighter-rouge">--network</code> フラグを何も指定しなかったので、コンテナーはデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに接続されます。</p>
+<code class="language-plaintext highlighter-rouge">--network</code>フラグを何も指定しなかったので、コンテナーはデフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに接続されます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 alpine ash
-
-<span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 alpine ash
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine1 alpine ash
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> alpine2 alpine ash
 </code></pre></div>    </div>
 
     <p>2 つのコンテナーが実際に開始されたことを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">ls
-
-</span>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-602dbf1edc81        alpine              <span class="s2">"ash"</span>               4 seconds ago       Up 3 seconds                            alpine2
-da33b7aa74b0        alpine              <span class="s2">"ash"</span>               17 seconds ago      Up 16 seconds                           alpine1
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">ls</span>
+<span class="go">
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+602dbf1edc81        alpine              "ash"               4 seconds ago       Up 3 seconds                            alpine2
+da33b7aa74b0        alpine              "ash"               17 seconds ago      Up 16 seconds                           alpine1
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">bridge</code> ネットワークを参照して、どのコンテナーがこれに接続しているかを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">bridge</code>ネットワークを参照して、どのコンテナーがこれに接続しているかを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect bridge
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect bridge
+<span class="go">
+[
+    {
+        "Name": "bridge",
+        "Id": "17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10",
+        "Created": "2017-06-22T20:27:43.826654485Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Containers": {
+            "602dbf1edc81813304b6cf0a647e65333dc6fe6ee6ed572dc0f686a3307c6a2c": {
+                "Name": "alpine2",
+                "EndpointID": "03b6aafb7ca4d7e531e292901b43719c0e34cc7eef565b38a6bf84acf50f38cd",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "da33b7aa74b0bf3bda3ebd502d404320ca112a268aafe05b4851d1e3312ed168": {
+                "Name": "alpine1",
+                "EndpointID": "46c044a645d6afc42ddd7857d19e9dcfb89ad790afb5c239a35ac0af5e8a5bc5",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+</span></code></pre></div>    </div>
 
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"Name"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"Id"</span>: <span class="s2">"17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10"</span>,
-        <span class="s2">"Created"</span>: <span class="s2">"2017-06-22T20:27:43.826654485Z"</span>,
-        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>,
-        <span class="s2">"Driver"</span>: <span class="s2">"bridge"</span>,
-        <span class="s2">"EnableIPv6"</span>: <span class="nb">false</span>,
-        <span class="s2">"IPAM"</span>: <span class="o">{</span>
-            <span class="s2">"Driver"</span>: <span class="s2">"default"</span>,
-            <span class="s2">"Options"</span>: null,
-            <span class="s2">"Config"</span>: <span class="o">[</span>
-                <span class="o">{</span>
-                    <span class="s2">"Subnet"</span>: <span class="s2">"172.17.0.0/16"</span>,
-                    <span class="s2">"Gateway"</span>: <span class="s2">"172.17.0.1"</span>
-                <span class="o">}</span>
-            <span class="o">]</span>
-        <span class="o">}</span>,
-        <span class="s2">"Internal"</span>: <span class="nb">false</span>,
-        <span class="s2">"Attachable"</span>: <span class="nb">false</span>,
-        <span class="s2">"Containers"</span>: <span class="o">{</span>
-            <span class="s2">"602dbf1edc81813304b6cf0a647e65333dc6fe6ee6ed572dc0f686a3307c6a2c"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine2"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"03b6aafb7ca4d7e531e292901b43719c0e34cc7eef565b38a6bf84acf50f38cd"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:03"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.3/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>,
-            <span class="s2">"da33b7aa74b0bf3bda3ebd502d404320ca112a268aafe05b4851d1e3312ed168"</span>: <span class="o">{</span>
-                <span class="s2">"Name"</span>: <span class="s2">"alpine1"</span>,
-                <span class="s2">"EndpointID"</span>: <span class="s2">"46c044a645d6afc42ddd7857d19e9dcfb89ad790afb5c239a35ac0af5e8a5bc5"</span>,
-                <span class="s2">"MacAddress"</span>: <span class="s2">"02:42:ac:11:00:02"</span>,
-                <span class="s2">"IPv4Address"</span>: <span class="s2">"172.17.0.2/16"</span>,
-                <span class="s2">"IPv6Address"</span>: <span class="s2">""</span>
-            <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"Options"</span>: <span class="o">{</span>
-            <span class="s2">"com.docker.network.bridge.default_bridge"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_icc"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.enable_ip_masquerade"</span>: <span class="s2">"true"</span>,
-            <span class="s2">"com.docker.network.bridge.host_binding_ipv4"</span>: <span class="s2">"0.0.0.0"</span>,
-            <span class="s2">"com.docker.network.bridge.name"</span>: <span class="s2">"docker0"</span>,
-            <span class="s2">"com.docker.network.driver.mtu"</span>: <span class="s2">"1500"</span>
-        <span class="o">}</span>,
-        <span class="s2">"Labels"</span>: <span class="o">{}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div>    </div>
-
-    <p>上の方に <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークに関する情報が一覧表示されます。
-Docker ホストと <code class="language-plaintext highlighter-rouge">bridge</code> ネットワーク間のゲートウェイに対する IP アドレス（<code class="language-plaintext highlighter-rouge">172.17.0.1</code>）も表示されています。
-<code class="language-plaintext highlighter-rouge">Containers</code> キーの配下に、接続されているコンテナーがそれぞれ表示されています。
-そこには IP アドレスの情報もあります（<code class="language-plaintext highlighter-rouge">alpine1</code> が <code class="language-plaintext highlighter-rouge">172.17.0.2</code>、<code class="language-plaintext highlighter-rouge">alpine2</code> が <code class="language-plaintext highlighter-rouge">172.17.0.3</code> となっています）。</p>
+    <p>上の方に<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークに関する情報が一覧表示されます。
+Docker ホストと<code class="language-plaintext highlighter-rouge">bridge</code>ネットワーク間のゲートウェイに対する IP アドレス（<code class="language-plaintext highlighter-rouge">172.17.0.1</code>）も表示されています。
+<code class="language-plaintext highlighter-rouge">Containers</code>キーの配下に、接続されているコンテナーがそれぞれ表示されています。
+そこには IP アドレスの情報もあります（<code class="language-plaintext highlighter-rouge">alpine1</code>が<code class="language-plaintext highlighter-rouge">172.17.0.2</code>、<code class="language-plaintext highlighter-rouge">alpine2</code>が<code class="language-plaintext highlighter-rouge">172.17.0.3</code>となっています）。</p>
   </li>
   <li>
     <p>コンテナーはバックグラウンドで実行しています。
-<code class="language-plaintext highlighter-rouge">docker attach</code> コマンドを使って <code class="language-plaintext highlighter-rouge">alpine1</code> に接続してみます。</p>
+<code class="language-plaintext highlighter-rouge">docker attach</code>コマンドを使って<code class="language-plaintext highlighter-rouge">alpine1</code>に接続してみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker attach alpine1
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker attach alpine1
+<span class="go">
+</span><span class="gp">/ #</span><span class="w">
+</span></code></pre></div>    </div>
 
-/ <span class="c">#</span>
-</code></pre></div>    </div>
+    <p>プロンプトが<code class="language-plaintext highlighter-rouge">#</code>に変わりました。
+これはコンテナー内の<code class="language-plaintext highlighter-rouge">root</code>ユーザーであることを意味します。
+<code class="language-plaintext highlighter-rouge">ip addr show</code>コマンドを使って、コンテナー内部から<code class="language-plaintext highlighter-rouge">alpine1</code>のネットワークインターフェースを見てみます。</p>
 
-    <p>プロンプトが <code class="language-plaintext highlighter-rouge">#</code> に変わりました。
-これはコンテナー内の <code class="language-plaintext highlighter-rouge">root</code> ユーザーであることを意味します。
-<code class="language-plaintext highlighter-rouge">ip addr show</code> コマンドを使って、コンテナー内部から <code class="language-plaintext highlighter-rouge">alpine1</code> のネットワークインターフェースを見てみます。</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ip addr show</span>
-
-1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1
-    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ip addr show
+<span class="go">
+</span><span class="gp">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
-27: eth0@if28: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue state UP
-    <span class="nb">link</span>/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+</span><span class="gp">27: eth0@if28: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UP
+<span class="go">    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.2/16 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe11:2/64 scope <span class="nb">link
-       </span>valid_lft forever preferred_lft forever
-</code></pre></div>    </div>
+    inet6 fe80::42:acff:fe11:2/64 scope link
+       valid_lft forever preferred_lft forever
+</span></code></pre></div>    </div>
 
     <p>1 つめのインターフェースはループバックデバイスです。
 今はこれを無視します。
-2 つめのインターフェースの IP アドレスは <code class="language-plaintext highlighter-rouge">172.17.0.2</code> となっています。
-前の手順で確認した <code class="language-plaintext highlighter-rouge">alpine1</code> のアドレスと同じです。</p>
+2 つめのインターフェースの IP アドレスは<code class="language-plaintext highlighter-rouge">172.17.0.2</code>となっています。
+前の手順で確認した<code class="language-plaintext highlighter-rouge">alpine1</code>のアドレスと同じです。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code> の内部から <code class="language-plaintext highlighter-rouge">google.com</code> への ping を行って、インターネットに接続してみます。
-<code class="language-plaintext highlighter-rouge">-c 2</code> フラグにより 2 回だけ <code class="language-plaintext highlighter-rouge">ping</code> を行います。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>の内部から<code class="language-plaintext highlighter-rouge">google.com</code>への ping を行って、インターネットに接続してみます。
+<code class="language-plaintext highlighter-rouge">-c 2</code>フラグにより 2 回だけ<code class="language-plaintext highlighter-rouge">ping</code>を行います。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 google.com</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 google.com
+<span class="go">
+PING google.com (172.217.3.174): 56 data bytes
+64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.841 ms
+64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.897 ms
 
-PING google.com <span class="o">(</span>172.217.3.174<span class="o">)</span>: 56 data bytes
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.841 ms
-64 bytes from 172.217.3.174: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>41 <span class="nb">time</span><span class="o">=</span>9.897 ms
-
-<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+--- google.com ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 9.841/9.869/9.897 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 9.841/9.869/9.897 ms
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>そこで 2 つめのコンテナーに対して ping してみます。
-最初は IP アドレス <code class="language-plaintext highlighter-rouge">172.17.0.3</code> を使って ping します。</p>
+最初は IP アドレス<code class="language-plaintext highlighter-rouge">172.17.0.3</code>を使って ping します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 172.17.0.3</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 172.17.0.3
+<span class="go">
+PING 172.17.0.3 (172.17.0.3): 56 data bytes
+64 bytes from 172.17.0.3: seq=0 ttl=64 time=0.086 ms
+64 bytes from 172.17.0.3: seq=1 ttl=64 time=0.094 ms
 
-PING 172.17.0.3 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.086 ms
-64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.094 ms
-
-<span class="nt">---</span> 172.17.0.3 ping statistics <span class="nt">---</span>
+--- 172.17.0.3 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max <span class="o">=</span> 0.086/0.090/0.094 ms
-</code></pre></div>    </div>
+round-trip min/avg/max = 0.086/0.090/0.094 ms
+</span></code></pre></div>    </div>
 
     <p>成功しました。
-次に <code class="language-plaintext highlighter-rouge">alpine2</code> コンテナーに向けて、コンテナー名により ping をしてみます。
+次に<code class="language-plaintext highlighter-rouge">alpine2</code>コンテナーに向けて、コンテナー名により ping をしてみます。
 これは失敗します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ping -c 2 alpine2</span>
-
-ping: bad address <span class="s1">'alpine2'</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>ping <span class="nt">-c</span> 2 alpine2
+<span class="go">
+ping: bad address 'alpine2'
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine1</code> を停止させることなくデタッチします。
-これはデタッチを行うキー操作、つまり <code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code> + <code class="language-plaintext highlighter-rouge">q</code> により行います（<code class="language-plaintext highlighter-rouge">CTRL</code> を押したまま、<code class="language-plaintext highlighter-rouge">p</code> と <code class="language-plaintext highlighter-rouge">q</code> を順に押します）。
-この後 <code class="language-plaintext highlighter-rouge">alpine2</code> に対して同じことをするなら、手順の 4、5、6 をもう一度行います。
-<code class="language-plaintext highlighter-rouge">alpine1</code> のところは <code class="language-plaintext highlighter-rouge">alpine2</code> に変えて実施します。</p>
+    <p><code class="language-plaintext highlighter-rouge">alpine1</code>を停止させることなくデタッチします。
+これはデタッチを行うキー操作、つまり<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">p</code>、<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">q</code>により行います（<code class="language-plaintext highlighter-rouge">CTRL</code>を押したまま、<code class="language-plaintext highlighter-rouge">p</code>と<code class="language-plaintext highlighter-rouge">q</code>を順に押します）。
+この後<code class="language-plaintext highlighter-rouge">alpine2</code>に対して同じことをするなら、手順の 4、5、6 をもう一度行います。
+<code class="language-plaintext highlighter-rouge">alpine1</code>のところは<code class="language-plaintext highlighter-rouge">alpine2</code>に変えて実施します。</p>
   </li>
   <li>
     <p>2 つのコンテナーを停止させ削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop alpine1 alpine2
-<span class="nv">$ </span>docker container <span class="nb">rm </span>alpine1 alpine2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop alpine1 alpine2
+<span class="gp">$</span><span class="w"> </span>docker container <span class="nb">rm </span>alpine1 alpine2
 </code></pre></div>    </div>
   </li>
 </ol>
 
-<p>デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークは、本番環境向けとしては推奨されない点を覚えておいてください。
+<p>デフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークは、本番環境向けとしては推奨されない点を覚えておいてください。
 ユーザー定義のブリッジネットワークについては、<a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/#use-user-defined-bridge-networks">次のチュートリアル</a> に進んでください。</p>
 
 <h2 id="other-networking-tutorials">その他のネットワークチュートリアル</h2>
@@ -785,7 +784,7 @@ ping: bad address <span class="s1">'alpine2'</span>
   <li><a href="#use-a-user-defined-overlay-network" class="nomunge">ユーザー定義のオーバーレイネットワーク利用</a>
     <ul>
       <li><a href="#prerequisites-2" class="nomunge">前提条件</a></li>
-      <li><a href="#walkthrough-1" class="nomunge">ウォークスルー</a></li>
+      <li><a href="#walkthrough" class="nomunge">ウォークスルー</a></li>
     </ul>
   </li>
   <li><a href="#use-an-overlay-network-for-standalone-containers" class="nomunge">スタンドアロンコンテナーに対するオーバーレイネットワーク利用</a>

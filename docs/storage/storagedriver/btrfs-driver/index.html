@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the BTRFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the BTRFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of Btrfs driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the BTRFS storage driver","description":"Learn how to optimize your use of Btrfs driver.","url":"https://docs.docker.com/storage/storagedriver/btrfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -145,10 +145,10 @@ performance reasons.</p>
     <p><code class="language-plaintext highlighter-rouge">btrfs</code> support must exist in your kernel. To check this, run the following
 command:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep </span>btrfs /proc/filesystems
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>btrfs /proc/filesystems
+<span class="go">
 btrfs
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>To manage BTRFS filesystems at the level of the operating system, you need the
@@ -169,8 +169,8 @@ package (SLES) or <code class="language-plaintext highlighter-rouge">btrfs-tools
     <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> to a backup location, then empty
 the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
-<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -179,7 +179,7 @@ example assumes that you are using two block devices called <code class="languag
 <code class="language-plaintext highlighter-rouge">/dev/xvdg</code>. Double-check the block device names because this is a
 destructive operation.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkfs.btrfs <span class="nt">-f</span> /dev/xvdf /dev/xvdg
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>mkfs.btrfs <span class="nt">-f</span> /dev/xvdf /dev/xvdg
 </code></pre></div>    </div>
 
     <p>There are many more options for Btrfs, including striping and RAID. See the
@@ -189,7 +189,7 @@ destructive operation.</p>
     <p>Mount the new Btrfs filesystem on the <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> mount point. You
 can specify any of the block devices used to create the Btrfs filesystem.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-t</span> btrfs /dev/xvdf /var/lib/docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>mount <span class="nt">-t</span> btrfs /dev/xvdf /var/lib/docker
 </code></pre></div>    </div>
 
     <p>Don’t forget to make the change permanent across reboots by adding an
@@ -198,7 +198,7 @@ entry to <code class="language-plaintext highlighter-rouge">/etc/fstab</code>.</
   <li>
     <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> to <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker.bk/<span class="k">*</span> /var/lib/docker/
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker.bk/<span class="k">*</span> /var/lib/docker/
 </code></pre></div>    </div>
   </li>
   <li>
@@ -221,8 +221,8 @@ line before an ending curly bracket (<code class="language-plaintext highlighter
     <p>Start Docker. After it is running, verify that <code class="language-plaintext highlighter-rouge">btrfs</code> is being used as the
 storage driver.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+<span class="go">
 Containers: 0
  Running: 0
  Paused: 0
@@ -232,8 +232,8 @@ Server Version: 17.03.1-ce
 Storage Driver: btrfs
  Build Version: Btrfs v4.4
  Library Version: 101
-&lt;...&gt;
-</code></pre></div>    </div>
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>When you are ready, remove the <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> directory.</p>
@@ -251,9 +251,9 @@ roughly 1 GB.</p>
 <p>To add a block device to a Btrfs volume, use the <code class="language-plaintext highlighter-rouge">btrfs device add</code> and
 <code class="language-plaintext highlighter-rouge">btrfs filesystem balance</code> commands.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>btrfs device add /dev/svdh /var/lib/docker
-
-<span class="nv">$ </span><span class="nb">sudo </span>btrfs filesystem balance /var/lib/docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>btrfs device add /dev/svdh /var/lib/docker
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>btrfs filesystem balance /var/lib/docker
 </code></pre></div></div>
 
 <blockquote>

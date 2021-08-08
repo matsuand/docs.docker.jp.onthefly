@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストの委任鍵ペア | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテントトラストの委任鍵ペア" />
   <meta property="og:description" content="コンテントトラストの委任鍵ペア。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの委任鍵ペア","description":"コンテントトラストの委任鍵ペア。","url":"https://docs.docker.com/engine/security/trust/trust_delegation/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -148,13 +148,13 @@ Successfully added signer: jeff to registry.example.com/user/repo
 
 <p>ログインしていなければ、以下のようなメッセージになります。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/user/repo
-Adding signer <span class="s2">"jeff"</span> to registry.example.com/user/repo...
-Initializing signed repository <span class="k">for </span>registry.example.com/user/repo...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/user/repo
+<span class="go">Adding signer "jeff" to registry.example.com/user/repo...
+Initializing signed repository for registry.example.com/user/repo...
 you are not authorized to perform this operation: server returned 401.
 
 Failed to add signer to: registry.example.com/user/repo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="configuring-the-notary-client">Notary クライアントの設定</h2>
 
@@ -193,13 +193,13 @@ Notary CLI のインストールと設定は以下のようにします。</p>
 <p>Docker トラストには、委任鍵ペアを生成するビルトインのコマンド<code class="language-plaintext highlighter-rouge">$ docker trust generate &lt;name&gt;</code>があります。
 このコマンドを実行すると、Docker トラストのローカルな保存場所に、委任鍵ペアの秘密鍵を自動的にロードします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key generate jeff
-
-Generating key <span class="k">for </span>jeff...
-Enter passphrase <span class="k">for </span>new jeff key with ID 9deed25:
-Repeat passphrase <span class="k">for </span>new jeff key with ID 9deed25:
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust key generate jeff
+<span class="go">
+Generating key for jeff...
+Enter passphrase for new jeff key with ID 9deed25:
+Repeat passphrase for new jeff key with ID 9deed25:
 Successfully generated and loaded private key. Corresponding public key available: /home/ubuntu/Documents/mytrustdir/jeff.pub
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="manually-generating-keys">手動での鍵生成</h3>
 
@@ -207,13 +207,13 @@ Successfully generated and loaded private key. Corresponding public key availabl
 
 <p>以下は、2048 ビットの RSA 鍵を生成する例です（RSA 鍵は最低でも 2048 ビットが必要）。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> delegation.key 2048
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> delegation.key 2048
+<span class="go">
 Generating RSA private key, 2048 bit long modulus
 ....................................................+++
 ............+++
-e is 65537 <span class="o">(</span>0x10001<span class="o">)</span>
-</code></pre></div></div>
+e is 65537 (0x10001)
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">delegation.key</code>は秘密鍵として保持しておきます。
 これを使って、タグへのサインを行います。</p>
@@ -222,14 +222,14 @@ e is 65537 <span class="o">(</span>0x10001<span class="o">)</span>
 ここから必要となるものが公開鍵です。
 以下は CSR (certificate signing request) を生成する例です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="nt">-new</span> <span class="nt">-sha256</span> <span class="nt">-key</span> delegation.key <span class="nt">-out</span> delegation.csr
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-new</span> <span class="nt">-sha256</span> <span class="nt">-key</span> delegation.key <span class="nt">-out</span> delegation.csr
 </code></pre></div></div>
 
 <p>Then they can send it to whichever CA you trust to sign certificates, or they
 can self-sign the certificate (in this example, creating a certificate that is
 valid for 1 year):</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-sha256</span> <span class="nt">-days</span> 365 <span class="nt">-in</span> delegation.csr <span class="nt">-signkey</span> delegation.key <span class="nt">-out</span> delegation.crt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-sha256</span> <span class="nt">-days</span> 365 <span class="nt">-in</span> delegation.csr <span class="nt">-signkey</span> delegation.key <span class="nt">-out</span> delegation.crt
 </code></pre></div></div>
 
 <p>Then they need to give you <code class="language-plaintext highlighter-rouge">delegation.crt</code>, whether it is self-signed or signed
@@ -237,25 +237,25 @@ by a CA.</p>
 
 <p>最後に Docker トラストのローカルの保存場所に秘密鍵を追加します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load delegation.key <span class="nt">--name</span> jeff
-
-Loading key from <span class="s2">"delegation.key"</span>...
-Enter passphrase <span class="k">for </span>new jeff key with ID 8ae710e:
-Repeat passphrase <span class="k">for </span>new jeff key with ID 8ae710e:
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust key load delegation.key <span class="nt">--name</span> jeff
+<span class="go">
+Loading key from "delegation.key"...
+Enter passphrase for new jeff key with ID 8ae710e:
+Repeat passphrase for new jeff key with ID 8ae710e:
 Successfully imported key from delegation.key
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="viewing-local-delegation-keys">ローカルの委任鍵ペアの確認</h3>
 
 <p>Docker トラストのローカルの保存場所にインポートされている鍵は、Notary CLI を利用して一覧表示することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary key list
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary key list
+<span class="go">
 ROLE       GUN                          KEY ID                                                              LOCATION
-<span class="nt">----</span>       <span class="nt">---</span>                          <span class="nt">------</span>                                                              <span class="nt">--------</span>
+----       ---                          ------                                                              --------
 root                                    f6c6a4b00fefd8751f86194c7d87a3bede444540eb3378c4a11ce10852ab1f96    /home/ubuntu/.docker/trust/private
 jeff                                    9deed251daa1aa6f9d5f9b752847647cf8d705da0763aa5467650d0987ed5306    /home/ubuntu/.docker/trust/private
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="managing-delegations-in-a-notary-server">Notary サーバー上の委任鍵の管理</h2>
 
@@ -281,46 +281,46 @@ second <code class="language-plaintext highlighter-rouge">targets/&lt;name&gt;</
 <code class="language-plaintext highlighter-rouge">jeff</code>, is there to help you keep track of the owner of the keys. In more
 advanced use cases of Notary additional delegations are used for hierarchy.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/admin/demo
-
-Adding signer <span class="s2">"jeff"</span> to registry.example.com/admin/demo...
-Initializing signed repository <span class="k">for </span>registry.example.com/admin/demo...
-Enter passphrase <span class="k">for </span>root key with ID f6c6a4b:
-Enter passphrase <span class="k">for </span>new repository key with ID b0014f8:
-Repeat passphrase <span class="k">for </span>new repository key with ID b0014f8:
-Successfully initialized <span class="s2">"registry.example.com/admin/demo"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/admin/demo
+<span class="go">
+Adding signer "jeff" to registry.example.com/admin/demo...
+Initializing signed repository for registry.example.com/admin/demo...
+Enter passphrase for root key with ID f6c6a4b:
+Enter passphrase for new repository key with ID b0014f8:
+Repeat passphrase for new repository key with ID b0014f8:
+Successfully initialized "registry.example.com/admin/demo"
 Successfully added signer: jeff to registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>You can see which keys have been pushed to the Notary server for each repository
 with the <code class="language-plaintext highlighter-rouge">$ docker trust inspect</code> command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<span class="go">
+No signatures for registry.example.com/admin/demo
 
-No signatures <span class="k">for </span>registry.example.com/admin/demo
 
-
-List of signers and their keys <span class="k">for </span>registry.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd
 
-Administrative keys <span class="k">for </span>registry.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>You could also use the Notary CLI to list delegations and keys. Here you can
 clearly see the keys were attached to <code class="language-plaintext highlighter-rouge">targets/releases</code> and <code class="language-plaintext highlighter-rouge">targets/jeff</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delegation list registry.example.com/admin/demo
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delegation list registry.example.com/admin/demo
+<span class="go">
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
-<span class="nt">----</span>                <span class="nt">-----</span>             <span class="nt">-------</span>                                                             <span class="nt">---------</span>
-targets/jeff        <span class="s2">""</span> &lt;all paths&gt;    1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    1
-
-targets/releases    <span class="s2">""</span> &lt;all paths&gt;    1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    1
+----                -----             -------                                                             ---------
+</span><span class="gp">targets/jeff        "" &lt;all paths&gt;</span><span class="w">    </span>1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    1
+<span class="go">
+</span><span class="gp">targets/releases    "" &lt;all paths&gt;</span><span class="w">    </span>1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    1
 </code></pre></div></div>
 
 <h3 id="adding-additional-signers">Adding Additional Signers</h3>
@@ -335,30 +335,30 @@ the <code class="language-plaintext highlighter-rouge">targets/release</code> ro
 configured when you first initiated the repository.</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> ben.pub ben registry.example.com/admin/demo
-
-Adding signer <span class="s2">"ben"</span> to registry.example.com/admin/demo...
-Enter passphrase <span class="k">for </span>repository key with ID b0014f8:
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> ben.pub ben registry.example.com/admin/demo
+<span class="go">
+Adding signer "ben" to registry.example.com/admin/demo...
+Enter passphrase for repository key with ID b0014f8:
 Successfully added signer: ben to registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>Check to prove that there are now 2 delegations (Signer).</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<span class="go">
+No signatures for registry.example.com/admin/demo
 
-No signatures <span class="k">for </span>registry.example.com/admin/demo
-
-List of signers and their keys <span class="k">for </span>registry.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 ben                 afa404703b25
 jeff                1091060d7bfd
 
-Administrative keys <span class="k">for </span>registry.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="adding-keys-to-an-existing-delegation">Adding Keys to an Existing Delegation</h3>
 
@@ -372,30 +372,30 @@ will automatically handle adding this new key to <code class="language-plaintext
 configured when you first initiated the repository.</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert2.pem jeff registry.example.com/admin/demo
-
-Adding signer <span class="s2">"jeff"</span> to registry.example.com/admin/demo...
-Enter passphrase <span class="k">for </span>repository key with ID b0014f8:
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> cert2.pem jeff registry.example.com/admin/demo
+<span class="go">
+Adding signer "jeff" to registry.example.com/admin/demo...
+Enter passphrase for repository key with ID b0014f8:
 Successfully added signer: jeff to registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>Check to prove that the delegation (Signer) now contains multiple Key IDs.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<span class="go">
+No signatures for registry.example.com/admin/demo
 
-No signatures <span class="k">for </span>registry.example.com/admin/demo
 
-
-List of signers and their keys <span class="k">for </span>registry.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd, 5570b88df073
 
-Administrative keys <span class="k">for </span>registry.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="removing-a-delegation">Removing a Delegation</h3>
 
@@ -408,11 +408,11 @@ attached to the <code class="language-plaintext highlighter-rouge">targets/relea
 by an active delegation</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer remove registry.example.com/admin/demo
-Removing signer <span class="s2">"ben"</span> from registry.example.com/admin/demo...
-Enter passphrase <span class="k">for </span>repository key with ID b0014f8:
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer remove registry.example.com/admin/demo
+<span class="go">Removing signer "ben" from registry.example.com/admin/demo...
+Enter passphrase for repository key with ID b0014f8:
 Successfully removed ben from registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h4 id="troubleshooting">Troubleshooting</h4>
 
@@ -432,7 +432,7 @@ to resign the <code class="language-plaintext highlighter-rouge">targets/release
 
 <p>Resigning the delegation file is done with the <code class="language-plaintext highlighter-rouge">$ notary witness</code> command</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary witness registry.example.com/admin/demo targets/releases <span class="nt">--publish</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary witness registry.example.com/admin/demo targets/releases <span class="nt">--publish</span>
 </code></pre></div></div>
 
 <p>More information on the <code class="language-plaintext highlighter-rouge">$ notary witness</code> command can be found
@@ -448,48 +448,48 @@ and the role specific to that signer <code class="language-plaintext highlighter
 
 <p>1) We will need to grab the Key ID from the Notary Server</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delegation list registry.example.com/admin/demo
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delegation list registry.example.com/admin/demo
+<span class="go">
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
-<span class="nt">----</span>                <span class="nt">-----</span>             <span class="nt">-------</span>                                                             <span class="nt">---------</span>
-targets/jeff        <span class="s2">""</span> &lt;all paths&gt;    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
-                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
-targets/releases    <span class="s2">""</span> &lt;all paths&gt;    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
-                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
-</code></pre></div></div>
+----                -----             -------                                                             ---------
+</span><span class="gp">targets/jeff        "" &lt;all paths&gt;</span><span class="w">    </span>8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+<span class="go">                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
+</span><span class="gp">targets/releases    "" &lt;all paths&gt;</span><span class="w">    </span>8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+<span class="go">                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
+</span></code></pre></div></div>
 
 <p>2) Remove from the <code class="language-plaintext highlighter-rouge">targets/releases</code> delegation</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="nt">--publish</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="nt">--publish</span>
+<span class="go">
 Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin
 Enter password:
-Enter passphrase <span class="k">for </span>targets key with ID b0014f8:
-Successfully published changes <span class="k">for </span>repository registry.example.com/admin/demo
-</code></pre></div></div>
+Enter passphrase for targets key with ID b0014f8:
+Successfully published changes for repository registry.example.com/admin/demo
+</span></code></pre></div></div>
 
 <p>3) Remove from the <code class="language-plaintext highlighter-rouge">targets/&lt;name&gt;</code> delegation</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="nt">--publish</span>
-
-Removal of delegation role targets/jeff with keys <span class="o">[</span>5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository <span class="s2">"registry.example.com/admin/demo"</span> staged <span class="k">for </span>next publish.
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="nt">--publish</span>
+<span class="go">
+Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "registry.example.com/admin/demo" staged for next publish.
 
 Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin
 Enter password:
-Enter passphrase <span class="k">for </span>targets key with ID b0014f8:
-Successfully published changes <span class="k">for </span>repository registry.example.com/admin/demo
-</code></pre></div></div>
+Enter passphrase for targets key with ID b0014f8:
+Successfully published changes for repository registry.example.com/admin/demo
+</span></code></pre></div></div>
 
 <p>4) Check the remaining delegation list</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delegation list registry.example.com/admin/demo
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delegation list registry.example.com/admin/demo
+<span class="go">
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
-<span class="nt">----</span>                <span class="nt">-----</span>             <span class="nt">-------</span>                                                             <span class="nt">---------</span>
-targets/jeff        <span class="s2">""</span> &lt;all paths&gt;    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
-targets/releases    <span class="s2">""</span> &lt;all paths&gt;    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+----                -----             -------                                                             ---------
+</span><span class="gp">targets/jeff        "" &lt;all paths&gt;</span><span class="w">    </span>8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+<span class="gp">targets/releases    "" &lt;all paths&gt;</span><span class="w">    </span>8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
 </code></pre></div></div>
 
 <h3 id="removing-a-local-delegation-private-key">Removing a local Delegation Private Key</h3>
@@ -500,24 +500,24 @@ the <code class="language-plaintext highlighter-rouge">$ notary key remove</code
 
 <p>1) We will need to get the Key ID from the local Docker Trust store</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary key list
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary key list
+<span class="go">
 ROLE       GUN                          KEY ID                                                              LOCATION
-<span class="nt">----</span>       <span class="nt">---</span>                          <span class="nt">------</span>                                                              <span class="nt">--------</span>
+----       ---                          ------                                                              --------
 root                                    f6c6a4b00fefd8751f86194c7d87a3bede444540eb3378c4a11ce10852ab1f96    /home/ubuntu/.docker/trust/private
 admin                                   8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    /home/ubuntu/.docker/trust/private
 jeff                                    1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    /home/ubuntu/.docker/trust/private
 targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fddfc3039058856fad061c009d    /home/ubuntu/.docker/trust/private
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>2) Remove the key from the local Docker Trust store</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
+<span class="go">
+Are you sure you want to remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private?  (yes/no)  y
 
-Are you sure you want to remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="o">(</span>role jeff<span class="o">)</span> from /home/ubuntu/.docker/trust/private?  <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span>  y
-
-Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 <span class="o">(</span>role jeff<span class="o">)</span> from /home/ubuntu/.docker/trust/private.
-</code></pre></div></div>
+Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private.
+</span></code></pre></div></div>
 
 <h2 id="removing-all-trust-data-from-a-repository">Removing all trust data from a Repository</h2>
 
@@ -527,17 +527,17 @@ snapshot and all delegations keys using the Notary CLI.</p>
 <p>This is often required by a container registry before a particular repository
 can be deleted.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delete registry.example.com/admin/demo <span class="nt">--remote</span>
-
-Deleting trust data <span class="k">for </span>repository registry.example.com/admin/demo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>notary delete registry.example.com/admin/demo <span class="nt">--remote</span>
+<span class="go">
+Deleting trust data for repository registry.example.com/admin/demo
 Enter username: admin
 Enter password:
-Successfully deleted <span class="nb">local </span>and remote trust data <span class="k">for </span>repository registry.example.com/admin/demo
+Successfully deleted local and remote trust data for repository registry.example.com/admin/demo
 
-<span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
-
+</span><span class="gp">$</span><span class="w"> </span>docker trust inspect <span class="nt">--pretty</span> registry.example.com/admin/demo
+<span class="go">
 No signatures or cannot access registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="related-information">Related information</h2>
 

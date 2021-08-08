@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-machine mount | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-machine mount" />
   <meta property="og:description" content="マシンからディレクトリをマウントします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/mount/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-machine mount","description":"マシンからディレクトリをマウントします。","url":"https://docs.docker.com/machine/reference/mount/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -97,11 +97,10 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker-machine mount</h1>
-<p>マシンからローカルホストに向けてディレクトリをマウントします。
-マウントには <code class="language-plaintext highlighter-rouge">sshfs</code> が用いられます。</p>
+                        <section class="section"><h1>docker-machine mount</h1><p>マシンからローカルホストに向けてディレクトリをマウントします。
+マウントには<code class="language-plaintext highlighter-rouge">sshfs</code>が用いられます。</p>
 
-<p>引数の書式は <code class="language-plaintext highlighter-rouge">machinename:/path/to/dir</code> です。
+<p>引数の書式は<code class="language-plaintext highlighter-rouge">machinename:/path/to/dir</code>です。
 マウントポイントに別名を指定することもできます。
 （デフォルトは同名のパスです。）</p>
 
@@ -109,36 +108,35 @@
 
 <p>以下の例を取り上げます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>foo
-<span class="nv">$ </span>docker-machine ssh dev <span class="nb">mkdir </span>foo
-<span class="nv">$ </span>docker-machine mount dev:/home/docker/foo foo
-<span class="nv">$ </span><span class="nb">touch </span>foo/bar
-<span class="nv">$ </span>docker-machine ssh dev <span class="nb">ls </span>foo
-bar
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>foo
+<span class="gp">$</span><span class="w"> </span>docker-machine ssh dev <span class="nb">mkdir </span>foo
+<span class="gp">$</span><span class="w"> </span>docker-machine mount dev:/home/docker/foo foo
+<span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>foo/bar
+<span class="gp">$</span><span class="w"> </span>docker-machine ssh dev <span class="nb">ls </span>foo
+<span class="go">bar
+</span></code></pre></div></div>
 
 <p>マシン上のディレクトリは、コンテナー内にマウントしたディレクトリとして利用できます。
 つまりローカルディレクトリ内で変更を行うと、それがマシン上にも反映されます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>dev<span class="si">)</span>
-<span class="nv">$ </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
-bar
-<span class="nv">$ </span><span class="nb">touch </span>foo/baz
-<span class="nv">$ </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
-bar
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>dev<span class="si">)</span>
+<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
+<span class="go">bar
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>foo/baz
+<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
+<span class="go">bar
 baz
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>対象のファイルは、実際には <code class="language-plaintext highlighter-rouge">sftp</code>（ssh 接続を介した）を利用して転送されます。
 したがってこのプログラム（sftp）がマシン上になければなりませんが、普通は存在しているものです。</p>
 
-<p>ディレクトリをアンマウントするには、同じオプションに加えて <code class="language-plaintext highlighter-rouge">-u</code> フラグを使います。
+<p>ディレクトリをアンマウントするには、同じオプションに加えて<code class="language-plaintext highlighter-rouge">-u</code>フラグを使います。
 コマンド <code class="language-plaintext highlighter-rouge">fuserunmount</code>（または <code class="language-plaintext highlighter-rouge">fusermount -u</code>）を直接実行してもかまいません。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine mount <span class="nt">-u</span> dev:/home/docker/foo foo
-<span class="nv">$ </span><span class="nb">rmdir </span>foo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine mount <span class="nt">-u</span> dev:/home/docker/foo foo
+<span class="gp">$</span><span class="w"> </span><span class="nb">rmdir </span>foo
 </code></pre></div></div>
-
 <p><strong>ファイルが保存されるのはマシン上であって、ホスト上ではありません。</strong>
 したがってマシンを削除するなら、保存しておきたいファイルはコピーをとっておいてください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=machine">machine</a>, <a href="/docs.docker.jp.onthefly/search/?q=mount">mount</a>, <a href="/docs.docker.jp.onthefly/search/?q=subcommand">subcommand</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>

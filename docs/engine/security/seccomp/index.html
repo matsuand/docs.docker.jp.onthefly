@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker 向け Seccomp セキュリティプロファイル | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker 向け Seccomp セキュリティプロファイル" />
   <meta property="og:description" content="Enabling seccomp in Docker" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/seccomp/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker 向け Seccomp セキュリティプロファイル","description":"Enabling seccomp in Docker","url":"https://docs.docker.com/engine/security/seccomp/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,48 +103,49 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker 向け Seccomp セキュリティプロファイル</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p>
-<p>セキュリティコンピューティングモード（secure computing mode; <code class="language-plaintext highlighter-rouge">seccomp</code>）は Linux カーネルの機能です。
+                        <section class="section"><h1>Docker 向け Seccomp セキュリティプロファイル</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>セキュリティコンピューティングモード（secure computing mode; <code class="language-plaintext highlighter-rouge">seccomp</code>）は Linux カーネルの機能です。
 これを使うと、コンテナー内で利用できる処理を限定することができます。
-システムコール <code class="language-plaintext highlighter-rouge">seccomp()</code> は呼び出し側プロセスの seccomp 状態を操作します。
+システムコール<code class="language-plaintext highlighter-rouge">seccomp()</code>は呼び出し側プロセスの seccomp 状態を操作します。
 この機能は、アプリケーションのアクセス処理を制限するものとして利用することができます。</p>
 
-<p>この機能を利用するためには、Docker が <code class="language-plaintext highlighter-rouge">seccomp</code> を使ってビルドされていること、そしてカーネルが <code class="language-plaintext highlighter-rouge">CONFIG_SECCOMP</code> を有効にしていることが必要です。
-カーネルが <code class="language-plaintext highlighter-rouge">seccomp</code> をサポートしているかどうかは、以下のようにして確認します。</p>
+<p>この機能を利用するためには、Docker が<code class="language-plaintext highlighter-rouge">seccomp</code>を使ってビルドされていること、そしてカーネルが<code class="language-plaintext highlighter-rouge">CONFIG_SECCOMP</code>を有効にしていることが必要です。
+カーネルが<code class="language-plaintext highlighter-rouge">seccomp</code>をサポートしているかどうかは、以下のようにして確認します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep </span><span class="nv">CONFIG_SECCOMP</span><span class="o">=</span> /boot/config-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span>
-<span class="nv">CONFIG_SECCOMP</span><span class="o">=</span>y
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span><span class="nv">CONFIG_SECCOMP</span><span class="o">=</span> /boot/config-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span>
+<span class="go">CONFIG_SECCOMP=y
+</span></code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="language-plaintext highlighter-rouge">seccomp</code> プロファイルは seccomp 2.2.1 を必要としますが、これは Ubuntu 14.04、Debian Wheezy、Debian Jessie では利用できません。
-そのディストリビューションにおいて <code class="language-plaintext highlighter-rouge">seccomp</code> を利用する場合は、（パッケージをインストールするのではなく）<a href="/docs.docker.jp.onthefly/engine/install/binaries/">最新の Linux 実行モジュール</a> をダウンロードして利用する必要があります。</p>
+  <p><strong>メモ</strong></p>
+
+  <p><code class="language-plaintext highlighter-rouge">seccomp</code>プロファイルは seccomp 2.2.1 を必要としますが、これは Ubuntu 14.04、Debian Wheezy、Debian Jessie では利用できません。
+そのディストリビューションにおいて<code class="language-plaintext highlighter-rouge">seccomp</code>を利用する場合は、（パッケージをインストールするのではなく）<a href="/docs.docker.jp.onthefly/engine/install/binaries/">最新の Linux 実行モジュール</a> をダウンロードして利用する必要があります。</p>
 </blockquote>
 
 <h2 id="passva-profile-for-a-container">コンテナーへのプロファイルの受け渡し</h2>
 
-<p>デフォルトの <code class="language-plaintext highlighter-rouge">seccomp</code> プロファイルは、seccomp を使ってコンテナーを実行するための、十分に考慮されたデフォルトを提供します。
+<p>デフォルトの<code class="language-plaintext highlighter-rouge">seccomp</code>プロファイルは、seccomp を使ってコンテナーを実行するための、十分に考慮されたデフォルトを提供します。
 そして 300 以上あるシステムコールのうち 44 個を無効とします。
 これは幅広くアプリケーションとの互換性を提供しつつ、適度なセキュリティ保護を実現します。
 デフォルトの Docker プロファイルは <a href="https://github.com/moby/moby/blob/master/profiles/seccomp/default.json">こちら</a> にあります。</p>
 
 <p>実際にプロファイルはホワイトリスト方式をとるものであり、デフォルトではシステムコールのアクセスを拒否します。
 そして特定のシステムコールを許可します。
-プロファイルは <code class="language-plaintext highlighter-rouge">SCMP_ACT_ERRNO</code> の <code class="language-plaintext highlighter-rouge">defaultAction</code> を定義することで動作し、指定したシステムコールのみ、その動作をオーバーライドします。
-<code class="language-plaintext highlighter-rouge">SCMP_ACT_ERRNO</code> の効果は <code class="language-plaintext highlighter-rouge">Permission Denied</code> エラーを発生させることです。
+プロファイルは<code class="language-plaintext highlighter-rouge">SCMP_ACT_ERRNO</code>の<code class="language-plaintext highlighter-rouge">defaultAction</code>を定義することで動作し、指定したシステムコールのみ、その動作をオーバーライドします。
+<code class="language-plaintext highlighter-rouge">SCMP_ACT_ERRNO</code>の効果は<code class="language-plaintext highlighter-rouge">Permission Denied</code>エラーを発生させることです。
 次にプロファイルにおいては、システムコールのうち、完全に動作を許容するものを列記します。
-これによって各 <code class="language-plaintext highlighter-rouge">action</code> を <code class="language-plaintext highlighter-rouge">SCMP_ACT_ALLOW</code> としてオーバーライドするためです。
-そして最後に、<code class="language-plaintext highlighter-rouge">personality</code> のような個別のシステムコールに対して、特定のルールを定めます。
+これによって各<code class="language-plaintext highlighter-rouge">action</code>を<code class="language-plaintext highlighter-rouge">SCMP_ACT_ALLOW</code>としてオーバーライドするためです。
+そして最後に、<code class="language-plaintext highlighter-rouge">personality</code>のような個別のシステムコールに対して、特定のルールを定めます。
 そのシステムコールに特定の引数を加えるといったことを行うことができます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">seccomp</code> は Docker コンテナーを最小限の権限により実行します。
-デフォルトの <code class="language-plaintext highlighter-rouge">seccomp</code> プロファイルを修正することは推奨されていません。</p>
+<p><code class="language-plaintext highlighter-rouge">seccomp</code>は Docker コンテナーを最小限の権限により実行します。
+デフォルトの<code class="language-plaintext highlighter-rouge">seccomp</code>プロファイルを修正することは推奨されていません。</p>
 
 <p>コンテナーの起動時にはデフォルトのプロファイルが利用されます。
-ただし <code class="language-plaintext highlighter-rouge">--security-opt</code> オプションを指定した場合は、それをオーバーライドすることができます。
+ただし<code class="language-plaintext highlighter-rouge">--security-opt</code>オプションを指定した場合は、それをオーバーライドすることができます。
 たとえば以下の例は、ポリシーを明示的に指定するものです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="se">\</span>
              <span class="nt">-it</span> <span class="se">\</span>
              <span class="nt">--security-opt</span> <span class="nv">seccomp</span><span class="o">=</span>/path/to/seccomp/profile.json <span class="se">\</span>
              hello-world
@@ -374,7 +375,7 @@
 
 <h2 id="run-without-the-default-seccomp-profile">デフォルトの seccomp プロファイルがない状態での実行</h2>
 
-<p>コンテナーを実行する際に <code class="language-plaintext highlighter-rouge">unconfined</code> を指定すれば、デフォルトの seccomp プロファイルをなしにして実行することができます。
+<p>コンテナーを実行する際に<code class="language-plaintext highlighter-rouge">unconfined</code>を指定すれば、デフォルトの seccomp プロファイルをなしにして実行することができます。
 profile.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \

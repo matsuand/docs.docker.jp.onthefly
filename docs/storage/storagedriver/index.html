@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ストレージドライバーについて | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ストレージドライバーについて" />
   <meta property="og:description" content="Learn the technologies that support storage drivers." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ストレージドライバーについて","description":"Learn the technologies that support storage drivers.","url":"https://docs.docker.com/storage/storagedriver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,19 +103,25 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ストレージドライバーについて</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>ストレージドライバーを効率よく利用するためには、Docker がどのようにしてイメージをビルドし保存するのか、またそのイメージをコンテナーがどのように利用するのかを理解しておくことが重要です。
+                        <section class="section"><h1>ストレージドライバーについて</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><p>ストレージドライバーを効率よく利用するためには、Docker がどのようにしてイメージをビルドし保存するのか、またそのイメージをコンテナーがどのように利用するのかを理解しておくことが重要です。
 これがわかっていれば、その知識に基づいた判断として、アプリケーションデータの適切な保存方法や、アプリケーション稼動中のパフォーマンス問題に対して、最良の方策をとることができます。</p>
 
-<p>ストレージドライバーは、コンテナー内の書き込み可能なレイヤーにデータを保存するものです。
-これがファイルデータであると、コンテナーが削除された後にデータは維持されず、通常のファイルシステム上でのパフォーマンスに比べて、読み書きの速度は低下します。</p>
+<h2 id="storage-drivers-versus-docker-volumes">ストレージドライバー vs. Docker ボリューム</h2>
 
-<blockquote>
-  <p><strong>メモ</strong>: 問題が発生すると言われる処理として、書き込みを重点的に行うデータベースストレージの利用があります。
-特に読み込み専用レイヤーに既にデータが存在している場合が挙げられます。
-詳しくは本文にて説明します。</p>
-</blockquote>
+<p>Docker uses storage drivers to store image layers, and to store data in the
+writable layer of a container. The container’s writable layer does not persist
+after the container is deleted, but is suitable for storing ephemeral data that
+is generated at runtime. Storage drivers are optimized for space efficiency, but
+(depending on the storage driver) write speeds are lower than native file system
+performance, especially for storage drivers that a use copy-on-write filesystem.
+Write-intensive applications, such as database storage, are impacted by a
+performance overhead, particularly if pre-existing data exists in the read-only
+layer.</p>
 
-<p><a href="/docs.docker.jp.onthefly/storage/volumes/">ボリューム利用方法について学ぶ</a> を参照してデータ保存方法やパフォーマンス改善について確認してください。</p>
+<p>Use Docker volumes for write-intensive data, data that must persist beyond the
+container’s lifespan, and data that must be shared between containers. Refer to
+the <a href="/docs.docker.jp.onthefly/storage/volumes/">volumes section</a> to learn how to use volumes to persist data
+and improve performance.</p>
 
 <h2 id="images-and-layers">イメージとレイヤー</h2>
 
@@ -126,24 +132,37 @@
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<span class="k">LABEL</span><span class="s"> org.opencontainers.image.authors="org@example.com"</span>
 <span class="k">COPY</span><span class="s"> . /app</span>
 <span class="k">RUN </span>make /app
+<span class="k">RUN </span><span class="nb">rm</span> <span class="nt">-r</span> <span class="nv">$HOME</span>/.cache
 <span class="k">CMD</span><span class="s"> python /app/app.py</span>
 </code></pre></div></div>
 
-<p>この Dockerfile には 4 つのコマンドがあります。
-コマンドのそれぞれが 1 つのレイヤーを生成します。
-まずは<code class="language-plaintext highlighter-rouge">FROM</code>命令によって<code class="language-plaintext highlighter-rouge">ubuntu:18.04</code>イメージから 1 つのレイヤーが生成されるところから始まります。
-<code class="language-plaintext highlighter-rouge">COPY</code>命令は Docker クライアントのカレントディレクトリから複数のファイルを追加します。
-<code class="language-plaintext highlighter-rouge">RUN</code>命令は<code class="language-plaintext highlighter-rouge">make</code>コマンドを実行してアプリケーションをビルドします。
-そして最後のレイヤーが、コンテナー内にて実行するべきコマンドを指定しています。</p>
+<p>This Dockerfile contains four commands. Commands that modify the filesystem create
+a layer. The<code class="language-plaintext highlighter-rouge">FROM</code> statement starts out by creating a layer from the <code class="language-plaintext highlighter-rouge">ubuntu:18.04</code>
+image. The <code class="language-plaintext highlighter-rouge">LABEL</code> command only modifies the image’s metadata, and does not produce
+a new layer. The <code class="language-plaintext highlighter-rouge">COPY</code> command adds some files from your Docker client’s current
+directory. The first <code class="language-plaintext highlighter-rouge">RUN</code> command builds your application using the <code class="language-plaintext highlighter-rouge">make</code> command,
+and writes the result to a new layer. The second <code class="language-plaintext highlighter-rouge">RUN</code> command removes a cache
+directory, and writes the result to a new layer. Finally, the <code class="language-plaintext highlighter-rouge">CMD</code> instruction
+specifies what command to run within the container, which only modifies the
+image’s metadata, which does not produce an image layer.</p>
 
-<p>各レイヤーは、その直前のレイヤーからの差異だけを保持します。
-そしてレイヤーは順に積み上げられていきます。
-新しいコンテナーを生成したときには、それまで存在していたレイヤー群の最上部に、新たな書き込み可能なレイヤーが加えられます。
-このレイヤーは「コンテナーレイヤー」と呼ばれることがあります。
-実行中のコンテナーに対して実行される変更処理すべて、たとえば新規ファイル生成、既存ファイル修正、ファイル削除といったことは、その薄い皮のような書き込み可能なコンテナーレイヤーに対して書き込まれます。
-以下の図は Ubuntu 15.04 イメージに基づいて生成されたコンテナーを表わしています。</p>
+<p>Each layer is only a set of differences from the layer before it. Note that both
+<em>adding</em>, and <em>removing</em> files will result in a new layer. In the example above,
+the <code class="language-plaintext highlighter-rouge">$HOME/.cache</code> directory is removed, but will still be available in the
+previous layer and add up to the image’s total size. Refer to the
+<a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+and <a href="/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">use multi-stage builds</a>
+sections to learn how to optimize your Dockerfiles for efficient images.</p>
+
+<p>The layers are stacked on top of each other. When you create a new container,
+you add a new writable layer on top of the underlying layers. This layer is often
+called the “container layer”. All changes made to the running container, such as
+writing new files, modifying existing files, and deleting files, are written to
+this thin writable container layer. The diagram below shows a container based
+on an <code class="language-plaintext highlighter-rouge">ubuntu:15.04</code> image.</p>
 
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/container-layers.jpg" alt="Ubuntu イメージに基づくコンテナーのレイヤー" /></p>
 
@@ -163,15 +182,16 @@
 
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/sharing-layers.jpg" alt="同一のイメージを共有する複数コンテナー" /></p>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>複数イメージを必要としていて、さらに同一のデータを共有してアクセスしたい場合は、そのデータを Docker ボリュームに保存して、コンテナー内でそれをマウントします。</p>
-</blockquote>
-
 <p>Docker はストレージドライバーを利用して、イメージレイヤーと書き込み可能なコンテナーレイヤーの各内容を管理します。
 さまざまなストレージドライバーでは、異なる実装によりデータを扱います。
 しかしどのようなドライバーであっても、積み上げ可能な（stackable）イメージレイヤーを取り扱い、コピーオンライト（copy-on-write; CoW）方式を採用します。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>複数イメージを必要としていて、さらに同一のデータを共有してアクセスしたい場合は、Docker ボリュームを用いてください。
+ボリュームについての詳細は <a href="/docs.docker.jp.onthefly/storage/volumes/">ボリュームの節</a> を参照してください。</p>
+</blockquote>
 
 <h2 id="container-size-on-disk">ディスク上のコンテナーサイズ</h2>
 
@@ -179,18 +199,14 @@
 サイズに関連した 2 つのデータがカラム表示されます。</p>
 
 <ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">size</code>＝（ディスク上の）データ総量。
-各コンテナーの書き込みレイヤーが利用するデータ部分です。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">virtual size</code>＝ コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込みレイヤーの<code class="language-plaintext highlighter-rouge">size</code>を足し合わせたデータ総量。
+  <li><code class="language-plaintext highlighter-rouge">size</code>＝（ディスク上の）データ総量。
+各コンテナーの書き込みレイヤーが利用するデータ部分です。</li>
+  <li><code class="language-plaintext highlighter-rouge">virtual size</code>＝ コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込みレイヤーの<code class="language-plaintext highlighter-rouge">size</code>を足し合わせたデータ総量。
 複数コンテナーにおいては、読み込み専用イメージデータの全部または一部を共有しているかもしれません。
 1 つのイメージをベースとして作った 2 つのコンテナーでは、読み込み専用データを 100% 共有します。
 一方で 2 つの異なるイメージが一部に共通するレイヤーを持っていて、そこからそれぞれに 2 つのコンテナーを作ったとすると、共有するのはその共通レイヤー部分のみです。
 したがって<code class="language-plaintext highlighter-rouge">virtual size</code>は単純に足し合わせで計算できるものではありません。
-これはディスク総量を多く見積もってしまい、その量は無視できないほどになることがあります。</p>
-  </li>
+これはディスク総量を多く見積もってしまい、その量は無視できないほどになることがあります。</li>
 </ul>
 
 <p>起動しているコンテナーすべてが利用するディスク総量は、各コンテナーの<code class="language-plaintext highlighter-rouge">size</code>と<code class="language-plaintext highlighter-rouge">virtual size</code>を適宜組み合わせた値になります。
@@ -199,7 +215,7 @@
 <p>またコンテナーがディスク領域を消費するものであっても、以下に示す状況はディスク総量の算定には含まれません。</p>
 
 <ul>
-  <li>ログドライバー<code class="language-plaintext highlighter-rouge">json-file</code>を利用している場合に、そのログファイルが利用するディスク量。
+  <li><a href="/docs.docker.jp.onthefly/config/containers/logging/">ログドライバー</a> を利用している場合に、そのログファイルが利用するディスク量。
 コンテナーにおいてログ出力を大量に行っていて、ログローテーションを用いていない場合には、このディスク量は無視できないものになります。</li>
   <li>コンテナーが利用するボリュームやバインドマウント。</li>
   <li>コンテナーの設定ファイルが利用するディスク領域。
@@ -222,51 +238,52 @@
 <p><code class="language-plaintext highlighter-rouge">docker pull</code>を実行してリポジトリからイメージをプルするとき、あるいはイメージから新たにコンテナーを生成するにあたってそのイメージがまだローカルに生成されていないとき、各レイヤーはプルによって個別に取得されて、Docker のローカル保存領域、たとえば Linux では通常<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>に保存されます。
 取得された各レイヤーは、以下の例のようにして確認することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu:18.04
-18.04: Pulling from library/ubuntu
-f476d66f5408: Pull <span class="nb">complete
-</span>8882c27f669e: Pull <span class="nb">complete
-</span>d9af21273955: Pull <span class="nb">complete
-</span>f5029279ec12: Pull <span class="nb">complete
-</span>Digest: sha256:ab6cb8de3ad7bb33e2534677f865008535427390b117d7939193f8d1a6613e34
-Status: Downloaded newer image <span class="k">for </span>ubuntu:18.04
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu:18.04
+<span class="go">18.04: Pulling from library/ubuntu
+f476d66f5408: Pull complete
+8882c27f669e: Pull complete
+d9af21273955: Pull complete
+f5029279ec12: Pull complete
+Digest: sha256:ab6cb8de3ad7bb33e2534677f865008535427390b117d7939193f8d1a6613e34
+Status: Downloaded newer image for ubuntu:18.04
+</span></code></pre></div></div>
 
 <p>各レイヤーは、Docker ホストのローカル保存領域内にて、それぞれのディレクトリ配下に保存されます。
 ファイルシステム上のレイヤーデータを確認するなら、<code class="language-plaintext highlighter-rouge">/var/lib/docker/&lt;storage-driver&gt;</code>の内容を一覧表示します。
 以下は<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーに対する例です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2
-16802227a96c24dcbeab5b37821e2b67a9f921749cd9a2e386d5a6d5bc6fc6d3
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> /var/lib/docker/overlay2
+<span class="go">16802227a96c24dcbeab5b37821e2b67a9f921749cd9a2e386d5a6d5bc6fc6d3
 377d73dbb466e0bc7c9ee23166771b35ebdbe02ef17753d79fd3571d4ce659d7
 3f02d96212b03e3383160d31d7c6aeca750d2d8a1879965b89fe8146594c453d
 ec1ec45792908e90484f7e629330666e7eee599f08729c93890a7205a6ba35f5
 l
-</code></pre></div></div>
+</span></code></pre></div></div>
 
-<p>ディレクトリ名はレイヤー ID に対応するものではありません。
-（Docker 1.10 以前は対応づいていました。）</p>
+<p>ディレクトリ名はレイヤー ID に対応するものではありません。</p>
 
 <p>ここで 2 つの異なる Dockerfile を利用している状況を考えます。
 1 つめの Dockerfile からは<code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code>というイメージが作られるものとします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
-<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
-<span class="k">COPY</span><span class="s"> . /app</span>
+<span class="k">FROM</span><span class="s"> alpine</span>
+<span class="k">RUN </span>apk add <span class="nt">--no-cache</span> bash
 </code></pre></div></div>
 
 <p>2 つめの Dockerfile は<code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code>をベースとして、さらにレイヤーを追加するものとします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> acme/my-base-image:1.0</span>
+<span class="k">COPY</span><span class="s"> . /app</span>
+<span class="k">RUN </span><span class="nb">chmod</span> +x /app/hello.sh
 <span class="k">CMD</span><span class="s"> /app/hello.sh</span>
 </code></pre></div></div>
 
-<p>2 つめのイメージには 1 つめのイメージが持つレイヤーがすべて含まれ、さらに<code class="language-plaintext highlighter-rouge">CMD</code>命令による新たなレイヤーと、読み書き可能なコンテナーレイヤーが加わっています。
+<p>2 つめのイメージには 1 つめのイメージが持つレイヤーがすべて含まれ、さらに<code class="language-plaintext highlighter-rouge">COPY</code>と<code class="language-plaintext highlighter-rouge">RUN</code>命令による新たなレイヤーと、読み書き可能なコンテナーレイヤーが加わっています。
 Docker にとって 1 つめのイメージにおけるレイヤーはすべて取得済であるため、再度プルによって取得する必要がありません。
 2 つのイメージにおいて共通して存在しているレイヤーは、すべて共有します。</p>
 
-<p>この 2 つの Dockerfile からイメージをビルドした場合、<code class="language-plaintext highlighter-rouge">docker image ls</code>や<code class="language-plaintext highlighter-rouge">docker history</code>コマンドを使ってみると、共有されているレイヤーに対する暗号化 ID は同一になっていることがわかります。</p>
+<p>この 2 つの Dockerfile からイメージをビルドした場合、<code class="language-plaintext highlighter-rouge">docker image ls</code>や<code class="language-plaintext highlighter-rouge">docker image history</code>コマンドを使ってみると、共有されているレイヤーに対する暗号化 ID は同一になっていることがわかります。</p>
 
 <ol>
   <li>
@@ -275,13 +292,8 @@ Docker にとって 1 つめのイメージにおけるレイヤーはすべて�
   <li>
     <p><code class="language-plaintext highlighter-rouge">cow-test/</code>ディレクトリにて、以下の内容で新規ファイル<code class="language-plaintext highlighter-rouge">hello.sh</code>を生成します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
 <span class="nb">echo</span> <span class="s2">"Hello world"</span>
-</code></pre></div>    </div>
-
-    <p>ファイルを保存して実行可能にします。</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x hello.sh
 </code></pre></div>    </div>
   </li>
   <li>
@@ -296,80 +308,145 @@ Docker にとって 1 つめのイメージにおけるレイヤーはすべて�
 これは<code class="language-plaintext highlighter-rouge">PATH</code>を指定するものであり、イメージに対してファイルの追加が必要となる場合に、そのファイルを探し出す場所を Docker に指示するものです。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> acme/my-base-image:1.0 <span class="nt">-f</span> Dockerfile.base <span class="nb">.</span>
-<span class="go">Sending build context to Docker daemon  812.4MB
-Step 1/2 : FROM ubuntu:18.04
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>d131e0fa2585
-<span class="go">Step 2/2 : COPY . /app
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>Using cache
-<span class="gp"> ---&gt;</span><span class="w"> </span>bd09118bcef6
-<span class="go">Successfully built bd09118bcef6
-Successfully tagged acme/my-base-image:1.0
-</span></code></pre></div>    </div>
+<span class="go">[+] Building 6.0s (11/11) FINISHED
+</span><span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile.base                                      0.4s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 116B                                                           0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                              0.3s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B                                                                0.0s
+<span class="gp">=&gt;</span><span class="w"> </span>resolve image config <span class="k">for </span>docker.io/docker/dockerfile:1                                     1.5s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>auth] docker/dockerfile:pull token <span class="k">for </span>registry-1.docker.io                               0.0s
+<span class="gp">=&gt;</span><span class="w"> </span>CACHED docker-image://docker.io/docker/dockerfile:1@sha256:9e2c9eca7367393aecc68795c671... 0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                              0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile.base                                      0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/alpine:latest                               0.0s
+<span class="gp">=&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>1/2] FROM docker.io/library/alpine                                                 0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>2/2] RUN apk add <span class="nt">--no-cache</span> bash                                                          3.1s
+<span class="gp">=&gt;</span><span class="w"> </span>exporting to image                                                                         0.2s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers                                                                        0.2s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:da3cf8df55ee9777ddcd5afc40fffc3ead816bda99430bad2257de4459625eaa   0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/acme/my-base-image:1.0                                              0.0s
+</code></pre></div>    </div>
   </li>
   <li>
     <p>2 つめのイメージをビルドします。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> acme/my-final-image:1.0 <span class="nt">-f</span> Dockerfile <span class="nb">.</span>
 <span class="go">
-Sending build context to Docker daemon  4.096kB
-Step 1/2 : FROM acme/my-base-image:1.0
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>bd09118bcef6
-<span class="go">Step 2/2 : CMD /app/hello.sh
-</span><span class="gp"> ---&gt;</span><span class="w"> </span>Running <span class="k">in </span>a07b694759ba
-<span class="gp"> ---&gt;</span><span class="w"> </span>dbf995fc07ff
-<span class="go">Removing intermediate container a07b694759ba
-Successfully built dbf995fc07ff
-Successfully tagged acme/my-final-image:1.0
-</span></code></pre></div>    </div>
+[+] Building 3.6s (12/12) FINISHED
+</span><span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile                                            0.1s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 156B                                                            0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                               0.1s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B                                                                 0.0s
+<span class="gp">=&gt;</span><span class="w"> </span>resolve image config <span class="k">for </span>docker.io/docker/dockerfile:1                                      0.5s
+<span class="gp">=&gt;</span><span class="w"> </span>CACHED docker-image://docker.io/docker/dockerfile:1@sha256:9e2c9eca7367393aecc68795c671...  0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                               0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile                                            0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/acme/my-base-image:1.0                               0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context                                                               0.2s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 340B                                                               0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>1/3] FROM docker.io/acme/my-base-image:1.0                                                 0.2s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>2/3] COPY <span class="nb">.</span> /app                                                                           0.1s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">[</span>3/3] RUN <span class="nb">chmod</span> +x /app/hello.sh                                                            0.4s
+<span class="gp">=&gt;</span><span class="w"> </span>exporting to image                                                                          0.1s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers                                                                         0.1s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:8bd85c42fa7ff6b33902ada7dcefaaae112bf5673873a089d73583b0074313dd    0.0s
+<span class="gp">=&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/acme/my-final-image:1.0                                              0.0s
+</code></pre></div>    </div>
   </li>
   <li>
     <p>2 つのイメージのサイズを確認します。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
 <span class="go">
-REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
-acme/my-final-image                1.0                     dbf995fc07ff        58 seconds ago      103MB
-acme/my-base-image                 1.0                     bd09118bcef6        3 minutes ago       103MB
+REPOSITORY             TAG     IMAGE ID         CREATED               SIZE
+acme/my-final-image    1.0     8bd85c42fa7f     About a minute ago    7.75MB
+acme/my-base-image     1.0     da3cf8df55ee     2 minutes ago         7.75MB
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>それぞれのイメージに含まれるレイヤーを確認します。</p>
+    <p>それぞれのイメージの履歴を確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">history </span>bd09118bcef6
-<span class="go">IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-</span><span class="gp">bd09118bcef6        4 minutes ago       /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span> COPY <span class="nb">dir</span>:35a7eb158c1504e...   100B
-<span class="gp">d131e0fa2585        3 months ago        /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">"/bin/bash"</span><span class="o">]</span>            0B
-<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /run/systemd <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'...   7B
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s1">3 months ago        /bin/sh -c sed -i '</span>s/^#<span class="se">\s</span><span class="k">*</span><span class="se">\(</span>deb.<span class="k">*</span>universe<span class="se">\.</span>..   2.78kB
-<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>          0B
-<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">set</span> <span class="nt">-xe</span>   <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span>...   745B
-<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:eef57983bd66e3a...   103MB</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">history </span>acme/my-base-image:1.0
+<span class="go">
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+</span><span class="gp">da3cf8df55ee   5 minutes ago   RUN /bin/sh -c apk add --no-cache bash #</span><span class="w"> </span>bui…   2.15MB    buildkit.dockerfile.v0
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>7 weeks ago     /bin/sh <span class="nt">-c</span> <span class="c">#(nop)  CMD ["/bin/sh"]              0B</span>
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>7 weeks ago     /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:f278386b0cef68136…   5.6MB</span>
 </code></pre></div>    </div>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">history </span>dbf995fc07ff
-<span class="go">
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-</span><span class="gp">dbf995fc07ff        3 minutes ago       /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">"/bin/sh"</span> <span class="s2">"-c"</span> <span class="s2">"/a...   0B
-</span><span class="gp">bd09118bcef6        5 minutes ago       /bin/sh -c #</span><span class="s2">(nop) COPY dir:35a7eb158c1504e...   100B
-</span><span class="gp">d131e0fa2585        3 months ago        /bin/sh -c #</span><span class="s2">(nop)  CMD ["</span>/bin/bash<span class="s2">"]            0B
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c mkdir -p /run/systemd &amp;&amp; echo '...   7B
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c sed -i 's/^#</span><span class="se">\s</span><span class="s2">*</span><span class="se">\(</span><span class="s2">deb.*universe</span><span class="se">\.</span><span class="s2">..   2.78kB
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c set -xe   &amp;&amp; echo '#!/bin/sh' &gt;...   745B
-</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB
-</span></code></pre></div>    </div>
+    <p>処理ステップの中にはサイズを持たないもの (<code class="language-plaintext highlighter-rouge">0B</code>) があります。
+メタデータだけが変更されたものであって、イメージレイヤーが生成されたものではないため、メタデータそのものを除くと、容量をまったく取っていません。
+上の出力結果から、このイメージは 2 つのイメージレイヤーから構成されることがわかります。</p>
 
-    <p>ほぼすべてのレイヤーが同一であって、ただ 2 つめのイメージの最上位レイヤーだけが違うのがわかります。
-これを除けば、すべてのレイヤーが 2 つのイメージ間で共有されているので、各レイヤーは<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>には一度しか保存されません。
-新たにできたレイヤーは、まったくと言ってよいほどに容量をとっていません。
-というのも、そのレイヤーは何かのファイルを変更するわけでなく、単にコマンドを実行するだけのものであるからです。</p>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">history  </span>acme/my-final-image:1.0
+<span class="go">
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+8bd85c42fa7f   3 minutes ago   CMD ["/bin/sh" "-c" "/app/hello.sh"]            0B        buildkit.dockerfile.v0
+</span><span class="gp">&lt;missing&gt;</span><span class="w">      </span>3 minutes ago   RUN /bin/sh <span class="nt">-c</span> <span class="nb">chmod</span> +x /app/hello.sh <span class="c"># buil…   39B       buildkit.dockerfile.v0</span>
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>3 minutes ago   COPY <span class="nb">.</span> /app <span class="c"># buildkit                          222B      buildkit.dockerfile.v0</span>
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>4 minutes ago   RUN /bin/sh <span class="nt">-c</span> apk add <span class="nt">--no-cache</span> bash <span class="c"># bui…   2.15MB    buildkit.dockerfile.v0</span>
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>7 weeks ago     /bin/sh <span class="nt">-c</span> <span class="c">#(nop)  CMD ["/bin/sh"]              0B</span>
+<span class="gp">&lt;missing&gt;</span><span class="w">      </span>7 weeks ago     /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:f278386b0cef68136…   5.6MB</span>
+</code></pre></div>    </div>
+
+    <p>Notice that all steps of the first image are also included in the final
+image. The final image includes the two layers from the first image, and
+two layers that were added in the second image.</p>
 
     <blockquote>
-      <p><strong>メモ</strong></p>
+      <p>What are the <code class="language-plaintext highlighter-rouge">&lt;missing&gt;</code> steps?</p>
 
-      <p><code class="language-plaintext highlighter-rouge">docker history</code>の出力において<code class="language-plaintext highlighter-rouge">&lt;missing&gt;</code>として示される行は、そのレイヤーが他のシステムにおいてビルドされていることを示しています。
-したがってローカルシステム上では利用することができません。
-この表示は無視して構いません。</p>
+      <p>The <code class="language-plaintext highlighter-rouge">&lt;missing&gt;</code> lines in the <code class="language-plaintext highlighter-rouge">docker history</code> output indicate that those
+steps were either built on another system and part of the <code class="language-plaintext highlighter-rouge">alpine</code> image
+that was pulled from Docker Hub, or were built with BuildKit as builder.
+Before BuildKit, the “classic” builder would produce a new “intermediate”
+image for each step for caching purposes, and the <code class="language-plaintext highlighter-rouge">IMAGE</code> column would show
+the ID of that image.
+BuildKit uses its own caching mechanism, and no longer requires intermediate
+images for caching. Refer to <a href="/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/">build images with BuildKit</a>
+to learn more about other enhancements made in BuildKit.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Check out the layers for each image</p>
+
+    <p>Use the <code class="language-plaintext highlighter-rouge">docker image inspect</code> command to view the cryptographic IDs of the
+layers in each image:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image inspect <span class="nt">--format</span> <span class="s2">"{{json .RootFS.Layers}}"</span> acme/my-final-image:1.0
+<span class="go">[
+  "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
+  "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
+]
+</span></code></pre></div>    </div>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image inspect <span class="nt">--format</span> <span class="s2">"{{json .RootFS.Layers}}"</span> acme/my-base-image:1.0
+<span class="go">[
+  "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
+  "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a",
+  "sha256:cc644054967e516db4689b5282ee98e4bc4b11ea2255c9630309f559ab96562e",
+  "sha256:e84fb818852626e89a09f5143dbc31fe7f0e0a6a24cd8d2eb68062b904337af4"
+]
+</span></code></pre></div>    </div>
+
+    <p>Notice that the first two layers are identical in both images. The second
+image adds two additional layers. Shared image layers are only stored once
+in <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> and are also shared when pushing and pulling and image
+to an image registry. Shared image layers can therefore reduce network
+bandwidth and storage.</p>
+
+    <blockquote>
+      <p>Tip: format output of Docker commands with the <code class="language-plaintext highlighter-rouge">--format</code> option</p>
+
+      <p>The examples above use the <code class="language-plaintext highlighter-rouge">docker image inspect</code> command with the <code class="language-plaintext highlighter-rouge">--format</code>
+option to view the layer IDs, formatted as a JSON array. The <code class="language-plaintext highlighter-rouge">--format</code>
+option on Docker commands can be a powerful feature that allows you to
+extract and format specific information from the output, without requiring
+additional tools such as <code class="language-plaintext highlighter-rouge">awk</code> or <code class="language-plaintext highlighter-rouge">sed</code>. To learn more about formatting
+the output of docker commands using the <code class="language-plaintext highlighter-rouge">--format</code> flag, refer to the
+<a href="/docs.docker.jp.onthefly/config/formatting/">format command and log output section</a>.
+We also pretty-printed the JSON output using the <a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">jq</code> utility</a>
+for readability.</p>
     </blockquote>
   </li>
 </ol>
@@ -383,35 +460,38 @@ IMAGE               CREATED             CREATED BY                              
 
 <p>コンテナー内にあるファイルが修正されると、ストレージドライバーはコピーオンライト方式により動作します。
 そこで実行される各処理は、ストレージドライバーによってさまざまです。
-<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">overlay2</code>といったドライバーの場合、だいたい以下のような順にコピーオンライト方式による処理が行われます。</p>
+<code class="language-plaintext highlighter-rouge">overlay2</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">aufs</code>といったドライバーの場合、だいたい以下のような順にコピーオンライト方式による処理が行われます。</p>
 
 <ul>
-  <li>
-    <p>更新するべきファイルをイメージレイヤー内から探します。
+  <li>更新するべきファイルをイメージレイヤー内から探します。
 この処理は最新のレイヤーから始まって、ベースレイヤーに向けて順に降りていき、一度に 1 つのレイヤーを処理していきます。
-ファイルが見つかるとこれをキャッシュに加えて、次回以降の処理スピードを上げることに備えます。</p>
-  </li>
-  <li>
-    <p>見つかったファイルを初めてコピーするときには<code class="language-plaintext highlighter-rouge">copy_up</code>という処理が行われます。
-これによってそのファイルをコンテナーの書き込みレイヤーにコピーします。</p>
-  </li>
-  <li>
-    <p>修正が発生すると、コピーを行ったそのファイルが処理されます。
-つまりコンテナーは、下位のレイヤー内に存在している読み込み専用のそのファイルを見にいくことはありません。</p>
-  </li>
+ファイルが見つかるとこれをキャッシュに加えて、次回以降の処理スピードを上げることに備えます。</li>
+  <li>見つかったファイルを初めてコピーするときには<code class="language-plaintext highlighter-rouge">copy_up</code>という処理が行われます。
+これによってそのファイルをコンテナーの書き込みレイヤーにコピーします。</li>
+  <li>修正が発生すると、コピーを行ったそのファイルが処理されます。
+つまりコンテナーは、下位のレイヤー内に存在している読み込み専用のそのファイルを見にいくことはありません。</li>
 </ul>
 
 <p>Btrfs, ZFS といったドライバーにおけるコピーオンライト方式は、これとは異なります。
 そのようなドライバーが行う手法の詳細は、後述するそれぞれの詳細説明を参照してください。</p>
 
 <p>データを大量に書き込むようなコンテナーは、そういった書き込みを行わないコンテナーに比べて、データ領域をより多く消費します。
-コンテナーの最上位にある書き込み可能な薄いレイヤー上に対して、書き込み処理を行うことは、たいていが新たなデータ領域を必要とするためです。</p>
+コンテナーの最上位にある書き込み可能な薄いレイヤー上に対して、書き込み処理を行うことは、たいていが新たなデータ領域を必要とするためです。
+Note that changing the metadata of files,
+for example, changing file permissions or ownership of a file, can also result
+in a <code class="language-plaintext highlighter-rouge">copy_up</code> operation, therefore duplicating the file to the writable layer.</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 書き込みが頻繁に行われるアプリケーションにおいては、コンテナー内にデータを保存するべきではありません。
-かわりに Docker ボリュームを利用してください。
-Docker ボリュームは起動されるコンテナーからは独立していて、効率的な入出力を行うように設計されています。
-さらにボリュームは複数のコンテナー間での共有が可能であり、書き込みレイヤーのサイズを増加させることもありません。</p>
+  <p>Tip: Use volumes for write-heavy applications</p>
+
+  <p>For write-heavy applications, you should not store the data in the container.
+Applications, such as write-intensive database storage, are known to be
+problematic particularly when pre-existing data exists in the read-only layer.</p>
+
+  <p>Instead, use Docker volumes, which are independent of the running container,
+and designed to be efficient for I/O. In addition, volumes can be shared among
+containers and do not increase the size of your container’s writable layer.
+Refer to the <a href="/docs.docker.jp.onthefly/storage/volumes/">use volumes</a> section to learn about volumes.</p>
 </blockquote>
 
 <p><code class="language-plaintext highlighter-rouge">copy_up</code>処理は際立った性能のオーバーヘッドを招きます。
@@ -422,74 +502,106 @@ Docker ボリュームは起動されるコンテナーからは独立してい�
 <p>コピーオンライトが動作している様子を確認するため、以下の例においては、前述した<code class="language-plaintext highlighter-rouge">acme/my-final-image:1.0</code>イメージをベースとする 5 つのコンテナーを見ていきます。
 そして各コンテナーがどれだけの容量を消費しているかを確認します。</p>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>以下の手順は Docker Desktop for Mac または Docker Desktop for Windows では動作しません。</p>
-</blockquote>
-
 <ol>
   <li>
     <p>Docker ホスト上の端末画面から、以下のような<code class="language-plaintext highlighter-rouge">docker run</code>コマンドを実行します。
 各行の終わりには、各コンテナーの ID を入力します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_1 acme/my-final-image:1.0 bash <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_1 acme/my-final-image:1.0 bash <span class="se">\</span>
   <span class="o">&amp;&amp;</span> docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_2 acme/my-final-image:1.0 bash <span class="se">\</span>
   <span class="o">&amp;&amp;</span> docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_3 acme/my-final-image:1.0 bash <span class="se">\</span>
   <span class="o">&amp;&amp;</span> docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_4 acme/my-final-image:1.0 bash <span class="se">\</span>
   <span class="o">&amp;&amp;</span> docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_5 acme/my-final-image:1.0 bash
-
-  c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-  dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
-  1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-  38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-  1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
-</code></pre></div>    </div>
+<span class="go">
+40ebdd7634162eb42bdb1ba76a395095527e9c0aa40348e6c325bd0aa289423c
+a5ff32e2b551168b9498870faf16c9cd0af820edf8a5c157f7b80da59d01a107
+3ed3c1a10430e09f253704116965b01ca920202d52f3bf381fbb833b8ae356bc
+939b3bf9e7ece24bcffec57d974c939da2bdcc6a5077b5459c897c1e2fa37a39
+cddae31c314fbab3f7eabeb9b26733838187abc9a2ed53f97bd5b04cd7984a5a
+</span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行して、5 つのコンテナーが実行中であることを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">--size</code>オプションを使って<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行し、5 つのコンテナーが実行中であることを確認します。
+そして各コンテナーのサイズを見てみます。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID      IMAGE                     COMMAND     CREATED              STATUS              PORTS      NAMES
-1a174fc216cc      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_5
-38fa94212a41      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_4
-1e7264576d78      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_3
-dcad7101795e      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_2
-c36785c423ec      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_1
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">--size</span> <span class="nt">--format</span> <span class="s2">"table {{.ID}}</span><span class="se">\t</span><span class="s2">{{.Image}}</span><span class="se">\t</span><span class="s2">{{.Names}}</span><span class="se">\t</span><span class="s2">{{.Size}}"</span>
+<span class="go">
+CONTAINER ID   IMAGE                     NAMES            SIZE
+cddae31c314f   acme/my-final-image:1.0   my_container_5   0B (virtual 7.75MB)
+939b3bf9e7ec   acme/my-final-image:1.0   my_container_4   0B (virtual 7.75MB)
+3ed3c1a10430   acme/my-final-image:1.0   my_container_3   0B (virtual 7.75MB)
+a5ff32e2b551   acme/my-final-image:1.0   my_container_2   0B (virtual 7.75MB)
+40ebdd763416   acme/my-final-image:1.0   my_container_1   0B (virtual 7.75MB)
+</span></code></pre></div>    </div>
+
+    <p>The output above shows that all containers share the image’s read-only layers
+(7.75MB), but no data was written to the container’s filesystem, so no additional
+storage is used for the containers.</p>
+
+    <blockquote>
+      <p>Advanced: metadata and logs storage used for containers</p>
+
+      <p><strong>Note</strong>: This step requires a Linux machine, and does not work on Docker
+Desktop for Mac or Docker Desktop for Windows, as it requires access to
+the Docker Daemon’s file storage.</p>
+
+      <p>While the output of <code class="language-plaintext highlighter-rouge">docker ps</code> provides you information about disk space
+consumed by a container’s writable layer, it does not include information
+about metadata and log-files stored for each container.</p>
+
+      <p>More details can be obtained my exploring the Docker Daemon’s storage location
+(<code class="language-plaintext highlighter-rouge">/var/lib/docker</code> by default).</p>
+
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo du</span> <span class="nt">-sh</span> /var/lib/docker/containers/<span class="k">*</span>
+<span class="go">
+36K  /var/lib/docker/containers/3ed3c1a10430e09f253704116965b01ca920202d52f3bf381fbb833b8ae356bc
+36K  /var/lib/docker/containers/40ebdd7634162eb42bdb1ba76a395095527e9c0aa40348e6c325bd0aa289423c
+36K  /var/lib/docker/containers/939b3bf9e7ece24bcffec57d974c939da2bdcc6a5077b5459c897c1e2fa37a39
+36K  /var/lib/docker/containers/a5ff32e2b551168b9498870faf16c9cd0af820edf8a5c157f7b80da59d01a107
+36K  /var/lib/docker/containers/cddae31c314fbab3f7eabeb9b26733838187abc9a2ed53f97bd5b04cd7984a5a
+</span></code></pre></div>      </div>
+
+      <p>Each of these containers only takes up 36k of space on the filesystem.</p>
+    </blockquote>
   </li>
   <li>
-    <p>ローカルの保存ディレクトリの内容を一覧表示します。</p>
+    <p>Per-container storage</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo ls</span> /var/lib/docker/containers
+    <p>To demonstrate this, run the following command to write the word ‘hello’ to
+ a file on the container’s writable layer in containers <code class="language-plaintext highlighter-rouge">my_container_1</code>,
+ <code class="language-plaintext highlighter-rouge">my_container_2</code>, and <code class="language-plaintext highlighter-rouge">my_container_3</code>:</p>
 
-1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
-1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>各サイズを確認します。</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo du</span> <span class="nt">-sh</span> /var/lib/docker/containers/<span class="k">*</span>
-
-32K  /var/lib/docker/containers/1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
-32K  /var/lib/docker/containers/1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-32K  /var/lib/docker/containers/38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-32K  /var/lib/docker/containers/c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-32K  /var/lib/docker/containers/dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..3<span class="o">}</span><span class="p">;</span> <span class="k">do </span>docker <span class="nb">exec </span>my_container_<span class="nv">$i</span> sh <span class="nt">-c</span> <span class="s1">'printf hello &gt; /out.txt'</span><span class="p">;</span> <span class="k">done</span>
 </code></pre></div>    </div>
 
-    <p>各コンテナーは、ファイルシステム上において 32k しか容量をとっていません。</p>
+    <p>Running the <code class="language-plaintext highlighter-rouge">docker ps</code> command again afterward shows that those containers
+ now consume 5 bytes each. This data is unique to each container, and not
+ shared. The read-only layers of the containers are not affected, and are still
+ shared by all containers.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker ps <span class="nt">--size</span> <span class="nt">--format</span> <span class="s2">"table {{.ID}}</span><span class="se">\t</span><span class="s2">{{.Image}}</span><span class="se">\t</span><span class="s2">{{.Names}}</span><span class="se">\t</span><span class="s2">{{.Size}}"</span>
+<span class="go">
+ CONTAINER ID   IMAGE                     NAMES            SIZE
+ cddae31c314f   acme/my-final-image:1.0   my_container_5   0B (virtual 7.75MB)
+ 939b3bf9e7ec   acme/my-final-image:1.0   my_container_4   0B (virtual 7.75MB)
+ 3ed3c1a10430   acme/my-final-image:1.0   my_container_3   5B (virtual 7.75MB)
+ a5ff32e2b551   acme/my-final-image:1.0   my_container_2   5B (virtual 7.75MB)
+ 40ebdd763416   acme/my-final-image:1.0   my_container_1   5B (virtual 7.75MB)
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
-<p>コピーオンライト方式は容量を抑えるだけでなく、起動時間も節約します。
-コンテナーを起動するとき（あるいは同一イメージからなる複数コンテナーを起動するとき）、Docker が必要とするのは、書き込み可能な薄いコンテナーレイヤーを生成することだけだからです。</p>
+<p>The examples above illustrate how copy-on-write filesystems help making containers
+efficient. Not only does copy-on-write save space, but it also reduces container
+start-up time. When you create a container (or multiple containers from the same
+image), Docker only needs to create the thin writable container layer.</p>
 
-<p>仮に Docker が新たなコンテナーを起動するたびに、その元にあるイメージ層をすべてコピーしなければならないとしたら、起動時間やディスク容量は著しく増大しているはずです。
-このことは仮想マシン技術において、複数の仮想ディスクが仮想マシン 1 つに対して動作している様子にも似ています。</p>
+<p>If Docker had to make an entire copy of the underlying image stack each time it
+created a new container, container create times and disk space used would be
+significantly increased. This would be similar to the way that virtual machines
+work, with one or more virtual disks per virtual machine. The <a href="/docs.docker.jp.onthefly/storage/storagedriver/vfs-driver/"><code class="language-plaintext highlighter-rouge">vfs</code> storage</a>
+does not provide a CoW filesystem or other optimizations. When using this storage
+driver, a full copy of the image’s data is created for each container.</p>
 
 <h2 id="related-information">関連情報</h2>
 
@@ -530,6 +642,7 @@ dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
+  <li><a href="#storage-drivers-versus-docker-volumes" class="nomunge">ストレージドライバー vs. Docker ボリューム</a></li>
   <li><a href="#images-and-layers" class="nomunge">イメージとレイヤー</a></li>
   <li><a href="#container-and-layers" class="nomunge">コンテナーとレイヤー</a></li>
   <li><a href="#container-size-on-disk" class="nomunge">ディスク上のコンテナーサイズ</a></li>

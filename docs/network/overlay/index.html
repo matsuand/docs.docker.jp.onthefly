@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>オーバーレイネットワークの利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="オーバーレイネットワークの利用" />
   <meta property="og:description" content="All about using overlay networks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"オーバーレイネットワークの利用","description":"All about using overlay networks","url":"https://docs.docker.com/network/overlay/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -160,12 +160,12 @@ Swarm サービスを利用するつもりがなくても、これを行って�
 
 <p>Swarm サービスに対して利用するオーバーレイネットワークを生成するには、以下のようなコマンドを実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay my-overlay
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> overlay my-overlay
 </code></pre></div></div>
 
 <p>オーバーレイネットワークを生成する目的が、Swarm サービスにおいて利用するだけでなく、スタンドアロンコンテナー <strong>においても</strong> 利用することが必要な場合で、他の Docker デーモン上で動作する他のスタンドアロンコンテナーとも通信を行う必要がある場合は、<code class="language-plaintext highlighter-rouge">--attachable</code>フラグを加えます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay <span class="nt">--attachable</span> my-attachable-overlay
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> overlay <span class="nt">--attachable</span> my-attachable-overlay
 </code></pre></div></div>
 
 <p>IP アドレス範囲、サブネット、ゲートウェイ、その他のオプションを指定することができます。
@@ -196,7 +196,7 @@ Swarm 内のマネージャーノードは、ゴシップデータ（gossip data
 
 <p>オーバーレイネットワーク機能を利用する際に<code class="language-plaintext highlighter-rouge">--opt encrypted --attachable</code>を同時に指定すれば、このネットワークに対して、管理外にあったコンテナーをアタッチさせることができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--opt</span> encrypted <span class="nt">--driver</span> overlay <span class="nt">--attachable</span> my-attachable-multi-host-network
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">--opt</span> encrypted <span class="nt">--driver</span> overlay <span class="nt">--attachable</span> my-attachable-multi-host-network
 </code></pre></div></div>
 
 <h3 id="customize-the-default-ingress-network">デフォルトの ingress ネットワークのカスタマイズ</h3>
@@ -223,21 +223,21 @@ Swarm 内のマネージャーノードは、ゴシップデータ（gossip data
   <li>
     <p>既存の<code class="language-plaintext highlighter-rouge">ingress</code>ネットワークを削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">rm </span>ingress
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>ingress
+<span class="go">
 WARNING! Before removing the routing-mesh network, make sure all the nodes
-<span class="k">in </span>your swarm run the same docker engine version. Otherwise, removal may not
+in your swarm run the same docker engine version. Otherwise, removal may not
 be effective and functionality of newly created ingress networks will be
 impaired.
-Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N]
-</code></pre></div>    </div>
+Are you sure you want to continue? [y/N]
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">--ingress</code>フラグを使って、新たなオーバーレイネットワークを生成します。
 カスタマイズしたいオプションがあれば設定しておきます。
 以下の例では MTU を 1200、サブネットを<code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>、ゲートウェイを <code class="language-plaintext highlighter-rouge">10.11.0.2</code>にそれぞれ指定しています。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
   <span class="nt">--ingress</span> <span class="se">\</span>
   <span class="nt">--subnet</span><span class="o">=</span>10.11.0.0/16 <span class="se">\</span>
@@ -273,9 +273,9 @@ Docker ホストのカーネル内に存在するものです。
   <li>
     <p>既存の<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>インターフェースを削除します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ip <span class="nb">link set </span>docker_gwbridge down
-
-<span class="nv">$ </span><span class="nb">sudo </span>ip <span class="nb">link </span>del dev docker_gwbridge
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ip <span class="nb">link set </span>docker_gwbridge down
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>ip <span class="nb">link </span>del dev docker_gwbridge
 </code></pre></div>    </div>
   </li>
   <li>
@@ -288,7 +288,7 @@ Swarm への参加、あるいは初期化は行いません。</p>
 以下の例では、サブネットを<code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>に指定しています。
 カスタマイズ可能なオプションについては、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_create/#bridge-driver-options">ブリッジドライバーのオプション</a> を参照してください。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
 <span class="nt">--subnet</span> 10.11.0.0/16 <span class="se">\</span>
 <span class="nt">--opt</span> com.docker.network.bridge.name<span class="o">=</span>docker_gwbridge <span class="se">\</span>
 <span class="nt">--opt</span> com.docker.network.bridge.enable_icc<span class="o">=</span><span class="nb">false</span> <span class="se">\</span>

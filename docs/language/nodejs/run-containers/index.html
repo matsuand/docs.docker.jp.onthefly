@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-08 15:00:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーとしてのイメージ実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテナーとしてのイメージ実行" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーとしてのイメージ実行","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/nodejs/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -132,7 +132,7 @@
 ここまでに作り出したイメージを使って、正しく動作することを確認します。
 ターミナルから以下のコマンドを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run node-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run node-docker
 </code></pre></div></div>
 
 <p>このコマンドを実行しても、コマンドプロンプトの入力状態には戻りません。
@@ -141,14 +141,14 @@
 
 <p>さてそこで新たなターミナルを開いて、このサーバーに対して<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
-curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8000: Connection refused
-</code></pre></div></div>
+</span><span class="go">	"msg": "testing"
+}'
+curl: (7) Failed to connect to localhost port 8000: Connection refused
+</span></code></pre></div></div>
 
 <p>上の curl コマンドは、サーバーへの接続が拒否されたために失敗しました。
 localhost のポート 8000 には接続できなかったということです。
@@ -164,18 +164,18 @@ localhost のポート 8000 には接続できなかったということです�
 
 <p>コンテナーを起動させ、ポート 8000 をホスト上のポート 8000 として公開します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:8000 node-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--publish</span> 8000:8000 node-docker
 </code></pre></div></div>
 
 <p>そこで先ほどの curl コマンドを再度実行してみます。
 新しいターミナルを開くことを忘れないでください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"msg": "testing"}'</span>
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"dc0e2c2b-793d-433c-8645-b3a553ea26de"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-09-01T17:36:09.897Z"</span><span class="o">}]}</span>
-</code></pre></div></div>
+<span class="go">{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+</span></code></pre></div></div>
 
 <p>成功しました。
 コンテナー内部で実行されているアプリケーションに対して、ポート 8000 による接続ができました。
@@ -193,23 +193,23 @@ Docker ではコンテナーをデタッチモード（detached mode）、つま
 これを行うには<code class="language-plaintext highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="language-plaintext highlighter-rouge">-d</code>フラグを指定します。
 Docker は先ほどと同じようにコンテナーを起動させますが、今回はコンテナーから「デタッチされた」つまり切り離されて実行されるので、ターミナルにプロンプトが戻ってきます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 node-docker
-ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 node-docker
+<span class="go">ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
+</span></code></pre></div></div>
 
 <p>Docker はバックグラウンドでコンテナーを起動させ、ターミナル上にそのコンテナー ID を出力します。</p>
 
 <p>同じようにコンテナーが適切に動作していることを確認します。
 前とまったく同じ curl コマンドを実行してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"dc0e2c2b-793d-433c-8645-b3a553ea26de"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-09-01T17:36:09.897Z"</span><span class="o">}]}</span>
-</code></pre></div></div>
+</span><span class="go">	"msg": "testing"
+}'
+{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+</span></code></pre></div></div>
 
 <h2 id="list-containers">コンテナーの一覧表示</h2>
 
@@ -235,15 +235,15 @@ ce02b3179f0f        node-docker         "docker-entrypoint.s…"   6 minutes ago
 このコマンドはそのとおりにコンテナーを停止させます。
 この際にはコンテナー名あるいはコンテナー ID を指定します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop wonderful_kalam
-wonderful_kalam
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop wonderful_kalam
+<span class="go">wonderful_kalam
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドをもう一度実行して、実行中コンテナーの一覧を確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+</span></code></pre></div></div>
 
 <h2 id="stop-start-and-name-containers">コンテナーの停止、起動、名前変更</h2>
 
@@ -252,12 +252,12 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 <code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行したときに、出力されるコンテナーはデフォルトでは実行中コンテナーのみです。
 <code class="language-plaintext highlighter-rouge">--all</code>または<code class="language-plaintext highlighter-rouge">-a</code>を指定すると、システム上にあるコンテナーすべて、つまり停止、起動にかかわらずすべてが表示されます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span>
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
-ce02b3179f0f        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   16 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 5 minutes ago                        wonderful_kalam
-ec45285c456d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   28 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 20 minutes ago                       agitated_moser
-fb7a41809e5d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   37 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 36 minutes ago                       goofy_khayyam
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span>
+<span class="go">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+ce02b3179f0f        node-docker         "docker-entrypoint.s…"   16 minutes ago      Exited (0) 5 minutes ago                        wonderful_kalam
+ec45285c456d        node-docker         "docker-entrypoint.s…"   28 minutes ago      Exited (0) 20 minutes ago                       agitated_moser
+fb7a41809e5d        node-docker         "docker-entrypoint.s…"   37 minutes ago      Exited (0) 36 minutes ago                       goofy_khayyam
+</span></code></pre></div></div>
 
 <p>ここまでの手順に沿って作業をしていれば、コンテナーがいくつか出力されたはずです。
 このコンテナーはこれまでに起動し停止し、そのまま削除していないものです。</p>
@@ -265,17 +265,17 @@ fb7a41809e5d        node-docker         <span class="s2">"docker-entrypoint.s…
 <p>停止したコンテナーをここで再起動してみましょう。
 停止したコンテナーの名前を確認して、再起動を行う以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker restart wonderful_kalam
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker restart wonderful_kalam
 </code></pre></div></div>
 
 <p>そこで再び ps コマンドを使ってコンテナー一覧を確認します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;8000/tcp   wonderful_kalam
-ec45285c456d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
-fb7a41809e5d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">--all</span>
+<span class="go">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
+</span><span class="gp">ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;</span>8000/tcp   wonderful_kalam
+<span class="go">ec45285c456d        node-docker         "docker-entrypoint.s…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
+fb7a41809e5d        node-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
+</span></code></pre></div></div>
 
 <p>上で再起動したコンテナーはデタッチモードで起動され、ポート 8000 が公開されています。
 またコンテナーのステータスを見てみると「Up X seconds」（起動後 X 秒）となっています。
@@ -287,31 +287,31 @@ fb7a41809e5d        node-docker         <span class="s2">"docker-entrypoint.s…
 <p>起動したばかりのコンテナーを停止させます。
 システム上の実行中コンテナーの名前を確認して、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop wonderful_kalam
-wonderful_kalam
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop wonderful_kalam
+<span class="go">wonderful_kalam
+</span></code></pre></div></div>
 
 <p>こうしてコンテナーはすべて停止したので削除します。
 コンテナーを削除するということは、実行することも停止状態にすることもできなくなります。
 コンテナー内のプロセスはすでに停止され、コンテナーに対するメタデータも削除されています。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;8000/tcp   wonderful_kalam
-ec45285c456d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
-fb7a41809e5d        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">--all</span>
+<span class="go">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
+</span><span class="gp">ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;</span>8000/tcp   wonderful_kalam
+<span class="go">ec45285c456d        node-docker         "docker-entrypoint.s…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
+fb7a41809e5d        node-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
+</span></code></pre></div></div>
 
 <p>コンテナーを削除するには、<code class="language-plaintext highlighter-rouge">docker rm</code>コマンドにコンテナー名を与えて実行します。
 このコマンド 1 つに対して複数のコンテナー名を指定することもできます。</p>
 
 <p>同じように、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm </span>wonderful_kalam agitated_moser goofy_khayyam
-wonderful_kalam
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">rm </span>wonderful_kalam agitated_moser goofy_khayyam
+<span class="go">wonderful_kalam
 agitated_moser
 goofy_khayyam
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>再度<code class="language-plaintext highlighter-rouge">docker ps --all</code>コマンドを実行し、コンテナーすべてがなくなっていることを確認してください。</p>
 
@@ -324,11 +324,11 @@ goofy_khayyam
 
 <p>コンテナー名をつけるには run コマンドに<code class="language-plaintext highlighter-rouge">--name</code>フラグをつけます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 <span class="nt">--name</span> rest-server node-docker
-1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
-<span class="nv">$ </span>docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        node-docker         <span class="s2">"docker-entrypoint.s…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;8000/tcp   rest-server
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 <span class="nt">--name</span> rest-server node-docker
+<span class="go">1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
+</span><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+</span><span class="gp">1aa5d46418a6        node-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;</span>8000/tcp   rest-server
 </code></pre></div></div>
 
 <p>こうしてコンテナーの識別は、名前を使って簡単に行えるようになりました。</p>
