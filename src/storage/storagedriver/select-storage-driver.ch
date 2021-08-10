@@ -13,7 +13,7 @@ redirect_from:
 ---
 @y
 ---
-title: Docker storage drivers
+title: Docker ストレージドライバー
 description: Learn how to select the proper storage driver for your container.
 keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2
 redirect_from:
@@ -29,10 +29,9 @@ use Docker volumes to write data. However, some workloads require you to be able
 to write to the container's writable layer. This is where storage drivers come
 in.
 @y
-Ideally, very little data is written to a container's writable layer, and you
-use Docker volumes to write data. However, some workloads require you to be able
-to write to the container's writable layer. This is where storage drivers come
-in.
+理想を言えば、コンテナーの書き込みレイヤーへのデータの書き込みは最小とし、データ出力先には Docker ボリュームを利用します。
+しかし処理内容によっては、書き込みレイヤーにデータを書き込めるようにする必要が出てきます。
+これがあるからこそストレージドライバーが必要になります。
 @z
 
 @x
