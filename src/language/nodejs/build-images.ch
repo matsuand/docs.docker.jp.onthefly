@@ -218,15 +218,49 @@ Switch back to the terminal where our server is running. You should now see the 
 @z
 
 @x
-```
+```console
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
 @y
-```
+```console
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
+@z
+
+@x
+Great! We verified that the application works. At this stage, you've completed testing the server script locally.
+@y
+すばらしい。
+アプリケーションが動作しているのを確認できました。
+この時点で、サーバースクリプトの動作テストはローカルで完了したことになります。
+@z
+
+@x
+Press `CTRL-c` from within the terminal session where the server is running to stop it.
+@y
+サーバーを稼働させているターミナルセッション内から`CTRL-c`を入力して、サーバーを停止させます。
+@z
+
+@x
+```console
+2021-08-06T12:11:33:8930  INFO: POST /test
+2021-08-06T12:11:41:5860  INFO: GET /test
+^Cshutting down...
+```
+@y
+```console
+2021-08-06T12:11:33:8930  INFO: POST /test
+2021-08-06T12:11:41:5860  INFO: GET /test
+^Cshutting down...
+```
+@z
+
+@x
+We will now continue to build and run the application in Docker.
+@y
+Docker 内でのアプリケーションのビルドと実行は、この後も続けます。
 @z
 
 @x

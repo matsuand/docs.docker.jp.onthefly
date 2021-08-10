@@ -4,7 +4,7 @@
 @x
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, images
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, kitematic
 title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/
@@ -15,7 +15,7 @@ toc_max: 3
 @y
 ---
 description: Docker ダッシュボード
-keywords: Docker Dashboard, manage, containers, images
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, kitematic
 title: Docker ダッシュボード
 redirect_from:
 - /docker-for-mac/dashboard/

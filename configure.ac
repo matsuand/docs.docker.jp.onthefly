@@ -169,7 +169,6 @@ AC_CONFIG_FILES([Makefile
 		 src/images/Makefile
 		 src/js/Makefile
 		 src/kitematic/Makefile
-		 src/kitematic/images/Makefile
 		 src/language/Makefile
 		 src/language/images/Makefile
 		 src/language/golang/Makefile

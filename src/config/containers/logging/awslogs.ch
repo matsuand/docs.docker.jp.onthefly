@@ -702,6 +702,54 @@ If not specified, the container ID is used as the log stream.
 @z
 
 @x
+### awslogs-force-flush-interval-seconds
+@y
+### awslogs-force-flush-interval-seconds
+@z
+
+@x
+The `awslogs` driver periodically flushs logs to CloudWatch.
+@y
+The `awslogs` driver periodically flushs logs to CloudWatch.
+@z
+
+@x
+The `awslogs-force-flush-interval-seconds` option changes log flush interval seconds.
+@y
+The `awslogs-force-flush-interval-seconds` option changes log flush interval seconds.
+@z
+
+@x
+Default is 5 seconds.
+@y
+Default is 5 seconds.
+@z
+
+@x
+### awslogs-max-buffered-events
+@y
+### awslogs-max-buffered-events
+@z
+
+@x
+The `awslogs` driver buffers logs.
+@y
+The `awslogs` driver buffers logs.
+@z
+
+@x
+The `awslogs-max-buffered-events` option changes log buffer size.
+@y
+The `awslogs-max-buffered-events` option changes log buffer size.
+@z
+
+@x
+Default is 4K.
+@y
+Default is 4K.
+@z
+
+@x
 ## Credentials
 @y
 ## Credentials

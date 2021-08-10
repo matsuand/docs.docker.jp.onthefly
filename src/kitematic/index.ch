@@ -3,34 +3,52 @@
 
 @x
 ---
-advisory: kitematic
-description: Documentation that provides an overview of Kitematic and installation instructions
-keywords: docker, documentation, about, technology, kitematic, gui
-title: Kitematic
+description: Kitematic userguide (deprecated)
+keywords: kitematic, deprecated
+title: Kitematic (deprecated)
+redirect_from:
+- /kitematic/faq/
+- /kitematic/known-issues/
+- /kitematic/minecraft-server/
+- /kitematic/nginx-web-server/
+- /kitematic/rethinkdb-dev-database/
+- /kitematic/userguide/
+notoc: true
 ---
 @y
 ---
-advisory: kitematic
-description: Documentation that provides an overview of Kitematic and installation instructions
-keywords: docker, documentation, about, technology, kitematic, gui
-title: Kitematic
+description: Kitematic ユーザーガイド (廃止決定)
+keywords: kitematic, deprecated
+title: Kitematic (廃止決定)
+redirect_from:
+- /kitematic/faq/
+- /kitematic/known-issues/
+- /kitematic/minecraft-server/
+- /kitematic/nginx-web-server/
+- /kitematic/rethinkdb-dev-database/
+- /kitematic/userguide/
+notoc: true
 ---
 @z
 
 @x
-Kitematic, the Docker GUI, runs on Mac and Windows operating systems.
+> **Deprecated**
+>
+> Kitematic has been deprecated. Please use the Dashboard included with Docker
+> Desktop instead. See [Docker Desktop](../desktop/dashboard.md).
+{: .warning }
 @y
-{% comment %}
-Kitematic, the Docker GUI, runs on Mac and Windows operating systems.
-{% endcomment %}
-Docker の GUI ツールである Kitematic は Mac および Windows 上で動作します。
+> **廃止決定**
+>
+> Kitematic は廃止決定となりました。
+> この代わりに、Docker Desktop に含まれるダッシュボードを利用してください。
+> [Docker Desktop](../desktop/dashboard.md) を参照のこと。
+{: .warning }
 @z
 
 @x
-For information about using Kitematic, take a look at the [User Guide](userguide.md).
+The source code for Kitematic has been archived, but [can be found on GitHub](https://github.com/docker/kitematic){:target="_blank" rel="noopener" class="_"}.
 @y
-{% comment %}
-For information about using Kitematic, take a look at the [User Guide](userguide.md).
-{% endcomment %}
-Kitemtic の利用方法については[ユーザーガイド](userguide.md)を参照してください。
+Kitematic のソースコードはアーカイブされています。
+[GitHub 上](https://github.com/docker/kitematic){:target="_blank" rel="noopener" class="_"} において参照することができます。
 @z
