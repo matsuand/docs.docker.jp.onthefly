@@ -3,15 +3,15 @@
 
 @x
 ---
-description: Docker Billing overview
+description: Docker subscription overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
-title: Docker Billing overview
+title: Docker subscription overview
 ---
 @y
 ---
-description: Docker Billing overview
+description: Docker サブスクリプションの概要
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
-title: Docker 有料プランの概要
+title: Docker サブスクリプションの概要
 ---
 @z
 

@@ -219,11 +219,11 @@ Synk を利用して Docker イメージのぜい弱性スキャンが自動的�
 @z
 
 @x
-* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker Billing](../docker-hub/billing/index.md).
+* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../docker-hub/billing/index.md).
 @y
 * Docker は新たにユーザーごとの料金体系を発表し、クラウドネイティブな開発に向けた開発ワークフローを推進するものとしました。
   それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
-  詳しくは [Docker 有料プラン](../docker-hub/billing/index.md) を参照してください。
+  詳しくは [Docker サブスクリプション](../docker-hub/billing/index.md) を参照してください。
 @z
 
 @x
