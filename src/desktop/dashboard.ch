@@ -698,9 +698,17 @@ To interact with remote repositories:
 @z
 
 @x
-The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+You can use [volumes](../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
 @y
-Docker Dashboard の **Volumes** 画面では、[ボリューム](../storage/volumes.md) の生成削除や、どれが利用中であるかの確認が簡単にできます。
+[ボリューム](../storage/volumes.md) を利用すれば、ファイルを保存し、コンテナー間で共有することができます。
+ボリュームは Docker が生成し、直接管理します。
+これは Docker コンテナーやサービスにおいて、データ保存を行う際によく採用されている仕組みでもあります。
+@z
+
+@x
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+@y
+Docker Dashboard の **Volumes** 画面では、ボリュームの生成削除や、どれが利用中であるかの確認が簡単にできます。
 Pro プランや Team プランを購入している開発者であれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
 @z
 
@@ -719,6 +727,38 @@ Pro プランや Team プランを購入している開発者であれば、特�
 @z
 
 @x
+The following table lists the Volumes UI features available in each plan:
+@y
+以下の表では、各プランにおいて利用可能なボリューム UI 機能を一覧に示します。
+@z
+
+@x
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+@y
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+@z
+
+@x
+| Feature                                       | Free      | Pro       | Team      |
+|:----------------------------------------------|:---------:|:---------:|:--------:|
+|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |
+| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |
+| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |
+@y
+| 機能                                          | 無償プラン| Pro プラン| Team プラン |
+|:----------------------------------------------|:---------:|:---------:|:--------:|
+| ボリュームの参照、生成、削除                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| 利用中ボリュームの確認                        | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| ボリューム容量の確認                          | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| ボリュームデータの詳細確認 (修正時刻やサイズ) | X         | {{ yes }} |  {{ yes }}  |
+| ボリュームを利用するコンテナーの確認          | X         | {{ yes }} |  {{ yes }}  |
+| ボリュームに対してのファイル保存、削除        | X         | {{ yes }} |  {{ yes }}  |
+@z
+
+@x
 ### Manage volumes
 @y
 {: #manage-volumes }
@@ -726,15 +766,23 @@ Pro プランや Team プランを購入している開発者であれば、特�
 @z
 
 @x
-By default, the **Volumes** view displays a list of all the volumes.
+By default, the **Volumes** view displays a list of all the volumes. Volumes that are currently used by a container display the **In Use** badge.
 @y
 デフォルトで **Volumes** 画面には、ボリュームの全一覧が表示されます。
+コンテナーによって現在利用されているボリュームには **In Use**(利用中) バッチが表示されます。
 @z
 
 @x
 ![List volumes](images/volumes-list.png){:width="700px"}
 @y
 ![ボリューム一覧](images/volumes-list.png){:width="700px"}
+@z
+
+@x
+Use the **Search** field to search for any specific volumes. You can also sort volumes by the name, the date created, and the size of the volume.
+@y
+ボリュームを検索するには **Search**(検索) 欄を使います。
+検索した結果は、名前、生成時刻、ボリュームサイズによってソートすることができます。
 @z
 
 @x
@@ -745,9 +793,10 @@ To explore the details of a specific volume, select a volume from the list. This
 @z
 
 @x
-The **In Use** tab displays the name of the container that’s using the volume, the image name, the port number used by the container, CPU, memory, disk read/write, and network I/O consumed by the container.
+The **In Use** tab displays the name of the container using the volume, the image name, the port number used by the container, and the target. A target is a path inside a container that gives access to the files in the volume.
 @y
-**In Use** (利用中) タブには、ボリュームを利用しているコンテナー名、イメージ名、コンテナーが利用するポート番号、CPU、メモリ、ディスク I/O、コンテナーが消費するネットワーク I/O が表示されます。
+**In Use** (利用中) タブには、ボリュームを利用しているコンテナー名、イメージ名、コンテナーが利用するポート番号、ターゲットが表示されます。
+ターゲットとは、ボリューム内のファイルにアクセスするための、コンテナー内のパスのことです。
 @z
 
 @x

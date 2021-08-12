@@ -162,10 +162,12 @@ Dev 環境を利用する一番簡単な方法は、作業プロジェクトの 
 @z
 
 @x
-1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 @y
-1. まずは `git@github.com:dockersamples/single-dev-env.git` をコピーして、**Create a Development Environment** (Dev 環境の生成) ページ上の **Create** (生成) 欄に貼り付けます。
+1. **Create New Environment** (新規環境の生成) をクリックします。
+   **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面が開きます。
+   `https://github.com/dockersamples/single-dev-env.git`をコピーして、**Remote Git Repository** タブ内の **Repository URL** 欄に貼り付けます。
 2. そして **Create** (生成) をクリックします。
 @z
 
@@ -251,17 +253,6 @@ Docker はこうすることで、特定のブランチやタグからリポジ�
 @z
 
 @x
-> **Note**
->
-> Known issue: when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
-@y
-> **メモ**
->
-> 既知の問題。
-> Git ブランチのクローン時に`https://`を用いる場合は、URL の終わりのサフィックス`.git`は取り除く必要があります。
-@z
-
-@x
 ### Recap
 @y
 {: #recap }
@@ -323,9 +314,10 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 @z
 
 @x
-Your team members just need to add this URL in the **Create** field and then click **Create**. Your Dev Environment now starts in the exact same state as you shared it!
+Your team members need to open the **Create** dialog, select the **Existing Dev Environment** tab, and then paste the URL. Your Dev Environment now starts in the exact same state as you shared it.
 @y
-チームメンバーは、上の URL を **Create** 欄に追加して **Create** ボタンをクリックします。
+チームメンバーは **Create** (生成) ダイアログ画面を開きます。
+**Existing Dev Environment** (既存の Dev 環境) タブを選び、URL を貼り付けます。
 こうして起動する Dev 環境は、共有した時点での同じ環境が実現します。
 @z
 
@@ -362,10 +354,11 @@ Dev 環境は Docker compose を用いたプロジェクトにおいても共有
 @z
 
 @x
-1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
 @y
-1. `git@github.com:dockersamples/compose-dev-env.git`をコピーして、**Create a Development Environment** (Dev 環境の生成) ページ上の **Create** (生成) 欄に貼り付けます。
+1. **Create** (生成) をクリックして **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面を開きます。
+   `https://github.com/dockersamples/compose-dev-env.git`をコピーして、**Remote** タブ上の **Docker image** 欄に貼り付けます。
 2. **Create** (生成) をクリックします。
    これによりプロジェクトの初期化が行われて、Git コードをクローンし、compose アプリケーションがビルドされます。
    さらに以下が行われます。
@@ -649,6 +642,45 @@ In this preview, Dev Environments support a simple YAML file which allows you to
 @z
 
 @x
+## Start a Dev Environment from a local folder
+@y
+{: #start-a-dev-environment-from-a-local-folder }
+## ローカルフォルダーからの Dev 環境の起動
+@z
+
+@x
+You can also start a Dev Environment from local code on your machine.
+@y
+自分のマシン上にあるローカルコードから Dev 環境を起動することもできます。
+@z
+
+@x
+1. Click **Create** to open the **Create a Dev Environment** dialog. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
+2. Now, click **Create**.
+@y
+1. **Create** (生成) をクリックして **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面を開きます。
+   **Local Folder** タブを選び、**Select directory** (ディレクトリの選択) をクリックします。
+   そして作業対象とするコードのルートディレクトリを開きます。
+2. **Create** (生成) をクリックします。
+@z
+
+@x
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
+@y
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
+@z
+
+@x
+> **Note**
+>
+> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
+@y
+> **Note**
+>
+> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
+@z
+
+@x
 ## Known issues
 @y
 {: #known-issues }
@@ -664,8 +696,7 @@ The following section lists known issues and workarounds in the Dev Environments
 @x
 1. It is currently not possible to share Compose-based applications using Dev Environments because registries do not support Compose applications. Refer to the [Feedback](#feedback) section to let us know your requirements for sharing Compose-based applications.
 2. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-3. You must wait until Dev Environment is successfully created (indicated by a green icon) before closing the Docker Dashboard. Dev Environments may not be created successfully if you attempt to close the Docker Dashboard while the Dev Environment creation process is in progress.
-4. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
+3. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
 @y
 1. 今のところ Dev 環境では、Compose ベースのアプリケーションを共有することはできません。
    レジストリが Compose アプリケーションをサポートしていないためです。
@@ -673,9 +704,7 @@ The following section lists known issues and workarounds in the Dev Environments
 2. Mac と Windows の間で Dev 環境を共有する場合、
    VS Code のターミナルが適切に動作しないことがあります。
    この問題を解消するには、Docker Dashboard において CLI オプションの Exec を利用してください。
-3. Dev 環境が正常に生成されるまで (グリーンアイコンが表示されるまで) 待ってから、Docker Dashboard を閉じるようにしてください。
-   Dev 環境の生成処理が行われている最中に Docker Dashboard を閉じてしまうと、Dev 環境が正常に生成できない場合があります。
-4. ARM64 と AMD64 のマシン間において Dev 環境を共有する場合、この環境はエミュレート処理が行われます。
+3. ARM64 と AMD64 のマシン間において Dev 環境を共有する場合、この環境はエミュレート処理が行われます。
 @z
 
 @x

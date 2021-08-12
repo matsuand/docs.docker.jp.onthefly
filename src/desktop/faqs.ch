@@ -238,6 +238,45 @@ For more information, see [Running Docker Desktop in nested virtualization scena
 @z
 
 @x
+### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
+@y
+{: #docker-desktops-ui-appears-green-distorted-or-has-visual-artifacts-how-do-i-fix-this }
+### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
+@z
+
+@x
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases, 
+Docker Desktop will launch successfully, but some screens may appear green, distorted, 
+or have some visual artifacts.
+@y
+Docker Desktop は、デフォルトでハードウェアアクセラレーションによるグラフィックスを利用しています。
+このことは GPU によっては問題が発生することがあります。
+その場合に Docker Desktop の起動は正常に行われますが、画面がグリーンになったり、ひずんでしまったり、といった視覚的な症状を引き起こす場合があります。
+@z
+
+@x
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
+@y
+この問題を解決するには、ハードウェアアクセラレーションを無効にします。
+具体的には、Docker Desktop の`settings.json`ファイルに、`"disableHardwareAcceleration": true`というエントリーを生成します。
+このファイルは以下の場所にあります。
+@z
+
+@x
+- **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
+- **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+@y
+- **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
+- **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+@z
+
+@x
+After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
+@y
+`settings.json`ファイルを修正した後は、ファイルを保存終了させて、Docker Desktop の再起動によってその変更を有効にします。
+@z
+
+@x
 ## Releases
 @y
 {: #releases }
@@ -658,7 +697,7 @@ Windows のネイティブシンボリックリンクと、コンテナー内部
 @z
 
 @x
-The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks): target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){:target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
 @y
 Windows のネイティブシンボリックリンクは、コンテナー内からもシンボリックリンクとして見えます。
 一方コンテナー内部に生成されるシンボリックリンクは [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){: target="_blank" rel="noopener" class="_"} と表現されるもので、特殊なメタデータを持った通常の Windows ファイルです。

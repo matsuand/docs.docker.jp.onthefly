@@ -20,6 +20,7 @@ bases = \
 	buildkit             \
 	compose-native-build \
 	daemon-access        \
+	deprecated           \
 	formatting           \
 	rootless             \
 	tip-scanning

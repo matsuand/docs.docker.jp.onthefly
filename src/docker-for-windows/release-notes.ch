@@ -38,6 +38,104 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.6.0
+2021-08-11
+@y
+## Docker Desktop 3.6.0
+2021-08-11
+@z
+
+@x
+[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+@y
+[ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- **Dev Environments**: You can now create a Dev Environment from your local Git repository. For more information, see [Start a Dev Environment from a local folder](../desktop/dev-environments.md#start-a-dev-environment-from-a-local-folder).
+- **Volume Management**: You can now sort volumes by the name, the date created, and the size of the volume. You can also search for specific volumes using the **Search** field. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+@y
+- **Dev 環境**: 
+Dev 環境はローカル Git リポジトリから生成できるようになりました。
+詳細は [ローカルフォルダーからの Dev 環境の起動](../desktop/dev-environments.md#start-a-dev-environment-from-a-local-folder) を参照してください。
+- **ボリューム管理**: ボリューム一覧では、名前、生成時刻、ボリュームサイズによってソートできるようになりました。
+また **Search** (検索) 欄を使って、ボリューム検索もできるようになりました。
+詳しくは [リモートリポジトリとのやりとり](../desktop/dashboard.md#explore-volumes) を参照してください。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2 RC1](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.1)
+  - Docker compose command line completion.
+  - Allow setting 0 scale/replicas.
+  - Detect new container on logs —follow.
+- [Go 1.16.7](https://github.com/golang/go/releases/tag/go1.16.7)
+- [Docker Engine 20.10.8](https://docs.docker.com/engine/release-notes/#20108)
+- [containerd v1.4.9](https://github.com/containerd/containerd/releases/tag/v1.4.9)
+- [runc v1.0.1](https://github.com/opencontainers/runc/releases/tag/v1.0.1)
+- [Kubernetes 1.21.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3)
+@y
+- [Compose V2 RC1](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.1)
+  - Docker compose コマンドライン補完。
+  - スケール/レプリカに対する 0 設定。
+  - logs コマンドの —follow における新規コンテナーの検出。
+- [Go 1.16.7](https://github.com/golang/go/releases/tag/go1.16.7)
+- [Docker Engine 20.10.8](https://docs.docker.com/engine/release-notes/#20108)
+- [containerd v1.4.9](https://github.com/containerd/containerd/releases/tag/v1.4.9)
+- [runc v1.0.1](https://github.com/opencontainers/runc/releases/tag/v1.0.1)
+- [Kubernetes 1.21.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug where the DNS server would fail after receiving an unexpectedly large datagram.
+- Fixed spurious traces on iptables updates.
+- Fixed slowness when adding multiple ports forwarding option.
+- Fixed bug where the WSL 2 synchonization code creates dangling symlinks if the WSL 2 home directory if it is the same as the Windows home directory. Fixes [docker/for-win#11668](https://github.com/docker/for-win/issues/11668).
+- Fixed `docker context ls` after upgrade from 3.5.x when the Linux WSL 2 home directory is the same as the Windows home directory.
+- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841
+- Fixed bug where the Linux home directory under WSL 2 was set to the Windows home directory e.g. `/mnt/c/Users/...`.
+- Fixed bug where Desktop would fail to start if it could not parse CLI contexts. Fixes [docker/for-win#11601](https://github.com/docker/for-win/issues/11601).
+- Fixed an issue related to log display inside a container [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
+- Fixed failures of the Windows Background Intelligent Transfer Service preventing Docker Desktop to start. [docker/for-win#11273](https://github.com/docker/for-win/issues/11273)
+@y
+- 不意に大量のデータグラムを受信した際に、DNS サーバーが失敗するバグを修正しました。
+- iptables アップデートにおける誤ったトレースを修正しました。
+- 複数のポート転送オプションを追加した際の、速度低下を修正しました。
+- WSL 2 のホームディレクトリが Windows のホームディレクトリと同じである場合に、WSL 2 の同期コードが、不明なシンボリックリンクを生成してしまうバグを修正しました。
+  [docker/for-win#11668](https://github.com/docker/for-win/issues/11668) を Fix に。
+- Linux WSL 2 のホームディレクトリが Windows のホームディレクトリと同じである場合に、3.5.x からアップグレードした後の`docker context ls`を修正しました。 
+- Windows コンテナーが潜在的に侵害される可能性があっため、その回避のため`%PROGRAMDATA%\Docker`の権限を修正しました。 
+  https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841 を参照のこと。
+- Linux の WSL 2 のホームディレクトリが Windows のホームディレクトリ、つまり`/mnt/c/Users/...`に設定されていたバグを修正しました。
+- CLI コンテキストを解析できない場合に、デスクトップが起動に失敗するバグを修正しました。
+  [docker/for-win#11601](https://github.com/docker/for-win/issues/11601) を Fix に。
+- コンテナー内のログ表示に関する問題を修正しました。
+  [docker/for-win#11251](https://github.com/docker/for-win/issues/11251)
+- Windows バックグラウンドインテリジェント転送サービスが、DockerDesktop の起動を妨げるという障害があったため、修正しました。 
+  [docker/for-win#11273](https://github.com/docker/for-win/issues/11273)
+@z
+
+@x
 ## Docker Desktop 3.5.2
 2021-07-08
 @y
@@ -46,9 +144,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> [Download](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
 @y
-[ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
 @z
 
 @x

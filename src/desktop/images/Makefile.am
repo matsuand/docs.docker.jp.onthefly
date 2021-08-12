@@ -16,7 +16,6 @@ images = \
 	dev-env-create.png           \
 	dev-env-gitbash.png          \
 	dev-env-localhost.png        \
-	dev-env-req.png              \
 	dev-env-share.png            \
 	dev-env-shared.png           \
 	example-app-architecture.png \

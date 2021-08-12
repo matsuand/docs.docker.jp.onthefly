@@ -30,7 +30,7 @@ You can follow progress on the implementation of the remaining commands and flag
 @z
 
 @x
-If you see some Compose functionality that is not available in the `compose` command, create an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
+If you see any Compose functionality that is not available in the `compose` command, create an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
 @y
 Compose 機能の中で`compose`コマンドでは利用できないものを見つけた場合は、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
 優先度をあげて対応することができます。
@@ -45,14 +45,14 @@ Compose 機能の中で`compose`コマンドでは利用できないものを見
 
 @x
 The following commands have not been implemented yet, and maybe implemented at a later time.
-Let us know if these commands are a higher priority for your usecases.
+Let us know if these commands are a higher priority for your use cases.
 @y
 以下に示すコマンドはまだ実装されていませんが、近いうちに実装される予定です。
 これらのコマンドの利用が優先される場合にはお知らせください。
 @z
 
 @x
-`compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but is hidden to avoid breaking existing Compose usage. It does not have any effect.
+`compose build --memory`: This option is not yet supported by buildkit. The flag is currently supported, but is hidden to avoid breaking existing Compose usage. It does not have any effect.
 @y
 `compose build --memory`
 このオプションはまだ buildkit によってサポートされていません。
