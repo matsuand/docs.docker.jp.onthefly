@@ -6,12 +6,16 @@
 description: Remove seats from your plan
 keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: Remove seats from your plan
+redirect_from:
+- /docker-hub/billing/remove-seats/
 ---
 @y
 ---
 description: Remove seats from your plan
 keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: プランからのシート削除
+redirect_from:
+- /docker-hub/billing/remove-seats/
 ---
 @z
 

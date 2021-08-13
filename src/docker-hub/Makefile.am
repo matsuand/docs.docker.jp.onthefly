@@ -1,4 +1,4 @@
-SUBDIRS = 2fa api billing builds images publish
+SUBDIRS = 2fa api builds images publish
 
 thisdir   = docker-hub
 origdir   = @abs_origdir@/$(thisdir)

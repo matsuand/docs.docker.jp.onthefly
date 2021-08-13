@@ -1,4 +1,4 @@
-thisdir   = docker-hub/billing/images
+thisdir   = subscription/images
 origdir   = @abs_origdir@/$(thisdir)
 srcdir    = @srcdir@
 mysrcdir  = $(shell cd $(srcdir) && pwd)

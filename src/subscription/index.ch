@@ -6,12 +6,16 @@
 description: Docker subscription overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
 title: Docker subscription overview
+redirect_from:
+- /docker-hub/billing/
 ---
 @y
 ---
 description: Docker サブスクリプションの概要
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
 title: Docker サブスクリプションの概要
+redirect_from:
+- /docker-hub/billing/
 ---
 @z
 
@@ -27,7 +31,7 @@ Starting with May 14, 2020, new customers who sign up for Docker can choose betw
 @z
 
 @x
-Existing Docker customers who had subscribed to a paid plan before May 14, 2020 have been converted to the new Pro or Team plan after January 31, 2021. 
+Existing Docker customers who had subscribed to a paid plan before May 14, 2020 have been converted to the new Pro or Team plan after January 31, 2021.
 @y
 2020年5月14日以前に有料プランを購入していた Docker ユーザーは、2021年1月31日までに新たなプロプランまたはチームプランへアップグレードすることが必要です。
 @z

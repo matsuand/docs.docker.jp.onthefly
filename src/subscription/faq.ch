@@ -8,6 +8,8 @@ keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscriptio
 title: Subscription & Billing FAQs
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /docker-hub/billing/faq/
 ---
 @y
 ---
@@ -16,6 +18,8 @@ keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscriptio
 title: Subscription & Billing FAQs
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /docker-hub/billing/faq/
 ---
 @z
 

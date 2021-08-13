@@ -13,11 +13,9 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 htmlbases = \
-	apple-silicon           \
 	community-banner        \
 	develop-with-docker     \
 	dev-environments        \
-	docker-aci              \
 	docker-pricing          \
 	dockercon-banner        \
 	dockercon-wrapup-banner \

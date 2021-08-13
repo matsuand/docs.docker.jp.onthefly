@@ -110,8 +110,6 @@ AC_CONFIG_FILES([Makefile
 		 src/docker-hub/2fa/Makefile
 		 src/docker-hub/api/Makefile
 		 src/docker-hub/api/latest/Makefile
-		 src/docker-hub/billing/Makefile
-		 src/docker-hub/billing/images/Makefile
 		 src/docker-hub/builds/Makefile
 		 src/docker-hub/builds/images/Makefile
 		 src/docker-hub/images/Makefile
@@ -203,5 +201,7 @@ AC_CONFIG_FILES([Makefile
 		 src/storage/images/Makefile
 		 src/storage/storagedriver/Makefile
 		 src/storage/storagedriver/images/Makefile
+		 src/subscription/Makefile
+		 src/subscription/images/Makefile
 		 src/toolbox/Makefile])
 AC_OUTPUT

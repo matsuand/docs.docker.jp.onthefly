@@ -8,6 +8,7 @@ keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
 title: Downgrade your plan
 redirect_from:
 - /docker-hub/cancel-downgrade/
+- /docker-hub/billing/downgrade/
 ---
 @y
 ---
@@ -16,6 +17,7 @@ keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
 title: 料金プランのダウングレード
 redirect_from:
 - /docker-hub/cancel-downgrade/
+- /docker-hub/billing/downgrade/
 ---
 @z
 

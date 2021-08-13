@@ -43,6 +43,7 @@ for Docker Engine.
 > instructions for the corresponding linux distro for details.
 @y
 > **メモ**
+>
 > クライアントとコンテナーランタイムは、Docker Engine 18.09 からデーモンとは別パッケージになりました。
 > ユーザーがインストールおよびアップデートをする際には、同時に 3 つのパッケージを入手して行い、最新のパッチリリースを合わせるようにします。
 > たとえば Ubuntu においては `sudo apt install docker-ce docker-ce-cli containerd.io` を実行します。
@@ -170,9 +171,9 @@ for Docker Engine.
 @z
 
 @x
-## Swarm
+### Swarm
 @y
-## Swarm
+### Swarm
 @z
 
 @x

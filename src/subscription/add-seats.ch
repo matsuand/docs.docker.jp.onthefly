@@ -6,12 +6,16 @@
 description: Add seats to your plan
 keywords: Docker, Docker Hub, subscription, update, add, seats
 title: Add seats to your plan
+redirect_from:
+- /docker-hub/billing/add-seats/
 ---
 @y
 ---
 description: Add seats to your plan
 keywords: Docker, Docker Hub, subscription, update, add, seats
 title: プランへのシート追加
+redirect_from:
+- /docker-hub/billing/add-seats/
 ---
 @z
 

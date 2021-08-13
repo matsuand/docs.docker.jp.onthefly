@@ -8,6 +8,7 @@ keywords: Docker Hub, upgrade, subscription, Pro, Team, pricing plan,
 title: Upgrade your plan
 redirect_from:
 - /docker-hub/upgrade/
+- /docker-hub/billing/upgrade/
 ---
 @y
 ---
@@ -16,6 +17,7 @@ keywords: Docker Hub, upgrade, subscription, Pro, Team, pricing plan,
 title: 料金プランのアップグレード
 redirect_from:
 - /docker-hub/upgrade/
+- /docker-hub/billing/upgrade/
 ---
 @z
 
