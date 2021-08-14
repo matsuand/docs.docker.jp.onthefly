@@ -112,7 +112,7 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
 - Fixed slowness when adding multiple ports forwarding option.
 - Fixed bug where the WSL 2 synchonization code creates dangling symlinks if the WSL 2 home directory if it is the same as the Windows home directory. Fixes [docker/for-win#11668](https://github.com/docker/for-win/issues/11668).
 - Fixed `docker context ls` after upgrade from 3.5.x when the Linux WSL 2 home directory is the same as the Windows home directory.
-- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841
+- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"}.
 - Fixed bug where the Linux home directory under WSL 2 was set to the Windows home directory e.g. `/mnt/c/Users/...`.
 - Fixed bug where Desktop would fail to start if it could not parse CLI contexts. Fixes [docker/for-win#11601](https://github.com/docker/for-win/issues/11601).
 - Fixed an issue related to log display inside a container [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
@@ -125,7 +125,7 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
   [docker/for-win#11668](https://github.com/docker/for-win/issues/11668) を Fix に。
 - Linux WSL 2 のホームディレクトリが Windows のホームディレクトリと同じである場合に、3.5.x からアップグレードした後の`docker context ls`を修正しました。 
 - Windows コンテナーが潜在的に侵害される可能性があっため、その回避のため`%PROGRAMDATA%\Docker`の権限を修正しました。 
-  https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841 を参照のこと。
+  [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"} を参照のこと。
 - Linux の WSL 2 のホームディレクトリが Windows のホームディレクトリ、つまり`/mnt/c/Users/...`に設定されていたバグを修正しました。
 - CLI コンテキストを解析できない場合に、デスクトップが起動に失敗するバグを修正しました。
   [docker/for-win#11601](https://github.com/docker/for-win/issues/11601) を Fix に。

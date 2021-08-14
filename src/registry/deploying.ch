@@ -992,14 +992,14 @@ secrets.
 > **Warning**:
 > You **cannot** use authentication with authentication schemes that send
 > credentials as clear text. You must
-> [configure TLS first](deploying.md#running-a-domain-registry) for
+> [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
 {:.warning}
 @y
 > **Warning**:
 > You **cannot** use authentication with authentication schemes that send
 > credentials as clear text. You must
-> [configure TLS first](deploying.md#running-a-domain-registry) for
+> [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
 {:.warning}
 @z
