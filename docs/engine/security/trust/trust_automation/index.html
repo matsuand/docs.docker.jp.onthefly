@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-08 15:00:43 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストの自動化 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテントトラストの自動化" />
   <meta property="og:description" content="コンテントトラストにおいてプッシュやプルを自動化します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_automation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの自動化","description":"コンテントトラストにおいてプッシュやプルを自動化します。","url":"https://docs.docker.com/engine/security/trust/trust_automation/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -111,12 +111,12 @@
 <p>ローカルの Docker トラストの保存場所に向けて、委任鍵ペアの秘密鍵のインポートを自動化するには、新たな鍵に対するパスフレーズを与える必要があります。
 このパスフレーズは、委任鍵ペアによってタグにサインを行う際に、毎回必要となるものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
-
-$ docker trust key load delegation.key --name jeff
-Loading key from "delegation.key"...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE</span><span class="o">=</span><span class="s2">"mypassphrase123"</span>
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker trust key load delegation.key <span class="nt">--name</span> jeff
+<span class="go">Loading key from "delegation.key"...
 Successfully imported key from delegation.key
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="add-a-delegation-public-key">委任鍵ペアの公開鍵の追加</h2>
 
@@ -124,35 +124,35 @@ Successfully imported key from delegation.key
 その後にリポジトリ内にトラストデータを生成するわけですが、その際にはローカルの Notary 標準ルート鍵のパスフレーズが必要になります。
 リポジトリをすでに初期化済みであれば、リポジトリのパスフレーズだけが必要になります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Export the Local Root Key Passphrase if required.
-$ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
-
-# Export the Repository Passphrase
-$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="repopassphrase123"
-
-# Initialise Repo and Push Delegation
-$ docker trust signer add --key delegation.crt jeff registry.example.com/admin/demo
-Adding signer "jeff" to registry.example.com/admin/demo...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Export the Local Root Key Passphrase <span class="k">if </span>required.
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE</span><span class="o">=</span><span class="s2">"rootpassphrase123"</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Export the Repository Passphrase
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE</span><span class="o">=</span><span class="s2">"repopassphrase123"</span>
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>Initialise Repo and Push Delegation
+<span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> delegation.crt jeff registry.example.com/admin/demo
+<span class="go">Adding signer "jeff" to registry.example.com/admin/demo...
 Initializing signed repository for registry.example.com/admin/demo...
 Successfully initialized "registry.example.com/admin/demo"
 Successfully added signer: registry.example.com/admin/demo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="sign-an-image">イメージへのサイン</h2>
 
 <p>最後に、イメージへのサインを行うには、サインする鍵のパスフレーズを環境変数に設定することが必要です。
 <code class="language-plaintext highlighter-rouge">docker trust key load</code>を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
-
-$ docker trust sign registry.example.com/admin/demo:1
-Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE</span><span class="o">=</span><span class="s2">"mypassphrase123"</span>
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker trust sign registry.example.com/admin/demo:1
+<span class="go">Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
 The push refers to repository [registry.example.com/admin/demo]
 428c97da766c: Layer already exists
 2: digest: sha256:1a6fd470b9ce10849be79e99529a88371dff60c60aab424c077007f6979b4812 size: 524
 Signing and pushing trust metadata
 Successfully signed registry.example.com/admin/demo:1
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="build-with-content-trust">コンテントトラストを使ったイメージビルド</h2>
 
@@ -197,7 +197,7 @@ Digest: sha256:d149ab53f871
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

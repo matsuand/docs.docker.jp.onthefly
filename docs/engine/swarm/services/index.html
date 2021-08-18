@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-08 15:00:43 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm へのサービスデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm へのサービスデプロイ" />
   <meta property="og:description" content="Deploy services to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/services/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm へのサービスデプロイ","description":"Deploy services to a swarm","url":"https://docs.docker.com/engine/swarm/services/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 39 分</em></p><p>Swarm サービスは <strong>宣言型</strong> モデルを採用しています。
+                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 40 分</em></p><p>Swarm サービスは <strong>宣言型</strong> モデルを採用しています。
 サービスに望むべき状態を定義して、その状態維持を Docker に委ねるものです。
 この状態には以下のような情報があります（ただしこれだけではありません）。</p>
 
@@ -222,19 +222,22 @@ The credential spec contained in the specified <code class="language-plaintext h
 
 <p>The following simple example retrieves the gMSA name and JSON contents from your Active Directory (AD) instance:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name="mygmsa"
-contents="{...}"
-echo $contents &gt; contents.json
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"mygmsa"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nv">contents</span><span class="o">=</span><span class="s2">"{...}"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$contents</span> <span class="o">&gt;</span> contents.json
 </code></pre></div></div>
+
 <p>Make sure that the nodes to which you are deploying are correctly configured for the gMSA.</p>
 
 <p>To use a Config as a credential spec, create a Docker Config in a credential spec file named <code class="language-plaintext highlighter-rouge">credpspec.json</code>.
  You can specify any name for the name of the <code class="language-plaintext highlighter-rouge">config</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create <span class="nt">--label</span> com.docker.gmsa.name<span class="o">=</span>mygmsa credspec credspec.json
 </code></pre></div></div>
+
 <p>Now you can create a service using this credential spec. Specify the <code class="language-plaintext highlighter-rouge">--credential-spec</code> flag with the config name:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create --credential-spec="config://credspec" &lt;your image&gt;
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--credential-spec</span><span class="o">=</span><span class="s2">"config://credspec"</span> &lt;your image&gt;
 </code></pre></div></div>
 
 <p>Your service uses the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec is not mounted into the container.</p>
@@ -1219,7 +1222,7 @@ wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

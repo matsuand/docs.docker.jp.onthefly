@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-08 15:00:43 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ボリュームの利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ボリュームの利用" />
   <meta property="og:description" content="ボリュームを利用します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームの利用","description":"ボリュームを利用します。","url":"https://docs.docker.com/storage/volumes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -574,6 +574,7 @@ ID                  NAME                IMAGE               NODE                
 	<span class="nt">--opt</span> <span class="nv">o</span><span class="o">=</span><span class="nv">addr</span><span class="o">=</span>uxxxxx.your-server.de,username<span class="o">=</span>uxxxxxxx,password<span class="o">=</span><span class="k">*****</span>,file_mode<span class="o">=</span>0777,dir_mode<span class="o">=</span>0777 <span class="se">\</span>
 	<span class="nt">--name</span> cif-volume
 </code></pre></div></div>
+
 <p>なお IP アドレスのかわりにホスト名を利用する場合には<code class="language-plaintext highlighter-rouge">addr</code>オプションの指定が必要です。
 これにより Docker はホスト名による名前解決が可能になります。</p>
 
@@ -586,7 +587,7 @@ ID                  NAME                IMAGE               NODE                
 
 <p>たとえば<code class="language-plaintext highlighter-rouge">dbstore</code>という名のコンテナーを新規生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -v /dbdata --name dbstore ubuntu /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> /dbdata <span class="nt">--name</span> dbstore ubuntu /bin/bash
 </code></pre></div></div>
 
 <p>次のコマンドでは以下のことを行います。</p>
@@ -597,7 +598,7 @@ ID                  NAME                IMAGE               NODE                
   <li><code class="language-plaintext highlighter-rouge">/backup</code>ディレクトリ内に入って、<code class="language-plaintext highlighter-rouge">dbdata</code>ボリュームの内容を tar コマンドにより<code class="language-plaintext highlighter-rouge">backup.tar</code>ファイルとして生成します。</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/backup ubuntu <span class="nb">tar </span>cvf /backup/backup.tar /dbdata
 </code></pre></div></div>
 
 <p>コマンドが正常終了すると、コンテナーは停止されます。
@@ -610,12 +611,12 @@ ID                  NAME                IMAGE               NODE                
 
 <p>たとえば<code class="language-plaintext highlighter-rouge">dbstore2</code>という名の新たなコンテナーを生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> /dbdata <span class="nt">--name</span> dbstore2 ubuntu /bin/bash
 </code></pre></div></div>
 
 <p>そして新たなコンテナーのデータボリューム内に、バックアップファイルを untar します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata &amp;&amp; tar xvf /backup/backup.tar --strip 1"
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore2 <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/backup ubuntu bash <span class="nt">-c</span> <span class="s2">"cd /dbdata &amp;&amp; tar xvf /backup/backup.tar --strip 1"</span>
 </code></pre></div></div>
 
 <p>上で見てきた作業については、好みのツールを利用して、バックアップ、復元、移行を自動化してテストを行うようにすることができます。</p>
@@ -639,14 +640,14 @@ ID                  NAME                IMAGE               NODE                
 コンテナーが削除されると Docker Engine は<code class="language-plaintext highlighter-rouge">/foo</code>を削除します。
 ただし<code class="language-plaintext highlighter-rouge">awesome</code>ボリュームは削除しません。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -v /foo -v awesome:/bar busybox top
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-v</span> /foo <span class="nt">-v</span> awesome:/bar busybox top
 </code></pre></div></div>
 
 <h3 id="remove-all-volumes">全ボリュームの削除</h3>
 
 <p>未使用のボリュームを削除して容量を開放するには、以下のコマンドを実行します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker volume prune
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume prune
 </code></pre></div></div>
 
 <h2 id="next-steps">次のステップ</h2>
@@ -662,7 +663,7 @@ ID                  NAME                IMAGE               NODE                
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

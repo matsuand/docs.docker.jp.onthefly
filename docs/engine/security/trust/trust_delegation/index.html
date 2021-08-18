@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-08 15:00:43 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストの委任鍵ペア | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテントトラストの委任鍵ペア" />
   <meta property="og:description" content="コンテントトラストの委任鍵ペア。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-08T15:00:43+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの委任鍵ペア","description":"コンテントトラストの委任鍵ペア。","url":"https://docs.docker.com/engine/security/trust/trust_delegation/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -116,35 +116,35 @@ Docker Hub や DTR を利用する際には、Notary サーバーの URL はレ�
 しかし独自に立ち上げたサーバー環境やサードパーティー製のレジストリの場合、Notary サーバーには別の URL を指定する必要があります。
 これは以下のようにして行います。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DOCKER_CONTENT_TRUST_SERVER=https://&lt;URL&gt;:&lt;PORT&gt;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTENT_TRUST_SERVER</span><span class="o">=</span>https://&lt;URL&gt;:&lt;PORT&gt;
 </code></pre></div></div>
 
 <p>独自に立ち上げているサーバー環境において、この変数を設定していないと、以下のようなエラーが発生します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
-Adding signer "jeff" to registry.example.com/admin/demo...
-[...]
-Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/admin/demo
+<span class="go">Adding signer "jeff" to registry.example.com/admin/demo...
+</span><span class="c">&lt;...&gt;
+</span><span class="go">Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 
-$ docker trust inspect registry.example.com/admin/demo --pretty
-WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
-[...]
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker trust inspect registry.example.com/admin/demo <span class="nt">--pretty</span>
+<span class="go">WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div></div>
 
 <p>Notary サーバーに対して認証機能を設定済みである場合、あるいは DTR を利用する場合は、Notary サーバーへのデータプッシュの前にログインする必要があります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker login registry.example.com/user/repo
-Username: admin
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker login registry.example.com/user/repo
+<span class="go">Username: admin
 Password:
 
 Login Succeeded
 
-$ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
-Adding signer "jeff" to registry.example.com/user/repo...
+</span><span class="gp">$</span><span class="w"> </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/user/repo
+<span class="go">Adding signer "jeff" to registry.example.com/user/repo...
 Initializing signed repository for registry.example.com/user/repo...
 Successfully initialized "registry.example.com/user/repo"
 Successfully added signer: jeff to registry.example.com/user/repo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>ログインしていなければ、以下のようなメッセージになります。</p>
 
@@ -552,7 +552,7 @@ No signatures or cannot access registry.example.com/admin/demo
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

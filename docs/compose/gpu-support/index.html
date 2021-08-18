@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における GPU アクセスの有効化 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose における GPU アクセスの有効化" />
   <meta property="og:description" content="Compose における GPU サポート。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/gpu-support/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における GPU アクセスの有効化","description":"Compose における GPU サポート。","url":"https://docs.docker.com/compose/gpu-support/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -171,19 +171,20 @@ Compose ファイル内でこのフィールドの設定が必須です。
             <span class="na">count</span><span class="pi">:</span> <span class="m">1</span>
             <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">,</span> <span class="nv">utility</span><span class="pi">]</span>
 </code></pre></div></div>
+
 <p>Docker Compose によってこれを実行します。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose up
-Creating network <span class="s2">"gpu_default"</span> with the default driver
-Creating gpu_test_1 ... <span class="k">done
-</span>Attaching to gpu_test_1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+<span class="go">Creating network "gpu_default" with the default driver
+Creating gpu_test_1 ... done
+Attaching to gpu_test_1
 test_1  | +-----------------------------------------------------------------------------+
 test_1  | | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.1     |
 test_1  | |-------------------------------+----------------------+----------------------+
 test_1  | | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
 test_1  | | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
 test_1  | |                               |                      |               MIG M. |
-test_1  | |<span class="o">===============================</span>+<span class="o">======================</span>+<span class="o">======================</span>|
+test_1  | |===============================+======================+======================|
 test_1  | |   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
 test_1  | | N/A   23C    P8     9W /  70W |      0MiB / 15109MiB |      0%      Default |
 test_1  | |                               |                      |                  N/A |
@@ -193,12 +194,12 @@ test_1  | +---------------------------------------------------------------------
 test_1  | | Processes:                                                                  |
 test_1  | |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
 test_1  | |        ID   ID                                                   Usage      |
-test_1  | |<span class="o">=============================================================================</span>|
+test_1  | |=============================================================================|
 test_1  | |  No running processes found                                                 |
 test_1  | +-----------------------------------------------------------------------------+
 gpu_test_1 exited with code 0
 
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">count</code>または<code class="language-plaintext highlighter-rouge">device_ids</code>が設定されていない場合は、デフォルトとしてホスト上にある GPU すべてが利用されることになります。</p>
 
@@ -212,24 +213,25 @@ gpu_test_1 exited with code 0
           <span class="na">devices</span><span class="pi">:</span>
           <span class="pi">-</span> <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
 </code></pre></div></div>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose up
-Creating network <span class="s2">"gpu_default"</span> with the default driver
-Creating gpu_test_1 ... <span class="k">done
-</span>Attaching to gpu_test_1
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+<span class="go">Creating network "gpu_default" with the default driver
+Creating gpu_test_1 ... done
+Attaching to gpu_test_1
 test_1  | I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
-.....
-test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
-Created TensorFlow device <span class="o">(</span>/device:GPU:0 with 13970 MB memory<span class="o">)</span> -&gt; physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus <span class="nb">id</span>: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
-test_1  | /device:GPU:0
+</span><span class="c">.....
+</span><span class="go">test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
+</span><span class="gp">Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -&gt;</span><span class="w"> </span>physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus <span class="nb">id</span>: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
+<span class="go">test_1  | /device:GPU:0
 gpu_test_1 exited with code 0
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>GPU を複数持つホストにおいては、<code class="language-plaintext highlighter-rouge">device_ids</code>フィールドを使って対象とする GPU デバイスを指定できます。
 またサービスコンテナーに割り当てる GPU デバイス数を<code class="language-plaintext highlighter-rouge">count</code>により制限することができます。
 <code class="language-plaintext highlighter-rouge">count</code>の設定値がホスト上の実際の GPU 数を超えている場合、デプロイ時にエラーが発生します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nvidia-smi
-+-----------------------------------------------------------------------------+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>nvidia-smi
+<span class="go">+-----------------------------------------------------------------------------+
 | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |
 |-------------------------------+----------------------+----------------------+
 | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
@@ -252,7 +254,8 @@ gpu_test_1 exited with code 0
 | N/A   62C    P8    11W /  70W |      0MiB / 15109MiB |      0%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
-</code></pre></div></div>
+</span></code></pre></div></div>
+
 <p>GPU-0 と GPU-3 の 2 つのデバイスのみアクセスするには、以下のようにします。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
@@ -282,7 +285,7 @@ gpu_test_1 exited with code 0
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

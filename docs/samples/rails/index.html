@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Rails | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Rails" />
   <meta property="og:description" content="Rails を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/rails/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Rails","description":"Rails を使って Docker Compose をはじめる。","url":"https://docs.docker.com/samples/rails/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -146,6 +146,7 @@ gem 'rails', '~&gt;5'
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>Gemfile.lock
 </code></pre></div></div>
+
 <p>次にエントリーポイントの実行スクリプトを生成して、Rails 特有の問題へ対処します。
 これはサーバー内に<code class="language-plaintext highlighter-rouge">server.pid</code>というファイルが先に存在していたときに、サーバーが再起動できなくなる問題を回避するものです。
 このスクリプトは、コンテナーが起動されるたびに実行されることになります。
@@ -272,34 +273,28 @@ drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 vendor
   <span class="na">database</span><span class="pi">:</span> <span class="s">myapp_test</span>
 </code></pre></div></div>
 
-<p><a href="/docs.docker.jp.onthefly/compose/reference/up/">docker-compose up</a> によりアプリを起動します。</p>
+<p><a href="/docs.docker.jp.onthefly/compose/reference/up/">docker-compose up</a> によりアプリを起動します。
+正常に動作すれば、PostgreSQL による出力が確認できるはずです。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
-</code></pre></div></div>
-<p>正常に動作すれば、PostgreSQL による出力が確認できるはずです。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails_db_1 is up-to-date
-Creating rails_web_1 ... <span class="k">done
-</span>Attaching to rails_db_1, rails_web_1
-db_1   | PostgreSQL init process <span class="nb">complete</span><span class="p">;</span> ready <span class="k">for </span>start up.
-db_1   |
-db_1   | 2018-03-21 20:18:37.437 UTC <span class="o">[</span>1] LOG:  listening on IPv4 address <span class="s2">"0.0.0.0"</span>, port 5432
-db_1   | 2018-03-21 20:18:37.437 UTC <span class="o">[</span>1] LOG:  listening on IPv6 address <span class="s2">"::"</span>, port 5432
-db_1   | 2018-03-21 20:18:37.443 UTC <span class="o">[</span>1] LOG:  listening on Unix socket <span class="s2">"/var/run/postgresql/.s.PGSQL.5432"</span>
-db_1   | 2018-03-21 20:18:37.726 UTC <span class="o">[</span>55] LOG:  database system was shut down at 2018-03-21 20:18:37 UTC
-db_1   | 2018-03-21 20:18:37.772 UTC <span class="o">[</span>1] LOG:  database system is ready to accept connections
-</code></pre></div></div>
+<span class="go">
+rails_db_1 is up-to-date
+Creating rails_web_1 ... done
+Attaching to rails_db_1, rails_web_1
+</span><span class="gp">db_1   | PostgreSQL init process complete;</span><span class="w"> </span>ready <span class="k">for </span>start up.
+<span class="go">db_1   |
+db_1   | 2018-03-21 20:18:37.437 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db_1   | 2018-03-21 20:18:37.437 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db_1   | 2018-03-21 20:18:37.443 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db_1   | 2018-03-21 20:18:37.726 UTC [55] LOG:  database system was shut down at 2018-03-21 20:18:37 UTC
+db_1   | 2018-03-21 20:18:37.772 UTC [1] LOG:  database system is ready to accept connections
+</span></code></pre></div></div>
 
 <p>最後にデータベースを生成することが必要です。
 別の端末から以下を実行します。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run web rake db:create
-</code></pre></div></div>
-<p>コマンドから出力される結果は、たとえば以下のようになります。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run web rake db:create
-<span class="go">
-Starting rails_db_1 ... done
+<span class="go">Starting rails_db_1 ... done
 Created database 'myapp_development'
 Created database 'myapp_test'
 </span></code></pre></div></div>
@@ -369,7 +364,7 @@ Compose ファイルにおいて、コンテナー側にて<code class="language
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>

@@ -97,15 +97,15 @@ AC_CONFIG_FILES([Makefile
 		 src/desktop/Makefile
 		 src/desktop/enterprise/Makefile
 		 src/desktop/images/Makefile
+		 src/desktop/mac/Makefile
+		 src/desktop/mac/images/Makefile
+		 src/desktop/mac/images/menu/Makefile
+		 src/desktop/windows/Makefile
+		 src/desktop/windows/images/Makefile
 		 src/develop/Makefile
 		 src/develop/develop-images/Makefile
 		 src/develop/scan-images/Makefile
 		 src/develop/scan-images/images/Makefile
-		 src/docker-for-mac/Makefile
-		 src/docker-for-mac/images/Makefile
-		 src/docker-for-mac/images/menu/Makefile
-		 src/docker-for-windows/Makefile
-		 src/docker-for-windows/images/Makefile
 		 src/docker-hub/Makefile
 		 src/docker-hub/2fa/Makefile
 		 src/docker-hub/api/Makefile

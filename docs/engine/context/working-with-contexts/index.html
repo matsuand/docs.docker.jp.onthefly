@@ -1,4 +1,4 @@
-<!-- Page generated 2021-07-21 08:26:35 +0900-->
+<!-- Page generated 2021-08-18 13:42:38 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Context | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Context" />
   <meta property="og:description" content="Docker コンテキストについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/working-with-contexts/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-07-21T08:26:35+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Context","description":"Docker コンテキストについて学びます。","url":"https://docs.docker.com/engine/context/working-with-contexts/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -80,8 +80,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -150,10 +150,10 @@
 
 <p>コンテキストというものがどのようなものに見えるかは、<strong>default</strong> コンテキストを見てみれば一番よくわかります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context ls
-NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT      ORCHESTRATOR
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context <span class="nb">ls</span>
+<span class="go">NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT      ORCHESTRATOR
 default *     Current...      unix:///var/run/docker.sock                             swarm
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>上の結果より、「default」という単一のコンテキストがあることがわかります。
 これは Swarm クラスターとやりとりするものとして設定されていて、ローカルの Unix ソケット<code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>を利用して実現するものとなっています。
@@ -166,8 +166,8 @@ default *     Current...      unix:///var/run/docker.sock                       
 <p>さらに詳しく見るには<code class="language-plaintext highlighter-rouge">docker context inspect</code>を実行します。
 この例においては、<code class="language-plaintext highlighter-rouge">default</code>というコンテキストを確認しています。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context inspect default
-[
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context inspect default
+<span class="go">[
     {
         "Name": "default",
         "Metadata": {
@@ -186,7 +186,7 @@ default *     Current...      unix:///var/run/docker.sock                       
         }
     }
 ]
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>このコンテキストでは、オーケストレーター（<code class="language-plaintext highlighter-rouge">metadata.stackOrchestrator</code>）として「swarm」を利用しています。
 また <code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>にあるローカル Unix ソケットを使い、利用可能なエンドポイントとの間でやりとりを行うように設定されています（<code class="language-plaintext highlighter-rouge">Endpoints.docker.Host</code>）。
@@ -203,12 +203,12 @@ default *     Current...      unix:///var/run/docker.sock                       
   <li>ローカル Unix ソケット<code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>に対してコマンド実行するものとします。</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context create docker-test \
-  --default-stack-orchestrator=swarm \
-  --docker host=unix:///var/run/docker.sock
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create docker-test <span class="se">\</span>
+  <span class="nt">--default-stack-orchestrator</span><span class="o">=</span>swarm <span class="se">\</span>
+  <span class="nt">--docker</span> <span class="nv">host</span><span class="o">=</span>unix:///var/run/docker.sock
+<span class="go">
 Successfully created context "docker-test"
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>新たなコンテキストは<code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code>配下の<code class="language-plaintext highlighter-rouge">meta.json</code>内に保存されます。
 コンテキストを新規に生成すると、<code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code>に専用のサブディレクトリが生成され、それぞれの<code class="language-plaintext highlighter-rouge">meta.json</code>が保存されるものです。</p>
@@ -227,22 +227,22 @@ Successfully created context "docker-test"
 これを動作させるためには、<code class="language-plaintext highlighter-rouge">/home/ubuntu/.kube/config</code>に Kubernetes の適切な設定ファイルが存在している必要があります。
 kubeconfig に複数のコンテキストが設定されている場合、現在のコンテキスト（<code class="language-plaintext highlighter-rouge">kubectl config current-context</code>）が用いられます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context create k8s-test \
-  --default-stack-orchestrator=kubernetes \
-  --kubernetes config-file=/home/ubuntu/.kube/config \
-  --docker host=unix:///var/run/docker.sock
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create k8s-test <span class="se">\</span>
+  <span class="nt">--default-stack-orchestrator</span><span class="o">=</span>kubernetes <span class="se">\</span>
+  <span class="nt">--kubernetes</span> config-file<span class="o">=</span>/home/ubuntu/.kube/config <span class="se">\</span>
+  <span class="nt">--docker</span> <span class="nv">host</span><span class="o">=</span>unix:///var/run/docker.sock
+<span class="go">
 Successfully created context "k8s-test"
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>システム上にあるコンテキストをすべて確認するには<code class="language-plaintext highlighter-rouge">docker context ls</code>を実行します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context ls
-NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context <span class="nb">ls</span>
+<span class="go">NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default *      Current       unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
 k8s-test                     unix:///var/run/docker.sock   https://35.226.99.100 (default)   kubernetes
 docker-test                  unix:///var/run/docker.sock                                     swarm
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>カレントなコンテキストはアスタリスク（”*“）により示されます。</p>
 
@@ -252,20 +252,20 @@ docker-test                  unix:///var/run/docker.sock                        
 
 <p>以下のコマンドは<code class="language-plaintext highlighter-rouge">docker</code>CLI が「k8s-test」コンテキストを利用するように切り替えるものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context use k8s-test
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context use k8s-test
+<span class="go">
 k8s-test
 Current context is now "k8s-test"
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>処理結果を確認するため、コンテキストをすべて一覧表示して、「k8s-test」コンテキストにアスタリスク（”*“）がついているかどうかを見てみます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context ls
-NAME            DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context <span class="nb">ls</span>
+<span class="go">NAME            DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default         Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
 docker-test                                               unix:///var/run/docker.sock                                     swarm
 k8s-test *                                                unix:///var/run/docker.sock   https://35.226.99.100 (default)   kubernetes
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker</code>コマンドはこれ以降、「k8s-test」コンテキストに定義されたエンドポイントを操作対象とします。</p>
 
@@ -276,12 +276,12 @@ k8s-test *                                                unix:///var/run/docker
 
 <p>Windows PowerShell の場合</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; $Env:DOCKER_CONTEXT=docker-test
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span><span class="nv">$Env</span>:DOCKER_CONTEXT<span class="o">=</span>docker-test
 </code></pre></div></div>
 
 <p>Linux の場合</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTEXT=docker-test
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CONTEXT</span><span class="o">=</span>docker-test
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker context ls</code>を実行すると、「docker-test」コンテキストが現在のアクティブコンテキストであることがわかります。</p>
@@ -289,7 +289,7 @@ k8s-test *                                                unix:///var/run/docker
 <p>またグローバルな<code class="language-plaintext highlighter-rouge">--context</code>フラグを使うと<code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code>環境変数によるコンテキスト指定ををオーバーライドします。
 たとえば以下は、コマンドに対して「production」というコンテキストを指定します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker --context production container ls
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nt">--context</span> production container <span class="nb">ls</span>
 </code></pre></div></div>
 
 <h2 id="exporting-and-importing-docker-contexts">Docker Context のインポート、エクスポート</h2>
@@ -315,23 +315,23 @@ Kubernetes 部分のコンテキストだけをエクスポートし、これを
 <p>以下の例では「docker-test」という既存のコンテキストをエクスポートします。
 これはコンテキストを<code class="language-plaintext highlighter-rouge">docker-test.dockercontext</code>というファイルに出力します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context export docker-test
-Written file "docker-test.dockercontext"
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context <span class="nb">export </span>docker-test
+<span class="go">Written file "docker-test.dockercontext"
+</span></code></pre></div></div>
 
 <p>エクスポートしたファイルの中身を確認します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat docker-test.dockercontext
-meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>docker-test.dockercontext
+<span class="go">meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
+</span></code></pre></div></div>
 
 <p>このファイルは、別のホスト上において<code class="language-plaintext highlighter-rouge">docker context import</code>を使ってインポートできます。
 対象とするホストには、Docker クライアントがインストールされている必要があります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context import docker-test docker-test.dockercontext
-docker-test
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context import docker-test docker-test.dockercontext
+<span class="go">docker-test
 Successfully imported context "docker-test"
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>コンテキストがインポートできたかどうかは<code class="language-plaintext highlighter-rouge">docker context ls</code>により確認します。</p>
 
@@ -348,19 +348,19 @@ Kubernetes コンテキストのインポートには<code class="language-plain
 コンテキスト名は既存の<code class="language-plaintext highlighter-rouge">k8s-test</code>であり、これを「k8s-test.kubeconfig」というファイルに出力します。
 <code class="language-plaintext highlighter-rouge">cat</code>コマンドを実行すれば、適正な kubeconfig ファイルとして出力されていることがわかります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context export k8s-test --kubeconfig
-Written file "k8s-test.kubeconfig"
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context <span class="nb">export </span>k8s-test <span class="nt">--kubeconfig</span>
+<span class="go">Written file "k8s-test.kubeconfig"
+</span></code></pre></div></div>
 
 <p>エクスポートしたファイルが、適正な kubectl 設定であることを確認します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat k8s-test.kubeconfig
-apiVersion: v1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>k8s-test.kubeconfig
+<span class="go">apiVersion: v1
 clusters:
 - cluster:
     certificate-authority-data:
-    &lt;Snip&gt;
-    server: https://35.226.99.100
+</span><span class="gp">    &lt;Snip&gt;</span><span class="w">
+</span><span class="go">    server: https://35.226.99.100
   name: cluster
 contexts:
 - context:
@@ -381,7 +381,7 @@ users:
         expiry-key: '{.credential.token_expiry}'
         token-key: '{.credential.access_token}'
       name: gcp
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>上の内容を、別のマシン上の<code class="language-plaintext highlighter-rouge">~/.kube/config</code>ファイルにマージします。</p>
 
@@ -391,16 +391,16 @@ users:
 
 <p>以下の例は、既存の<code class="language-plaintext highlighter-rouge">k8s-test</code>コンテキストにおいて「Description」という項目を更新するものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context update k8s-test --description "Test Kubernetes cluster"
-k8s-test
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context update k8s-test <span class="nt">--description</span> <span class="s2">"Test Kubernetes cluster"</span>
+<span class="go">k8s-test
 Successfully updated context "k8s-test"
-</code></pre></div></div>
+</span></code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=engine">engine</a>, <a href="/docs.docker.jp.onthefly/search/?q=context">context</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=kubernetes">kubernetes</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>
