@@ -40,9 +40,9 @@ toc_max: 2
 @z
 
 @x
-For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](../docker-for-mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](../docker-for-windows/install.md#system-requirements).
+For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 @y
-Docker Desktop のシステム要件については、[Docker Desktop for Mac システム要件](../docker-for-mac/install.md#system-requirements) または [Docker Desktop for Windows システム要件](../docker-for-windows/install.md#system-requirements) を参照してください。
+Docker Desktop のシステム要件については、[Docker Desktop for Mac システム要件](mac/install.md#system-requirements) または [Docker Desktop for Windows システム要件](windows/install.md#system-requirements) を参照してください。
 @z
 
 @x
@@ -66,10 +66,10 @@ Docker Desktop のシステム要件については、[Docker Desktop for Mac �
 @z
 
 @x
-You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](../docker-for-mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](../docker-for-windows/troubleshoot.md).
+You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](windows/troubleshoot.md).
 @y
 問題を調べて解決する一般的な方法はトラブルシューティングのトピックとして示されています。
-[Mac のログとトラブルシューティング](../docker-for-mac/troubleshoot.md) や [Windows のログとトラブルシューティング](../docker-for-windows/troubleshoot.md) を参照してください。
+[Mac のログとトラブルシューティング](mac/troubleshoot.md) や [Windows のログとトラブルシューティング](windows/troubleshoot.md) を参照してください。
 @z
 
 @x
@@ -153,9 +153,9 @@ Mac と Windows では、ともに動的 IP アドレスを利用します（た
 
 @x
 For more information and examples, see how to connect from a container to a service on the host
-[on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+[on Mac](mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 @y
-詳しい説明あるいは利用例については、コンテナーからサービスに接続する方法を示した [Mac での説明](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) あるいは [Windows での説明](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) を参照してください。
+詳しい説明あるいは利用例については、コンテナーからサービスに接続する方法を示した [Mac での説明](mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) あるいは [Windows での説明](windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) を参照してください。
 @z
 
 @x
@@ -175,9 +175,9 @@ We recommend that you publish a port, or connect from another container. Port fo
 
 @x
 For more information and examples, see
-[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
 @y
-詳しい情報や利用例については [Mac からコンテナーに接続したい](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) や [Windows からコンテナーに接続したい](networking.md#i-want-to-connect-to-a-container-from-windows) を参照してください。
+詳しい情報や利用例については [Mac からコンテナーに接続したい](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) や [Windows からコンテナーに接続したい](windows/networking.md#i-want-to-connect-to-a-container-from-windows) を参照してください。
 @z
 
 @x
@@ -189,10 +189,10 @@ For more information and examples, see
 
 @x
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates on Mac](../docker-for-mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](../docker-for-windows/index.md#adding-tls-certificates).
+[Add TLS certificates on Mac](mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](windows/index.md#adding-tls-certificates).
 @y
 Docker Desktop は信頼された（ルートあるいは中間の）認証局をすべてサポートします。
-サーバー側およびクライアント側に証明書を追加する詳しい説明は [Mac での TLS 証明書の追加](../docker-for-mac/index.md#add-tls-certificates) や [Windows での TLS 証明書の追加](../docker-for-windows/index.md#adding-tls-certificates) を参照してください。
+サーバー側およびクライアント側に証明書を追加する詳しい説明は [Mac での TLS 証明書の追加](mac/index.md#add-tls-certificates) や [Windows での TLS 証明書の追加](windows/index.md#adding-tls-certificates) を参照してください。
 @z
 
 @x
@@ -232,9 +232,9 @@ Docker Desktop は Mac 上の Parallels や VMware Fusion といったアプリ�
 @z
 
 @x
-For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+For more information, see [Running Docker Desktop in nested virtualization scenarios](windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 @y
-詳しくは [ネストした仮想環境内での Docker Desktop の実行]({{ site.baseurl }}/docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios) を参照してください。
+詳しくは [ネストした仮想環境内での Docker Desktop の実行](windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios) を参照してください。
 @z
 
 @x
@@ -291,12 +291,12 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 @z
 
 @x
-Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](../docker-for-mac/install.md#automatic-updates).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#automatic-updates).
 @y
 Docker Desktop 3.0.0 から Docker Desktop は 1 つの累積的なリリースストリームとして提供されるようになりました。
 つまり安定版（Stable）ユーザー、最新版（Edge）ユーザーのどちらも同一バージョンを用いることになります。
 Docker Desktop 3.0.0 の次に行われるリリースは、デルタアップデートを採用する初めてのリリースです。
-詳しくは [自動アップデート](../docker-for-mac/install.md#automatic-updates) を参照してください。
+詳しくは [自動アップデート](mac/install.md#automatic-updates) を参照してください。
 @z
 
 @x
@@ -387,11 +387,11 @@ Docker Desktop 3.0.0 から安定版（Stable）と最新版（Edge）は、ど�
 @z
 
 @x
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
+Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
 @y
 はい。
 Docker Desktop ではプロユーザーおよびチームユーザーに対してのサポートを行っています。
-詳しくは [Docker Desktop サポート](../docker-for-mac/troubleshoot.md#support) を参照してください。
+詳しくは [Docker Desktop サポート](mac/troubleshoot.md#support) を参照してください。
 @z
 
 @x
@@ -478,11 +478,11 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 @z
 
 @x
-Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md).
+Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](mac/apple-silicon.md).
 @y
 はい。
 Docker Desktop for Mac は Apple silicon 上にインストールできます。
-詳しくは [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md) を参照してください。
+詳しくは [Docker Desktop for Apple silicon](mac/apple-silicon.md) を参照してください。
 @z
 
 @x
@@ -579,9 +579,9 @@ Windows のバージョンが古くても Hyper-V 機能が利用できますが
 @z
 
 @x
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
+If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](windows/wsl.md).
 @y
-Windows 10 Home を利用している場合（バージョン 1903 以降）、[WSL 2 バックエンド](../docker-for-windows/wsl.md) を利用して [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} をインストールすることができます。
+Windows 10 Home を利用している場合（バージョン 1903 以降）、[WSL 2 バックエンド](windows/wsl.md) を利用して [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} をインストールすることができます。
 @z
 
 @x
@@ -650,10 +650,10 @@ Right-click to add the user to the group. Log out and log back in for the change
 
 @x
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 @y
 アンチウィルスソフトの中には、Docker Desktop に必要となる Hyper-V と Windows 10 ビルドと互換性がないものがあります。
-詳しくは [トラブルシューティング](troubleshoot.md) 内にある [アンチウィルスソフトのインストール時における Docker Desktop 起動の失敗](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed) を参照してください
+詳しくは [トラブルシューティング](troubleshoot.md) 内にある [アンチウィルスソフトのインストール時における Docker Desktop 起動の失敗](windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed) を参照してください
 @z
 
 @x
@@ -665,21 +665,21 @@ Desktop. For more information, see [Docker Desktop fails to start when anti-viru
 
 @x
 Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](../docker-for-windows/index.md#file-sharing) for
+the Unix-style permissions on [shared volumes](windows/index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 @y
-Docker Desktop では、デプロイコンテナーの [共有ボリューム](../docker-for-windows/index.md#file-sharing) に対して、Unix 流のパーミッション制御（`chmod`）を行うことはできません。
+Docker Desktop では、デプロイコンテナーの [共有ボリューム](windows/index.md#file-sharing) に対して、Unix 流のパーミッション制御（`chmod`）を行うことはできません。
 パーミッションはそもそもデフォルトの [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}（ユーザーおよびグループに対しての`read`、`write`、`execute`権限）に設定され、変更することはできません。
 @z
 
 @x
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 @y
-回避策や詳細に関しては [共有ボリューム上のデータディレクトリに対するパーミッションエラー](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) を参照してください。
+回避策や詳細に関しては [共有ボリューム上のデータディレクトリに対するパーミッションエラー](windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) を参照してください。
 @z
 
 @x

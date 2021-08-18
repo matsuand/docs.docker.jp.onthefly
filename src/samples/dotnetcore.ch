@@ -99,8 +99,8 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
     [Windows Containers](https://docs.microsoft.com/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
-    [Docker Desktop for Windows](../docker-for-windows/index.md). Read more on
-    [switching containers](../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+    [Docker Desktop for Windows](../desktop/windows/index.md). Read more on
+    [switching containers](../desktop/windows/index.md#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change
    the `Dockerfile` to use the DLL file of your project.
 @y
@@ -109,8 +109,8 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
     [Windows Containers](https://docs.microsoft.com/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
-    [Docker Desktop for Windows](../docker-for-windows/index.md). Read more on
-    [switching containers](../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+    [Docker Desktop for Windows](../desktop/windows/index.md). Read more on
+    [switching containers](../desktop/windows/index.md#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change
    the `Dockerfile` to use the DLL file of your project.
 @z
@@ -178,12 +178,16 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 bin/
 obj/
 ```
-### Method 2 (build app outside Docker container):
 @y
 ```dockerignore
 bin/
 obj/
 ```
+@z
+
+@x
+### Method 2 (build app outside Docker container):
+@y
 ### Method 2 (build app outside Docker container):
 @z
 
@@ -193,8 +197,8 @@ obj/
     [Windows Containers](https://docs.microsoft.com/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
-    [Docker Desktop for Windows](../docker-for-windows/index.md). Read more on
-    [switching containers](../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+    [Docker Desktop for Windows](../desktop/windows/index.md). Read more on
+    [switching containers](../desktop/windows/index.md#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile){: target="blank" rel="noopener" class=“"}.
 @y
 1.  Create a `Dockerfile` in your project folder.
@@ -202,8 +206,8 @@ obj/
     [Windows Containers](https://docs.microsoft.com/virtualization/windowscontainers/about/).
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
-    [Docker Desktop for Windows](../docker-for-windows/index.md). Read more on
-    [switching containers](../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+    [Docker Desktop for Windows](../desktop/windows/index.md). Read more on
+    [switching containers](../desktop/windows/index.md#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile){: target="blank" rel="noopener" class=“"}.
 @z
 
@@ -281,7 +285,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 
 @x
 * Go to [localhost:8080](http://localhost:8080) to access your app in a web browser.
-* If you are using the Nano [Windows Container](../docker-for-windows/index.md)
+* If you are using the Nano [Windows Container](../desktop/windows/index.md)
   and have not updated to the Windows Creator Update there is a bug affecting how
   [Windows 10 talks to Containers via "NAT"](https://github.com/Microsoft/Virtualization-Documentation/issues/181#issuecomment-252671828)
   (Network Address Translation). You must hit the IP of the container
@@ -292,7 +296,7 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
   (For example, `172.16.240.197`)
 @y
 * Go to [localhost:8080](http://localhost:8080) to access your app in a web browser.
-* If you are using the Nano [Windows Container](../docker-for-windows/index.md)
+* If you are using the Nano [Windows Container](../desktop/windows/index.md)
   and have not updated to the Windows Creator Update there is a bug affecting how
   [Windows 10 talks to Containers via "NAT"](https://github.com/Microsoft/Virtualization-Documentation/issues/181#issuecomment-252671828)
   (Network Address Translation). You must hit the IP of the container

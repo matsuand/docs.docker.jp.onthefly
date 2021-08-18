@@ -259,12 +259,12 @@ You can learn what configuration options are available in the
 @z
 
 @x
-```
-dockerd --help
+```console
+$ dockerd --help
 ```
 @y
-```
-dockerd --help
+```console
+$ dockerd --help
 ```
 @z
 

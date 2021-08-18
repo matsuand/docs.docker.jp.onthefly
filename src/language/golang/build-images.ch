@@ -636,15 +636,12 @@ Let's build our first Docker image!
 @x
 ```console
 $ docker build --tag docker-gs-ping .
-```
 @y
 ```console
 $ docker build --tag docker-gs-ping .
-```
 @z
 
 @x
-```
 [+] Building 3.6s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                      0.1s
  => => transferring dockerfile: 38B                                                       0.0s
@@ -666,7 +663,6 @@ $ docker build --tag docker-gs-ping .
  => => writing image sha256:336a3f164d0f079f2e42cd1d38f24ab9110d47d481f1db7f2a0b0d2859ec  0.0s
  => => naming to docker.io/library/docker-gs-ping                                         0.0s
 @y
-```
 [+] Building 3.6s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                      0.1s
  => => transferring dockerfile: 38B                                                       0.0s
@@ -724,21 +720,17 @@ To list images, simply run the `images` command:
 @x
 ```console
 $ docker images
-```
 @y
 ```console
 $ docker images
-```
 @z
 
 @x
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   39 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 ```
 @y
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   39 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
@@ -800,22 +792,18 @@ Now run the `docker images` command to see the updated list of local images:
 @x
 ```console
 $ docker images
-```
 @y
 ```console
 $ docker images
-```
 @z
 
 @x
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   43 minutes ago   540MB
 docker-gs-ping   v1.0      336a3f164d0f   43 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 ```
 @y
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   43 minutes ago   540MB
 docker-gs-ping   v1.0      336a3f164d0f   43 minutes ago   540MB
@@ -856,21 +844,17 @@ Notice that the response from Docker tells us that the image has not been remove
 @x
 ```console
 $ docker images
-```
 @y
 ```console
 $ docker images
-```
 @z
 
 @x
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   45 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 ```
 @y
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   45 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
@@ -1028,13 +1012,19 @@ Comparing the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest` w
 @z
 
 @x
-```
+```console
+$ docker images
+@y
+```console
+$ docker images
+@z
+
+@x
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
 docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
 docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB
 ```
 @y
-```
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
 docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
 docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB

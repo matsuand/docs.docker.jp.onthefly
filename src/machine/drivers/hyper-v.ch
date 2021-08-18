@@ -250,9 +250,9 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 @z
 
 @x
-*   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
+* Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
 @y
-*   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
+* Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
 @z
 
 @x
@@ -298,7 +298,6 @@ Reboot your desktop system to clear out any routing table problems. Without a re
     ker\Docker\Resources\bin\docker-machine.exe env manager1
     PS C:\WINDOWS\system32>
     ```
-*   Use the same process, driver, and network switch to create the other nodes.
 @y
     ```console
     PS C:\WINDOWS\system32>  docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" manager1
@@ -326,7 +325,12 @@ Reboot your desktop system to clear out any routing table problems. Without a re
     ker\Docker\Resources\bin\docker-machine.exe env manager1
     PS C:\WINDOWS\system32>
     ```
-*   Use the same process, driver, and network switch to create the other nodes.
+@z
+
+@x
+* Use the same process, driver, and network switch to create the other nodes.
+@y
+* Use the same process, driver, and network switch to create the other nodes.
 @z
 
 @x

@@ -25,9 +25,9 @@ Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に�
 @z
 
 @x
-![Snooze update](../../docker-for-mac/images/snooze-update.png){:width="500px"}
+![Snooze update](/desktop/mac/images/snooze-update.png){:width="500px"}
 @y
-![Snooze アップデート](../../docker-for-mac/images/snooze-update.png){:width="500px"}
+![Snooze アップデート]({{ site.baseurl }}/desktop/mac/images/snooze-update.png){:width="500px"}
 @z
 
 @x

@@ -80,10 +80,12 @@ For components and controls we are using [Bootstrap](https://getbootstrap.com)
 @x
   <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
 ```
+
 <hr>
 @y
   <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
 ```
+
 <hr>
 @z
 

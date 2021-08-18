@@ -299,10 +299,10 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
+5. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
    the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
 @y
-4. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
+5. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
    それぞれ`working_dir`と`volumes`の定義を行います。
    ボリュームにも [短い文法](../compose/compose-file/compose-file-v3.md#short-syntax-3) と [長い文法](../compose/compose-file/compose-file-v3.md#long-syntax-3) があります。
 @z
@@ -344,9 +344,9 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-5. Finally, we need to migrate the environment variable definitions using the `environment` key.
+6. Finally, we need to migrate the environment variable definitions using the `environment` key.
 @y
-5. 最後に環境変数設定を行います。
+6. 最後に環境変数設定を行います。
    これには`environment`キーを用います。
 @z
 

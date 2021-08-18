@@ -55,7 +55,7 @@ Dev 環境にアクセスするには、Docker メニューから **Dashboard** 
 @z
 
 @x
-![Dev environment intro](/images/dev-env-create.png){:width="700px"}
+![Dev environment intro](images/dev-env-create.png){:width="700px"}
 @y
 ![Dev 環境の導入](/images/dev-env-create.png){:width="700px"}
 @z
@@ -75,11 +75,11 @@ Dev 環境は Docker Desktop 3.5.0 リリースの一部として提供されて
 @z
 
 @x
-- [Mac](https://docs.docker.com/docker-for-mac/release-notes/)
-- [Windows](https://docs.docker.com/docker-for-windows/release-notes/)
+- [Mac](mac/release-notes.md)
+- [Windows](windows/release-notes.md)
 @y
-- [Mac](https://docs.docker.com/docker-for-mac/release-notes/)
-- [Windows](https://docs.docker.com/docker-for-windows/release-notes/)
+- [Mac](mac/release-notes.md)
+- [Windows](windows/release-notes.md)
 @z
 
 @x
@@ -131,7 +131,7 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 @z
 
 @x
-![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
+![Windows add Git to path](images/dev-env-gitbash.png){:width="300px"}
 @y
 ![Windows 上での Git のパス追加](/images/dev-env-gitbash.png){:width="300px"}
 @z
@@ -180,7 +180,7 @@ Dev 環境を利用する一番簡単な方法は、作業プロジェクトの 
 @z
 
 @x
-![Single container Dev environment](/images/dev-env-container.png){:width="700px"}
+![Single container Dev environment](images/dev-env-container.png){:width="700px"}
 @y
 ![単一コンテナーによる Dev 環境](/images/dev-env-container.png){:width="700px"}
 @z
@@ -209,7 +209,7 @@ You can launch the application by running the command `make run` in your VS Code
 @z
 
 @x
-![Single container Dev environment](/images/dev-env-localhost.png){:width="700px"}
+![Single container Dev environment](images/dev-env-localhost.png){:width="700px"}
 @y
 ![単一コンテナーによる Dev 環境](/images/dev-env-localhost.png){:width="700px"}
 @z
@@ -294,7 +294,7 @@ Docker の [Team プラン](https://www.docker.com/pricing?utm_source=docker&utm
 @z
 
 @x
-![Share a Dev environment](/images/dev-env-share.png){:width="700px"}
+![Share a Dev environment](images/dev-env-share.png){:width="700px"}
 @y
 ![Dev 環境の共有](/images/dev-env-share.png){:width="700px"}
 @z
@@ -308,7 +308,7 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 @z
 
 @x
-![Dev environment shared](/images/dev-env-shared.png){:width="700px"}
+![Dev environment shared](images/dev-env-shared.png){:width="700px"}
 @y
 ![共有された Dev 環境](/images/dev-env-shared.png){:width="700px"}
 @z
@@ -377,7 +377,7 @@ Dev 環境は Docker compose を用いたプロジェクトにおいても共有
 @z
 
 @x
-![Compose Dev environment](/images/dev-env-compose.png){:width="700px"}
+![Compose Dev environment](images/dev-env-compose.png){:width="700px"}
 @y
 ![compose による Dev 環境](/images/dev-env-compose.png){:width="700px"}
 @z

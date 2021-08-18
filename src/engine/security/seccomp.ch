@@ -279,12 +279,12 @@ profile.
 @z
 
 @x
-```
+```console
 $ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \
     unshare --map-root-user --user sh -c whoami
 ```
 @y
-```
+```console
 $ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \
     unshare --map-root-user --user sh -c whoami
 ```

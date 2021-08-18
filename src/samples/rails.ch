@@ -437,29 +437,22 @@ test:
 @z
 
 @x
-You can now boot the app with [docker-compose up](../compose/reference/up.md):
+You can now boot the app with [docker-compose up](../compose/reference/up.md).
+If all is well, you should see some PostgreSQL output:
 @y
 [docker-compose up](../compose/reference/up.md) によりアプリを起動します。
-@z
-
-@x
-```console
-$ docker-compose up
-```
-@y
-```console
-$ docker-compose up
-```
-@z
-
-@x
-If all's well, you should see some PostgreSQL output.
-@y
 正常に動作すれば、PostgreSQL による出力が確認できるはずです。
 @z
 
 @x
-```bash
+```console
+$ docker-compose up
+@y
+```console
+$ docker-compose up
+@z
+
+@x
 rails_db_1 is up-to-date
 Creating rails_web_1 ... done
 Attaching to rails_db_1, rails_web_1
@@ -472,7 +465,6 @@ db_1   | 2018-03-21 20:18:37.726 UTC [55] LOG:  database system was shut down at
 db_1   | 2018-03-21 20:18:37.772 UTC [1] LOG:  database system is ready to accept connections
 ```
 @y
-```bash
 rails_db_1 is up-to-date
 Creating rails_web_1 ... done
 Attaching to rails_db_1, rails_web_1
@@ -496,31 +488,17 @@ Finally, you need to create the database. In another terminal, run:
 @x
 ```console
 $ docker-compose run web rake db:create
-```
 @y
 ```console
 $ docker-compose run web rake db:create
-```
 @z
 
 @x
-Here is an example of the output from that command:
-@y
-コマンドから出力される結果は、たとえば以下のようになります。
-@z
-
-@x
-```console
-$ docker-compose run web rake db:create
-
 Starting rails_db_1 ... done
 Created database 'myapp_development'
 Created database 'myapp_test'
 ```
 @y
-```console
-$ docker-compose run web rake db:create
-
 Starting rails_db_1 ... done
 Created database 'myapp_development'
 Created database 'myapp_test'

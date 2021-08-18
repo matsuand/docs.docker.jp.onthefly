@@ -81,9 +81,9 @@ While docker-compose is still supported and maintained, Compose V2 implementatio
 @z
 
 @x
-Additionally, Compose V2 also supports [Apple silicon](../docker-for-mac/apple-silicon.md).
+Additionally, Compose V2 also supports [Apple silicon](../desktop/mac/apple-silicon.md).
 @y
-Additionally, Compose V2 also supports [Apple silicon](../docker-for-mac/apple-silicon.md).
+Additionally, Compose V2 also supports [Apple silicon](../desktop/mac/apple-silicon.md).
 @z
 
 @x
@@ -136,11 +136,11 @@ Docker Desktop のインストール手順は以下を参照してください�
 @z
 
 @x
-- [Install Docker Desktop on Mac](../docker-for-mac/install.md)
-- [Install Docker Desktop on Windows](../docker-for-windows/install.md)
+- [Install Docker Desktop on Mac](../desktop/mac/install.md)
+- [Install Docker Desktop on Windows](../desktop/windows/install.md)
 @y
-- [Docker Desktop の Mac へのンストール](../docker-for-mac/install.md)
-- [Docker Desktop の Windows へのンストール](../docker-for-windows/install.md)
+- [Docker Desktop の Mac へのンストール](../desktop/mac/install.md)
+- [Docker Desktop の Windows へのンストール](../desktop/windows/install.md)
 @z
 
 @x

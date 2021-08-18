@@ -42,12 +42,12 @@ page on GitHub.
 @z
 
 @x
-With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
+With the advent of [Docker Desktop for Mac](../desktop/mac/index.md) and
+[Docker Desktop for Windows](../desktop/windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
 on your local system without using Docker Machine at all.
 @y
-[Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) が開発されているので、Docker を使った作業には、これらの新しいアプリケーションを利用することをお勧めします。
+[Docker Desktop for Mac](../desktop/mac/index.md) や [Docker Desktop for Windows](../desktop/windows/index.md) が開発されているので、Docker を使った作業には、これらの新しいアプリケーションを利用することをお勧めします。
 このアプリケーションを利用すれば Docker Machine を用いることなく、ローカルシステム上において Docker をネイティブに実行することができます。
 @z
 
@@ -109,11 +109,11 @@ The prerequisites are:
 @z
 
 @x
-* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../docker-for-windows/install.md#what-to-know-before-you-install)).
+* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#what-to-know-before-you-install)).
 @y
 * Docker Desktop for Windows がインストールされていて、実行していることが必要です。
   （実行するためには仮想化環境および Hyper-V が有効であることが必要です。
-   このことは [Docker Desktop for Windows をインストール前に確認すべきこと](../docker-for-windows/install.md#what-to-know-before-you-install) において説明されています。）
+   このことは [Docker Desktop for Windows をインストール前に確認すべきこと](../desktop/windows/install.md#what-to-know-before-you-install) において説明されています。）
 @z
 
 @x

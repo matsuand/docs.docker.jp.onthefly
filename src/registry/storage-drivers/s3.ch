@@ -181,7 +181,6 @@ The following AWS policy is required by the registry for push and pull. Make sur
   ]
 }
 ```
-See [the S3 policy documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) for more details.
 @y
 ```
 {
@@ -210,6 +209,11 @@ See [the S3 policy documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev
   ]
 }
 ```
+@z
+
+@x
+See [the S3 policy documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) for more details.
+@y
 See [the S3 policy documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) for more details.
 @z
 
@@ -340,7 +344,7 @@ The following example shows a minimum configuration:
 @z
 
 @x
-```
+```yaml
 ...
 storage:
   s3:
@@ -356,7 +360,7 @@ middleware:
 ...
 ```
 @y
-```
+```yaml
 ...
 storage:
   s3:

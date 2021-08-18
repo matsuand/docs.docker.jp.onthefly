@@ -69,13 +69,13 @@ configure this app to use our SQL Server database, and then create a
 
 @x
     This directory is the context of your docker-compose project. For
-    [Docker Desktop for Windows](../docker-for-windows/index.md#file-sharing) and
-    [Docker Desktop for Mac](../docker-for-mac/index.md#file-sharing), you
+    [Docker Desktop for Windows](../desktop/windows/index.md#file-sharing) and
+    [Docker Desktop for Mac](../desktop/mac/index.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 @y
     This directory is the context of your docker-compose project. For
-    [Docker Desktop for Windows](../docker-for-windows/index.md#file-sharing) and
-    [Docker Desktop for Mac](../docker-for-mac/index.md#file-sharing), you
+    [Docker Desktop for Windows](../desktop/windows/index.md#file-sharing) and
+    [Docker Desktop for Mac](../desktop/mac/index.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 @z
 
@@ -311,7 +311,7 @@ configure this app to use our SQL Server database, and then create a
 
 @x
     ```csharp
-    [...]
+    <...>
     public void ConfigureServices(IServiceCollection services)
     {
         // Database connection string.
@@ -319,7 +319,7 @@ configure this app to use our SQL Server database, and then create a
         var connection = @"Server=db;Database=master;User=sa;Password=Your_password123;";
 @y
     ```csharp
-    [...]
+    <...>
     public void ConfigureServices(IServiceCollection services)
     {
         // Database connection string.
@@ -360,14 +360,14 @@ configure this app to use our SQL Server database, and then create a
         services.AddTransient<IEmailSender, AuthMessageSender>();
         services.AddTransient<ISmsSender, AuthMessageSender>();
     }
-    [...]
+    <...>
     ```
 @y
         // Add application services.
         services.AddTransient<IEmailSender, AuthMessageSender>();
         services.AddTransient<ISmsSender, AuthMessageSender>();
     }
-    [...]
+    <...>
     ```
 @z
 
@@ -432,14 +432,14 @@ configure this app to use our SQL Server database, and then create a
 @x
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker Desktop for Mac](../docker-for-mac/index.md#advanced) and
-    [Docker Desktop for Windows](../docker-for-windows/index.md#advanced).
+    [Docker Desktop for Mac](../desktop/mac/index.md#advanced) and
+    [Docker Desktop for Windows](../desktop/windows/index.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 @y
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker Desktop for Mac](../docker-for-mac/index.md#advanced) and
-    [Docker Desktop for Windows](../docker-for-windows/index.md#advanced).
+    [Docker Desktop for Mac](../desktop/mac/index.md#advanced) and
+    [Docker Desktop for Windows](../desktop/windows/index.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 @z
 

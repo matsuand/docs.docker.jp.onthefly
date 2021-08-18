@@ -78,11 +78,11 @@ Docker コンテナーを ECS にデプロイするには、以下の条件を�
 @z
 
 @x
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 @y
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 @z
 
 @x
@@ -1286,77 +1286,77 @@ use an existing domain name for your application:
 @z
 
 @x
-```console
-$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
-
-"vpc-123456"
-$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
-
-[
-    "subnet-1234abcd",
-    "subnet-6789ef00",
-]
-```
+        ```console
+        $ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        
+        "vpc-123456"
+        $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+        
+        [
+            "subnet-1234abcd",
+            "subnet-6789ef00",
+        ]
+        ```
 @y
-```console
-$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
-
-"vpc-123456"
-$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
-
-[
-    "subnet-1234abcd",
-    "subnet-6789ef00",
-]
-```
+        ```console
+        $ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        
+        "vpc-123456"
+        $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+        
+        [
+            "subnet-1234abcd",
+            "subnet-6789ef00",
+        ]
+        ```
 @z
 
 @x
-1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
+2. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 @y
-1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
+2. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 @z
 
 @x
-```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
-
-{
-    "LoadBalancers": [
+        ```console
+        $ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+        
         {
-            "IpAddressType": "ipv4",
-            "VpcId": "vpc-123456",
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
-            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
-...
-```
+            "LoadBalancers": [
+                {
+                    "IpAddressType": "ipv4",
+                    "VpcId": "vpc-123456",
+                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+                    "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+        <...>
+        ```
 @y
-```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
-
-{
-    "LoadBalancers": [
+        ```console
+        $ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+        
         {
-            "IpAddressType": "ipv4",
-            "VpcId": "vpc-123456",
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
-            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
-...
-```
+            "LoadBalancers": [
+                {
+                    "IpAddressType": "ipv4",
+                    "VpcId": "vpc-123456",
+                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+                    "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+        <...>
+        ```
 @z
 
 @x
-1. To assign your application an existing domain name, you can configure your DNS with a
-CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
+3. To assign your application an existing domain name, you can configure your DNS with a
+   CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
 @y
-1. To assign your application an existing domain name, you can configure your DNS with a
-CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
+3. To assign your application an existing domain name, you can configure your DNS with a
+   CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
 @z
 
 @x
-1. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
+4. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
 @y
-1. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
+4. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
 @z
 
 @x

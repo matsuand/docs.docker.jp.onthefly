@@ -203,11 +203,11 @@ content that they already downloaded:
 @z
 
 @x
-```
+```console
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 @y
-```
+```console
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 @z

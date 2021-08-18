@@ -125,13 +125,13 @@ The easiest way to see what a context looks like is to view the **default** cont
 @z
 
 @x
-```
+```console
 $ docker context ls
 NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT      ORCHESTRATOR
 default *     Current...      unix:///var/run/docker.sock                             swarm
 ```
 @y
-```
+```console
 $ docker context ls
 NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT      ORCHESTRATOR
 default *     Current...      unix:///var/run/docker.sock                             swarm
@@ -162,7 +162,7 @@ Dig a bit deeper with `docker context inspect`. In this example, we're inspectin
 @z
 
 @x
-```
+```console
 $ docker context inspect default
 [
     {
@@ -185,7 +185,7 @@ $ docker context inspect default
 ]
 ```
 @y
-```
+```console
 $ docker context inspect default
 [
     {
@@ -245,7 +245,7 @@ The following example creates a new context called "docker-test" and specifies t
 @z
 
 @x
-```
+```console
 $ docker context create docker-test \
   --default-stack-orchestrator=swarm \
   --docker host=unix:///var/run/docker.sock
@@ -253,7 +253,7 @@ $ docker context create docker-test \
 Successfully created context "docker-test"
 ```
 @y
-```
+```console
 $ docker context create docker-test \
   --default-stack-orchestrator=swarm \
   --docker host=unix:///var/run/docker.sock
@@ -294,7 +294,7 @@ kubeconfig に複数のコンテキストが設定されている場合、現在
 @z
 
 @x
-```
+```console
 $ docker context create k8s-test \
   --default-stack-orchestrator=kubernetes \
   --kubernetes config-file=/home/ubuntu/.kube/config \
@@ -303,7 +303,7 @@ $ docker context create k8s-test \
 Successfully created context "k8s-test"
 ```
 @y
-```
+```console
 $ docker context create k8s-test \
   --default-stack-orchestrator=kubernetes \
   --kubernetes config-file=/home/ubuntu/.kube/config \
@@ -320,7 +320,7 @@ You can view all contexts on the system with `docker context ls`.
 @z
 
 @x
-```
+```console
 $ docker context ls
 NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default *      Current       unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -328,7 +328,7 @@ k8s-test                     unix:///var/run/docker.sock   https://35.226.99.100
 docker-test                  unix:///var/run/docker.sock                                     swarm
 ```
 @y
-```
+```console
 $ docker context ls
 NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default *      Current       unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -363,14 +363,14 @@ The following command will switch the `docker` CLI to use the "k8s-test" context
 @z
 
 @x
-```
+```console
 $ docker context use k8s-test
 
 k8s-test
 Current context is now "k8s-test"
 ```
 @y
-```
+```console
 $ docker context use k8s-test
 
 k8s-test
@@ -385,7 +385,7 @@ Verify the operation by listing all contexts and ensuring the asterisk ("\*") is
 @z
 
 @x
-```
+```console
 $ docker context ls
 NAME            DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default         Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -393,7 +393,7 @@ docker-test                                               unix:///var/run/docker
 k8s-test *                                                unix:///var/run/docker.sock   https://35.226.99.100 (default)   kubernetes
 ```
 @y
-```
+```console
 $ docker context ls
 NAME            DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default         Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -428,11 +428,11 @@ Windows PowerShell の場合
 @z
 
 @x
-```
+```console
 > $Env:DOCKER_CONTEXT=docker-test
 ```
 @y
-```
+```console
 > $Env:DOCKER_CONTEXT=docker-test
 ```
 @z
@@ -444,11 +444,11 @@ Linux の場合
 @z
 
 @x
-```
+```console
 $ export DOCKER_CONTEXT=docker-test
 ```
 @y
-```
+```console
 $ export DOCKER_CONTEXT=docker-test
 ```
 @z
@@ -467,11 +467,11 @@ You can also use the global `--context` flag to override the context specified b
 @z
 
 @x
-```
+```console
 $ docker --context production container ls
 ```
 @y
-```
+```console
 $ docker --context production container ls
 ```
 @z
@@ -534,12 +534,12 @@ The following example exports an existing context called "docker-test". It will 
 @z
 
 @x
-```
+```console
 $ docker context export docker-test
 Written file "docker-test.dockercontext"
 ```
 @y
-```
+```console
 $ docker context export docker-test
 Written file "docker-test.dockercontext"
 ```
@@ -552,12 +552,12 @@ Check the contents of the export file.
 @z
 
 @x
-```
+```console
 $ cat docker-test.dockercontext
 meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
 ```
 @y
-```
+```console
 $ cat docker-test.dockercontext
 meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
 ```
@@ -571,13 +571,13 @@ This file can be imported on another host using `docker context import`. The tar
 @z
 
 @x
-```
+```console
 $ docker context import docker-test docker-test.dockercontext
 docker-test
 Successfully imported context "docker-test"
 ```
 @y
-```
+```console
 $ docker context import docker-test docker-test.dockercontext
 docker-test
 Successfully imported context "docker-test"
@@ -625,12 +625,12 @@ These steps will use the `--kubeconfig` flag to export **only** the Kubernetes e
 @z
 
 @x
-```
+```console
 $ docker context export k8s-test --kubeconfig
 Written file "k8s-test.kubeconfig"
 ```
 @y
-```
+```console
 $ docker context export k8s-test --kubeconfig
 Written file "k8s-test.kubeconfig"
 ```
@@ -643,7 +643,7 @@ Verify that the exported file contains a valid kubectl config.
 @z
 
 @x
-```
+```console
 $ cat k8s-test.kubeconfig
 apiVersion: v1
 clusters:
@@ -673,7 +673,7 @@ users:
       name: gcp
 ```
 @y
-```
+```console
 $ cat k8s-test.kubeconfig
 apiVersion: v1
 clusters:
@@ -730,13 +730,13 @@ The following example updates the "Description" field in the existing `k8s-test`
 @z
 
 @x
-```
+```console
 $ docker context update k8s-test --description "Test Kubernetes cluster"
 k8s-test
 Successfully updated context "k8s-test"
 ```
 @y
-```
+```console
 $ docker context update k8s-test --description "Test Kubernetes cluster"
 k8s-test
 Successfully updated context "k8s-test"

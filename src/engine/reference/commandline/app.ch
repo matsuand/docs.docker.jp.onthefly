@@ -176,12 +176,12 @@ Use the following command to initialize a new empty project called "hello-world"
 @z
 
 @x
-```
+```console
 $ docker app init hello-world
 Created "hello-world.dockerapp"
 ```
 @y
-```
+```console
 $ docker app init hello-world
 Created "hello-world.dockerapp"
 ```
@@ -212,10 +212,10 @@ Inspect the YAML files with the following commands.
 @z
 
 @x
-```
+```console
 $ cd hello-world.dockerapp/
 @y
-```
+```console
 $ cd hello-world.dockerapp/
 @z
 
@@ -306,24 +306,24 @@ the following information:
 @z
 
 @x
-```
+```yaml
 version: "3.6"
 services:
   hello:
     image: hashicorp/http-echo
     command: ["-text", "${hello.text}"]
     ports:
-      - ${hello.port}:5678
+      - "${hello.port}:5678"
 ```
 @y
-```
+```yaml
 version: "3.6"
 services:
   hello:
     image: hashicorp/http-echo
     command: ["-text", "${hello.text}"]
     ports:
-      - ${hello.port}:5678
+      - "${hello.port}:5678"
 ```
 @z
 
@@ -334,13 +334,13 @@ Update the `parameters.yml` file to the following:
 @z
 
 @x
-```
+```yaml
 hello:
   port: 8080
   text: Hello world!
 ```
 @y
-```
+```yaml
 hello:
   port: 8080
   text: Hello world!
@@ -382,11 +382,11 @@ the `inspect` operation inspects the configuration file(s).
 @z
 
 @x
-```
+```console
 $ docker app inspect hello-world.dockerapp
 hello-world 0.1.0
 @y
-```
+```console
 $ docker app inspect hello-world.dockerapp
 hello-world 0.1.0
 @z
@@ -444,12 +444,12 @@ If the app passes validation, the command returns no arguments.
 @z
 
 @x
-```
+```console
 $ docker app validate hello-world.dockerapp
 Validated "hello-world.dockerapp"
 ```
 @y
-```
+```console
 $ docker app validate hello-world.dockerapp
 Validated "hello-world.dockerapp"
 ```
@@ -522,14 +522,14 @@ Use the following command to deploy (install) the application.
 @z
 
 @x
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app
 Creating network my-app_default
 Creating service my-app_hello
 Application "my-app" installed on context "default"
 ```
 @y
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app
 Creating network my-app_default
 Creating service my-app_hello
@@ -550,14 +550,14 @@ available for the commands `status`, `upgrade`, and `uninstall`.
 @z
 
 @x
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
 Creating network my-app_default
 Creating service my-app_hello
 Application "my-app" installed on context "my-big-production-cluster"
 ```
 @y
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
 Creating network my-app_default
 Creating service my-app_hello
@@ -580,7 +580,7 @@ You can check the status of the app with the `docker app status <app-name>` comm
 @z
 
 @x
-```
+```console
 $ docker app status my-app
 INSTALLATION
 ------------
@@ -592,7 +592,7 @@ Last Action:  install
 Result:       SUCCESS
 Orchestrator: swarm
 @y
-```
+```console
 $ docker app status my-app
 INSTALLATION
 ------------
@@ -652,13 +652,13 @@ The app is deployed using the stack orchestrator. This means you can also inspec
 @z
 
 @x
-```
+```console
 $ docker stack ls
 NAME                SERVICES            ORCHESTRATOR
 my-app              1                   Swarm
 ```
 @y
-```
+```console
 $ docker stack ls
 NAME                SERVICES            ORCHESTRATOR
 my-app              1                   Swarm
@@ -677,14 +677,18 @@ the connection from your browser to your Docker host.
 
 @x
 Now change the port of the application using `docker app upgrade <app-name>` command.
-```
+@y
+Now change the port of the application using `docker app upgrade <app-name>` command.
+@z
+
+@x
+```console
 $ docker app upgrade my-app --set hello.port=8181
 Upgrading service my-app_hello
 Application "my-app" upgraded on context "default"
 ```
 @y
-Now change the port of the application using `docker app upgrade <app-name>` command.
-```
+```console
 $ docker app upgrade my-app --set hello.port=8181
 Upgrading service my-app_hello
 Application "my-app" upgraded on context "default"
@@ -736,11 +740,11 @@ Use the following command to render the app to a Compose file called `docker-com
 @z
 
 @x
-```
+```console
 $ docker app render --output docker-compose.yml hello-world.dockerapp
 ```
 @y
-```
+```console
 $ docker app render --output docker-compose.yml hello-world.dockerapp
 ```
 @z
@@ -752,7 +756,7 @@ Check the contents of the resulting `docker-compose.yml` file.
 @z
 
 @x
-```
+```console
 $ cat docker-compose.yml
 version: "3.6"
 services:
@@ -768,7 +772,7 @@ services:
       protocol: tcp
 ```
 @y
-```
+```console
 $ cat docker-compose.yml
 version: "3.6"
 services:
@@ -806,7 +810,7 @@ Try to render the application with a different text:
 @z
 
 @x
-```
+```console
 $ docker app render hello-world.dockerapp --set hello.text="Hello whales!" 
 version: "3.6"
 services:
@@ -822,7 +826,7 @@ services:
       protocol: tcp
 ```
 @y
-```
+```console
 $ docker app render hello-world.dockerapp --set hello.text="Hello whales!" 
 version: "3.6"
 services:
@@ -846,13 +850,13 @@ Use `docker-compose up` to deploy the app.
 @z
 
 @x
-```
+```console
 $ docker-compose up --detach
 WARNING: The Docker Engine you're using is running in swarm mode.
 <Snip>
 ```
 @y
-```
+```console
 $ docker-compose up --detach
 WARNING: The Docker Engine you're using is running in swarm mode.
 <Snip>
@@ -902,13 +906,13 @@ you're ready to deploy it as a Docker Stack. Your Docker host must be in Swarm m
 @z
 
 @x
-```
+```console
 $ docker stack deploy hello-world-app -c docker-compose.yml
 Creating network hello-world-app_default
 Creating service hello-world-app_hello
 ```
 @y
-```
+```console
 $ docker stack deploy hello-world-app -c docker-compose.yml
 Creating network hello-world-app_default
 Creating service hello-world-app_hello
@@ -1004,11 +1008,11 @@ The location of your app is different from the one provided in the examples.
 @z
 
 @x
-```
+```console
 $ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
 @y
-```
+```console
 $ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
 @z
@@ -1050,14 +1054,14 @@ Now install it as a native Docker App by referencing the app in the registry, wi
 @z
 
 @x
-```
+```console
 $ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
 Creating service hello-world_hello
 Application "hello-world" installed on context "default"
 ```
 @y
-```
+```console
 $ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
 Creating service hello-world_hello
@@ -1080,12 +1084,12 @@ your app might be different.
 @z
 
 @x
-```
+```console
 $ curl http://localhost:8181
 Hello world!
 ```
 @y
-```
+```console
 $ curl http://localhost:8181
 Hello world!
 ```
@@ -1098,14 +1102,14 @@ Uninstall the app.
 @z
 
 @x
-```
+```console
 $ docker app uninstall hello-world
 Removing service hello-world_hello
 Removing network hello-world_default
 Application "hello-world" uninstalled on context "default"
 ```
 @y
-```
+```console
 $ docker app uninstall hello-world
 Removing service hello-world_hello
 Removing network hello-world_default

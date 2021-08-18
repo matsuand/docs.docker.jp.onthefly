@@ -316,12 +316,12 @@ When an invalid file path is being passed as `--env-file` argument, Compose retu
 @z
 
 @x
-```
+```console
 $ docker-compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
 @y
-```
+```console
 $ docker-compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```

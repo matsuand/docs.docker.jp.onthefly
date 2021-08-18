@@ -736,14 +736,14 @@ Now run the `docker images` command to see a list of our local images.
 @z
 
 @x
-```
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
 ```
 @y
-```
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB

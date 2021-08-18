@@ -72,12 +72,12 @@ Docker Hub や DTR を利用する際には、Notary サーバーの URL はレ�
 @z
 
 @x
-```
-export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
+```console
+$ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 @y
-```
-export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
+```console
+$ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 @z
 
@@ -89,28 +89,28 @@ errors such as:
 @z
 
 @x
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
-[...]
+<...>
 Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 @y
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
-[...]
+<...>
 Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 @z
 
 @x
 $ docker trust inspect registry.example.com/admin/demo --pretty
 WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
-[...]
+<...>
 ```
 @y
 $ docker trust inspect registry.example.com/admin/demo --pretty
 WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
-[...]
+<...>
 ```
 @z
 
@@ -122,12 +122,12 @@ Notary サーバーに対して認証機能を設定済みである場合、あ�
 @z
 
 @x
-```
+```console
 $ docker login registry.example.com/user/repo
 Username: admin
 Password:
 @y
-```
+```console
 $ docker login registry.example.com/user/repo
 Username: admin
 Password:

@@ -72,11 +72,11 @@ redirect_from:
 
 @x
 Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
+[macOS](../../desktop/mac/install.md) and [Windows 10](../../desktop/windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 @y
-Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフォーム](#server) や [macOS](../../docker-for-mac/install.md)、[Windows 10](../../docker-for-windows/install.md) において利用可能です。
+Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフォーム](#server) や [macOS](../../desktop/mac/install.md)、[Windows 10](../../desktop/windows/install.md) において利用可能です。
 また [バイナリによるインストール](binaries.md) もできます。
 以下の中から好みに合ったオペレーティングシステムを選んでください。
 @z
@@ -97,13 +97,13 @@ Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフ
 @x
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     | [{{ yes }}](../../docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)     |
+| [Docker Desktop for Windows](../../desktop/windows/install.md) | [{{ yes }}](../../desktop/windows/install.md) |                                                  |
 @y
 | プラットフォーム                                                  | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     | [{{ yes }}](../../docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)        |
+| [Docker Desktop for Windows](../../desktop/windows/install.md)    | [{{ yes }}](../../desktop/windows/install.md)    |                                                  |
 @z
 
 @x

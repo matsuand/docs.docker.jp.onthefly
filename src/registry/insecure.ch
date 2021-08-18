@@ -251,21 +251,21 @@ This is more secure than the insecure registry solution.
 
 @x
     - **Docker Desktop for Mac**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 @y
     - **Docker Desktop for Mac**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 @z
 
 @x
     - **Docker Desktop for Windows**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 @y
     - **Docker Desktop for Windows**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 @z
 

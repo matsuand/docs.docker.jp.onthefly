@@ -285,11 +285,11 @@ For example, consider this command line:
 @z
 
 @x
-```
+```console
 $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
 ```
 @y
-```
+```console
 $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
 ```
 @z
@@ -301,7 +301,7 @@ The `docker-compose.yml` file might specify a `webapp` service.
 @z
 
 @x
-```
+```yaml
 webapp:
   image: examples/web
   ports:
@@ -310,7 +310,7 @@ webapp:
     - "/data"
 ```
 @y
-```
+```yaml
 webapp:
   image: examples/web
   ports:
@@ -330,14 +330,14 @@ configuration.
 @z
 
 @x
-```
+```yaml
 webapp:
   build: .
   environment:
     - DEBUG=1
 ```
 @y
-```
+```yaml
 webapp:
   build: .
   environment:
@@ -421,7 +421,7 @@ Here's the full example:
 @z
 
 @x
-```
+```console
 $ docker-compose -f ~/sandbox/rails/docker-compose.yml pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres
@@ -442,7 +442,7 @@ Digest: sha256:1364924c753d5ff7e2260cd34dc4ba05ebd40ee8193391220be0f9901d4e1651
 Status: Downloaded newer image for postgres:latest
 ```
 @y
-```
+```console
 $ docker-compose -f ~/sandbox/rails/docker-compose.yml pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres

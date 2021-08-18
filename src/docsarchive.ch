@@ -25,12 +25,12 @@ To view the docs offline on your local machine, run:
 @z
 
 @x
-```
-docker run -ti -p 4000:4000 {{ archive.image }}
+```console
+$ docker run -ti -p 4000:4000 {{ archive.image }}
 ```
 @y
-```
-docker run -ti -p 4000:4000 docs/docker.github.io:latest
+```console
+$ docker run -ti -p 4000:4000 {{ archive.image }}
 ```
 @z
 
@@ -62,11 +62,11 @@ you can still access that documentation in the following ways:
 @z
 
 @x
-  ```console
-  $ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
-  ```
+```console
+$ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+```
 @y
-  ```console
-  $ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
-  ```
+```console
+$ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+```
 @z

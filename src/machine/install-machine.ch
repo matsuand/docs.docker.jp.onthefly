@@ -266,12 +266,12 @@ Docker Machine のアンインストールは以下のようにします。
 @x
    Removing machines is an optional step because there are cases where
    you might want to save and migrate existing machines to a
-   [Docker for Mac](../docker-for-mac/index.md) or
-   [Docker Desktop for Windows](../docker-for-windows/index.md) environment,
+   [Docker for Mac](../desktop/mac/index.md) or
+   [Docker Desktop for Windows](../desktop/windows/index.md) environment,
    for example.
 @y
    マシンを削除するのは任意の作業です。
-   それはたとえば [Docker for Mac](../docker-for-mac/index.md) または [Docker Desktop for Windows](../docker-for-windows/index.md) 環境向けに、既存マシンを移行して利用したい場合もあるからです。
+   それはたとえば [Docker for Mac](../desktop/mac/index.md) または [Docker Desktop for Windows](../desktop/windows/index.md) 環境向けに、既存マシンを移行して利用したい場合もあるからです。
 @z
 
 @x

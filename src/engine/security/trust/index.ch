@@ -311,7 +311,7 @@ key, you will need to use the
 @z
 
 @x
-```
+```console
 $ docker trust key generate jeff
 Generating key for jeff...
 Enter passphrase for new jeff key with ID 9deed25:
@@ -319,7 +319,7 @@ Repeat passphrase for new jeff key with ID 9deed25:
 Successfully generated and loaded private key. Corresponding public key available: /home/ubuntu/Documents/mytrustdir/jeff.pub
 ```
 @y
-```
+```console
 $ docker trust key generate jeff
 Generating key for jeff...
 Enter passphrase for new jeff key with ID 9deed25:
@@ -335,7 +335,7 @@ Or if you have an existing key:
 @z
 
 @x
-```
+```console
 $ docker trust key load key.pem --name jeff
 Loading key from "key.pem"...
 Enter passphrase for new jeff key with ID 8ae710e:
@@ -343,7 +343,7 @@ Repeat passphrase for new jeff key with ID 8ae710e:
 Successfully imported key from key.pem
 ```
 @y
-```
+```console
 $ docker trust key load key.pem --name jeff
 Loading key from "key.pem"...
 Enter passphrase for new jeff key with ID 8ae710e:
@@ -368,13 +368,13 @@ role of delegations, head to
 @z
 
 @x
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
 ```
 @y
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
@@ -389,7 +389,7 @@ push it up to the registry.
 @z
 
 @x
-```
+```console
 $ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
 The push refers to repository [registry.example.com/admin/demo]
@@ -400,7 +400,7 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed registry.example.com/admin/demo:1
 ```
 @y
-```
+```console
 $ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
 The push refers to repository [registry.example.com/admin/demo]
@@ -420,10 +420,10 @@ Alternatively, once the keys have been imported an image can be pushed with the
 @z
 
 @x
-```
+```console
 $ export DOCKER_CONTENT_TRUST=1
 @y
-```
+```console
 $ export DOCKER_CONTENT_TRUST=1
 @z
 
@@ -455,10 +455,10 @@ Remote trust data for a tag or a repository can be viewed by the
 @z
 
 @x
-```
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo:1
 @y
-```
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo:1
 @z
 
@@ -513,13 +513,13 @@ Remote Trust data for a tag can be removed by the `$ docker trust revoke` comman
 @z
 
 @x
-```
+```console
 $ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
 ```
 @y
-```
+```console
 $ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
@@ -576,11 +576,11 @@ content hash always succeeds as long as the hash exists:
 @z
 
 @x
-```
+```console
 $ docker pull registry.example.com/user/image:1
 Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
 @y
-```
+```console
 $ docker pull registry.example.com/user/image:1
 Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
 @z

@@ -1351,6 +1351,13 @@ build from inadvertently succeeding. For example:
 ```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
+@y
+```dockerfile
+RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+```
+@z
+
+@x
 > Not all shells support the `-o pipefail` option.
 >
 > In cases such as the `dash` shell on
@@ -1361,10 +1368,8 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 > RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
 > ```
 @y
-```dockerfile
-RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
-```
 > すべてのシェルが`-o pipefail`オプションをサポートしているわけではありません。
+>
 > その場合（例えば Debian ベースのイメージにおけるデフォルトシェル`dash`である場合）、`RUN`コマンドにおける **exec** 形式の利用を考えてみてください。
 > これは`pipefail`オプションをサポートしているシェルを明示的に指示するものです。
 > たとえば以下です。

@@ -1,4 +1,4 @@
-SUBDIRS = enterprise images
+SUBDIRS = enterprise images mac windows
 
 thisdir    = desktop
 origdir    = @abs_origdir@/$(thisdir)

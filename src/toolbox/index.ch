@@ -43,15 +43,15 @@ toc_max: 2
 >**Deprecated**
 >
 > Docker Toolbox has been deprecated and is no longer in active development. Please
-> use Docker Desktop instead. See [Docker Desktop for Mac](../docker-for-mac/index.md)
-> and [Docker Desktop for Windows](../docker-for-windows/index.md).
+> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
+> and [Docker Desktop for Windows](../desktop/windows/index.md).
 {: .warning }
 @y
 >**廃止決定**
 >
 > Docker Toolbox は廃止決定されており、開発は行われていません。
   この代わりに Docker Desktop を利用してください。
-  詳しくは [Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) を参照してください。
+  詳しくは [Docker Desktop for Mac](../desktop/mac/index.md) や [Docker Desktop for Windows](../desktop/windows/index.md) を参照してください。
 {: .warning }
 @z
 
@@ -169,11 +169,11 @@ Docker Toolbox on Mac のアンインストールは以下のようにして行�
 @x
     This step is optional because if you plan
     to re-install Docker Machine as a part
-    of [Docker Desktop for Mac](../docker-for-mac/index.md), you can import and
+    of [Docker Desktop for Mac](../desktop/mac/index.md), you can import and
     continue to manage those machines through Docker.
 @y
     この手順は任意です。
-    [Docker Desktop for Mac](../docker-for-mac/index.md) の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。
+    [Docker Desktop for Mac](../desktop/mac/index.md) の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。
 @z
 
 @x
@@ -304,11 +304,11 @@ Docker Toolbox on Windows のアンインストールは以下のようにして
 
 @x
     This step is optional because if you plan to re-install Docker Machine as a
-    part of [Docker Desktop for Windows](../docker-for-windows/index.md), you can
+    part of [Docker Desktop for Windows](../desktop/windows/index.md), you can
     import and continue to manage those machines through Docker.
 @y
     この手順は任意です。
-    [Docker Desktop for Windows](../docker-for-windows/index.md) の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。
+    [Docker Desktop for Windows](../desktop/windows/index.md) の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。
 @z
 
 @x

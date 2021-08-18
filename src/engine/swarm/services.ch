@@ -343,16 +343,16 @@ The credential spec contained in the specified `config` is used.
 @z
 
 @x
- ```
-name="mygmsa"
-contents="{...}"
-echo $contents > contents.json
+ ```console
+$ name="mygmsa"
+$ contents="{...}"
+$ echo $contents > contents.json
 ```
 @y
- ```
-name="mygmsa"
-contents="{...}"
-echo $contents > contents.json
+ ```console
+$ name="mygmsa"
+$ contents="{...}"
+$ echo $contents > contents.json
 ```
 @z
 
@@ -371,12 +371,12 @@ Make sure that the nodes to which you are deploying are correctly configured for
 @z
 
 @x
-```
-docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
+```console
+$ docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
 ```
 @y
-```
-docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
+```console
+$ docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
 ```
 @z
 
@@ -387,12 +387,12 @@ Now you can create a service using this credential spec. Specify the `--credenti
 @z
 
 @x
-```
-docker service create --credential-spec="config://credspec" <your image>
+```console
+$ docker service create --credential-spec="config://credspec" <your image>
 ```
 @y
-```
-docker service create --credential-spec="config://credspec" <your image>
+```console
+$ docker service create --credential-spec="config://credspec" <your image>
 ```
 @z
 

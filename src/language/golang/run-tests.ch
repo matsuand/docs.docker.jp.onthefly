@@ -222,15 +222,6 @@ That was a bit... underwhelming? Let's ask it to print a bit more detail, just t
 @x
 ```console
 $ go test -v ./...
-```
-@y
-```console
-$ go test -v ./...
-```
-@z
-
-@x
-```
 === RUN   TestRespondsWithLove
     main_test.go:47: container not ready, waiting...
 --- PASS: TestRespondsWithLove (5.24s)
@@ -241,7 +232,8 @@ PASS
 ok      github.com/olliefr/docker-gs-ping       6.670s
 ```
 @y
-```
+```console
+$ go test -v ./...
 === RUN   TestRespondsWithLove
     main_test.go:47: container not ready, waiting...
 --- PASS: TestRespondsWithLove (5.24s)

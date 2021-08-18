@@ -189,9 +189,9 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 @z
 
 @x
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
 @y
-Docker Desktop のインストール手順については [Docker Desktop の Mac へのインストール](../docker-for-mac/install.md) か [Docker Desktop の Windows へのインストール](../docker-for-windows/install.md) を参照してください。
+Docker Desktop のインストール手順については [Docker Desktop の Mac へのインストール](../desktop/mac/install.md) か [Docker Desktop の Windows へのインストール](../desktop/windows/install.md) を参照してください。
 @z
 
 @x
@@ -246,16 +246,18 @@ You'll notice a few flags being used. Here's some more info on them:
 >
 > You can combine single character flags to shorten the full command.
 > As an example, the command above could be written as:
-> ```
-> docker run -dp 80:80 docker/getting-started
+>
+> ```console
+> $ docker run -dp 80:80 docker/getting-started
 > ```
 @y
 > **ヒント**
 >
 > 1 文字からなるフラグはつなぎ合わせることで、コマンド記述を短くすることができます。
 > たとえば上のコマンドは以下のようにすることもできます。
-> ```
-> docker run -dp 80:80 docker/getting-started
+>
+> ```console
+> $ docker run -dp 80:80 docker/getting-started
 > ```
 @z
 
@@ -279,13 +281,12 @@ easily manage container lifecycle (stop, remove, etc.).
 @z
 
 @x
-To access the dashboard, follow the instructions for either 
-[Mac](../../docker-for-mac/dashboard/) or 
-[Windows](../../docker-for-windows/dashboard/). If you open the dashboard
+To access the dashboard, follow the instructions in the
+[Docker Desktop product manual](../desktop/dashboard.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 @y
-ダッシュボードにアクセスするには [Mac](../docker-for-mac/dashboard/) 用または [Windows](../docker-for-windows/dashboard/) 用の手順に従ってください。
+ダッシュボードにアクセスするには [Docker Desktop 製品マニュアル](../desktop/dashboard.md) の手順に従ってください。
 ダッシュボードを今開いている場合は、チュートリアルコンテナーが動作中であるのが見てとれるはずです。
 コンテナー名（以下では`jolly_bouman`）はランダムに生成されます。
 したがって手元のコンテナー名は、きっと別の名前になっているはずです。

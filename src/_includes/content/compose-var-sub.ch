@@ -141,11 +141,11 @@ as an environment variable and warns you:
 @z
 
 @x
-```
+```console
 The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
 ```
 @y
-```
+```console
 The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
 (VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。)
 ```

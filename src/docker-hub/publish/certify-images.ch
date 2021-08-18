@@ -618,7 +618,7 @@ cat ./run_my_application.sh
 @z
 
 @x
-```
+```bash
 #!/usr/bin/env bash
 docker container run -d \
 -p 80:8080 --name tomcat-wildbook \
@@ -626,7 +626,7 @@ docker container run -d \
 $1
   ```
 @y
-```
+```bash
 #!/usr/bin/env bash
 docker container run -d \
 -p 80:8080 --name tomcat-wildbook \
@@ -642,11 +642,11 @@ $1
 @z
 
 @x
-```
+```console
 root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
 ```
 @y
-```
+```console
 root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
 ```
 @z
@@ -1154,11 +1154,11 @@ root:[~/] #
 @z
 
 @x
-```
+```console
 root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 ```
 @y
-```
+```console
 root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 ```
 @z
@@ -1420,11 +1420,11 @@ root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 @z
 
 @x
-```
+```console
 root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
 ```
 @y
-```
+```console
 root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
 ```
 @z
@@ -1514,11 +1514,11 @@ root:[~/] #
 @z
 
 @x
-```
+```console
 PS D:\InspectDockerimage> .\inspectDockerImage microsoft/nanoserver:latest
 ```
 @y
-```
+```console
 PS D:\InspectDockerimage> .\inspectDockerImage microsoft/nanoserver:latest
 ```
 @z

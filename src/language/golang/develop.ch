@@ -359,8 +359,8 @@ An example of interaction with the SQL shell is presented below.
 
 @x
 {% raw %}
-```
-oliver@hki:~$ sudo docker exec -it roach ./cockroach sql --insecure
+```console
+$ sudo docker exec -it roach ./cockroach sql --insecure
 #
 # Welcome to the CockroachDB SQL shell.
 # All statements must be terminated by a semicolon.
@@ -375,8 +375,8 @@ root@:26257/defaultdb> CREATE DATABASE mydb;
 CREATE DATABASE
 @y
 {% raw %}
-```
-oliver@hki:~$ sudo docker exec -it roach ./cockroach sql --insecure
+```console
+$ sudo docker exec -it roach ./cockroach sql --insecure
 #
 # Welcome to the CockroachDB SQL shell.
 # All statements must be terminated by a semicolon.
@@ -1478,11 +1478,11 @@ Docker Compose will automatically read environment variables from a `.env` file 
 @z
 
 @x
-```
+```bash
 PGPASSWORD=whatever
 ```
 @y
-```
+```bash
 PGPASSWORD=whatever
 ```
 @z

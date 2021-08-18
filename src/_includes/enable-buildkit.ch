@@ -43,11 +43,11 @@ run:
 @z
 
 @x
-```
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 @y
-```
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 @z

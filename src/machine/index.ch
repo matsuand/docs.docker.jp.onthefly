@@ -77,13 +77,13 @@ Machine CLI の操作対象として実行中の管理ホストを設定した�
 @x
 Machine _was_ the _only_ way to run Docker on Mac or Windows previous to Docker
 v1.12. Starting with the beta program and Docker v1.12,
-[Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md) are available as native apps and the
+[Docker Desktop for Mac](../desktop/mac/index.md) and
+[Docker Desktop for Windows](../desktop/windows/index.md) are available as native apps and the
 better choice for this use case on newer desktops and laptops. We encourage you
 to try out these new apps.
 @y
 Docker Machine は、Docker v1.12 以前は Mac および Windows 上において Docker を実行する唯一の方法**でした**。
-Docker v1.12 のベータ版として始まったプログラムが、[Docker Desktop for Mac](../docker-for-mac/index.md) と [Docker Desktop for Windows](../docker-for-windows/index.md) というネイティブアプリとして利用可能になり、これが最新のデスクトップやノート PC に対しての最適な選択肢となりました。
+Docker v1.12 のベータ版として始まったプログラムが、[Docker Desktop for Mac](../desktop/mac/index.md) と [Docker Desktop for Windows](../desktop/windows/index.md) というネイティブアプリとして利用可能になり、これが最新のデスクトップやノート PC に対しての最適な選択肢となりました。
 現在ではこれらの新しいアプリケーションの利用をお勧めしています。
 @z
 
@@ -135,9 +135,9 @@ Docker Machine は、以下の 2 つの利用がよく行われています。
 @z
 
 @x
-  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](../docker-for-mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md) apps, then you need Docker Machine to run Docker Engine locally.
+  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](../desktop/mac/index.md) and [Docker Desktop for Windows](../desktop/windows/index.md) apps, then you need Docker Machine to run Docker Engine locally.
 @y
-  主に作業をしているマシンが Mac や Windows の古いデスクトップやノート PC であって、[Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) という新たなアプリを利用する前提条件を満たしていない場合、Docker Engine をローカルで実行するには Docker Machine が必要になります。
+  主に作業をしているマシンが Mac や Windows の古いデスクトップやノート PC であって、[Docker Desktop for Mac](../desktop/mac/index.md) や [Docker Desktop for Windows](../desktop/windows/index.md) という新たなアプリを利用する前提条件を満たしていない場合、Docker Engine をローカルで実行するには Docker Machine が必要になります。
 @z
 
 @x

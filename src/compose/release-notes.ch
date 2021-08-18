@@ -6640,9 +6640,9 @@ The highlights:
 @z
 
 @x
- - Fig can be used with the [official Docker OS X installer](../docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](../desktop/mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 @y
- - Fig can be used with the [official Docker OS X installer](../docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](../desktop/mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 @z
 
 @x

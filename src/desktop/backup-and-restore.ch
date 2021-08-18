@@ -115,11 +115,11 @@ computer.
 
 @x
 After backing up your data, you can uninstall the current version of Docker Desktop
-and install a different version ([Windows](../docker-for-windows/install.md)
-[macOS](../docker-for-mac/install.md), or reset Docker Desktop to factory defaults.
+and install a different version ([Windows](windows/install.md)
+[macOS](mac/install.md), or reset Docker Desktop to factory defaults.
 @y
 データのバックアップをとった後は、現状の Docker Desktop バージョンをアンインストールすることができます。
-そして（[Windows](../docker-for-windows/install.md) や [macOS](../docker-for-mac/install.md)）の別バージョンをインストールしたり、Docker Desktop の設定を初期化したりすることができます。
+そして（[Windows](windows/install.md) や [macOS](mac/install.md)）の別バージョンをインストールしたり、Docker Desktop の設定を初期化したりすることができます。
 @z
 
 @x
@@ -130,10 +130,10 @@ and install a different version ([Windows](../docker-for-windows/install.md)
 @z
 
 @x
-1. Use [`docker pull`]((../engine/reference/commandline/load.md)) to restore images
+1. Use [`docker pull`](../engine/reference/commandline/load.md) to restore images
    you pushed to Docker Hub in "step 2." in the [save your data section](#save-your-data)
 @y
-1. [`docker pull`]((../engine/reference/commandline/load.md)) を実行します。
+1. [`docker pull`](../engine/reference/commandline/load.md) を実行します。
    これにより、[データの保存](#save-your-data) の「手順 2」において Docker Hub にプッシュしたイメージを復元します。
 @z
 

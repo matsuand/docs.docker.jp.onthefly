@@ -166,7 +166,7 @@ Docker Compose によってこれを実行します。
 @z
 
 @x
-```sh
+```console
 $ docker-compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
@@ -194,7 +194,7 @@ gpu_test_1 exited with code 0
 
 ```
 @y
-```sh
+```console
 $ docker-compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
@@ -241,18 +241,6 @@ services:
           devices:
           - capabilities: [gpu]
 ```
-```sh
-$ docker-compose up
-Creating network "gpu_default" with the default driver
-Creating gpu_test_1 ... done
-Attaching to gpu_test_1
-test_1  | I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
-.....
-test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
-Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5)
-test_1  | /device:GPU:0
-gpu_test_1 exited with code 0
-```
 @y
 ```yaml
 services:
@@ -265,7 +253,23 @@ services:
           devices:
           - capabilities: [gpu]
 ```
-```sh
+@z
+
+@x
+```console
+$ docker-compose up
+Creating network "gpu_default" with the default driver
+Creating gpu_test_1 ... done
+Attaching to gpu_test_1
+test_1  | I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+.....
+test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
+Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5)
+test_1  | /device:GPU:0
+gpu_test_1 exited with code 0
+```
+@y
+```console
 $ docker-compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
@@ -288,7 +292,7 @@ GPU を複数持つホストにおいては、`device_ids`フィールドを使�
 @z
 
 @x
-```
+```console
 $ nvidia-smi   
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |
@@ -315,7 +319,7 @@ $ nvidia-smi
 +-------------------------------+----------------------+----------------------+
 ```
 @y
-```
+```console
 $ nvidia-smi   
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |

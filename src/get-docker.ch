@@ -46,28 +46,28 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
 @z
 
 @x
-                    <a href="/docker-for-mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
+                    <a href="/desktop/mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
 @y
-                    <a href="{{ site.baseurl }}/docker-for-mac/install/"><img src="{{ site.baseurl }}/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
+                    <a href="{{ site.baseurl }}/desktop/mac/install/"><img src="{{ site.baseurl }}/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
 @z
 @x
-                <h2 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h2>
+                <h2 id="docker-for-mac"><a href="/desktop/mac/install/">Docker Desktop for Mac</a></h2>
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
 @y
-                <h2 id="docker-for-mac"><a href="{{ site.baseurl }}/docker-for-mac/install/">Docker Desktop for Mac</a></h2>
+                <h2 id="docker-for-mac"><a href="{{ site.baseurl }}/desktop/mac/install/">Docker Desktop for Mac</a></h2>
                 <p>Mac 上ですべての Docker ツールを実行するために macOS サンドボックスセキュリティモデルを使うネイティブなアプリケーションです。</p>
 @z
 
 @x
-                    <a href="/docker-for-windows/install/"><img src="/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
+                    <a href="/desktop/windows/install/"><img src="/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
 @y
-                    <a href="{{ site.baseurl }}/docker-for-windows/install/"><img src="{{ site.baseurl }}/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
+                    <a href="{{ site.baseurl }}/desktop/windows/install/"><img src="{{ site.baseurl }}/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
 @z
 @x
-                <h2 id="docker-for-windows/install/"><a href="/docker-for-windows/install/">Docker Desktop for Windows</a></h2>
+                <h2 id="docker-for-windows/install/"><a href="/desktop/windows/install/">Docker Desktop for Windows</a></h2>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
 @y
-                <h2 id="docker-for-windows/install/"><a href="{{ site.baseurl }}/docker-for-windows/install/">Docker Desktop for Windows</a></h2>
+                <h2 id="docker-for-windows/install/"><a href="{{ site.baseurl }}/desktop/windows/install/">Docker Desktop for Windows</a></h2>
                 <p>Windows コンピューター上ですべての Docker ツールを実行するためのネイティブ Windows アプリケーションです。</p>
 @z
 

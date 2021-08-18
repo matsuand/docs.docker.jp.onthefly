@@ -256,14 +256,14 @@ The config.yml file should be in the following format:
 @z
 
 @x
-```
+```yaml
 version: 0.1
 storage:
   filesystem:
     rootdirectory: /registry/data
 ```
 @y
-```
+```yaml
 version: 0.1
 storage:
   filesystem:

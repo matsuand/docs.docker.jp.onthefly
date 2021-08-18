@@ -1288,11 +1288,11 @@ For example, create a new container named `dbstore`:
 @z
 
 @x
-```
+```console
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 @y
-```
+```console
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 @z
@@ -1314,11 +1314,11 @@ Then in the next command, we:
 @z
 
 @x
-```
+```console
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 @y
-```
+```console
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 @z
@@ -1353,11 +1353,11 @@ For example, create a new container named `dbstore2`:
 @z
 
 @x
-```
+```console
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 @y
-```
+```console
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 @z
@@ -1369,11 +1369,11 @@ Then un-tar the backup file in the new container`s data volume:
 @z
 
 @x
-```
+```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 @y
-```
+```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 @z
@@ -1429,11 +1429,11 @@ the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 @z
 
 @x
-```
+```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 @y
-```
+```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 @z
@@ -1452,11 +1452,11 @@ To remove all unused volumes and free up space:
 @z
 
 @x
-```
+```console
 $ docker volume prune
 ```
 @y
-```
+```console
 $ docker volume prune
 ```
 @z

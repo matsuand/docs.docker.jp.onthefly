@@ -522,12 +522,16 @@ Run the following command to get the current value of the `MountFlags` property 
 $ sudo systemctl show --property=MountFlags docker.service
 MountFlags=
 ```
-Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
 @y
 ```console
 $ sudo systemctl show --property=MountFlags docker.service
 MountFlags=
 ```
+@z
+
+@x
+Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
+@y
 Update your configuration if this command prints a non-empty value for `MountFlags`, and restart the docker service.
 @z
 

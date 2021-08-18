@@ -57,10 +57,10 @@ everytime that delegation signs a tag.
 @z
 
 @x
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 @y
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 @z
 
@@ -95,11 +95,11 @@ been initiated then you only need the repositories passphrase.
 @z
 
 @x
-```
+```console
 # Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 @y
-```
+```console
 # Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 @z
@@ -147,10 +147,10 @@ trust store with `$ docker trust key load`.
 @z
 
 @x
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 @y
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 @z
 

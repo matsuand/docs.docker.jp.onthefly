@@ -79,11 +79,11 @@ Docker Desktop は Mac と Windows において利用できます。
 @z
 
 @x
-* [Install Docker Desktop on Mac](../docker-for-mac/install.md)
-* [Install Docker Desktop on Windows](../docker-for-windows/install.md)
+* [Install Docker Desktop on Mac](mac/install.md)
+* [Install Docker Desktop on Windows](windows/install.md)
 @y
-* [Docker Desktop on Mac のインストール](../docker-for-mac/install.md)
-* [Docker Desktop on Windows のインストール](../docker-for-windows/install.md)
+* [Docker Desktop on Mac のインストール](mac/install.md)
+* [Docker Desktop on Windows のインストール](windows/install.md)
 @z
 
 @x
@@ -100,11 +100,11 @@ To learn about the various UI options and their usage, see:
 @z
 
 @x
-* [Docker Desktop for Mac user manual](../docker-for-mac/index.md)
-* [Docker Desktop for Windows user manual](../docker-for-windows/index.md)
+* [Docker Desktop for Mac user manual](mac/index.md)
+* [Docker Desktop for Windows user manual](windows/index.md)
 @y
-* [Docker Desktop for Mac ユーザーマニュアル](../docker-for-mac/index.md)
-* [Docker Desktop for Windows ユーザーマニュアル](../docker-for-windows/index.md)
+* [Docker Desktop for Mac ユーザーマニュアル](mac/index.md)
+* [Docker Desktop for Windows ユーザーマニュアル](windows/index.md)
 @z
 
 @x
@@ -121,9 +121,9 @@ Docker Desktop リリースにおける新機能、修正、バグフィック�
 @z
 
 @x
-* [Docker Desktop for Mac Release notes](../docker-for-mac/release-notes.md)
-* [Docker Desktop for Windows Release notes](../docker-for-windows/release-notes.md)
+* [Docker Desktop for Mac Release notes](mac/release-notes.md)
+* [Docker Desktop for Windows Release notes](windows/release-notes.md)
 @y
-* [Docker Desktop for Mac リリースノート](../docker-for-mac/release-notes.md)
-* [Docker Desktop for Windows リリースノート](../docker-for-windows/release-notes.md)
+* [Docker Desktop for Mac リリースノート](mac/release-notes.md)
+* [Docker Desktop for Windows リリースノート](windows/release-notes.md)
 @z

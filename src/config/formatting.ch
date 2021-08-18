@@ -100,14 +100,14 @@ It puts a separator between each element in the list.
 
 @x
 {% raw %}
-```
-docker inspect --format '{{join .Args " , "}}' container
+```console
+$ docker inspect --format '{{join .Args " , "}}' container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format '{{join .Args " , "}}' container
+```console
+$ docker inspect --format '{{join .Args " , "}}' container
 ```
 {% endraw %}
 @z
@@ -126,14 +126,14 @@ docker inspect --format '{{join .Args " , "}}' container
 
 @x
 {% raw %}
-```
-docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
+```console
+$ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
+```console
+$ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 ```
 {% endraw %}
 @z
@@ -152,14 +152,14 @@ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 
 @x
 {% raw %}
-```
-docker inspect --format '{{json .Mounts}}' container
+```console
+$ docker inspect --format '{{json .Mounts}}' container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format '{{json .Mounts}}' container
+```console
+$ docker inspect --format '{{json .Mounts}}' container
 ```
 {% endraw %}
 @z
@@ -178,14 +178,14 @@ docker inspect --format '{{json .Mounts}}' container
 
 @x
 {% raw %}
-```
-docker inspect --format "{{lower .Name}}" container
+```console
+$ docker inspect --format "{{lower .Name}}" container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format "{{lower .Name}}" container
+```console
+$ docker inspect --format "{{lower .Name}}" container
 ```
 {% endraw %}
 @z
@@ -204,14 +204,14 @@ docker inspect --format "{{lower .Name}}" container
 
 @x
 {% raw %}
-```
-docker inspect --format '{{split .Image ":"}}'
+```console
+$ docker inspect --format '{{split .Image ":"}}'
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format '{{split .Image ":"}}'
+```console
+$ docker inspect --format '{{split .Image ":"}}'
 ```
 {% endraw %}
 @z
@@ -230,14 +230,14 @@ docker inspect --format '{{split .Image ":"}}'
 
 @x
 {% raw %}
-```
-docker inspect --format "{{title .Name}}" container
+```console
+$ docker inspect --format "{{title .Name}}" container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format "{{title .Name}}" container
+```console
+$ docker inspect --format "{{title .Name}}" container
 ```
 {% endraw %}
 @z
@@ -256,14 +256,14 @@ docker inspect --format "{{title .Name}}" container
 
 @x
 {% raw %}
-```
-docker inspect --format "{{upper .Name}}" container
+```console
+$ docker inspect --format "{{upper .Name}}" container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format "{{upper .Name}}" container
+```console
+$ docker inspect --format "{{upper .Name}}" container
 ```
 {% endraw %}
 @z
@@ -282,14 +282,14 @@ docker inspect --format "{{upper .Name}}" container
 
 @x
 {% raw %}
-```
-docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
+```console
+$ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
 ```
 {% endraw %}
 @y
 {% raw %}
-```
-docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
+```console
+$ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
 ```
 {% endraw %}
 @z
@@ -309,14 +309,14 @@ To find out what data can be printed, show all content as json:
 
 @x
 {% raw %} 
-```
-docker container ls --format='{{json .}}'
+```console
+$ docker container ls --format='{{json .}}'
 ```
 {% endraw %} 
 @y
 {% raw %} 
-```
-docker container ls --format='{{json .}}'
+```console
+$ docker container ls --format='{{json .}}'
 ```
 {% endraw %} 
 @z

@@ -82,11 +82,11 @@ Docker コンテナーを Azure にデプロイするには、以下の条件を
 @z
 
 @x
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 @y
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 @z
 
 @x

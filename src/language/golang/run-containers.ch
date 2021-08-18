@@ -278,20 +278,16 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには`p
 @x
 ```console
 $ docker ps
-```
 @y
 ```console
 $ docker ps
-```
 @z
 
 @x
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"   41 seconds ago   Up 40 seconds   0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 ```
 @y
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"   41 seconds ago   Up 40 seconds   0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 ```
@@ -337,11 +333,13 @@ Now rerun the `docker ps` command to see a list of running containers.
 @x
 ```console
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 @y
 ```console
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 @z
@@ -364,16 +362,13 @@ Docker コンテナーは起動させ停止させ、再起動することがで�
 
 @x
 ```console
-$ docker ps -a
-```
+$ docker ps -all
 @y
 ```console
-$ docker ps -a
-```
+$ docker ps -all
 @z
 
 @x
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS                      PORTS     NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        About a minute ago   Exited (2) 23 seconds ago             inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        3 minutes ago        Exited (2) 2 minutes ago              wizardly_joliot
@@ -381,7 +376,6 @@ aade1bf3d330   docker-gs-ping   "/docker-gs-ping"        3 minutes ago        Ex
 52d5ce3c15f0   docker-gs-ping   "/docker-gs-ping"        9 minutes ago        Exited (2) 3 minutes ago              gifted_mestorf
 ```
 @y
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS                      PORTS     NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        About a minute ago   Exited (2) 23 seconds ago             inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        3 minutes ago        Exited (2) 2 minutes ago              wizardly_joliot
@@ -422,16 +416,13 @@ Now, list all the containers again using the `ps` command:
 
 @x
 ```console
-$ docker ps --all
-```
+$ docker ps -a
 @y
 ```console
-$ docker ps --all
-```
+$ docker ps -a
 @z
 
 @x
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                     PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        2 minutes ago    Up 5 seconds               0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        4 minutes ago    Exited (2) 2 minutes ago                            wizardly_joliot
@@ -439,7 +430,6 @@ aade1bf3d330   docker-gs-ping   "/docker-gs-ping"        4 minutes ago    Exited
 52d5ce3c15f0   docker-gs-ping   "/docker-gs-ping"        10 minutes ago   Exited (2) 4 minutes ago                            gifted_mestorf
 ```
 @y
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                     PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        2 minutes ago    Up 5 seconds               0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        4 minutes ago    Exited (2) 2 minutes ago                            wizardly_joliot
@@ -506,22 +496,18 @@ Again, make sure you replace the containers names in the below command with the 
 @x
 ```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
-```
 @y
 ```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
-```
 @z
 
 @x
-```
 inspiring_ishizaka
 wizardly_joliot
 magical_carson
 gifted_mestorf
 ```
 @y
-```
 inspiring_ishizaka
 wizardly_joliot
 magical_carson
@@ -567,20 +553,16 @@ $ docker run -d -p 8080:8080 --name rest-server docker-gs-ping
 @x
 ```console
 $ docker ps
-```
 @y
 ```console
 $ docker ps
-```
 @z
 
 @x
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 3bbc6a3102ea   docker-gs-ping   "/docker-gs-ping"   25 seconds ago   Up 24 seconds   0.0.0.0:8080->8080/tcp   rest-server
 ```
 @y
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 3bbc6a3102ea   docker-gs-ping   "/docker-gs-ping"   25 seconds ago   Up 24 seconds   0.0.0.0:8080->8080/tcp   rest-server
 ```

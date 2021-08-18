@@ -132,11 +132,11 @@ Python package manager or installing Compose as a container.
 @x
 **Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
+For installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md).
 @y
 **Docker Desktop for Mac** には他の Docker アプリとともに Compose が含まれています。
 したがって Mac ユーザーは Compose を個別にインストールする必要はありません。
-インストール手順については [Docker Desktop on Mac のインストール](../docker-for-mac/install.md) を参照してください。
+インストール手順については [Docker Desktop on Mac のインストール](../desktop/mac/install.md) を参照してください。
 @z
 
 @x
@@ -157,11 +157,11 @@ For installation instructions, see [Install Docker Desktop on Mac](../docker-for
 @x
 **Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../desktop/windows/install.md).
 @y
 **Docker Desktop for Windows** には他の Docker アプリとともに Compose が含まれています。
 したがって Windows ユーザーは Compose を個別にインストールする必要はありません。
-インストール手順については [Install Docker Desktop on Windows](../docker-for-windows/install.md) を参照してください。
+インストール手順については [Install Docker Desktop on Windows](../desktop/windows/install.md) を参照してください。
 @z
 
 @x
@@ -398,6 +398,7 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
+
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 @y
@@ -405,6 +406,7 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
+
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 @z
@@ -461,11 +463,15 @@ Compose は`pip`を使って [pypi](https://pypi.python.org/pypi/docker-compose)
 ```console
 $ pip install docker-compose
 ```
-If you are not using virtualenv,
 @y
 ```console
 $ pip install docker-compose
 ```
+@z
+
+@x
+If you are not using virtualenv,
+@y
 virtualenv を使わない場合は以下のようにします。
 @z
 

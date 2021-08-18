@@ -459,14 +459,14 @@ $ docker-compose -f docker-compose.dev.yml up --build
 @z
 
 @x
-We pass the `--build` flag so Docker will compile our image and then starts it.
+We pass the `--build` flag so Docker compiles our image and then starts it.
 @y
 ここでは`--build`フラグを指定しました。
 これによって Docker はイメージをコンパイルした上で起動を行います。
 @z
 
 @x
-If all goes will you should see something similar:
+If all goes well, you should see something similar:
 @y
 正常に処理されれば、以下のような出力が得られるはずです。
 @z
