@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-18 13:42:38 +0900-->
+<!-- Page generated 2021-08-20 14:18:28 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>サンプルアプリケーション | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="サンプルアプリケーション" />
   <meta property="og:description" content="overview of our simple applicaiton for learning docker" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-20T14:18:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/02_our_app/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-20T14:18:28+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"サンプルアプリケーション","description":"overview of our simple applicaiton for learning docker","url":"https://docs.docker.com/get-started/02_our_app/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -146,36 +146,36 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
   <li>
     <p><code class="language-plaintext highlighter-rouge">package.json</code>ファイルやこれにともなうファイルが存在している同一フォルダー内に、<code class="language-plaintext highlighter-rouge">Dockerfile</code>という名前のファイルを生成します。</p>
 
-    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># syntax=docker/dockerfile:1</span>
- FROM node:12-alpine
- RUN apk add --no-cache python g++ make
- WORKDIR /app
- COPY . .
- RUN yarn install --production
- CMD ["node", "src/index.js"]
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> node:12-alpine</span>
+<span class="k">RUN </span>apk add <span class="nt">--no-cache</span> python g++ make
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">RUN </span>yarn <span class="nb">install</span> <span class="nt">--production</span>
+<span class="k">CMD</span><span class="s"> ["node", "src/index.js"]</span>
 </code></pre></div>    </div>
 
     <p><code class="language-plaintext highlighter-rouge">Dockerfile</code>ファイルには<code class="language-plaintext highlighter-rouge">.txt</code>といったようなファイル拡張子がないことを確認してください。
- テキストエディターの中にはファイル拡張子を自動的に付与するものがあるため、そうなってしまうとこれ以降の手順においてエラーが発生します。</p>
+テキストエディターの中にはファイル拡張子を自動的に付与するものがあるため、そうなってしまうとこれ以降の手順においてエラーが発生します。</p>
   </li>
   <li>
     <p>ターミナルをまだ開いていなければこれを開き、<code class="language-plaintext highlighter-rouge">Dockerfile</code>ファイルがある<code class="language-plaintext highlighter-rouge">app</code>ディレクトリに移動します。
 そして<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してコンテナーイメージをビルドします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker build <span class="nt">-t</span> getting-started <span class="nb">.</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> getting-started <span class="nb">.</span>
 </code></pre></div>    </div>
 
     <p>このコマンドは Dockerfile を利用して新たにコンテナーイメージをビルドします。
- 実行の際には数々の「レイヤー」をダウンロードしたことが表示されます。
- イメージのビルド処理において<code class="language-plaintext highlighter-rouge">node:12-alpine</code>イメージから作業を始めたいという指示を下したからです。
- マシン内に必要なイメージが存在しなかったために、そのダウンロードが必要であったということです。</p>
+実行の際には数々の「レイヤー」をダウンロードしたことが表示されます。
+イメージのビルド処理において<code class="language-plaintext highlighter-rouge">node:12-alpine</code>イメージから作業を始めたいという指示を下したからです。
+マシン内に必要なイメージが存在しなかったために、そのダウンロードが必要であったということです。</p>
 
     <p>イメージがダウンロードされた後は、アプリケーションをコピーし<code class="language-plaintext highlighter-rouge">yarn</code>を使って依存パッケージをインストールします。
- <code class="language-plaintext highlighter-rouge">CMD</code>ディレクティブは、イメージからコンテナーが起動された際に実行されるデフォルトコマンドを指定するものです。</p>
+<code class="language-plaintext highlighter-rouge">CMD</code>ディレクティブは、イメージからコンテナーが起動された際に実行されるデフォルトコマンドを指定するものです。</p>
 
     <p>最後に<code class="language-plaintext highlighter-rouge">-t</code>フラグによってイメージに名前づけを行います。
- 最終イメージに対して、人が読みやすいような名称をつけたものと思ってください。
- ここでは<code class="language-plaintext highlighter-rouge">getting-started</code>というイメージ名としたので、コンテナーを起動する際にこのイメージが参照できるようになりました。</p>
+最終イメージに対して、人が読みやすいような名称をつけたものと思ってください。
+ここでは<code class="language-plaintext highlighter-rouge">getting-started</code>というイメージ名としたので、コンテナーを起動する際にこのイメージが参照できるようになりました。</p>
 
     <p><code class="language-plaintext highlighter-rouge">docker build</code>コマンドの最後に<code class="language-plaintext highlighter-rouge">.</code>があるのは、Docker に対して<code class="language-plaintext highlighter-rouge">Dockerfile</code>を探し出す場所がカレントディレクトリであることを指示するものです。</p>
   </li>
@@ -190,17 +190,17 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
   <li>
     <p><code class="language-plaintext highlighter-rouge">docker run</code>コマンドを実行してコンテナーを起動し、上で生成したイメージ名を指定します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 getting-started
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 getting-started
 </code></pre></div>    </div>
 
     <p><code class="language-plaintext highlighter-rouge">-d</code>フラグと<code class="language-plaintext highlighter-rouge">-p</code>フラグは覚えていますか。
- 新たなコンテナーは「デタッチ」モード（バックグラウンド）で起動しています。
- そしてホストのポート 3000 をコンテナーのポート 3000 にマッピングしています。
- このポートマッピングがないとアプリケーションにアクセスすることはできません。</p>
+新たなコンテナーは「デタッチ」モード（バックグラウンド）で起動しています。
+そしてホストのポート 3000 をコンテナーのポート 3000 にマッピングしています。
+このポートマッピングがないとアプリケーションにアクセスすることはできません。</p>
   </li>
   <li>
     <p>数秒待ってから、ブラウザーを使って <a href="http://localhost:3000">http://localhost:3000</a> にアクセスします。
- アプリケーションが表示されるはずです。</p>
+アプリケーションが表示されるはずです。</p>
 
     <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/todo-list-empty.png" alt="空の Todo リスト" style="width:450px;margin-top:20px;" /></p>
   </li>
@@ -308,7 +308,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
                     <ul class="footer_links">
                         <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
                         <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
-                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Docker 認定公開者向けプログラム</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">

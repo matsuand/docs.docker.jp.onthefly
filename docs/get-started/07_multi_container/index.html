@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-18 13:42:38 +0900-->
+<!-- Page generated 2021-08-20 14:18:28 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチコンテナーアプリケーション | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="マルチコンテナーアプリケーション" />
   <meta property="og:description" content="Using more than one container in our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-18T13:42:38+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-20T14:18:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-18T13:42:38+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-20T14:18:28+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"マルチコンテナーアプリケーション","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -170,12 +170,12 @@
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nx">mysql:5.7</span><span class="w">
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> PS&gt;</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="sb">`</span>
+<span class="go">     --network todo-app --network-alias mysql `
+     -v todo-mysql-data:/var/lib/mysql `
+     -e MYSQL_ROOT_PASSWORD=secret `
+     -e MYSQL_DATABASE=todos `
+     mysql:5.7
 </span></code></pre></div>    </div>
 
     <p>ここで<code class="language-plaintext highlighter-rouge">--network-alias</code>フラグというものを利用しています。
@@ -199,8 +199,8 @@ Docker が名前つきボリュームが指定されたことを認識して、�
     <p>パスワードプロンプトが表示されたら <strong>secret</strong> と入力します。
  MySQL シェルにおいてデータベース一覧を表示し、<code class="language-plaintext highlighter-rouge">todos</code>データベースがあることを確認します。</p>
 
-    <pre><code class="language-cli"> mysql&gt; SHOW DATABASES;
-</code></pre>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span><span class="w"> </span>SHOW DATABASES<span class="p">;</span>
+</code></pre></div>    </div>
 
     <p>出力は以下のようになるはずです。</p>
 
@@ -323,29 +323,28 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
-</span><span class="w">   </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
-   --network todo-app </span><span class="se">`</span><span class="s2">
-   -e MYSQL_HOST=mysql </span><span class="se">`</span><span class="s2">
-   -e MYSQL_USER=root </span><span class="se">`</span><span class="s2">
-   -e MYSQL_PASSWORD=secret </span><span class="se">`</span><span class="s2">
-   -e MYSQL_DB=todos </span><span class="se">`</span><span class="s2">
-   node:12-alpine </span><span class="se">`</span><span class="s2">
-   sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> PS&gt;</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 <span class="sb">`</span>
+<span class="gp">   -w /app -v "$</span><span class="o">(</span><span class="nb">pwd</span><span class="o">)</span>:/app<span class="s2">" </span><span class="sb">`</span>
+<span class="go">   --network todo-app `
+   -e MYSQL_HOST=mysql `
+   -e MYSQL_USER=root `
+   -e MYSQL_PASSWORD=secret `
+   -e MYSQL_DB=todos `
+   node:12-alpine `
+   sh -c "yarn install &amp;&amp; yarn run dev"
 </span></code></pre></div>    </div>
   </li>
   <li>
     <p>コンテナーのログ（<code class="language-plaintext highlighter-rouge">docker logs &lt;container-id&gt;</code>）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Previous log messages omitted
- $ nodemon src/index.js
- [nodemon] 1.19.2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>nodemon src/index.js
+<span class="go"> [nodemon] 1.19.2
  [nodemon] to restart at any time, enter `rs`
  [nodemon] watching dir(s): *.*
  [nodemon] starting `node src/index.js`
  Connected to mysql db at host mysql
  Listening on port 3000
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>ブラウザー上においてアプリを開き、Todo リストに 2、3 のアイテムを追加します。</p>
@@ -359,14 +358,14 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
 
     <p>そして MySQL シェルから以下を実行します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; select * from todo_items;
- +--------------------------------------+--------------------+-----------+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span><span class="w"> </span><span class="k">select</span> <span class="k">*</span> from todo_items<span class="p">;</span>
+<span class="go"> +--------------------------------------+--------------------+-----------+
  | id                                   | name               | completed |
  +--------------------------------------+--------------------+-----------+
  | c906ff08-60e6-44e6-8f49-ed56a0853e85 | Do amazing things! |         0 |
  | 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
  +--------------------------------------+--------------------+-----------+
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>みなさんのテーブルにはみなさんのアイテムが書き込まれていますから、上と完全に同じものにはなっていないはずです。
  しかし確かにデータが保存されたことがわかったはずです。</p>
@@ -470,7 +469,7 @@ Docker Compose を利用すると、もっと簡単な方法でアプリケー�
                     <ul class="footer_links">
                         <li><b><a href="https://www.docker.com/products/docker-desktop">価格体系</a></b></li>
                         <li><a href="https://www.docker.com/pricing/faq">FAQ</a></li>
-                        <li><a href="https://www.docker.com/partners/programs">Verified Publisher Program</a></li>
+                        <li><a href="https://www.docker.com/partners/programs">Docker 認定公開者向けプログラム</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
