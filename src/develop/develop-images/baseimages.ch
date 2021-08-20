@@ -268,9 +268,9 @@ There are lots of resources available to help you write your `Dockerfile`.
 * There's a [complete guide to all the instructions](../../engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
-* If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](../../docker-hub/official_images.md).
+* If your goal is to create a new Docker Official Image, read [Docker Official Images](../../docker-hub/official_images.md).
 @y
 * リファレンスには`Dockerfile`にて利用可能な [全コマンドのガイド](../../engine/reference/builder.md) があります。
 * `Dockerfile`をわかりやすく読みやすく、保守がしやすくするように、[`Dockerfile`ベストプラクティス](dockerfile_best-practices.md) も記述しています。
-* 公式イメージを作ることが目的であれば Docker の[公式イメージ](../../docker-hub/official_images/) を確認してください。
+* 公式イメージを作ることが目的であれば [Docker 公式イメージ](../../docker-hub/official_images/) を確認してください。
 @z

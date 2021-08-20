@@ -161,8 +161,8 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```powershell
-    docker run -d `
+    ```console
+    PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
         -e MYSQL_ROOT_PASSWORD=secret `
@@ -170,8 +170,8 @@ For now, we will create the network first and attach the MySQL container at star
         mysql:5.7
     ```
 @y
-    ```powershell
-    docker run -d `
+    ```console
+    PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
         -e MYSQL_ROOT_PASSWORD=secret `
@@ -225,11 +225,11 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```cli
+    ```console
     mysql> SHOW DATABASES;
     ```
 @y
-    ```cli
+    ```console
     mysql> SHOW DATABASES;
     ```
 @z
@@ -510,8 +510,8 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```powershell
-    docker run -dp 3000:3000 `
+    ```console
+    PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `
@@ -522,8 +522,8 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 @y
-    ```powershell
-    docker run -dp 3000:3000 `
+    ```console
+    PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `
@@ -543,8 +543,7 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```
-    # Previous log messages omitted
+    ```console
     $ nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
@@ -554,8 +553,7 @@ With all of that explained, let's start our dev-ready container!
     Listening on port 3000
     ```
 @y
-    ```
-    # Previous log messages omitted
+    ```console
     $ nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
@@ -597,7 +595,7 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```plaintext
+    ```console
     mysql> select * from todo_items;
     +--------------------------------------+--------------------+-----------+
     | id                                   | name               | completed |
@@ -607,7 +605,7 @@ With all of that explained, let's start our dev-ready container!
     +--------------------------------------+--------------------+-----------+
     ```
 @y
-    ```plaintext
+    ```console
     mysql> select * from todo_items;
     +--------------------------------------+--------------------+-----------+
     | id                                   | name               | completed |

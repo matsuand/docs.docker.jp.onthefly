@@ -2154,15 +2154,16 @@ allowing the `Dockerfile` author to make a choice.
 @z
 
 @x
-## Examples for Official Images
+## Examples of Docker Official Images
 @y
-## 公式イメージの例
+{: #examples-of-docker-official-images }
+## Docker 公式イメージの例
 @z
 
 @x
 These Official Images have exemplary `Dockerfile`s:
 @y
-以下に示すのは代表的な `Dockerfile`の例です。
+以下に示すのは代表的な`Dockerfile`の例です。
 @z
 
 @x
@@ -2188,12 +2189,12 @@ These Official Images have exemplary `Dockerfile`s:
 * [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
-* [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
+* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 @y
 * [Dockerfile リファレンス](../../engine/reference/builder.md)
 * [ベースイメージの詳細](baseimages.md)
 * [自動ビルドの詳細](../../docker-hub/builds/index.md)
-* [公式イメージ作成のガイドライン](../../docker-hub/official_images.md)
+* [Docker 公式イメージ作成のガイドライン](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 @z

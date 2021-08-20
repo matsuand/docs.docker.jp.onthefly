@@ -428,13 +428,13 @@ There you can see two example results: `centos` and `ansible/centos7-ansible`.
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[official images](official_images.md). The `/` character separates
+[Docker Official Images](official_images.md). The `/` character separates
 a user's repository from the image name.
 @y
 上の検索によると、検索結果として`centos`と`ansible/centos7-ansible`という 2 つがあります。
 2 つめの結果は、パブリックリポジトリにある、ユーザー`ansible/`によるイメージを表わしています。
 一方 1 つめである`centos`はリポジトリが表示されていません。
-これは [公式イメージ](official_images.md) によるトップレベルの名前空間からきていることを表わします。
+これは [Docker 公式イメージ](official_images.md) によるトップレベルの名前空間からきていることを表わします。
 なお`/`は、ユーザーのリポジトリ名とイメージ名を区切るものです。
 @z
 

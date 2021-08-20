@@ -2310,12 +2310,12 @@ can also be read from a file.
 @z
 
 @x
-Many of the official images in the
+Many of the Docker Official Images in the
 [Docker library](https://github.com/docker-library/), such as the
 [wordpress](https://github.com/docker-library/wordpress/)
 image used in the above examples, have been updated in this way.
 @y
-Many of the official images in the
+Many of the Docker Official Images in the
 [Docker library](https://github.com/docker-library/), such as the
 [wordpress](https://github.com/docker-library/wordpress/)
 image used in the above examples, have been updated in this way.

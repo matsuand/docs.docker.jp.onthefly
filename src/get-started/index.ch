@@ -215,12 +215,12 @@ If you've already run the command to get started with the tutorial, congratulati
 @z
 
 @x
-```cli
-docker run -d -p 80:80 docker/getting-started
+```console
+$ docker run -d -p 80:80 docker/getting-started
 ```
 @y
-```cli
-docker run -d -p 80:80 docker/getting-started
+```console
+$ docker run -d -p 80:80 docker/getting-started
 ```
 @z
 

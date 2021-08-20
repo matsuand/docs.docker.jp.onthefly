@@ -116,32 +116,32 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-    ```dockerfile
-    # syntax=docker/dockerfile:1
-    FROM node:12-alpine
-    RUN apk add --no-cache python g++ make
-    WORKDIR /app
-    COPY . .
-    RUN yarn install --production
-    CMD ["node", "src/index.js"]
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM node:12-alpine
+   RUN apk add --no-cache python g++ make
+   WORKDIR /app
+   COPY . .
+   RUN yarn install --production
+   CMD ["node", "src/index.js"]
+   ```
 @y
-    ```dockerfile
-    # syntax=docker/dockerfile:1
-    FROM node:12-alpine
-    RUN apk add --no-cache python g++ make
-    WORKDIR /app
-    COPY . .
-    RUN yarn install --production
-    CMD ["node", "src/index.js"]
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM node:12-alpine
+   RUN apk add --no-cache python g++ make
+   WORKDIR /app
+   COPY . .
+   RUN yarn install --production
+   CMD ["node", "src/index.js"]
+   ```
 @z
 
 @x
-    Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
+   Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
 @y
-    `Dockerfile`ファイルには`.txt`といったようなファイル拡張子がないことを確認してください。
-    テキストエディターの中にはファイル拡張子を自動的に付与するものがあるため、そうなってしまうとこれ以降の手順においてエラーが発生します。
+   `Dockerfile`ファイルには`.txt`といったようなファイル拡張子がないことを確認してください。
+   テキストエディターの中にはファイル拡張子を自動的に付与するものがあるため、そうなってしまうとこれ以降の手順においてエラーが発生します。
 @z
 
 @x
@@ -152,50 +152,50 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-    ```console
-    $ docker build -t getting-started .
-    ```
+   ```console
+   $ docker build -t getting-started .
+   ```
 @y
-    ```console
-    $ docker build -t getting-started .
-    ```
+   ```console
+   $ docker build -t getting-started .
+   ```
 @z
 
 @x
-    This command used the Dockerfile to build a new container image. You might
-    have noticed that a lot of "layers" were downloaded. This is because we instructed
-    the builder that we wanted to start from the `node:12-alpine` image. But, since we
-    didn't have that on our machine, that image needed to be downloaded.
+   This command used the Dockerfile to build a new container image. You might
+   have noticed that a lot of "layers" were downloaded. This is because we instructed
+   the builder that we wanted to start from the `node:12-alpine` image. But, since we
+   didn't have that on our machine, that image needed to be downloaded.
 @y
-    このコマンドは Dockerfile を利用して新たにコンテナーイメージをビルドします。
-    実行の際には数々の「レイヤー」をダウンロードしたことが表示されます。
-    イメージのビルド処理において`node:12-alpine`イメージから作業を始めたいという指示を下したからです。
-    マシン内に必要なイメージが存在しなかったために、そのダウンロードが必要であったということです。
+   このコマンドは Dockerfile を利用して新たにコンテナーイメージをビルドします。
+   実行の際には数々の「レイヤー」をダウンロードしたことが表示されます。
+   イメージのビルド処理において`node:12-alpine`イメージから作業を始めたいという指示を下したからです。
+   マシン内に必要なイメージが存在しなかったために、そのダウンロードが必要であったということです。
 @z
 
 @x
-    After the image was downloaded, we copied in our application and used `yarn` to 
-    install our application's dependencies. The `CMD` directive specifies the default 
-    command to run when starting a container from this image.
+   After the image was downloaded, we copied in our application and used `yarn` to 
+   install our application's dependencies. The `CMD` directive specifies the default 
+   command to run when starting a container from this image.
 @y
-    イメージがダウンロードされた後は、アプリケーションをコピーし`yarn`を使って依存パッケージをインストールします。
-    `CMD`ディレクティブは、イメージからコンテナーが起動された際に実行されるデフォルトコマンドを指定するものです。
+   イメージがダウンロードされた後は、アプリケーションをコピーし`yarn`を使って依存パッケージをインストールします。
+   `CMD`ディレクティブは、イメージからコンテナーが起動された際に実行されるデフォルトコマンドを指定するものです。
 @z
 
 @x
-    Finally, the `-t` flag tags our image. Think of this simply as a human-readable name
-    for the final image. Since we named the image `getting-started`, we can refer to that
-    image when we run a container.
+   Finally, the `-t` flag tags our image. Think of this simply as a human-readable name
+   for the final image. Since we named the image `getting-started`, we can refer to that
+   image when we run a container.
 @y
-    最後に`-t`フラグによってイメージに名前づけを行います。
-    最終イメージに対して、人が読みやすいような名称をつけたものと思ってください。
-    ここでは`getting-started`というイメージ名としたので、コンテナーを起動する際にこのイメージが参照できるようになりました。
+   最後に`-t`フラグによってイメージに名前づけを行います。
+   最終イメージに対して、人が読みやすいような名称をつけたものと思ってください。
+   ここでは`getting-started`というイメージ名としたので、コンテナーを起動する際にこのイメージが参照できるようになりました。
 @z
 
 @x
-    The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
+   The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
 @y
-    `docker build`コマンドの最後に`.`があるのは、Docker に対して`Dockerfile`を探し出す場所がカレントディレクトリであることを指示するものです。
+   `docker build`コマンドの最後に`.`があるのは、Docker に対して`Dockerfile`を探し出す場所がカレントディレクトリであることを指示するものです。
 @z
 
 @x
@@ -215,46 +215,46 @@ command (remember that from earlier?).
 
 @x
 1. Start your container using the `docker run` command and specify the name of the image we 
-    just created:
+   just created:
 @y
 1. `docker run`コマンドを実行してコンテナーを起動し、上で生成したイメージ名を指定します。
 @z
 
 @x
-    ```console
-    $ docker run -dp 3000:3000 getting-started
-    ```
+   ```console
+   $ docker run -dp 3000:3000 getting-started
+   ```
 @y
-    ```console
-    $ docker run -dp 3000:3000 getting-started
-    ```
+   ```console
+   $ docker run -dp 3000:3000 getting-started
+   ```
 @z
 
 @x
-    Remember the `-d` and `-p` flags? We're running the new container in "detached" mode (in the 
-    background) and creating a mapping between the host's port 3000 to the container's port 3000.
-    Without the port mapping, we wouldn't be able to access the application.
+   Remember the `-d` and `-p` flags? We're running the new container in "detached" mode (in the 
+   background) and creating a mapping between the host's port 3000 to the container's port 3000.
+   Without the port mapping, we wouldn't be able to access the application.
 @y
-    `-d`フラグと`-p`フラグは覚えていますか。
-    新たなコンテナーは「デタッチ」モード（バックグラウンド）で起動しています。
-    そしてホストのポート 3000 をコンテナーのポート 3000 にマッピングしています。
-    このポートマッピングがないとアプリケーションにアクセスすることはできません。
+   `-d`フラグと`-p`フラグは覚えていますか。
+   新たなコンテナーは「デタッチ」モード（バックグラウンド）で起動しています。
+   そしてホストのポート 3000 をコンテナーのポート 3000 にマッピングしています。
+   このポートマッピングがないとアプリケーションにアクセスすることはできません。
 @z
 
 @x
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
-    You should see our app.
+   You should see our app.
 @y
 2. 数秒待ってから、ブラウザーを使って [http://localhost:3000](http://localhost:3000) にアクセスします。
-    アプリケーションが表示されるはずです。
+   アプリケーションが表示されるはずです。
 @z
 
 @x
-    ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
-    {: .text-center }
+   ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
+   {: .text-center }
 @y
-    ![空の Todo リスト](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
-    {: .text-center }
+   ![空の Todo リスト](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
+   {: .text-center }
 @z
 
 @x
