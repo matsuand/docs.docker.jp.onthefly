@@ -78,9 +78,9 @@ Your organization's number of paid seats must equal the number of organization m
 @z
 
 @x
-Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
+Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../docker-hub/download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 @y
-Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
+Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../docker-hub/download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 @z
 
 @x
@@ -284,9 +284,9 @@ When you downgrade your Pro or Team plan, changes are applied at the end of your
 @z
 
 @x
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](../#pricing-plans){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](index.md#pricing-plans){:target="blank" rel="noopener" class=""} page.
 @y
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](../#pricing-plans){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](index.md#pricing-plans){:target="blank" rel="noopener" class=""} page.
 @z
 
 @x
@@ -308,9 +308,9 @@ Before you downgrade to a Free plan, ensure that your account organization detai
 @z
 
 @x
-For information on how to add a member to a team, see [Add a member to a team](../orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
+For information on how to add a member to a team, see [Add a member to a team](../docker-hub/orgs.md#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 @y
-For information on how to add a member to a team, see [Add a member to a team](../orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
+For information on how to add a member to a team, see [Add a member to a team](../docker-hub/orgs.md#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 @z
 
 @x

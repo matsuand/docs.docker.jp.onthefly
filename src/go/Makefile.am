@@ -21,9 +21,11 @@ bases = \
 	compose-native-build \
 	daemon-access        \
 	deprecated           \
+	experimental         \
 	formatting           \
 	rootless             \
-	tip-scanning
+	tip-scanning         \
+	wsl2
 
 ch_mds = $(bases:=.ch)
 tr_mds = $(bases:=.md)
