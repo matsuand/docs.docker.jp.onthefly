@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker run | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker run" />
   <meta property="og:description" content="docker run: `docker run`コマンドは、指定されたイメージの上に書き込み可能コンテナーレイヤーを `create`（生成）します。 そして指定されたコマンドを使ってコンテナーを `start`（起動）します。 `docker run`は API で言うと、`/containers/create`の実行後に`/containers/(id)/start`を起動することと同じです。 停止しているコンテナーの場合は、以前からの変更をすべて考慮して`docker start`によって起動されます。 コンテナーの全一覧は`docker ps -a`により確認できます。 The `docker run` command can be used in combination with `docker commit` to [*change..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/run/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker run","description":"docker run: `docker run`コマンドは、指定されたイメージの上に書き込み可能コンテナーレイヤーを `create`（生成）します。 そして指定されたコマンドを使ってコンテナーを `start`（起動）します。 `docker run`は API で言うと、`/containers/create`の実行後に`/containers/(id)/start`を起動することと同じです。 停止しているコンテナーの場合は、以前からの変更をすべて考慮して`docker start`によって起動されます。 コンテナーの全一覧は`docker ps -a`により確認できます。 The `docker run` command can be used in combination with `docker commit` to [*change...","url":"https://docs.docker.com/engine/reference/commandline/run/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -1602,14 +1602,14 @@ https://github.com/docker/cli
 
 <h3 id="assign-name-and-allocate-pseudo-tty---name--it">Assign name and allocate pseudo-TTY (--name, -it)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-it</span> debian
-
-root@d6c0fe130dba:/# <span class="nb">exit </span>13
-<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
-13
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> | <span class="nb">grep test
-</span>d6c0fe130dba        debian:7            <span class="s2">"/bin/bash"</span>         26 seconds ago      Exited <span class="o">(</span>13<span class="o">)</span> 17 seconds ago                         <span class="nb">test</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-it</span> debian
+<span class="go">
+</span><span class="gp">root@d6c0fe130dba:/#</span><span class="w"> </span><span class="nb">exit </span>13
+<span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">13
+</span><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span> | <span class="nb">grep test</span>
+<span class="go">d6c0fe130dba        debian:7            "/bin/bash"         26 seconds ago      Exited (13) 17 seconds ago                         test
+</span></code></pre></div></div>
 
 <p>This example runs a container named <code class="language-plaintext highlighter-rouge">test</code> using the <code class="language-plaintext highlighter-rouge">debian:latest</code>
 image. The <code class="language-plaintext highlighter-rouge">-it</code> instructs Docker to allocate a pseudo-TTY connected to
@@ -1620,7 +1620,7 @@ In the example, the <code class="language-plaintext highlighter-rouge">bash</cod
 
 <h3 id="capture-container-id---cidfile">Capture container ID (--cidfile)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--cidfile</span> /tmp/docker_test.cid ubuntu <span class="nb">echo</span> <span class="s2">"test"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--cidfile</span> /tmp/docker_test.cid ubuntu <span class="nb">echo</span> <span class="s2">"test"</span>
 </code></pre></div></div>
 
 <p>This will create a container and print <code class="language-plaintext highlighter-rouge">test</code> to the console. The <code class="language-plaintext highlighter-rouge">cidfile</code>
@@ -1630,21 +1630,21 @@ file when <code class="language-plaintext highlighter-rouge">docker run</code> e
 
 <h3 id="full-container-capabilities---privileged">Full container capabilities (--privileged)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--rm</span> ubuntu bash
-root@bc338942ef20:/# mount <span class="nt">-t</span> tmpfs none /mnt
-mount: permission denied
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--rm</span> ubuntu bash
+<span class="gp">root@bc338942ef20:/#</span><span class="w"> </span>mount <span class="nt">-t</span> tmpfs none /mnt
+<span class="go">mount: permission denied
+</span></code></pre></div></div>
 
 <p>This will <em>not</em> work, because by default, most potentially dangerous kernel
 capabilities are dropped; including <code class="language-plaintext highlighter-rouge">cap_sys_admin</code> (which is required to mount
 filesystems). However, the <code class="language-plaintext highlighter-rouge">--privileged</code> flag will allow it to run:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--privileged</span> ubuntu bash
-root@50e3f57e16e6:/# mount <span class="nt">-t</span> tmpfs none /mnt
-root@50e3f57e16e6:/# <span class="nb">df</span> <span class="nt">-h</span>
-Filesystem      Size  Used Avail Use% Mounted on
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--privileged</span> ubuntu bash
+<span class="gp">root@50e3f57e16e6:/#</span><span class="w"> </span>mount <span class="nt">-t</span> tmpfs none /mnt
+<span class="gp">root@50e3f57e16e6:/#</span><span class="w"> </span><span class="nb">df</span> <span class="nt">-h</span>
+<span class="go">Filesystem      Size  Used Avail Use% Mounted on
 none            1.9G     0  1.9G   0% /mnt
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">--privileged</code> flag gives <em>all</em> capabilities to the container, and it also
 lifts all the limitations enforced by the <code class="language-plaintext highlighter-rouge">device</code> cgroup controller. In other
@@ -1653,7 +1653,7 @@ flag exists to allow special use-cases, like running Docker within Docker.</p>
 
 <h3 id="set-working-directory--w">ワーキングディレクトリの設定 (-w)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker  run <span class="nt">-w</span> /path/to/dir/ <span class="nt">-i</span> <span class="nt">-t</span>  ubuntu <span class="nb">pwd</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker  run <span class="nt">-w</span> /path/to/dir/ <span class="nt">-i</span> <span class="nt">-t</span>  ubuntu <span class="nb">pwd</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">-w</code> は、コマンド実行を指定されたディレクトリ内において行います。
@@ -1662,7 +1662,7 @@ flag exists to allow special use-cases, like running Docker within Docker.</p>
 
 <h3 id="set-storage-driver-options-per-container">コンテナーごとのストレージドライバーオプションの設定</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--storage-opt</span> <span class="nv">size</span><span class="o">=</span>120G fedora /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--storage-opt</span> <span class="nv">size</span><span class="o">=</span>120G fedora /bin/bash
 </code></pre></div></div>
 
 <p>This (size) will allow to set the container rootfs size to 120G at creation time.
@@ -1676,7 +1676,7 @@ Under these conditions, user can pass any size less than the backing fs size.</p
 
 <h3 id="mount-tmpfs---tmpfs">tmpfs のマウント (--tmpfs)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">--tmpfs</span> /run:rw,noexec,nosuid,size<span class="o">=</span>65536k my_image
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--tmpfs</span> /run:rw,noexec,nosuid,size<span class="o">=</span>65536k my_image
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">--tmpfs</code> flag mounts an empty tmpfs into the container with the <code class="language-plaintext highlighter-rouge">rw</code>,
@@ -1684,7 +1684,7 @@ Under these conditions, user can pass any size less than the backing fs size.</p
 
 <h3 id="mount-volume--v---read-only">Mount volume (-v, --read-only)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker  run  <span class="nt">-v</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="nt">-w</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="nt">-i</span> <span class="nt">-t</span>  ubuntu <span class="nb">pwd</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker  run  <span class="nt">-v</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="nt">-w</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="nt">-i</span> <span class="nt">-t</span>  ubuntu <span class="nb">pwd</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">-v</code> flag mounts the current working directory into the container. The <code class="language-plaintext highlighter-rouge">-w</code>
@@ -1693,7 +1693,7 @@ changing into the directory to the value returned by <code class="language-plain
 combination executes the command using the container, but inside the
 current working directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-v</span> /doesnt/exist:/foo <span class="nt">-w</span> /foo <span class="nt">-i</span> <span class="nt">-t</span> ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> /doesnt/exist:/foo <span class="nt">-w</span> /foo <span class="nt">-i</span> <span class="nt">-t</span> ubuntu bash
 </code></pre></div></div>
 
 <p>When the host directory of a bind-mounted volume doesn’t exist, Docker
@@ -1701,7 +1701,7 @@ will automatically create this directory on the host for you. In the
 example above, Docker will create the <code class="language-plaintext highlighter-rouge">/doesnt/exist</code>
 folder before starting your container.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--read-only</span> <span class="nt">-v</span> /icanwrite busybox <span class="nb">touch</span> /icanwrite/here
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--read-only</span> <span class="nt">-v</span> /icanwrite busybox <span class="nb">touch</span> /icanwrite/here
 </code></pre></div></div>
 
 <p>Volumes can be used in combination with <code class="language-plaintext highlighter-rouge">--read-only</code> to control where
@@ -1709,7 +1709,7 @@ a container writes files. The <code class="language-plaintext highlighter-rouge"
 filesystem as read only prohibiting writes to locations other than the
 specified volumes for the container.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="nt">-v</span> /path/to/static-docker-binary:/usr/bin/docker busybox sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="nt">-v</span> /path/to/static-docker-binary:/usr/bin/docker busybox sh
 </code></pre></div></div>
 
 <p>By bind-mounting the docker unix socket and statically linked docker
@@ -1755,15 +1755,15 @@ the <a href="/engine/reference/commandline/service_create/#add-bind-mounts-volum
 
 <p>Examples:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--read-only</span> <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span>volume,target<span class="o">=</span>/icanwrite busybox <span class="nb">touch</span> /icanwrite/here
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--read-only</span> <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span>volume,target<span class="o">=</span>/icanwrite busybox <span class="nb">touch</span> /icanwrite/here
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,src<span class="o">=</span>/data,dst<span class="o">=</span>/data busybox sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,src<span class="o">=</span>/data,dst<span class="o">=</span>/data busybox sh
 </code></pre></div></div>
 
 <h3 id="publish-or-expose-port--p---expose">Publish or expose port (-p, --expose)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-p</span> 127.0.0.1:80:8080/tcp ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-p</span> 127.0.0.1:80:8080/tcp ubuntu bash
 </code></pre></div></div>
 
 <p>This binds port <code class="language-plaintext highlighter-rouge">8080</code> of the container to TCP port <code class="language-plaintext highlighter-rouge">80</code> on <code class="language-plaintext highlighter-rouge">127.0.0.1</code> of the host
@@ -1776,7 +1776,7 @@ explains in detail how to manipulate ports in Docker.</p>
 you configured UFW to block this specific port, as Docker manages his
 own iptables rules. <a href="https://docs.docker.com/network/iptables/">Read more</a></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--expose</span> 80 ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--expose</span> 80 ubuntu bash
 </code></pre></div></div>
 
 <p>This exposes port <code class="language-plaintext highlighter-rouge">80</code> of the container without publishing the port to the host
@@ -1784,7 +1784,7 @@ system’s interfaces.</p>
 
 <h3 id="環境変数の設定--e---env---env-file">環境変数の設定 (-e, --env, --env-file)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-e</span> MYVAR1 <span class="nt">--env</span> <span class="nv">MYVAR2</span><span class="o">=</span>foo <span class="nt">--env-file</span> ./env.list ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-e</span> MYVAR1 <span class="nt">--env</span> <span class="nv">MYVAR2</span><span class="o">=</span>foo <span class="nt">--env-file</span> ./env.list ubuntu bash
 </code></pre></div></div>
 
 <p>Use the <code class="language-plaintext highlighter-rouge">-e</code>, <code class="language-plaintext highlighter-rouge">--env</code>, and <code class="language-plaintext highlighter-rouge">--env-file</code> flags to set simple (non-array)
@@ -1793,20 +1793,20 @@ that are defined in the Dockerfile of the image you’re running.</p>
 
 <p>You can define the variable and its value when running the container:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--env</span> <span class="nv">VAR1</span><span class="o">=</span>value1 <span class="nt">--env</span> <span class="nv">VAR2</span><span class="o">=</span>value2 ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
-<span class="nv">VAR1</span><span class="o">=</span>value1
-<span class="nv">VAR2</span><span class="o">=</span>value2
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--env</span> <span class="nv">VAR1</span><span class="o">=</span>value1 <span class="nt">--env</span> <span class="nv">VAR2</span><span class="o">=</span>value2 ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
+<span class="go">VAR1=value1
+VAR2=value2
+</span></code></pre></div></div>
 
 <p>You can also use variables that you’ve exported to your local environment:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">VAR1</span><span class="o">=</span>value1
-<span class="nb">export </span><span class="nv">VAR2</span><span class="o">=</span>value2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">export VAR1=value1
+export VAR2=value2
 
-<span class="nv">$ </span>docker run <span class="nt">--env</span> VAR1 <span class="nt">--env</span> VAR2 ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
-<span class="nv">VAR1</span><span class="o">=</span>value1
-<span class="nv">VAR2</span><span class="o">=</span>value2
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--env</span> VAR1 <span class="nt">--env</span> VAR2 ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
+<span class="go">VAR1=value1
+VAR2=value2
+</span></code></pre></div></div>
 
 <p>このコマンドが実行されると、Docker CLI クライアントはローカル環境内でのその変数値を確認して、コンテナーに受け渡します。
 <code class="language-plaintext highlighter-rouge">=</code> が実行されず、ローカル環境内にてその変数がエクスポートされていなければ、その変数はコンテナー内で設定されません。</p>
@@ -1815,24 +1815,24 @@ that are defined in the Dockerfile of the image you’re running.</p>
 このファイルでは <code class="language-plaintext highlighter-rouge">&lt;変数&gt;=値</code> という文法を用います（これは変数に設定値を代入します）。
 これに加えて <code class="language-plaintext highlighter-rouge">&lt;variable&gt;</code> という記述（これはローカル環境から値を取得します）と、コメントを表わす <code class="language-plaintext highlighter-rouge">#</code> を用いることができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>env.list
-<span class="c"># This is a comment</span>
-<span class="nv">VAR1</span><span class="o">=</span>value1
-<span class="nv">VAR2</span><span class="o">=</span>value2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>env.list
+<span class="gp">#</span><span class="w"> </span>This is a comment
+<span class="go">VAR1=value1
+VAR2=value2
 USER
 
-<span class="nv">$ </span>docker run <span class="nt">--env-file</span> env.list ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
-<span class="nv">VAR1</span><span class="o">=</span>value1
-<span class="nv">VAR2</span><span class="o">=</span>value2
-<span class="nv">USER</span><span class="o">=</span>denis
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--env-file</span> env.list ubuntu <span class="nb">env</span> | <span class="nb">grep </span>VAR
+<span class="go">VAR1=value1
+VAR2=value2
+USER=denis
+</span></code></pre></div></div>
 
 <h3 id="コンテナーのメタデータ設定--l---label---label-file">コンテナーのメタデータ設定 (-l, --label, --label-file)</h3>
 
 <p>ラベルは <code class="language-plaintext highlighter-rouge">キー=値</code> というペアとして記述され、これを使ってメタデータをコンテナーに適用します。
 以下はコンテナーに対して 2 つのラベルを設定します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-l</span> my-label <span class="nt">--label</span> com.example.foo<span class="o">=</span>bar ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-l</span> my-label <span class="nt">--label</span> com.example.foo<span class="o">=</span>bar ubuntu bash
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">my-label</code> キーには値が設定されていないため、このラベルはデフォルトとして空文字列 (<code class="language-plaintext highlighter-rouge">""</code>) が設定されます。
@@ -1846,7 +1846,7 @@ USER
 ファイル内において各ラベルの区切りは EOL 文字です。
 以下はカレントディレクトリにあるラベル設定のファイルを用いて、ラベルをロードする例です。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--label-file</span> ./labels ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--label-file</span> ./labels ubuntu bash
 </code></pre></div></div>
 
 <p>ラベル設定のファイルの書式は、環境変数をロードするファイルと似ています。
@@ -1871,13 +1871,13 @@ the Docker User Guide.</p>
 <p>コンテナーを起動する際には、<code class="language-plaintext highlighter-rouge">--network</code> フラグを用いることでネットワークに接続することができます。
 以下の例では、<code class="language-plaintext highlighter-rouge">busybox</code> コンテナーを <code class="language-plaintext highlighter-rouge">my-net</code> ネットワークに接続します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-itd</span> <span class="nt">--network</span><span class="o">=</span>my-net busybox
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-itd</span> <span class="nt">--network</span><span class="o">=</span>my-net busybox
 </code></pre></div></div>
 
 <p>You can also choose the IP addresses for the container with <code class="language-plaintext highlighter-rouge">--ip</code> and <code class="language-plaintext highlighter-rouge">--ip6</code>
 flags when you start the container on a user-defined network.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-itd</span> <span class="nt">--network</span><span class="o">=</span>my-net <span class="nt">--ip</span><span class="o">=</span>10.10.9.75 busybox
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-itd</span> <span class="nt">--network</span><span class="o">=</span>my-net <span class="nt">--ip</span><span class="o">=</span>10.10.9.75 busybox
 </code></pre></div></div>
 
 <p>If you want to add a running container to a network use the <code class="language-plaintext highlighter-rouge">docker network connect</code> subcommand.</p>
@@ -1901,7 +1901,7 @@ disconnect</code> command.</p>
 
 <h3 id="mount-volumes-from-container---volumes-from">Mount volumes from container (--volumes-from)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--volumes-from</span> 777f7dc92da7 <span class="nt">--volumes-from</span> ba8c0c54f0f2:ro <span class="nt">-i</span> <span class="nt">-t</span> ubuntu <span class="nb">pwd</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--volumes-from</span> 777f7dc92da7 <span class="nt">--volumes-from</span> ba8c0c54f0f2:ro <span class="nt">-i</span> <span class="nt">-t</span> ubuntu <span class="nb">pwd</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">--volumes-from</code> flag mounts all the defined volumes from the referenced
@@ -1930,20 +1930,20 @@ Only the current container can use a private volume.</p>
 or <code class="language-plaintext highlighter-rouge">STDERR</code>. This makes it possible to manipulate the output and input as
 needed.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"test"</span> | docker run <span class="nt">-i</span> <span class="nt">-a</span> stdin ubuntu <span class="nb">cat</span> -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s2">"test"</span> | docker run <span class="nt">-i</span> <span class="nt">-a</span> stdin ubuntu <span class="nb">cat</span> -
 </code></pre></div></div>
 
 <p>This pipes data into a container and prints the container’s ID by attaching
 only to the container’s <code class="language-plaintext highlighter-rouge">STDIN</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-a</span> stderr ubuntu <span class="nb">echo test</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-a</span> stderr ubuntu <span class="nb">echo test</span>
 </code></pre></div></div>
 
 <p>This isn’t going to print anything unless there’s an error because we’ve
 only attached to the <code class="language-plaintext highlighter-rouge">STDERR</code> of the container. The container’s logs
 still store what’s been written to <code class="language-plaintext highlighter-rouge">STDERR</code> and <code class="language-plaintext highlighter-rouge">STDOUT</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>somefile | docker run <span class="nt">-i</span> <span class="nt">-a</span> stdin mybuilder dobuild
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>somefile | docker run <span class="nt">-i</span> <span class="nt">-a</span> stdin mybuilder dobuild
 </code></pre></div></div>
 
 <p>This is how piping a file into a container could be done for a build.
@@ -1954,15 +1954,15 @@ retrieve the container’s ID once the container has finished running.</p>
 
 <h3 id="add-host-device-to-container---device">Add host device to container (--device)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sdc:/dev/xvdc <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sdc:/dev/xvdc <span class="se">\</span>
              <span class="nt">--device</span><span class="o">=</span>/dev/sdd <span class="nt">--device</span><span class="o">=</span>/dev/zero:/dev/nulo <span class="se">\</span>
              <span class="nt">-i</span> <span class="nt">-t</span> <span class="se">\</span>
              ubuntu <span class="nb">ls</span> <span class="nt">-l</span> /dev/<span class="o">{</span>xvdc,sdd,nulo<span class="o">}</span>
-
+<span class="go">
 brw-rw---- 1 root disk 8, 2 Feb  9 16:05 /dev/xvdc
 brw-rw---- 1 root disk 8, 3 Feb  9 16:05 /dev/sdd
 crw-rw-rw- 1 root root 1, 5 Feb  9 16:05 /dev/nulo
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>It is often necessary to directly expose devices to a container. The <code class="language-plaintext highlighter-rouge">--device</code>
 option enables that. For example, a specific block storage device or loop
@@ -1974,21 +1974,21 @@ This can be overridden using a third <code class="language-plaintext highlighter
 flag. If the container is running in privileged mode, then the permissions specified
 will be ignored.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
+<span class="go">
+Command (m for help): q
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:r <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
+<span class="go">You will not be able to write the partition table.
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: q
-<span class="nv">$ </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:r <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
-You will not be able to write the partition table.
+Command (m for help): q
 
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: q
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:rw <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
+<span class="go">
+Command (m for help): q
 
-<span class="nv">$ </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:rw <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
-
-Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: q
-
-<span class="nv">$ </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:m <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
-fdisk: unable to open /dev/xvdc: Operation not permitted
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--device</span><span class="o">=</span>/dev/sda:/dev/xvdc:m <span class="nt">--rm</span> <span class="nt">-it</span> ubuntu fdisk  /dev/xvdc
+<span class="go">fdisk: unable to open /dev/xvdc: Operation not permitted
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>Note</strong></p>
@@ -2032,18 +2032,18 @@ for more information.</p>
 <p>To use <code class="language-plaintext highlighter-rouge">--gpus</code>, specify which GPUs (or all) to use. If no value is provied, all
 available GPUs are used. The example below exposes all available GPUs.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> all ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> all ubuntu nvidia-smi
 </code></pre></div></div>
 
 <p>Use the <code class="language-plaintext highlighter-rouge">device</code> option to specify GPUs. The example below exposes a specific
 GPU.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 </code></pre></div></div>
 
 <p>The example below exposes the first and third GPUs.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>0,2 nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>0,2 nvidia-smi
 </code></pre></div></div>
 
 <h3 id="restart-policies---restart">Restart policies (--restart)</h3>
@@ -2079,7 +2079,7 @@ Docker supports the following restart policies:</p>
   </tbody>
 </table>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--restart</span><span class="o">=</span>always redis
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--restart</span><span class="o">=</span>always redis
 </code></pre></div></div>
 
 <p>This will run the <code class="language-plaintext highlighter-rouge">redis</code> container with a restart policy of <strong>always</strong>
@@ -2095,16 +2095,18 @@ section of the Docker run reference page.</p>
 more <code class="language-plaintext highlighter-rouge">--add-host</code> flags. This example adds a static address for a host named
 <code class="language-plaintext highlighter-rouge">docker</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--add-host</span><span class="o">=</span>docker:10.180.0.1 <span class="nt">--rm</span> <span class="nt">-it</span> debian
-
-root@f38c87f2a42d:/# ping docker
-PING docker <span class="o">(</span>10.180.0.1<span class="o">)</span>: 48 data bytes
-56 bytes from 10.180.0.1: <span class="nv">icmp_seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>254 <span class="nb">time</span><span class="o">=</span>7.600 ms
-56 bytes from 10.180.0.1: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>254 <span class="nb">time</span><span class="o">=</span>30.705 ms
-^C--- docker ping statistics <span class="nt">---</span>
-2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max/stddev <span class="o">=</span> 7.600/19.152/30.705/11.553 ms
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--add-host</span><span class="o">=</span>docker:93.184.216.34 <span class="nt">--rm</span> <span class="nt">-it</span> alpine
+<span class="go">
+</span><span class="gp">/ #</span><span class="w"> </span>ping docker
+<span class="go">PING docker (93.184.216.34): 56 data bytes
+64 bytes from 93.184.216.34: seq=0 ttl=37 time=93.052 ms
+64 bytes from 93.184.216.34: seq=1 ttl=37 time=92.467 ms
+64 bytes from 93.184.216.34: seq=2 ttl=37 time=92.252 ms
+^C
+--- docker ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 92.209/92.495/93.052 ms
+</span></code></pre></div></div>
 
 <p>Sometimes you need to connect to the Docker host from within your
 container. To enable this, pass the Docker host’s IP address to
@@ -2115,8 +2117,8 @@ use the <code class="language-plaintext highlighter-rouge">ip addr show</code> c
 using IPv4 or IPv6 networking in your containers. Use the following
 flags for IPv4 address retrieval for a network device named <code class="language-plaintext highlighter-rouge">eth0</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ HOSTIP</span><span class="o">=</span><span class="sb">`</span>ip <span class="nt">-4</span> addr show scope global dev eth0 | <span class="nb">grep </span>inet | <span class="nb">awk</span> <span class="s1">'{print $2}'</span> | <span class="nb">cut</span> <span class="nt">-d</span> / <span class="nt">-f</span> 1 | <span class="nb">sed</span> <span class="nt">-n</span> 1p<span class="sb">`</span>
-<span class="nv">$ </span>docker run  <span class="nt">--add-host</span><span class="o">=</span>docker:<span class="k">${</span><span class="nv">HOSTIP</span><span class="k">}</span> <span class="nt">--rm</span> <span class="nt">-it</span> debian
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">HOSTIP</span><span class="o">=</span><span class="sb">`</span>ip <span class="nt">-4</span> addr show scope global dev eth0 | <span class="nb">grep </span>inet | <span class="nb">awk</span> <span class="s1">'{print $2}'</span> | <span class="nb">cut</span> <span class="nt">-d</span> / <span class="nt">-f</span> 1 | <span class="nb">sed</span> <span class="nt">-n</span> 1p<span class="sb">`</span>
+<span class="gp">$</span><span class="w"> </span>docker run  <span class="nt">--add-host</span><span class="o">=</span>docker:<span class="k">${</span><span class="nv">HOSTIP</span><span class="k">}</span> <span class="nt">--rm</span> <span class="nt">-it</span> debian
 </code></pre></div></div>
 
 <p>For IPv6 use the <code class="language-plaintext highlighter-rouge">-6</code> flag instead of the <code class="language-plaintext highlighter-rouge">-4</code> flag. For other network
@@ -2130,9 +2132,9 @@ for the bridge device).</p>
 <code class="language-plaintext highlighter-rouge">--ulimit</code> では以下のように、ソフトリミット（soft limit）とハードリミット（hard limit）を <code class="language-plaintext highlighter-rouge">&lt;type&gt;=&lt;soft limit&gt;[:&lt;hard limit&gt;]</code> のようにして指定します。
 たとえば以下のとおりです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--ulimit</span> <span class="nv">nofile</span><span class="o">=</span>1024:1024 <span class="nt">--rm</span> debian sh <span class="nt">-c</span> <span class="s2">"ulimit -n"</span>
-1024
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--ulimit</span> <span class="nv">nofile</span><span class="o">=</span>1024:1024 <span class="nt">--rm</span> debian sh <span class="nt">-c</span> <span class="s2">"ulimit -n"</span>
+<span class="go">1024
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -2142,7 +2144,7 @@ for the bridge device).</p>
 <code class="language-plaintext highlighter-rouge">as</code> オプションは利用できなくなっています。
 つまり以下のようなスクリプトはサポートされません。</p>
 
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--ulimit</span> <span class="nv">as</span><span class="o">=</span>1024 fedora /bin/bash<span class="sb">`</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--ulimit</span> <span class="nv">as</span><span class="o">=</span>1024 fedora /bin/bash<span class="sb">`</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -2156,13 +2158,13 @@ Docker はバイト列に関して何か変換を行うようなことはしま�
 maximum number of processes available to a user, not to a container.  For example, start four
 containers with <code class="language-plaintext highlighter-rouge">daemon</code> user:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
-
-<span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
-
-<span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
-
-<span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-u</span> daemon <span class="nt">--ulimit</span> <span class="nb">nproc</span><span class="o">=</span>3 busybox top
 </code></pre></div></div>
 
 <p>The 4th container fails and reports “[8] System error: resource temporarily unavailable” error.
@@ -2171,9 +2173,12 @@ the three processes quota set for the <code class="language-plaintext highlighte
 
 <h3 id="stop-container-with-signal---stop-signal">Stop container with signal (--stop-signal)</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">--stop-signal</code> flag sets the system call signal that will be sent to the container to exit.
-This signal can be a valid unsigned number that matches a position in the kernel’s syscall table, for instance 9,
-or a signal name in the format SIGNAME, for instance SIGKILL.</p>
+<p>The <code class="language-plaintext highlighter-rouge">--stop-signal</code> flag sets the system call signal that will be sent to the
+container to exit. This signal can be a signal name in the format <code class="language-plaintext highlighter-rouge">SIG&lt;NAME&gt;</code>,
+for instance <code class="language-plaintext highlighter-rouge">SIGKILL</code>, or an unsigned number that matches a position in the
+kernel’s syscall table, for instance <code class="language-plaintext highlighter-rouge">9</code>.</p>
+
+<p>The default is <code class="language-plaintext highlighter-rouge">SIGTERM</code> if not specified.</p>
 
 <h3 id="optional-security-options---security-opt">Optional security options (--security-opt)</h3>
 
@@ -2182,8 +2187,16 @@ The <code class="language-plaintext highlighter-rouge">credentialspec</code> mus
 
 <h3 id="stop-container-with-timeout---stop-timeout">Stop container with timeout (--stop-timeout)</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">--stop-timeout</code> flag sets the timeout (in seconds) that a pre-defined (see <code class="language-plaintext highlighter-rouge">--stop-signal</code>) system call
-signal that will be sent to the container to exit. After timeout elapses the container will be killed with SIGKILL.</p>
+<p>The <code class="language-plaintext highlighter-rouge">--stop-timeout</code> flag sets the number of seconds to wait for the container
+to stop after sending the pre-defined (see <code class="language-plaintext highlighter-rouge">--stop-signal</code>) system call signal.
+If the container does not exit after the timeout elapses, it is forcibly killed
+with a <code class="language-plaintext highlighter-rouge">SIGKILL</code> signal.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">--stop-timeout</code> is set to <code class="language-plaintext highlighter-rouge">-1</code>, no timeout is applied, and the daemon will
+wait indefinitely for the container to exit.</p>
+
+<p>The default is determined by the daemon, and is 10 seconds for Linux containers,
+and 30 seconds for Windows containers.</p>
 
 <h3 id="specify-isolation-technology-for-container---isolation">コンテナーへの分離技術方式の指定 (--isolation)</h3>
 
@@ -2192,8 +2205,8 @@ signal that will be sent to the container to exit. After timeout elapses the con
 Linux の場合にサポートされているのは <code class="language-plaintext highlighter-rouge">default</code> オプションだけであり、これは Linux 名前空間を利用するものです。
 以下の 2 つのコマンドは Linux 上においてはまったく同じことです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> busybox top
-<span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">--isolation</span> default busybox top
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> busybox top
+<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--isolation</span> default busybox top
 </code></pre></div></div>
 
 <p>On Windows, <code class="language-plaintext highlighter-rouge">--isolation</code> can take one of these values:</p>
@@ -2288,7 +2301,7 @@ is set on the cgroup and applications in a container can query it at <code class
 container. For example, to turn on IP forwarding in the containers
 network namespace, run this command:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--sysctl</span> net.ipv4.ip_forward<span class="o">=</span>1 someimage
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--sysctl</span> net.ipv4.ip_forward<span class="o">=</span>1 someimage
 </code></pre></div></div>
 
 <blockquote>

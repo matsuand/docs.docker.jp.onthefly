@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker config create | Docker ドキュメント</title>
@@ -63,12 +63,12 @@ config 利用の詳細については [Docker configs を利用した設定デ�
 &gt; したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
 &gt; マネージャーノードやワーカーノードについては、[Swarm モード](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/) を参照してください。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/config_create/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker config create","description":"docker config create: config 内容を示すファイルまたは標準入力により config を生成します。\n\nconfig 利用の詳細については [Docker configs を利用した設定データの保存](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/) を参照してください。\n\n> **メモ**\n>\n> これはクラスター管理コマンドです。\n> したがって Swarm 上のマネージャーノードにおいて実行する必要があります。\n> マネージャーノードやワーカーノードについては、[Swarm モード](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/) を参照してください。","url":"https://docs.docker.com/engine/reference/commandline/config_create/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -218,59 +218,59 @@ https://github.com/docker/cli
 
 <h3 id="create-a-config">config の生成</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">printf</span> &lt;config&gt; | docker config create my_config -
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">printf</span> &lt;config&gt; | docker config create my_config -
+<span class="go">
 onakdyv307se2tl7nl20anokv
 
-<span class="nv">$ </span>docker config <span class="nb">ls
-
-</span>ID                          NAME                CREATED             UPDATED
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">ls</span>
+<span class="go">
+ID                          NAME                CREATED             UPDATED
 onakdyv307se2tl7nl20anokv   my_config           6 seconds ago       6 seconds ago
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="create-a-config-with-a-file">ファイルからの config 生成</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create my_config ./config.json
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create my_config ./config.json
+<span class="go">
 dg426haahpi5ezmkkj5kyl3sn
 
-<span class="nv">$ </span>docker config <span class="nb">ls
-
-</span>ID                          NAME                CREATED             UPDATED
+</span><span class="gp">$</span><span class="w"> </span>docker config <span class="nb">ls</span>
+<span class="go">
+ID                          NAME                CREATED             UPDATED
 dg426haahpi5ezmkkj5kyl3sn   my_config           7 seconds ago       7 seconds ago
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="create-a-config-with-labels">ラベルを利用した config の生成</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config create <span class="se">\</span>
     <span class="nt">--label</span> <span class="nb">env</span><span class="o">=</span>dev <span class="se">\</span>
     <span class="nt">--label</span> <span class="nv">rev</span><span class="o">=</span>20170324 <span class="se">\</span>
     my_config ./config.json
-
+<span class="go">
 eo7jnzguqgtpdah3cm5srfb97
-</code></pre></div></div>
+</span></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config inspect my_config
-
-<span class="o">[</span>
-    <span class="o">{</span>
-        <span class="s2">"ID"</span>: <span class="s2">"eo7jnzguqgtpdah3cm5srfb97"</span>,
-        <span class="s2">"Version"</span>: <span class="o">{</span>
-            <span class="s2">"Index"</span>: 17
-        <span class="o">}</span>,
-        <span class="s2">"CreatedAt"</span>: <span class="s2">"2017-03-24T08:15:09.735271783Z"</span>,
-        <span class="s2">"UpdatedAt"</span>: <span class="s2">"2017-03-24T08:15:09.735271783Z"</span>,
-        <span class="s2">"Spec"</span>: <span class="o">{</span>
-            <span class="s2">"Name"</span>: <span class="s2">"my_config"</span>,
-            <span class="s2">"Labels"</span>: <span class="o">{</span>
-                <span class="s2">"env"</span>: <span class="s2">"dev"</span>,
-                <span class="s2">"rev"</span>: <span class="s2">"20170324"</span>
-            <span class="o">}</span>,
-            <span class="s2">"Data"</span>: <span class="s2">"aGVsbG8K"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">]</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker config inspect my_config
+<span class="go">
+[
+    {
+        "ID": "eo7jnzguqgtpdah3cm5srfb97",
+        "Version": {
+            "Index": 17
+        },
+        "CreatedAt": "2017-03-24T08:15:09.735271783Z",
+        "UpdatedAt": "2017-03-24T08:15:09.735271783Z",
+        "Spec": {
+            "Name": "my_config",
+            "Labels": {
+                "env": "dev",
+                "rev": "20170324"
+            },
+            "Data": "aGVsbG8K"
+        }
+    }
+]
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

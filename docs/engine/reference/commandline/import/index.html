@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker import | Docker ドキュメント</title>
@@ -66,12 +66,12 @@
 サポートされている`Dockerfile`命令は以下のとおりです。
 `CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/import/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker import","description":"docker import: 引数には`URL`が指定できます。\nまた`-`（ダッシュ）を指定すると`STDIN`からデータを直接入力できます。\n`URL`には、ファイルシステムを含んだアーカイブ（.tar, .tar.gz, .tgz, .bzip, .tar.xz, .txz）を指定するか、Docker ホスト上の個別ファイルを指定します。\nアーカイブを指定した場合、Docker はそれをコンテナー内において、`/`（ルート）からの相対位置に伸張（展開）します。\n個別のファイルを指定する場合には、ホスト内のフルパスの指定でなければなりません。\nリモートからインポートを行う場合、`http://`または`https://`プロトコルによる`URI`を指定します。\n\n`--change`オプションは、生成されたイメージに対して`Dockerfile`命令を適用します。\nサポートされている`Dockerfile`命令は以下のとおりです。\n`CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`","url":"https://docs.docker.com/engine/reference/commandline/import/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -227,40 +227,34 @@ https://github.com/docker/cli
 
 <p>以下は、新たなタグなしのイメージを生成します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker import http://example.com/exampleimage.tgz
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker import https://example.com/exampleimage.tgz
 </code></pre></div></div>
 
 <h3 id="import-from-a-local-file">ローカルファイルからのインポート</h3>
 
-<ul>
-  <li>
-    <p>パイプと<code class="language-plaintext highlighter-rouge">STDIN</code>を通じてインポートします。</p>
+<p>パイプと<code class="language-plaintext highlighter-rouge">STDIN</code>を通じてインポートします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>exampleimage.tgz | docker import - exampleimagelocal:new
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>コミットメッセージをつけてインポートします。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>exampleimage.tgz | docker import - exampleimagelocal:new
+</code></pre></div></div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>exampleimage.tgz | docker import <span class="nt">--message</span> <span class="s2">"New image imported from tarball"</span> - exampleimagelocal:new
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>ローカルのアーカイブからインポートします。</p>
+<p>コミットメッセージをつけてインポートします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker import /path/to/exampleimage.tgz
-</code></pre></div>    </div>
-  </li>
-</ul>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>exampleimage.tgz | docker import <span class="nt">--message</span> <span class="s2">"New image imported from tarball"</span> - exampleimagelocal:new
+</code></pre></div></div>
+
+<p>ローカルのアーカイブからインポートします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker import /path/to/exampleimage.tgz
+</code></pre></div></div>
 
 <h3 id="import-from-a-local-directory">ローカルディレクトリからのインポート</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo tar</span> <span class="nt">-c</span> <span class="nb">.</span> | docker import - exampleimagedir
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo tar</span> <span class="nt">-c</span> <span class="nb">.</span> | docker import - exampleimagedir
 </code></pre></div></div>
 
 <h3 id="import-from-a-local-directory-with-new-configurations">新たな設定を加えて、ローカルディレクトリからのインポート</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo tar</span> <span class="nt">-c</span> <span class="nb">.</span> | docker import <span class="nt">--change</span> <span class="s2">"ENV DEBUG=true"</span> - exampleimagedir
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo tar</span> <span class="nt">-c</span> <span class="nb">.</span> | docker import <span class="nt">--change</span> <span class="s2">"ENV DEBUG=true"</span> - exampleimagedir
 </code></pre></div></div>
 
 <p>上の例においては<code class="language-plaintext highlighter-rouge">sudo</code>を用いています。

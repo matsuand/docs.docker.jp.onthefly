@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>root ユーザー以外による Docker デーモン起動（rootless モード） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="root ユーザー以外による Docker デーモン起動（rootless モード）" />
   <meta property="og:description" content="root ユーザー以外によって Docker デーモンを起動します（rootless モード）。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"root ユーザー以外による Docker デーモン起動（rootless モード）","description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。","url":"https://docs.docker.com/engine/security/rootless/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p><p>rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。</p>
+                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 18 分</em></p><p>rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。</p>
 
 <p>rootless モードは root 権限を必要としません。
 しかも <a href="#prerequisites">前提条件</a> を満たしていれば、Docker デーモンのインストール時も必要としません。</p>
@@ -155,7 +155,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
   <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
-  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse-sles">openSUSE と SLES</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 、RHEL 8、Fedora</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7、RHEL 7</a></li>
 </ul>
@@ -163,26 +163,32 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
   <div id="hint-ubuntu" class="tab-pane fade in active">
     <ul>
       <li>
-        <p>事前準備するものは何もありません。</p>
+        <p><code class="language-plaintext highlighter-rouge">dbus-user-session</code>パッケージをインストールしていない場合は、インストールしてください。
+<code class="language-plaintext highlighter-rouge">sudo apt-get install -y dbus-user-session</code>を実行して、再ログインしてください。</p>
       </li>
       <li>
         <p>デフォルトで<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーが有効になっています。
 (<a href="https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144">Ubuntu 固有のカーネルパッチ</a>)</p>
       </li>
       <li>
-        <p>Ubuntu 16.04、18.04、20.04 において動作します。</p>
+        <p>Ubuntu 18.04、20.04、21.04 において動作します。</p>
       </li>
     </ul>
   </div>
   <div id="hint-debian" class="tab-pane fade in">
     <ul>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
+        <p><code class="language-plaintext highlighter-rouge">dbus-user-session</code>パッケージをインストールしていない場合は、インストールしてください。
+<code class="language-plaintext highlighter-rouge">sudo apt-get install -y dbus-user-session</code>を実行して、再ログインしてください。</p>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバー（推奨）を利用するには、<code class="language-plaintext highlighter-rouge">sudo modprobe overlay permit_mounts_in_userns=1</code>を実行してください。
- (<a href="https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch">Debian 固有のカーネルパッチ、Debian 10 において導入</a>)
- そして<code class="language-plaintext highlighter-rouge">/etc/modprobe.d</code>に設定を追加してください。</p>
+        <p>Debian 10 においては、<code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。
+この手順は Debian 11 では必要ありません。</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されるので、<code class="language-plaintext highlighter-rouge">sudo apt-get install -y fuse-overlayfs</code>を実行してください。
+<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーの利用にあたっては、Debian 固有の modprobe オプション <code class="language-plaintext highlighter-rouge">sudo modprobe overlay permit_mounts_in_userns=1</code>を用いることもできます。
+ただし <a href="https://github.com/moby/moby/issues/42302">不安定性</a> があるため、利用するのは避けてください。</p>
       </li>
       <li>
         <p>rootless docker では、<code class="language-plaintext highlighter-rouge">slirp4netns</code>のバージョンは<code class="language-plaintext highlighter-rouge">v0.4.0</code>以上が必要です (<code class="language-plaintext highlighter-rouge">vpnkit</code>がインストールされていない場合)。
@@ -190,7 +196,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
 
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>slirp4netns <span class="nt">--version</span>
 </code></pre></div>        </div>
-        <p>これをまだ入手していない場合は、最新版の <a href="https://github.com/rootless-containers/slirp4netns/releases">リリース</a> をダウンロードしてインストールしてください。</p>
+        <p>これをまだ入手していない場合は、<code class="language-plaintext highlighter-rouge">sudo apt-get install -y slirp4netns</code>によってインストールするか、あるいは最新版の <a href="https://github.com/rootless-containers/slirp4netns/releases">リリース</a> をダウンロードしてインストールしてください。</p>
       </li>
     </ul>
 
@@ -206,7 +212,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
       </li>
     </ul>
   </div>
-  <div id="hint-opensuse" class="tab-pane fade in">
+  <div id="hint-opensuse-sles" class="tab-pane fade in">
     <ul>
       <li>
         <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
@@ -217,7 +223,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
 設定方法によっては他のディストリビューションにおいても必要なことかもしれません。</p>
       </li>
       <li>
-        <p>openSUSE 15 において動作します。</p>
+        <p>openSUSE 15 と SLES 15 において動作します。</p>
       </li>
     </ul>
   </div>
@@ -231,12 +237,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
         <p><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</p>
       </li>
       <li>
-        <p>When SELinux is enabled, you may face <code class="language-plaintext highlighter-rouge">can't open lock file /run/xtables.lock: Permission denied</code> error.
-A workaround for this is to <code class="language-plaintext highlighter-rouge">sudo dnf install -y policycoreutils-python-utils &amp;&amp; sudo semanage permissive -a iptables_t</code>.
-This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">moby/moby#41230</a>.</p>
-      </li>
-      <li>
-        <p>Known to work on CentOS 8 and Fedora 33.</p>
+        <p>Known to work on CentOS 8, RHEL 8, and Fedora 34.</p>
       </li>
     </ul>
   </div>
@@ -259,7 +260,7 @@ This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">mob
 <ul>
   <li>以下のストレージドライバーのみがサポートされます。
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">overlay2</code>（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）</li>
+      <li><code class="language-plaintext highlighter-rouge">overlay2</code>（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系カーネルのみ。）</li>
       <li><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>（カーネル 4.18 またはそれ以降の稼動時、そして<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>インストール時のみ。）</li>
       <li><code class="language-plaintext highlighter-rouge">btrfs</code>（カーネル 4.18 またはそれ以降で利用する場合のみ。あるいは<code class="language-plaintext highlighter-rouge">user_subvol_rm_allowed</code>マウントオプションを使って<code class="language-plaintext highlighter-rouge">~/.local/share/docker</code>をマウントしている場合。）</li>
       <li><code class="language-plaintext highlighter-rouge">vfs</code></li>
@@ -392,6 +393,8 @@ Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
 [INFO] This uninstallation tool does NOT remove Docker binaries and data.
 [INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 </span></code></pre></div></div>
+
+<p>Unset environment variables PATH and DOCKER_HOST if you have added them to <code class="language-plaintext highlighter-rouge">~/.bashrc</code>.</p>
 
 <p>To remove the data directory, run <code class="language-plaintext highlighter-rouge">rootlesskit rm -rf ~/.local/share/docker</code>.</p>
 
@@ -640,13 +643,12 @@ up automatically. See <a href="#usage">Usage</a>.</p>
 
 <p><strong>iptables failed: iptables -t nat -N DOCKER: Fatal: can’t open lock file /run/xtables.lock: Permission denied</strong></p>
 
-<p>This error may happen when SELinux is enabled on the host.</p>
+<p>This error may happen with an older version of Docker when SELinux is enabled on the host.</p>
 
-<p>A known workaround is to run the following commands to disable SELinux for <code class="language-plaintext highlighter-rouge">iptables</code>:</p>
+<p>The issue has been fixed in Docker 20.10.8.
+A known workaround for older version of Docker is to run the following commands to disable SELinux for <code class="language-plaintext highlighter-rouge">iptables</code>:</p>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>dnf <span class="nb">install</span> <span class="nt">-y</span> policycoreutils-python-utils <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>semanage permissive <span class="nt">-a</span> iptables_t
 </code></pre></div></div>
-
-<p>This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">moby/moby#41230</a>.</p>
 
 <h3 id="docker-pull-errors"><code class="language-plaintext highlighter-rouge">docker pull</code> errors</h3>
 
@@ -666,6 +668,24 @@ images. However, 65,536 entries are sufficient for most images. See
 </span></code></pre></div></div>
 
 <h3 id="docker-run-errors"><code class="language-plaintext highlighter-rouge">docker run</code> errors</h3>
+
+<p><strong>docker: Error response from daemon: OCI runtime create failed: ...: read unix @-&gt;/run/systemd/private: read: connection reset by peer: unknown.</strong></p>
+
+<p>This error occurs on cgroup v2 hosts mostly when the dbus daemon is not running for the user.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> is-active dbus
+<span class="go">inactive
+
+</span><span class="gp">$</span><span class="w"> </span>docker run hello-world
+<span class="go">docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: process_linux.go:385: applying cgroup configuration for process caused: error while starting unit "docker
+-931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e.scope" with properties [{Name:Description Value:"libcontainer container 931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e"} {Name:Slice Value:"use
+r.slice"} {Name:PIDs Value:@au [4529]} {Name:Delegate Value:true} {Name:MemoryAccounting Value:true} {Name:CPUAccounting Value:true} {Name:IOAccounting Value:true} {Name:TasksAccounting Value:true} {Name:DefaultDependencies Val
+</span><span class="gp">ue:false}]: read unix @-&gt;</span>/run/systemd/private: <span class="nb">read</span>: connection reset by peer: unknown.
+</code></pre></div></div>
+
+<p>To fix the issue, run <code class="language-plaintext highlighter-rouge">sudo apt-get install -y dbus-user-session</code> or <code class="language-plaintext highlighter-rouge">sudo dnf install -y dbus-daemon</code>, and then relogin.</p>
+
+<p>If the error still occurs, try running <code class="language-plaintext highlighter-rouge">systemctl --user enable --now dbus</code> (without sudo).</p>
 
 <p><strong><code class="language-plaintext highlighter-rouge">--cpus</code>, <code class="language-plaintext highlighter-rouge">--memory</code>, and <code class="language-plaintext highlighter-rouge">--pids-limit</code> are ignored</strong></p>
 
@@ -719,13 +739,29 @@ If slirp4netns is not installed, Docker falls back to <a href="https://github.co
 See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers">RootlessKit documentation</a> for the benchmark result.</p>
 
 <p>Also, changing MTU value may improve the throughput.
-The MTU value can be specified by adding <code class="language-plaintext highlighter-rouge">Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=&lt;INTEGER&gt;"</code>
-to <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service</code> and then running <code class="language-plaintext highlighter-rouge">systemctl --user daemon-reload</code>.</p>
+The MTU value can be specified by creating <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service.d/override.conf</code> with the following content:</p>
+
+<div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
+<span class="nt">Environment</span><span class="p">=</span>"DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=&lt;INTEGER&gt;"
+</code></pre></div></div>
+
+<p>And then restart the daemon:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> daemon-reload
+<span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> restart docker
+</code></pre></div></div>
 
 <p><strong><code class="language-plaintext highlighter-rouge">docker run -p</code> does not propagate source IP addresses</strong></p>
 
-<p>The source IP addresses can be propagated by adding <code class="language-plaintext highlighter-rouge">Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"</code>
-to <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service</code> and then running <code class="language-plaintext highlighter-rouge">systemctl --user daemon-reload</code>.</p>
+<p>The source IP addresses can be propagated by creating <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service.d/override.conf</code> with the following content:</p>
+
+<div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
+<span class="nt">Environment</span><span class="p">=</span>"DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+</code></pre></div></div>
+
+<p>And then restart the daemon:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> daemon-reload
+<span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> restart docker
+</code></pre></div></div>
 
 <p>Note that this configuration decreases throughput.
 See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers">RootlessKit documentation</a> for the benchmark result.</p>

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Go image | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Build your Go image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Build your Go image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/golang/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -218,19 +218,45 @@ ____________________________________O/_______
 
 <h2 id="create-a-dockerfile-for-the-application">Create a Dockerfile for the application</h2>
 
-<p>A <code class="language-plaintext highlighter-rouge">Dockerfile</code> is a text document that contains the instructions for building a Docker image. When we tell Docker to build our image by executing the <code class="language-plaintext highlighter-rouge">docker build</code> command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.</p>
+<p>Dockerfile とは、 Docker イメージを取得する命令を含んだテキストファイルのことです。
+Docker に対して<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
 
-<p>Let’s walk through the process of creating a <code class="language-plaintext highlighter-rouge">Dockerfile</code> for our application. In the root of your working directory, create a file named <code class="language-plaintext highlighter-rouge">Dockerfile</code> and open this file in your text editor.</p>
+<p>ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
+プロジェクトのルートディレクトリに<code class="language-plaintext highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>Dockerfile の名前を何にするか</strong></p>
 
-  <p>The name of the file is not <em>that</em> important but the default filename for many commands is simply <code class="language-plaintext highlighter-rouge">Dockerfile</code>. So, we’ll use that as our filename throughout this series.</p>
+  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="language-plaintext highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
+このデフォルトファイル名を用いておけば、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
+
+  <p>プロジェクトによっては、特定の目的のため、Dockerfile に別名を与える場合があります。
+普通行われる慣例としては、<code class="language-plaintext highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
+このような Dockerfile は、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="language-plaintext highlighter-rouge">--file</code>オプション (その短縮形<code class="language-plaintext highlighter-rouge">-f</code>) を用いて指定します。
+<code class="language-plaintext highlighter-rouge">--file</code>オプションの利用方法については、<code class="language-plaintext highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
+
+  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="language-plaintext highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
+本ガイドに示すほとんどの例においては、この名前を用いています。</p>
 </blockquote>
 
-<p>The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.</p>
+<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="language-plaintext highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
+これは <strong>任意の記述</strong> ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
+また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
+<a href="/docs.docker.jp.onthefly/engine/reference/builder/#parser-directives">パーサーディレクティブ</a> は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.16-alpine</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
+こうしておくと、常に文法バージョン 1 の最新リリース版を指し示すことになります。
+BuildKit は、ビルド処理の前に文法に更新がないかを自動的にチェックし、最新バージョンが用いられていることを確認します。</p>
+
+<p>Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="k">FROM</span><span class="s"> golang:1.16-alpine</span>
 </code></pre></div></div>
 
 <p>Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Go image that already has all the tools and packages to compile and run a Go application. You can think of this in the same way you would think about class inheritance in object oriented programming or functional composition in functional programming.</p>
@@ -260,7 +286,7 @@ ____________________________________O/_______
 <span class="k">COPY</span><span class="s"> go.sum ./</span>
 </code></pre></div></div>
 
-<p>Now that we have the module files inside the Docker image that we are building, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">go mod download</code> there as well. This works exactly the same as if we were running <code class="language-plaintext highlighter-rouge">go</code> locally on our machine, but this time these Go modules will be installed into the a directory inside our image.</p>
+<p>Now that we have the module files inside the Docker image that we are building, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">go mod download</code> there as well. This works exactly the same as if we were running <code class="language-plaintext highlighter-rouge">go</code> locally on our machine, but this time these Go modules will be installed into the app directory inside our image.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>go mod download
 </code></pre></div></div>
@@ -290,7 +316,9 @@ ____________________________________O/_______
 
 <p>Here’s the complete <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.16-alpine</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="k">FROM</span><span class="s"> golang:1.16-alpine</span>
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
@@ -309,7 +337,9 @@ ____________________________________O/_______
 
 <p>The <code class="language-plaintext highlighter-rouge">Dockerfile</code> may also contain <em>comments</em>. They always begin with a <code class="language-plaintext highlighter-rouge">#</code> symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Alpine is chosen for its small footprint</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="c"># Alpine is chosen for its small footprint</span>
 <span class="c"># compared to Ubuntu</span>
 <span class="k">FROM</span><span class="s"> golang:1.16-alpine</span>
 
@@ -425,10 +455,11 @@ postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 
 <p>The <code class="language-plaintext highlighter-rouge">Dockerfile.multistage</code> in the sample application’s repo has the following content:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="c">##</span>
 <span class="c">## Build</span>
 <span class="c">##</span>
-
 <span class="k">FROM</span><span class="s"> golang:1.16-buster AS build</span>
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>
@@ -444,7 +475,6 @@ postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 <span class="c">##</span>
 <span class="c">## Deploy</span>
 <span class="c">##</span>
-
 <span class="k">FROM</span><span class="s"> gcr.io/distroless/base-debian10</span>
 
 <span class="k">WORKDIR</span><span class="s"> /</span>

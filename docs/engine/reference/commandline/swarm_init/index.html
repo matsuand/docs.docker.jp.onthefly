@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker swarm init | Docker ドキュメント</title>
@@ -42,12 +42,12 @@
   <meta property="og:description" content="docker swarm init: スウォームを初期化します。
 このコマンドの対象となった docker エンジンは、新たに生成されるシングルノードスウォームにおけるマネージャーとなります。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker swarm init","description":"docker swarm init: スウォームを初期化します。\nこのコマンドの対象となった docker エンジンは、新たに生成されるシングルノードスウォームにおけるマネージャーとなります。","url":"https://docs.docker.com/engine/reference/commandline/swarm_init/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -368,17 +368,18 @@ https://github.com/docker/cli
 
 <h2 id="examples">利用例</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init <span class="nt">--advertise-addr</span> 192.168.99.121
-Swarm initialized: current node <span class="o">(</span>bvz81updecsj6wjz393c09vti<span class="o">)</span> is now a manager.
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--advertise-addr</span> 192.168.99.121
+<span class="go">
+Swarm initialized: current node (bvz81updecsj6wjz393c09vti) is now a manager.
 
-To add a worker to this swarm, run the following <span class="nb">command</span>:
+To add a worker to this swarm, run the following command:
 
-    docker swarm <span class="nb">join</span> <span class="se">\</span>
-    <span class="nt">--token</span> SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx <span class="se">\</span>
+    docker swarm join \
+    --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx \
     172.17.0.2:2377
 
-To add a manager to this swarm, run <span class="s1">'docker swarm join-token manager'</span> and follow the instructions.
-</code></pre></div></div>
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker swarm init</code> generates two random tokens, a worker token and a manager token. When you join
 a new node to the swarm, the node joins as a worker or manager node based upon the token you pass
@@ -462,19 +463,20 @@ applies to all nodes that join the swarm.
 The following example initializes a new Swarm, and configures the data path
 port to UDP port 7777;</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm init <span class="nt">--data-path-port</span><span class="o">=</span>7777
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--data-path-port</span><span class="o">=</span>7777
 </code></pre></div></div>
+
 <p>After the swarm is initialized, use the <code class="language-plaintext highlighter-rouge">docker info</code> command to verify that
 the port is configured:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker info
-...
-ClusterID: 9vs5ygs0gguyyec4iqf2314c0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+<span class="c">&lt;...&gt;
+</span><span class="go">ClusterID: 9vs5ygs0gguyyec4iqf2314c0
 Managers: 1
 Nodes: 1
 Data Path Port: 7777
-...
-</code></pre></div></div>
+</span><span class="c">&lt;...&gt;
+</span></code></pre></div></div>
 
 <h3 id="--default-addr-pool"><code class="language-plaintext highlighter-rouge">--default-addr-pool</code></h3>
 <p>This flag specifies default subnet pools for global scope networks.

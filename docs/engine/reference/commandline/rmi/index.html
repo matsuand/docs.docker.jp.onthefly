@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker rmi | Docker ドキュメント</title>
@@ -57,12 +57,12 @@
 実行中コンテナーのイメージは`-f`オプションをつけない限りは削除することができません。
 ホスト上のイメージをすべて確認するには [`docker image ls`](images.md) コマンドを使います。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/rmi/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker rmi","description":"docker rmi: ホストノードから 1 つまたは複数のイメージを削除（そしてタグづけ解除）します。\nイメージに複数のタグがつけられている場合、パラメーターにそのタグを指定して本コマンドを実行すればそのタグだけが削除されます。\nそのタグがイメージにとって唯一のものであれば、イメージとタグがともに削除されます。\n\nこのコマンドはイメージをレジストリから削除するものではありません。\n実行中コンテナーのイメージは`-f`オプションをつけない限りは削除することができません。\nホスト上のイメージをすべて確認するには [`docker image ls`](images.md) コマンドを使います。","url":"https://docs.docker.com/engine/reference/commandline/rmi/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -201,71 +201,71 @@ https://github.com/docker/cli
 イメージを参照するタグが存在する場合は、イメージを削除する前にそのタグを削除しておかなければなりません。
 ダイジェスト値による参照は、イメージをタグによって削除した際に、自動的に削除されます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">
 REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-test1                     latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
-<span class="nb">test                      </span>latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
-test2                     latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
+test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
+test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
+test2                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 
-<span class="nv">$ </span>docker rmi fd484f19954f
-
-Error: Conflict, cannot delete image fd484f19954f because it is tagged <span class="k">in </span>multiple repositories, use <span class="nt">-f</span> to force
+</span><span class="gp">$</span><span class="w"> </span>docker rmi fd484f19954f
+<span class="go">
+Error: Conflict, cannot delete image fd484f19954f because it is tagged in multiple repositories, use -f to force
 2013/12/11 05:47:16 Error: failed to remove one or more images
 
-<span class="nv">$ </span>docker rmi test1:latest
-
+</span><span class="gp">$</span><span class="w"> </span>docker rmi test1:latest
+<span class="go">
 Untagged: test1:latest
 
-<span class="nv">$ </span>docker rmi test2:latest
-
+</span><span class="gp">$</span><span class="w"> </span>docker rmi test2:latest
+<span class="go">
 Untagged: test2:latest
 
 
-<span class="nv">$ </span>docker images
-
+</span><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">
 REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-<span class="nb">test                      </span>latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
+test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 
-<span class="nv">$ </span>docker rmi <span class="nb">test</span>:latest
-
-Untagged: <span class="nb">test</span>:latest
+</span><span class="gp">$</span><span class="w"> </span>docker rmi <span class="nb">test</span>:latest
+<span class="go">
+Untagged: test:latest
 Deleted: fd484f19954f4920da7ff372b5067f5b7ddb2fd3830cecd17b96ea9e286ba5b8
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">-f</code>フラグを使い、短いイメージ ID または長いイメージ ID を指定した場合、このコマンドは指定した ID に合致するイメージのタグづけを解除した上で、イメージすべてを削除します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">
 REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-test1                     latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
-<span class="nb">test                      </span>latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
-test2                     latest              fd484f19954f        23 seconds ago      7 B <span class="o">(</span>virtual 4.964 MB<span class="o">)</span>
+test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
+test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
+test2                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 
-<span class="nv">$ </span>docker rmi <span class="nt">-f</span> fd484f19954f
-
+</span><span class="gp">$</span><span class="w"> </span>docker rmi <span class="nt">-f</span> fd484f19954f
+<span class="go">
 Untagged: test1:latest
-Untagged: <span class="nb">test</span>:latest
+Untagged: test:latest
 Untagged: test2:latest
 Deleted: fd484f19954f4920da7ff372b5067f5b7ddb2fd3830cecd17b96ea9e286ba5b8
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>ダイジェスト値を使ってプルを行ったイメージにはタグが関連づけられていません。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images <span class="nt">--digests</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images <span class="nt">--digests</span>
+<span class="go">
 REPOSITORY                     TAG       DIGEST                                                                    IMAGE ID        CREATED         SIZE
-localhost:5000/test/busybox    &lt;none&gt;    sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf   4986bf8c1536    9 weeks ago     2.43 MB
+</span><span class="gp">localhost:5000/test/busybox    &lt;none&gt;</span><span class="w">    </span>sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf   4986bf8c1536    9 weeks ago     2.43 MB
 </code></pre></div></div>
 
 <p>ダイジェスト値を使ってイメージを削除するには、以下のようにします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker rmi localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
-Untagged: localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker rmi localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+<span class="go">Untagged: localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
 Deleted: 4986bf8c15363d1c5d15512d5266f8777bfba4974ac56e3270e7760f6f0a8125
 Deleted: ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2
 Deleted: df7546f9f060a2268024c8a230d8639878585defcc1bc6f79d2728a13957871b
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

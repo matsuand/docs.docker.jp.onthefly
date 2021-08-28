@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker push | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker push" />
   <meta property="og:description" content="docker push: [Docker Hub](https://hub.docker.com) レジストリや独自レジストリに対して`docker image push`を実行することで、そのイメージを共有することができます。 適正なイメージ名やタグ名についての詳細は [`docker image tag`](tag.md) リファレンスを参照してください。 `docker image push`を実行した端末上において、たとえば`CTRL-c`を押下してプロセスを kill した場合、プッシュ処理は停止します。 プッシュ処理中にはプログレスバーが表示され、非圧縮時のサイズが示されます。 プッシュされるデータは送信前に圧縮されるため、実際にアップロードされたサイズはプログレスバー上には反映されません。 レジストリの資格情報は [docker login](login.md) を用いて管理されます。 {: #concurrent-uploads } ### 並列アップロード Docker デーモンはデフォルトにおいて、イメージのプッシュ時に同時にプッシュするレイヤー数は..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/push/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker push","description":"docker push: [Docker Hub](https://hub.docker.com) レジストリや独自レジストリに対して`docker image push`を実行することで、そのイメージを共有することができます。 適正なイメージ名やタグ名についての詳細は [`docker image tag`](tag.md) リファレンスを参照してください。 `docker image push`を実行した端末上において、たとえば`CTRL-c`を押下してプロセスを kill した場合、プッシュ処理は停止します。 プッシュ処理中にはプログレスバーが表示され、非圧縮時のサイズが示されます。 プッシュされるデータは送信前に圧縮されるため、実際にアップロードされたサイズはプログレスバー上には反映されません。 レジストリの資格情報は [docker login](login.md) を用いて管理されます。 {: #concurrent-uploads } ### 並列アップロード Docker デーモンはデフォルトにおいて、イメージのプッシュ時に同時にプッシュするレイヤー数は...","url":"https://docs.docker.com/engine/reference/commandline/push/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -209,21 +209,21 @@ https://github.com/docker/cli
 そして新たなイメージ名をつけてコミットします。
 イメージ名に利用できる文字は<code class="language-plaintext highlighter-rouge">a-z0-9-_.</code>のみです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container commit c16378f943fe rhel-httpd:latest
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container commit c16378f943fe rhel-httpd:latest
 </code></pre></div></div>
 
 <p>そしてイメージ ID を利用してそのイメージをレジストリにプッシュします。
 以下の例ではレジストリが<code class="language-plaintext highlighter-rouge">registry-host</code>というホスト上にあり、ポート<code class="language-plaintext highlighter-rouge">5000</code>で待ち受けているものとします。
 以下ではイメージにタグづけを行い、レジストリのホスト名または IP アドレスとポート番号を指定して実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
-
-<span class="nv">$ </span>docker image push registry-host:5000/myadmin/rhel-httpd:latest
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker image push registry-host:5000/myadmin/rhel-httpd:latest
 </code></pre></div></div>
 
 <p>正常処理されたことを確認するために、以下を実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image <span class="nb">ls</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
 </code></pre></div></div>
 
 <p>出力結果には<code class="language-plaintext highlighter-rouge">rhel-httpd</code>と<code class="language-plaintext highlighter-rouge">registry-host:5000/myadmin/rhel-httpd</code>が一覧にあがります。</p>
@@ -235,29 +235,29 @@ https://github.com/docker/cli
 <p>以下の例では 1 つのイメージに対して複数のタグを生成しています。
 そしてそのタグすべてを Docker Hub にプッシュします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image tag myimage registry-host:5000/myname/myimage:latest
-<span class="nv">$ </span>docker image tag myimage registry-host:5000/myname/myimage:v1.0.1
-<span class="nv">$ </span>docker image tag myimage registry-host:5000/myname/myimage:v1.0
-<span class="nv">$ </span>docker image tag myimage registry-host:5000/myname/myimage:v1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image tag myimage registry-host:5000/myname/myimage:latest
+<span class="gp">$</span><span class="w"> </span>docker image tag myimage registry-host:5000/myname/myimage:v1.0.1
+<span class="gp">$</span><span class="w"> </span>docker image tag myimage registry-host:5000/myname/myimage:v1.0
+<span class="gp">$</span><span class="w"> </span>docker image tag myimage registry-host:5000/myname/myimage:v1
 </code></pre></div></div>
 
 <p>イメージには複数のタグ名がつけられています。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image <span class="nb">ls
-
-</span>REPOSITORY                          TAG        IMAGE ID       CREATED      SIZE
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<span class="go">
+REPOSITORY                          TAG        IMAGE ID       CREATED      SIZE
 myimage                             latest     6d5fcfe5ff17   2 hours ago  1.22MB
 registry-host:5000/myname/myimage   latest     6d5fcfe5ff17   2 hours ago  1.22MB
 registry-host:5000/myname/myimage   v1         6d5fcfe5ff17   2 hours ago  1.22MB
 registry-host:5000/myname/myimage   v1.0       6d5fcfe5ff17   2 hours ago  1.22MB
 registry-host:5000/myname/myimage   v1.0.1     6d5fcfe5ff17   2 hours ago  1.22MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>そして<code class="language-plaintext highlighter-rouge">--all-tags</code>オプションを使ってプッシュを行うと、<code class="language-plaintext highlighter-rouge">registry-host:5000/myname/myimage</code>イメージのタグがすべてプッシュされます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image push <span class="nt">--all-tags</span> registry-host:5000/myname/myimage
-
-The push refers to repository <span class="o">[</span>registry-host:5000/myname/myimage]
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image push <span class="nt">--all-tags</span> registry-host:5000/myname/myimage
+<span class="go">
+The push refers to repository [registry-host:5000/myname/myimage]
 195be5f8be1d: Pushed
 latest: digest: sha256:edafc0a0fb057813850d1ba44014914ca02d671ae247107ca70c94db686e7de6 size: 4527
 195be5f8be1d: Layer already exists
@@ -266,7 +266,7 @@ v1: digest: sha256:edafc0a0fb057813850d1ba44014914ca02d671ae247107ca70c94db686e7
 v1.0: digest: sha256:edafc0a0fb057813850d1ba44014914ca02d671ae247107ca70c94db686e7de6 size: 4527
 195be5f8be1d: Layer already exists
 v1.0.1: digest: sha256:edafc0a0fb057813850d1ba44014914ca02d671ae247107ca70c94db686e7de6 size: 4527
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

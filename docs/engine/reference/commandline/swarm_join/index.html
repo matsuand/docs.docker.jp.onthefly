@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker swarm join | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker swarm join" />
   <meta property="og:description" content="docker swarm join: Join a node to a swarm. The node joins as a manager node or worker node based upon the token you pass with the `--token` flag. If..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/swarm_join/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker swarm join","description":"docker swarm join: Join a node to a swarm. The node joins as a manager node or worker node based upon the token you pass with the `--token` flag. If...","url":"https://docs.docker.com/engine/reference/commandline/swarm_join/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -175,7 +175,7 @@ pass a worker token, the node joins as a worker.</p>
   <tr>
     <td><code class="language-plaintext highlighter-rouge">--availability</code></td>
     <td><code class="language-plaintext highlighter-rouge">active</code></td>
-    <td>ノードの利用状態（availability）。("active"|"pause"|"drain")</td>
+    <td>Availability of the node ("active"|"pause"|"drain")</td>
   </tr>
 
   
@@ -230,13 +230,14 @@ pass a worker token, the node joins as a worker.</p>
 
 <p>The example below demonstrates joining a manager node using a manager token.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2 192.168.99.121:2377
-This node joined a swarm as a manager.
-<span class="nv">$ </span>docker node <span class="nb">ls
-</span>ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
-dkp8vy1dq1kxleu9g4u78tlag <span class="k">*</span>  manager2  Ready   Active        Reachable
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2 192.168.99.121:2377
+<span class="go">This node joined a swarm as a manager.
+
+</span><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span>
+<span class="go">ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+dkp8vy1dq1kxleu9g4u78tlag *  manager2  Ready   Active        Reachable
 dvfxp4zseq4s0rih1selh0d20    manager1  Ready   Active        Leader
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>A cluster should only have 3-7 managers at most, because a majority of managers must be available
 for the cluster to function. Nodes that aren’t meant to participate in this management quorum
@@ -246,14 +247,15 @@ should join as workers instead. Managers should be stable hosts that have static
 
 <p>The example below demonstrates joining a worker node using a worker token.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx 192.168.99.121:2377
-This node joined a swarm as a worker.
-<span class="nv">$ </span>docker node <span class="nb">ls
-</span>ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="nt">--token</span> SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx 192.168.99.121:2377
+<span class="go">This node joined a swarm as a worker.
+
+</span><span class="gp">$</span><span class="w"> </span>docker node <span class="nb">ls</span>
+<span class="go">ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 7ln70fl22uw2dvjn2ft53m3q5    worker2   Ready   Active
 dkp8vy1dq1kxleu9g4u78tlag    worker1   Ready   Active        Reachable
-dvfxp4zseq4s0rih1selh0d20 <span class="k">*</span>  manager1  Ready   Active        Leader
-</code></pre></div></div>
+dvfxp4zseq4s0rih1selh0d20 *  manager1  Ready   Active        Leader
+</span></code></pre></div></div>
 
 <h3 id="--listen-addr-value"><code class="language-plaintext highlighter-rouge">--listen-addr value</code></h3>
 

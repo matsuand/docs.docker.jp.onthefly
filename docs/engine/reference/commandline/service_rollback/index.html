@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker service rollback | Docker ドキュメント</title>
@@ -57,12 +57,12 @@
 &gt; したがって Swarm のマネージャーノード上で実行する必要があります。
 &gt; マネージャーノードとワーカーノードについては [Swarm モード](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/) の節を参照してください。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/service_rollback/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker service rollback","description":"docker service rollback: Swarm 内の指定したサービスを、以前のバージョンにロールバックします。\n\n> **メモ**\n>\n> これはクラスター管理コマンドです。\n> したがって Swarm のマネージャーノード上で実行する必要があります。\n> マネージャーノードとワーカーノードについては [Swarm モード](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/) の節を参照してください。","url":"https://docs.docker.com/engine/reference/commandline/service_rollback/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -220,36 +220,36 @@ https://github.com/docker/cli
 
 <p>まず 1 つのレプリカからなる 1 つのサービスを生成します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> my-service <span class="nt">-p</span> 8080:80 nginx:alpine
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> my-service <span class="nt">-p</span> 8080:80 nginx:alpine
 </code></pre></div></div>
 
 <p>このサービスが 1 つのレプリカにより実行していることを確認します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+</span><span class="gp">xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080-&gt;</span>80/tcp
 </code></pre></div></div>
 
 <p>次にこのサービスのレプリカ数を 3 にアップデートします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--replicas</span><span class="o">=</span>3 my-service
-
-<span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--replicas</span><span class="o">=</span>3 my-service
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+</span><span class="gp">xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        *:8080-&gt;</span>80/tcp
 </code></pre></div></div>
 
 <p>そしてこのサービスを前バージョンにロールバックします。
 確認してみると、再度レプリカ数が 1 になっていることがわかります。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rollback my-service
-
-<span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service rollback my-service
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+<span class="go">
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+</span><span class="gp">xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080-&gt;</span>80/tcp
 </code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>

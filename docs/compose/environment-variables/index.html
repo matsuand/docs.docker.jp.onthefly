@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における環境変数 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose における環境変数" />
   <meta property="og:description" content="Compose において環境変数を設定、利用、管理する方法について説明。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における環境変数","description":"Compose において環境変数を設定、利用、管理する方法について説明。","url":"https://docs.docker.com/compose/environment-variables/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose における環境変数</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Compose の複数の場面において環境変数がさまざまに用いられています。
+                        <section class="section"><h1>Compose における環境変数</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Compose の複数の場面において環境変数がさまざまに用いられています。
 このページでは環境変数について必要となる情報を示します。</p>
 
 <h2 id="substitute-environment-variables-in-compose-files">Compose ファイル内での環境変数の利用</h2>
@@ -116,6 +116,61 @@
 
 <p>環境変数が複数ある場合、<code class="language-plaintext highlighter-rouge">.env</code>という名前のファイルに環境変数のデフォルト値を設定することができます。
 あるいはコマンドラインオプション<code class="language-plaintext highlighter-rouge">--env-file</code>を使って環境変数ファイルへのパスを指定して利用することもできます。</p>
+
+<p>設定オプションには環境変数を含めることができます。
+Compose は <code class="language-plaintext highlighter-rouge">docker-compose</code> が実行されたシェル環境から変数値を取得します。
+たとえばシェル環境に <code class="language-plaintext highlighter-rouge">POSTGRES_VERSION=9.3</code> が定義されているとして、以下のような設定を行ったとします。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">db</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgres:${POSTGRES_VERSION}"</span>
+</code></pre></div></div>
+
+<p>上の設定を使って <code class="language-plaintext highlighter-rouge">docker-compose up</code> を実行すると、Compose はシェル環境内の環境変数 <code class="language-plaintext highlighter-rouge">POSTGRES_VERSION</code> を見にいき、その値を使って設定を置換します。
+この例では <code class="language-plaintext highlighter-rouge">image</code> が <code class="language-plaintext highlighter-rouge">postgres:9.3</code> と置換された上で、設定に関する処理へ進みます。</p>
+
+<p>その環境変数が何も設定されていなかった場合、Compose は空文字に置換します。
+上の例でいうと <code class="language-plaintext highlighter-rouge">POSTGRES_VERSION</code> が設定されていなかったとき、<code class="language-plaintext highlighter-rouge">image</code> オプションの値は <code class="language-plaintext highlighter-rouge">postgres:</code> になります。</p>
+
+<p>環境変数のデフォルト値を <a href="/compose/env-file/"><code class="language-plaintext highlighter-rouge">.env</code> ファイル</a> に設定しておくことができます。
+Compose はプロジェクトディレクトリ（Compose ファイルの親ディレクトリ）内のこのファイルを自動的に探しにいきます。
+<code class="language-plaintext highlighter-rouge">.env</code> ファイルで定義されたものよりも、シェル環境で設定された値が優先されます。</p>
+
+<blockquote class="important">
+  <p><code class="language-plaintext highlighter-rouge">.env</code> ファイルによる機能は <code class="language-plaintext highlighter-rouge">docker-compose up</code> コマンドを使うときだけ動作します。
+<code class="language-plaintext highlighter-rouge">docker stack deploy</code> コマンドでは動作しません。</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">$VARIABLE</code> と <code class="language-plaintext highlighter-rouge">${VARIABLE}</code> という 2 つの文法がともにサポートされます。
+さらに <a href="/compose/compose-file/compose-versioning/#version-21">2.1 ファイルフォーマット</a> を利用している場合は、シェル上でも利用されているインラインのデフォルト指定方法を行うことができます。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">${VARIABLE:-default}</code> は <code class="language-plaintext highlighter-rouge">VARIABLE</code> がセットされていないか空文字であるときに <code class="language-plaintext highlighter-rouge">default</code> として評価されます。</li>
+  <li><code class="language-plaintext highlighter-rouge">${VARIABLE-default}</code> は <code class="language-plaintext highlighter-rouge">VARIABLE</code> がセットされていないときのみ <code class="language-plaintext highlighter-rouge">default</code> として評価されます。</li>
+</ul>
+
+<p>同様に以下の文法により、変数を必須とする扱いができます。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">${VARIABLE:?err}</code> は <code class="language-plaintext highlighter-rouge">VARIABLE</code> がセットされていないか空文字であるときに、<code class="language-plaintext highlighter-rouge">err</code> を含むエラーメッセージを表示して終了します。</li>
+  <li><code class="language-plaintext highlighter-rouge">${VARIABLE?err}</code> は <code class="language-plaintext highlighter-rouge">VARIABLE</code> がセットされていないときに、<code class="language-plaintext highlighter-rouge">err</code> を含むエラーメッセージを表示して終了します。</li>
+</ul>
+
+<p>シェル風のこの他の機能、たとえば <code class="language-plaintext highlighter-rouge">${VARIABLE/foo/bar}</code> などはサポートされていません。</p>
+
+<p>設定ファイル内にドル記号そのものが必要な場合は <code class="language-plaintext highlighter-rouge">$$</code>（ドル記号 2 つ）を書きます。
+この記述は Compose が値を取り違えないようにします。
+つまり <code class="language-plaintext highlighter-rouge">$$</code> と書くことで、環境変数を参照しつつ Compose には処理させないようにすることができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$$VAR_NOT_INTERPOLATED_BY_COMPOSE"</span>
+</code></pre></div></div>
+
+<p>このことを忘れてドル記号 1 つ（<code class="language-plaintext highlighter-rouge">$</code>）を用いてしまうと、Compose は環境変数として値を解釈し、以下の警告を出します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
+(VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。)
+</span></code></pre></div></div>
 
 <h3 id="the-env-file"><code class="language-plaintext highlighter-rouge">.env</code>ファイル</h3>
 

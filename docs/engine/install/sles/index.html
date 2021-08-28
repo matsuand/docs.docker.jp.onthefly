@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Install Docker Engine on SLES | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Install Docker Engine on SLES" />
   <meta property="og:description" content="Instructions for installing Docker Engine on SLES" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/sles/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Install Docker Engine on SLES","description":"Instructions for installing Docker Engine on SLES","url":"https://docs.docker.com/engine/install/sles/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -118,17 +118,19 @@ are not yet supported for SLES.</p>
 
 <h3 id="os-requirements">OS requirements</h3>
 
-<p>To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+<p>To install Docker Engine, you need a maintained version of SLES 15-SP2 or SLES 15-SP3 on s390x (IBM Z).
 Archived versions aren’t supported or tested.</p>
 
 <p>The <a href="https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&amp;version=15.2&amp;arch=s390x"><code class="language-plaintext highlighter-rouge">SCC SUSE</code></a>
 repositories must be enabled.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">SELinux (SLE_15_SP2)</code>repository must be enabled. This repository is not added by
-default, you need to
-<a href="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo">add it</a>.</p>
+<p>The <a href="https://download.opensuse.org/repositories/security">OpenSUSE <code class="language-plaintext highlighter-rouge">SELinux</code> repository</a>
+must be enabled. This repository is not added by default, and you need to enable
+it for the version of SLES you are running. Run the following commands to add it:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">sles_version</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">.</span> /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">VERSION_ID</span><span class="p">##*.</span><span class="k">}</span><span class="s2">"</span><span class="si">)</span><span class="s2">"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nv">opensuse_repo</span><span class="o">=</span><span class="s2">"https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP</span><span class="nv">$sles_version</span><span class="s2">/security:SELinux.repo"</span>
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper addrepo <span class="nv">$opensuse_repo</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver is recommended.</p>
@@ -187,9 +189,7 @@ from the repository.</p>
 
 <p>Set up the <strong>stable</strong> repository.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="se">\</span>
-    addrepo <span class="se">\</span>
-    https://download.docker.com/linux/sles/docker-ce.repo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper addrepo https://download.docker.com/linux/sles/docker-ce.repo
 </code></pre></div></div>
 
 <blockquote>
@@ -246,16 +246,18 @@ in the repo, then select and install:</p>
     <p>a. List and sort the versions available in your repo. This example sorts
    results by version number, highest to lowest, and is truncated:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper se docker-ce <span class="nt">--match-exact</span>  | <span class="nb">sort</span> <span class="nt">-r</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper search <span class="nt">-s</span> <span class="nt">--match-exact</span> docker-ce | <span class="nb">sort</span> <span class="nt">-r</span>
+<span class="go">
+  v  | docker-ce | package | 3:20.10.8-3 | s390x | Docker CE Stable - s390x
+  v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
+</span></code></pre></div>    </div>
 
     <p>The list returned depends on which repositories are enabled, and is specific
 to your version of SLES.</p>
 
     <p>b. Install a specific version by its fully qualified package name, which is
-   the package name (<code class="language-plaintext highlighter-rouge">docker-ce</code>) plus the version string (2nd column)
-   starting at the first colon (<code class="language-plaintext highlighter-rouge">:</code>), up to the first hyphen, separated by
-   a hyphen (<code class="language-plaintext highlighter-rouge">-</code>). For example, <code class="language-plaintext highlighter-rouge">docker-ce-18.09.1</code>.</p>
+   the package name (<code class="language-plaintext highlighter-rouge">docker-ce</code>) plus the version string (fourth column),
+   separated by a hyphen (<code class="language-plaintext highlighter-rouge">-</code>). For example, <code class="language-plaintext highlighter-rouge">docker-ce-3:20.10.8</code>.</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>zypper <span class="nb">install </span>docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io
 </code></pre></div>    </div>

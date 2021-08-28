@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker network prune | Docker ドキュメント</title>
@@ -42,12 +42,12 @@
   <meta property="og:description" content="docker network prune: 未使用のネットワークをすべて削除します。
 未使用のネットワークとは、どのコンテナーからも参照されていないネットワークのことです。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/network_prune/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker network prune","description":"docker network prune: 未使用のネットワークをすべて削除します。\n未使用のネットワークとは、どのコンテナーからも参照されていないネットワークのことです。","url":"https://docs.docker.com/engine/reference/commandline/network_prune/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -183,14 +183,14 @@ https://github.com/docker/cli
 
 <h2 id="examples">利用例</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network prune
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network prune
+<span class="go">
 WARNING! This will remove all custom networks not used by at least one container.
-Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
+Are you sure you want to continue? [y/N] y
 Deleted Networks:
 n1
 n2
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="filtering">フィルター検索</h3>
 
@@ -219,28 +219,28 @@ Unix 時間を指定する場合は seconds[.nanoseconds]（[秒.ナノ秒]）�
 <p>以下の例では生成から 5 分以上経過したネットワークを削除します。
 ただしシステムネットワークである <code class="language-plaintext highlighter-rouge">bridge</code>、<code class="language-plaintext highlighter-rouge">host</code>、<code class="language-plaintext highlighter-rouge">none</code> は取り除かれる（prune される）ことはありません。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+7430df902d7a        bridge              bridge              local
+ea92373fd499        foo-1-day-ago       bridge              local
+ab53663ed3c7        foo-1-min-ago       bridge              local
+97b91972bc3b        host                host                local
+f949d337b1f5        none                null                local
 
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-7430df902d7a        bridge              bridge              <span class="nb">local
-</span>ea92373fd499        foo-1-day-ago       bridge              <span class="nb">local
-</span>ab53663ed3c7        foo-1-min-ago       bridge              <span class="nb">local
-</span>97b91972bc3b        host                host                <span class="nb">local
-</span>f949d337b1f5        none                null                <span class="nb">local</span>
-
-<span class="nv">$ </span>docker network prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="k">until</span><span class="o">=</span>5m
-
+</span><span class="gp">$</span><span class="w"> </span>docker network prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="k">until</span><span class="o">=</span>5m
+<span class="go">
 Deleted Networks:
 foo-1-day-ago
 
-<span class="nv">$ </span>docker network <span class="nb">ls
-
-</span>NETWORK ID          NAME                DRIVER              SCOPE
-7430df902d7a        bridge              bridge              <span class="nb">local
-</span>ab53663ed3c7        foo-1-min-ago       bridge              <span class="nb">local
-</span>97b91972bc3b        host                host                <span class="nb">local
-</span>f949d337b1f5        none                null                <span class="nb">local</span>
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">ls</span>
+<span class="go">
+NETWORK ID          NAME                DRIVER              SCOPE
+7430df902d7a        bridge              bridge              local
+ab53663ed3c7        foo-1-min-ago       bridge              local
+97b91972bc3b        host                host                local
+f949d337b1f5        none                null                local
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

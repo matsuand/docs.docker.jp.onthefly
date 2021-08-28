@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker container prune | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker container prune" />
   <meta property="og:description" content="docker container prune: 停止中のコンテナーをすべて削除します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/container_prune/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker container prune","description":"docker container prune: 停止中のコンテナーをすべて削除します。","url":"https://docs.docker.com/engine/reference/commandline/container_prune/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -178,15 +178,15 @@ https://github.com/docker/cli
 
 <h3 id="prune-containers">コンテナーの削除</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container prune
-WARNING! This will remove all stopped containers.
-Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container prune
+<span class="go">WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
 Deleted Containers:
 4a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063
 f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360
 
 Total reclaimed space: 212 B
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="filtering">フィルター検索</h3>
 
@@ -214,45 +214,45 @@ Unix タイムスタンプを指定する場合は seconds[.nanoseconds]（[秒.
 
 <p>以下では、5 分以上前に生成されたコンテナーを削除します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 41 seconds ago
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 12 minutes ago
+61b9efa71024        busybox             "sh"                2017-01-04 13:23:33 -0800 PST   Exited (0) 41 seconds ago
+53a9bc23a516        busybox             "sh"                2017-01-04 13:11:59 -0800 PST   Exited (0) 12 minutes ago
 
-<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=5m"</span>
-
+</span><span class="gp">$</span><span class="w"> </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=5m"</span>
+<span class="go">
 Deleted Containers:
 53a9bc23a5168b6caa2bfbefddf1b30f93c7ad57f3dec271fd32707497cb9369
 
 Total reclaimed space: 25 B
 
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
+</span><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 44 seconds ago
-</code></pre></div></div>
+61b9efa71024        busybox             "sh"                2017-01-04 13:23:33 -0800 PST   Exited (0) 44 seconds ago
+</span></code></pre></div></div>
 
 <p>以下では、<code class="language-plaintext highlighter-rouge">2017-01-04T13:10:00</code> より以前に生成されたコンテナーを削除します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 7 minutes ago
-4a75091a6d61        busybox             <span class="s2">"sh"</span>                2017-01-04 13:09:53 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
+53a9bc23a516        busybox             "sh"                2017-01-04 13:11:59 -0800 PST   Exited (0) 7 minutes ago
+4a75091a6d61        busybox             "sh"                2017-01-04 13:09:53 -0800 PST   Exited (0) 9 minutes ago
 
-<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=2017-01-04T13:10:00"</span>
-
+</span><span class="gp">$</span><span class="w"> </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=2017-01-04T13:10:00"</span>
+<span class="go">
 Deleted Containers:
 4a75091a6d618526fcd8b33ccd6e5928ca2a64415466f768a6180004b0c72c6c
 
 Total reclaimed space: 27 B
 
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
+</span><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
-</code></pre></div></div>
+53a9bc23a516        busybox             "sh"                2017-01-04 13:11:59 -0800 PST   Exited (0) 9 minutes ago
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

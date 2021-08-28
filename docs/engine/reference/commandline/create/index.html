@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker create | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker create" />
   <meta property="og:description" content="docker create: `docker create` コマンドは、指定されたイメージの上に書き込み可能なコンテナーを生成します。 そして指定されたコマンドが実行できるように準備します。 この後にコンテナー ID が `STDOUT` に出力されます。 これは `docker run -d` に似ていますが、ただしこのコマンドではコンテナーは起動しません。 これに続けて `docker start ` コマンドを実行すれば、どのような時点でもコンテナーを起動させることができます。 事前にコンテナー設定を行っておいて、必要となるときまでコンテナーを起動させないでおきたい場合に、このコマンドが役立ちます。 新たに生成されたコンテナーの初期状態は `created`（生成済み）です。 詳細は [run](run.md) コマンドや [Docker run リファレンス](../run.md)..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/create/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker create","description":"docker create: `docker create` コマンドは、指定されたイメージの上に書き込み可能なコンテナーを生成します。 そして指定されたコマンドが実行できるように準備します。 この後にコンテナー ID が `STDOUT` に出力されます。 これは `docker run -d` に似ていますが、ただしこのコマンドではコンテナーは起動しません。 これに続けて `docker start ` コマンドを実行すれば、どのような時点でもコンテナーを起動させることができます。 事前にコンテナー設定を行っておいて、必要となるときまでコンテナーを起動させないでおきたい場合に、このコマンドが役立ちます。 新たに生成されたコンテナーの初期状態は `created`（生成済み）です。 詳細は [run](run.md) コマンドや [Docker run リファレンス](../run.md)...","url":"https://docs.docker.com/engine/reference/commandline/create/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -1560,14 +1560,14 @@ https://github.com/docker/cli
 
 <h3 id="create-and-start-a-container">コンテナーの生成と起動</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create <span class="nt">-t</span> <span class="nt">-i</span> fedora bash
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker create <span class="nt">-t</span> <span class="nt">-i</span> fedora bash
+<span class="go">
 6d8af538ec541dd581ebc2a24153a28329acb5268abe5ef868c1f1a261221752
 
-<span class="nv">$ </span>docker start <span class="nt">-a</span> <span class="nt">-i</span> 6d8af538ec5
-
-bash-4.2#
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker start <span class="nt">-a</span> <span class="nt">-i</span> 6d8af538ec5
+<span class="go">
+</span><span class="gp">bash-4.2#</span><span class="w">
+</span></code></pre></div></div>
 
 <h3 id="initialize-volumes">ボリュームの初期化</h3>
 
@@ -1575,41 +1575,41 @@ bash-4.2#
 （<code class="language-plaintext highlighter-rouge">docker run</code>も同じです。）
 つまり<code class="language-plaintext highlighter-rouge">create</code>によって<code class="language-plaintext highlighter-rouge">data</code>ボリュームコンテナーが生成されるので、これを別のコンテナーが利用できることを意味します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create <span class="nt">-v</span> /data <span class="nt">--name</span> data ubuntu
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker create <span class="nt">-v</span> /data <span class="nt">--name</span> data ubuntu
+<span class="go">
 240633dfbb98128fa77473d3d9018f6123b99c454b3251427ae190a7d951ad57
 
-<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> data ubuntu <span class="nb">ls</span> <span class="nt">-la</span> /data
-
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> data ubuntu <span class="nb">ls</span> <span class="nt">-la</span> /data
+<span class="go">
 total 8
-drwxr-xr-x  2 root root 4096 Dec  5 04:10 <span class="nb">.</span>
+drwxr-xr-x  2 root root 4096 Dec  5 04:10 .
 drwxr-xr-x 48 root root 4096 Dec  5 04:11 ..
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>同様にして<code class="language-plaintext highlighter-rouge">create</code>は、ホストディレクトリをバインドマウントするコンテナーを生成します。
 そしてこれに続くコンテナーがこれを利用できるようにします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create <span class="nt">-v</span> /home/docker:/docker <span class="nt">--name</span> docker ubuntu
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker create <span class="nt">-v</span> /home/docker:/docker <span class="nt">--name</span> docker ubuntu
+<span class="go">
 9aa88c08f319cd1e4515c3c46b0de7cc9aa75e878357b1e96f91e2c773029f03
 
-<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> docker ubuntu <span class="nb">ls</span> <span class="nt">-la</span> /docker
-
+</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> docker ubuntu <span class="nb">ls</span> <span class="nt">-la</span> /docker
+<span class="go">
 total 20
-drwxr-sr-x  5 1000 staff  180 Dec  5 04:00 <span class="nb">.</span>
+drwxr-sr-x  5 1000 staff  180 Dec  5 04:00 .
 drwxr-xr-x 48 root root  4096 Dec  5 04:13 ..
-<span class="nt">-rw-rw-r--</span>  1 1000 staff 3833 Dec  5 04:01 .ash_history
-<span class="nt">-rw-r--r--</span>  1 1000 staff  446 Nov 28 11:51 .ashrc
-<span class="nt">-rw-r--r--</span>  1 1000 staff   25 Dec  5 04:00 .gitconfig
+-rw-rw-r--  1 1000 staff 3833 Dec  5 04:01 .ash_history
+-rw-r--r--  1 1000 staff  446 Nov 28 11:51 .ashrc
+-rw-r--r--  1 1000 staff   25 Dec  5 04:00 .gitconfig
 drwxr-sr-x  3 1000 staff   60 Dec  1 03:28 .local
-<span class="nt">-rw-r--r--</span>  1 1000 staff  920 Nov 28 11:51 .profile
+-rw-r--r--  1 1000 staff  920 Nov 28 11:51 .profile
 drwx--S---  2 1000 staff  460 Dec  5 00:51 .ssh
 drwxr-xr-x 32 1000 staff 1140 Dec  5 04:01 docker
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>コンテナーごとにストレージドライバーのオプションを設定します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create <span class="nt">-it</span> <span class="nt">--storage-opt</span> <span class="nv">size</span><span class="o">=</span>120G fedora /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker create <span class="nt">-it</span> <span class="nt">--storage-opt</span> <span class="nv">size</span><span class="o">=</span>120G fedora /bin/bash
 </code></pre></div></div>
 
 <p>上の例において（そのサイズ設定）は、コンテナー生成時に rootfs のサイズを 120 G に設定しています。
@@ -1660,7 +1660,7 @@ Microsoft Windows の場合、以下の値を設定することができます�
 たとえば、キャラクターデバイスとしてメジャー番号<code class="language-plaintext highlighter-rouge">42</code>、マイナー番号は何でも取るような（新たなデバイスとして出てきたら加えられる）デバイスにアクセスする必要があるとします。
 この場合には、以下のようなルールを適用することになるはずです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker create --device-cgroup-rule='c 42:* rmw' -name my-container my-image
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker create <span class="nt">--device-cgroup-rule</span><span class="o">=</span><span class="s1">'c 42:* rmw'</span> <span class="nt">-name</span> my-container my-image
 </code></pre></div></div>
 
 <p>そして必要なデバイスが追加された際に<code class="language-plaintext highlighter-rouge">docker exec my-container mknod newDevX c 42 &lt;minor&gt;</code>を実行するようなスクリプトを、<code class="language-plaintext highlighter-rouge">udev</code>から実行するように設定します。</p>

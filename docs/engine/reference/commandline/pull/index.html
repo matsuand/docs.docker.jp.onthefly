@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker pull | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker pull" />
   <meta property="og:description" content="docker pull: たいていのイメージは [Docker Hub](https://hub.docker.com) レジストリから取得したイメージを最上位のベースイメージとして生成されています。 [Docker Hub](https://hub.docker.com) にはあらかじめビルドされた数多くのイメージがあり、何も定義したり設定したりせず、ただ`pull`するだけで利用することができます。 特定のイメージあるいはイメージのセット（つまりリポジトリ）をダウンロードするには`docker pull`を利用します。 {: #proxy-configuration } ### プロキシー設定 たとえば会社の設定として HTTP プロキシーサーバーを介している場合、レジストリへの接続を開始する前に、デーモンのプロキシー設定を行う必要があるかもしれません。 その場合は環境変数`HTTP_PROXY`、`HTTPS_PROXY`、`NO_PROXY`を用います。 `systemd`を利用するホスト上においてこのような変数を設定するには、[control and configure Docker with systemd](__HOSTURL__/config/daemon/systemd/#httphttps-proxy) を参考にして変数設定を行ってください。 {: #concurrent-downloads }..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/pull/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker pull","description":"docker pull: たいていのイメージは [Docker Hub](https://hub.docker.com) レジストリから取得したイメージを最上位のベースイメージとして生成されています。 [Docker Hub](https://hub.docker.com) にはあらかじめビルドされた数多くのイメージがあり、何も定義したり設定したりせず、ただ`pull`するだけで利用することができます。 特定のイメージあるいはイメージのセット（つまりリポジトリ）をダウンロードするには`docker pull`を利用します。 {: #proxy-configuration } ### プロキシー設定 たとえば会社の設定として HTTP プロキシーサーバーを介している場合、レジストリへの接続を開始する前に、デーモンのプロキシー設定を行う必要があるかもしれません。 その場合は環境変数`HTTP_PROXY`、`HTTPS_PROXY`、`NO_PROXY`を用います。 `systemd`を利用するホスト上においてこのような変数を設定するには、[control and configure Docker with systemd](__HOSTURL__/config/daemon/systemd/#httphttps-proxy) を参考にして変数設定を行ってください。 {: #concurrent-downloads }...","url":"https://docs.docker.com/engine/reference/commandline/pull/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -224,15 +224,15 @@ https://github.com/docker/cli
 タグ名を指定しなかった場合、Docker Engine はデフォルトとして<code class="language-plaintext highlighter-rouge">:latest</code>というタグを用います。
 したがって以下のコマンドは<code class="language-plaintext highlighter-rouge">debian:latest</code>イメージをプルします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull debian
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull debian
+<span class="go">
 Using default tag: latest
 latest: Pulling from library/debian
-fdd5d7827f33: Pull <span class="nb">complete
-</span>a3ed95caeb02: Pull <span class="nb">complete
-</span>Digest: sha256:e7d38b3517548a1c71e41bffe9c8ae6d6d29546ce46bf62159837aad072c90aa
-Status: Downloaded newer image <span class="k">for </span>debian:latest
-</code></pre></div></div>
+fdd5d7827f33: Pull complete
+a3ed95caeb02: Pull complete
+Digest: sha256:e7d38b3517548a1c71e41bffe9c8ae6d6d29546ce46bf62159837aad072c90aa
+Status: Downloaded newer image for debian:latest
+</span></code></pre></div></div>
 
 <p>Docker イメージは複数レイヤーにより構成することができます。
 上の例におけるイメージは 2 つのレイヤー、つまり<code class="language-plaintext highlighter-rouge">fdd5d7827f33</code>と<code class="language-plaintext highlighter-rouge">a3ed95caeb02</code>から構成されています。</p>
@@ -242,23 +242,23 @@ Status: Downloaded newer image <span class="k">for </span>debian:latest
 したがって<code class="language-plaintext highlighter-rouge">debian:jessie</code>イメージをプルすると、レイヤーはプルせず、メタデータのみをプルすることになります。
 全レイヤーがすでにローカルに取得できているためです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull debian:jessie
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull debian:jessie
+<span class="go">
 jessie: Pulling from library/debian
 fdd5d7827f33: Already exists
 a3ed95caeb02: Already exists
 Digest: sha256:a9c958be96d7d40df920e7041608f2f017af81800ca5ad23e327bc402626b58e
-Status: Downloaded newer image <span class="k">for </span>debian:jessie
-</code></pre></div></div>
+Status: Downloaded newer image for debian:jessie
+</span></code></pre></div></div>
 
 <p>どのイメージがローカルに存在するかを確認するには <a href="/engine/reference/commandline/images/"><code class="language-plaintext highlighter-rouge">docker images</code></a> コマンドを用います。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<span class="go">
 REPOSITORY   TAG      IMAGE ID        CREATED      SIZE
 debian       jessie   f50f9524513f    5 days ago   125.1 MB
 debian       latest   f50f9524513f    5 days ago   125.1 MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>Docker ではイメージ内容をアドレス検索できるイメージストア（content-addressable image store）を利用します。
 そこでのイメージ ID は、イメージ設定とレイヤーから算出される SHA256 ダイジェスト値です。
@@ -283,22 +283,20 @@ debian       latest   f50f9524513f    5 days ago   125.1 MB
 <p>イメージのダイジェスト値を知るには、まずはイメージをプルします。
 そこで Docker Hub から最新の<code class="language-plaintext highlighter-rouge">ubuntu:14.04</code>イメージをプルしてみます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu:14.04
-
-14.04: Pulling from library/ubuntu
-5a132a7e7af1: Pull <span class="nb">complete
-</span>fd2731e4c50c: Pull <span class="nb">complete
-</span>28a2f68d1120: Pull <span class="nb">complete
-</span>a3ed95caeb02: Pull <span class="nb">complete
-</span>Digest: sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-Status: Downloaded newer image <span class="k">for </span>ubuntu:14.04
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu:20.04
+<span class="go">
+20.04: Pulling from library/ubuntu
+16ec32c2132b: Pull complete
+Digest: sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+</span></code></pre></div></div>
 
 <p>プルが完了するとイメージのダイジェスト値が表示されます。
 上の例におけるイメージのダイジェスト値は以下のものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+</span></code></pre></div></div>
 
 <p>レジストリへの <strong>プッシュ</strong> を行う際にもこのダイジェスト値は表示されます。
 プッシュしたばかりのイメージバージョンを特定したいときに便利です。</p>
@@ -306,21 +304,18 @@ Status: Downloaded newer image <span class="k">for </span>ubuntu:14.04
 <p>イメージをプルする際には、タグの代わりにダイジェスト値を用いることができます。
 たとえば上のイメージをダイジェスト値によってプルするには、以下のコマンドを実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-
-sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2: Pulling from library/ubuntu
-5a132a7e7af1: Already exists
-fd2731e4c50c: Already exists
-28a2f68d1120: Already exists
-a3ed95caeb02: Already exists
-Digest: sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-Status: Downloaded newer image <span class="k">for </span>ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+<span class="go">
+docker.io/library/ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3: Pulling from library/ubuntu
+Digest: sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+Status: Image is up to date for ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+docker.io/library/ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+</span></code></pre></div></div>
 
 <p>ダイジェスト値は Dockerfile 内の<code class="language-plaintext highlighter-rouge">FROM</code>命令においても利用可能です。
 たとえば以下です。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3</span>
 <span class="k">LABEL</span><span class="s"> org.opencontainers.image.authors="some maintainer &lt;maintainer@example.com&gt;"</span>
 </code></pre></div></div>
 
@@ -341,7 +336,7 @@ Status: Downloaded newer image <span class="k">for </span>ubuntu@sha256:45b23dee
 
 <p>以下のコマンドは、ローカルレジストリがポート 5000 番で待ち受けているものとして、そこから<code class="language-plaintext highlighter-rouge">testing/test-image</code>イメージをプルするものです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull myregistry.local:5000/testing/test-image
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull myregistry.local:5000/testing/test-image
 </code></pre></div></div>
 
 <p>レジストリの資格情報は <a href="/engine/reference/commandline/login/">docker login</a> を用いて管理されます。</p>
@@ -357,42 +352,42 @@ Status: Downloaded newer image <span class="k">for </span>ubuntu@sha256:45b23dee
 
 <p>以下のコマンドは<code class="language-plaintext highlighter-rouge">fedora</code>リポジトリから全イメージをプルします。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull <span class="nt">--all-tags</span> fedora
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull <span class="nt">--all-tags</span> fedora
+<span class="go">
 Pulling repository fedora
-ad57ef8d78d7: Download <span class="nb">complete
-</span>105182bb5e8b: Download <span class="nb">complete
-</span>511136ea3c5a: Download <span class="nb">complete
-</span>73bd853d2ea5: Download <span class="nb">complete</span>
-....
-
-Status: Downloaded newer image <span class="k">for </span>fedora
-</code></pre></div></div>
+ad57ef8d78d7: Download complete
+105182bb5e8b: Download complete
+511136ea3c5a: Download complete
+73bd853d2ea5: Download complete
+</span><span class="c">....
+</span><span class="go">
+Status: Downloaded newer image for fedora
+</span></code></pre></div></div>
 
 <p>プル処理が終わったら<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを使って、プルされたイメージを確認することができます。
 以下の例では、ローカルに存在する<code class="language-plaintext highlighter-rouge">fedora</code>イメージをすべて確認するものです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images fedora
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images fedora
+<span class="go">
 REPOSITORY   TAG         IMAGE ID        CREATED      SIZE
 fedora       rawhide     ad57ef8d78d7    5 days ago   359.3 MB
 fedora       20          105182bb5e8b    5 days ago   372.7 MB
 fedora       heisenbug   105182bb5e8b    5 days ago   372.7 MB
 fedora       latest      105182bb5e8b    5 days ago   372.7 MB
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="cancel-a-pull">プル処理のキャンセル</h3>
 
 <p><code class="language-plaintext highlighter-rouge">docker pull</code>を実行した端末上において、たとえば<code class="language-plaintext highlighter-rouge">CTRL-c</code>を押下してプロセスを kill した場合、プル処理は停止します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull fedora
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull fedora
+<span class="go">
 Using default tag: latest
 latest: Pulling from library/fedora
 a3ed95caeb02: Pulling fs layer
 236608c7b546: Pulling fs layer
 ^C
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>

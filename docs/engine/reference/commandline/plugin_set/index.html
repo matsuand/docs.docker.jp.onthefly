@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker plugin set | Docker ドキュメント</title>
@@ -60,12 +60,12 @@
  * デバイスへのパス
  * 引数" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/plugin_set/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker plugin set","description":"docker plugin set: プラグインの設定を変更します。\nプラグインは無効化しておく必要があります。\n\nサポートされる設定項目は、現在のところ以下のものです。\n * 環境変数\n * マウント元ディレクトリ\n * デバイスへのパス\n * 引数","url":"https://docs.docker.com/engine/reference/commandline/plugin_set/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -171,27 +171,27 @@ https://github.com/docker/cli
 
 <p>以下の例は、プラグイン<code class="language-plaintext highlighter-rouge">sample-volume-plugin</code>上において環境変数<code class="language-plaintext highlighter-rouge">DEBUG</code>を変更します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="o">{{</span>.Settings.Env<span class="o">}}</span> tiborvass/sample-volume-plugin
-<span class="o">[</span><span class="nv">DEBUG</span><span class="o">=</span>0]
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="o">{{</span>.Settings.Env<span class="o">}}</span> tiborvass/sample-volume-plugin
+<span class="go">[DEBUG=0]
 
-<span class="nv">$ </span>docker plugin <span class="nb">set </span>tiborvass/sample-volume-plugin <span class="nv">DEBUG</span><span class="o">=</span>1
-
-<span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="o">{{</span>.Settings.Env<span class="o">}}</span> tiborvass/sample-volume-plugin
-<span class="o">[</span><span class="nv">DEBUG</span><span class="o">=</span>1]
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker plugin <span class="nb">set </span>tiborvass/sample-volume-plugin <span class="nv">DEBUG</span><span class="o">=</span>1
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="o">{{</span>.Settings.Env<span class="o">}}</span> tiborvass/sample-volume-plugin
+<span class="go">[DEBUG=1]
+</span></code></pre></div></div>
 
 <h3 id="change-the-source-of-a-mount">マウント元ディレクトリの変更</h3>
 
 <p>以下の例は、プラグイン<code class="language-plaintext highlighter-rouge">myplugin</code>上のマウント<code class="language-plaintext highlighter-rouge">mymount</code>に対するマウント元ディレクトリを変更します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}'</span> myplugin
-/foo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}'</span> myplugin
+<span class="go">/foo
 
-<span class="nv">$ </span>docker plugins <span class="nb">set </span>myplugin mymount.source<span class="o">=</span>/bar
-
-<span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}'</span> myplugin
-/bar
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker plugins <span class="nb">set </span>myplugin mymount.source<span class="o">=</span>/bar
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}'</span> myplugin
+<span class="go">/bar
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -203,16 +203,16 @@ https://github.com/docker/cli
 
 <p>以下の例は、プラグイン<code class="language-plaintext highlighter-rouge">myplugin</code>上のデバイス<code class="language-plaintext highlighter-rouge">mydevice</code>のパスを変更します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}'</span> myplugin
-
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}'</span> myplugin
+<span class="go">
 /dev/foo
 
-<span class="nv">$ </span>docker plugins <span class="nb">set </span>myplugin mydevice.path<span class="o">=</span>/dev/bar
-
-<span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}'</span> myplugin
-
+</span><span class="gp">$</span><span class="w"> </span>docker plugins <span class="nb">set </span>myplugin mydevice.path<span class="o">=</span>/dev/bar
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}'</span> myplugin
+<span class="go">
 /dev/bar
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong>
@@ -223,16 +223,16 @@ https://github.com/docker/cli
 
 <p>以下の例は、プラグイン<code class="language-plaintext highlighter-rouge">myplugin</code>上の引数値を変更します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{.Settings.Args}}'</span> myplugin
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{.Settings.Args}}'</span> myplugin
+<span class="go">
+["foo", "bar"]
 
-<span class="o">[</span><span class="s2">"foo"</span>, <span class="s2">"bar"</span><span class="o">]</span>
-
-<span class="nv">$ </span>docker plugins <span class="nb">set </span>myplugin <span class="nv">myargs</span><span class="o">=</span><span class="s2">"foo bar baz"</span>
-
-<span class="nv">$ </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{.Settings.Args}}'</span> myplugin
-
-<span class="o">[</span><span class="s2">"foo"</span>, <span class="s2">"bar"</span>, <span class="s2">"baz"</span><span class="o">]</span>
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span>docker plugins <span class="nb">set </span>myplugin <span class="nv">myargs</span><span class="o">=</span><span class="s2">"foo bar baz"</span>
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span>docker plugin inspect <span class="nt">-f</span> <span class="s1">'{{.Settings.Args}}'</span> myplugin
+<span class="go">
+["foo", "bar", "baz"]
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 

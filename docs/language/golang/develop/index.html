@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use containers for development | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use containers for development" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use containers for development","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/golang/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -149,7 +149,7 @@ local     roach
 
 <h3 id="networking">Networking</h3>
 
-<p>The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined <em>bridge network</em>. It is going to provide us with a DNS lookup service so that we can refer to our database enginer container by its host name.</p>
+<p>The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined <em>bridge network</em>. It is going to provide us with a DNS lookup service so that we can refer to our database engine container by its hostname.</p>
 
 <p>The following command creates a new bridge network named <code class="language-plaintext highlighter-rouge">mynet</code>:</p>
 
@@ -173,7 +173,7 @@ daed20bbecce   host          host      local
 
 <p>As the saying goes, there are only two hard things in Computer Science: cache invalidation and naming things. And off-by-one errors.</p>
 
-<p>When choosing a name for a network or a managed volume, it’s best to choose a name which is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.</p>
+<p>When choosing a name for a network or a managed volume, it’s best to choose a name that is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.</p>
 
 <h3 id="start-the-database-engine">Start the database engine</h3>
 
@@ -282,7 +282,7 @@ Time: 14.217559ms
 <span class="gp">#</span><span class="w"> </span>... output omitted ...
 </code></pre></div></div>
 
-<p>The application’s <code class="language-plaintext highlighter-rouge">main.go</code> now includes database initialisation code, as well as the code to implement a new business requirement:</p>
+<p>The application’s <code class="language-plaintext highlighter-rouge">main.go</code> now includes database initialization code, as well as the code to implement a new business requirement:</p>
 
 <ul>
   <li>An HTTP <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/send</code> containing a <code class="language-plaintext highlighter-rouge">{ "value" : string }</code> JSON must save the value to the database.</li>
@@ -446,7 +446,7 @@ Time: 14.217559ms
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The repository also includes the <code class="language-plaintext highlighter-rouge">Dockerfile</code>, which is almost exactly the same as the multi-stage <code class="language-plaintext highlighter-rouge">Dockerfile</code> introduced in the previous modules. It uses official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, “distroless” image.</p>
+<p>The repository also includes the <code class="language-plaintext highlighter-rouge">Dockerfile</code>, which is almost exactly the same as the multi-stage <code class="language-plaintext highlighter-rouge">Dockerfile</code> introduced in the previous modules. It uses the official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, “distroless” image.</p>
 
 <p>Regardless of whether we had updated the old example application, or checked out the new one, this new Docker image has to be built to reflect the changes to the application source code.</p>
 
@@ -617,7 +617,7 @@ roach
 
 <h2 id="better-productivity-with-docker-compose">Better productivity with Docker Compose</h2>
 
-<p>At this point you might be wondering if there is a way to avoid having to deal with long lists of argument to the <code class="language-plaintext highlighter-rouge">docker</code> command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, <em>many</em> more. Then there is also a question of dependencies – ideally, we would like to make sure that the database is started <em>before</em> our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.</p>
+<p>At this point, you might be wondering if there is a way to avoid having to deal with long lists of arguments to the <code class="language-plaintext highlighter-rouge">docker</code> command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, <em>many</em> more. Then there is also a question of dependencies – ideally, we would like to make sure that the database is started <em>before</em> our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.</p>
 
 <p>In this section, we’ll create a Docker Compose file to start our <code class="language-plaintext highlighter-rouge">docker-gs-ping-roach</code> application and CockroachDB database engine with a single command.</p>
 
@@ -682,7 +682,7 @@ roach
 
 <h3 id="merging-compose-files">Merging Compose files</h3>
 
-<p>The file name <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> is the default file name which <code class="language-plaintext highlighter-rouge">docker-compose</code> command recognises if no <code class="language-plaintext highlighter-rouge">-f</code> flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of configuration together. The following list is just a few examples of scenarios where such feature would be very useful:</p>
+<p>The file name <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> is the default file name which <code class="language-plaintext highlighter-rouge">docker-compose</code> command recognises if no <code class="language-plaintext highlighter-rouge">-f</code> flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:</p>
 
 <ul>
   <li>Using a bind mount for the source code for local development but not when running the CI tests;</li>
@@ -695,7 +695,7 @@ roach
 
 <h3 id="variable-substitution-in-docker-compose">Variable substitution in Docker Compose</h3>
 
-<p>One of the really cool features of Docker Compose is <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#variable-substitution">variable substitution</a>. You can see some example in our Compose file, <code class="language-plaintext highlighter-rouge">environment</code> section. By means of example:</p>
+<p>One of the really cool features of Docker Compose is <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#variable-substitution">variable substitution</a>. You can see some examples in our Compose file, <code class="language-plaintext highlighter-rouge">environment</code> section. By means of an example:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">PGUSER=${PGUSER:-totoro}</code> means that inside the container, the environment variable <code class="language-plaintext highlighter-rouge">PGUSER</code> shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of <code class="language-plaintext highlighter-rouge">totoro</code>.</li>
@@ -725,7 +725,7 @@ roach
 <blockquote>
   <p><strong>Note</strong></p>
 
-  <p>Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on update to the source code unless the <code class="language-plaintext highlighter-rouge">--build</code> flag is provided. It is a very common pitfall to edit one’s source code, and forget to use the <code class="language-plaintext highlighter-rouge">--build</code> flag when running <code class="language-plaintext highlighter-rouge">docker-compose up</code>.</p>
+  <p>Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the <code class="language-plaintext highlighter-rouge">--build</code> flag is provided. It is a very common pitfall to edit one’s source code, and forget to use the <code class="language-plaintext highlighter-rouge">--build</code> flag when running <code class="language-plaintext highlighter-rouge">docker-compose up</code>.</p>
 </blockquote>
 
 <p>Since our set-up is now run by Docker Compose, it has assigned it a “project name”, so we got a new volume for our CockroachDB instance. This means that our application would fail to connect to the database, because the database does not exist in this new volume. The terminal would display an authentication error for the database:</p>

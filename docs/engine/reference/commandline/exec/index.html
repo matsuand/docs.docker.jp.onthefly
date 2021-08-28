@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-08-28 16:57:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker exec | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker exec" />
   <meta property="og:description" content="docker exec: `docker exec`コマンドを、実行中のコンテナー内において新たなコマンドを実行します。 `docker exec`を使って指示されるコマンドは、コンテナーの主要プロセス（`PID 1`）が実行中である場合のみ実行されます。 そしてコンテナーが再起動された際には、再実行されません。 COMMAND はコンテナーのデフォルトディレクトリにおいて実行されます。 コンテナーの元になるイメージが、Dockerfile 内の WORKDIR ディレクティブの指定により、特定ディレクトリを指定している場合は、そのディレクトリにおいて実行されます。 COMMAND は実行可能である必要があり、連結されていたりクォートで囲まれていたりすると動作しません。 例として`docker exec -ti my_container &quot;echo a &amp;&amp; echo b&quot;`は動作しませんが、`docker exec -ti my_container sh -c..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-28T16:57:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/exec/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-08-28T16:57:33+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker exec","description":"docker exec: `docker exec`コマンドを、実行中のコンテナー内において新たなコマンドを実行します。 `docker exec`を使って指示されるコマンドは、コンテナーの主要プロセス（`PID 1`）が実行中である場合のみ実行されます。 そしてコンテナーが再起動された際には、再実行されません。 COMMAND はコンテナーのデフォルトディレクトリにおいて実行されます。 コンテナーの元になるイメージが、Dockerfile 内の WORKDIR ディレクティブの指定により、特定ディレクトリを指定している場合は、そのディレクトリにおいて実行されます。 COMMAND は実行可能である必要があり、連結されていたりクォートで囲まれていたりすると動作しません。 例として`docker exec -ti my_container \"echo a && echo b\"`は動作しませんが、`docker exec -ti my_container sh -c...","url":"https://docs.docker.com/engine/reference/commandline/exec/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -284,28 +284,28 @@ https://github.com/docker/cli
 
 <p>はじめにコンテナーを起動させます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--name</span> ubuntu_bash <span class="nt">--rm</span> <span class="nt">-i</span> <span class="nt">-t</span> ubuntu bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--name</span> ubuntu_bash <span class="nt">--rm</span> <span class="nt">-i</span> <span class="nt">-t</span> ubuntu bash
 </code></pre></div></div>
 
 <p>上では<code class="language-plaintext highlighter-rouge">ubuntu_bash</code>という名のコンテナーが生成されて、Bash セッションが起動します。</p>
 
 <p>次にそのコンテナー上においてコマンドを実行します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-d</span> ubuntu_bash <span class="nb">touch</span> /tmp/execWorks
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-d</span> ubuntu_bash <span class="nb">touch</span> /tmp/execWorks
 </code></pre></div></div>
 
 <p>これはバックグラウンドで実行中のコンテナー<code class="language-plaintext highlighter-rouge">ubuntu_bash</code>内において、新規ファイル<code class="language-plaintext highlighter-rouge">/tmp/execWorks</code>を生成します。</p>
 
 <p>次にそのコンテナー上において、対話形式の<code class="language-plaintext highlighter-rouge">bash</code>シェルを起動します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> ubuntu_bash bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> ubuntu_bash bash
 </code></pre></div></div>
 
 <p>コンテナー<code class="language-plaintext highlighter-rouge">ubuntu_bash</code>内において新たな Bash セッションを生成します。</p>
 
 <p>次にカレントな Bash セッションにおいて環境変数を設定します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="nt">-e</span> <span class="nv">VAR</span><span class="o">=</span>1 ubuntu_bash bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="nt">-e</span> <span class="nv">VAR</span><span class="o">=</span>1 ubuntu_bash bash
 </code></pre></div></div>
 
 <p>これはコンテナー<code class="language-plaintext highlighter-rouge">ubuntu_bash</code>内に新たな Bash セッションを生成して、環境変数<code class="language-plaintext highlighter-rouge">$VAR</code>に “1” を設定します。
@@ -313,36 +313,36 @@ https://github.com/docker/cli
 
 <p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドは、コンテナーの生成時に設定されたワーキングディレクトリにおいて動作します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> ubuntu_bash <span class="nb">pwd</span>
-/
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> ubuntu_bash <span class="nb">pwd</span>
+<span class="go">/
+</span></code></pre></div></div>
 
 <p>コマンドを実行するワーキングディレクトリは変更することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="nt">-w</span> /root ubuntu_bash <span class="nb">pwd</span>
-/root
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="nt">-w</span> /root ubuntu_bash <span class="nb">pwd</span>
+<span class="go">/root
+</span></code></pre></div></div>
 
 <h3 id="try-to-run-docker-exec-on-a-paused-container">停止中コンテナーでの<code class="language-plaintext highlighter-rouge">docker exec</code>実行</h3>
 
 <p>コンテナーが停止中である場合に<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを実行すると、エラーが発生します。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pause <span class="nb">test
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pause <span class="nb">test</span>
+<span class="go">
+test
 
-test</span>
-
-<span class="nv">$ </span>docker ps
-
+</span><span class="gp">$</span><span class="w"> </span>docker ps
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                   PORTS               NAMES
-1ae3b36715d2        ubuntu:latest       <span class="s2">"bash"</span>              17 seconds ago      Up 16 seconds <span class="o">(</span>Paused<span class="o">)</span>                       <span class="nb">test</span>
+1ae3b36715d2        ubuntu:latest       "bash"              17 seconds ago      Up 16 seconds (Paused)                       test
 
-<span class="nv">$ </span>docker <span class="nb">exec test ls
+</span><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec test ls</span>
+<span class="go">
+FATA[0000] Error response from daemon: Container test is paused, unpause the container before exec
 
-</span>FATA[0000] Error response from daemon: Container <span class="nb">test </span>is paused, unpause the container before <span class="nb">exec</span>
-
-<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
-1
-</code></pre></div></div>
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">1
+</span></code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 
