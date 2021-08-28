@@ -1,6 +1,4 @@
-SUBDIRS = analytics content guides landing-page
-
-thisdir = _includes
+thisdir = _includes/guides
 origdir  = @abs_origdir@/$(thisdir)
 srcdir   = @srcdir@
 mysrcdir = $(shell cd $(srcdir) && pwd)
@@ -9,37 +7,17 @@ publishdir = @abs_publishdir@/$(thisdir)
 uploaddir  = @UPLOADDIR@/$(thisdir)
 
 .PHONY: all
-all: ctie tgtdir $(publishdir)/jatrans.md $(srcs_with_prefix)
+all: ctie tgtdir $(srcs_with_prefix)
 
 ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	api-version-matrix   \
-	cli                  \
-	deploy               \
-	desktop-update       \
-	eula                 \
-	experimental         \
-	experimental-feature \
-	github-pr            \
-	install-script       \
-	registry
-htmlbases = \
-	breadcrumbs      \
-	footer           \
-	head             \
-	header           \
-	navigation       \
-	read_time        \
-	theme-switch     \
-	toc_pure_liquid  \
-	upgrade-cta
+	create-dockerfile \
+	enable-buildkit
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files
-ch_htmls = $(htmlbases:=.htmlch)
-tr_htmls = $(htmlbases:=.html)
 EXTRA_DIST = $(ch_mds)
 #DISTCLEANFILES = 
 
@@ -58,8 +36,3 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds)) $(addprefix $(mysrcdir)/, $(ch_htmls))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-@MAINT@$(addprefix $(mysrcdir)/, $(ch_htmls)):
-@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.htmlch$$|.html|"` $@; fi
-
-$(publishdir)/jatrans.md: $(srcdir)/jatrans.md.in
-	@cp -p $^ $@

@@ -50,9 +50,9 @@ Btrfs Filesystem as Btrfs.
 @z
 
 @x
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on SLES, Ubuntu or Debian.
 @y
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on SLES, Ubuntu or Debian.
 @z
 
 @x

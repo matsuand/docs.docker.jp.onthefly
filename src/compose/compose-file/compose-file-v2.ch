@@ -3720,29 +3720,29 @@ volumes_from:
 
 @x
 ```yaml
-restart: no
+restart: "no"
 ```
 ```yaml
-restart: always
+restart: "always"
 ```
 ```yaml
-restart: on-failure
+restart: "on-failure"
 ```
 ```yaml
-restart: unless-stopped
+restart: "unless-stopped"
 ```
 @y
 ```yaml
-restart: no
+restart: "no"
 ```
 ```yaml
-restart: always
+restart: "always"
 ```
 ```yaml
-restart: on-failure
+restart: "on-failure"
 ```
 ```yaml
-restart: unless-stopped
+restart: "unless-stopped"
 ```
 @z
 

@@ -136,9 +136,9 @@ local     roach
 @z
 
 @x
-The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database enginer container by its host name.
+The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database engine container by its hostname.
 @y
-The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database enginer container by its host name.
+The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database engine container by its hostname.
 @z
 
 @x
@@ -204,9 +204,9 @@ As the saying goes, there are only two hard things in Computer Science: cache in
 @z
 
 @x
-When choosing a name for a network or a managed volume, it's best to choose a name which is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
+When choosing a name for a network or a managed volume, it's best to choose a name that is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
 @y
-When choosing a name for a network or a managed volume, it's best to choose a name which is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
+When choosing a name for a network or a managed volume, it's best to choose a name that is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
 @z
 
 @x
@@ -482,9 +482,9 @@ $ git clone https://github.com/olliefr/docker-gs-ping-roach.git
 @z
 
 @x
-The application's `main.go` now includes database initialisation code, as well as the code to implement a new business requirement:
+The application's `main.go` now includes database initialization code, as well as the code to implement a new business requirement:
 @y
-The application's `main.go` now includes database initialisation code, as well as the code to implement a new business requirement:
+The application's `main.go` now includes database initialization code, as well as the code to implement a new business requirement:
 @z
 
 @x
@@ -876,9 +876,9 @@ func countRecords(db *sql.DB) (int, error) {
 @z
 
 @x
-The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
+The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses the official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
 @y
-The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
+The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses the official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
 @z
 
 @x
@@ -1334,9 +1334,9 @@ Please make sure that you stop the CockroachDB and `docker-gs-ping-roach` contai
 @z
 
 @x
-At this point you might be wondering if there is a way to avoid having to deal with long lists of argument to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
+At this point, you might be wondering if there is a way to avoid having to deal with long lists of arguments to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
 @y
-At this point you might be wondering if there is a way to avoid having to deal with long lists of argument to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
+At this point, you might be wondering if there is a way to avoid having to deal with long lists of arguments to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
 @z
 
 @x
@@ -1500,9 +1500,9 @@ The exact value does not really matter for our example, because we run Cockroach
 @z
 
 @x
-The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of configuration together. The following list is just a few examples of scenarios where such feature would be very useful:
+The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 @y
-The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of configuration together. The following list is just a few examples of scenarios where such feature would be very useful:
+The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 @z
 
 @x
@@ -1530,9 +1530,9 @@ We are not going to cover any of these advanced use cases here.
 @z
 
 @x
-One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some example in our Compose file, `environment` section. By means of example:
+One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some examples in our Compose file, `environment` section. By means of an example:
 @y
-One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some example in our Compose file, `environment` section. By means of example:
+One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some examples in our Compose file, `environment` section. By means of an example:
 @z
 
 @x
@@ -1608,11 +1608,11 @@ We pass the `--build` flag so Docker will compile our image and then starts it.
 @x
 > **Note**
 >
-> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
+> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
 @y
 > **Note**
 >
-> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
+> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
 @z
 
 @x

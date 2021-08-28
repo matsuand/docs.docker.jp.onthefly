@@ -59,15 +59,15 @@ Docker Engine をインストールするには、Debian か Raspbian の 64 ビ
 @z
 
 @x
-- Debian Bullseye 11 (testing)
-- Debian Buster 10 (stable)
-- Raspbian Bullseye 11 (testing)
-- Raspbian Buster 10 (stable)
+- Debian Bullseye 11 (stable)
+- Debian Buster 10 (oldstable)
+- Raspbian Bullseye 11 (stable)
+- Raspbian Buster 10 (oldstable)
 @y
-- Debian Bullseye 11 (テスト版)
-- Debian Buster 10 (安定版)
-- Raspbian Bullseye 11 (テスト版)
-- Raspbian Buster 10 (安定版)
+- Debian Bullseye 11 (安定版)
+- Debian Buster 10 (古い安定版)
+- Raspbian Bullseye 11 (安定版)
+- Raspbian Buster 10 (古い安定版)
 @z
 
 @x

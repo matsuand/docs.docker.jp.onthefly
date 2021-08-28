@@ -86,7 +86,7 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-2. Validate we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
+2. Validate that we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
 @y
 2. コンテナー内で`exec`を実行し、その結果を確認します。
    これを行うにはダッシュボードを開いて、`ubuntu`イメージを起動させているコンテナーの 1 つめの動作をクリックします。

@@ -16,11 +16,13 @@ title: よくたずねられる質問
 @z
 
 @x
-If you don’t see your question here, feel free to drop by `#docker-compose` on
-freenode IRC and ask the community.
+If you don’t see your question here, feel free to drop by
+[#docker-compose](https://dockercommunity.slack.com/archives/C2X82D9PA) on the
+[Docker Community Slack](https://dockr.ly/slack).
 @y
-If you don’t see your question here, feel free to drop by `#docker-compose` on
-freenode IRC and ask the community.
+If you don’t see your question here, feel free to drop by
+[#docker-compose](https://dockercommunity.slack.com/archives/C2X82D9PA) on the
+[Docker Community Slack](https://dockr.ly/slack).
 @z
 
 @x

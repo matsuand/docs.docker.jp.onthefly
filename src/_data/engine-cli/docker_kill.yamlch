@@ -13,14 +13,37 @@ short: 起動コンテナーを 1 つまたは複数 kill します。
 long: |-
   The `docker kill` subcommand kills one or more containers. The main process
   inside the container is sent `SIGKILL` signal (default), or the signal that is
-  specified with the `--signal` option. You can kill a container using the
-  container's ID, ID-prefix, or name.
+  specified with the `--signal` option. You can reference a container by its
+  ID, ID-prefix, or name.
 @y
 long: |-
   docker のサブコマンド`docker kill`は、コンテナー 1 つまたは複数 kill します。
   コンテナー内のメインプロセスに対して、デフォルトでは`SIGKILL`シグナルが送信されます。
   あるいは`--signal`オプションを指定すると、そのシグナルが送信されます。
-  コンテナーを kill する際には、コンテナー ID、ID のプレフィックス、コンテナー名を指定します。
+  コンテナーを参照する際には、コンテナー ID、ID のプレフィックス、コンテナー名を指定します。
+@z
+
+@x
+  The `--signal` (or `-s` shorthand) flag sets the system call signal that is sent
+  to the container. This signal can be a signal name in the format `SIG<NAME>`, for
+  instance `SIGINT`, or an unsigned number that matches a position in the kernel's
+  syscall table, for instance `2`.
+@y
+  `--signal` (またはその短縮形`-s`) フラグは、 コンテナーに送信するシステムコールシグナルを設定します。
+  そのシグナルには、たとえば`SIGINT`のように、`SIG<NAME>`形式のシグナル名を用いることができます。
+  あるいは、カーネルの syscall テーブルの位置を示す unsigned の数値、たとえば`2`を用いることもできます。
+@z
+
+@x
+  While the default (`SIGKILL`) signal will terminate the container, the signal
+  set through `--signal` may be non-terminal, depending on the container's main
+  process. For example, the `SIGHUP` signal in most cases will be non-terminal,
+  and the container will continue running after receiving the signal.
+@y
+  デフォルトのシグナル (`SIGKILL`) がコンテナーを停止しようとする際に、`--signal`によって設定されたシグナルが、端末から実行するタイプのものではない場合があります。
+  これはコンテナーの主プロセスによって異なります。
+  たとえばたいていの場合、シグナル`SIGHUP`は、端末からの実行タイプではありません。
+  その場合、コンテナーはそのシグナルを受信した後も、実行し続けることになります。
 @z
 
 @x
@@ -75,34 +98,34 @@ options:
 
 @x
 examples: |-
-  ### Send a KILL signal  to a container
+  ### Send a KILL signal to a container
 @y
 examples: |-
-  {: #send-a-kill-signal--to-a-container }
+  {: #send-a-kill-signal-to-a-container }
   ### コンテナーへの KILL シグナルの送信
 @z
 
 @x
-  The following example sends the default `KILL` signal to the container named
+  The following example sends the default `SIGKILL` signal to the container named
   `my_container`:
 @y
-  以下の例では`my_container`という名前のコンテナーに対して、デフォルトの`KILL`シグナルを送信します。
+  以下の例では`my_container`という名前のコンテナーに対して、デフォルトの`SIGKILL`シグナルを送信します。
 @z
 
 @x
-  ```bash
+  ```console
   $ docker kill my_container
   ```
 @y
-  ```bash
+  ```console
   $ docker kill my_container
   ```
 @z
 
 @x
-  ### Send a custom signal  to a container
+  ### Send a custom signal to a container
 @y
-  {: #send-a-custom-signal--to-a-container }
+  {: #send-a-custom-signal-to-a-container }
   ### コンテナーへの指定シグナルの送信
 @z
 
@@ -114,11 +137,11 @@ examples: |-
 @z
 
 @x
-  ```bash
+  ```console
   $ docker kill --signal=SIGHUP  my_container
   ```
 @y
-  ```bash
+  ```console
   $ docker kill --signal=SIGHUP  my_container
   ```
 @z
@@ -132,13 +155,13 @@ examples: |-
 @z
 
 @x
-  ```bash
+  ```console
   $ docker kill --signal=SIGHUP my_container
   $ docker kill --signal=HUP my_container
   $ docker kill --signal=1 my_container
   ```
 @y
-  ```bash
+  ```console
   $ docker kill --signal=SIGHUP my_container
   $ docker kill --signal=HUP my_container
   $ docker kill --signal=1 my_container

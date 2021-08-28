@@ -35,9 +35,9 @@ Work through the orientation and setup in Get started [Part 1](../../get-started
 @z
 
 @x
-{% include enable-buildkit.md %}
+{% include guides/enable-buildkit.md %}
 @y
-{% include enable-buildkit.md %}
+{% include guides/enable-buildkit.md %}
 @z
 
 @x
@@ -196,63 +196,9 @@ Now that our application is running properly, let’s take a look at creating a 
 @z
 
 @x
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions, executes them consecutively, and creates a Docker image as a result.
+{% include guides/create-dockerfile.md %}
 @y
-Dockerfile はテキストファイルであり、コマンドラインから実行するイメージ生成コマンドを記述したようなものです。
-Docker に対して`docker build`コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで 1 つずつそれを実行し、最終的に Docker イメージを作り出します。
-@z
-
-@x
-Let’s walk through creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-@y
-ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
-ワーキングディレクトリのルートに`Dockerfile`という名前のファイルを生成して、テキストエディターでこれを開きます。
-@z
-
-@x
-> **Note**
->
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. Therefore, we’ll use that as our filename throughout this series.
-@y
-> **メモ**
->
-> Dockerfile という名前はさして重要ではありません。
-> ただし各種コマンドが扱うデフォルト名が`Dockerfile`となっています。
-> したがってここではこのファイル名を用いていくことにします。
-@z
-
-@x
-The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
-While _optional_, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, should be the first line in Dockerfiles.
-@y
-Docker ファイルの 1 行めに書くのは [`# syntax`パーサーディレクティブ]({{ site.baseurl }}/engine/reference/builder/#syntax) です。
-これは **任意の記述** ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
-また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
-[パーサーディレクティブ]({{ site.baseurl }}/engine/reference/builder/#parser-directives) は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。
-@z
-
-@x
-```dockerfile
-# syntax=docker/dockerfile:1
-```
-@y
-```dockerfile
-# syntax=docker/dockerfile:1
-```
-@z
-
-@x
-We recommend using `docker/dockerfile:1`, which always points to the latest release
-of the version 1 syntax. BuildKit automatically checks for updates of the syntax
-before building, making sure you are using the most current version.
-@y
-この指定にあたっては`docker/dockerfile:1`とすることを推奨します。
-これはバージョン 1 の最新リリースを常に指し示すものです。
-BuildKit ではビルド前に文法が更新されているかどうか、利用するバージョンが最新であるかどうかが自動的にチェックされます。
+{% include guides/create-dockerfile.md %}
 @z
 
 @x

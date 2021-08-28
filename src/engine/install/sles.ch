@@ -84,38 +84,42 @@ To get started with Docker Engine on SLES, make sure you
 @z
 
 @x
-To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+To install Docker Engine, you need a maintained version of SLES 15-SP2 or SLES 15-SP3 on s390x (IBM Z).
 Archived versions aren't supported or tested.
 @y
-To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+To install Docker Engine, you need a maintained version of SLES 15-SP2 or SLES 15-SP3 on s390x (IBM Z).
 Archived versions aren't supported or tested.
 @z
 
 @x
 The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
-repositories must be enabled. 
+repositories must be enabled.
 @y
 The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
-repositories must be enabled. 
+repositories must be enabled.
 @z
 
 @x
-The `SELinux (SLE_15_SP2)`repository must be enabled. This repository is not added by
-default, you need to
-[add it](https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo).
+The [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security)
+must be enabled. This repository is not added by default, and you need to enable
+it for the version of SLES you are running. Run the following commands to add it:
 @y
-The `SELinux (SLE_15_SP2)`repository must be enabled. This repository is not added by
-default, you need to
-[add it](https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo).
+The [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security)
+must be enabled. This repository is not added by default, and you need to enable
+it for the version of SLES you are running. Run the following commands to add it:
 @z
 
 @x
 ```console
-$ zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+$ sles_version="$(. /etc/os-release && echo "${VERSION_ID##*.}")"
+$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP$sles_version/security:SELinux.repo"
+$ sudo zypper addrepo $opensuse_repo 
 ```
 @y
 ```console
-$ zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+$ sles_version="$(. /etc/os-release && echo "${VERSION_ID##*.}")"
+$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP$sles_version/security:SELinux.repo"
+$ sudo zypper addrepo $opensuse_repo 
 ```
 @z
 
@@ -259,15 +263,11 @@ Set up the **stable** repository.
 
 @x
 ```console
-$ sudo zypper \
-    addrepo \
-    {{ download-url-base }}/docker-ce.repo
+$ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 ```
 @y
 ```console
-$ sudo zypper \
-    addrepo \
-    {{ download-url-base }}/docker-ce.repo
+$ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 ```
 @z
 
@@ -393,11 +393,19 @@ $ sudo zypper \
 
 @x
     ```console
-    $ sudo zypper se docker-ce --match-exact  | sort -r
-    ```
+    $ sudo zypper search -s --match-exact docker-ce | sort -r
 @y
     ```console
-    $ sudo zypper se docker-ce --match-exact  | sort -r
+    $ sudo zypper search -s --match-exact docker-ce | sort -r
+@z
+
+@x
+      v  | docker-ce | package | 3:20.10.8-3 | s390x | Docker CE Stable - s390x
+      v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
+    ```
+@y
+      v  | docker-ce | package | 3:20.10.8-3 | s390x | Docker CE Stable - s390x
+      v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
     ```
 @z
 
@@ -411,14 +419,12 @@ $ sudo zypper \
 
 @x
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column)
-       starting at the first colon (`:`), up to the first hyphen, separated by
-       a hyphen (`-`). For example, `docker-ce-18.09.1`.
+       the package name (`docker-ce`) plus the version string (fourth column),
+       separated by a hyphen (`-`). For example, `docker-ce-3:20.10.8`.
 @y
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column)
-       starting at the first colon (`:`), up to the first hyphen, separated by
-       a hyphen (`-`). For example, `docker-ce-18.09.1`.
+       the package name (`docker-ce`) plus the version string (fourth column),
+       separated by a hyphen (`-`). For example, `docker-ce-3:20.10.8`.
 @z
 
 @x

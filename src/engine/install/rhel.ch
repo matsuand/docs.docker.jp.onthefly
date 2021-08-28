@@ -376,10 +376,14 @@ $ sudo yum-config-manager \
 @z
 
 @x
+    docker-ce.s390x                3:20.10.8-3.el8                 docker-ce-stable
     docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
+    <...>
     ```
 @y
+    docker-ce.s390x                3:20.10.8-3.el8                 docker-ce-stable
     docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
+    <...>
     ```
 @z
 

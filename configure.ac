@@ -39,6 +39,7 @@ AC_CONFIG_FILES([Makefile
 		 src/_includes/analytics/Makefile
 		 src/_includes/content/Makefile
 		 src/_includes/content/ssh/Makefile
+		 src/_includes/guides/Makefile
 		 src/_includes/landing-page/Makefile
 		 src/_layouts/Makefile
 		 src/_samples/Makefile

@@ -308,39 +308,31 @@ Having established that the server is running and is accessible, let's proceed t
 @z
 
 @x
-A `Dockerfile` is a text document that contains the instructions for building a Docker image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+{% include guides/create-dockerfile.md %}
 @y
-A `Dockerfile` is a text document that contains the instructions for building a Docker image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+{% include guides/create-dockerfile.md %}
 @z
 
 @x
-Let’s walk through the process of creating a `Dockerfile` for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
 @y
-Let’s walk through the process of creating a `Dockerfile` for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-@z
-
-@x
-> **Note**
->
-> The name of the file is not _that_ important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
-@y
-> **Note**
->
-> The name of the file is not _that_ important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
-@z
-
-@x
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
-@y
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
 @z
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
 FROM golang:1.16-alpine
 ```
 @y
-```dockerfile
 FROM golang:1.16-alpine
 ```
 @z
@@ -420,9 +412,9 @@ COPY go.sum ./
 @z
 
 @x
-Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
+Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the app directory inside our image.
 @y
-Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
+Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the app directory inside our image.
 @z
 
 @x
@@ -515,9 +507,15 @@ Here's the complete `Dockerfile`:
 
 @x
 ```dockerfile
-FROM golang:1.16-alpine
+# syntax=docker/dockerfile:1
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
+FROM golang:1.16-alpine
+@y
 FROM golang:1.16-alpine
 @z
 
@@ -571,11 +569,17 @@ The `Dockerfile` may also contain _comments_. They always begin with a `#` symbo
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
 # Alpine is chosen for its small footprint
 # compared to Ubuntu
 FROM golang:1.16-alpine
 @y
-```dockerfile
 # Alpine is chosen for its small footprint
 # compared to Ubuntu
 FROM golang:1.16-alpine
@@ -894,20 +898,22 @@ The `Dockerfile.multistage` in the sample application's repo has the following c
 @x
 {% raw %}
 ```dockerfile
-##
-## Build
-##
+# syntax=docker/dockerfile:1
 @y
 {% raw %}
 ```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
 ##
 ## Build
 ##
-@z
-
-@x
 FROM golang:1.16-buster AS build
 @y
+##
+## Build
+##
 FROM golang:1.16-buster AS build
 @z
 
@@ -943,15 +949,11 @@ RUN go build -o /docker-gs-ping
 ##
 ## Deploy
 ##
-@y
-##
-## Deploy
-##
-@z
-
-@x
 FROM gcr.io/distroless/base-debian10
 @y
+##
+## Deploy
+##
 FROM gcr.io/distroless/base-debian10
 @z
 

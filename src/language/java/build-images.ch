@@ -34,9 +34,9 @@ Work through the orientation and setup in Get started [Part 1](../../get-started
 @z
 
 @x
-{% include enable-buildkit.md %}
+{% include guides/enable-buildkit.md %}
 @y
-{% include enable-buildkit.md %}
+{% include guides/enable-buildkit.md %}
 @z
 
 @x
@@ -166,61 +166,9 @@ Now that our application is running properly, let’s take a look at creating a 
 @z
 
 @x
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and execute them sequentially and creates a Docker image.
+{% include guides/create-dockerfile.md %}
 @y
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and execute them sequentially and creates a Docker image.
-@z
-
-@x
-Let’s walk through the steps on creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-@y
-Let’s walk through the steps on creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-@z
-
-@x
-> **Note**
->
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. Therefore, we’ll use that as our filename throughout this series.
-@y
-> **Note**
->
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. Therefore, we’ll use that as our filename throughout this series.
-@z
-
-@x
-The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
-While _optional_, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. Parser directives
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, and should be the first line in Dockerfiles.
-@y
-The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
-While _optional_, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. Parser directives
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, and should be the first line in Dockerfiles.
-@z
-
-@x
-```dockerfile
-# syntax=docker/dockerfile:1
-```
-@y
-```dockerfile
-# syntax=docker/dockerfile:1
-```
-@z
-
-@x
-We recommend using `docker/dockerfile:1`, which always points to the latest release
-of the version 1 syntax. BuildKit automatically checks for updates of the syntax
-before building, making sure you are using the most current version.
-@y
-We recommend using `docker/dockerfile:1`, which always points to the latest release
-of the version 1 syntax. BuildKit automatically checks for updates of the syntax
-before building, making sure you are using the most current version.
+{% include guides/create-dockerfile.md %}
 @z
 
 @x

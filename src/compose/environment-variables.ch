@@ -65,6 +65,12 @@ path to your environment variables file using the `--env-file` command line opti
 @z
 
 @x
+{% include content/compose-var-sub.md %}
+@y
+{% include content/compose-var-sub.md %}
+@z
+
+@x
 ### The “.env” file
 @y
 {: #the-env-file }

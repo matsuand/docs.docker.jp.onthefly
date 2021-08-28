@@ -312,11 +312,11 @@ docker-compose down
 @x
 The default configuration for local builds of the documentation disables some
 features to allow for a shorter build-time. The following options differ between
-local builds, and builds that are deployed to docs.docker.com:
+local builds, and builds that are deployed to [docs.docker.com](https://docs.docker.com/):
 @y
 The default configuration for local builds of the documentation disables some
 features to allow for a shorter build-time. The following options differ between
-local builds, and builds that are deployed to docs.docker.com:
+local builds, and builds that are deployed to [docs.docker.com](https://docs.docker.com/):
 @z
 
 @x
@@ -324,14 +324,14 @@ local builds, and builds that are deployed to docs.docker.com:
 - google analytics
 - page ratings
 - `sitemap.xml` generation
-- minification of stylesheets (css/style.css)
+- minification of stylesheets (`css/style.css`)
 - adjusting "edit this page" links for content in other repositories
 @y
 - search auto-completion, and generation of `js/metadata.json`
 - google analytics
 - page ratings
 - `sitemap.xml` generation
-- minification of stylesheets (css/style.css)
+- minification of stylesheets (`css/style.css`)
 - adjusting "edit this page" links for content in other repositories
 @z
 
@@ -689,11 +689,11 @@ eliminates unpleasant background and saves the editors the need to crop.
 
 @x
 On Mac, capture windows without shadows. To this end, once you pressed
-`Command-Shift-4`, press Option while clicking on the window. To disable
+<kbd>Command-Shift-4</kbd>, press <kbd>Option</kbd> while clicking on the window. To disable
 shadows once for all, run:
 @y
 On Mac, capture windows without shadows. To this end, once you pressed
-`Command-Shift-4`, press Option while clicking on the window. To disable
+<kbd>Command-Shift-4</kbd>, press <kbd>Option</kbd> while clicking on the window. To disable
 shadows once for all, run:
 @z
 

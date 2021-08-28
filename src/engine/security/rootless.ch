@@ -135,7 +135,7 @@ testuser:231072:65536
   <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
-  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse-sles">openSUSE and SLES</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 8, RHEL 8 and Fedora</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7 and RHEL 7</a></li>
 </ul>
@@ -147,7 +147,7 @@ testuser:231072:65536
   <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
-  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse-sles">openSUSE と SLES</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 、RHEL 8、Fedora</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7、RHEL 7</a></li>
 </ul>
@@ -157,9 +157,10 @@ testuser:231072:65536
 @z
 
 @x
-- No preparation is needed.
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 @y
-- 事前準備するものは何もありません。
+- `dbus-user-session`パッケージをインストールしていない場合は、インストールしてください。
+  `sudo apt-get install -y dbus-user-session`を実行して、再ログインしてください。
 @z
 
 @x
@@ -171,9 +172,9 @@ testuser:231072:65536
 @z
 
 @x
-- Known to work on Ubuntu 16.04, 18.04, and 20.04.
+- Known to work on Ubuntu 18.04, 20.04, and 21.04.
 @y
-- Ubuntu 16.04、18.04、20.04 において動作します。
+- Ubuntu 18.04、20.04、21.04 において動作します。
 @z
 
 @x
@@ -185,21 +186,28 @@ testuser:231072:65536
 @z
 
 @x
-- Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 @y
-- `/etc/sysctl.conf`（または`/etc/sysctl.d`）に`kernel.unprivileged_userns_clone=1`を追加して、`sudo sysctl --system`を実行してください。
+- `dbus-user-session`パッケージをインストールしていない場合は、インストールしてください。
+  `sudo apt-get install -y dbus-user-session`を実行して、再ログインしてください。
 @z
 
 @x
-- To use the `overlay2` storage driver (recommended), run
-  `sudo modprobe overlay permit_mounts_in_userns=1`
-   ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
-   Add the configuration to `/etc/modprobe.d` for persistence.
+- For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
+  `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
 @y
-- `overlay2`ストレージドライバー（推奨）を利用するには、`sudo modprobe overlay permit_mounts_in_userns=1`を実行してください。
-   ([Debian 固有のカーネルパッチ、Debian 10 において導入](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch))
-   そして`/etc/modprobe.d`に設定を追加してください。
+- Debian 10 においては、`/etc/sysctl.conf`（または`/etc/sysctl.d`）に`kernel.unprivileged_userns_clone=1`を追加して、`sudo sysctl --system`を実行してください。
+  この手順は Debian 11 では必要ありません。
+@z
+
+@x
+- Installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
+  Using `overlay2` storage driver with Debian-specific modprobe option `sudo modprobe overlay permit_mounts_in_userns=1` is also possible,
+  however, highly discouraged due to [instability](https://github.com/moby/moby/issues/42302).
+@y
+- `fuse-overlayfs`をインストールすることが推奨されるので、`sudo apt-get install -y fuse-overlayfs`を実行してください。
+  `overlay2`ストレージドライバーの利用にあたっては、Debian 固有の modprobe オプション `sudo modprobe overlay permit_mounts_in_userns=1`を用いることもできます。
+  ただし [不安定性](https://github.com/moby/moby/issues/42302) があるため、利用するのは避けてください。
 @z
 
 @x
@@ -221,9 +229,9 @@ testuser:231072:65536
 @z
 
 @x
-  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+  If you do not have this download and install with `sudo apt-get install -y slirp4netns` or download the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
 @y
-  これをまだ入手していない場合は、最新版の [リリース](https://github.com/rootless-containers/slirp4netns/releases) をダウンロードしてインストールしてください。
+  これをまだ入手していない場合は、`sudo apt-get install -y slirp4netns`によってインストールするか、あるいは最新版の [リリース](https://github.com/rootless-containers/slirp4netns/releases) をダウンロードしてインストールしてください。
 @z
 
 @x
@@ -250,10 +258,10 @@ testuser:231072:65536
 
 @x
 </div>
-<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
+<div id="hint-opensuse-sles" class="tab-pane fade in" markdown="1">
 @y
 </div>
-<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
+<div id="hint-opensuse-sles" class="tab-pane fade in" markdown="1">
 @z
 
 @x
@@ -272,9 +280,9 @@ testuser:231072:65536
 @z
 
 @x
-- Known to work on openSUSE 15.
+- Known to work on openSUSE 15 and SLES 15.
 @y
-- openSUSE 15 において動作します。
+- openSUSE 15 と SLES 15 において動作します。
 @z
 
 @x
@@ -299,19 +307,9 @@ testuser:231072:65536
 @z
 
 @x
-- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
-  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
-  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
+- Known to work on CentOS 8, RHEL 8, and Fedora 34.
 @y
-- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
-  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
-  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
-@z
-
-@x
-- Known to work on CentOS 8 and Fedora 33.
-@y
-- Known to work on CentOS 8 and Fedora 33.
+- Known to work on CentOS 8, RHEL 8, and Fedora 34.
 @z
 
 @x
@@ -354,7 +352,7 @@ testuser:231072:65536
 
 @x
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
@@ -372,7 +370,7 @@ testuser:231072:65536
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
 @y
 - 以下のストレージドライバーのみがサポートされます。
-  - `overlay2`（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）
+  - `overlay2`（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系カーネルのみ。）
   - `fuse-overlayfs`（カーネル 4.18 またはそれ以降の稼動時、そして`fuse-overlayfs`インストール時のみ。）
   - `btrfs`（カーネル 4.18 またはそれ以降で利用する場合のみ。あるいは`user_subvol_rm_allowed`マウントオプションを使って`~/.local/share/docker`をマウントしている場合。）
   - `vfs`
@@ -616,6 +614,12 @@ Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
 [INFO] This uninstallation tool does NOT remove Docker binaries and data.
 [INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 ```
+@z
+
+@x
+Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
+@y
+Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
 @z
 
 @x
@@ -1306,15 +1310,17 @@ up automatically. See [Usage](#usage).
 @z
 
 @x
-This error may happen when SELinux is enabled on the host.
+This error may happen with an older version of Docker when SELinux is enabled on the host.
 @y
-This error may happen when SELinux is enabled on the host.
+This error may happen with an older version of Docker when SELinux is enabled on the host.
 @z
 
 @x
-A known workaround is to run the following commands to disable SELinux for `iptables`:
+The issue has been fixed in Docker 20.10.8.
+A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
 @y
-A known workaround is to run the following commands to disable SELinux for `iptables`:
+The issue has been fixed in Docker 20.10.8.
+A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
 @z
 
 @x
@@ -1325,12 +1331,6 @@ $ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -
 ```console
 $ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
 ```
-@z
-
-@x
-This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
-@y
-This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 @z
 
 @x
@@ -1389,6 +1389,54 @@ A workaround is to specify non-NFS `data-root` directory in `~/.config/docker/da
 ### `docker run` errors
 @y
 ### `docker run` errors
+@z
+
+@x
+**docker: Error response from daemon: OCI runtime create failed: ...: read unix @-&gt;/run/systemd/private: read: connection reset by peer: unknown.**
+@y
+**docker: Error response from daemon: OCI runtime create failed: ...: read unix @-&gt;/run/systemd/private: read: connection reset by peer: unknown.**
+@z
+
+@x
+This error occurs on cgroup v2 hosts mostly when the dbus daemon is not running for the user.
+@y
+This error occurs on cgroup v2 hosts mostly when the dbus daemon is not running for the user.
+@z
+
+@x
+```console
+$ systemctl --user is-active dbus
+inactive
+
+$ docker run hello-world
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: process_linux.go:385: applying cgroup configuration for process caused: error while starting unit "docker
+-931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e.scope" with properties [{Name:Description Value:"libcontainer container 931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e"} {Name:Slice Value:"use
+r.slice"} {Name:PIDs Value:@au [4529]} {Name:Delegate Value:true} {Name:MemoryAccounting Value:true} {Name:CPUAccounting Value:true} {Name:IOAccounting Value:true} {Name:TasksAccounting Value:true} {Name:DefaultDependencies Val
+ue:false}]: read unix @->/run/systemd/private: read: connection reset by peer: unknown.
+```
+@y
+```console
+$ systemctl --user is-active dbus
+inactive
+
+$ docker run hello-world
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: process_linux.go:385: applying cgroup configuration for process caused: error while starting unit "docker
+-931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e.scope" with properties [{Name:Description Value:"libcontainer container 931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e"} {Name:Slice Value:"use
+r.slice"} {Name:PIDs Value:@au [4529]} {Name:Delegate Value:true} {Name:MemoryAccounting Value:true} {Name:CPUAccounting Value:true} {Name:IOAccounting Value:true} {Name:TasksAccounting Value:true} {Name:DefaultDependencies Val
+ue:false}]: read unix @->/run/systemd/private: read: connection reset by peer: unknown.
+```
+@z
+
+@x
+To fix the issue, run `sudo apt-get install -y dbus-user-session` or `sudo dnf install -y dbus-daemon`, and then relogin.
+@y
+To fix the issue, run `sudo apt-get install -y dbus-user-session` or `sudo dnf install -y dbus-daemon`, and then relogin.
+@z
+
+@x
+If the error still occurs, try running `systemctl --user enable --now dbus` (without sudo).
+@y
+If the error still occurs, try running `systemctl --user enable --now dbus` (without sudo).
 @z
 
 @x
@@ -1541,12 +1589,40 @@ See [RootlessKit documentation](https://github.com/rootless-containers/rootlessk
 
 @x
 Also, changing MTU value may improve the throughput.
-The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
 @y
 Also, changing MTU value may improve the throughput.
-The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+@z
+
+@x
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
+```
+@y
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
+```
+@z
+
+@x
+And then restart the daemon:
+@y
+And then restart the daemon:
+@z
+
+@x
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
+@y
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 @z
 
 @x
@@ -1561,11 +1637,39 @@ This is because Docker with rootless mode uses RootlessKit's builtin port driver
 @z
 
 @x
-The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The source IP addresses can be propagated by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
 @y
-The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The source IP addresses can be propagated by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+@z
+
+@x
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+```
+@y
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+```
+@z
+
+@x
+And then restart the daemon:
+@y
+And then restart the daemon:
+@z
+
+@x
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
+@y
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 @z
 
 @x
