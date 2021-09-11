@@ -55,10 +55,10 @@ We will gradually turn this option on automatically for Docker Desktop users, so
 @z
 
 @x
-Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
+Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 {: .important}
 @y
-Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
+Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 {: .important}
 @z
 
@@ -181,22 +181,22 @@ $ docker-compose disable-v2
 
 @x
 You can install Compose V2 by downloading the adequate binary for your system 
-from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
+from the [project release page](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 @y
 You can install Compose V2 by downloading the adequate binary for your system 
-from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
+from the [project release page](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 @z
 
 @x
 ```console
 $ mkdir -p ~/.docker/cli-plugins/
-$ curl -SL https://github.com/docker/compose-cli/releases/download/v2.0.0-rc.1/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
+$ curl -SL https://github.com/docker/compose/releases/download/v2.0.0-rc.3/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
 $ chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 @y
 ```console
 $ mkdir -p ~/.docker/cli-plugins/
-$ curl -SL https://github.com/docker/compose-cli/releases/download/v2.0.0-rc.1/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
+$ curl -SL https://github.com/docker/compose/releases/download/v2.0.0-rc.3/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
 $ chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 @z

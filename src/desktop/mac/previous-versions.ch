@@ -30,12 +30,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 @z
 
 @x
-{% include eula.md %}
-@y
-{% include eula.md %}
-@z
-
-@x
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 @y
@@ -44,9 +38,17 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/49550/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/amd64/49550/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -87,9 +89,17 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/49427/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/49427/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/49427/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/49427/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -107,11 +117,11 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
-- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
-- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+- Users with a paid Docker subscription plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users with a paid Docker subscription.
 @y
-- プロプランまたはチームプランを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
-- Docker Desktop では、プロプランまたはチームプランを購入しているユーザー向けのサポートオプションを導入しました。
+- 有償の Docker サブスクリプションを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
+- Docker Desktop では、有償の Docker サブスクリプションを購入しているユーザー向けのサポートオプションを導入しました。
 @z
 
 @x
@@ -202,9 +212,17 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/48506/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/48506/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -344,9 +362,17 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/48029/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/48029/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/48029/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/48029/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -418,9 +444,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/46911/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/46911/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/46911/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/46911/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -468,9 +502,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/45519/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/45519/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/45519/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://desktop.docker.com/mac/stable/45519/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -510,9 +552,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/mac/stable/45183/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/45183/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/mac/stable/45183/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ向けダウンロード](https://download.docker.com/mac/stable/45183/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -593,9 +643,17 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 @z
 
 @x
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/43884/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/43884/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -620,9 +678,17 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 @z
 
 @x
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/43472/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/43472/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -662,9 +728,17 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 @z
 
 @x
-> [Download](https://download.docker.com/mac/stable/42716/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/42716/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/stable/42716/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/42716/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -691,9 +765,17 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 @z
 
 @x
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/42247/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/42247/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -819,9 +901,17 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/40693/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/40693/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/40693/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/40693/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -856,9 +946,17 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/39773/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/39773/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/39773/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/39773/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -904,9 +1002,17 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/38240/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/38240/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/38240/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/38240/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -944,9 +1050,17 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/37877/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/37877/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/37877/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/37877/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -983,9 +1097,17 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kuber
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/37199/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/37199/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/37199/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/37199/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1134,9 +1256,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/31259/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/31259/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/31259/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/31259/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1154,9 +1284,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/30215/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/30215/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/30215/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/30215/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1196,9 +1334,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/29211/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/29211/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/29211/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/29211/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1216,9 +1362,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/28905/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/28905/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/28905/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/28905/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1278,9 +1432,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/26764/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/26764/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/26764/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/26764/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1306,9 +1468,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/26399/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/26399/Docker.dmg){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/mac/stable/26399/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/26399/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1378,9 +1548,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/24312/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/24312/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/24312/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/24312/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1410,9 +1588,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/24245/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/24245/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/24245/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/24245/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1442,9 +1628,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/23751/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23751/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/23751/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23751/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1462,9 +1656,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/23608/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23608/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/23608/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23608/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1528,9 +1730,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23011/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/23011/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1550,9 +1760,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/21805/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21805/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/21805/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21805/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1582,9 +1800,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1604,9 +1830,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1668,9 +1902,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/21090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21090/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/21090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/21090/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1700,9 +1942,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/19611/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/stable/19611/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1720,9 +1970,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19543/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19543/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1740,9 +1998,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19506/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19506/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1820,9 +2086,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19124/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19124/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1842,9 +2116,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18950/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18950/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1884,9 +2166,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18433/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18433/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1990,9 +2280,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/17661/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/17661/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2014,9 +2312,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/16048/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/16048/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2038,9 +2344,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15583/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15583/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2142,9 +2456,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15353/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15353/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2188,9 +2510,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15072/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15072/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2310,9 +2640,17 @@ underestimate the number of active connections
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/14777/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/14777/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2348,9 +2686,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/13776/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/13776/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2540,9 +2886,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2772,9 +3126,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/11213/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/11213/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2824,9 +3186,17 @@ events or unexpected unmounts.
 @z
 
 @x
-[Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/10871/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/10871/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2849,4 +3219,10 @@ events or unexpected unmounts.
 * Docker 1.12.0
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

@@ -122,26 +122,26 @@ the token will be used, or set a purpose for the token.
 @z
 
 @x
-    | Features   | Free | Pro | Team |
-    | --------------------- | ---- | ----- | ----- |
-    | Personal Access Tokens (read, write, delete scope only)*    |  x |   x  |   x  |
-    | Scoped Personal Access Tokens  |      | x   |   x   |
-    | Unlimited Personal Access Tokens   |      |       |   x   |
+    | Feature   | Personal | Pro | Team | Business |
+    | --------------------- | ---- | ----- | ----- |----- |
+    | Personal Access Tokens (read, write, delete scope only)*    |  x |   x  |   x  |   x  |
+    | Scoped Personal Access Tokens  |      | x   |   x   |   x  |
+    | Unlimited Personal Access Tokens   |      |       |   x   |   x  |
 @y
-    | 機能   | Free | Pro | Team |
-    | --------------------- | ---- | ----- | ----- |
-    | パーソナルアクセストークン (読み込み、書き込み、削除の各スコープのみ)*    |  x |   x  |   x  |
-    | スコープつきパーソナルアクセストークン |      | x   |   x   |
-    | 無制限のパーソナルアクセストークン   |      |       |   x   |
+    | 機能   | Personal | Pro | Team | Business |
+    | --------------------- | ---- | ----- | ----- |----- |
+    | パーソナルアクセストークン (読み込み、書き込み、削除の各スコープのみ)*    |  x |   x  |   x  |   x  |
+    | スコープつきパーソナルアクセストークン  |      | x   |   x   |   x  |
+    | 無制限のパーソナルアクセストークン   |      |       |   x   |   x  |
 @z
 
 @x
-      >*You can create 1 access token as part of the Free plan, 5 tokens per the Pro plan, and Unlimited tokens for the Team plan.
-      For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
+      >*You can create 1 access token as part of the Docker Personal tier, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business tier.
+      For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 @y
-      >* Free プラン内では 1 つのアクセストークン生成ができます。
-      Pro プランでは 5 つのトークン、Team プランでは無制限です。
-      Pro プランや Team プランの詳細については、[Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} を参照してください。
+      >* Docker Personal では 1 つのアクセストークン生成ができます。
+      > Docker Pro では 5 つのトークン、Docker Team や Business では無制限です。
+      > 詳細については、[Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

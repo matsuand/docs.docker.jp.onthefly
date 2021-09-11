@@ -139,9 +139,9 @@ services:
       resources:
         reservations:
           devices:
-          - driver: nvidia
-            count: 1
-            capabilities: [gpu, utility]
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 ```
 @y
 ```yaml
@@ -153,9 +153,9 @@ services:
       resources:
         reservations:
           devices:
-          - driver: nvidia
-            count: 1
-            capabilities: [gpu, utility]
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 ```
 @z
 
@@ -239,7 +239,7 @@ services:
       resources:
         reservations:
           devices:
-          - capabilities: [gpu]
+            - capabilities: [gpu]
 ```
 @y
 ```yaml
@@ -251,7 +251,7 @@ services:
       resources:
         reservations:
           devices:
-          - capabilities: [gpu]
+            - capabilities: [gpu]
 ```
 @z
 

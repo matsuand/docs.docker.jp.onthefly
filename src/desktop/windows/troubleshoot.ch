@@ -27,21 +27,21 @@ toc_max: 2
 
 @x
 {% include upgrade-cta.html
-  body="Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Upgrade your existing plan to benefit from Docker Support. Click [here](#support) to learn more."
+  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](#support) to learn more."
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 @y
 {% include upgrade-cta.html
-  body="Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？ Docker サポートを得るには既存プランを更新してください。詳しくは [こちら](#support) を参照のこと。"
+  body="Docker Desktop では、有償サブスクリプション（Pro、Team、Business）を購入している開発者向けのサポートを提供していることをご存知ですか？ Docker サポートを得るには既存プランを更新してください。詳しくは [こちら](#support) を参照してください。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 @z
 
 @x
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 @y
 本ページでは Docker Desktop において問題が発生した際の分析方法や解決方法について示します。
-Docker Desktop サポートへの要求を行ったり（プロプランやチームプランのユーザーのみ）、Docker Desktop チームへログ送付してやりとりを行ったり、フォーラムや Success Center を活用したりしてください。
+Docker Desktop サポートへの要求を行ったり、Docker Desktop チームへログ送付してやりとりを行ったり、フォーラムや Success Center を活用したりしてください。
 GitHub 上での issue の確認や情報収集を行って、既知の問題であればその回避策を探してください。
 @z
 
@@ -78,9 +78,9 @@ The Troubleshoot page contains the following options:
 @z
 
 @x
-* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
+* **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 @y
-* **Support**（サポート）: プロプランおよびチームプランの開発者は、このオプションを利用してサポートリクエストを送信することができます。
+* **Support**（サポート）: 有償の Docker サブスクリプションのユーザーは、このオプションを利用してサポートリクエストを送信することができます。
 それ以外のユーザーはこのオプションによって Docker Desktop の issue 診断を行うことができます。
 詳しくは [診断とフィードバック](#diagnose-and-feedback) あるいは [サポート](#support) を参照してください。
 @z
@@ -146,19 +146,19 @@ from the menu.
 @z
 
 @x
-    ![Diagnose & Support](images/diagnose-support.png){:width="600px"}
+    ![Diagnose & Support](../mac/images/diagnose-support.png){:width="600px"}
 @y
-    ![診断とサポート](images/diagnose-support.png){:width="600px"}
+    ![診断とサポート](../mac/images/diagnose-support.png){:width="600px"}
 @z
 
 @x
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
 5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
-6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+6. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
 @y
 4. 診断情報の収集処理が終了したら **Upload to get a Diagnostic ID**（アップロードと診断 ID の取得）をクリックします。
 5. 診断情報がアップロードされると Docker Desktop は診断 ID（Diagnostic ID）を出力するので、これをコピーします。
-6. プロプランまたはチームプランを購入している場合は **Contact support**（サポートへの問い合わせ）をクリックします。
+6. 有償の Docker サブスクリプションを購入している場合は **Contact support**（サポートへの問い合わせ）をクリックします。
    ここから [Docker Desktop サポート](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} 画面が開きます。
    必要な情報を入力し、上でコピーした ID を診断 ID 欄に入力します。
    そして **Submit** をクリックして Docker Desktop サポートへ送信します。
@@ -175,10 +175,10 @@ from the menu.
 @z
 
 @x
-7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
+7. If you don't have a paid Docker subscription, click **Upgrade to benefit from Docker Support** to upgrade your existing account.
     Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @y
-7. プロプランやチームプランを購入していない場合は、**Upgrade to benefit from Docker Support**（アップグレードと Docker サポート取得）をクリックして既存のアカウントをアップグレードしてください。
+7. 有償の Docker サブスクリプションを購入していない場合は、**Upgrade to benefit from Docker Support**（アップグレードと Docker サポート取得）をクリックして既存のアカウントをアップグレードしてください。
     こうすることとは別に **Report a Bug**（バグ報告）をクリックして GitHub 上に Docker Desktop の issue を開くこともできます。
     この場合には、ウェブブラウザー上に GitHub の Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) に関する新たな issue のテンプレートが開きます。
     必要な情報を書き入れた上で、上でコピーした診断 ID も忘れずに記入してください。
@@ -1211,14 +1211,14 @@ This section contains instructions on how to get support, and covers the scope o
 
 @x
 {% include upgrade-cta.html
-  body="Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Upgrade your existing plan to benefit from Docker Support."
-  header-text="This feature requires a Pro or a Team plan"
+  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 @y
 {% include upgrade-cta.html
-  body="Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Upgrade your existing plan to benefit from Docker Support."
-  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 @z
@@ -1230,9 +1230,9 @@ This section contains instructions on how to get support, and covers the scope o
 @z
 
 @x
-If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+If you have a paid Docker subscription, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
 @y
-If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+If you have a paid Docker subscription, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -1248,9 +1248,9 @@ Docker Community users can get support through our Github repos for-win and for-
 @z
 
 @x
-If you are a Pro or a Team user, you can request for support on the following types of issues:
+If you have a paid Docker subscription, you can request for support on the following types of issues:
 @y
-If you are a Pro or a Team user, you can request for support on the following types of issues:
+If you have a paid Docker subscription, you can request for support on the following types of issues:
 @z
 
 @x

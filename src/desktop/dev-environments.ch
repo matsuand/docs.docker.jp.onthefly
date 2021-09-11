@@ -286,11 +286,24 @@ Let's summarize the tasks we performed so far to start a single container Dev En
 @z
 
 @x
-If you are a member of the Docker [Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}, you can now share you Dev Environment with your team. When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you'd like to push your Dev Environment to.
+{% include upgrade-cta.html
+  body="Docker Pro, Team, and Business users can now share Dev Environments with their team members."
+  header-text="This feature requires a paid Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
+%}
 @y
-Docker の [Team プラン](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} のメンバーであれば、この Dev 環境をチーム内で共有することができます。
-共有の準備が整っていれば **Share** (共有) ボタンをクリックするだけです。
-そして Dev 環境をプッシュする先となる Docker Hub 名前空間を指定します。
+{% include upgrade-cta.html
+  body="Docker の Pro プラン、Team プラン、Business プランのユーザーは、チームメンバー間において Dev 環境を共有できるようになりました。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
+%}
+@z
+
+@x
+When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
+@y
+環境を共有する準備が整ったら、 あとは **Share** (共有) ボタンをクリックして、Docker Hub の名前空間を指定するだけです。
+この名前空間とは、Dev 環境をプッシュしたい対象のことです。
 @z
 
 @x

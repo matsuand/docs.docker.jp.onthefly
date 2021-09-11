@@ -264,9 +264,9 @@ Upgrading your legacy plan to a Pro plan offers you unlimited public and private
 @z
 
 @x
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 concurrent builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
 @y
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 concurrent builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
 @z
 
 @x

@@ -8,6 +8,10 @@ keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop overview
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /desktop/opensource/
+- /docker-for-mac/opensource/
+- /docker-for-windows/opensource/
 ---
 @y
 ---
@@ -16,6 +20,10 @@ keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop 概要
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /desktop/opensource/
+- /docker-for-mac/opensource/
+- /docker-for-windows/opensource/
 ---
 @z
 
@@ -28,7 +36,7 @@ Docker Desktop には [Docker Engine](../engine/)、Docker CLI クライアン�
 @z
 
 @x
-Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in [Docker Hub](https://hub.docker.com/). This enables development teams to extend their environment to rapidly auto-build, continuously integrate and collaborate using a secure repository.
+Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in [Docker Hub](https://hub.docker.com/). This enables development teams to extend their environment to rapidly auto-build, continuously integrate, and collaborate using a secure repository.
 @y
 Docker Desktop は、選択した開発ツールやプログラミング言語を使って動作します。
 そして [Docker Hub](https://hub.docker.com/) にある認定イメージやテンプレートに対しての、数多くのライブラリにアクセスできるようになります。
@@ -84,6 +92,12 @@ Docker Desktop は Mac と Windows において利用できます。
 @y
 * [Docker Desktop on Mac のインストール](mac/install.md)
 * [Docker Desktop on Windows のインストール](windows/install.md)
+@z
+
+@x
+For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
+@y
+For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 @z
 
 @x

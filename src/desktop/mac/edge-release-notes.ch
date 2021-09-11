@@ -44,9 +44,17 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/50534/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/edge/50534/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/50534/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/50534/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -98,9 +106,17 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/50261/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/50261/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -141,9 +157,17 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/50165/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/50165/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/50165/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/50165/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -190,9 +214,17 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/49923/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/49923/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/49923/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/49923/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -258,9 +290,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48975/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/48975/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -337,9 +377,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48583/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/48583/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -389,9 +437,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/48173/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48173/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/48173/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/48173/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -479,9 +535,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/47792/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47792/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/47792/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/47792/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -520,9 +584,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/47622/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47622/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/47622/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/47622/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -601,9 +673,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/47376/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47376/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/47376/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/47376/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -696,9 +776,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46980/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/46980/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -759,9 +847,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/edge/46784/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/46784/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -803,9 +899,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46574/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/46574/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -853,9 +957,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46268/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/edge/46268/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -913,9 +1025,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/45408/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/edge/45408/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -976,9 +1096,17 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
-> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/44875/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/44875/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1003,9 +1131,17 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
-> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/44472/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/44472/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1065,9 +1201,17 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
-> [Download](https://download.docker.com/mac/edge/43965/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/43965/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/edge/43965/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/43965/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1155,9 +1299,17 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
-> [Download](https://download.docker.com/mac/edge/43066/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/43066/Docker.dmg){: .accept-eula }
 @y
-> [Download](https://download.docker.com/mac/edge/43066/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/43066/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1205,9 +1357,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/42746/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/42746/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1234,9 +1394,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/41561/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/41561/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1294,9 +1462,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/40807/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/40807/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/40807/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://download.docker.com/mac/edge/40807/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1351,9 +1527,17 @@ Added the ability to start and stop Compose-based applications and view combined
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/40323/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/40323/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/40323/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/40323/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1439,9 +1623,17 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/39357/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/39357/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/39357/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/39357/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1491,9 +1683,17 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38275/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38275/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1524,9 +1724,17 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38030/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38030/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1576,9 +1784,17 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/37260/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/37260/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1624,9 +1840,17 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/36792/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/36792/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/36792/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/36792/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1701,9 +1925,17 @@ This release contains Kubernetes security improvements. Note that your local Kub
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/35318/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/35318/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/35318/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/35318/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1771,9 +2003,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/34207/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/34207/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/34207/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/34207/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1791,9 +2031,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/33772/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/33772/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/33772/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/33772/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1845,14 +2093,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
     - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
-    - Parallel building of Compose files
+    - Concurrent building of Compose files
     - High-level build constructs with `bake`
 @y
     - Familiar UI from docker build
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
     - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
-    - Parallel building of Compose files
+    - Concurrent building of Compose files
     - High-level build constructs with `bake`
 @z
 
@@ -1871,9 +2119,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/31778/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31778/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/31778/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31778/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1901,9 +2157,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/31274/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31274/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/31274/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31274/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1921,9 +2185,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/30972/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30972/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/30972/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30972/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1965,9 +2237,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/30090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30090/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/30090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30090/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2021,9 +2301,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/29268/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/29268/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/29268/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/29268/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2043,9 +2331,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/28700/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/28700/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/28700/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/28700/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2081,9 +2377,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/27117/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/27117/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/27117/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/27117/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2129,9 +2433,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/26766/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26766/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/26766/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26766/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2157,9 +2469,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/26398/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26398/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/26398/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26398/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2187,9 +2507,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/26342/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26342/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/26342/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26342/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2237,9 +2565,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/25042/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/25042/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/25042/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/25042/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2277,9 +2613,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/24545/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24545/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/24545/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24545/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2327,9 +2671,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/24246/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24246/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/24246/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24246/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2365,9 +2717,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23965/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23965/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23965/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23965/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2387,9 +2747,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23890/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23890/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23890/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23890/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2425,9 +2793,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23607/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23607/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23607/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23607/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2447,9 +2823,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23352/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23352/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23352/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23352/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2479,9 +2863,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23287/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23287/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23287/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23287/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2517,9 +2909,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/23022/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23022/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/23022/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23022/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2563,9 +2963,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/22617/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22617/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/22617/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22617/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2597,9 +3005,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/22446/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22446/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/22446/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22446/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2633,9 +3049,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/22256/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22256/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/22256/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22256/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2665,9 +3089,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/22004/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22004/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/22004/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22004/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2723,9 +3155,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/21669/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21669/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/21669/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21669/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2767,9 +3207,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/21438/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21438/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/21438/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21438/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2799,9 +3247,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/21270/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21270/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/21270/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21270/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2869,9 +3325,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/20561/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/20561/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/20561/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/20561/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -2981,9 +3445,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/19824/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/edge/19824/Docker.dmg){: .accept-eula }
 @y
-[Download](https://download.docker.com/mac/edge/19824/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/edge/19824/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -6800,4 +7272,10 @@ work yet.
 - Fixed permissions on `usr/local` symbolic links
 @y
 - Fixed permissions on `usr/local` symbolic links
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

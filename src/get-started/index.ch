@@ -189,15 +189,21 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 @z
 
 @x
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+[Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn .accept-eula }
+[Linux](../engine/install/index.md){: .button .primary-btn}
 @y
-Docker Desktop のインストール手順については [Docker Desktop の Mac へのインストール](../desktop/mac/install.md) か [Docker Desktop の Windows へのインストール](../desktop/windows/install.md) を参照してください。
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+[Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn .accept-eula }
+[Linux](../engine/install/index.md){: .button .primary-btn}
 @z
 
 @x
-{% include eula.md %}
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
 @y
-{% include eula.md %}
+Docker Desktop のインストール手順については [Docker Desktop の Mac へのインストール](../desktop/mac/install.md) か [Docker Desktop の Windows へのインストール](../desktop/windows/install.md) を参照してください。
 @z
 
 @x
@@ -282,11 +288,11 @@ easily manage container lifecycle (stop, remove, etc.).
 
 @x
 To access the dashboard, follow the instructions in the
-[Docker Desktop product manual](../desktop/dashboard.md). If you open the dashboard
+[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 @y
-ダッシュボードにアクセスするには [Docker Desktop 製品マニュアル](../desktop/dashboard.md) の手順に従ってください。
+ダッシュボードにアクセスするには [Docker Desktop マニュアル](../desktop/dashboard.md) の手順に従ってください。
 ダッシュボードを今開いている場合は、チュートリアルコンテナーが動作中であるのが見てとれるはずです。
 コンテナー名（以下では`jolly_bouman`）はランダムに生成されます。
 したがって手元のコンテナー名は、きっと別の名前になっているはずです。
@@ -402,4 +408,10 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker run](../engine/reference/commandline/run.md)
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

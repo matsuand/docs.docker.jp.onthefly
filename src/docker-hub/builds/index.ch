@@ -29,14 +29,14 @@ title: 自動ビルドの設定
 
 @x
 {% include upgrade-cta.html
-  body="The Automated Builds feature is available on Pro and Team plans. Upgrade your existing plan to start automatically building and pushing your images today."
-  header-text="This feature requires a Pro or a Team plan"
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images."
+  header-text="This feature requires a Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}
 @y
 {% include upgrade-cta.html
-  body="自動ビルド機能は Pro プランまたは Team プランにおいて利用可能です。既存のプランをアップデートして、最新のイメージビルドおよびプッシュの自動化を始めてください。"
-  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  body="自動ビルド機能は Pro、Team、Business ユーザーが利用可能です。既存のプランをアップデートして、最新のイメージビルドおよびプッシュの自動化を始めてください。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}
 @z
@@ -103,12 +103,12 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 @z
 
 @x
-Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get concurrent builds, which means that `N`
 autobuilds can be run at the same time. `N` is configured by the plan that you
 subscribe to. Once `N+1` builds are running, any additional builds are
 queued to be run later.
 @y
-購入している [プラン](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} によっては、並行ビルドを行うこともできます。
+購入している [プラン](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} によっては、同時ビルドを行うこともできます。
 つまり`N`個の自動ビルドを同時に実行します。
 `N`という数値は、購入しているプランにおいて設定します。
 `N+1`個めのビルドが実行されると、これに続くビルドはキューに入り、後に実行されます。
@@ -117,12 +117,12 @@ queued to be run later.
 @x
 > **Note**
 >
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of parallel builds for Pro is 5 and for Team is 15.
+> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of concurrent builds for Pro is 5 and for Team is 15.
 @y
 > **メモ**
 >
 > キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。
-> 並行ビルド数は Pro プランでは 5、Team プランでは 15 です。
+> 同時ビルド数は Pro プランでは 5、Team プランでは 15 です。
 @z
 
 @x

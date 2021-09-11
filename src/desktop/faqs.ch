@@ -46,6 +46,31 @@ Docker Desktop のシステム要件については、[Docker Desktop for Mac �
 @z
 
 @x
+### Do I need to pay to use Docker Desktop?
+@y
+{: #do-i-need-to-pay-to-use-docker-desktop }
+### Docker Desktop を利用するには支払いが必要ですか
+@z
+
+@x
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
+The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022, for those that will require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
+@y
+Docker Desktop は、小規模なビジネス向け（従業員 250名未満、かつ収益 1,000 万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、無償提供が継続されます。
+大規模なエンタープライズ向けのプロフェッショナル利用に対しては、有償サブスクリプションが必要です。
+この条件の適用開始日は 2021 年 8 月31 日です。
+Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは、猶予期間が設けられています。
+Docker Desktop をダウンロードしてインストールする際には、[Docker サブスクリプションサービス契約](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} へ合意するかどうかが確認されます。
+@z
+
+@x
+Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
+@y
+[ブログ](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} や [FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} を読んで、Docker Desktop を利用する各企業において、どのような影響が発生するのかを確認してください。
+Docker Desktop ライセンスの詳細は、[Docker Desktop ライセンス契約](../subscription/index.md#docker-desktop-license-agreement) を参照してください。
+@z
+
+@x
 ### What is an experimental feature?
 @y
 {: #what-is-an-experimental-feature }
@@ -188,7 +213,7 @@ For more information and examples, see
 @z
 
 @x
-Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
+Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client-side certs, see
 [Add TLS certificates on Mac](mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](windows/index.md#adding-tls-certificates).
 @y
 Docker Desktop は信頼された（ルートあるいは中間の）認証局をすべてサポートします。
@@ -222,7 +247,7 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
 VMware Fusion on a Mac provided that the VM is properly configured. However,
 problems and intermittent failures may still occur due to the way these apps
 virtualize the hardware. For these reasons, **Docker Desktop is not supported in
-nested virtualization scenarios**. It might work in some cases, and not in others.
+nested virtualization scenarios**. It might work in some cases and not in others.
 @y
 Docker Desktop は Mac 上の Parallels や VMware Fusion といったアプリ内に稼動する Windows 10 VM 内で実行させることができます。
 その場合には VM を適切に設定することが必要です。
@@ -322,7 +347,7 @@ Each Docker Desktop release is also delivered as a full installer for new users.
 @z
 
 @x
-New releases will be available roughly monthly, similar to Edge today, unless there are critical fixes that need to be released sooner.
+New releases will be available roughly monthly, similar to Edge today unless there are critical fixes that need to be released sooner.
 @y
 新規リリースはおおまかに言えば 1 ヶ月ごとに利用できます。
 最新版は本日も行われています。
@@ -387,17 +412,17 @@ Docker Desktop 3.0.0 から安定版（Stable）と最新版（Edge）は、ど�
 @z
 
 @x
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
+Yes, Docker Desktop offers support for users with a paid Docker subscription. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
 @y
 はい。
-Docker Desktop ではプロユーザーおよびチームユーザーに対してのサポートを行っています。
+Docker Desktop では、有償の Docker サブスクリプション購入ユーザーに対してのサポートを行っています。
 詳しくは [Docker Desktop サポート](mac/troubleshoot.md#support) を参照してください。
 @z
 
 @x
-For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For information about Docker subscriptions and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-有償プランや既存アカウントの更新に関する情報については [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+有償の Docker サブスクリプションや既存アカウントの更新に関する情報は [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -434,7 +459,7 @@ Docker が問題を調査できるようにするための診断情報のアッ�
 @z
 
 @x
-By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
+By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues but may derive high-level (non personal) metrics such as the rate of issues from it.
 @y
 原則として Docker 社はアップロードされた診断情報を 30 日後には削除します。
 ユーザーから診断情報の削除を要請することもでき、その場合は診断情報 ID か、あるいは GitHub ID（その診断情報が GitHub issue に言及している場合）を送付します。
@@ -514,7 +539,7 @@ HyperKit を利用することによって、Oracle VirtualBox や VMWare Fusion
 @z
 
 @x
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
+HyperKit is thinner than VirtualBox and VMWare fusion, and the version included is customized for Docker workloads on Mac.
 @y
 HyperKit は VirtualBox や VMWare fusion に比べて軽量です。
 本製品に含まれているバージョンは Mac 上の Docker 処理に合わせてカスタマイズされています。

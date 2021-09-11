@@ -43,21 +43,17 @@ Docker Desktop for Apple silicon はマルチプラットフォームイメー�
 @z
 
 @x
-Download Docker Desktop for Mac on Apple silicon:
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
 @y
-Apple silicon 向け Docker Desktop for Mac のダウンロード
-@z
-
-@x
-[Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-@y
-[ダウンロード](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-@z
-
-@x
-{% include eula.md %}
-@y
-{% include eula.md %}
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
 @z
 
 @x
@@ -242,4 +238,10 @@ GitHub リポジトリ [Docker Desktop for Mac](https://github.com/docker/for-ma
 We also recommend that you join the [Docker Community Slack](https://www.docker.com/docker-community) and ask questions in **#docker-desktop-mac** channel.
 @y
 また [Docker Community Slack](https://www.docker.com/docker-community) への参加や **#docker-desktop-mac** チャネルへの質問をお願いします。
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

@@ -20,30 +20,22 @@ redirect_from:
 @z
 
 @x
-Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
 @y
 Docker Desktop for Mac へようこそ。
-このページでは Docker Desktop for Mac のシステム要件、ダウンロード URL、インストール手順、自動アップデートについて説明します。
+このページでは Docker Desktop for Mac のシステム要件、ダウンロード URL、インストール手順、アップデートについて説明します。
 @z
 
 @x
-Download Docker Desktop for Mac:
+> Download Docker Desktop for Mac
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 @y
-Docker Desktop for Mac は以下からダウンロードします。
-@z
-
-@x
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-@y
-[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-@z
-
-@x
-{% include eula.md %}
-@y
-{% include eula.md %}
+> Docker Desktop for Mac のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 @z
 
 @x
@@ -54,7 +46,7 @@ Docker Desktop for Mac は以下からダウンロードします。
 @z
 
 @x
-Your Mac must meet the following requirements to successfully install Docker Desktop.
+Your Mac must meet the following requirements to install Docker Desktop successfully.
 @y
 Docker Desktop を Mac に正常にインストールするには、以下のシステム要件が満たされている必要があります。
 @z
@@ -207,10 +199,10 @@ Docker Desktop のインストールにより以下のものが利用できま�
 @z
 
 @x
-2. Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
+2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 @y
 2. アプリケーションフォルダー内の`Docker.app`をダブルクリックして Docker を起動します。
-    （以下の例において、アプリケーションフォルダーは「グリッド」表示モードにしています。）
+   以下の例において、アプリケーションフォルダーは「グリッド」表示モードにしています。
 @z
 
 @x
@@ -220,55 +212,73 @@ Docker Desktop のインストールにより以下のものが利用できま�
 @z
 
 @x
-    The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
+3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 @y
-    最上段のスタータスバーにある Docker メニューには Docker Desktop が起動していることが示されているので、ターミナル画面からアクセスすることができます。
+3. Docker メニュー (![クジラメニュー](images/whale-x.png){: .inline}) には、Docker Subscription Service Terms（サブスクリプションサービス条件）画面が表示されます。
+   そこには Docker Desktop の利用条件に関する変更が示されています。
 @z
 
 @x
-      ![Whale in menu bar](images/whale-in-menu-bar.png)
+    {% include desktop-license-update.md %}
 @y
-      ![メニューバー内のクジラアイコン](images/whale-in-menu-bar.png)
+    {% include desktop-license-update.md %}
 @z
 
 @x
-    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+4. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 @y
-    インストーラーによるインストールを終えたら、Docker Desktop はオンボードのチュートリアルを開始します。
+4. チェックボックスをクリックして、更新されたサービス条件に合意してください。
+   そして **Accept**（合意）をクリックして先に進みます。
+   この合意後に Docker Desktop が起動します。
+@z
+
+@x
+    > **Important**
+    >
+    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
+@y
+    > **重要**
+    >
+    > この条件に合意しなかった場合、Docker Desktop アプリケーションは終了し、そのマシン上での DOcker Desktop 実行はできなくなります。
+    > 後日 Docker Desktop を開いて、条件の合意を選ぶことができます。
+    {: .important}
+@z
+
+@x
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+@y
+    詳しくは [Docker Desktop ライセンス契約](/subscription/#docker-desktop-license-terms) を参照してください。
+@z
+
+@x
+### Quick start guide  
+@y
+{: #quick-start-guide }
+### クイックスタートガイド
+@z
+
+@x
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
+@y
+    インストーラーによるインストールを終えたら、Docker Desktop のチュートリアルが開始されます。
     このチュートリアルでは、単純な課題を通じてサンプルの Docker イメージを構築し、コンテナーとして実行、そのイメージを Docker Hub にプッシュして保存することを行います。
 @z
 
 @x
-    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+   ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 @y
-    ![Docker クィックスタートチュートリアル](images/docker-tutorial-mac.png)
+   ![Docker クィックスタートチュートリアル](images/docker-tutorial-mac.png)
 @z
 
 @x
-3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
-**Preferences** and other options.
-@y
-3.  Docker メニュー (![クジラメニュー](images/whale-x.png){: .inline}) をクリックして、**Preferences** やその他のオプションを確認します。
-@z
-
-@x
-4. Select **About Docker** to verify that you have the latest version.
-@y
-4.  **About Docker** をクリックして、最新版を入手していることを確認します。
-@z
-
-@x
-Congratulations! You are now successfully running Docker Desktop.
+Congratulations! You are now successfully running Docker Desktop. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
+**Preferences** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
 @y
 おめでとうございます！
 Docker Desktop を正常に実行することができました。
-@z
-
-@x
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
-@y
-チュートリアルを再実行したい場合は Docker Desktop メニューから **Learn** を実行してください。
+Docker メニュー (![whale menu](images/whale-x.png){: .inline}) をクリックして、**Preferences**（設定）などのオプションを確認してください。
+クイックスタートガイドを明示的に実行したい場合は、Docker メニューから **Quick Start Guide**（クイックスタートガイド）を選んでください。
 @z
 
 @x
@@ -306,14 +316,14 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 @z
 
 @x
-> **Important**
+> **Note**
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](../backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
 @y
-> **重要**
+> **メモ**
 >
 > Docker Desktop をアンインストールすると、ローカルにある Docker コンテナー、イメージ、ボリューム、その他 Docker 関連データは破棄され、アプリケーションが生成したファイルは削除されます。
 > アンインストールによって大切なデータを失わないように、[バックアップとリストア](../backup-and-restore.md) の手順を確認してください。

@@ -639,11 +639,11 @@ Images 画面では、リモートリポジトリ内のイメージを管理し�
 @x
 > **Note**
 >
-> If you have subscribed to a Pro or a Team plan and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
+> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
 @y
 > **メモ**
 >
-> プロプランやチームプランを購入していて Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、スキャン結果は Remote repositories タブに表示されます。
+> Docker の有償サブスクリプションを購入していて、 Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、スキャン結果は Remote repositories タブに表示されます。
 @z
 
 @x
@@ -685,9 +685,9 @@ To interact with remote repositories:
 @z
 
 @x
-    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+    If you have a paid Docker subscription and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
 @y
-    プロプランやチームプランを購入していて Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、Docker Hub ページには、ぜい弱性スキャン結果の概要が表示され、検出されたぜい弱性に関する詳細情報が提供されます。
+    Docker サブスクリプションを購入していて、Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、Docker Hub ページには、ぜい弱性スキャン結果の概要が表示され、検出されたぜい弱性に関する詳細情報が提供されます。
 @z
 
 @x
@@ -706,22 +706,22 @@ You can use [volumes](../storage/volumes.md) to store files and share them among
 @z
 
 @x
-The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are user with a paid Docker subscription, you can also see which container is using a specific volume and explore the files and folders in your volumes.
 @y
 Docker Dashboard の **Volumes** 画面では、ボリュームの生成削除や、どれが利用中であるかの確認が簡単にできます。
-Pro プランや Team プランを購入している開発者であれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
+有償サブスクリプションを購入しているユーザーであれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
 @z
 
 @x
 {% include upgrade-cta.html
-  body="To start exploring the details in your volumes, upgrade to a Pro or a Team plan."
-  header-text="This feature requires a Pro or a Team plan"
+  body="To start exploring the details in your volumes, upgrade to a Docker Pro, Team, or a Business subscription."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
 %}
 @y
 {% include upgrade-cta.html
-  body="ボリュームについてさらに深く理解していきたい場合は、Pro プランまたは Team プランにアップグレードしてください。"
-  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  body="ボリュームについてさらに深く理解していきたい場合は、Pro プラン、Team プラン、Business プランにアップグレードしてください。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
 %}
 @z
@@ -739,23 +739,23 @@ The following table lists the Volumes UI features available in each plan:
 @z
 
 @x
-| Feature                                       | Free      | Pro       | Team      |
-|:----------------------------------------------|:---------:|:---------:|:--------:|
-|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |
-| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |
-| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |
+| Feature                                       | Personal      | Pro       | Team      | Business      | 
+|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
+|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
 @y
-| 機能                                          | 無償プラン| Pro プラン| Team プラン |
-|:----------------------------------------------|:---------:|:---------:|:--------:|
-| ボリュームの参照、生成、削除                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| 利用中ボリュームの確認                        | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| ボリューム容量の確認                          | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| ボリュームデータの詳細確認 (修正時刻やサイズ) | X         | {{ yes }} |  {{ yes }}  |
-| ボリュームを利用するコンテナーの確認          | X         | {{ yes }} |  {{ yes }}  |
-| ボリュームに対してのファイル保存、削除        | X         | {{ yes }} |  {{ yes }}  |
+| 機能                                          | Personal  | Pro       | Team      | Business      | 
+|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
+| ボリュームの参照、生成、削除                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| 利用中ボリュームの確認                        | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| ボリューム容量の確認                          | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| ボリュームデータの詳細確認 (修正時刻やサイズ) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| ボリュームを利用するコンテナーの確認          | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| ボリュームに対してのファイル保存、削除        | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
 @z
 
 @x

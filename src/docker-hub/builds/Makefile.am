@@ -15,9 +15,9 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	advanced \
+	advanced          \
 	automated-testing \
-	index \
+	index             \
 	link-source
 
 ch_mds = $(bases:=.ch) # ch means change files

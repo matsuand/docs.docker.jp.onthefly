@@ -17,23 +17,23 @@ title: 拡張イメージ管理ダッシュボード
 
 @x
 {% include upgrade-cta.html
-  body="Docker Pro and Team users can now use Docker Hub's new **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade your existing plan to start using the Advanced Image Management dashboard."
-  header-text="This feature requires a Pro or a Team plan"
+  body="Docker Pro, Team, and Business users can now use Docker Hub's **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade now to start using the Advanced Image Management dashboard."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
 %}
 @y
 {% include upgrade-cta.html
-  body="Docker の Pro ユーザーおよび Team ユーザーは、Docker Hub の新機能、**拡張イメージ管理**（Advanced Image Management）ダッシュボードが利用できるようになりました。ダッシュボードを使えば、これまでにないイメージアクセスが可能になります。そして古いデータをきめ細かく整理したり、プッシュされたイメージの旧バージョンを確認したりすることができます。拡張イメージ管理ダッシュボードを利用するために、既存のサブスクリプションをアップグレードしてください。"
-  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  body="Docker の Pro、Team、Business ユーザーは、Docker Hub の新機能、**拡張イメージ管理**（Advanced Image Management）ダッシュボードが利用できるようになりました。ダッシュボードを使えば、これまでにないイメージアクセスが可能になります。そして古いデータをきめ細かく整理したり、プッシュされたイメージの旧バージョンを確認したりすることができます。拡張イメージ管理ダッシュボードを利用するために、既存のサブスクリプションをアップグレードしてください。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
 %}
 @z
 
 @x
-The **Advanced Image Management** dashboard allows you to manage Docker images across all repositories. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing account to a Pro or a Team account to start using the Advanced Image Management dashboard.
+The **Advanced Image Management** dashboard allows you to manage Docker images across all repositories. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing subscription to start using the Advanced Image Management dashboard.
 @y
 **拡張イメージ管理**（Advanced Image Management）ダッシュボードは、あらゆるリポジトリにわたっての Docker イメージ管理を実現します。
-すでにお持ちのアカウントをプロアカウントやチームアカウントに [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} して、この拡張イメージ管理ダッシュボードをご利用ください。
+すでにお持ちのアカウントを [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} して、この拡張イメージ管理ダッシュボードをご利用ください。
 @z
 
 @x
@@ -99,9 +99,9 @@ To access the  Advanced Image Management dashboard:
 @z
 
 @x
-    > You must be logged in as a Pro or a Team user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} to upgrade your existing subscription.
+    > You must be logged in as a Docker Pro, Team, or a Business user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} to upgrade your existing subscription.
 @y
-    > 拡張イメージ管理ダッシュボードを利用するためには、プロユーザーまたはチームユーザーとしてログインしなければなりません。
+    > 拡張イメージ管理ダッシュボードを利用するためには、Docker Pro、Team、Business ユーザーとしてログインしなければなりません。
     > 既存のサブスクリプションを [アップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} してご利用ください。
 @z
 
@@ -134,9 +134,9 @@ The Advanced Image Management dashboard provides a snapshot of your existing ima
 @z
 
 @x
-> You must be logged in as a Pro or a Team user and have admin access to the repository to delete images.
+> You must be logged in as a Docker Pro, Team, or a Business user and have admin access to the repository to delete images.
 @y
-> イメージの削除を行うには、プロユーザーまたはチームユーザーとしてログインし、リポジトリへの管理権限を有していることが必要です。
+> イメージの削除を行うには、Docker Pro、Team、Business ユーザーとしてログインし、リポジトリへの管理権限を有していることが必要です。
 @z
 
 @x

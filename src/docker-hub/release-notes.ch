@@ -27,9 +27,55 @@ known issues for each Docker Hub release.
 @z
 
 @x
-# 2021-05-05
+## 2021-08-31
 @y
-# 2021-05-05
+## 2021-08-31
+@z
+
+@x
+### New
+@y
+### New
+@z
+
+@x
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
+@y
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
+@z
+
+@x
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@y
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@z
+
+@x
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@y
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@z
+
+@x
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../subscription/index.md).
+@y
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../subscription/index.md).
+@z
+
+@x
+## 2021-05-05
+@y
+## 2021-05-05
 @z
 
 @x
@@ -53,9 +99,9 @@ Docker Hub API については、[Docker Hub API リファレンス]({{ site.bas
 @z
 
 @x
-# 2021-04-13
+## 2021-04-13
 @y
-# 2021-04-13
+## 2021-04-13
 @z
 
 @x
@@ -74,9 +120,9 @@ The **Billing Details** page now shows any organizations you own, in addition to
 @z
 
 @x
-# 2021-04-09
+## 2021-04-09
 @y
-# 2021-04-09
+## 2021-04-09
 @z
 
 @x
@@ -110,9 +156,9 @@ For details on how to update your billing information, see [Update billing infor
 @z
 
 @x
-# 2021-03-22
+## 2021-03-22
 @y
-# 2021-03-22
+## 2021-03-22
 @z
 
 @x
@@ -137,9 +183,9 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 @z
 
 @x
-# 2021-01-25
+## 2021-01-25
 @y
-# 2021-01-25
+## 2021-01-25
 @z
 
 @x
@@ -164,9 +210,9 @@ For more information about this feature and for instructions on how to use it, s
 @z
 
 @x
-# 2020-11-10
+## 2020-11-10
 @y
-# 2020-11-10
+## 2020-11-10
 @z
 
 @x
@@ -206,9 +252,9 @@ Synk を利用して Docker イメージのぜい弱性スキャンが自動的�
 @z
 
 @x
-# 2020-05-14
+## 2020-05-14
 @y
-# 2020-05-14
+## 2020-05-14
 @z
 
 @x
@@ -219,10 +265,10 @@ Synk を利用して Docker イメージのぜい弱性スキャンが自動的�
 @z
 
 @x
-* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/index.md).
+* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/index.md).
 @y
 * Docker は新たにユーザーごとの料金体系を発表し、クラウドネイティブな開発に向けた開発ワークフローを推進するものとしました。
-  それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
+  それまでのプライベートリポジトリと同時自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
   詳しくは [Docker サブスクリプション](../subscription/index.md) を参照してください。
 @z
 
@@ -235,9 +281,9 @@ Synk を利用して Docker イメージのぜい弱性スキャンが自動的�
 @z
 
 @x
-# 2019-11-04
+## 2019-11-04
 @y
-# 2019-11-04
+## 2019-11-04
 @z
 
 @x
@@ -270,9 +316,9 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 @z
 
 @x
-# 2019-10-21
+## 2019-10-21
 @y
-# 2019-10-21
+## 2019-10-21
 @z
 
 @x
@@ -324,9 +370,9 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 @z
 
 @x
-# 2019-10-02
+## 2019-10-02
 @y
-# 2019-10-02
+## 2019-10-02
 @z
 
 @x
@@ -386,9 +432,9 @@ Each organization page now breaks down into these tabs:
 @z
 
 @x
-# 2019-09-19
+## 2019-09-19
 @y
-# 2019-09-19
+## 2019-09-19
 @z
 
 @x
@@ -419,9 +465,9 @@ Each organization page now breaks down into these tabs:
 @z
 
 @x
-# 2019-09-16
+## 2019-09-16
 @y
-# 2019-09-16
+## 2019-09-16
 @z
 
 @x
@@ -452,9 +498,9 @@ Each organization page now breaks down into these tabs:
 @z
 
 @x
-# 2019-09-05
+## 2019-09-05
 @y
-# 2019-09-05
+## 2019-09-05
 @z
 
 @x

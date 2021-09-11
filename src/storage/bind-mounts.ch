@@ -202,7 +202,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
-If you're on Windows, see also [Path conversions on Windows](../docker-for-windows/troubleshoot.md#path-conversions-on-windows)
+If you're on Windows, see also [Path conversions on Windows](../desktop/windows/troubleshoot.md#path-conversion-on-windows).
 @y
 仮に`source`というディレクトリがあって、そこにソースコードが置かれているとします。
 そして成果物はそのサブディレクトリ`source/target/`に置かれるものとします。
@@ -211,7 +211,7 @@ If you're on Windows, see also [Path conversions on Windows](../docker-for-windo
 これを実現するには以下のようなコマンドにより、`target/`ディレクトリをコンテナー内の`/app/`にバインドマウントします。
 コマンドは`source`ディレクトリから実行します。
 `$(pwd)`というサブコマンドは、Linux あるいは macOS ホスト上において、カレントディレクトリに展開されます。
-Windows ユーザーは、[Windows におけるパス変換](../desktop/windows/troubleshoot.md#path-conversions-on-windows) も参照してください。
+Windows ユーザーは、[Windows におけるパス変換](../desktop/windows/troubleshoot.md#path-conversion-on-windows) も参照してください。
 @z
 
 @x

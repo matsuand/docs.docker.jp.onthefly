@@ -32,24 +32,20 @@ redirect_from:
 @z
 
 @x
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 @y
 Docker Desktop for Windows へようこそ。
-このページでは Docker Desktop for Windows のシステム要件、ダウンロード URL、インストール手順、自動アップデートについて説明します。
+このページでは Docker Desktop for Windows のシステム要件、ダウンロード URL、インストール手順、アップデートについて説明します。
 @z
 
 @x
-[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
-.button .primary-btn}
+> Download Docker Desktop for Windows
+>
+> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 @y
-[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
-.button .primary-btn}
-@z
-
-@x
-{% include eula.md %}
-@y
-{% include eula.md %}
+> Docker Desktop for Windows のダウンロード
+>
+> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 @z
 
 @x
@@ -309,43 +305,69 @@ Log out and log back in for the changes to take effect.
 @z
 
 @x
-Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select **Docker Desktop** in the search results.
+Docker Desktop does not start automatically after installation. To start Docker Desktop:
 @y
 インストール直後の Docker Desktop は、自動的には起動されません。
-Docker Desktop を起動するには、Docker を検索して、その結果から **Docker Desktop** を実行します。
+Docker Desktop を起動するには、以下を実行します。
 @z
 
 @x
-![search for Docker app](images/docker-app-search.png){:width="300px"}
+1. Search for Docker, and select **Docker Desktop** in the search results.
 @y
-![Docker アプリの検索](images/docker-app-search.png){:width="300px"}
+1. Search for Docker, and select **Docker Desktop** in the search results.
 @z
 
 @x
-When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+      ![search for Docker app](images/docker-app-search.png){:width="300px"}
 @y
-クジラアイコンがステータスバーに常時表示されていれば、Docker Desktop は実行しており、どのターミナル画面からでもアクセス可能です。
+      ![search for Docker app](images/docker-app-search.png){:width="300px"}
 @z
 
 @x
-![whale on taskbar](images/whale-icon-systray.png)
+2. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 @y
-![タスクバー上のクジラアイコン](images/whale-icon-systray.png)
+2. Docker メニュー (![クジラメニュー](images/whale-x.png){: .inline}) には、Docker Subscription Service Agreement（サブスクリプションサービス契約）画面が表示されます。
+   そこには Docker Desktop の利用条件に関する変更が示されています。
 @z
 
 @x
-If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker Settings](index.md#settings).
+    {% include desktop-license-update.md %}
 @y
-通知エリアにクジラアイコンが表示されていない場合は、タスクバー上の上矢印ボタンをクリックして、アイコンを表示します。
-詳しくは [Docker の設定](index.md#settings) を参照してください。
+    {% include desktop-license-update.md %}
 @z
 
 @x
-## Quick Start Guide
+3. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+@y
+3. チェックボックスをクリックして、更新されたサービス条件に合意してください。
+   そして **Accept**（合意）をクリックして先に進みます。
+   この合意後に Docker Desktop が起動します。
+@z
+
+@x
+    > **Important**
+    >
+    > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
+@y
+    > **重要**
+    >
+    > この更新された条件に合意しなかった場合、Docker Desktop アプリケーションは終了し、そのマシン上での DOcker Desktop 実行はできなくなります。
+    > 後日 Docker Desktop を開いて、条件の合意を選ぶことができます。
+    {: .important}
+@z
+
+@x
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+@y
+    詳しくは [Docker Desktop ライセンス契約](/subscription/#docker-desktop-license-agreement) を参照してください。
+@z
+
+@x
+### Quick Start Guide
 @y
 {: #quick-start-guide }
-## クイックスタートガイド
+### クイックスタートガイド
 @z
 
 @x

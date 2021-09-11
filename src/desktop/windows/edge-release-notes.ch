@@ -44,9 +44,17 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -89,9 +97,17 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -116,9 +132,17 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -159,9 +183,17 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -217,9 +249,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -300,9 +340,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -347,9 +395,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe))
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -454,9 +510,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -495,9 +559,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -562,9 +634,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -589,9 +669,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -672,9 +760,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -735,9 +831,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -764,9 +868,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -791,9 +903,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -835,9 +955,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -925,9 +1053,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1048,9 +1184,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1085,9 +1229,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1199,9 +1351,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1357,9 +1517,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1426,9 +1594,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-> [Download](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1529,9 +1705,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1619,9 +1803,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1660,9 +1852,17 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1747,9 +1947,17 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1852,9 +2060,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1902,9 +2118,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1931,9 +2155,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1983,9 +2215,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2046,9 +2286,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2127,9 +2375,17 @@ This release contains Kubernetes security improvements. Note that your local Kub
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2207,9 +2463,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2227,9 +2491,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2285,14 +2557,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
     - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
-    - Parallel building of compose files
+    - Concurrent building of compose files
     - High-level build constructs with `bake`
 @y
     - Familiar UI from docker build
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
     - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
-    - Parallel building of compose files
+    - Concurrent building of compose files
     - High-level build constructs with `bake`
 @z
 
@@ -2317,9 +2589,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2349,9 +2629,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2369,9 +2657,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2409,9 +2705,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2467,9 +2771,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2495,9 +2807,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2539,9 +2859,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2593,9 +2921,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2637,9 +2973,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2657,9 +3001,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2677,9 +3029,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2725,9 +3085,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2759,9 +3127,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2801,9 +3177,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2835,9 +3219,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2857,9 +3249,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2895,9 +3295,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2925,9 +3333,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2955,9 +3371,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2997,9 +3421,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -3049,9 +3481,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -3143,9 +3583,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -3177,9 +3625,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -3279,9 +3735,17 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [ダウンロード](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -7252,4 +7716,10 @@ are working on a solution.
   - live debugging Node.js application
 @y
   - live debugging Node.js application
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

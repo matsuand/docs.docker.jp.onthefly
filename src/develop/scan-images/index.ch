@@ -17,14 +17,14 @@ keywords: docker scan, scan, images, snyk, vulnerability
 
 @x
 {% include upgrade-cta.html
-  body="Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv) to activate your free monthly scans. Upgrade your existing plan to start scanning your images for vulnerabilities."
-  header-text="This feature requires a Pro or a Team plan"
+  body="Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv) to activate your free monthly scans. Upgrade your existing subscription to start scanning your images for vulnerabilities."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @y
 {% include upgrade-cta.html
-  body="Docker プランの購入者であれば、購入機能の一部として Snyk によるぜい弱性スキャンを 200 回行うことができます。ご存じでしたか？ [こちら](https://snyk.co/udvnv) をクリックすれば、無償の月次スキャンを有効にすることができます。既存のプランをアップグレードして、イメージに対するぜい弱性スキャンを始めてください。"
-  header-text="この機能を利用するには Pro プランまたは Team プランが必要です。"
+  body="Docker サブスクリプション購入者であれば、購入機能の一部として Snyk によるぜい弱性スキャンを 200 回行うことができます。ご存じでしたか？ [こちら](https://snyk.co/udvnv) をクリックすれば、無償の月次スキャンを有効にすることができます。既存のプランをアップグレードして、イメージに対するぜい弱性スキャンを始めてください。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @z
@@ -123,11 +123,11 @@ You can trigger scans, view, and inspect vulnerabilities through Docker Hub. For
 @x
 > **Note**
 >
-> Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"}.
+> Docker Hub Vulnerability Scanning is available for developers subscribed to a Docker Pro, Team, or a Business tier. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"}.
 @y
 > **メモ**
 >
-> Docker Hub のぜい弱性スキャンは、Pro プランまたは Team プランを購入している開発者が利用できます。
+> Docker Hub のぜい弱性スキャンは、Docker Pro、Team、Business プランを購入している開発者が利用できます。
 > 価格プランに関する詳細は [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 

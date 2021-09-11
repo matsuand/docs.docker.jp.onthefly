@@ -81,8 +81,8 @@ profile can be found
 @z
 
 @x
-In effect, the profile is a whitelist which denies access to system calls by
-default, then whitelists specific system calls. The profile works by defining a
+In effect, the profile is a allowlist which denies access to system calls by
+default, then allowlists specific system calls. The profile works by defining a
 `defaultAction` of `SCMP_ACT_ERRNO` and overriding that action only for specific
 system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
 error. Next, the profile defines a specific list of system calls which are fully
@@ -90,7 +90,7 @@ allowed, because their `action` is overridden to be `SCMP_ACT_ALLOW`. Finally,
 some specific rules are for individual system calls such as `personality`, and others, 
 to allow variants of those system calls with specific arguments.
 @y
-実際にプロファイルはホワイトリスト方式をとるものであり、デフォルトではシステムコールのアクセスを拒否します。
+実際にプロファイルは許可リスト方式をとるものであり、デフォルトではシステムコールのアクセスを拒否します。
 そして特定のシステムコールを許可します。
 プロファイルは`SCMP_ACT_ERRNO`の`defaultAction`を定義することで動作し、指定したシステムコールのみ、その動作をオーバーライドします。
 `SCMP_ACT_ERRNO`の効果は`Permission Denied`エラーを発生させることです。
@@ -142,15 +142,15 @@ $ docker run --rm \
 @z
 
 @x
-Docker's default seccomp profile is a whitelist which specifies the calls that
+Docker's default seccomp profile is an allowlist which specifies the calls that
 are allowed. The table below lists the significant (but not all) syscalls that
-are effectively blocked because they are not on the whitelist. The table includes
+are effectively blocked because they are not on the Allowlist. The table includes
 the reason each syscall is blocked rather than white-listed.
 @y
-Docker 向けの seccomp プロファイルはホワイトリスト方式をとります。
+Docker 向けの seccomp プロファイルは許可リスト方式をとります。
 したがって許可したいシステムコールを指定する必要があります。
-以下の表では、重要な（ただしすべてではない）システムコールの中で、ホワイトリストに指定されなかったことから拒否されてしまうものの一覧です。
-表の中では、ホワイトリスト化されずにブロックされてしまう理由についても触れています。
+以下の表では、重要な（ただしすべてではない）システムコールの中で、許可リストに指定されなかったことから拒否されてしまうものの一覧です。
+表の中では、許可リスト化されずにブロックされてしまう理由についても触れています。
 @z
 
 @x

@@ -30,12 +30,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 @z
 
 @x
-{% include eula.md %}
-@y
-{% include eula.md %}
-@z
-
-@x
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 @y
@@ -44,9 +38,17 @@ This page contains release notes for older versions of Docker Desktop for Window
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -73,9 +75,17 @@ This page contains release notes for older versions of Docker Desktop for Window
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -93,11 +103,11 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
-- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
-- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+- Users with a paid Docker subscription can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users who have a paid Docker subscription.
 @y
-- プロプランまたはチームプランを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
-- Docker Desktop では、プロプランまたはチームプランを購入しているユーザー向けのサポートオプションを導入しました。
+- 有償の Docker サブスクリプションを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
+- Docker Desktop では、有償の Docker サブスクリプションを購入しているユーザー向けのサポートオプションを導入しました。
 @z
 
 @x
@@ -177,9 +187,17 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -379,9 +397,17 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -453,9 +479,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -510,9 +544,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -621,9 +663,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -797,9 +847,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/stable/43884/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/43884/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [Download](https://download.docker.com/win/stable/43884/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/43884/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -832,9 +890,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [Download](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -915,9 +981,17 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-> [Download](https://download.docker.com/win/stable/42716/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/42716/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [Download](https://download.docker.com/win/stable/42716/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/42716/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1174,9 +1248,17 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/40693/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/40693/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/40693/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/40693/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1211,9 +1293,17 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1263,9 +1353,17 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1290,9 +1388,17 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1329,9 +1435,17 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1492,9 +1606,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/31259/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1520,9 +1642,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/30215/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1566,9 +1696,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/29211/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/29211/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/29211/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/29211/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1594,9 +1732,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/28905/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/28905/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/28905/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/28905/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1664,9 +1810,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/19507/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19507/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/19507/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19507/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1708,17 +1862,25 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
 * New
-  - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is whitelisted. Click "More info" to view the app is published by "Docker Inc" and run it.
+  - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is allowlisted. Click "More info" to view the app is published by "Docker Inc" and run it.
 @y
 * New
-  - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is whitelisted. Click "More info" to view the app is published by "Docker Inc" and run it.
+  - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is allowlisted. Click "More info" to view the app is published by "Docker Inc" and run it.
 @z
 
 @x
@@ -1736,9 +1898,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1796,9 +1966,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1830,9 +2008,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/17438/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/17438/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/17438/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/17438/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1864,9 +2050,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1938,9 +2132,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1964,9 +2166,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2024,9 +2234,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2064,9 +2282,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2084,9 +2310,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2174,9 +2408,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2196,9 +2438,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2238,9 +2488,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2334,9 +2592,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2358,9 +2624,17 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -2444,9 +2718,17 @@ progressively
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -2490,9 +2772,17 @@ progressively
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -2594,9 +2884,17 @@ progressively
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -2632,9 +2930,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -2870,9 +3176,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -3148,9 +3462,17 @@ We did not distribute a 1.12.4 stable release
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi){: .accept-eula }
 @y
-[Download](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi){: .accept-eula }
 @z
 
 @x
@@ -3173,4 +3495,10 @@ We did not distribute a 1.12.4 stable release
 * Docker 1.12.0
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

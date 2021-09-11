@@ -34,9 +34,95 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-{% include eula.md %}
+## Docker Desktop 4.0.0
+2021-08-31
 @y
-{% include eula.md %}
+## Docker Desktop 4.0.0
+2021-08-31
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@y
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@z
+
+@x
+### New
+@y
+### New
+@z
+
+@x
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+@y
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+@z
+
+@x
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@y
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@z
+
+@x
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@y
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@z
+
+@x
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+@y
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+@z
+
+@x
+### Upgrades
+@y
+### Upgrades
+@z
+
+@x
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+@y
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+### Bug fixes and minor changes
+@z
+
+@x
+- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
+- Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
+@y
+- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
+- Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
 @z
 
 @x
@@ -48,9 +134,17 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/67351/Docker Desktop Installer.exe){: .accept-eula }
 @y
-[ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/67351/Docker Desktop Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -120,7 +214,7 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
 - Fixed slowness when adding multiple ports forwarding option.
 - Fixed bug where the WSL 2 synchonization code creates dangling symlinks if the WSL 2 home directory if it is the same as the Windows home directory. Fixes [docker/for-win#11668](https://github.com/docker/for-win/issues/11668).
 - Fixed `docker context ls` after upgrade from 3.5.x when the Linux WSL 2 home directory is the same as the Windows home directory.
-- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"}.
+- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"}. Thanks to [Alessio Dalla Piazza](http://it.linkedin.com/in/alessiodallapiazza) for discovering the issue and to @kevpar for helpful discussion.
 - Fixed bug where the Linux home directory under WSL 2 was set to the Windows home directory e.g. `/mnt/c/Users/...`.
 - Fixed bug where Desktop would fail to start if it could not parse CLI contexts. Fixes [docker/for-win#11601](https://github.com/docker/for-win/issues/11601).
 - Fixed an issue related to log display inside a container [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
@@ -137,6 +231,7 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
 - Linux WSL 2 のホームディレクトリが Windows のホームディレクトリと同じである場合に、3.5.x からアップグレードした後の`docker context ls`を修正しました。 
 - Windows コンテナーが潜在的に侵害される可能性があっため、その回避のため`%PROGRAMDATA%\Docker`の権限を修正しました。 
   [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"} を参照のこと。
+  この問題を発見し @kevpar に有益な議論をあげてくれた　[Alessio Dalla Piazza](http://it.linkedin.com/in/alessiodallapiazza) に感謝。
 - Linux の WSL 2 のホームディレクトリが Windows のホームディレクトリ、つまり`/mnt/c/Users/...`に設定されていたバグを修正しました。
 - CLI コンテキストを解析できない場合に、デスクトップが起動に失敗するバグを修正しました。
   [docker/for-win#11601](https://github.com/docker/for-win/issues/11601) を Fix に。
@@ -155,9 +250,17 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -250,9 +353,17 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -315,9 +426,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -420,9 +539,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -545,9 +672,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -587,9 +722,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -645,9 +788,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -682,9 +833,17 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -704,10 +863,10 @@ Docker Desktop のアップデートに対して、ダウンロードとイン�
 @z
 
 @x
-Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, users with a paid Docker subscription can skip notifications for a particular update when a reminder appears.
 @y
 本格的な開発目的で Docker Desktop を利用する開発者は、特定のアップデートをスキップしなければならない場合もあります。
-こういった状況があるため、プロプランとチームプランへの加入者は、アップデートのリマインダーが表示された際に特定アップデートの通知をスキップすることができます。
+こういった状況があるため、有償の Docker サブスクリプションの購入ユーザーは、アップデートのリマインダーが表示された際に特定アップデートの通知をスキップすることができます。
 @z
 
 @x
@@ -776,9 +935,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -810,9 +977,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -837,9 +1012,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -967,9 +1150,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1027,9 +1218,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1068,9 +1267,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Windows 向け](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe){: .accept-eula }
 @z
 
 @x
@@ -1158,4 +1365,10 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 - git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
   この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
 - Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

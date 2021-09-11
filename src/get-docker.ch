@@ -83,9 +83,3 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
                 <h2 id="docker-for-linux"><a href="{{ site.baseurl }}/engine/install/">Docker for Linux</a></h2>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
 @z
-
-@x
-{% include eula.md %}
-@y
-{% include eula.md %}
-@z

@@ -114,9 +114,9 @@ Settings ダイアログの **General** タブにおいて、Docker の起動や
 @z
 
 @x
-![Settings](images/settings-general.png){:width="750px"}
+![Settings](../mac/images/menu/prefs-general.png){:width="750px"}
 @y
-![Settings ダイアログ](images/settings-general.png){:width="750px"}
+![Settings ダイアログ](../mac/images/menu/prefs-general.png){:width="750px"}
 @z
 
 @x

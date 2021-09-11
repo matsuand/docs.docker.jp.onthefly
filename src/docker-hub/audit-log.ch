@@ -17,14 +17,14 @@ title: 監査ログ
 
 @x
 {% include upgrade-cta.html
-  body="The Audit log feature is available for organizations subscribed to a Team plan. Upgrade your existing plan to start tracking events across your organization."
-  header-text="This feature requires a Team plan"
+  body="The Audit log feature is available for users subscribed to a Docker Team or a Business subscription. Upgrade now to start tracking events across your organization."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
 @y
 {% include upgrade-cta.html
-  body="監査ログ機能は、Team プランを購入している組織（organization）において利用可能です。既存のプランをアップグレードして、組織全体にわたるイベント追跡を始めてください。"
-  header-text="この機能を利用するには Team プランが必要です。"
+  body="監査ログ機能は、Team または Business プランを購入しているユーザーが利用可能です。既存のプランをアップグレードして、組織全体にわたるイベント追跡を始めてください。"
+  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
 @z

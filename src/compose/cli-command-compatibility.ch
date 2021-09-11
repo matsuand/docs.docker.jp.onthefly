@@ -16,23 +16,16 @@ title: compose コマンドの docker-compose との互換性
 @z
 
 @x
-The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, and we are prioritizing these implementations based on usage metrics and user feedback.
+The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. 
 @y
 Docker CLI 内の`compose`コマンドは、`docker-compose`コマンドとそのフラグをほぼサポートします。
 このコマンドは`docker-compose`と完全な互換性を持つものとしています。
-まだ実装できていないフラグが残っているため、利用メトリックスやユーザーからのフィードバックに基づいて、実装の優先度をつけて進めていきます。
 @z
 
 @x
-You can follow progress on the implementation of the remaining commands and flags in the  [Compose-CLI](https://github.com/docker/compose-cli/issues/1283){:target="_blank" rel="noopener" class="_"} GitHub repository.
+If you see any Compose functionality that is not available in the `compose` command, create an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
 @y
-未実装のコマンドやフラグの実装状況に関しては、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues/1283){:target="_blank" rel="noopener" class="_"} において確認することができます。
-@z
-
-@x
-If you see any Compose functionality that is not available in the `compose` command, create an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
-@y
-Compose 機能の中で`compose`コマンドでは利用できないものを見つけた場合は、GitHub リポジトリ [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
+Compose 機能の中で`compose`コマンドでは利用できないものを見つけた場合は、GitHub リポジトリ [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
 優先度をあげて対応することができます。
 @z
 

@@ -4,117 +4,235 @@
 @x
 ---
 description: Docker subscription overview
-keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
+keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
 title: Docker subscription overview
 redirect_from:
 - /docker-hub/billing/
+- /docker-hub/billing/faq/
+- /subscription/faq/
 ---
 @y
 ---
 description: Docker サブスクリプションの概要
-keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
+keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
 title: Docker サブスクリプションの概要
 redirect_from:
 - /docker-hub/billing/
+- /docker-hub/billing/faq/
+- /subscription/faq/
 ---
 @z
 
 @x
-On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** subscriptions that include unlimited private repositories and up to 50,000 container pulls in a 24-hour period.
-Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
+On August 31, 2021, we [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} updates and extensions to our product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
 @y
-2020年5月14日に Docker は [製品戦略](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} に連携して、新たにユーザーごとの料金体系を発表しました。
-これはクラウドネイティブな開発に向けた開発ワークフローを推進するためです。
-それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
-そして 24 時間以内にプルできるコンテナー数は 50,000 個までとなっています。
-2020年5月14日からは、Docker にサインアップした新規ユーザーの方は、この Free、Pro、Team の各プランを選択できるようになりました。
+2021 年 8 月 31 日に、開発者やビジネス利用に向けた生産性、共同作業、セキュリティ向上のために、製品サブスクリプションの更新と拡張を [公表](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} しました。
+Docker サブスクリプションでは、Personal、Pro、Team、Business の各プランを提供します。
 @z
 
 @x
-Existing Docker customers who had subscribed to a paid plan before May 14, 2020 have been converted to the new Pro or Team plan after January 31, 2021.
+### Here's a summary of the changes
 @y
-2020年5月14日以前に有料プランを購入していた Docker ユーザーは、2021年1月31日までに新たなプロプランまたはチームプランへアップグレードすることが必要です。
+{: #heres-a-summary-of-the-changes }
+### Here's a summary of the changes
 @z
 
 @x
-## Pricing plans
+- We’re introducing a **new** product subscription, Docker Business, for organizations using Docker at scale for application development and require features like secure software supply chain management, single sign-on (SSO), container registry access controls, and more.
 @y
-{: #pricing-plans }
-## 料金プラン
+- We’re introducing a **new** product subscription, Docker Business, for organizations using Docker at scale for application development and require features like secure software supply chain management, single sign-on (SSO), container registry access controls, and more.
 @z
 
 @x
-Docker offers pricing plans that are tailored for individual developers and development teams. You can also choose between an **Annual** or a **Monthly** subscription. The Pro and Team plans offered through annual subscription include a discount compared to the price of the same plan offered through monthly subscription.
+- Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
+    - Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
+    - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+    - The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
 @y
-Docker では個人開発者向けや開発チーム向けの料金プランを用意しています。
-さらに支払い方法として **Annual**（年額）か **Monthly**（月額）のサブスクリプションが選択できます。
-プロプランとチームプランにおいて年額のサブスクリプションを選ぶと、同じプランで月額とした場合に比べて料金値引きがあります。
+- Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
+    - Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
+    - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+    - The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
 @z
 
 @x
-**For individuals:**
+To understand how these changes affect you, read the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 @y
-**個人利用者向け**
+To understand how these changes affect you, read the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 @z
 
 @x
-The **Pro** plan includes unlimited public repositories, unlimited private repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, one [service account](../docker-hub/service-accounts.md) for private repositories, autobuilds with 5 parallel builds, starting at $5 per month with the annual subscription.
+The following sections provide an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 @y
-**プロ**プランには以下が含まれます。
-無制限のパブリックリポジトリ、無制限のプライベートリポジトリ、パブリックリポジトリにおける無制限の [協力者](../docker-hub/repos.md#collaborators-and-their-role)、プライベートリポジトリにおける 1 つの [サービスアカウント](../docker-hub/service-accounts.md)、5 つの同時並行ビルドによる自動ビルド。
-年額のサブスクリプションは、月額 5 ドルから用意されています。
+The following sections provide an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@z
+
+@x
+## Docker Personal
+@y
+## Docker Personal
+@z
+
+@x
+Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, Docker Scan, and more.
+@y
+Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, Docker Scan, and more.
+@z
+
+@x
+Docker Personal includes unlimited public repositories and unlimited collaborators for public repositories at no cost per month.
+@y
+Docker Personal includes unlimited public repositories and unlimited collaborators for public repositories at no cost per month.
+@z
+
+@x
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@y
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@z
+
+@x
+## Docker Pro
+@y
+## Docker Pro
+@z
+
+@x
+**Docker Pro** enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
+@y
+**Docker Pro** enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
+@z
+
+@x
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), 5 [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+@y
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), 5 [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+@z
+
+@x
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@y
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@z
+
+@x
+## Docker Team
+@y
+## Docker Team
+@z
+
+@x
+**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
+@y
+**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
+@z
+
+@x
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+@y
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+@z
+
+@x
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@y
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@z
+
+@x
+## Docker Business
+@y
+## Docker Business
+@z
+
+@x
+**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
+@y
+**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
+@z
+
+@x
+In addition to all the features available in Docker Pro and Docker Team, Docker Business includes centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images, SAML SSO (_Coming soon_), Remote Management (_Coming soon_).
+@y
+In addition to all the features available in Docker Pro and Docker Team, Docker Business includes centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images, SAML SSO (_Coming soon_), Remote Management (_Coming soon_).
+@z
+
+@x
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@y
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+@z
+
+@x
+## Docker Desktop License Agreement
+@y
+## Docker Desktop License Agreement
+@z
+
+@x
+Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
+@y
+Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
+@z
+
+@x
+> **Docker Subscription Service Agreement**
+>
+> We’ve updated the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}. Please read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected.
+@y
+> **Docker Subscription Service Agreement**
+>
+> We’ve updated the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}. Please read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected.
+@z
+
+@x
+**Here’s a summary of the key changes:**
+@y
+**Here’s a summary of the key changes:**
+@z
+
+@x
+- Our Docker Subscription Service Agreement include a change to the terms of use for Docker Desktop
+    - It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open source projects.
+    - It requires a paid subscription for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a **grace period** until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
+- The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
+@y
+- Our Docker Subscription Service Agreement include a change to the terms of use for Docker Desktop
+    - It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open source projects.
+    - It requires a paid subscription for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a **grace period** until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
+- The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 @z
 
 @x
 > **Note**
 >
-> Pro plans allow one service account for private repositories. For more information, see [service accounts](../docker-hub/service-accounts.md). If you already have more than one collaborator in your private repository, you’ll not be able to add any further collaborators. Any new private repository that you create will be restricted to one service account.
+> The licensing and distribution terms for Docker and Moby **open-source** projects, such as Docker Engine, are not changing.
 @y
-> **メモ**
+> **Note**
 >
-> プロプランでは、プライベートリポジトリに対してサービスアカウントを 1 つだけ利用可能です。
-> 詳しくは [サービスアカウント](../docker-hub/service-accounts.md) を参照してください。
-> プライベートリポジトリにおいてすでに複数の協力者を設定している場合は、それ以上の協力者を追加することはできません。
-> 新たに生成するプライベートリポジトリでは 1 つのサービスアカウントに制限されます。
+> The licensing and distribution terms for Docker and Moby **open-source** projects, such as Docker Engine, are not changing.
 @z
 
 @x
-The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero service accounts for private repositories at no cost per month.
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.png){: .inline} > **About Docker Desktop** > **Acknowledgements**.
 @y
-**無料**プランでは、無制限のパブリックリポジトリ、パブリックリポジトリに対する無制限の協力者が利用できますが、プライベートリポジトリにおいての協力者は利用できません。
-月額は無料です。
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.png){: .inline} > **About Docker Desktop** > **Acknowledgements**.
 @z
 
 @x
-**For development teams:**
+Docker Desktop distributes some components that are licensed under the
+GNU General Public License. Click [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.
 @y
-**開発チーム向け**
-@z
-
-@x
-The **Team** plan includes unlimited public and unlimited private repositories starting at $25 per month for the first 5 users and $7 per month for each user thereafter with the annual subscription. In addition, the Team plan offers autobuilds with 15 parallel builds, advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
-@y
-**チーム**プランでは、無制限のパブリックリポジトリ、無制限のプライベートリポジトリが利用できます。
-5 ユーザーに対して月額 25 ドルから、また年額サブスクリプションではその後、各ユーザーに対して月額 7 ドルから用意されています。
-またチームプランでは 15 個の同時並行ビルドによる自動ビルド、高度な共同および管理ツール、チーム全体に向けたロールベースのアクセス制御による組織およびチーム管理が利用できます。
-@z
-
-@x
-The **Free Team** plan includes unlimited public repositories at no cost per month. This plan also offers advanced collaboration and management tools, including organization and team management with role-based access controls which are limited to 1 team and 3 team members.
-@y
-**無料チーム**プランでは、無制限のパブリックリポジトリが月額無料で利用できます。
-このプランでは、高度な共同および管理ツールが提供され、ロールベースのアクセス制御による組織およびチーム管理を 1 チームおよび 3 チームメンバーに限って利用できます。
-@z
-
-@x
-For information on how to purchase a plan, see [Upgrade your plan](../subscription/upgrade.md), or to learn more about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
-@y
-各プランにおいて利用可能な機能の詳細は、[プランのアップグレード](../subscription/upgrade.md) を参照してください。
-また各プランにおいて利用可能な機能を確認するには、[Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
-@z
-
-@x
-For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
-@y
-料金に関してよくたずねられる質問が [Docker の料金に関する FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"} にあります。
+Docker Desktop distributes some components that are licensed under the
+GNU General Public License. Click [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.
 @z

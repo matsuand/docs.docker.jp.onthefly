@@ -34,9 +34,95 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-{% include eula.md %}
+## Docker Desktop 4.0.0
+2021-08-31
 @y
-{% include eula.md %}
+## Docker Desktop 4.0.0
+2021-08-31
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+@y
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+@z
+
+@x
+### New
+@y
+### New
+@z
+
+@x
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+@y
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+@z
+
+@x
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@y
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+@z
+
+@x
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@y
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+@z
+
+@x
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+@y
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+@z
+
+@x
+### Upgrades
+@y
+### Upgrades
+@z
+
+@x
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+@y
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+### Bug fixes and minor changes
+@z
+
+@x
+- Fixed a bug where SSH was not available for builds from git URL. Fixes [for-mac#5902](https://github.com/docker/for-mac/issues/5902)
+@y
+- Fixed a bug where SSH was not available for builds from git URL. Fixes [for-mac#5902](https://github.com/docker/for-mac/issues/5902)
 @z
 
 @x
@@ -48,11 +134,19 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/67351/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/67351/Docker.dmg){: .accept-eula }
 @y
-[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/67351/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/67351/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -140,13 +234,19 @@ Dev 環境はローカル Git リポジトリから生成できるようにな�
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -238,13 +338,19 @@ Dev 環境に関する詳しい情報、あるいは利用手順については 
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップ の Mac](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg){: .accept-eula } |
+> [Apple チップ の Mac](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -304,13 +410,19 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -416,13 +528,19 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -579,13 +697,19 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -625,13 +749,19 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -697,13 +827,19 @@ Compose V2 の利用にあたって何か問題が発生したら、簡単に Co
 @z
 
 @x
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg){: .accept-eula }
 @y
-> [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
-
-> [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg){: .accept-eula } |
+> [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -777,9 +913,17 @@ Docker Desktop は Intel チップに加えて Apple silicon においても利�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -799,10 +943,10 @@ Docker Desktop のアップデートに対して、ダウンロードとイン�
 @z
 
 @x
-Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, users with a paid Docker subscription can skip notifications for a particular update when a reminder appears.
 @y
 本格的な開発目的で Docker Desktop を利用する開発者は、特定のアップデートをスキップしなければならない場合もあります。
-こういった状況があるため、プロプランとチームプランへの加入者は、アップデートのリマインダーが表示された際に特定アップデートの通知をスキップすることができます。
+こういった状況があるため、有償の Docker サブスクリプションのユーザーは、アップデートのリマインダーが表示された際に特定アップデートの通知をスキップすることができます。
 @z
 
 @x
@@ -887,9 +1031,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -924,9 +1076,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -966,9 +1126,17 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1091,9 +1259,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51484/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/51484/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1149,9 +1325,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51218/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/51218/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1207,9 +1391,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51017/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/51017/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1253,9 +1445,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50996/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/50996/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1303,9 +1503,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50773/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/50773/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1352,9 +1560,17 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/50684/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50684/Docker.dmg){: .accept-eula }
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/50684/Docker.dmg)
+> Docker Desktop のダウンロード
+>
+> {%- include eula.md -%}
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/stable/50684/Docker.dmg){: .accept-eula }
 @z
 
 @x
@@ -1455,4 +1671,10 @@ Docker Desktop をバージョン 3.2.0 にアップデートすると、起動�
 - git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
   この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
 - Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
+@z
+
+@x
+{% include eula-modal.html %}
+@y
+{% include eula-modal.html %}
 @z

@@ -3,18 +3,18 @@
 
 @x
 ---
-description: Downgrade your Docker Hub Plan
+description: Downgrade your Docker subscription
 keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
-title: Downgrade your plan
+title: Downgrade your subscription
 redirect_from:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
 ---
 @y
 ---
-description: Downgrade your Docker Hub Plan
+description: Downgrade your Docker subscription
 keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
-title: 料金プランのダウングレード
+title: サブスクリプションのダウングレード
 redirect_from:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
@@ -22,51 +22,51 @@ redirect_from:
 @z
 
 @x
-You can downgrade your Pro or Team plan anytime. When you downgrade your plan, changes will be applied at the end of your billing cycle.
+You can downgrade your Docker subscription anytime. When you downgrade your subscription, changes are applied at the end of your billing cycle.
 @y
-プロプランやチームプランは、いつでもダウングレードすることができます。
-プランをダウングレードすると、現在の支払い期間が満了してからダウングレードが適用されます。
+Docker サブスクリプションは、いつでもダウングレードすることができます。
+サブスクリプションをダウングレードすると、現在の支払い期間が満了してからダウングレードが適用されます。
 @z
 
 @x
-For example, if you are currently on a **Team** plan which is billed on the 8th of every month and you choose to downgrade to a **Free** plan on the 15th, your plan will be active until 7th of the following month. You will be transferred to a Free plan on the 8th of the following month.
+For example, if you are currently on a **Docker Team** subscription which is billed on the 8th of every month and you choose to downgrade to **Docker Personal** on the 15th, your plan will be active until 7th of the following month. You will be transferred to Docker Personal on the 8th of the following month.
 @y
-たとえば、**チーム**プランを購入していて支払日が各月の8日であったとし、15日に**無料**プランにダウングレードしたとします。
+たとえば、**Docker Team** サブスクリプションを購入していて支払日が各月の8日であったとし、15日に **Docker Personal** にダウングレードしたとします。
 それまでのプランは翌月の7日までは有効です。
-翌月の8日になったら無料プランに移行します。
+翌月の8日になったら Docker サブスクリプションに移行します。
 @z
 
 @x
-The following sections contain instructions on how to downgrade from Pro and Team plans to a Free plan.
+The following sections contain instructions on how to downgrade from a paid subscription to a Docker Personal tier.
 @y
-以下の節では、プロプランやチームプランを無料プランにダウングレードする方法について示します。
+以下の節では、有償の Docker サブスクリプションを Docker Personal にダウングレードする方法について示します。
 @z
 
 @x
-## Downgrade from Pro to a Free plan
+## Downgrade from Docker Pro to Docker Personal
 @y
-{: #downgrade-from-pro-to-a-free-plan }
-## プロプランから無料プランへのダウングレード
+{: #downgrade-from-docker-pro-to-docker-personal }
+## Docker Pro から Docker Personal へのダウングレード
 @z
 
 @x
 >**Note:**
 >
-> - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+> - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn't expired.
+> - Before you downgrade to Docker Personal, ensure that your account details are updated to reflect features available in Docker Personal. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Docker Personal, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 >**メモ**
 >
-> - 年額プランを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額プランに戻すことができます。
-> - 無料プランへのダウングレードを行う際には、アカウントに対して、無料プランでの利用可能な機能が反映される点を十分に確認しておいてください。たとえばプライベートリポジトリを利用していたら、パブリックリポジトリへの変更が必要になります。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+> - 年額サブスクリプションを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額プランに戻すことができます。
+> - Docker Personal へのダウングレードを行う際には、アカウントに対して、Docker Personal での利用可能な機能が反映される点を十分に確認しておいてください。たとえばプライベートリポジトリを利用していたら、パブリックリポジトリへの変更が必要になります。Docker Personal にはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important }
 @z
 
 @x
-To downgrade from a Pro plan to a Free plan:
+To downgrade from a Docker Pro to Docker Personal:
 @y
-プロプランから無料プランへダウングレードするには、以下を行います。
+Docker Pro から Docker Personal へダウングレードするには、以下を行います。
 @z
 
 @x
@@ -89,9 +89,9 @@ To downgrade from a Pro plan to a Free plan:
 @z
 
 @x
-4. Click **Change plan** to downgrade your existing plan.
+4. Click **Change plan** to downgrade your existing subscription.
 @y
-4. それまでのプランをダウングレードするため **Change plan**（プランの変更）をクリックします。
+4. それまでのサブスクリプションをダウングレードするため **Change plan**（プランの変更）をクリックします。
 @z
 
 @x
@@ -107,9 +107,9 @@ To downgrade from a Pro plan to a Free plan:
 @z
 
 @x
-7. If your account meets the requirements of a Free plan, the **Downgrade confirmation** screen will be displayed. Click **continue**.
+7. If your account meets the requirements of Docker Personal, the **Downgrade confirmation** screen will be displayed. Click **continue**.
 @y
-7. 現アカウントが無料プランの条件を満たしていれば、**Downgrade confirmation**（ダウングレードの確認）画面が表示されるので **continue**（続ける）をクリックします。
+7. 現アカウントが Docker Personal の条件を満たしていれば、**Downgrade confirmation**（ダウングレードの確認）画面が表示されるので **continue**（続ける）をクリックします。
 @z
 
 @x
@@ -135,30 +135,30 @@ To downgrade from a Pro plan to a Free plan:
 @z
 
 @x
-## Downgrade from Team to a Free plan
+## Downgrade from Docker Team to Docker Free Team
 @y
-{: #downgrade-from-team-to-a-free-plan }
-## チームプランから無料プランへのダウングレード
+{: #downgrade-from-docker-team-to-docker-free-team }
+## Docker Team から Docker Personal へのダウングレード
 @z
 
 @x
 >**Note:**
 >
-> - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+> - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn't expired.
+> - Before you downgrade to a Free Team, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free Team. For example, you may need to reduce the number of team members. For information on what’s included in the Free Team, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 >**メモ**
 >
-> - 年額プランを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額プランに戻すことができます。
-> - 無料チームプランへのダウングレードを行う際には、プライベートリポジトリはすべてパブリックリポジトリへ変更することが必要です。また組織の詳細設定を、無料プランにおいて利用可能となるように反映することが必要です。たとえばチームメンバー数を減らすことが必要になるかもしれません。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+> - 年額サブスクリプションを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額サブスクリプションに戻すことができます。
+> - Docker Personal へのダウングレードを行う際には、プライベートリポジトリはすべてパブリックリポジトリへ変更することが必要です。また組織の詳細設定を、Docker Personal において利用可能となるように反映することが必要です。たとえばチームメンバー数を減らすことが必要になるかもしれません。Docker Personal にはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important }
 @z
 
 @x
-To downgrade to a Free Team plan from a Team plan:
+To downgrade to a Docker Free Team from Docker Team:
 @y
-チームプランから無料のチームプランへダウングレードするには、以下を行います。
+Docker Team から Docker Personal へダウングレードするには、以下を行います。
 @z
 
 @x
@@ -199,9 +199,9 @@ To downgrade to a Free Team plan from a Team plan:
 @z
 
 @x
-7. If your account meets the requirements of a Free plan, the **Downgrade confirmation** screen will be displayed. Click **continue**.
+7. If your account meets the requirements of a Free Team plan, the **Downgrade confirmation** screen will be displayed. Click **continue**.
 @y
-7. 現アカウントが無料プランの条件を満たしていれば、**Downgrade confirmation**（ダウングレードの確認）画面が表示されるので **continue**（続ける）をクリックします。
+7. 現アカウントが Docker Personal の条件を満たしていれば、**Downgrade confirmation**（ダウングレードの確認）画面が表示されるので **continue**（続ける）をクリックします。
 @z
 
 @x
