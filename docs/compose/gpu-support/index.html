@@ -1,4 +1,4 @@
-<!-- Page generated 2021-08-24 22:24:15 +0900-->
+<!-- Page generated 2021-09-11 14:21:28 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における GPU アクセスの有効化 | Docker ドキュメント</title>
@@ -13,7 +13,11 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <meta name="theme-color" content="#2496ed" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- hide elements that are only shown without JavaScript enabled -->
+  <script>document.documentElement.classList.add('js')</script>
+  <style>html.js .no-js { display: none !important; }</style><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
   <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
   <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
   <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
@@ -39,12 +43,12 @@
   <meta property="og:title" content="Compose における GPU アクセスの有効化" />
   <meta property="og:description" content="Compose における GPU サポート。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-11T14:21:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/gpu-support/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-08-24T22:24:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-09-11T14:21:28+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における GPU アクセスの有効化","description":"Compose における GPU サポート。","url":"https://docs.docker.com/compose/gpu-support/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -81,7 +85,7 @@
 </div>
 <div class="nav-container hidden-sm hidden-xs">
     <div>
-        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
@@ -91,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/compose/">Docker Compose</a></li><li><a href="/docs.docker.jp.onthefly/compose/gpu-support/">Compose での GPU サポート</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/compose/">Docker Compose</a></li><li><a href="/docs.docker.jp.onthefly/compose/gpu-support/">Compose での GPU サポート</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -167,9 +171,9 @@ Compose ファイル内でこのフィールドの設定が必須です。
       <span class="na">resources</span><span class="pi">:</span>
         <span class="na">reservations</span><span class="pi">:</span>
           <span class="na">devices</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="na">driver</span><span class="pi">:</span> <span class="s">nvidia</span>
-            <span class="na">count</span><span class="pi">:</span> <span class="m">1</span>
-            <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">,</span> <span class="nv">utility</span><span class="pi">]</span>
+            <span class="pi">-</span> <span class="na">driver</span><span class="pi">:</span> <span class="s">nvidia</span>
+              <span class="na">count</span><span class="pi">:</span> <span class="m">1</span>
+              <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <p>Docker Compose によってこれを実行します。</p>
@@ -211,7 +215,7 @@ gpu_test_1 exited with code 0
       <span class="na">resources</span><span class="pi">:</span>
         <span class="na">reservations</span><span class="pi">:</span>
           <span class="na">devices</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
+            <span class="pi">-</span> <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
