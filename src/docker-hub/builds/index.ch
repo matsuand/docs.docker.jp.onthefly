@@ -762,25 +762,12 @@ You could also use capture groups to build and label images that come from vario
 @z
 
 @x
-You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
-[environment variable](#environment-variables-for-builds) in the
-[Configure automated build settings](#configure-automated-build-settings) section.
-Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+Autobuilds use the BuildKit build system by default. If you want to use the legacy Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} `DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
 page for more information on BuildKit.
 @y
-[自動ビルドの設定](#configure-automated-build-settings) における [環境変数](#environment-variables-for-builds) の設定に従って`DOCKER_BUILDKIT=1`を設定すれば、BuildKit ビルダーを有効にすることができます。
+自動ビルドは、デフォルトで BuildKit ビルドシステムを利用します。
+かつての Docker ビルドシステムを利用したい場合は、[環境変数](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} `DOCKER_BUILDKIT=0` を設定します。
 BuildKit に関する詳細は [BuildKit を使ったイメージビルド](../../develop/develop-images/build_enhancements.md) を参照してください。
-@z
-
-@x
-> **Note**
->
-> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} DOCKER_BUILDKIT=0.
-@y
-> **メモ**
->
-> 自動ビルドは、デフォルトで buildKit によるビルドシステムを用います。
-> ビルドシステムとして従来の Docker を用いたい場合は、[環境変数](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} DOCKER_BUILDKIT=0 を追加してください。
 @z
 
 @x

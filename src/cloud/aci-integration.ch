@@ -1046,9 +1046,9 @@ Docker Compose CLI は、Azure コンテナーインスタンス（ACI）上で�
 @z
 
 @x
-- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](../get-docker.md)
 @y
-- [Docker 19.03 またはそれ以降](https://docs.docker.com/get-docker/)
+- [Docker 19.03 またはそれ以降](../get-docker.md)
 @z
 
 @x
@@ -1141,9 +1141,9 @@ $ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 
 @x
 On a fresh install of Ubuntu 20.04 with Docker Engine
-[already installed](https://docs.docker.com/engine/install/ubuntu/):
+[already installed](../engine/install/ubuntu.md):
 @y
-Docker Engine が [インストール](https://docs.docker.com/engine/install/ubuntu/) されている Ubuntu 20.04 の場合、初期状態では以下のようになっています。
+Docker Engine が [インストール](../engine/install/ubuntu.md) されている Ubuntu 20.04 の場合、初期状態では以下のようになっています。
 @z
 
 @x

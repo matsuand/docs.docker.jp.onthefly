@@ -186,9 +186,9 @@ Dev 環境を利用する一番簡単な方法は、作業プロジェクトの 
 @z
 
 @x
-In the above example, the names `amazing_mclaren` and `stoic_carver` are randomly generated. You'll most likely see different names when you create your Dev Environment.
+In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 @y
-上に示した例において`amazing_mclaren`や`stoic_carver`はランダムに作り出された名前です。
+上に示した例において`wizardly_ellis`や`relaxed_maclaren`はランダムに作り出された名前です。
 実際に作り出した Dev 環境では、おそらく異なる名前になっているはずです。
 @z
 

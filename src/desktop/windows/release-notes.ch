@@ -34,6 +34,59 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 4.0.1
+2021-09-13
+@y
+## Docker Desktop 4.0.1
+2021-09-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2 RC3](https://github.com/docker/compose/releases/tag/v2.0.0-rc.3)
+  - Compose v2 is now hosted on github.com/docker/compose.
+  - Fixed go panic on downscale using `compose up --scale`.
+  - Fixed  a race condition in `compose run --rm` while capturing exit code.
+@y
+- [Compose V2 RC3](https://github.com/docker/compose/releases/tag/v2.0.0-rc.3)
+  - Compose v2 は現在、github.com/docker/compose において提供されています。
+  - `compose up --scale`を使ってダウングレードする際のパニックを修正しました。
+  - `compose run --rm`の利用にあたって、終了コードが競合する問題を修正しました。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug where Docker Desktop would not start correctly with the Hyper-V engine. See [docker/for-win#11963](https://github.com/docker/for-win/issues/11963)
+- Fixed a bug where copy-paste was not available in the Docker Dashboard.
+@y
+- Hyper-V エンジンを使った場合に、Docker Desktop が起動しないバグを修正しました。
+  [docker/for-win#11963](https://github.com/docker/for-win/issues/11963) を参照のこと。
+- Docker ダッシュボードにおいて、コピーペーストができなかった箇所を修正しました。
+@z
+
+@x
 ## Docker Desktop 4.0.0
 2021-08-31
 @y
@@ -44,29 +97,30 @@ This page contains information about the new features, improvements, known issue
 @x
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe)
 @y
-> Download Docker Desktop
+> Docker Desktop のダウンロード
 >
-> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe)
 @z
 
 @x
 ### New
 @y
-### New
+{: #new }
+### 新機能
 @z
 
 @x
 Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
 @y
-Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+開発者やビジネス利用に向けた生産性、共同作業、セキュリティ向上のために、製品サブスクリプションの更新と拡張を [発表](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} しました。
 @z
 
 @x
 The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
 @y
-The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+更新された [Docker サブスクリプションサービス契約](https://www.docker.com/legal/docker-subscription-service-agreement) には、**Docker Desktop** での契約変更内容が記載されています。
 @z
 
 @x
@@ -77,24 +131,27 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/lega
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 @y
-- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
-- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
-- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
-- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
-- The existing Docker Free subscription has been renamed **Docker Personal**.
-- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+- Docker Desktop は、小規模ビジネス向け（従業員 250 未満、かつ年間収益 1,000 万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、 **無償提供が継続** されます。
+- 大規模なエンタープライズ向けのプロフェッショナル利用に対しては、最低でも月額 5 ドルの有償サブスクリプション（**Pro, Team, Business**）が必要です。
+- この条件の適用開始日は 2021 年 8 月31 日です。
+  Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
+- Docker Pro と Docker Team のサブスクリプションには、Docker Desktop の **商用利用** が含まれるようになりました。
+- 既存の Docker 無償サブスクリプションは **Docker Personal** として名称変更されました。
+- Docker Engine、これに関するアップストリームの **オープンソース**、Moby プロジェクトには **一切変更がありません**。
 @z
 
 @x
     To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
 @y
-    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+    この変更内容がユーザーにとってどのように影響するかについては、[FAQ](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} を参照してください。
+    より詳しくは [Docker サブスクリプション概要](../../subscription/index.md) を参照してください。
 @z
 
 @x
 ### Upgrades
 @y
-### Upgrades
+{: #upgrades }
+### アップグレード
 @z
 
 @x
@@ -105,24 +162,27 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/lega
 - [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
 @y
 - [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
-  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
-  - Fixed non-normalized project name.
-  - Fixed port merging on partial reference.
+  - `compose down`において、プロジェクト名の大文字小文字を区別するように修正しました。
+    [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023) を参照のこと。
+  - 標準的でないプロジェクト名に対して修正しました。
+  - 部分参照によるポートマージを修正しました。
 - [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
 @z
 
 @x
 ### Bug fixes and minor changes
 @y
-### Bug fixes and minor changes
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
 @z
 
 @x
 - Fixed a bug where the CLI tools would not be available in WSL 2 distros.
 - Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
 @y
-- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
-- Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
+- WSL 2 ディストリビューションにおいて CLI ツールが利用できなかったバグを修正しました。
+- Linux コンテナーから Windows コンテナーに切り替える際の、`panic.log`への不適切なアクセス権限を修正しました。
+  [for-win#11899](https://github.com/docker/for-win/issues/11899)
 @z
 
 @x
@@ -1289,12 +1349,12 @@ IT 管理環境下での開発者の Docker ID がチームプランに属して
 
 @x
 - Use of three-digit version number for Docker Desktop releases.
-- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#updates).
 - First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
 @y
 - Docker Desktop リリースに対して 3 桁のバージョン番号を用いるようにしました。
 - Docker Desktop のアップデートでは、デルタパッチを用いることにより、アップデートをより小さなものにしました。
-  詳しくは [自動アップデート](install.md#automatic-updates) を参照してください。
+  詳しくは [自動アップデート](install.md#updates) を参照してください。
 - `docker compose`の初めてのバージョン（これまでの`docker-compose`に対応づくもの）。 
   基本的なコマンドはサポートしていますが、`docker-compose`の全機能をまだ実現していません。
 @z

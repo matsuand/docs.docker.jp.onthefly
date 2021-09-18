@@ -232,19 +232,19 @@ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 @z
 
 @x
-> **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build/) command
+> **Caution**: A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 @y
-> **注意**: `hooks/build`ファイルは、ビルド処理において用いられる基本的な [docker build](/engine/reference/commandline/build/) コマンドをオーバーライドします。
+> **注意**: `hooks/build`ファイルは、ビルド処理において用いられる基本的な [docker build](../../engine/reference/commandline/build.md) コマンドをオーバーライドします。
 したがってフック内には同じようなビルドコマンドを用いなければなりません。
 そうしないと自動ビルドは失敗します。
 @z
 
 @x
-To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#set-build-time-variables-build-arg).
+To learn more about Docker build-time variables, see the [docker build documentation](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg).
 @y
-Docker のビルド時における変数についての詳細は [docker build のドキュメント](/engine/reference/commandline/build/#set-build-time-variables-build-arg) を参照してください。
+Docker のビルド時における変数についての詳細は [docker build のドキュメント](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg) を参照してください。
 @z
 
 @x

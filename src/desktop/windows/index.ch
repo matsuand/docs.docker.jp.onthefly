@@ -820,9 +820,9 @@ Windows コンテナーについての詳細は、以下のドキュメントを
 
 @x
 - To understand how to connect to Windows containers from the local host, see
-  [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
+  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
 @y
-- ローカルホストから Windows コンテナーへの接続方法を理解するには、[`localhost`や公開ポートに対する Windows コンテナーの制約](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports) を参照してください。
+- ローカルホストから Windows コンテナーへの接続方法を理解するには、[Windows からコンテナーに接続する](networking.md#i-want-to-connect-to-a-container-from-windows) を参照してください。
 @z
 
 @x
@@ -840,12 +840,12 @@ Windows コンテナーについての詳細は、以下のドキュメントを
 @x
   * [General](#general)
   * [Proxies](#proxies)
-  * [Daemon](#docker-daemon)
+  * [Daemon](#docker-engine)
   * [Reset](#reset)
 @y
   * [General タブ](#general)
   * [Proxies タブ](#proxies)
-  * [Daemon タブ](#docker-daemon)
+  * [Daemon タブ](#docker-engine)
   * [Reset タブ](#reset)
 @z
 

@@ -218,9 +218,9 @@ If a custom security group is provided, you need to ensure that you allow TCP po
 @z
 
 @x
-Moreover, if you want to use [Docker Swarm](/engine/swarm/swarm-tutorial/), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
+Moreover, if you want to use [Docker Swarm](../../engine/swarm/swarm-tutorial/index.md), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
 @y
-Moreover, if you want to use [Docker Swarm](/engine/swarm/swarm-tutorial/), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
+Moreover, if you want to use [Docker Swarm](../../engine/swarm/swarm-tutorial/index.md), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
 @z
 
 @x
@@ -230,9 +230,9 @@ Moreover, if you want to use [Docker Swarm](/engine/swarm/swarm-tutorial/), also
 @z
 
 @x
-The [default storage driver][storagedriver] may fail on Debian, specifying `overlay2` should resolve this issue.
+The [default storage driver](../../storage/storagedriver/select-storage-driver.md) may fail on Debian, specifying `overlay2` should resolve this issue.
 @y
-The [default storage driver][storagedriver] may fail on Debian, specifying `overlay2` should resolve this issue.
+The [default storage driver](../../storage/storagedriver/select-storage-driver.md) may fail on Debian, specifying `overlay2` should resolve this issue.
 @z
 
 @x
@@ -254,12 +254,10 @@ There is a limit to the number of machines that an anti-affinity group can have.
 @z
 
 @x
-[storagedriver]: https://docs.docker.com/storage/storagedriver/select-storage-driver/#docker-ce
 [templates]: https://www.exoscale.com/templates/
 [datacenters]: https://www.exoscale.com/datacenters/
 [anti-affinity]: https://community.exoscale.com/documentation/compute/anti-affinity-groups/
 @y
-[storagedriver]: https://docs.docker.com/storage/storagedriver/select-storage-driver/#docker-ce
 [templates]: https://www.exoscale.com/templates/
 [datacenters]: https://www.exoscale.com/datacenters/
 [anti-affinity]: https://community.exoscale.com/documentation/compute/anti-affinity-groups/

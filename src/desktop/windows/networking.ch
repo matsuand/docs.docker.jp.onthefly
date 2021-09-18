@@ -291,10 +291,9 @@ Linux 上であっても、コンテナーがブリッジネットワーク上�
 @z
 
 @x
-The command to run the `nginx` webserver shown in [Getting Started](index.md#explore-the-application)
-is an example of this.
+For example, to run an `nginx` webserver:
 @y
-以下は、[はじめよう](index.md#explore-the-application) の節に示している`nginx`ウェブサーバーの起動コマンドです。
+たとえば`nginx`ウェブサーバーは以下のように実行します。
 @z
 
 @x

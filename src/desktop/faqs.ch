@@ -46,6 +46,26 @@ Docker Desktop のシステム要件については、[Docker Desktop for Mac �
 @z
 
 @x
+### Where does Docker Desktop get installed on my machine?
+@y
+### Where does Docker Desktop get installed on my machine?
+@z
+
+@x
+By default, Docker Desktop is installed at the following location:
+@y
+By default, Docker Desktop is installed at the following location:
+@z
+
+@x
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+@y
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+@z
+
+@x
 ### Do I need to pay to use Docker Desktop?
 @y
 {: #do-i-need-to-pay-to-use-docker-desktop }
@@ -200,7 +220,7 @@ We recommend that you publish a port, or connect from another container. Port fo
 
 @x
 For more information and examples, see
-[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-windows).
 @y
 詳しい情報や利用例については [Mac からコンテナーに接続したい](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) や [Windows からコンテナーに接続したい](windows/networking.md#i-want-to-connect-to-a-container-from-windows) を参照してください。
 @z
@@ -316,12 +336,12 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 @z
 
 @x
-Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#automatic-updates).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#updates).
 @y
 Docker Desktop 3.0.0 から Docker Desktop は 1 つの累積的なリリースストリームとして提供されるようになりました。
 つまり安定版（Stable）ユーザー、最新版（Edge）ユーザーのどちらも同一バージョンを用いることになります。
 Docker Desktop 3.0.0 の次に行われるリリースは、デルタアップデートを採用する初めてのリリースです。
-詳しくは [自動アップデート](mac/install.md#automatic-updates) を参照してください。
+詳しくは [自動アップデート](mac/install.md#updates) を参照してください。
 @z
 
 @x

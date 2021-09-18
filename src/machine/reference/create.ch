@@ -391,12 +391,12 @@ Docker Machine uses them for the default value of the flag.
 As part of the process of creation, Docker Machine installs Docker and
 configures it with some sensible defaults. For instance, it allows connection
 from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
+as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 when available.
 @y
 Docker Machine の生成処理において、Docker Machine はマシンをインストールし、実用的なデフォルト値をいくつか利用して設定を行います。
 たとえば、ネットワークにおいては TCP を介して外部との接続を可能とし、TLS ベースの暗号化を利用します。
-また [ストレージドライバー](/engine/reference/commandline/dockerd/#daemon-storage-driver-option) として AUFS が利用可能であれば、これをデフォルト設定します。
+また [ストレージドライバー]({{ site.baseurl }}/engine/reference/commandline/dockerd/#daemon-storage-driver) として AUFS が利用可能であれば、これをデフォルト設定します。
 @z
 
 @x
@@ -506,19 +506,19 @@ The supported flags are as follows:
 @z
 
 @x
--   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli/#insecure-registries) to allow with the created engine
+-   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/dockerd/#insecure-registries) to allow with the created engine
 -   `--engine-registry-mirror`: Specify [registry mirrors](../../registry/recipes/mirror.md) to use
 -   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
--   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
+-   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver) to use with the engine
 @y
 -   `--engine-insecure-registry`:
-    Engine に対して [安全ではない Registry](/engine/reference/commandline/cli/#insecure-registries) の利用を許可します。
+    Engine に対して [安全ではない Registry]({{ site.baseurl }}/engine/reference/commandline/dockerd/#insecure-registries) の利用を許可します。
 -   `--engine-registry-mirror`:
     利用する [Registry ミラー](../../registry/recipes/mirror.md) を指定します。
 -   `--engine-label`:
     Engine に対して [ラベル](../../config/labels-custom-metadata.md) を設定します。
 -   `--engine-storage-driver`:
-    Engine において利用する [ストレージドライバー](/engine/reference/commandline/cli/#daemon-storage-driver-option) を指定します。
+    Engine において利用する [ストレージドライバー]({{ site.baseurl }}/engine/reference/commandline/dockerd/#daemon-storage-driver) を指定します。
 @z
 
 @x
@@ -595,7 +595,7 @@ $ docker-machine create -d virtualbox \
 In addition to configuring Docker Engine options as listed above,
 you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
-the [scheduling strategy](../../swarm/scheduler/strategy.md)
+the scheduling strategy
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
 There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
 for the `swarm manage` command (used to boot a master node) instead of the base
@@ -606,7 +606,7 @@ allows you to access [experimental features](https://github.com/docker/swarm/tre
 in Docker Swarm.
 @y
 上で示した Docker Engine のオプション設定に加えて、Swarm マネージャーを生成する際のオプションを指定することもできます。
-`--swarm-strategy`フラグがあり、これによって [スケジュールストラテジー](../../swarm/scheduler/strategy.md)（scheduling strategy）を指定することができます。
+`--swarm-strategy`フラグがあり、これによってスケジュールストラテジー（scheduling strategy）を指定することができます。
 Docker Swarm においては、この指定が必要になります（Docker Machine は`spread`ストラテジーをデフォルトとしています）。
 もう一つ、汎用目的で`--swarm-opt`オプションがあり、前述した`--engine-opt`オプションと同様に動作しますが、ただしこれは、ベースコマンドに対してではなく、`swarm manage`コマンドに対するオプションを指定するものです（マスターノードの起動の際によく用います）。
 パワーユーザーであれば、これを利用して必要な設定を行うことができます。

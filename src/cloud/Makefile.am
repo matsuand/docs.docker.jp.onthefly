@@ -16,7 +16,6 @@ bases = \
 	aci-compose-features   \
 	aci-container-features \
 	aci-integration        \
-	architecture           \
 	ecs-architecture       \
 	ecs-compose-examples   \
 	ecs-compose-features   \

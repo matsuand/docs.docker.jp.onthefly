@@ -322,10 +322,10 @@ node-1
 @x
 The labels you set for nodes using docker node update apply only to the node
 entity within the swarm. Do not confuse them with the docker daemon labels for
-[dockerd](../../config/labels-custom-metadata.md#daemon-labels).
+[dockerd](../../config/labels-custom-metadata.md).
 @y
 docker node update を使ってノード用に設定するラベルは、Swarm 内のノードにしか適用されません。
-Docker デーモン [dockerd](../../config/labels-custom-metadata.md#daemon-labels) におけるラベルと混同しないように注意してください。
+Docker デーモン [dockerd](../../config/labels-custom-metadata.md) におけるラベルと混同しないように注意してください。
 @z
 
 @x

@@ -45,25 +45,25 @@ Docker has [announced](https://www.docker.com/blog/updating-product-subscription
 @z
 
 @x
-The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
 @y
-The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
 @z
 
 @x
-- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
 - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
 - The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
-- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
-- The existing Docker Free subscription has been renamed **Docker Personal**.
-- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 @y
-- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
 - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
 - The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
-- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
-- The existing Docker Free subscription has been renamed **Docker Personal**.
-- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 @z
 
 @x
@@ -87,15 +87,15 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/lega
 
 @x
 When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
-For more information, see  [Advanced Management Dashboard](/image-management.md).
+For more information, see  [Advanced Management Dashboard](image-management.md).
 @y
-リポジトリ内容を管理するにあたって、最新タグに基づいた検索や、タグなしイメージを容易に識別できるようにしました。詳しくは [拡張イメージ管理ダッシュボード](/image-management.md) を参照してください。
+リポジトリ内容を管理するにあたって、最新タグに基づいた検索や、タグなしイメージを容易に識別できるようにしました。詳しくは [拡張イメージ管理ダッシュボード](image-management.md) を参照してください。
 @z
 
 @x
-For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
+For Docker Hub API documentation, see [Docker Hub API Reference](api/latest.md#operation/GetNamespacesRepositoriesImages).
 @y
-Docker Hub API については、[Docker Hub API リファレンス]({{ site.baseurl }}/docker-hub/api/latest/#operation/GetNamespacesRepositoriesImages) を参照してください。
+Docker Hub API については、[Docker Hub API リファレンス](api/latest/#operation/GetNamespacesRepositoriesImages) を参照してください。
 @z
 
 @x
@@ -150,9 +150,9 @@ To change the email address receiving billing-related emails, log into Docker Hu
 @z
 
 @x
-For details on how to update your billing information, see [Update billing information](../subscription/index.md#update-billing-information).
+For details on how to update your billing information, see [Update billing information](../subscription/upgrade.md#update-billing-information).
 @y
-請求情報の更新方法については [請求情報の更新](../subscription/index.md#update-billing-information) を参照してください。
+請求情報の更新方法については [請求情報の更新](../subscription/upgrade.md#update-billing-information) を参照してください。
 @z
 
 @x
@@ -175,11 +175,11 @@ For details on how to update your billing information, see [Update billing infor
 @z
 
 @x
-Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](image-management.md).
 @y
 拡張イメージ管理ダッシュボード（Advanced Image Management dashboard）が導入されました。
 これにより複数リポジトリ内の Docker イメージを参照、管理できるようになりました。
-詳しくは [拡張イメージ管理ダッシュボード](/image-management.md) を参照してください。
+詳しくは [拡張イメージ管理ダッシュボード](image-management.md) を参照してください。
 @z
 
 @x
@@ -224,10 +224,10 @@ For more information about this feature and for instructions on how to use it, s
 
 @x
 The **Repositories** view now shows which images have gone stale because they haven't been 
-pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
+pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
 @y
 **Repositories**（リポジトリ）画面では、プルやプッシュが行われずに古い扱いとなったイメージがどれであるかを確認できるようになりました。
-詳しくは [リポジトリタグ](repos.md/#viewing-repository-tags) を参照してください。
+詳しくは [リポジトリタグ](repos.md#viewing-repository-tags) を参照してください。
 @z
 
 @x
@@ -294,11 +294,11 @@ Synk を利用して Docker イメージのぜい弱性スキャンが自動的�
 @z
 
 @x
-* The [repositories page](https://docs.docker.com/docker-hub/repos/) and all
+* The [repositories page](repos.md) and all
 related settings and tabs have been updated and moved from `cloud.docker.com`
 to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories). 
 @y
-* [リポジトリのページ]({{ site.baseurl }}/docker-hub/repos/) と関連する設定やタブは、内容を更新し`cloud.docker.com`から`hub.docker.com`に移転しました。
+* [リポジトリのページ](repos.md) と関連する設定やタブは、内容を更新し`cloud.docker.com`から`hub.docker.com`に移転しました。
 新たなページは URL [https://hub.docker.com/repositories](https://hub.docker.com/repositories) からアクセスできます。
 @z
 
@@ -329,9 +329,9 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 @z
 
 @x
-* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](/docker-hub/2fa). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](2fa/index.md). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 @y
-* **ベータ機能** ＝ Docker Hub では [２要素認証（two-factor authentication; 2FA)]({{ site.baseurl }}/docker-hub/2fa) に対応しました。これを有効にするには、アカウント設定画面の **[Security](https://hub.docker.com/settings/security)** セクションのもとで行います。
+* **ベータ機能** ＝ Docker Hub では [２要素認証（two-factor authentication; 2FA)](2fa/index.md) に対応しました。これを有効にするには、アカウント設定画面の **[Security](https://hub.docker.com/settings/security)** セクションのもとで行います。
 @z
 
 @x
@@ -516,7 +516,7 @@ Each organization page now breaks down into these tabs:
   * The architecture it was built on
   * The OS
   * The user who most recently updated an image for a specific tag
-* The security scan summary for [official images](https://docs.docker.com/docker-hub/official_images/)
+* The security scan summary for [official images](official_images.md)
 has been updated.
 @y
 * イメージページの`Tags`タブにおいて、各タグにさらなる情報を提供するようにしました。
@@ -524,7 +524,7 @@ has been updated.
   * イメージがビルド対象としているアーキテクチャー。
   * OS。
   * 特定のタグに対して、イメージ更新を行った最終ユーザー。
-* [公式イメージ]({{ site.baseurl }}/docker-hub/official_images/) に対するセキュリティスキャン概要を更新しました。
+* [公式イメージ](official_images.md) に対するセキュリティスキャン概要を更新しました。
 @z
 
 @x

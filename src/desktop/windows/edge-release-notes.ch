@@ -29,10 +29,10 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 
 @x
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+[What to know before you install](install.md#system-requirements).
 @y
 安定版については [安定版リリースノート](release-notes.md) を参照してください。
-また Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
+また Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#system-requirements) を参照してください。
 @z
 
 @x
@@ -5262,8 +5262,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 @x
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](index.md#switch-between-windows-and-linux-containers). (See
-[About the Docker Windows containers specific dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+[Windows containers mode](index.md#switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -5271,8 +5270,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Support for arm, aarch64, ppc64le architectures using qemu
 @y
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](index.md#switch-between-windows-and-linux-containers). (See
-[About the Docker Windows containers specific dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+[Windows containers mode](index.md#switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -5923,9 +5921,9 @@ work. Some insider builds may not work.
 @z
 
 @x
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 @y
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 @z
 
 @x
@@ -5999,9 +5997,9 @@ work. Some insider builds may not work.
 @z
 
 @x
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 @y
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 @z
 
 @x
@@ -6331,9 +6329,9 @@ Unreleased. See Beta 23 for changes.
 @z
 
 @x
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by [recreating or updating your containers](troubleshoot.md#recreate-or-update-your-containers-after-beta-18-upgrade) as described in Troubleshooting.
+>**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 @y
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by [recreating or updating your containers](troubleshoot.md#recreate-or-update-your-containers-after-beta-18-upgrade) as described in Troubleshooting.
+>**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 @z
 
 @x
@@ -6697,9 +6695,9 @@ Unreleased. See Beta 23 for changes.
 @z
 
 @x
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @y
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @z
 
 @x
@@ -6769,9 +6767,9 @@ This Beta release includes some significant changes:
 @z
 
 @x
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @y
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @z
 
 @x
@@ -6815,9 +6813,9 @@ This Beta release includes some significant changes:
 @z
 
 @x
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @y
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 @z
 
 @x

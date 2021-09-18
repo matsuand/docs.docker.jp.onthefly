@@ -41,11 +41,11 @@ Docker Desktop for Windows へようこそ。
 @x
 > Download Docker Desktop for Windows
 >
-> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 @y
 > Docker Desktop for Windows のダウンロード
 >
-> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 @z
 
 @x
@@ -131,12 +131,12 @@ WSL 2 on Windows 10:
 @x
 - Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
 @y
 - Windows 10 64 ビット: Pro 2004 (build 19041) またはそれ以降、
   Enterprise または Education 1909 (build 18363) またはそれ以降。
 
-  Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#system-requirements-for-wsl-2-backend) を参照してください。
+  Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#wsl-2-backend) を参照してください。
 @z
 
 @x

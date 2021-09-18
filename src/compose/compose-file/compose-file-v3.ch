@@ -2854,7 +2854,7 @@ external_links:
 > **Note**
 >
 > The externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 
 > Note when using docker stack deploy
@@ -2866,7 +2866,7 @@ external_links:
 > **メモ**
 >
 > 外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
-> [Links](compose-file-v2#links) は古いオプションです。
+> [Links](compose-file-v2.md#links) は古いオプションです。
 > これではなく [networks](#networks) を用いるようにしてください。
 
 > docker のスタックデプロイ時のメモ
@@ -4623,11 +4623,11 @@ userns_mode: "host"
 
 @x
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 @y
 Docker デーモンにおいてユーザー名前空間が設定されていても、サービスに対してユーザー名前空間を無効にします。
-詳しくは [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) を参照してください。
+詳しくは [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) を参照してください。
 @z
 
 @x

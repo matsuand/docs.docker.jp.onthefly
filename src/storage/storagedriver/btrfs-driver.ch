@@ -277,10 +277,10 @@ This procedure is essentially identical on SLES and Ubuntu.
 
 @x
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @y
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @z
 
 @x

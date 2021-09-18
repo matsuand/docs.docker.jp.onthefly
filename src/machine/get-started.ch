@@ -109,11 +109,11 @@ The prerequisites are:
 @z
 
 @x
-* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#what-to-know-before-you-install)).
+* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#system-requirements)).
 @y
 * Docker Desktop for Windows がインストールされていて、実行していることが必要です。
   （実行するためには仮想化環境および Hyper-V が有効であることが必要です。
-   このことは [Docker Desktop for Windows をインストール前に確認すべきこと](../desktop/windows/install.md#what-to-know-before-you-install) において説明されています。）
+   このことは [Docker Desktop for Windows をインストール前に確認すべきこと](../desktop/windows/install.md#system-requirements) において説明されています。）
 @z
 
 @x

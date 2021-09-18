@@ -138,13 +138,13 @@ offers a high-level tool with several powerful functionalities:
 @z
 
 @x
- - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent_image) to
+ - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent-image) to
 create more specialized components. This can be done manually or as part of an
 automated build. For example you can prepare the ideal Python environment, and
 use it as a base for 10 different applications. Your ideal PostgreSQL setup can
 be re-used for all your future projects. And so on.
 @y
- - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent_image) to
+ - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent-image) to
 create more specialized components. This can be done manually or as part of an
 automated build. For example you can prepare the ideal Python environment, and
 use it as a base for 10 different applications. Your ideal PostgreSQL setup can

@@ -28,15 +28,24 @@ redirect_from:
 @z
 
 @x
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes [Docker Engine](../engine/), Docker CLI client, [Docker Compose](../compose/), [Docker Content Trust](../engine/security/trust.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+Docker Desktop is an easy-to-install application for your Mac or Windows environment
+that enables you to build and share containerized applications and microservices.
+Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
+[Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md),
+[Kubernetes](https://github.com/kubernetes/kubernetes/), and 
+Credential Helper](https://github.com/docker/docker-credential-helpers/).
 @y
 Docker Desktop は Mac や Windows に簡単にインストールできるアプリケーションです。
 これにより、コンテナー化アプリケーションやマイクロサービスを構築し共有することができます。
-Docker Desktop には [Docker Engine](../engine/)、Docker CLI クライアント、[Docker Compose](../compose/)、[Docker コンテントトラスト](../engine/security/trust.md)、[Kubernetes](https://github.com/kubernetes/kubernetes/)、[Credential Helper](https://github.com/docker/docker-credential-helpers/) が含まれます。
+Docker Desktop には [Docker Engine](../engine/index.md)、Docker CLI クライアント、[Docker Compose](../compose/index.md)、[Docker コンテントトラスト](../engine/security/trust/index.md)、[Kubernetes](https://github.com/kubernetes/kubernetes/)、[Credential Helper](https://github.com/docker/docker-credential-helpers/) が含まれます。
 @z
 
 @x
-Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in [Docker Hub](https://hub.docker.com/). This enables development teams to extend their environment to rapidly auto-build, continuously integrate, and collaborate using a secure repository.
+Docker Desktop works with your choice of development tools and languages and
+gives you access to a vast library of certified images and templates in
+[Docker Hub](https://hub.docker.com/). This enables development teams to extend
+their environment to rapidly auto-build, continuously integrate, and collaborate
+using a secure repository.
 @y
 Docker Desktop は、選択した開発ツールやプログラミング言語を使って動作します。
 そして [Docker Hub](https://hub.docker.com/) にある認定イメージやテンプレートに対しての、数多くのライブラリにアクセスできるようになります。

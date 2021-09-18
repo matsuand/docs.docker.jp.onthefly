@@ -277,10 +277,10 @@ the mount point of the secret within a given container.
 
 @x
 Use these links to read about specific commands, or continue to the
-[example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
+[example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 @y
 Use these links to read about specific commands, or continue to the
-[example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
+[example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 @z
 
 @x
@@ -289,14 +289,14 @@ Use these links to read about specific commands, or continue to the
 - [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
 - [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#add-or-remove-secrets) flags for `docker service update`
 @y
 - [`docker secret create`](../reference/commandline/secret_create.md)
 - [`docker secret inspect`](../reference/commandline/secret_inspect.md)
 - [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
 - [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#add-or-remove-secrets) flags for `docker service update`
 @z
 
 @x

@@ -99,11 +99,11 @@ Docker デーモンに対してのデーモンフラグや環境変数を設定�
 @x
 You can configure nearly all daemon configuration options using `daemon.json`. The following
 example configures two options. One thing you cannot configure using `daemon.json` mechanism is
-a [HTTP proxy](#http-proxy).
+a [HTTP proxy](#httphttps-proxy).
 @y
 `daemon.json`を使うと、デーモンオプションはほぼすべて設定することができます。
 以下の例では 2 つのオプションを設定しています。
-`daemon.json`による仕組みで設定できないものに [HTTP プロキシー](#http-proxy) があります。
+`daemon.json`による仕組みで設定できないものに [HTTP プロキシー](#httphttps-proxy) があります。
 @z
 
 @x
@@ -603,7 +603,7 @@ you need to add this configuration in the Docker systemd service file.
 
 @x
 See
-[Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+[Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#configure-where-the-docker-daemon-listens-for-connections).
 @y
 [Docker デーモンがどこからの接続待ちをするかの設定](../../engine/install/linux-postinstall.md#configure-where-the-docker-daemon-listens-for-connections) を参照してください。
 @z

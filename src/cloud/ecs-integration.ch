@@ -392,13 +392,13 @@ Your ECS services are created with rolling update configuration. As you run
 `docker compose up` with a modified Compose file, the stack will be
 updated to reflect changes, and if required, some services will be replaced.
 This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+your services [`deploy.update_config`](../compose/compose-file/compose-file-v3.md#update_config)
 configuration.
 @y
 本番環境の実行を妨げることなくアプリケーションのアップデートを行うには、更新された Compose プロジェクト上において`docker compose up`を実行するだけです。
 ECS サービスはローリングアップデート設定を含めて生成されます。
 Compose ファイルを修正した上で`docker compose up`を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
-この置き換え処理は、サービスの [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)  設定によって定められるローリングアップデート設定に従います。
+この置き換え処理は、サービスの [`deploy.update_config`](../compose/compose-file/compose-file-v3.md#update_config)  設定によって定められるローリングアップデート設定に従います。
 @z
 
 @x
@@ -522,9 +522,9 @@ First, create a `token.json` file to define your DockerHub username and access t
 @z
 
 @x
-For instructions on how to generate access tokens, see [Managing access tokens](https://docs.docker.com/docker-hub/access-tokens/).
+For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
 @y
-For instructions on how to generate access tokens, see [Managing access tokens](https://docs.docker.com/docker-hub/access-tokens/).
+For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
 @z
 
 @x
@@ -638,14 +638,14 @@ Services can retrieve their dependencies using Compose service names (as they do
 @z
 
 @x
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
 Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 @y
 Compose ファイルがデプロイされると ECS 上においてサービスが同タイミングでスケジューリングされます。
 AWS Cloud Map では、サービスドメイン名を解決できるようにするため、DNS サービスの初期遅延処理を行っています。
 したがってアプリケーションコードには、その遅延への対応が必要になります。
 つまり依存サービスが準備状態となるのを待つか、Docker イメージへエントリーポイントとして、ウェイトを行うスクリプトを追加するなどの対応を行います。
-このことは [起動順の制御]({{ site.baseurl }}/compose/startup-order/) において説明しています。
+このことは [起動順の制御](../compose/startup-order.md) において説明しています。
 なお Compose アプリケーション内の依存サービスに対しても、docker-compose によりローカルにデプロイする際にもこれが必要です。
 ただし遅延は普通は短いものです。
 明らかな問題が発生するとすれば ECS へのデプロイ時であり、サービスがその依存サービスの起動を待たずに実行されてしまった場合です。
@@ -1468,9 +1468,9 @@ Docker Compose CLI は、ECS 上のコンテナー実行と管理をサポート
 @z
 
 @x
-[Docker 19.03 or later](https://docs.docker.com/get-docker/)
+[Docker 19.03 or later](../get-docker.md)
 @y
-* [Docker 19.03 またはそれ以降](https://docs.docker.com/get-docker/)
+* [Docker 19.03 またはそれ以降](../get-docker.md)
 @z
 
 %@x

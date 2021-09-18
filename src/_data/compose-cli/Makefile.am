@@ -37,7 +37,8 @@ bases = \
 	docker_compose_stop    \
 	docker_compose_top     \
 	docker_compose_unpause \
-	docker_compose_up
+	docker_compose_up      \
+	docker_compose_version
 
 ch_yamls = $(bases:=.yamlch) # ch means change files
 tr_yamls = $(bases:=.yaml)   # tr means translated files
@@ -54,6 +55,7 @@ tgtdir:
 -include ./Makefile.sub
 Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
+	sed -i -e "/docker_compose_events.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_compose_events.yaml" $@
 
 @MAINT@.PHONY: chbuild
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_yamls))

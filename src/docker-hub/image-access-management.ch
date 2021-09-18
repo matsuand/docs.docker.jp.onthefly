@@ -35,10 +35,10 @@ For example, a developer, who is part of an organization, building a new contain
 
 @x
 1. Log into your [Docker Hub](https://hub.docker.com) account as an organization administrator.
-2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org images.
+2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org Permissions.
 @y
 1. Log into your [Docker Hub](https://hub.docker.com) account as an organization administrator.
-2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org images.
+2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org Permissions.
 @z
 
 @x

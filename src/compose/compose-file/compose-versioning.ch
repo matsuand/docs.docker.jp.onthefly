@@ -34,14 +34,14 @@ Compose ファイルのフォーマットは、各バージョンごとに以下
 | [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
 | [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
-| Version 1 (Deprecated)                       | [Version 1 updates](#version-1)  |
+| Version 1 (Deprecated)                                | [Version 1 updates](#version-1-deprecated)  |
 @y
-| **リファレンスファイル**                        | **各バージョンでの変更点**           |
-|:------------------------------------------------|:-------------------------------------|
+| **リファレンスファイル**                        | **各バージョンでの変更点**                         |
+|:------------------------------------------------|:---------------------------------------------------|
 | [Compose 仕様](index.md) （最新版、利用を推奨） | [バージョンづけ](compose-versioning.md#versioning) |
-| [バージョン 3](compose-file-v3.md)              | [バージョン 3 での変更](#version-3)  |
-| [バージョン 2](compose-file-v2.md)              | [バージョン 2 での変更](#version-2)  |
-| バージョン 1 (非推奨)                           | [バージョン 1 での変更](#version-1)  |
+| [バージョン 3](compose-file-v3.md)              | [バージョン 3 での変更](#version-3)                |
+| [バージョン 2](compose-file-v2.md)              | [バージョン 2 での変更](#version-2)                |
+| バージョン 1 (非推奨)                           | [バージョン 1 での変更](#version-1-deprecated)     |
 @z
 
 @x
@@ -502,9 +502,9 @@ between services and startup order.
 @z
 
 @x
-* [`ipv4_address`, `ipv6_address`](compose-file-v2.md#ipv4address-ipv6address)
+* [`ipv4_address`, `ipv6_address`](compose-file-v2.md#ipv4_address-ipv6_address)
 @y
-* [`ipv4_address`, `ipv6_address`](compose-file-v2.md#ipv4address-ipv6address)
+* [`ipv4_address`, `ipv6_address`](compose-file-v2.md#ipv4_address-ipv6_address)
 @z
 
 @x
@@ -537,7 +537,7 @@ Introduces the following additional parameters:
 
 @x
 - [`link_local_ips`](compose-file-v2.md#link_local_ips)
-- [`isolation`](compose-file-v2.md#isolation) in build configurations and
+- [`isolation`](compose-file-v2.md#isolation-1) in build configurations and
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
   [networks](compose-file-v2.md#network-configuration-reference), and
@@ -551,7 +551,7 @@ Introduces the following additional parameters:
 - [`cpu_period`](compose-file-v2.md#cpu-and-other-resources)
 @y
 - [`link_local_ips`](compose-file-v2.md#link_local_ips)
-- [`isolation`](compose-file-v2.md#isolation) in build configurations and
+- [`isolation`](compose-file-v2.md#isolation-1) in build configurations and
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
   [networks](compose-file-v2.md#network-configuration-reference), and
@@ -625,14 +625,14 @@ Introduces the following additional parameters:
 
 @x
 - [`target`](compose-file-v2.md#target), [`extra_hosts`](compose-file-v2.md#extra_hosts-1) and
-  [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
+  [`shm_size`](compose-file-v2.md#shm_size) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 - [`runtime`](compose-file-v2.md#runtime) for service definitions
 - [`device_cgroup_rules`](compose-file-v2.md#device_cgroup_rules)
 @y
 - [`target`](compose-file-v2.md#target), [`extra_hosts`](compose-file-v2.md#extra_hosts-1) and
-  [`shm_size`](compose-file-v2.md#shmsize) for [build configurations](compose-file-v2.md#build)
+  [`shm_size`](compose-file-v2.md#shm_size) for [build configurations](compose-file-v2.md#build)
 - `start_period` for [`healthchecks`](compose-file-v2.md#healthcheck)
 - ["Long syntax" for volumes](compose-file-v2.md#long-syntax)
 - [`runtime`](compose-file-v2.md#runtime) for service definitions

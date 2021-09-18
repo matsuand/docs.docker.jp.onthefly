@@ -287,12 +287,12 @@ using this character as path separator.
 @z
 
 @x
-If set, volume declarations using the [short syntax](../compose-file/#short-syntax-3)
+If set, volume declarations using the [short syntax](../compose-file/compose-file-v3.md#short-syntax-3)
 are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 @y
-これが設定されていて、[短い文法](../compose-file/index.md#short-syntax-3) によってボリュームの宣言を行うと、ホストのパスは Windows パスとして扱われます。
+これが設定されていて、[短い文法](../compose-file/compose-file-v3.md#short-syntax-3) によってボリュームの宣言を行うと、ホストのパスは Windows パスとして扱われます。
 Compose が UNIX ベースのシステム上で動作していても、そのようになります。
 対応する値は`true`または`1`が有効を意味し、また`false`または`0`が無効を意味します。
 @z

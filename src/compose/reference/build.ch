@@ -127,8 +127,8 @@ BuildKit は Docker Desktop においてはデフォルトで有効になって�
 @z
 
 @x
-Refer to the [Compose CLI environment variables](envvars.md#COMPOSE_DOCKER_CLI_BUILD)
+Refer to the [Compose CLI environment variables](envvars.md#compose_docker_cli_build)
 section to learn how to switch between "native build" and "compose build".
 @y
-「ネイティブビルド」と「Compose ビルド」を切り替える方法については [Compose CLI 環境変数](envvars.md#COMPOSE_DOCKER_CLI_BUILD) の節を参照してください。
+「ネイティブビルド」と「Compose ビルド」を切り替える方法については [Compose CLI 環境変数](envvars.md#compose_docker_cli_build) の節を参照してください。
 @z

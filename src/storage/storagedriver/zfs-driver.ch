@@ -351,10 +351,10 @@ Edit `/etc/docker/daemon.json` and add the following:
 
 @x
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 @y
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 @z
 
 @x

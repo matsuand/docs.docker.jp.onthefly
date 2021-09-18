@@ -2694,9 +2694,9 @@ The corresponding network configuration in the
 @z
 
 @x
-> If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+> If IPv6 addressing is desired, the [`enable_ipv6`](#enable_ipv6) option must be set.
 @y
-> IPv6 アドレスが必要である場合は、[`enable_ipv6`](#enableipv6) オプションの設定が必要になります。
+> IPv6 アドレスが必要である場合は、[`enable_ipv6`](#enable_ipv6) オプションの設定が必要になります。
 @z
 
 @x
@@ -3426,11 +3426,11 @@ userns_mode: "host"
 
 @x
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 @y
 Docker デーモンにおいてユーザー名前空間が設定されていても、サービスに対してユーザー名前空間を無効にします。
-詳しくは [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) を参照してください。
+詳しくは [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) を参照してください。
 @z
 
 @x
@@ -3850,9 +3850,9 @@ tty: true
 @z
 
 @x
-{: id="orig-resources" }
+<a name="orig-resources"></a>
 @y
-{: id="orig-resources" }
+<a name="orig-resources"></a>
 @z
 
 @x
@@ -3900,10 +3900,10 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 @x
 Some configuration options, such as the `device_read_bps` sub-option for
-[`blkio_config`](#blkioconfig), accept a byte value as a string in a format
+[`blkio_config`](#blkio_config), accept a byte value as a string in a format
 that looks like this:
 @y
-[`blkio_config`](#blkioconfig) のサブオプション`device_read_bps`のようにバイト値を設定するオプションがあります。
+[`blkio_config`](#blkio_config) のサブオプション`device_read_bps`のようにバイト値を設定するオプションがあります。
 バイト値は文字列として指定するものであり、以下のようになります。
 @z
 

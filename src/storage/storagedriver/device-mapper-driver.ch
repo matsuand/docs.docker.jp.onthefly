@@ -177,10 +177,10 @@ For production systems, see
 
 @x
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @y
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @z
 
 @x
@@ -423,10 +423,10 @@ options in the table above.
 
 @x
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @y
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 @z
 
 @x
@@ -1055,14 +1055,14 @@ If you run into repeated problems with thin pool, you can set the storage option
 `/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
-[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" rel="noopener" class="_"}.
+[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#daemon-storage-driver){: target="_blank" rel="noopener" class="_"}.
 @y
 If you run into repeated problems with thin pool, you can set the storage option
 `dm.min_free_space` to a value (representing a percentage) in
 `/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
-[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" rel="noopener" class="_"}.
+[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#daemon-storage-driver){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
