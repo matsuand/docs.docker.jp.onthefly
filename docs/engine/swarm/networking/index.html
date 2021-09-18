@@ -1,11 +1,690 @@
+<!-- Page generated 2021-09-18 11:47:44 +0900-->
 <!DOCTYPE html>
-<html lang="ja-JP">
-  <meta charset="utf-8">
-  <title>リダイレクトします&hellip;</title>
-  <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/">
-  <meta http-equiv="refresh" content="0; url=https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/">
-  <meta name="robots" content="noindex">
-  <h1>リダイレクトします&hellip;</h1>
-  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/">リダイレクトされない場合は以下をクリックしてください。</a>
-  <script>location="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/"</script>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Manage swarm service networks | Docker ドキュメント</title>
+  <meta name="description" content="Use swarm mode overlay networking features" />
+  <meta name="keywords" content="swarm, networking, ingress, overlay, service discovery">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/swarm/networking/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- hide elements that are only shown without JavaScript enabled -->
+  <script>document.documentElement.classList.add('js')</script>
+  <style>html.js .no-js { display: none !important; }</style><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Manage swarm service networks"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Manage swarm service networks" />
+  <meta property="og:description" content="Use swarm mode overlay networking features" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/networking/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Manage swarm service networks","description":"Use swarm mode overlay networking features","url":"https://docs.docker.com/engine/swarm/networking/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+</div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Manage swarm service networks</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><p>A Docker swarm generates two different kinds of traffic:</p>
+
+<ul>
+  <li>
+    <p><strong>Control and management plane traffic</strong>: This includes swarm management
+messages, such as requests to join or leave the swarm. This traffic is
+always encrypted.</p>
+  </li>
+  <li>
+    <p><strong>Application data plane traffic</strong>: This includes container traffic and
+traffic to and from external clients.</p>
+  </li>
+</ul>
+
+<p>This topic discusses how to manage the application data for your swarm services.
+For more details about swarm networking in general, see the
+<a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks" target="_blank" rel="noopener" class="_">Docker networking reference architecture</a>.</p>
+
+<p>The following three network concepts are important to swarm services:</p>
+
+<ul>
+  <li>
+    <p><strong>Overlay networks</strong> manage communications among the Docker daemons
+participating in the swarm. You can create overlay networks, in the same way
+as user-defined networks for standalone containers. You can attach a service
+to one or more existing overlay networks as well, to enable service-to-service
+communication. Overlay networks are Docker networks that use the <code class="language-plaintext highlighter-rouge">overlay</code>
+network driver.</p>
+  </li>
+  <li>
+    <p>The <strong>ingress network</strong> is a special overlay network that facilitates
+load balancing among a service’s nodes. When any swarm node receives a
+request on a published port, it hands that request off to a module called
+<code class="language-plaintext highlighter-rouge">IPVS</code>. <code class="language-plaintext highlighter-rouge">IPVS</code> keeps track of all the IP addresses participating in that
+service, selects one of them, and routes the request to it, over the
+<code class="language-plaintext highlighter-rouge">ingress</code> network.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">ingress</code> network is created automatically when you initialize or join a
+swarm. Most users do not need to customize its configuration, but Docker allows
+you to do so.</p>
+  </li>
+  <li>
+    <p>The <strong>docker_gwbridge</strong> is a bridge network that connects the overlay
+networks (including the <code class="language-plaintext highlighter-rouge">ingress</code> network) to an individual Docker daemon’s
+physical network. By default, each container a service is running is connected
+to its local Docker daemon host’s <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> network.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> network is created automatically when you initialize or
+join a swarm. Most users do not need to customize its configuration, but
+Docker allows you to do so.</p>
+  </li>
+</ul>
+
+<h2 id="firewall-considerations">Firewall considerations</h2>
+
+<p>Docker daemons participating in a swarm need the ability to communicate with
+each other over the following ports:</p>
+
+<ul>
+  <li>Port <code class="language-plaintext highlighter-rouge">7946</code> TCP/UDP for container network discovery.</li>
+  <li>Port <code class="language-plaintext highlighter-rouge">4789</code> UDP for the container overlay network.</li>
+</ul>
+
+<h2 id="create-an-overlay-network">Create an overlay network</h2>
+
+<p>To create an overlay network, specify the <code class="language-plaintext highlighter-rouge">overlay</code> driver when using the
+<code class="language-plaintext highlighter-rouge">docker network create</code> command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+  <span class="nt">--driver</span> overlay <span class="se">\</span>
+  my-network
+</code></pre></div></div>
+
+<p>The above command doesn’t specify any custom options, so Docker assigns a
+subnet and uses default options. You can see information about the network using
+<code class="language-plaintext highlighter-rouge">docker network inspect</code>.</p>
+
+<p>When no containers are connected to the overlay network, its configuration is
+not very exciting:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect my-network
+<span class="go">[
+    {
+        "Name": "my-network",
+        "Id": "fsf1dmx3i9q75an49z36jycxd",
+        "Created": "0001-01-01T00:00:00Z",
+        "Scope": "swarm",
+        "Driver": "overlay",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": []
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "Containers": null,
+        "Options": {
+            "com.docker.network.driver.overlay.vxlanid_list": "4097"
+        },
+        "Labels": null
+    }
+]
+</span></code></pre></div></div>
+
+<p>In the above output, notice that the driver is <code class="language-plaintext highlighter-rouge">overlay</code> and that the scope is
+<code class="language-plaintext highlighter-rouge">swarm</code>, rather than <code class="language-plaintext highlighter-rouge">local</code>, <code class="language-plaintext highlighter-rouge">host</code>, or <code class="language-plaintext highlighter-rouge">global</code> scopes you might see in
+other types of Docker networks. This scope indicates that only hosts which are
+participating in the swarm can access this network.</p>
+
+<p>The network’s subnet and gateway are dynamically configured when a service
+connects to the network for the first time. The following example shows
+the same network as above, but with three containers of a <code class="language-plaintext highlighter-rouge">redis</code> service
+connected to it.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect my-network
+<span class="go">[
+    {
+        "Name": "my-network",
+        "Id": "fsf1dmx3i9q75an49z36jycxd",
+        "Created": "2017-05-31T18:35:58.877628262Z",
+        "Scope": "swarm",
+        "Driver": "overlay",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "10.0.0.0/24",
+                    "Gateway": "10.0.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "Containers": {
+            "0e08442918814c2275c31321f877a47569ba3447498db10e25d234e47773756d": {
+                "Name": "my-redis.1.ka6oo5cfmxbe6mq8qat2djgyj",
+                "EndpointID": "950ce63a3ace13fe7ef40724afbdb297a50642b6d47f83a5ca8636d44039e1dd",
+                "MacAddress": "02:42:0a:00:00:03",
+                "IPv4Address": "10.0.0.3/24",
+                "IPv6Address": ""
+            },
+            "88d55505c2a02632c1e0e42930bcde7e2fa6e3cce074507908dc4b827016b833": {
+                "Name": "my-redis.2.s7vlybipal9xlmjfqnt6qwz5e",
+                "EndpointID": "dd822cb68bcd4ae172e29c321ced70b731b9994eee5a4ad1d807d9ae80ecc365",
+                "MacAddress": "02:42:0a:00:00:05",
+                "IPv4Address": "10.0.0.5/24",
+                "IPv6Address": ""
+            },
+            "9ed165407384f1276e5cfb0e065e7914adbf2658794fd861cfb9b991eddca754": {
+                "Name": "my-redis.3.hbz3uk3hi5gb61xhxol27hl7d",
+                "EndpointID": "f62c686a34c9f4d70a47b869576c37dffe5200732e1dd6609b488581634cf5d2",
+                "MacAddress": "02:42:0a:00:00:04",
+                "IPv4Address": "10.0.0.4/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.driver.overlay.vxlanid_list": "4097"
+        },
+        "Labels": {},
+        "Peers": [
+            {
+                "Name": "moby-e57c567e25e2",
+                "IP": "192.168.65.2"
+            }
+        ]
+    }
+]
+</span></code></pre></div></div>
+
+<h3 id="customize-an-overlay-network">Customize an overlay network</h3>
+
+<p>There may be situations where you don’t want to use the default configuration
+for an overlay network. For a full list of configurable options, run the
+command <code class="language-plaintext highlighter-rouge">docker network create --help</code>. The following are some of the most
+common options to change.</p>
+
+<h4 id="configure-the-subnet-and-gateway">Configure the subnet and gateway</h4>
+
+<p>By default, the network’s subnet and gateway are configured automatically when
+the first service is connected to the network. You can configure these when
+creating a network using the <code class="language-plaintext highlighter-rouge">--subnet</code> and <code class="language-plaintext highlighter-rouge">--gateway</code> flags. The following
+example extends the previous one by configuring the subnet and gateway.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+  <span class="nt">--driver</span> overlay <span class="se">\</span>
+  <span class="nt">--subnet</span> 10.0.9.0/24 <span class="se">\</span>
+  <span class="nt">--gateway</span> 10.0.9.99 <span class="se">\</span>
+  my-network
+</code></pre></div></div>
+
+<h5 id="using-custom-default-address-pools">Using custom default address pools</h5>
+
+<p>To customize subnet allocation for your Swarm networks, you can <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/">optionally configure them</a> during <code class="language-plaintext highlighter-rouge">swarm init</code>.</p>
+
+<p>For example, the following command is used when initializing Swarm:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--default-addr-pool</span> 10.20.0.0/16 <span class="nt">--default-addr-pool-mask-length</span> 26<span class="sb">`</span>
+</code></pre></div></div>
+
+<p>Whenever a user creates a network, but does not use the <code class="language-plaintext highlighter-rouge">--subnet</code> command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm.</p>
+
+<p>Multiple pools can be configured if discontiguous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.</p>
+
+<p>The default mask length can be configured and is the same for all networks. It is set to <code class="language-plaintext highlighter-rouge">/24</code> by default. To change the default subnet mask length, use the <code class="language-plaintext highlighter-rouge">--default-addr-pool-mask-length</code> command line option.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: Default address pools can only be configured on <code class="language-plaintext highlighter-rouge">swarm init</code> and cannot be altered after cluster creation.</p>
+</blockquote>
+
+<h5 id="overlay-network-size-limitations">Overlay network size limitations</h5>
+
+<p>Docker recommends creating overlay networks with <code class="language-plaintext highlighter-rouge">/24</code> blocks. The <code class="language-plaintext highlighter-rouge">/24</code> overlay network blocks, which limits the network to 256 IP addresses.</p>
+
+<p>This recommendation addresses <a href="https://github.com/moby/moby/issues/30820">limitations with swarm mode</a>.
+If you need more than 256 IP addresses, do not increase the IP block size. You can either use <code class="language-plaintext highlighter-rouge">dnsrr</code>
+endpoint mode with an external load balancer, or use multiple smaller overlay networks. See
+<a href="#configure-service-discovery">Configure service discovery</a> or more information about different endpoint modes.</p>
+
+<h4 id="configure-encryption-of-application-data">Configure encryption of application data</h4>
+
+<p>Management and control plane data related to a swarm is always encrypted.
+For more details about the encryption mechanisms, see the
+<a href="/docs.docker.jp.onthefly/network/overlay/">Docker swarm mode overlay network security model</a>.</p>
+
+<p>Application data among swarm nodes is not encrypted by default. To encrypt this
+traffic on a given overlay network, use the <code class="language-plaintext highlighter-rouge">--opt encrypted</code> flag on <code class="language-plaintext highlighter-rouge">docker
+network create</code>. This enables IPSEC encryption at the level of the vxlan. This
+encryption imposes a non-negligible performance penalty, so you should test this
+option before using it in production.</p>
+
+<h2 id="attach-a-service-to-an-overlay-network">Attach a service to an overlay network</h2>
+
+<p>To attach a service to an existing overlay network, pass the <code class="language-plaintext highlighter-rouge">--network</code> flag to
+<code class="language-plaintext highlighter-rouge">docker service create</code>, or the <code class="language-plaintext highlighter-rouge">--network-add</code> flag to <code class="language-plaintext highlighter-rouge">docker service update</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
+  <span class="nt">--replicas</span> 3 <span class="se">\</span>
+  <span class="nt">--name</span> my-web <span class="se">\</span>
+  <span class="nt">--network</span> my-network <span class="se">\</span>
+  nginx
+</code></pre></div></div>
+
+<p>Service containers connected to an overlay network can communicate with
+each other across it.</p>
+
+<p>To see which networks a service is connected to, use <code class="language-plaintext highlighter-rouge">docker service ls</code> to find
+the name of the service, then <code class="language-plaintext highlighter-rouge">docker service ps &lt;service-name&gt;</code> to list the
+networks. Alternately, to see which services’ containers are connected to a
+network, use <code class="language-plaintext highlighter-rouge">docker network inspect &lt;network-name&gt;</code>. You can run these commands
+from any swarm node which is joined to the swarm and is in a <code class="language-plaintext highlighter-rouge">running</code> state.</p>
+
+<h3 id="configure-service-discovery">Configure service discovery</h3>
+
+<p><strong>Service discovery</strong> is the mechanism Docker uses to route a request from your
+service’s external clients to an individual swarm node, without the client
+needing to know how many nodes are participating in the service or their
+IP addresses or ports. You don’t need to publish ports which are used between
+services on the same network. For instance, if you have a
+<a href="https://training.play-with-docker.com/swarm-service-discovery/">WordPress service that stores its data in a MySQL service</a>,
+and they are connected to the same overlay network, you do not need to publish
+the MySQL port to the client, only the WordPress HTTP port.</p>
+
+<p>Service discovery can work in two different ways: internal connection-based
+load-balancing at Layers 3 and 4 using the embedded DNS and a virtual IP (VIP),
+or external and customized request-based load-balancing at Layer 7 using DNS
+round robin (DNSRR). You can configure this per service.</p>
+
+<ul>
+  <li>
+    <p>By default, when you attach a service to a network and that service publishes
+one or more ports, Docker assigns the service a virtual IP (VIP), which is the
+“front end” for clients to reach the service. Docker keeps a list of all
+worker nodes in the service, and routes requests between the client and one of
+the nodes. Each request from the client might be routed to a different node.</p>
+  </li>
+  <li>
+    <p>If you configure a service to use DNS round-robin (DNSRR) service discovery,
+there is not a single virtual IP. Instead, Docker sets up DNS entries for the
+service such that a DNS query for the service name returns a list of IP
+addresses, and the client connects directly to one of these.</p>
+
+    <p>DNS round-robin is useful in cases where you want to use your own load
+balancer, such as HAProxy. To configure a service to use DNSRR, use the flag
+<code class="language-plaintext highlighter-rouge">--endpoint-mode dnsrr</code> when creating a new service or updating an existing
+one.</p>
+  </li>
+</ul>
+
+<h2 id="customize-the-ingress-network">Customize the ingress network</h2>
+
+<p>Most users never need to configure the <code class="language-plaintext highlighter-rouge">ingress</code> network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet
+conflicts with one that already exists on your network, or you need to customize
+other low-level network settings such as the MTU.</p>
+
+<p>Customizing the <code class="language-plaintext highlighter-rouge">ingress</code> network involves removing and recreating it. This is
+usually done before you create any services in the swarm. If you have existing
+services which publish ports, those services need to be removed before you can
+remove the <code class="language-plaintext highlighter-rouge">ingress</code> network.</p>
+
+<p>During the time that no <code class="language-plaintext highlighter-rouge">ingress</code> network exists, existing services which do not
+publish ports continue to function but are not load-balanced. This affects
+services which publish ports, such as a WordPress service which publishes port
+80.</p>
+
+<ol>
+  <li>
+    <p>Inspect the <code class="language-plaintext highlighter-rouge">ingress</code> network using <code class="language-plaintext highlighter-rouge">docker network inspect ingress</code>, and
+remove any services whose containers are connected to it. These are services
+that publish ports, such as a WordPress service which publishes port 80. If
+all such services are not stopped, the next step fails.</p>
+  </li>
+  <li>
+    <p>Remove the existing <code class="language-plaintext highlighter-rouge">ingress</code> network:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>ingress
+<span class="go">
+WARNING! Before removing the routing-mesh network, make sure all the nodes
+in your swarm run the same docker engine version. Otherwise, removal may not
+be effective and functionality of newly created ingress networks will be
+impaired.
+Are you sure you want to continue? [y/N]
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a new overlay network using the <code class="language-plaintext highlighter-rouge">--ingress</code> flag, along  with the
+custom options you want to set. This example sets the MTU to 1200, sets
+the subnet to <code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>, and sets the gateway to <code class="language-plaintext highlighter-rouge">10.11.0.2</code>.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+  <span class="nt">--driver</span> overlay <span class="se">\</span>
+  <span class="nt">--ingress</span> <span class="se">\</span>
+  <span class="nt">--subnet</span><span class="o">=</span>10.11.0.0/16 <span class="se">\</span>
+  <span class="nt">--gateway</span><span class="o">=</span>10.11.0.2 <span class="se">\</span>
+  <span class="nt">--opt</span> com.docker.network.mtu<span class="o">=</span>1200 <span class="se">\</span>
+  my-ingress
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><strong>Note</strong>: You can name your <code class="language-plaintext highlighter-rouge">ingress</code> network something other than
+<code class="language-plaintext highlighter-rouge">ingress</code>, but you can only have one. An attempt to create a second one
+fails.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Restart the services that you stopped in the first step.</p>
+  </li>
+</ol>
+
+<h2 id="customize-the-docker_gwbridge">Customize the docker_gwbridge</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks
+(including the <code class="language-plaintext highlighter-rouge">ingress</code> network) to an individual Docker daemon’s physical
+network. Docker creates it automatically when you initialize a swarm or join a
+Docker host to a swarm, but it is not a Docker device. It exists in the kernel
+of the Docker host. If you need to customize its settings, you must do so before
+joining the Docker host to the swarm, or after temporarily removing the host
+from the swarm.</p>
+
+<p>You need to have the <code class="language-plaintext highlighter-rouge">brctl</code> application installed on your operating system in
+order to delete an existing bridge. The package name is <code class="language-plaintext highlighter-rouge">bridge-utils</code>.</p>
+
+<ol>
+  <li>
+    <p>Stop Docker.</p>
+  </li>
+  <li>
+    <p>Use the <code class="language-plaintext highlighter-rouge">brctl show docker_gwbridge</code> command to check whether a bridge
+device exists called <code class="language-plaintext highlighter-rouge">docker_gwbridge</code>. If so, remove it using
+<code class="language-plaintext highlighter-rouge">brctl delbr docker_gwbridge</code>.</p>
+  </li>
+  <li>
+    <p>Start Docker. Do not join or initialize the swarm.</p>
+  </li>
+  <li>
+    <p>Create or re-create the <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> bridge with your custom settings.
+This example uses the subnet <code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>. For a full list of customizable
+options, see <a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_create/#bridge-driver-options">Bridge driver options</a>.</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+<span class="nt">--subnet</span> 10.11.0.0/16 <span class="se">\</span>
+<span class="nt">--opt</span> com.docker.network.bridge.name<span class="o">=</span>docker_gwbridge <span class="se">\</span>
+<span class="nt">--opt</span> com.docker.network.bridge.enable_icc<span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--opt</span> com.docker.network.bridge.enable_ip_masquerade<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+docker_gwbridge
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Initialize or join the swarm.</p>
+  </li>
+</ol>
+
+<h2 id="use-a-separate-interface-for-control-and-data-traffic">Use a separate interface for control and data traffic</h2>
+
+<p>By default, all swarm traffic is sent over the same interface, including control
+and management traffic for maintaining the swarm itself and data traffic to and
+from the service containers.</p>
+
+<p>You can separate this traffic by passing
+the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> flag when initializing or joining the swarm. If there are
+multiple interfaces, <code class="language-plaintext highlighter-rouge">--advertise-addr</code> must be specified explicitly, and
+<code class="language-plaintext highlighter-rouge">--data-path-addr</code> defaults to <code class="language-plaintext highlighter-rouge">--advertise-addr</code> if not specified. Traffic about
+joining, leaving, and managing the swarm is sent over the
+<code class="language-plaintext highlighter-rouge">--advertise-addr</code> interface, and traffic among a service’s containers is sent
+sent over the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> interface. These flags can take an IP address or
+a network device name, such as <code class="language-plaintext highlighter-rouge">eth0</code>.</p>
+
+<p>This example initializes a swarm with a separate <code class="language-plaintext highlighter-rouge">--data-path-addr</code>. It assumes
+that your Docker host has two different network interfaces: 10.0.0.1 should be
+used for control and management traffic and 192.168.0.1 should be used for
+traffic relating to services.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--advertise-addr</span> 10.0.0.1 <span class="nt">--data-path-addr</span> 192.168.0.1
+</code></pre></div></div>
+
+<p>This example joins the swarm managed by host <code class="language-plaintext highlighter-rouge">192.168.99.100:2377</code> and sets the
+<code class="language-plaintext highlighter-rouge">--advertise-addr</code> flag to <code class="language-plaintext highlighter-rouge">eth0</code> and the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> flag to <code class="language-plaintext highlighter-rouge">eth1</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="se">\</span>
+  <span class="nt">--token</span> SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c <span class="se">\</span>
+  <span class="nt">--advertise-addr</span> eth0 <span class="se">\</span>
+  <span class="nt">--data-path-addr</span> eth1 <span class="se">\</span>
+  192.168.99.100:2377
+</code></pre></div></div>
+
+<h2 id="learn-more">Learn more</h2>
+
+<ul>
+  <li><a href="/docs.docker.jp.onthefly/engine/swarm/services/">Deploy services to a swarm</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/swarm/admin_guide/">Swarm administration guide</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/docker/">Docker CLI reference</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/">Swarm mode tutorial</a></li>
+  <li><a href="https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks" target="_blank" rel="noopener" class="_">Docker networking reference architecture</a></li>
+</ul>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=swarm">swarm</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a>, <a href="/docs.docker.jp.onthefly/search/?q=ingress">ingress</a>, <a href="/docs.docker.jp.onthefly/search/?q=overlay">overlay</a>, <a href="/docs.docker.jp.onthefly/search/?q=service discovery">service discovery</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/engine/swarm/networking.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [engine/swarm/networking.ch](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/networking/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#firewall-considerations" class="nomunge">Firewall considerations</a></li>
+  <li><a href="#create-an-overlay-network" class="nomunge">Create an overlay network</a>
+    <ul>
+      <li><a href="#customize-an-overlay-network" class="nomunge">Customize an overlay network</a></li>
+    </ul>
+  </li>
+  <li><a href="#attach-a-service-to-an-overlay-network" class="nomunge">Attach a service to an overlay network</a>
+    <ul>
+      <li><a href="#configure-service-discovery" class="nomunge">Configure service discovery</a></li>
+    </ul>
+  </li>
+  <li><a href="#customize-the-ingress-network" class="nomunge">Customize the ingress network</a></li>
+  <li><a href="#customize-the-docker_gwbridge" class="nomunge">Customize the docker_gwbridge</a></li>
+  <li><a href="#use-a-separate-interface-for-control-and-data-traffic" class="nomunge">Use a separate interface for control and data traffic</a></li>
+  <li><a href="#learn-more" class="nomunge">Learn more</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products" target="_blank" rel="noopener">製品ラインアップ</a></b></li>
+                        <li><a href="https://www.docker.com/products/personal" target="_blank" rel="noopener">Docker Personal</a></li>
+                        <li><a href="https://www.docker.com/products/pro" target="_blank" rel="noopener">Docker Pro</a></li>
+                        <li><a href="https://www.docker.com/products/team" target="_blank" rel="noopener">Docker Team</a></li>
+                        <li><a href="https://www.docker.com/products/business" target="_blank" rel="noopener">Docker Business</a></li>
+                        <li><a href="https://www.docker.com/products" target="_blank" rel="noopener">サブスクリプション比較</a></li>
+                        <li><b><a href="https://www.docker.com/" target="_blank" rel="noopener">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub" target="_blank" rel="noopener">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/products/secure-software-supply-chain" target="_blank" rel="noopener">セキュアなソフトウェアサプライチェーン</a></li>
+                        <li><a href="https://www.docker.com/products/container-runtime" target="_blank" rel="noopener">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools" target="_blank" rel="noopener">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/partners" target="_blank" rel="noopener">信頼できるコンテント</a></li>
+                        <li><a href="https://www.docker.com/roadmap" target="_blank" rel="noopener">Docker 製品ロードマップ</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases" target="_blank" rel="noopener">利用例</a></li>
+                        <li><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">はじめよう</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/docker-community" target="_blank" rel="noopener">コミュニティー</a></li>
+                        <li><a href="https://www.docker.com/open-source" target="_blank" rel="noopener">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/get-involved/developer-preview" target="_blank" rel="noopener">プレビュープログラム</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq" target="_blank" rel="noopener">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener">Docker 認定公開者向けプログラム</a></li>
+                        <li><a href="https://www.docker.com/partners" target="_blank" rel="noopener">パートナー</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社概要</a></b></li>
+                        <li><a href="https://www.docker.com/what-container" target="_blank" rel="noopener">コンテナーって何？</a></li>
+                        <li><a href="https://www.docker.com/why-docker" target="_blank" rel="noopener">なぜ Docker？</a></li>
+                        <li><a href="https://www.docker.com/events" target="_blank" rel="noopener">仮想イベント</a></li>
+                        <li><a href="https://www.docker.com/swag" target="_blank" rel="noopener">Swag ストア
+                        </a></li>
+                        <li><a href="https://www.docker.com/company/newsroom" target="_blank" rel="noopener">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers" target="_blank" rel="noopener">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact" target="_blank" rel="noopener">連絡先</a></li>
+                        <li><a href="https://www.docker.com/customers" target="_blank" rel="noopener">顧客</a></li>
+                        <li><a href="https://www.docker.com/newsletter-subscription" target="_blank" rel="noopener">ニュースレター</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="https://www.docker.com/legal/docker-terms-service" target="_blank" rel="noopener">サービス契約</a></li>
+                        <li><a href="https://status.docker.com/" target="_blank" rel="noopener">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal" target="_blank" rel="noopener">法的情報</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/engine/swarm/networking/";</script></body>
 </html>
