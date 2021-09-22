@@ -113,7 +113,7 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
         spec:
           containers:
           - name: bb-site
-            image: bulletinboard:1.0
+            image: getting-started
     ---
     apiVersion: v1
     kind: Service
@@ -125,8 +125,8 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
       selector:
         bb: web
       ports:
-      - port: 8080
-        targetPort: 8080
+      - port: 3000
+        targetPort: 3000
         nodePort: 30001
     ```
 @y
@@ -148,7 +148,7 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
         spec:
           containers:
           - name: bb-site
-            image: bulletinboard:1.0
+            image: getting-started
     ---
     apiVersion: v1
     kind: Service
@@ -160,8 +160,8 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
       selector:
         bb: web
       ports:
-      - port: 8080
-        targetPort: 8080
+      - port: 3000
+        targetPort: 3000
         nodePort: 30001
     ```
 @z

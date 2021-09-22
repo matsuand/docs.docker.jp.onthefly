@@ -161,7 +161,7 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    ```console
+    ```powershell
     PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
@@ -170,7 +170,7 @@ For now, we will create the network first and attach the MySQL container at star
         mysql:5.7
     ```
 @y
-    ```console
+    ```powershell
     PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
@@ -510,7 +510,7 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-    ```console
+    ```powershell
     PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
@@ -522,7 +522,7 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 @y
-    ```console
+    ```powershell
     PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `

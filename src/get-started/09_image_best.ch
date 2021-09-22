@@ -23,12 +23,24 @@ description: Tips for building the images for our application
 @z
 
 @x
-When you have built an image, it is good practice to scan it for security vulnerabilities using the `docker scan` command.
+When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
 Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 @y
 イメージをビルドしたら`docker scan`コマンドを実行して、イメージにセキュリティぜい弱性がないかどうかをスキャンする。
 これがベストプラクティスです。
 Docker は [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} 社と連携してセキュリティスキャンサービスを提供しています。
+@z
+
+@x
+> **Note**
+> 
+> You must be logged in to Docker Hub to scan your images. Run the command `docker login`, and then scan your images using
+> `docker scan <image-name>`.
+@y
+> **メモ**
+> 
+> イメージをスキャンするには、Docker Hub にログインしておくことが必要です。
+> `docker login`コマンドの実行後に、`docker scan <image-name>`を実行して、イメージのスキャンを行います。
 @z
 
 @x

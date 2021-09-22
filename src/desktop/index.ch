@@ -33,7 +33,7 @@ that enables you to build and share containerized applications and microservices
 Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
 [Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md),
 [Kubernetes](https://github.com/kubernetes/kubernetes/), and 
-Credential Helper](https://github.com/docker/docker-credential-helpers/).
+[Credential Helper](https://github.com/docker/docker-credential-helpers/).
 @y
 Docker Desktop は Mac や Windows に簡単にインストールできるアプリケーションです。
 これにより、コンテナー化アプリケーションやマイクロサービスを構築し共有することができます。

@@ -429,13 +429,12 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 @z
 
 @x
-The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `name:tag`. We’ll leave off the optional `tag` for now to help simplify things. If you do not pass a tag, Docker uses “latest” as its default tag. You can see this in the last line of the build output.
+The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `name:tag`. We’ll leave off the optional `tag` for now to help simplify things. If you do not pass a tag, Docker uses “latest” as its default tag.
 @y
 build コマンドにはオプションとして`--tag`フラグをつけることができます。
 タグ（tag）はイメージ名とオプションとなるタグ名を`name:tag`という書式で指定します。
 話を単純にするため、ここでは「タグ」は用いないことにします。
 タグを指定しなければ Docker はデフォルトのタグ名として「latest」を用います。
-これはビルド処理結果の出力最終行に示されます。
 @z
 
 @x
