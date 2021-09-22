@@ -1,4 +1,4 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-09-22 10:19:46 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチコンテナーアプリケーション | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="マルチコンテナーアプリケーション" />
   <meta property="og:description" content="Using more than one container in our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-22T10:19:46+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-09-22T10:19:46+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"マルチコンテナーアプリケーション","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>マルチコンテナーアプリケーション</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>これまでは 1 つのコンテナーからなるアプリを使って作業を進めてきました。
+                        <section class="section"><h1>マルチコンテナーアプリケーション</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>これまでは 1 つのコンテナーからなるアプリを使って作業を進めてきました。
 ここからはアプリケーションに MySQL を加えることにします。
 ところが以下の質問があがってきます。
 「MySQL はどこで動かすの？」
@@ -174,12 +174,12 @@
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> PS&gt;</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="sb">`</span>
-<span class="go">     --network todo-app --network-alias mysql `
-     -v todo-mysql-data:/var/lib/mysql `
-     -e MYSQL_ROOT_PASSWORD=secret `
-     -e MYSQL_DATABASE=todos `
-     mysql:5.7
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nx">mysql:5.7</span><span class="w">
 </span></code></pre></div>    </div>
 
     <p>ここで<code class="language-plaintext highlighter-rouge">--network-alias</code>フラグというものを利用しています。
@@ -327,15 +327,15 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> PS&gt;</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 <span class="sb">`</span>
-<span class="gp">   -w /app -v "$</span><span class="o">(</span><span class="nb">pwd</span><span class="o">)</span>:/app<span class="s2">" </span><span class="sb">`</span>
-<span class="go">   --network todo-app `
-   -e MYSQL_HOST=mysql `
-   -e MYSQL_USER=root `
-   -e MYSQL_PASSWORD=secret `
-   -e MYSQL_DB=todos `
-   node:12-alpine `
-   sh -c "yarn install &amp;&amp; yarn run dev"
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
+</span><span class="w">   </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
+   --network todo-app </span><span class="se">`</span><span class="s2">
+   -e MYSQL_HOST=mysql </span><span class="se">`</span><span class="s2">
+   -e MYSQL_USER=root </span><span class="se">`</span><span class="s2">
+   -e MYSQL_PASSWORD=secret </span><span class="se">`</span><span class="s2">
+   -e MYSQL_DB=todos </span><span class="se">`</span><span class="s2">
+   node:12-alpine </span><span class="se">`</span><span class="s2">
+   sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
 </span></code></pre></div>    </div>
   </li>
   <li>
