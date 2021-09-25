@@ -34,6 +34,7 @@ htmlbases = \
 	header                 \
 	navigation             \
 	read_time              \
+	sign-up-cta            \
 	theme-switch           \
 	toc_pure_liquid        \
 	upgrade-cta

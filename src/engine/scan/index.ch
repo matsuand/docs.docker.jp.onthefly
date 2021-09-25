@@ -20,11 +20,25 @@ toc_max: 2
 @z
 
 @x
-> Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
+{% include sign-up-cta.html
+  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="This feature requires a Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
 @y
-> 開発サイクルを早めたいと思いませんか？
-> CVE をすばやく検出して修復する方法として`docker scan IMAGE_NAME`を実行してください。
-> 詳しくは [イメージのスキャン方法](#how-to-scan-images) を確認してください。
+{% include sign-up-cta.html
+  body="Docker サブスクリプションの機能の一部として、毎月 10 回の無償スキャンが実行可能です。Docker にサインインして、イメージのぜい弱性スキャンを始めてください。"
+  header-text="この機能を利用するには、Docker サブスクリプションが必要です。"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
+@z
+
+@x
+Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
+@y
+開発サイクルを早めたいと思いませんか？
+CVE をすばやく検出して修復する方法として`docker scan IMAGE_NAME`を実行してください。
+詳しくは [イメージのスキャン方法](#how-to-scan-images) を確認してください。
 @z
 
 @x
@@ -767,17 +781,19 @@ Docker イメージに対してぜい弱性スキャンを実行するには、�
 @z
 
 @x
-1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
+1. Download and install Docker Desktop.
 @y
-1. Docker Desktop 最新版（Edge）バージョン 2.3.6.0 またはそれ以降をダウンロードしインストールしていること。
+1. Docker Desktop をダウンロードしインストールしていること。
 @z
 
 @x
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Download for Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+    - [Download for Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
+    - [Download for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
 @y
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Intel チップの Mac 向けダウンロード](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+    - [Apple チップの Mac 向けダウンロード](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
+    - [Windows 向けダウンロード](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
 @z
 
 @x

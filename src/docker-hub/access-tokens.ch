@@ -16,7 +16,8 @@ keywords: docker hub, hub, security, PAT, personal access token
 @z
 
 @x
-Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
+Docker Hub lets you create personal access tokens as alternatives to your password.
+You can use tokens to access Hub images from the Docker CLI.
 @y
 Docker Hub では、パスワードに代わるものとして個人用のアクセストークンを利用することができます。
 このトークンを使って Docker CLI から Docker Hub イメージにアクセスできます
@@ -24,10 +25,16 @@ Docker Hub では、パスワードに代わるものとして個人用のアク
 
 @x
 Using personal access tokens provides some advantages over a password:
-* You can investigate the last usage of the access token and disable or delete it if you find any suspicious activity.
-* When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
 @y
 個人用のアクセストークンを利用すると、パスワードに比べて以下の利点があります。
+@z
+
+@x
+* You can investigate the last usage of the access token and disable or delete
+  it if you find any suspicious activity.
+* When using an access token, you can't perform any admin activity on the account,
+  including changing the password. It protects your account if your computer is compromised.
+@y
 * アクセストークンの前回利用状況を確認できます。
   したがって何か疑わしい履歴が残っていたら、アクセストークンを無効化したり削除したりすることができます。
 * アクセストークンを使うと、ログインアカウントに対する管理操作、たとえばパスワードの変更といったことを行うことはできません。コンピューターが危険にさらされた際に、アカウントを保護する目的があります。
@@ -102,11 +109,13 @@ You can create as many tokens as you need.
 @z
 
 @x
-4. Add a description for your token. Use something that indicates where
-the token will be used, or set a purpose for the token.
+4. Add a description for your token. Use something that indicates where the token
+   will be used, or set a purpose for the token. You can view the following access
+   permissions from the drop-down:
 @y
 4. トークンに対する説明を書きます。
    トークンをどのように用いるべきか、トークンの利用目的は何か、といったことを書きます。
+   ドロップダウンメニューからは、以下のようなアクセス権限が確認できます。
 @z
 
 @x
@@ -116,9 +125,9 @@ the token will be used, or set a purpose for the token.
 @z
 
 @x
-5. You can view the following permissions from the drop-down:
+5. The table below lists the tokens available in each subscription:
 @y
-5. ドロップダウンメニューには、以下のようなパーミッションが表示されます。
+5. 以下の表では、各サブスクリプションにおいて利用可能なトークンを示します。
 @z
 
 @x
@@ -145,7 +154,8 @@ the token will be used, or set a purpose for the token.
 @z
 
 @x
-6. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
+6. Copy the token that appears on the screen and save it. You will not be able
+   to retrieve the token once you close this prompt.
 @y
 6. 画面上に表示されるトークンをコピーして保存します。
    この表示画面を閉じてしまうと、トークンを知ることはできなくなります。
@@ -172,7 +182,9 @@ Docker Hub のパスワードを必要とする場面では、どこでもアク
 @z
 
 @x
-When logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. Instead, enter your token when asked for a password.
+When logging in from your Docker CLI client (`docker login --username <username>`),
+omit the password in the login command. Instead, enter your token when asked for
+a password.
 @y
 Docker CLI クライアントからログインする場合（`docker login --username <ユーザー名>`）、ログインコマンドにおけるパスワード入力は行いません。
 パスワードの入力プロンプトには、代わりにトークンを入力します。
@@ -206,34 +218,28 @@ You can rename, activate, deactivate, or delete a token as needed.
 
 @x
 1. Access your tokens under **[Account Settings > Security](https://hub.docker.com/settings/security){: target="_blank" rel="noopener" class="_"}**.
+   This page shows an overview of all your tokens. You can also view the number
+   of tokens that are activated and deactivated in the toolbar.
 @y
 1. **[Account Settings > Security](https://hub.docker.com/settings/security){: target="_blank" rel="noopener" class="_"}** の下にトークンを表示します。
+   このページでは、すべてのトークンの概要を示します。
+   またツールバーを見れば、アクティブまたは非アクティブなトークンの数を確認できます。
+@z
+
+@x
+   ![Delete or Edit](images/hub-delete-edit-token.png){:width="700px"}
+@y
+   ![削除または編集](images/hub-delete-edit-token.png){:width="700px"}
 @z
 
 @x
 2. Select a token and click **Delete** or **Edit**, or use the menu on
-the far right of a token row to bring up the edit screen. You can also
-select multiple tokens to delete at once.
+   the far right of a token row to bring up the edit screen. You can also
+   select multiple tokens to delete at once.
 @y
 2. トークンを選択して **Delete** や **Edit** をクリックします。
    あるいはトークンが表示されている行の一番右にあるメニューを用いて、編集画面を開きます。
    複数のトークンを選択状態にして、一括で削除することもできます。
-@z
-
-@x
-      ![Delete or Edit](images/hub-delete-edit-token.png){:width="700px"}
-@y
-      ![削除または編集](images/hub-delete-edit-token.png){:width="700px"}
-@z
-
-@x
-   > **Note**
-   >
-   > You can also view the number of tokens that are activated and deactivated in the toolbar.
-@y
-   > **メモ**
-   >
-   > 有効または無効にしたトークン数は、ツールバーから参照することができます。
 @z
 
 @x
@@ -243,9 +249,22 @@ select multiple tokens to delete at once.
 @z
 
 @x
-Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+3. After modifying the token, click the **Save** button to save your changes.
 @y
-Docker では [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} ツール (現時点では試験的機能）と API を提供しています。
-これらを用いて Docker Hub との連携を行うことができます。
-ブラウザーから [Docker Hub API]({{ site.baseurl }}/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} にあるドキュメントにアクセスして、サポートされているエンドポイントを調べてみてください。
+3. トークンを修正した後は、**Save**（保存）ボタンをクリックして、変更を保存します。
+@z
+
+@x
+> **Tip: Docker Hub CLI and API**
+>
+> Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"}
+> tool (currently experimental) and an API that allows you to interact with Docker
+> Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"}
+> documentation to explore the supported endpoints.
+@y
+> **ヒント： Docker Hub CLI と API**
+>
+> Docker では [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} ツール (現時点では試験的機能）と API を提供しています。
+> これらを用いて Docker Hub との連携を行うことができます。
+> ブラウザーから [Docker Hub API]({{ site.baseurl }}/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} にあるドキュメントにアクセスして、サポートされているエンドポイントを調べてみてください。
 @z

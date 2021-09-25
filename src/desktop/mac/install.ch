@@ -240,15 +240,16 @@ Docker Desktop のインストールにより以下のものが利用できま�
 @y
     > **重要**
     >
-    > この条件に合意しなかった場合、Docker Desktop アプリケーションは終了し、そのマシン上での DOcker Desktop 実行はできなくなります。
+    > この条件に合意しなかった場合、Docker Desktop アプリケーションは終了し、そのマシン上での Docker Desktop 実行はできなくなります。
     > 後日 Docker Desktop を開いて、条件の合意を選ぶことができます。
     {: .important}
 @z
 
 @x
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 @y
-    詳しくは [Docker Desktop ライセンス契約](/subscription/#docker-desktop-license-terms) を参照してください。
+    詳しくは [Docker Desktop ライセンス契約]({{ site.baseurl }}/subscription/#docker-desktop-license-terms) を参照してください。
+    また、以下の [ブログ](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}  を読んで、Docker Desktop を利用する各企業において、どのような影響が発生するのかを確認してください。
 @z
 
 @x

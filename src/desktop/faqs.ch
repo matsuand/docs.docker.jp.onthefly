@@ -748,3 +748,18 @@ Windows のネイティブシンボリックリンクは、コンテナー内か
 一方コンテナー内部に生成されるシンボリックリンクは [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){: target="_blank" rel="noopener" class="_"} と表現されるもので、特殊なメタデータを持った通常の Windows ファイルです。
 したがってコンテナー内部からはシンボリックリンクとして見えますが、ホスト上はシンボリックリンクではありません。
 @z
+
+@x
+### File sharing with Kubernetes and WSL 2
+@y
+{: #file-sharing-with-kubernetes-and-wsl-2 }
+### Kubernetes と WSL 2 間でのファイル共有
+@z
+
+@x
+Docker Desktop mounts the Windows host filesystem under `/run/desktop` inside the container running Kubernetes.
+See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} for an example of how to configure a Kubernetes Persistent Volume to represent directories on the host.
+@y
+Docker Desktop は、 Kubernetes が動いているコンテナー内部において、 WIndows ホストのファイルシステムを`/run/desktop`にマウントします。
+ホスト上のディレクトリに対して、Kubernetes による永続的なボリュームを設定する例については、[stackoverflow の投稿](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} を参照してください。
+@z
