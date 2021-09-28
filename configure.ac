@@ -178,10 +178,6 @@ AC_CONFIG_FILES([Makefile
 		 src/language/nodejs/images/Makefile
 		 src/language/python/Makefile
 		 src/machine/Makefile
-		 src/machine/drivers/Makefile
-		 src/machine/examples/Makefile
-		 src/machine/img/Makefile
-		 src/machine/reference/Makefile
 		 src/network/Makefile
 		 src/network/images/Makefile
 		 src/opensource/Makefile

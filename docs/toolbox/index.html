@@ -1,4 +1,4 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-09-28 14:37:29 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,12 +44,12 @@
   <meta property="og:title" content="Docker Toolbox" />
   <meta property="og:description" content="Docker Desktop for Windows and Docker Toolbox" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-28T14:37:29+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-09-28T14:37:29+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Toolbox","description":"Docker Desktop for Windows and Docker Toolbox","url":"https://docs.docker.com/toolbox/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -96,7 +96,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a>かつての製品やツール</a></li><li><a href="/docs.docker.jp.onthefly/toolbox/">Docker Toolbox (廃止予定)</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/machine/">かつての製品やツール</a></li><li><a href="/docs.docker.jp.onthefly/toolbox/">Docker Toolbox (廃止決定)</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -108,140 +108,16 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Toolbox</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><blockquote class="warning">
+                        <section class="section"><h1>Docker Toolbox</h1><blockquote class="warning">
   <p><strong>廃止決定</strong></p>
 
-  <p>Docker Toolbox は廃止決定されており、開発は行われていません。
-  この代わりに Docker Desktop を利用してください。
-  詳しくは <a href="/docs.docker.jp.onthefly/desktop/mac/">Docker Desktop for Mac</a> や <a href="/docs.docker.jp.onthefly/desktop/windows/">Docker Desktop for Windows</a> を参照してください。</p>
+  <p>Docker Toolbox は廃止決定されているため、通常の開発は今後行われません。
+代わりに Docker Desktop を利用してください。
+<a href="/docs.docker.jp.onthefly/desktop/mac/">Docker Desktop for Mac</a> または <a href="/docs.docker.jp.onthefly/desktop/windows/">Docker Desktop for Windows</a> を参照してください。</p>
 </blockquote>
 
-<p>このページでは Docker Toolbox ディスクイメージを Docker Desktop へ移行する方法について説明します。
-また Docker Toolbox を Mac または Windows からアンインストールする手順についても説明します。</p>
-
-<h2 id="migrate-from-docker-toolbox-to-docker-desktop">Docker Toolbox から Docker Desktop への移行</h2>
-
-<p>Docker Toolbox をアンインストールすると、Docker によって保存されていたローカルイメージキャッシュ、ボリューム、コンテナーなどが削除されます。
-Docker Toolbox をアンインストールする際には <a href="/docs.docker.jp.onthefly/desktop/backup-and-restore/">バックアップとリストア</a> を参照して、データのバックアップ方法を確認してください。
-data.</p>
-
-<h2 id="uninstall-docker-toolbox">Docker Toolbox のアンインストール</h2>
-
-<p>Toolbox を削除するということは、そこに含まれていた Docker コンポーネントをすべて削除するということです。</p>
-
-<p>また完全にアンインストールを行うと、Docker Machine を使って生成したローカルマシンおよびリモートマシンもすべて削除されます。
-場合によっては Docker Machine によって生成したマシンを保存しておきたいことがあるはずです。
-たとえば Docker Desktop の一部として Docker Machine を再インストールしようとしている場合には、引き続きそのようなマシンを管理していきたいはずです。
-あるいはクラウドプロバイダー上にリモートマシンを生成していて、プロバイダー上の管理を引き続き行うのであれば、マシンを削除したくないはずです。
-そこで以下の説明においては、マシン削除の手順は任意の作業として説明することにします。</p>
-
-<h3 id="uninstall-docker-toolbox-on-mac">Docker Toolbox on Mac のアンインストール</h3>
-
-<p>Docker Toolbox on Mac のアンインストールは以下のようにして行います。</p>
-
-<ol>
-  <li>
-    <p>マシン一覧を表示します。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine <span class="nb">ls</span>
-<span class="go">NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
-dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
-my-docker-machine            virtualbox   Stopped
-default                      virtualbox   Stopped
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>任意の手順として個々のマシンを削除します。
-たとえば以下のとおりです。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine <span class="nb">rm </span>my-docker-machine
-<span class="go">Successfully removed my-docker-machine
-</span></code></pre></div>    </div>
-
-    <p>この手順は任意です。
-<a href="/docs.docker.jp.onthefly/desktop/mac/">Docker Desktop for Mac</a> の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。</p>
-  </li>
-  <li>
-    <p>「Applications」フォルダーにおいて、「Docker Quickstart Terminal」や「Kitematic」が含まれている「Docker」ディレクトリを削除します。</p>
-  </li>
-  <li>
-    <p>コマンドシェルから以下のコマンドを実行して Kitematic を完全に削除します。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-fr</span> ~/Library/Application<span class="se">\ </span>Support/Kitematic
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">/usr/local/bin</code>フォルダーから<code class="language-plaintext highlighter-rouge">docker</code>、<code class="language-plaintext highlighter-rouge">docker-compose</code>、<code class="language-plaintext highlighter-rouge">docker-machine</code>の各コマンドを削除します。
-Docker Desktop for Mac や Brew にはそれらがインストールされたままかもしれません。
-それが疑われる場合は、Brew を通した再インストールを行うか、Docker Desktop for Mac を再起動してください（再インストールの必要はありません）。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-f</span> /usr/local/bin/docker
-<span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-f</span> /usr/local/bin/docker-compose
-<span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-f</span> /usr/local/bin/docker-machine
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>任意の手順として<code class="language-plaintext highlighter-rouge">~/.docker/machine</code>ディレクトリを削除します。</p>
-
-    <p>このディレクトリには設定ファイルや状態に関する情報が保存されています。
-たとえば生成されたマシンや証明書などの情報を含みます。</p>
-  </li>
-  <li>
-    <p>Oracle VirtualBox をアンインストールします。
-これは Toolbox インストールの際の一部としてインストールされるものです。</p>
-  </li>
-</ol>
-
-<h3 id="uninstall-docker-toolbox-on-windows">Docker Toolbox on Windows のアンインストール</h3>
-
-<p>Docker Toolbox on Windows のアンインストールは以下のようにして行います。</p>
-
-<ol>
-  <li>
-    <p>マシン一覧を表示します。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine <span class="nb">ls</span>
-<span class="go">NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
-dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
-my-docker-machine            virtualbox   Stopped
-default                      virtualbox   Stopped
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>任意の手順として個々のマシンを削除します。
-たとえば以下のとおりです。</p>
-
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-machine <span class="nb">rm </span>my-docker-machine
-<span class="go">Successfully removed my-docker-machine
-</span></code></pre></div>    </div>
-
-    <p>この手順は任意です。
-<a href="/docs.docker.jp.onthefly/desktop/windows/">Docker Desktop for Windows</a> の一部として Docker Machine を再インストールする予定であれば、上のマシンをインポートして Docker による管理を引き続き行っていくことができます。</p>
-  </li>
-  <li>
-    <p>Docker Toolbox のアンインストールは、コントロールパネル（そのプログラムと機能）を通じて、通常のアンインストールプログラムによる処理手順に従って行います。</p>
-
-    <blockquote>
-      <p><strong>メモ</strong></p>
-
-      <p>この手順を行っても<code class="language-plaintext highlighter-rouge">docker-install.exe</code>ファイルは削除されません。
-このファイルは手動で削除してください。</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>任意の手順として<code class="language-plaintext highlighter-rouge">C:\Users\&lt;your-user&gt;\.docker</code>ディレクトリを削除します。</p>
-
-    <p>Docker を完全に削除する場合は、アンインストールによってユーザーパス配下の<code class="language-plaintext highlighter-rouge">.docker</code>が削除されているかどうかを確認します。
- このディレクトリがまだ存在している場合は手動で削除してください。
- このディレクトリには Docker のプログラム設定や状態に関する情報が保存されています。
- たとえば生成されたマシンや証明書などの情報を含みます。
- 通常はこのディレクトリを削除する必要はありません。</p>
-  </li>
-  <li>
-    <p>Oracle VirtualBox をアンインストールします。
-これは Toolbox インストールの際の一部としてインストールされるものです。</p>
-  </li>
-</ol>
+<p>Toolbox のソースコードはアーカイブされています。
+このソースコードは <a href="https://github.com/docker-archive/toolbox" target="_blank" rel="noopener" class="_">GitHub</a> にあります。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=windows">windows</a>, <a href="/docs.docker.jp.onthefly/search/?q=alpha">alpha</a>, <a href="/docs.docker.jp.onthefly/search/?q=beta">beta</a>, <a href="/docs.docker.jp.onthefly/search/?q=toolbox">toolbox</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker-machine">docker-machine</a>, <a href="/docs.docker.jp.onthefly/search/?q=tutorial">tutorial</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -274,13 +150,6 @@ default                      virtualbox   Stopped
 </li>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
-<ul id="my_toc" class="inline_toc">
-  <li><a href="#migrate-from-docker-toolbox-to-docker-desktop" class="nomunge">Docker Toolbox から Docker Desktop への移行</a>
-    <ul>
-      <li><a href="#uninstall-docker-toolbox" class="nomunge">Docker Toolbox のアンインストール</a></li>
-    </ul>
-  </li>
-</ul>
 
 </div>
                         </div>
