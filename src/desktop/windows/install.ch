@@ -181,23 +181,6 @@ Hyper-V on Windows 10:
 @z
 
 @x
-### What's included in the installer
-@y
-### インストーラーに含まれるもの
-{: #whats-included-in-the-installer }
-@z
-
-@x
-The Docker Desktop installation includes [Docker Engine](../../engine/index.md),
-Docker CLI client, [Docker Compose](../../compose/index.md),
-[Docker Content Trust](../../engine/security/trust/index.md),
-[Kubernetes](https://github.com/kubernetes/kubernetes/),
-and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
-@y
-Docker Desktop のインストールにより以下のものが利用できます。[Docker Engine](../../engine/index.md)、Docker CLI クライアント、[Docker Compose](../../compose/index.md)、[Docker コンテントトラスト](../../engine/security/trust/index.md)、[Kubernetes](https://github.com/kubernetes/kubernetes/)、[Credential Helper](https://github.com/docker/docker-credential-helpers/)。
-@z
-
-@x
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
 accounts use the same VM to build and run containers. Note that it is not possible to share containers and images between user accounts when using the Docker Desktop WSL 2 backend.

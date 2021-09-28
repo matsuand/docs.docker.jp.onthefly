@@ -90,14 +90,12 @@ To run this tutorial, you need the following:
 @x
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
-Amazon EC2 instances, or hosted in some other way. You can even use Docker Machine
-from a Linux, Mac, or Windows host. Check out
+Amazon EC2 instances, or hosted in some other way. Check out
 [Getting started - Swarms](../../../get-started/swarm-deploy.md#prerequisites)
 for one possible set-up for the hosts.
 @y
 このチュートリアルでは、Docker がインストールされ、互いにネットワーク通信が可能である 3 つの Linux ホストを用います。
 このホストは物理マシン、仮想マシン、Amazon EC2 インスタンス、その他のホストのいずれでもかまいません。
-Docker Machine を利用するのであれば、Linux、Mac、Windows のいずれをホストすることもできます。
 [Swarm をはじめよう](../../../get-started/swarm-deploy.md#prerequisites) を確認し、ホストとして設定可能なものを選んでください。
 @z
 
@@ -148,12 +146,10 @@ Linux マシン上では単一ノード、複数ノードのいずれのシナ�
 @x
 Alternatively, install the latest [Docker Desktop for Mac](../../../desktop/mac/index.md) or
 [Docker Desktop for Windows](../../../desktop/windows/index.md) application on one
-computer. You can test both single-node and multi-node swarm from this computer,
-but you need to use Docker Machine to test the multi-node scenarios.
+computer. You can test both single-node and multi-node swarm from this computer.
 @y
 別の方法として、手元のコンピューターに最新の [Docker Desktop for Mac](../../../desktop/mac/index.md) または [Docker Desktop for Windows](../../../desktop/windows/index.md) をインストールして利用することもできます。
 このコンピューターからは、単一ノード、複数ノードのいずれの Swarm でもテストすることができます。
-ただし複数ノードの例をテストするためには Docker Machine が必要です。
 @z
 
 @x
@@ -201,14 +197,6 @@ You can run `ifconfig` on Linux or macOS to see a list of the
 available network interfaces.
 @y
 Linux や macOS では`ifconfig`を実行すれば、利用可能なネットワークインターフェースの一覧を確認できます。
-@z
-
-@x
-If you are using Docker Machine, you can get the manager IP with either
-`docker-machine ls` or `docker-machine ip <MACHINE-NAME>` &#8212; for example,
-`docker-machine ip manager1`.
-@y
-Docker Machine を利用している場合は、`docker-machine ls`または`docker-machine ip <マシン名>`（たとえば `docker-machine ip manager1`） によってマネージャーの IP アドレスを確認することができます。
 @z
 
 @x

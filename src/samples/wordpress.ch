@@ -296,15 +296,6 @@ minutes before the first load.
 @z
 
 @x
-If you are using [Docker Machine](../machine/index.md), you can run the command
-`docker-machine ip MACHINE_VM` to get the machine address, and then open
-`http://MACHINE_VM_IP:8000` in a web browser.
-@y
-[Docker Machine](../machine/index.md) を利用している場合は、`docker-machine ip MACHINE_VM`を実行してマシンの IP アドレスを取得できます。
-そこでウェブブラウザーから`http://MACHINE_VM_IP:8000`にアクセスしてください。
-@z
-
-@x
 If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
 `http://localhost` as the IP address, and open `http://localhost:8000` in a web
 browser.
