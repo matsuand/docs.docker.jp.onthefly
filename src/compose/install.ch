@@ -81,19 +81,22 @@ Python package manager or installing Compose as a container.
 
 @x
 > Install a different version
-> 
+>
 > The instructions below outline installation of the current stable release
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
-> Compose, replace the given release number with the one that you want. Compose
-> releases are also listed and available for direct download on the
+> Compose, replace the given release number with the one that you want. For instructions to install Compose 2.0.0 on Linux, see [Install Compose 2.0.0 on Linux](cli-command.md#install-on-linux).
+>
+> Compose releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
 @y
 > 別バージョンのインストール
-> 
+>
 > 以降に示す手順は Compose の現時点での最新安定版（**v{{site.compose_version}}**）に基づいたものです。
 > これ以外のバージョンをインストールする場合は、記述されているリリース番号を、目的とするものに置き換えてください。
+> Linux 上に Compose 2.0.0 をインストールする手順については、[Linux への Compose 2.0.0 のインストール](cli-command.md#install-on-linux) を参照してください。
+>
 > Compose のリリースは [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} においても一覧が示され利用可能です。
 > Compose の**プレリリース版**をインストールする場合は、[プレリリース版のインストール](#install-pre-release-builds)の説明を参照してください。
 @z
