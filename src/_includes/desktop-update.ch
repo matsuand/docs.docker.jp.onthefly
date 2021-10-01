@@ -7,20 +7,19 @@
 <!-- This text will be included in the Mac and Windows Install topic -->
 @z
 
-%@x
-%Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available as delta updates from the previous version. When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can choose when to start the download and installation process.
-%@y
-%Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に行われるようになりました。
-%その場合には旧バージョンからのデルタアップデートが行われます。
-%アップデートが利用可能になると Docker Desktop は、最新バージョンの入手が可能であることを示すアイコンを表示します。
-%ダウンロードとインストールをいつ行うかは選択することができます。
-%@z
-
 @x
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can choose when to start the download and installation process.
+When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version.
 @y
 アップデートが利用可能になると、Docker Desktop はアイコンを表示して、新たなバージョンが入手可能であることを知らせます。
-ダウンロードとインストールをいつ開始するのかを選択できます。
+@z
+
+@x
+Starting with Docker Desktop 4.1.0, the **Software Updates** section in the [General](../#general) tab also notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version. If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](../#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+@y
+Docker Desktop 4.1.0 からは、[General](../#general) タブ内の **Software Updates**（ソフトウェア更新）セクションにおいても、Docker Desktop の最新版更新があるかどうかが通知されるようになりました。
+アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
+Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
+これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
 @z
 
 @x

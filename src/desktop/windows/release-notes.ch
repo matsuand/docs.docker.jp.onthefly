@@ -49,11 +49,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 4.0.1
-2021-09-13
+## Docker Desktop 4.1.0
+2021-09-30
 @y
-## Docker Desktop 4.0.1
-2021-09-13
+## Docker Desktop 4.1.0
+2021-09-30
 @z
 
 @x
@@ -64,6 +64,102 @@ This page contains information about the new features, improvements, known issue
 > Docker Desktop のダウンロード
 >
 > [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+@y
+- **ソフトウェア更新** ＝ Settings（設定）タブに新たなセクションが追加され、Docker Desktop のアップデートを管理できるようになりました。
+  **Software Updates**（ソフトウェア更新）セクションでは、新たな更新があれば通知されます。
+  そして更新のダウンロードを行ったり、最新版に含まれる機能がどのようなものかを参照したりすることができます。
+  詳しくは [ソフトウェア更新](../#software-updates) を参照してください。
+- **Compose V2** ＝ General（一般）において [Docker Compose V2](../../compose/cli-command.md) を利用するかどうかが設定できるようになりました。
+- **ボリューム管理** ＝ Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
+  詳しくは [ボリュームの確認](../dashboard.md#explore-volumes) を参照してください。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2](https://github.com/docker/compose/releases/tag/v2.0.0)
+- [Buildx 0.6.3](https://github.com/docker/buildx/releases/tag/v0.6.3)
+- [Kubernetes 1.21.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5)
+- [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
+- [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
+- [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
+- Base distro to debian:bullseye
+@y
+- [Compose V2](https://github.com/docker/compose/releases/tag/v2.0.0)
+- [Buildx 0.6.3](https://github.com/docker/buildx/releases/tag/v0.6.3)
+- [Kubernetes 1.21.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5)
+- [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
+- [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
+- [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
+- debian:bullseye に対するベースディストロ
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug related to anti-malware software triggering, self-diagnose avoids calling the `net.exe` utility.
+- Fixed filesystem corruption in the WSL 2 Linux VM in self-diagnose. This can be caused by [microsoft/WSL#5895](https://github.com/microsoft/WSL/issues/5895).
+- Fixed `SeSecurityPrivilege` requirement issue. See [docker/for-win#12037](https://github.com/docker/for-win/issues/12037).
+- Fixed CLI context switch sync with UI. See [docker/for-win#11721](https://github.com/docker/for-win/issues/11721).
+- Added the key `vpnKitMaxPortIdleTime` to `settings.json` to allow the idle network connection timeout to be disabled or extended.
+- Fixed a crash on exit. See [docker/for-win#12128](https://github.com/docker/for-win/issues/12128).
+- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
+- Fixed switching from Linux to Windows containers that was stuck because access rights on panic.log. See [for-win#11899](https://github.com/docker/for-win/issues/11899).
+@y
+- アンチマルウェアの起動、自己診断からの`net.exe`ユーティリティーの呼び出し不備に関するバグを修正しました。
+- WSL 2 Linux VM の自己診断において、ファイルシステムが破損する不備を修正しました。
+  これは、以下の [microsoft/WSL#5895](https://github.com/microsoft/WSL/issues/5895) により発生します。
+- `SeSecurityPrivilege`の要件に関する問題を修正しました。
+  [docker/for-win#12037](https://github.com/docker/for-win/issues/12037) を参照のこと。
+- UI と連動した CLI のコンテキスト切り替えを修正しました。
+  [docker/for-win#11721](https://github.com/docker/for-win/issues/11721) を参照のこと。
+- `settings.json`に対して`vpnKitMaxPortIdleTime`キーを追加し、ネットワーク接続のアイドルタイムアウトを無効化、あるいは拡張可能にしました。
+- 終了時のクラッシュを修正しました。
+  [docker/for-win#12128](https://github.com/docker/for-win/issues/12128) 参照。
+- WSL 2 ディストロにおいて、CLI ツールが利用できないバグを修正しました。
+- panic.log へのアクセス権限の不備により、Linux コンテナーから Windows コンテナーへの切り替えができなくなっていた点を修正しました。
+  [for-win#11899](https://github.com/docker/for-win/issues/11899) を参照のこと。
+@z
+
+@x
+## Docker Desktop 4.0.1
+2021-09-13
+@y
+## Docker Desktop 4.0.1
+2021-09-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/68347/Docker Desktop Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/68347/Docker Desktop Installer.exe)
 @z
 
 @x

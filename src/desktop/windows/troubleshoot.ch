@@ -245,21 +245,21 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploade
 @z
 
 @x
-### Experimental self-diagnose tool
+### Self-diagnose tool
 @y
-{: #experimental-self-diagnose-tool }
-### 試験的な自己診断ツール
+{: #self-diagnose-tool }
+### 自己診断ツール
 @z
 
 @x
-Docker Desktop 3.6.0 contains an experimental "self-diagnose" tool which helps identify some common
-problems. To run it: first locate `com.docker.diagnose.exe`, usually installed in `C:\Program
+Docker Desktop contains a self-diagnose tool which helps you to identify some common
+problems. Before you run the self-diagnose tool, locate `com.docker.diagnose.exe`. This is usually installed in `C:\Program
 Files\Docker\Docker\resources\com.docker.diagnose.exe`.
 @y
-Docker Desktop 3.6.0 には、試験的な「自己診断」ツールが含まれます。
+Docker Desktop には自己診断ツールが含まれます。
 これを使えば、ごく普通の問題を特定できるようになります。
-これを実行するには、まずは`com.docker.diagnose.exe`を探し出します。
-Docker Desktop を Applications ディレクトリにインストールしていれば、これは`C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe`にあります。
+この自己診断ツールを実行するには、まずは`com.docker.diagnose.exe`を探し出します。
+通常これは`C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe`にあります。
 @z
 
 @x
@@ -279,29 +279,20 @@ PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" che
 @z
 
 @x
-The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.
-it will try to highlight the most relevant at the end.
+The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end.
 @y
 ツールでは一連のチェックが行われて、各チェックの後ろに **PASS**(成功) や **FAIL**(失敗) を表示します。
 失敗が発生した場合、最も関連性の高いものが最後に強調して示されます。
 @z
 
 @x
-> **Note**
+> **Feedback**
 >
-> The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-win](https://github.com/docker/for-win/issues) GitHub repository.
+> Let us know your feedback on the self-diagnose tool by creating an issue in the [for-win](https://github.com/docker/for-win/issues) GitHub repository.
 @y
-> **メモ**
+> **フィードバック**
 >
-> 自己診断ツールは、現在のところ試験的機能です。
 > フィードバックは、GitHub リポジトリの [for-win](https://github.com/docker/for-win/issues) に issue を生成してお知らせください。
-@z
-
-@x
-The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-win](https://github.com/docker/for-win/issues) GitHub repository.
-@y
-自己診断ツールは、現在のところ試験的機能です。
-フィードバックは、GitHub リポジトリの [for-win](https://github.com/docker/for-win/issues) に issue を生成してお知らせください。
 @z
 
 @x

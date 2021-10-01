@@ -156,6 +156,13 @@ On the **General** tab, you can configure when to start and update Docker:
 @z
 
 @x
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+@y
+- **Use Docker Compose V2**（Docker Compose V2 の利用）＝ このオプションを選択することで、`docker-compose`コマンドにより Docker Compose V2 の利用を有効にします。
+  詳しくは [Docker Compose V2](../../compose/cli-command.md) を参照してください。
+@z
+
+@x
 ### Resources
 @y
 {: #resources }
@@ -579,6 +586,27 @@ Docker Desktop における Kubernetes 統合機能の利用方法について�
 For information about the reset options, see [Logs and Troubleshooting](troubleshoot.md).
 @y
 リセットオプションに関する詳細は [ログ機能とトラブルシューティング](troubleshoot.md) を参照してください。
+@z
+
+@x
+### Software Updates
+@y
+{: #software-updates }
+### ソフトウェア更新
+@z
+
+@x
+The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+@y
+Software Updates（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
+アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
+@z
+
+@x
+If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+@y
+Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
+これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
 @z
 
 @x

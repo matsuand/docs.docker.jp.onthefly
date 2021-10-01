@@ -49,11 +49,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 4.0.1
-2021-09-13
+## Docker Desktop 4.1.0
+2021-09-30
 @y
-## Docker Desktop 4.0.1
-2021-09-13
+## Docker Desktop 4.1.0
+2021-09-30
 @z
 
 @x
@@ -66,6 +66,72 @@ This page contains information about the new features, improvements, known issue
 >
 > [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+@y
+- **ソフトウェア更新** ＝ Settings（設定）タブに新たなセクションが追加され、Docker Desktop のアップデートを管理できるようになりました。
+  **Software Updates**（ソフトウェア更新）セクションでは、新たな更新があれば通知されます。
+  そして更新のダウンロードを行ったり、最新版に含まれる機能がどのようなものかを参照したりすることができます。
+  詳しくは [ソフトウェア更新](../#software-updates) を参照してください。
+- **Compose V2** ＝ General（一般）において [Docker Compose V2](../../compose/cli-command.md) を利用するかどうかが設定できるようになりました。
+- **ボリューム管理** ＝ Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
+  詳しくは [ボリュームの確認](../dashboard.md#explore-volumes) を参照してください。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose V2](https://github.com/docker/compose/releases/tag/v2.0.0)
+- [Buildx 0.6.3](https://github.com/docker/buildx/releases/tag/v0.6.3)
+- [Kubernetes 1.21.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5)
+- [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
+- [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
+- [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
+- Base distro to debian:bullseye
+@y
+- [Compose V2](https://github.com/docker/compose/releases/tag/v2.0.0)
+- [Buildx 0.6.3](https://github.com/docker/buildx/releases/tag/v0.6.3)
+- [Kubernetes 1.21.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5)
+- [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
+- [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
+- [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
+- debian:bullseye に対するベースディストロ
+@z
+
+@x
+## Docker Desktop 4.0.1
+2021-09-13
+@y
+## Docker Desktop 4.0.1
+2021-09-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/68347/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/68347/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/68347/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/68347/Docker.dmg)
 @z
 
 @x

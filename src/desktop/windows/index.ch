@@ -114,9 +114,9 @@ Settings ダイアログの **General** タブにおいて、Docker の起動や
 @z
 
 @x
-![Settings](../mac/images/menu/prefs-general.png){:width="750px"}
+![Settings](images/settings-general.png){:width="750px"}
 @y
-![Settings ダイアログ](../mac/images/menu/prefs-general.png){:width="750px"}
+![Settings ダイアログ](images/settings-general.png){:width="750px"}
 @z
 
 @x
@@ -172,6 +172,13 @@ Docker では定期的に情報確認を行うことがあります。
 @z
 
 @x
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+@y
+- **Use Docker Compose V2**（Docker Compose V2 の利用）＝ このオプションを選択することで、`docker-compose`コマンドにより Docker Compose V2 の利用を有効にします。
+  詳しくは [Docker Compose V2](../../compose/cli-command.md) を参照してください。
+@z
+
+@x
 ### Resources
 @y
 {: #resources }
@@ -179,19 +186,13 @@ Docker では定期的に情報確認を行うことがあります。
 @z
 
 @x
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, 
-network, and other resources. Different settings are available for 
-configuration depending on whether you are using Linux containers in WSL 2 
+The **Resources** tab allows you to configure CPU, memory, disk, proxies,
+network, and other resources. Different settings are available for
+configuration depending on whether you are using Linux containers in WSL 2
 mode, Linux containers in Hyper-V mode, or Windows containers.
 @y
 **Resources** タブは、CPU、メモリ、ディスク、プロキシー、ネットワークといったリソースを設定します。
 動作させているコンテナーが WSL 2 モードでの Linux コンテナーか、Hyper-V モードでの Linux コンテナーか、Windows コンテナーかによって、設定可能な項目は異なります。
-@z
-
-@x
-![Resources](images/settings-resources.png){:width="750px"}
-@y
-![Resources タブ](images/settings-resources.png){:width="750px"}
 @z
 
 @x
@@ -207,13 +208,14 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 > The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
 > Windows container mode these resources are managed by Windows. In WSL 2 
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
+class="_"}.
 @y
 > **メモ**
 >
 > Advanced タブは Hyper-V モードにおいてのみ利用可能です。
 > WSL 2 モードや Windows コンテナーモードでは、ここで扱うリソースは Windows において管理されます。
-> WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
+> WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank" class="_"} に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
 @z
 
 @x
@@ -723,6 +725,27 @@ Kubernetes サポートの有効化と、Docker コンテナーとして起動�
 For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 @y
 Docker Desktop における Kubernetes 統合機能の利用方法については [Kubernetes へのデプロイ](../kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
+### Software Updates
+@y
+{: #software-updates }
+### ソフトウェア更新
+@z
+
+@x
+The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+@y
+Software Updates（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
+アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
+@z
+
+@x
+If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+@y
+Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
+これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
 @z
 
 @x

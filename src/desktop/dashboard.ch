@@ -706,56 +706,19 @@ You can use [volumes](../storage/volumes.md) to store files and share them among
 @z
 
 @x
-The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are user with a paid Docker subscription, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+> Starting with Docker Desktop 4.1.0 release, Volume management is available for users on any subscription, including Docker Personal. Update Docker Desktop to 4.1.0 to start managing your volumes for free.
+{: .important}
+@y
+> Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
+> Docker Desktop 4.1.0 にアップデートして、無料のボリューム管理を始めてください。
+{: .important}
+@z
+
+@x
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. You can also see which container is using a specific volume and explore the files and folders in your volumes.
 @y
 Docker Dashboard の **Volumes** 画面では、ボリュームの生成削除や、どれが利用中であるかの確認が簡単にできます。
-有償サブスクリプションを購入しているユーザーであれば、特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
-@z
-
-@x
-{% include upgrade-cta.html
-  body="To start exploring the details in your volumes, upgrade to a Docker Pro, Team, or a Business subscription."
-  header-text="This feature requires a paid Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
-%}
-@y
-{% include upgrade-cta.html
-  body="ボリュームについてさらに深く理解していきたい場合は、Pro プラン、Team プラン、Business プランにアップグレードしてください。"
-  header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
-%}
-@z
-
-@x
-The following table lists the Volumes UI features available in each plan:
-@y
-以下の表では、各プランにおいて利用可能なボリューム UI 機能を一覧に示します。
-@z
-
-@x
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
-@y
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
-@z
-
-@x
-| Feature                                       | Personal      | Pro       | Team      | Business      | 
-|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
-|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-@y
-| 機能                                          | Personal  | Pro       | Team      | Business      | 
-|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
-| ボリュームの参照、生成、削除                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| 利用中ボリュームの確認                        | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| ボリューム容量の確認                          | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| ボリュームデータの詳細確認 (修正時刻やサイズ) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| ボリュームを利用するコンテナーの確認          | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| ボリュームに対してのファイル保存、削除        | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+特定のボリュームを利用するコンテナーがどれであって、そのボリューム内にどのようなファイルやフォルダーがあるのかも確認できます。
 @z
 
 @x
