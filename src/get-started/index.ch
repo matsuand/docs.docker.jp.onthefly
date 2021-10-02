@@ -409,9 +409,3 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
 @z
-
-@x
-{% include eula-modal.html %}
-@y
-{% include eula-modal.html %}
-@z

@@ -137,6 +137,17 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 @z
 
 @x
+> **Note**
+>
+> After you have installed Git, you must quit and then start Docker Desktop. From the Docker menu, select **Quit Docker Desktop**, and then start it again.
+@y
+> **メモ**
+>
+> Git をインストールした後は、Docker Desktop をいったん停止して再起動する必要があります。
+> Docker メニューから **Quit Docker Desktop**（Docker Desktop の停止）を実行してから、もう一度起動してください。
+@z
+
+@x
 ## Start a single container Dev Environment
 @y
 {: #start-a-single-container-dev-environment }

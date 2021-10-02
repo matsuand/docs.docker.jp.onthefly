@@ -229,9 +229,9 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
+    For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 @y
-    詳しくは [Docker Desktop ライセンス契約]({{ site.baseurl }}/subscription/#docker-desktop-license-terms) を参照してください。
+    詳しくは [Docker Desktop ライセンス契約](../../subscription/index.md#docker-desktop-license-agreement) を参照してください。
     また、以下の [ブログ](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}  を読んで、Docker Desktop を利用する各企業において、どのような影響が発生するのかを確認してください。
 @z
 

@@ -237,9 +237,3 @@ We also recommend that you join the [Docker Community Slack](https://www.docker.
 @y
 また [Docker Community Slack](https://www.docker.com/docker-community) への参加や **#docker-desktop-mac** チャネルへの質問をお願いします。
 @z
-
-@x
-{% include eula-modal.html %}
-@y
-{% include eula-modal.html %}
-@z
