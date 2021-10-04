@@ -55,15 +55,9 @@ To push an image, we first need to create a repository on Docker Hub.
 @z
 
 @x
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} and share images using Docker Hub.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 @y
-1. Docker Hub でのイメージ共有を行うために [サインアップ](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} します。
-@z
-
-@x
-2. Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
-@y
-2. [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} にサインインします。
+1. [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} に [サインアップ](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} またはサインインします。
 @z
 
 @x

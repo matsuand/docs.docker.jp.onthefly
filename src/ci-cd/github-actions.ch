@@ -514,9 +514,9 @@ on:
 @z
 
 @x
-This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
+This ensures that the main CI will only trigger if we tag our commits with something like `v1.0.2` Let’s test this. For example, run the following command:
 @y
-これにより、コミットに`Vn.n.n`というタグをつけた場合にのみ、主要な CI が起動されるようになります。
+これにより、コミットに`v1.0.2`といったようなタグをつけた場合にのみ、主要な CI が起動されるようになります。
 テストしてみます。
 たとえば以下のようなコマンドを実行します。
 @z
@@ -634,10 +634,10 @@ Remember to change how the image is tagged. The following example keeps ‘lates
 @z
 
 @x
-Now, we will have two different flows: one for our changes to master, and one for our pull requests. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.
+Now, we will have two different flows: one for our changes to master, and one for our pushed tags. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.
 @y
 このように 2 つのフローを作ってみました。
-1 つは master へ変更を適用するものであり、もう 1 つはプルリクエストに対応するものです。
+1 つは master へ変更を適用するものであり、もう 1 つはプッシュしたタグに対応するものです。
 次に必要になってくるのは、これを修正して、Docker Hub に向けてではなく GitHub リポジトリに対して PR をプッシュすることでしょう。
 @z
 

@@ -398,12 +398,12 @@ First, let’s add the `mysql-connector-python` module to our application using 
 @x
 ```console
 $ pip3 install mysql-connector-python
-$ pip3 freeze > requirements.txt
+$ pip3 freeze | grep mysql-connector-python >> requirements.txt
 ```
 @y
 ```console
 $ pip3 install mysql-connector-python
-$ pip3 freeze > requirements.txt
+$ pip3 freeze | grep mysql-connector-python >> requirements.txt
 ```
 @z
 

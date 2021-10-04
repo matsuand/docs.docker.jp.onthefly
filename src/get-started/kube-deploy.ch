@@ -261,13 +261,13 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 
 @x
     ```shell
-    NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    bb-demo   1         1         1            1           48s
+    NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+    bb-demo   1/1     1            1           40s
     ```
 @y
     ```shell
-    NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    bb-demo   1         1         1            1           48s
+    NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+    bb-demo   1/1     1            1           40s
     ```
 @z
 

@@ -93,14 +93,14 @@ Let’s create a simple Python application using the Flask framework that we’l
 ```console
 $ cd /path/to/python-docker
 $ pip3 install Flask
-$ pip3 freeze > requirements.txt
+$ pip3 freeze | grep Flask >> requirements.txt
 $ touch app.py
 ```
 @y
 ```console
 $ cd /path/to/python-docker
 $ pip3 install Flask
-$ pip3 freeze > requirements.txt
+$ pip3 freeze | grep Flask >> requirements.txt
 $ touch app.py
 ```
 @z

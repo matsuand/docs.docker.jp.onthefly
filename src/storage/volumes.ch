@@ -153,7 +153,7 @@ If you need to specify volume driver options, you must use `--mount`.
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume).
+    the container as read-only](#use-a-read-only-volume). May be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 @y
@@ -170,6 +170,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - `destination`には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
     `destination`、`dst`、`target`といった指定がよく用いられます。
   - オプション`readonly`が指定されると、そのボリュームが [コンテナーにおける読み込み専用マウント](#use-a-read-only-volume) としてマウントされます。
+    これは`readonly`または`ro`として指定が可能です。
   - `volume-opt`オプションは複数の指定が可能です。
     オプション名とその値からなるキーバリューペアを指定します。
 @z

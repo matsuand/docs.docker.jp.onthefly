@@ -100,9 +100,7 @@ Let’s open a new terminal then make a GET request to the server using the curl
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 @y
@@ -110,9 +108,7 @@ curl: (7) Failed to connect to localhost port 8000: Connection refused
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 @z
