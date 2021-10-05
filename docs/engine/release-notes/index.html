@@ -1,4 +1,4 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-10-05 13:37:44 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-05T13:37:44+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-05T13:37:44+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -120,10 +120,13 @@
 
 <h1 id="version-2010">Version 20.10</h1>
 
-<h2 id="20108">20.10.8</h2>
-<p>2021-08-03</p>
+<h2 id="20109">20.10.9</h2>
+<p>2021-10-04</p>
 
-<blockquote class="important" id="deprecation">
+<p>本リリースは、CLI やランタイムにおけるセキュリティフィックスを含んだセキュリティリリースです。
+また containerd.io パッケージの更新バージョンも含みます。</p>
+
+<blockquote class="important">
   <p><strong>重要</strong></p>
 
   <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
@@ -131,7 +134,57 @@
 
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。</p>
 </blockquote>
-<h3 id="廃止決定">廃止決定</h3>
+
+<h2 id="client">クライアント</h2>
+
+<ul>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092">CVE-2021-41092</a>
+デフォルトの auth 設定ファイルに、アドレス項目を持つようにしました。
+これにより、資格情報がデフォルトのレジストリに送信されないようにしました。</li>
+</ul>
+
+<h2 id="runtime">ランタイム</h2>
+
+<ul>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089">CVE-2021-41089</a>
+<code class="language-plaintext highlighter-rouge">docker cp</code>の処理時に chroot 内で親ディレクトリを生成するようにしました。
+これにより、特別に作成されたコンテナーが、ホストのファイルシステムにおける既存ファイルのパーミッションを変更してしまわないようにしました。</li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091">CVE-2021-41091</a>
+ファイルパーミッションを下げることによって、非特権ユーザーにより、<code class="language-plaintext highlighter-rouge">/var/lib/docker</code>内を検索したり、プログラム実行ができることがないようにしました。</li>
+</ul>
+
+<h2 id="packaging">パッケージ</h2>
+
+<blockquote>
+  <p><strong>既知の問題</strong></p>
+
+  <p>当リリースの static パッケージに含まれる<code class="language-plaintext highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
+したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
+これを解消するためには、<code class="language-plaintext highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="language-plaintext highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
+詳しくは、この問題に関連する containerd のチケット <a href="https://github.com/containerd/containerd/issues/5824">containerd/containerd#5824</a> を参照してください。</p>
+</blockquote>
+
+<ul>
+  <li>Go 言語のランタイムを Go 1.16.8 に更新しました。
+これには <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221">CVE-2021-36221</a> と <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39293">CVE-2021-39293</a> への対応が含まれています。</li>
+  <li>rpm と deb パッケージにおけるスタティックライブラリを containerd v1.4.11 と runc v1.0.2 に更新しました。
+<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41103">CVE-2021-41103</a></li>
+  <li>rpm と deb パッケージにバンドルする buildx バージョンを v0.6.3 に更新しました。</li>
+</ul>
+
+<h2 id="20108">20.10.8</h2>
+<p>2021-08-03</p>
+
+<blockquote class="important">
+  <p><strong>重要</strong></p>
+
+  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
+<code class="language-plaintext highlighter-rouge">https://</code> URL によるリクエストを扱う際には、環境変数<code class="language-plaintext highlighter-rouge">$HTTPS_PROXY</code>の設定も必要になることを忘れないでください。</p>
+
+  <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。</p>
+</blockquote>
+
+<h3 id="deprecation">廃止決定</h3>
 
 <ul>
   <li>暗号化 TLS の秘密鍵に対するサポートは廃止決定しました。
@@ -838,6 +891,10 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#20109" class="nomunge">20.10.9</a></li>
+      <li><a href="#client" class="nomunge">クライアント</a></li>
+      <li><a href="#runtime" class="nomunge">ランタイム</a></li>
+      <li><a href="#packaging" class="nomunge">パッケージ</a></li>
       <li><a href="#20108" class="nomunge">20.10.8</a></li>
       <li><a href="#20107" class="nomunge">20.10.7</a></li>
       <li><a href="#20106" class="nomunge">20.10.6</a></li>
