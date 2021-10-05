@@ -58,6 +58,120 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.9
+2021-10-04
+@y
+## 20.10.9
+2021-10-04
+@z
+
+@x
+This release is a security release with security fixes in the CLI, runtime, as
+well as updated versions of the containerd.io package.
+@y
+本リリースは、CLI やランタイムにおけるセキュリティフィックスを含んだセキュリティリリースです。
+また containerd.io パッケージの更新バージョンも含みます。
+@z
+
+@x
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+@y
+> **重要**
+>
+> [Go 1.16](https://golang.org/doc/go1.16#net/http) において [net/http changes](https://github.com/golang/go/issues/40909) (net/http の変更) があったため、環境変数`$HTTP_PROXY`を使った HTTP プロキシーの設定は、TLS (`https://`) 接続においては用いられなくなりました。
+> `https://` URL によるリクエストを扱う際には、環境変数`$HTTPS_PROXY`の設定も必要になることを忘れないでください。
+>
+> [HTTP/HTTPS プロキシーの節](../../config/daemon/systemd.md#httphttps-proxy) を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。
+{: .important }
+@z
+
+@x
+## Client
+@y
+{: #client }
+## クライアント
+@z
+
+@x
+- [CVE-2021-41092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092)
+  Ensure default auth config has address field set, to prevent credentials being
+  sent to the default registry.
+@y
+- [CVE-2021-41092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092)
+  デフォルトの auth 設定ファイルに、アドレス項目を持つようにしました。
+  これにより、資格情報がデフォルトのレジストリに送信されないようにしました。
+@z
+
+@x
+## Runtime
+@y
+{: #runtime }
+## ランタイム
+@z
+
+@x
+- [CVE-2021-41089](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089)
+  Create parent directories inside a chroot during `docker cp` to prevent a specially
+  crafted container from changing permissions of existing files in the host’s filesystem.
+- [CVE-2021-41091](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091)
+  Lock down file permissions to prevent unprivileged users from discovering and
+  executing programs in `/var/lib/docker`.
+@y
+- [CVE-2021-41089](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089)
+  `docker cp`の処理時に chroot 内で親ディレクトリを生成するようにしました。
+  これにより、特別に作成されたコンテナーが、ホストのファイルシステムにおける既存ファイルのパーミッションを変更してしまわないようにしました。
+- [CVE-2021-41091](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091)
+  ファイルパーミッションを下げることによって、非特権ユーザーにより、`/var/lib/docker`内を検索したり、プログラム実行ができることがないようにしました。
+@z
+
+@x
+## Packaging
+@y
+{: #packaging }
+## パッケージ
+@z
+
+@x
+> **Known issue**
+>
+> The `ctr` binary shipping with the static packages of this release is not
+> statically linked, and will not run in Docker images using alpine as a base
+> image. Users can install the `libc6-compat` package, or download a previous
+> version of the `ctr` binary as a workaround. Refer to the containerd ticket
+> related to this issue for more details: [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824).
+@y
+> **既知の問題**
+>
+> 当リリースの static パッケージに含まれる`ctr`バイナリは、スタティックリンクが行われていません。
+> したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
+> これを解消するためには、`libc6-compat`パッケージをインストールするか、`ctr`バイナリの一つ前のバージョンを利用するようにしてください。
+> 詳しくは、この問題に関連する containerd のチケット [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824) を参照してください。
+@z
+
+@x
+- Update Golang runtime to Go 1.16.8, which contains fixes for [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221)
+  and [CVE-2021-39293](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39293)
+- Update static binaries and containerd.io rpm and deb packages to containerd
+  v1.4.11 and runc v1.0.2 to address [CVE-2021-41103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41103).
+- Update the bundled buildx version to v0.6.3 for rpm and deb packages.
+@y
+- Go 言語のランタイムを Go 1.16.8 に更新しました。
+  これには [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221) と [CVE-2021-39293](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39293) への対応が含まれています。
+- rpm と deb パッケージにおけるスタティックライブラリを containerd v1.4.11 と runc v1.0.2 に更新しました。
+  [CVE-2021-41103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41103)
+- rpm と deb パッケージにバンドルする buildx バージョンを v0.6.3 に更新しました。
+@z
+
+@x
 ## 20.10.8
 2021-08-03
 @y

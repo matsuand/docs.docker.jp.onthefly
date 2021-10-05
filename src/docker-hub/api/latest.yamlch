@@ -35,12 +35,14 @@ info:
   version: 'beta'
   x-logo:
     url: https://docs.docker.com/images/logo-docker-main.png
+    href: /reference
 @y
 info:
   title: Docker HUB API
   version: 'ベータ'
   x-logo:
     url: __URL____BASEURL__/images/logo-docker-main.png
+    href: /reference
 @z
 
 @x
@@ -232,6 +234,18 @@ tags:
 @z
 
 @x
+  - name: org-settings
+    x-displayName: Org Settings
+    description: |
+      The Org Settings API endpoints allow you to manage your organization's settings.
+@y
+  - name: org-settings
+    x-displayName: 組織設定
+    description: |
+      組織設定 (Org Settings) の API エンドポイントは、組織に関する設定の管理を行います。
+@z
+
+@x
 x-tagGroups:
   - name: General
     tags:
@@ -242,6 +256,7 @@ x-tagGroups:
       - access-tokens
       - images
       - audit-logs
+      - org-settings
 @y
 x-tagGroups:
   - name: General
@@ -253,6 +268,7 @@ x-tagGroups:
       - access-tokens
       - images
       - audit-logs
+      - org-settings
 @z
 
 @x
@@ -1548,6 +1564,54 @@ definitions:
 @z
 
 @x
+  orgSettings:
+    type: object
+    properties:
+      restricted_images:
+        $ref: "#/definitions/restricted_images"
+@y
+  orgSettings:
+    type: object
+    properties:
+      restricted_images:
+        $ref: "#/definitions/restricted_images"
+@z
+
+@x
+  restricted_images:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        description: Whether or not to restrict image usage for users in the organization.
+        example: true
+      allow_official_images:
+        type: boolean
+        description: Allow usage of official images if "enabled" is `true`.
+        example: true
+      allow_verified_publishers:
+        type: boolean
+        description: Allow usage of verified publisher images if "enabled" is `true`.
+        example: true
+@y
+  restricted_images:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        description: Whether or not to restrict image usage for users in the organization.
+        example: true
+      allow_official_images:
+        type: boolean
+        description: Allow usage of official images if "enabled" is `true`.
+        example: true
+      allow_verified_publishers:
+        type: boolean
+        description: Allow usage of verified publisher images if "enabled" is `true`.
+        example: true
+@z
+
+@x
 paths:
   /v2/users/login:
     post:
@@ -2780,31 +2844,160 @@ paths:
 @z
 
 @x
+  /v2/orgs/{name}/settings:
+    parameters:
+      - in: path
+        name: name
+        description: Name of the organization.
+        required: true
+        type: string
+@y
+  /v2/orgs/{name}/settings:
+    parameters:
+      - in: path
+        name: name
+        description: Name of the organization.
+        required: true
+        type: string
+@z
+
+@x
+    get:
+      summary: Get organization settings
+      description: |
+        Returns organization settings by name.
+      tags: [org-settings]
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/orgSettings"
+        401:
+          $ref: "#/responses/Unauthorized"
+        403:
+          $ref: "#/responses/Forbidden"
+        404:
+          $ref: "#/responses/NotFound"
+@y
+    get:
+      summary: Get organization settings
+      description: |
+        Returns organization settings by name.
+      tags: [org-settings]
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/orgSettings"
+        401:
+          $ref: "#/responses/Unauthorized"
+        403:
+          $ref: "#/responses/Forbidden"
+        404:
+          $ref: "#/responses/NotFound"
+@z
+
+@x
+    put:
+      summary: Update organization settings
+      description: |
+        Updates an organization's settings. Some settings are only used when the organization is on a business plan.
+
+        ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        The following settings are only used on a business plan:
+        - `restricted_images`
+@y
+    put:
+      summary: Update organization settings
+      description: |
+        Updates an organization's settings. Some settings are only used when the organization is on a business plan.
+
+        ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        The following settings are only used on a business plan:
+        - `restricted_images`
+@z
+
+@x
+      tags: [org-settings]
+      parameters:
+        - in: body
+          name: request body
+          required: true
+          schema:
+            required: [restricted_images]
+            properties:
+              restricted_images:
+                allOf:
+                  - $ref: "#/definitions/restricted_images"
+                  - type: object
+                    required: [enabled, allow_official_images, allow_verified_publishers]
+@y
+      tags: [org-settings]
+      parameters:
+        - in: body
+          name: request body
+          required: true
+          schema:
+            required: [restricted_images]
+            properties:
+              restricted_images:
+                allOf:
+                  - $ref: "#/definitions/restricted_images"
+                  - type: object
+                    required: [enabled, allow_official_images, allow_verified_publishers]
+@z
+
+@x
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/orgSettings"
+        401:
+          $ref: "#/responses/Unauthorized"
+        403:
+          $ref: "#/responses/Forbidden"
+        404:
+          $ref: "#/responses/NotFound"
+@y
+@z
+
+@x
 responses:
   BadRequest:
     description: Bad Request
     schema:
-      $ref: '#/definitions/ValueError'
+      $ref: "#/definitions/ValueError"
   Unauthorized:
     description: Unauthorized
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/Error"
   NotFound:
     description: Not Found
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
 @y
 responses:
   BadRequest:
     description: Bad Request
     schema:
-      $ref: '#/definitions/ValueError'
+      $ref: "#/definitions/ValueError"
   Unauthorized:
     description: Unauthorized
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/Error"
   NotFound:
     description: Not Found
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
 @z
