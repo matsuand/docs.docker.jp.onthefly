@@ -74,17 +74,25 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
-- **Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
-- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+**Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
 @y
-- **ソフトウェア更新** ＝ Settings（設定）タブに新たなセクションが追加され、Docker Desktop のアップデートを管理できるようになりました。
-  **Software Updates**（ソフトウェア更新）セクションでは、新たな更新があれば通知されます。
-  そして更新のダウンロードを行ったり、最新版に含まれる機能がどのようなものかを参照したりすることができます。
-  詳しくは [ソフトウェア更新](../#software-updates) を参照してください。
-- **Compose V2** ＝ General（一般）において [Docker Compose V2](../../compose/cli-command.md) を利用するかどうかが設定できるようになりました。
-- **ボリューム管理** ＝ Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
-  詳しくは [ボリュームの確認](../dashboard.md#explore-volumes) を参照してください。
+**ソフトウェア更新** ＝ Settings（設定）タブに新たなセクションが追加され、Docker Desktop のアップデートを管理できるようになりました。
+**Software Updates**（ソフトウェア更新）セクションでは、新たな更新があれば通知されます。
+そして更新のダウンロードを行ったり、最新版に含まれる機能がどのようなものかを参照したりすることができます。
+詳しくは [ソフトウェア更新](../#software-updates) を参照してください。
+@z
+
+@x
+**Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
+@y
+**Compose V2** ＝ General（一般）において [Docker Compose V2](../../compose/cli-command.md) を利用するかどうかが設定できるようになりました。
+@z
+
+@x
+**Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+@y
+**ボリューム管理** ＝ Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
+詳しくは [ボリュームの確認](../dashboard.md#explore-volumes) を参照してください。
 @z
 
 @x
@@ -142,6 +150,20 @@ This page contains information about the new features, improvements, known issue
 - WSL 2 ディストロにおいて、CLI ツールが利用できないバグを修正しました。
 - panic.log へのアクセス権限の不備により、Linux コンテナーから Windows コンテナーへの切り替えができなくなっていた点を修正しました。
   [for-win#11899](https://github.com/docker/for-win/issues/11899) を参照のこと。
+@z
+
+@x
+### Known Issue
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distributions such as ArchWSL. See [docker/for-win#12229](https://github.com/docker/for-win/issues/12229)
+@y
+ArchWSL のような WSL ベースのディストリビューション上で Docker Desktop を 4.1.0 にアップグレードした場合に、起動に失敗する場合があります。
+[docker/for-win#12229](https://github.com/docker/for-win/issues/12229) 参照。
 @z
 
 @x

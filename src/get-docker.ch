@@ -24,6 +24,21 @@ redirect_from:
 @z
 
 @x
+> **Update to the Docker Desktop terms**
+>
+> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022, for those that require a paid subscription. For more information, see the blog [Docker is Updating and Extending Our Product Subscriptions](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+{: .important}
+@y
+> **Docker Desktop 利用契約の更新**
+>
+> 大規模エンタープライズ向けの Docker Desktop のプロフェッショナル利用 (従業員 250名以上、または年間収益 1,000 万ドル以上) に対しては、有償の Docker サブスクリプションが必要です。
+> この条件の適用開始日は 2021 年 8 月31 日です。
+> Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
+> 詳しくは、以下のブログ [Docker is Updating and Extending Our Product Subscriptions](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} を参照してください。
+{: .important}
+@z
+
+@x
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so you
 can deliver software quickly. With Docker, you can manage your infrastructure in
