@@ -1,7 +1,7 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-10-07 15:22:04 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Image Access Management | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>イメージアクセス管理 | Docker ドキュメント</title>
   <meta name="description" content="Image Access Management" />
   <meta name="keywords" content="image, access, management">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/image-access-management/" />
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Image Access Management"/>
+  <meta name="twitter:title" itemprop="title name" content="イメージアクセス管理"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -40,16 +40,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Image Access Management" />
+  <meta property="og:title" content="イメージアクセス管理" />
   <meta property="og:description" content="Image Access Management" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-07T15:22:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/image-access-management/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Image Access Management","description":"Image Access Management","url":"https://docs.docker.com/docker-hub/image-access-management/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-07T15:22:04+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"イメージアクセス管理","description":"Image Access Management","url":"https://docs.docker.com/docker-hub/image-access-management/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -107,69 +107,133 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Image Access Management</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Image Access Management is a new feature that is a part of the Docker Business subscription. This feature allows Organization owners to control which types of images (Docker Official Images, Docker Verified Publisher Images, Community images) their developers can pull from Docker Hub.</p>
+                        <section class="section"><h1>イメージアクセス管理</h1><p>イメージアクセス管理（Image Access Management）は、Docker Business サブスクリプションの一部に含まれる新機能です。
+この機能は、各開発者が Docker Hub からどのような種類のイメージ（Docker 公式イメージ、Docker 認証者によるイメージ、コミュニティイメージ）をプルしたのか、それを組織所有者が管理するものです。</p>
 
-<p>For example, a developer, who is part of an organization, building a new containerized application could accidentally use an untrusted, community image as a component of their application. This image could be malicious and pose a security risk to the company. Using Image Access Management, the Organization owner could ensure that the developer can only access trusted content like Docker Official Images, Docker Verified Publisher Images, or the Organization’s own images, preventing such a risk.</p>
+<p>たとえば、組織の一員である開発者が、新たにコンテナー化アプリケーションを構築する際に、アプリケーションの一部に、信頼できないコミュニティイメージを含めてしまうことが起こりえます。
+そのようなイメージは、企業に対して悪意を含んだセキュリティリスクとなる可能性があります。
+イメージアクセス管理を利用すると、開発者がアクセスするイメージを、Docker 公式イメージ、Docker 認証者によるイメージ、組織の保有するイメージといった、信頼のおけるイメージだけとなるように、組織所有者が仕向けることができます。
+こうしてセキュリティリスクを回避できます。</p>
 
-<h2 id="configure-image-access-management-permissions">Configure Image Access Management permissions</h2>
+<h2 id="configure-image-access-management-permissions">イメージアクセス管理のパーミッション設定</h2>
 
 <ol>
-  <li>Log into your <a href="https://hub.docker.com">Docker Hub</a> account as an organization administrator.</li>
+  <li>組織管理者として <a href="https://hub.docker.com">Docker Hub</a> アカウントにログインします。</li>
   <li>
-    <p>Select an organization, and navigate to the <strong>Settings</strong> tab on the <strong>Organizations</strong> page and click Org Permissions.</p>
+    <p>組織を選択して、<strong>Organizations</strong>（組織）ページの <strong>Settings</strong>（設定）タブを開き、Org Permissions をクリックします。</p>
 
-    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/image-access-management.png" alt="Image Access Management" width="700px" /></p>
+    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/image-access-management.png" alt="イメージアクセス管理" width="700px" /></p>
   </li>
-  <li>Enable Image Access Management to set the permissions for the following categories of images you can manage:
+  <li>イメージアクセス管理を有効にして、管理対象としたい以下のようなイメージ種類に対するパーミッションを設定します。
     <ul>
-      <li><strong>Organization Images</strong>: When Image Access Management is enabled, images from your organization are always allowed. These images can be public or private created by members within your organization.</li>
-      <li><strong>Docker Official Images</strong>: A curated set of Docker repositories hosted on Hub. They provide OS repositories, best practices for Dockerfiles, drop-in solutions, and applies security updates on time.</li>
-      <li><strong>Docker Verified Publisher Images</strong>: published by Docker partners that are part of the Verified Publisher program and are qualified to be included in the developer secure supply chain. You can set permissions to <strong>Allowed</strong> or <strong>Restricted</strong>.</li>
-      <li><strong>Community Images</strong>: Images are always disabled when Image Access Management is enabled. These images are not trusted because various Docker Hub users contribute them and pose security risks.</li>
+      <li><strong>Organization Images</strong>（組織イメージ）＝ イメージアクセス管理が有効なときに、自組織が構築したイメージは常に有効となります。
+このイメージは組織内のメンバーが生成したものであり、公開されたもの、プライベートなものを問いません。</li>
+      <li><strong>Docker Official Images</strong>（Docker 公式イメージ）＝ Docker Hub 上の Docker リポジトリから提供されるイメージです。
+ここには OS リポジトリ、Dockerfile のベストプラクティス、すぐに使えるソリューションが提供されていて、日々セキュリティ更新が行われています。</li>
+      <li><strong>Docker Verified Publisher Images</strong>（Docker 認証者によるイメージ）＝ 認証公開者（Verified Publisher）プログラムの一部である Docker パートナーによって公開されたイメージです。
+開発者の安全性を確保するサプライチェーンに含める、信頼のおけるイメージです。
+これに対するパーミッションとして、<strong>Allowed</strong>（許可）や <strong>Restricted</strong>（限定的）を設定することができます。</li>
+      <li><strong>Community Images</strong>（コミュニティイメージ）＝ イメージアクセス管理が有効である場合に、このイメージは常に無効となります。
+こういったイメージは信頼できないものです。さまざまな Docker Hub ユーザーが提供しているため、セキュリティリスクを引き起こすためです。</li>
     </ul>
 
     <blockquote>
-      <p><strong>Note</strong></p>
+      <p><strong>メモ</strong></p>
 
-      <p>Image Access Management is set to Disabled by default. However, member(s) of the <code class="language-plaintext highlighter-rouge">owners</code> Team in your Organization have access to all images regardless of the settings.</p>
+      <p>イメージアクセス管理は、デフォルトでは無効となっています。
+ただし、組織内の<code class="language-plaintext highlighter-rouge">owners</code>チームに属するメンバーは、この設定には関係なく、すべてのイメージにアクセスできます。</p>
     </blockquote>
   </li>
-  <li>Select the category restrictions for your images by clicking <strong>Allowed</strong>.</li>
-  <li>Once the restrictions are applied, your members can view the Org permissions page in a read-only format.</li>
+  <li><strong>Allowed</strong>（許可）をクリックして、イメージに対するカテゴリー制約を選択します。</li>
+  <li>制約を適用した後、各メンバーは、組織のパーミッションページを編集はできませんが参照することはできます。</li>
 </ol>
 
-<p>To ensure that each org member uses images in a safe and secure environment, you can  perform the following steps below to enforce sign-in under your organization.</p>
+<p>組織内の各メンバーが、安全でセキュアな環境のもとでイメージを利用するように仕向けるため、以下の手順を実施して、組織内においては強制的にサインインさせるようにします。</p>
 
 <ol>
   <li>
-    <p>Download Docker Desktop 4.0 or a later release.</p>
+    <p>Docker Desktop 4.0 またはそれ以降のリリースをダウンロードします。</p>
 
     <ul>
-      <li><a href="/desktop/windows/install/">Download and install for Windows</a></li>
-      <li><a href="/desktop/mac/install/">Download and install for Mac</a></li>
+      <li><a href="/docs.docker.jp.onthefly/desktop/windows/install/">Windows 向けのダウンロードとインストール</a></li>
+      <li><a href="/docs.docker.jp.onthefly/desktop/mac/install/">Mac 向けのダウンロードとインストール</a></li>
     </ul>
 
     <blockquote>
-      <p><strong>Note</strong></p>
+      <p><strong>メモ</strong></p>
 
-      <p>There currently is no Docker Desktop for Linux. Linux users will have the same restrictions as Mac and Windows users while logged in, but there is currently no way to require them to log in.</p>
+      <p>現在のところ Linux 向けの Docker Desktop はありません。
+ログインに際しては Linux ユーザーも、 Mac や Windows ユーザーと同様の制約を持つことになりますが、現在のところ、ログイン時にこれを要求する方法はありません。</p>
     </blockquote>
   </li>
   <li>
-    <p>On Windows, create a file <code class="language-plaintext highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code> with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the <code class="language-plaintext highlighter-rouge">allowedOrgs</code> key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop. For example:</p>
+    <p>Windows または Mac 上に registry.json ファイルを生成します。</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    <p><strong>Windows</strong> の場合</p>
+
+    <p><code class="language-plaintext highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>というファイルを生成します。
+ そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
+ このファイルは JSON 形式であり、<code class="language-plaintext highlighter-rouge">allowedOrgs</code>キー内に、少なくとも組織名を 1 つ設定していなければなりません。</p>
+
+    <p>個人用の registry.json ファイルを生成するには以下を行います。</p>
+
+    <ol>
+      <li>Windows Powershell を開いて Run as Administrator（管理者として実行）を選択します。</li>
+      <li>以下のコマンドを入力します。 <code class="language-plaintext highlighter-rouge">cd /ProgramData/DockerDesktop/</code></li>
+      <li>
+        <p>メモ帳を開いて、<code class="language-plaintext highlighter-rouge">registry.json</code>を入力し、<code class="language-plaintext highlighter-rouge">allowedOrgs</code>キー内に必要な分だけ組織名を記述します。
+そして Save をクリックします。</p>
+
+        <p>たとえば以下のようにします。</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycompany"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Powershell において <code class="language-plaintext highlighter-rouge">start .</code> を入力します。</p>
+
+        <p>おめでとうございます。registry.json ファイルができあがりました。</p>
+      </li>
+    </ol>
+
+    <p><strong>macOS</strong> の場合</p>
+
+    <p><code class="language-plaintext highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>というファイルを生成します。
+ そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
+ このファイルは JSON 形式であり、<code class="language-plaintext highlighter-rouge">allowedOrgs</code>キー内に、少なくとも組織名を 1 つ設定していなければなりません。
+ Docker Desktop を利用するユーザーは、あらかじめサインインができていて、その組織のうちの 1 つのメンバーであることが必要です。</p>
+
+    <p>個人用の registry.json ファイルを生成するには以下を行います。</p>
+    <ol>
+      <li>VS Code か、好みのテキストエディターを開きます。</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">allowedOrgs</code>キー内に必要な分だけ組織名を記述します。
+そしてファイルを保存します。</p>
+
+        <p>たとえば以下のようにします。</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
    </span><span class="nl">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycompany"</span><span class="p">]</span><span class="w">
  </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>On macOS, create a file <code class="language-plaintext highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code> with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the <code class="language-plaintext highlighter-rouge">allowedOrgs</code> key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop. For example:</p>
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>別の端末画面を開いて、以下のコマンドを入力します。</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="nl">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mycompanymarketing"</span><span class="p">,</span><span class="w"> </span><span class="err">“mycompanydev”</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
+        <p><code class="language-plaintext highlighter-rouge">sudo mkdir -p /Library/Application\ Support/com.docker.docker</code></p>
+
+        <p>メモ： プロンプトが表示されたら、そのマシンにおけるパスワードを入力してください。</p>
+      </li>
+      <li>
+        <p>以下のコマンドを入力します。</p>
+
+        <p><code class="language-plaintext highlighter-rouge">Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json</code></p>
+
+        <p>おめでとうございます。registry.json ファイルができあがりました。</p>
+      </li>
+    </ol>
   </li>
 </ol>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=image">image</a>, <a href="/docs.docker.jp.onthefly/search/?q=access">access</a>, <a href="/docs.docker.jp.onthefly/search/?q=management">management</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -205,7 +269,7 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#configure-image-access-management-permissions" class="nomunge">Configure Image Access Management permissions</a></li>
+  <li><a href="#configure-image-access-management-permissions" class="nomunge">イメージアクセス管理のパーミッション設定</a></li>
 </ul>
 
 </div>
