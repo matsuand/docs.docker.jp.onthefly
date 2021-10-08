@@ -1,4 +1,4 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-10-08 21:11:17 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナー内での複数サービス起動 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテナー内での複数サービス起動" />
   <meta property="og:description" content="How to run more than one process in a container" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-08T21:11:17+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/multi-service_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-08T21:11:17+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナー内での複数サービス起動","description":"How to run more than one process in a container","url":"https://docs.docker.com/config/containers/multi-service_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナー内での複数サービス起動</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>コンテナーの主となる実行プロセスは、<code class="language-plaintext highlighter-rouge">Dockerfile</code>の最終部分に指定される<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>や<code class="language-plaintext highlighter-rouge">CMD</code>です。
+                        <section class="section"><h1>コンテナー内での複数サービス起動</h1><p>コンテナーの主となる実行プロセスは、<code class="language-plaintext highlighter-rouge">Dockerfile</code>の最終部分に指定される<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>や<code class="language-plaintext highlighter-rouge">CMD</code>です。
 1 つのコンテナーには 1 つのサービスを割り当てるということにすれば、気にかける箇所が絞られるので、一般的にはこれが推奨されます。
 ただそのサービスからは、複数のプロセスがフォークされることもあります（たとえば Apache ウェブサーバーでは複数のワーカープロセスが起動されます）。
 マルチプロセスとなることは、まったく問題ありません。
@@ -134,39 +134,16 @@
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="c"># 1つめのプロセスを起動</span>
-./my_first_process <span class="nt">-D</span>
-<span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$status</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
-  </span><span class="nb">echo</span> <span class="s2">"Failed to start my_first_process: </span><span class="nv">$status</span><span class="s2">"</span>
-  <span class="nb">exit</span> <span class="nv">$status</span>
-<span class="k">fi</span>
+./my_first_process &amp;
 
 <span class="c"># 2つめのプロセスを起動</span>
-./my_second_process <span class="nt">-D</span>
-<span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$status</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
-  </span><span class="nb">echo</span> <span class="s2">"Failed to start my_second_process: </span><span class="nv">$status</span><span class="s2">"</span>
-  <span class="nb">exit</span> <span class="nv">$status</span>
-<span class="k">fi</span>
+./my_second_process &amp;
 
-<span class="c"># 単純なチェックとして 1分間隔で2つのプロセスの終了コードを確認します。</span>
-<span class="c"># 1つのコンテナーに複数サービスを起動させたい場合に、このような部分が</span>
-<span class="c"># 大変なところです。どちらかのプロセスの終了が検出されたら、コンテナー</span>
-<span class="c"># はエラー終了するようにします。そうでなければ、60秒ごとに確認しながら</span>
-<span class="c"># ループし続けます。</span>
+<span class="c"># いずれかが終了するのを待つ</span>
+<span class="nb">wait</span> <span class="nt">-n</span>
 
-<span class="k">while </span><span class="nb">sleep </span>60<span class="p">;</span> <span class="k">do
-  </span>ps aux |grep my_first_process |grep <span class="nt">-q</span> <span class="nt">-v</span> <span class="nb">grep
-  </span><span class="nv">PROCESS_1_STATUS</span><span class="o">=</span><span class="nv">$?</span>
-  ps aux |grep my_second_process |grep <span class="nt">-q</span> <span class="nt">-v</span> <span class="nb">grep
-  </span><span class="nv">PROCESS_2_STATUS</span><span class="o">=</span><span class="nv">$?</span>
-  <span class="c"># 上の2つのgrepが検索マッチすれば、どちらの終了ステータスともゼロ。</span>
-  <span class="c"># 2つともゼロでないなら何かがおかしい。</span>
-  <span class="k">if</span> <span class="o">[</span> <span class="nv">$PROCESS_1_STATUS</span> <span class="nt">-ne</span> 0 <span class="nt">-o</span> <span class="nv">$PROCESS_2_STATUS</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"One of the processes has already exited."</span>
-    <span class="nb">exit </span>1
-  <span class="k">fi
-done</span>
+<span class="c"># 最初に終了したプロセスのステータスを返す</span>
+<span class="nb">exit</span> <span class="nv">$?</span>
 </code></pre></div>    </div>
 
     <p>Dockerfile は以下のような記述とします。</p>
