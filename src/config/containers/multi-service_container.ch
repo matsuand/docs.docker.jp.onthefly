@@ -89,82 +89,28 @@ this in a few different ways.
 
 @x
   # Start the first process
-  ./my_first_process -D
-  status=$?
-  if [ $status -ne 0 ]; then
-    echo "Failed to start my_first_process: $status"
-    exit $status
-  fi
+  ./my_first_process &
+  
+  # Start the second process
+  ./my_second_process &
+  
+  # Wait for any process to exit
+  wait -n
+  
+  # Exit with status of process that exited first
+  exit $?
 @y
   # 1つめのプロセスを起動
-  ./my_first_process -D
-  status=$?
-  if [ $status -ne 0 ]; then
-    echo "Failed to start my_first_process: $status"
-    exit $status
-  fi
-@z
-
-@x
-  # Start the second process
-  ./my_second_process -D
-  status=$?
-  if [ $status -ne 0 ]; then
-    echo "Failed to start my_second_process: $status"
-    exit $status
-  fi
-@y
+  ./my_first_process &
+  
   # 2つめのプロセスを起動
-  ./my_second_process -D
-  status=$?
-  if [ $status -ne 0 ]; then
-    echo "Failed to start my_second_process: $status"
-    exit $status
-  fi
-@z
-
-@x
-  # Naive check runs checks once a minute to see if either of the processes exited.
-  # This illustrates part of the heavy lifting you need to do if you want to run
-  # more than one service in a container. The container exits with an error
-  # if it detects that either of the processes has exited.
-  # Otherwise it loops forever, waking up every 60 seconds
-@y
-  # 単純なチェックとして 1分間隔で2つのプロセスの終了コードを確認します。
-  # 1つのコンテナーに複数サービスを起動させたい場合に、このような部分が
-  # 大変なところです。どちらかのプロセスの終了が検出されたら、コンテナー
-  # はエラー終了するようにします。そうでなければ、60秒ごとに確認しながら
-  # ループし続けます。
-@z
-
-@x
-  while sleep 60; do
-    ps aux |grep my_first_process |grep -q -v grep
-    PROCESS_1_STATUS=$?
-    ps aux |grep my_second_process |grep -q -v grep
-    PROCESS_2_STATUS=$?
-    # If the greps above find anything, they exit with 0 status
-    # If they are not both 0, then something is wrong
-    if [ $PROCESS_1_STATUS -ne 0 -o $PROCESS_2_STATUS -ne 0 ]; then
-      echo "One of the processes has already exited."
-      exit 1
-    fi
-  done
-  ```
-@y
-  while sleep 60; do
-    ps aux |grep my_first_process |grep -q -v grep
-    PROCESS_1_STATUS=$?
-    ps aux |grep my_second_process |grep -q -v grep
-    PROCESS_2_STATUS=$?
-    # 上の2つのgrepが検索マッチすれば、どちらの終了ステータスともゼロ。
-    # 2つともゼロでないなら何かがおかしい。
-    if [ $PROCESS_1_STATUS -ne 0 -o $PROCESS_2_STATUS -ne 0 ]; then
-      echo "One of the processes has already exited."
-      exit 1
-    fi
-  done
-  ```
+  ./my_second_process &
+  
+  # いずれかが終了するのを待つ
+  wait -n
+  
+  # 最初に終了したプロセスのステータスを返す
+  exit $?
 @z
 
 @x

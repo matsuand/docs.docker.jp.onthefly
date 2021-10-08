@@ -71,13 +71,13 @@ script:
 
 @x
 - Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/jwilder/dockerize), sh-compatible
+  [dockerize](https://github.com/powerman/dockerize), sh-compatible
   [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
   wrapper scripts which you can include in your application's image to
   poll a given host and port until it's accepting TCP connections.
 @y
 - [wait-for-it](https://github.com/vishnubob/wait-for-it)、
-  [dockerize](https://github.com/jwilder/dockerize)、シェル互換の [wait-for](https://github.com/Eficode/wait-for)、[RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) テンプレートを利用します。
+  [dockerize](https://github.com/powerman/dockerize)、シェル互換の [wait-for](https://github.com/Eficode/wait-for)、[RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) テンプレートを利用します。
   これは非常に小さなラッパースクリプトです。
   これをアプリケーションイメージに含めて、指定されたホストが TCP 接続を受け入れるまでの間、指定ポートに問い合わせを行うようにすることができます。
 @z
