@@ -1179,6 +1179,7 @@ x-aws-cloudformation:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
+        Port: 443
 ```
 @y
 ```yaml
@@ -1195,6 +1196,7 @@ x-aws-cloudformation:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
+        Port: 443
 ```
 @z
 

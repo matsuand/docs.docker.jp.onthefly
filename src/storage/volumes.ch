@@ -1440,6 +1440,19 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 @z
 
 @x
+> **Note**:
+>
+> If another container binds the volumes with
+> `--volumes-from`, the volume definitions are _copied_ and the 
+> anonymous volume also stays after the first container is removed.
+@y
+> **メモ**
+>
+> 別のコンテナーが、`--volumes-from`を使ってボリュームをマウントしている場合は、そのボリューム定義が **コピー** されます。
+> そして、初めのコンテナーが削除されても、匿名ボリュームも残り続けます。
+@z
+
+@x
 ### Remove all volumes
 @y
 {: #remove-all-volumes }

@@ -6,12 +6,14 @@
 description: Image Access Management
 keywords: image, access, management
 title: Image Access Management
+toc_max: 2
 ---
 @y
 ---
 description: Image Access Management
 keywords: image, access, management
 title: イメージアクセス管理
+toc_max: 2
 ---
 @z
 
@@ -36,6 +38,35 @@ For example, a developer, who is part of an organization, building a new contain
 @y
 {: #configure-image-access-management-permissions }
 ## イメージアクセス管理のパーミッション設定
+@z
+
+@x
+The following video walks you through the process of configuring Image Access Management permissions.
+@y
+以下に示すビデオでは、イメージアクセス管理におけるパーミッションの設定過程を順に示しています。
+@z
+
+@x
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+@y
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+@z
+
+@x
+### Detailed instructions
+@y
+{: #detailed-instructions }
+### 詳細な手順
+@z
+
+@x
+To configure Image Access Management permissions, perform the following steps:
+@y
+イメージアクセス管理におけるパーミッションを設定するには、以下の手順を行います。
 @z
 
 @x
