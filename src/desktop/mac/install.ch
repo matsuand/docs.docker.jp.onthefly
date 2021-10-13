@@ -326,7 +326,7 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs.md) provide answers to frequently asked questions.
-- [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 * [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
@@ -335,7 +335,7 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 - [Docker Desktop for Apple silicon](apple-silicon.md) では、Docker Desktop for Apple silicon について詳細に説明しています。
 - [トラブルシューティング](troubleshoot.md) では一般的な質問、解決方法、診断実行や課題送信などを示しています。
 - [FAQ](../faqs.md) はよくたずねられる質問とその回答を示します。
-- [リリースノート](release-notes.md) では Docker Desktop リリースに関連したコンポーネントのアップデート、新機能、改善機能を示しています。
+- [リリースノート](release-notes/index.md) では Docker Desktop リリースに関連したコンポーネントのアップデート、新機能、改善機能を示しています。
 - [Docker をはじめよう](../../get-started/index.md) は Docker の全般的なチュートリアルです。
 * [バックアップとリストア](../backup-and-restore.md) は Docker に関するデータのバックアップとリストア手順について説明しています。
 @z

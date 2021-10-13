@@ -1,4 +1,4 @@
-SUBDIRS = buildx cluster compose-cli \
+SUBDIRS = buildx compose-cli \
 	docker-app docsarchive engine-cli
 
 thisdir = _data

@@ -29,14 +29,14 @@ Docker の最新情報を確認してください。
 
 @x
 - [Docker Engine](../engine/release-notes/index.md)
-- [Docker Desktop for Mac](../desktop/mac/release-notes.md)
-- [Docker Desktop for Windows](../desktop/windows/release-notes.md)
+- [Docker Desktop for Mac](../desktop/mac/release-notes/index.md)
+- [Docker Desktop for Windows](../desktop/windows/release-notes/index.md)
 - [Docker Hub](../docker-hub/release-notes.md)
 - [Docker Compose](../compose/release-notes.md)
 @y
 - [Docker Engine](../engine/release-notes/index.md)
-- [Docker Desktop for Mac](../desktop/mac/release-notes.md)
-- [Docker Desktop for Windows](../desktop/windows/release-notes.md)
+- [Docker Desktop for Mac](../desktop/mac/release-notes/index.md)
+- [Docker Desktop for Windows](../desktop/windows/release-notes/index.md)
 - [Docker Hub](../docker-hub/release-notes.md)
 - [Docker Compose](../compose/release-notes.md)
 @z

@@ -226,12 +226,12 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 @x
     ```console
     $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.0/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
     ```
 @y
     ```console
     $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.0/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
     ```
 @z
 
@@ -266,12 +266,12 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 @x
     ```console
     $ docker compose version
-    Docker Compose version 2.0.0
+    Docker Compose version 2.0.1
     ```
 @y
     ```console
     $ docker compose version
-    Docker Compose version 2.0.0
+    Docker Compose version 2.0.1
     ```
 @z
 

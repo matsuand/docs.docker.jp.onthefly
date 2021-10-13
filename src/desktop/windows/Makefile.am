@@ -1,4 +1,4 @@
-SUBDIRS = images
+SUBDIRS = images release-notes
 
 thisdir   = desktop/windows
 origdir   = @abs_origdir@/$(thisdir)
@@ -15,12 +15,9 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	edge-release-notes \
 	index              \
 	install            \
 	networking         \
-	previous-versions  \
-	release-notes      \
 	troubleshoot       \
 	wsl
 

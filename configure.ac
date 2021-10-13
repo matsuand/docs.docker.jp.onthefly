@@ -30,7 +30,6 @@ AC_CONFIG_FILES([Makefile
 		 src/Makefile
 		 src/_data/Makefile
 		 src/_data/buildx/Makefile
-		 src/_data/cluster/Makefile
 		 src/_data/compose-cli/Makefile
 		 src/_data/docker-app/Makefile
 		 src/_data/docsarchive/Makefile
@@ -101,8 +100,10 @@ AC_CONFIG_FILES([Makefile
 		 src/desktop/mac/Makefile
 		 src/desktop/mac/images/Makefile
 		 src/desktop/mac/images/menu/Makefile
+		 src/desktop/mac/release-notes/Makefile
 		 src/desktop/windows/Makefile
 		 src/desktop/windows/images/Makefile
+		 src/desktop/windows/release-notes/Makefile
 		 src/develop/Makefile
 		 src/develop/develop-images/Makefile
 		 src/develop/scan-images/Makefile

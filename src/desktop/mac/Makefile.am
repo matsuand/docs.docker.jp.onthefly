@@ -1,4 +1,4 @@
-SUBDIRS = images
+SUBDIRS = images release-notes
 
 thisdir   = desktop/mac
 origdir   = @abs_origdir@/$(thisdir)
@@ -16,12 +16,9 @@ ctie:
 
 bases = \
 	apple-silicon      \
-	edge-release-notes \
 	index              \
 	install            \
 	networking         \
-	previous-versions  \
-	release-notes      \
 	space              \
 	troubleshoot
 

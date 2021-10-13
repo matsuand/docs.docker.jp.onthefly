@@ -459,13 +459,13 @@ Windows から Docker Desktop をアンインストールするには、以下�
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs.md) provide answers to frequently asked questions.
-* [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Release notes]( release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 * [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
 @y
 * [はじめよう](index.md) では Docker Desktop for Windows を紹介しています。
 * [Docker をはじめよう](../../get-started/) はマルチサービススタックのデプロイ方法を説明するチュートリアルです。
 * [トラブルシューティング](troubleshoot.md) では、一般的な問題、回避策、サポートの受け方などについて説明しています。
 * [FAQ](../faqs.md) ではよくたずねられる質問を示しています。
-* [リリースノート](release-notes.md) では、Docker Desktop リリースにおけるコンポーネントアップデート、新機能、改善項目を一覧にしています。
+* [リリースノート](release-notes/index.md) では、Docker Desktop リリースにおけるコンポーネントアップデート、新機能、改善項目を一覧にしています。
 * [データのバックアップとリストア](../backup-and-restore.md) では Docker に関するデータのバックアップやリストアの手順を説明しています。
 @z

@@ -159,9 +159,9 @@ Docker Desktop リリースにおける新機能、修正、バグフィック�
 @z
 
 @x
-* [Docker Desktop for Mac Release notes](mac/release-notes.md)
-* [Docker Desktop for Windows Release notes](windows/release-notes.md)
+* [Docker Desktop for Mac Release notes](mac/release-notes/index.md)
+* [Docker Desktop for Windows Release notes](windows/release-notes/index.md)
 @y
-* [Docker Desktop for Mac リリースノート](mac/release-notes.md)
-* [Docker Desktop for Windows リリースノート](windows/release-notes.md)
+* [Docker Desktop for Mac リリースノート](mac/release-notes/index.md)
+* [Docker Desktop for Windows リリースノート](windows/release-notes/index.md)
 @z

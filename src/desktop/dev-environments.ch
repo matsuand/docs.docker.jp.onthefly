@@ -75,11 +75,11 @@ Dev 環境は Docker Desktop 3.5.0 リリースの一部として提供されて
 @z
 
 @x
-- [Mac](mac/release-notes.md)
-- [Windows](windows/release-notes.md)
+- [Mac](mac/release-notes/index.md)
+- [Windows](windows/release-notes/index.md)
 @y
-- [Mac](mac/release-notes.md)
-- [Windows](windows/release-notes.md)
+- [Mac](mac/release-notes/index.md)
+- [Windows](windows/release-notes/index.md)
 @z
 
 @x
