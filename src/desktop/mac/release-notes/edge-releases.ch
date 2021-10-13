@@ -28,11 +28,11 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 @z
 
 @x
-For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#system-requirements).
+For information about Stable releases, see the [Stable release notes](index.md). For Docker Desktop system requirements, see
+[What to know before you install](../install.md#system-requirements).
 @y
-安定版についての情報は [安定版リリースノート](release-notes.md) を参照してください。
-Docker Desktop のシステム要件については [インストールの前に](install.md#system-requirements) を参照してください。
+安定版についての情報は [安定版リリースノート](index.md) を参照してください。
+Docker Desktop のシステム要件については [インストールの前に](../install.md#system-requirements) を参照してください。
 @z
 
 @x
@@ -3178,11 +3178,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 @x
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md)
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../../kubernetes.md)
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
 @y
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md)
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../../kubernetes.md)
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
 @z
 
@@ -3757,11 +3757,11 @@ TCP connection is idle for more than five minutes (related to
 @x
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../../docker-hub/repos.md) and [organizations](../../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../../docker-hub/repos.md) and [organizations](../../../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 @y
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../../docker-hub/repos.md) and [organizations](../../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../../docker-hub/repos.md) and [organizations](../../../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 @z
 
 @x
@@ -4431,7 +4431,7 @@ TCP connection is idle for more than five minutes (related to
 @z
 
 @x
-- More options when moving disk image (see [Storage location](space.md) under Advanced preference settings)
+- More options when moving disk image (see [Storage location](../space.md) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -4439,7 +4439,7 @@ TCP connection is idle for more than five minutes (related to
 - Parses aliases from /etc/hosts ([docker/for-mac#983](https://github.com/docker/for-mac/issues/983))
 - Can resolve DNS requests through servers listed in the /etc/resolver directory on the host
 @y
-- More options when moving disk image (see [Storage location](space.md) under Advanced preference settings)
+- More options when moving disk image (see [Storage location](../space.md) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -4917,15 +4917,15 @@ TCP connection is idle for more than five minutes (related to
 @z
 
 @x
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](index.md#docker-engine).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](../index.md#docker-engine).
 @y
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](index.md#docker-engine).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](../index.md#docker-engine).
 @z
 
 @x
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#docker-engine).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](../index.md#docker-engine).
 @y
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#docker-engine).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](../index.md#docker-engine).
 @z
 
 @x
@@ -5337,13 +5337,13 @@ issue is being investigated. The workaround is to restart Docker.app.
 traversals of large directories are currently slow. Additionally, containers
 that perform large numbers of directory operations, such as repeated scans of
 large directory trees, may suffer from poor performance. More information is
-available in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+available in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @y
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and
 traversals of large directories are currently slow. Additionally, containers
 that perform large numbers of directory operations, such as repeated scans of
 large directory trees, may suffer from poor performance. More information is
-available in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+available in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @z
 
 @x
@@ -5416,14 +5416,14 @@ with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
 trees, may suffer from poor performance. More information is available in
-[Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+[Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @y
 * There are a number of issues with the performance of directories bind-mounted
 with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
 trees, may suffer from poor performance. More information is available in
-[Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+[Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @z
 
 @x
@@ -5514,12 +5514,12 @@ trees, may suffer from poor performance. More information is available in
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
-trees, may suffer from poor performance. For more information and workarounds, see the bullet on [performance of bind-mounted directories](troubleshoot.md#bind-mounted-dirs) in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @y
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
-trees, may suffer from poor performance. For more information and workarounds, see the bullet on [performance of bind-mounted directories](troubleshoot.md#bind-mounted-dirs) in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @z
 
 @x
@@ -5589,9 +5589,9 @@ trees, may suffer from poor performance. For more information and workarounds, s
 @z
 
 @x
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on [performance of bind-mounted directories](troubleshoot.md#bind-mounted-dirs) in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @y
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on [performance of bind-mounted directories](troubleshoot.md#bind-mounted-dirs) in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot.md#known-issues) in Troubleshooting.
 @z
 
 @x
@@ -5653,9 +5653,9 @@ trees, may suffer from poor performance. For more information and workarounds, s
 @z
 
 @x
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -5723,9 +5723,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](install.md).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](../install.md).
 @y
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](install.md).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](../install.md).
 @z
 
 @x
@@ -5783,9 +5783,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](troubleshoot.md#known-issues) in [Logs and Troubleshooting](troubleshoot.md).
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](../troubleshoot.md#known-issues) in [Logs and Troubleshooting](../troubleshoot.md).
 @y
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](troubleshoot.md#known-issues) in [Logs and Troubleshooting](troubleshoot.md).
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](../troubleshoot.md#known-issues) in [Logs and Troubleshooting](../troubleshoot.md).
 @z
 
 @x
@@ -5901,9 +5901,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -5977,9 +5977,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -6037,9 +6037,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -6067,14 +6067,14 @@ events or unexpected unmounts.
 @z
 
 @x
-* Documentation moved to [https://docs.docker.com/desktop/mac/](index.md)
+* Documentation moved to [https://docs.docker.com/desktop/mac/](../index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
 * Fixed "failure: No error" message in diagnostic panel
 * Improved diagnostics for networking and logs for the service port openers
 @y
-* Documentation moved to [https://docs.docker.com/desktop/mac/](index.md)
+* Documentation moved to [https://docs.docker.com/desktop/mac/](../index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
@@ -6089,9 +6089,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -6145,9 +6145,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x
@@ -6211,9 +6211,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @y
-* See [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
+* See [Known Issues](../troubleshoot.md#known-issues) in [Troubleshooting](../troubleshoot.md)
 @z
 
 @x

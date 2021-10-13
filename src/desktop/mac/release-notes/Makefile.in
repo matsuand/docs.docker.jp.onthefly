@@ -87,7 +87,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = src/_data/cluster
+subdir = src/desktop/mac/release-notes
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/progs.m4 \
 	$(top_srcdir)/configure.ac
@@ -237,28 +237,24 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-thisdir = _data/cluster
+thisdir = desktop/mac/release-notes
 origdir = @abs_origdir@/$(thisdir)
 mysrcdir = $(shell cd $(srcdir) && pwd)
 targetdir = @abs_targetdir@/$(thisdir)
 publishdir = @abs_publishdir@/$(thisdir)
 uploaddir = @UPLOADDIR@/$(thisdir)
 bases = \
-	docker_cluster \
-	docker_cluster_backup \
-	docker_cluster_create \
-	docker_cluster_inspect \
-	docker_cluster_ls \
-	docker_cluster_restore \
-	docker_cluster_rm \
-	docker_cluster_update \
-	docker_cluster_version
+	2.x     \
+	3.x     \
+	archive \
+	edge-releases \
+	index
 
-ch_yamls = $(bases:=.yamlch) # ch means change files
-tr_yamls = $(bases:=.yaml)   # tr means translated files
-EXTRA_DIST = $(ch_yamls)
+ch_mds = $(bases:=.ch) # ch means change files
+tr_mds = $(bases:=.md) # tr means translated files
+EXTRA_DIST = $(ch_mds)
 #DISTCLEANFILES = 
-srcs = $(tr_yamls)
+srcs = $(tr_mds)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
 all: all-am
 
@@ -272,9 +268,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/_data/cluster/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/desktop/mac/release-notes/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/_data/cluster/Makefile
+	  $(AUTOMAKE) --gnu src/desktop/mac/release-notes/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -457,35 +453,14 @@ ctie:
 tgtdir:
 	$(MKDIR_P) $(publishdir)
 
--include ./Makefile.sub
+-include Makefile.sub
 Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 
 @MAINT@.PHONY: chbuild
-@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_yamls))
-@MAINT@$(addprefix $(mysrcdir)/, $(ch_yamls)):
-@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.yamlch$$|.yaml|"` $@ yaml; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-.PHONY: rewriteurls
-rewriteurls:
-
-.PHONY: publishclean
-publishclean:
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
+@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
+@MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
+@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

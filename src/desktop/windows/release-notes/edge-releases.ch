@@ -28,11 +28,11 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 @z
 
 @x
-For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#system-requirements).
+For information about Stable releases, see the [Stable release notes](index.md). For Docker Desktop system requirements, see
+[What to know before you install](../install.md#system-requirements).
 @y
-安定版については [安定版リリースノート](release-notes.md) を参照してください。
-また Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#system-requirements) を参照してください。
+安定版については [安定版リリースノート](index.md) を参照してください。
+また Docker Desktop のシステム要件については [インストール前に確認すべきこと](../install.md#system-requirements) を参照してください。
 @z
 
 @x
@@ -265,14 +265,14 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @x
 ### New
 @y
-{: #new-1 }
+{: #new }
 ### 新機能
 @z
 
 @x
-- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+- If you have enabled [Vulnerability Scanning](../../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will now appear in Docker Desktop.
 @y
-- Docker Hub において [ぜい弱性スキャン]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を有効にしている場合、スキャン結果が Docker Desktop 上に表示されるようになりました。
+- Docker Hub において [ぜい弱性スキャン](../../../docker-hub/vulnerability-scanning.md) を有効にしている場合、スキャン結果が Docker Desktop 上に表示されるようになりました。
 @z
 
 @x
@@ -1575,12 +1575,12 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 @x
 - Added a prerequisite check in the installer for the `LanmanServer` service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
-- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md#use-cases-and-workarounds).
 - Ceph support has been removed from Docker Desktop to save disk space.
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 @y
 - Added a prerequisite check in the installer for the `LanmanServer` service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
-- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md#use-cases-and-workarounds).
 - Ceph support has been removed from Docker Desktop to save disk space.
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 @z
@@ -1675,9 +1675,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md#use-cases-and-workarounds).
 @y
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md#use-cases-and-workarounds).
 @z
 
 @x
@@ -2003,9 +2003,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](../wsl.md).
 @y
-- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](../wsl.md).
 @z
 
 @x
@@ -2249,9 +2249,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
-- [Docker Desktop WSL 2 Tech Preview](wsl.md)
+- [Docker Desktop WSL 2 Tech Preview](../wsl.md)
 @y
-- [Docker Desktop WSL 2 Tech Preview](wsl.md)
+- [Docker Desktop WSL 2 Tech Preview](../wsl.md)
 @z
 
 @x
@@ -3556,11 +3556,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 @x
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md).
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../../kubernetes.md).
   - LCOW containers can now be run next to Windows containers (on Windows RS3 build 16299 and later). Use `--platform=linux` in Windows container mode to run Linux Containers On Windows. Note that LCOW is still experimental, and requires daemon `experimental` option.
 @y
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md).
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../../kubernetes.md).
   - LCOW containers can now be run next to Windows containers (on Windows RS3 build 16299 and later). Use `--platform=linux` in Windows container mode to run Linux Containers On Windows. Note that LCOW is still experimental, and requires daemon `experimental` option.
 @z
 
@@ -5262,7 +5262,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 @x
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](index.md#switch-between-windows-and-linux-containers).
+[Windows containers mode](../index.md#switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -5270,7 +5270,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 - Support for arm, aarch64, ppc64le architectures using qemu
 @y
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](index.md#switch-between-windows-and-linux-containers).
+[Windows containers mode](../index.md#switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -6114,10 +6114,10 @@ work. Some insider builds may not work.
 
 @x
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot.md#networking-issues).
 @y
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot.md#networking-issues).
 @z
 
 @x
@@ -6139,9 +6139,9 @@ Unreleased. See Beta 23 for changes.
 @z
 
 @x
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot.md#networking-issues).
 @y
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](troubleshoot.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot.md#networking-issues).
 @z
 
 @x
@@ -6157,9 +6157,9 @@ Unreleased. See Beta 23 for changes.
 @z
 
 @x
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](install.md).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../install.md).
 @y
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](install.md).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../install.md).
 @z
 
 @x
@@ -6852,12 +6852,12 @@ This Beta release includes some significant changes:
 * The GUI now runs in non-elevated mode and connects to an elevated Windows service
 * Allocate virtual machine memory by 256 MB increments, instead of 1 GB
 * Show a meaningful error when the user has an empty password
-* Improved [Troubleshooting](troubleshoot.md) page
+* Improved [Troubleshooting](../troubleshoot.md) page
 @y
 * The GUI now runs in non-elevated mode and connects to an elevated Windows service
 * Allocate virtual machine memory by 256 MB increments, instead of 1 GB
 * Show a meaningful error when the user has an empty password
-* Improved [Troubleshooting](troubleshoot.md) page
+* Improved [Troubleshooting](../troubleshoot.md) page
 @z
 
 @x
@@ -6915,9 +6915,9 @@ This Beta release includes some significant changes:
 @z
 
 @x
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot.md) for more details.
 @y
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot.md) for more details.
 @z
 
 @x
@@ -6989,9 +6989,9 @@ This Beta release includes some significant changes:
 @z
 
 @x
-*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](troubleshoot.md) for more details.
+*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot.md) for more details.
 @y
-*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](troubleshoot.md) for more details.
+*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot.md) for more details.
 @z
 
 @x
