@@ -1,4 +1,4 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Java image | Docker ドキュメント</title>
@@ -43,13 +43,13 @@
   <meta property="og:title" content="Build your Java image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Build your Java image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/java/build-images/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Build your Java image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/java/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -154,7 +154,6 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>To complete this tutorial, you need the following:</p>
 
 <ul>
-  <li>Java OpenJDK version 15 or later. <a href="https://jdk.java.net/" target="_blank" rel="noopener" class="_">Download and install Java</a></li>
   <li>Docker running locally. Follow the instructions to <a href="/docs.docker.jp.onthefly/get-docker/">download and install Docker</a></li>
   <li>A Git client</li>
   <li>An IDE or a text editor to edit files. We recommend using <a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener" class="_">IntelliJ Community Edition</a>.</li>
@@ -169,7 +168,17 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>spring-petclinic
 </code></pre></div></div>
 
-<h2 id="test-the-application">Test the application</h2>
+<h2 id="test-the-application-without-docker-optional">Test the application without Docker (optional)</h2>
+
+<p>In this step, we will test the application locally without Docker, before we
+continue with building and running the application with Docker. This section
+requires you to have Java OpenJDK version 15 or later installed on your machine.
+<a href="https://jdk.java.net/" target="_blank" rel="noopener" class="_">Download and install Java</a></p>
+
+<p>If you prefer to not install Java on your machine, you can skip this step, and
+continue straight to the next section, in which we explain how to build and run
+the application in Docker, which does not require you to have Java installed on
+your machine.</p>
 
 <p>Let’s start our application and make sure it is running properly. Maven will manage all the project processes (compiling, tests, packaging, etc). The <strong>Spring Pets Clinic</strong> project we cloned earlier contains an embedded version of Maven. Therefore, we don’t need to install Maven separately on your local machine.</p>
 
@@ -188,9 +197,14 @@ Linux 上において Docker を利用している場合は、環境変数を用
 PetClinicApplication in 11.743 seconds (JVM running for 12.364)
 </span></code></pre></div></div>
 
-<h2 id="create-a-dockerfile-for-java">Create a Dockerfile for Java</h2>
+<p>Great! We verified that the application works. At this stage, you’ve completed
+testing the server script locally.</p>
 
-<p>Now that our application is running properly, let’s take a look at creating a Dockerfile.</p>
+<p>Press <code class="language-plaintext highlighter-rouge">CTRL-c</code> from within the terminal session where the server is running to stop it.</p>
+
+<p>We will now continue to build and run the application in Docker.</p>
+
+<h2 id="create-a-dockerfile-for-java">Create a Dockerfile for Java</h2>
 
 <p>Dockerfile とは、 Docker イメージを取得する命令を含んだテキストファイルのことです。
 Docker に対して<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
@@ -233,28 +247,36 @@ we would like to use for our application.</p>
 <span class="k">FROM</span><span class="s"> openjdk:16-alpine3.13</span>
 </code></pre></div></div>
 
-<p>Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Maven image with Java JDK that already has all the tools and packages that we need to run a Java application.</p>
+<p>Docker images can be inherited from other images. For this guide, we use the
+official <code class="language-plaintext highlighter-rouge">openjdk</code> image from Docker Hub with Java JDK that already has all the
+tools and packages that we need to run a Java application.</p>
 
-<blockquote>
-  <p><strong>Note</strong></p>
-
-  <p>To learn more about creating your own base images, see <a href="https://docs.docker.com/develop/develop-images/baseimages/">Creating base images</a>.</p>
-</blockquote>
-
-<p>To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.</p>
+<p>To make things easier when running the rest of our commands, let’s set the image’s
+working directory. This instructs Docker to use this path as the default location
+for all subsequent commands. By doing this, we do not have to type out full file
+paths but can use relative paths based on the working directory.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WORKDIR</span><span class="s"> /app</span>
 </code></pre></div></div>
 
-<p>Usually, the very first thing you do once you’ve downloaded a project written in Java which is using Maven for project management is to install dependencies.</p>
+<p>Usually, the very first thing you do once you’ve downloaded a project written in
+Java which is using Maven for project management is to install dependencies.</p>
 
-<p>Before we can run <code class="language-plaintext highlighter-rouge">mvnw dependency</code>, we need to get the Maven wrapper and our <code class="language-plaintext highlighter-rouge">pom.xml</code> file into our image. We’ll use the <code class="language-plaintext highlighter-rouge">COPY</code> command to do this. The <code class="language-plaintext highlighter-rouge">COPY</code> command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy all those files and directories into our working directory - <code class="language-plaintext highlighter-rouge">/app</code>.</p>
+<p>Before we can run <code class="language-plaintext highlighter-rouge">mvnw dependency</code>, we need to get the Maven wrapper and our
+<code class="language-plaintext highlighter-rouge">pom.xml</code> file into our image. We’ll use the <code class="language-plaintext highlighter-rouge">COPY</code> command to do this. The
+<code class="language-plaintext highlighter-rouge">COPY</code> command takes two parameters. The first parameter tells Docker what
+file(s) you would like to copy into the image. The second parameter tells Docker
+where you want that file(s) to be copied to. We’ll copy all those files and
+directories into our working directory - <code class="language-plaintext highlighter-rouge">/app</code>.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> .mvn/ .mvn</span>
 <span class="k">COPY</span><span class="s"> mvnw pom.xml ./</span>
 </code></pre></div></div>
 
-<p>Once we have our <code class="language-plaintext highlighter-rouge">pom.xml</code> file inside the image, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">mvnw dependency:go-offline</code>. This works exactly the same way as if we were running <code class="language-plaintext highlighter-rouge">mvnw</code> (or mvn) dependency locally on our machine, but this time the dependencies will be installed into the image.</p>
+<p>Once we have our <code class="language-plaintext highlighter-rouge">pom.xml</code> file inside the image, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command
+to execute the command <code class="language-plaintext highlighter-rouge">mvnw dependency:go-offline</code>. This works exactly the same
+way as if we were running <code class="language-plaintext highlighter-rouge">mvnw</code> (or <code class="language-plaintext highlighter-rouge">mvn</code>) dependency locally on our machine,
+but this time the dependencies will be installed into the image.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>./mvnw dependency:go-offline
 </code></pre></div></div>
@@ -411,7 +433,7 @@ java-docker    	latest	b1b5f29f74f0	59 minutes ago	     567MB
   </li>
   <li><a href="#overview" class="nomunge">Overview</a></li>
   <li><a href="#sample-application" class="nomunge">Sample application</a></li>
-  <li><a href="#test-the-application" class="nomunge">Test the application</a></li>
+  <li><a href="#test-the-application-without-docker-optional" class="nomunge">Test the application without Docker (optional)</a></li>
   <li><a href="#create-a-dockerfile-for-java" class="nomunge">Create a Dockerfile for Java</a>
     <ul>
       <li><a href="#create-a-dockerignore-file" class="nomunge">Create a .dockerignore file</a></li>
@@ -506,8 +528,8 @@ java-docker    	latest	b1b5f29f74f0	59 minutes ago	     567MB
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
-                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
-                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-twitter"><a href="https://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="https://www.youtube.com/user/dockerrun">Youtube</a></li>
                     <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
                     <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
                     <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>

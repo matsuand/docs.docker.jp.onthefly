@@ -1,8 +1,8 @@
-<!-- Page generated 2021-09-18 11:47:44 +0900-->
+<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker checkpoint | Docker ドキュメント</title>
-  <meta name="description" content="docker checkpoint: チェックポイントを管理します。" />
+  <meta name="description" content="docker checkpoint: Checkpoint and Restore is an experimental feature that allows you to freeze a running container by checkpointing it, which turns its state into a collection of files on..." />
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/reference/commandline/checkpoint/" />
 
@@ -33,7 +33,7 @@
 
   <!-- SEO stuff -->
   <meta name="twitter:title" itemprop="title name" content="docker checkpoint"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="docker checkpoint: チェックポイントを管理します。" />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker checkpoint: Checkpoint and Restore is an experimental feature that allows you to freeze a running container by checkpointing it, which turns its state into a collection of files on..." />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
   <meta name="twitter:site" content="@docker_docs"/>
@@ -41,15 +41,15 @@
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
   <meta property="og:title" content="docker checkpoint" />
-  <meta property="og:description" content="docker checkpoint: チェックポイントを管理します。" />
+  <meta property="og:description" content="docker checkpoint: Checkpoint and Restore is an experimental feature that allows you to freeze a running container by checkpointing it, which turns its state into a collection of files on..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-09-18T11:47:44+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/checkpoint/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-09-18T11:47:44+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker checkpoint","description":"docker checkpoint: チェックポイントを管理します。","url":"https://docs.docker.com/engine/reference/commandline/checkpoint/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"docker checkpoint","description":"docker checkpoint: Checkpoint and Restore is an experimental feature that allows you to freeze a running container by checkpointing it, which turns its state into a collection of files on...","url":"https://docs.docker.com/engine/reference/commandline/checkpoint/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker checkpoint</h1><!--
+                        <section class="section"><h1>docker checkpoint</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><!--
 This page is automatically generated from Docker's source code. If you want to
 suggest a change to the text that appears here, open a ticket or pull request
 in the source repository on GitHub:
@@ -118,7 +118,7 @@ https://github.com/docker/cli
 
 <h2 id="description">説明</h2>
 
-<p>チェックポイントを管理します。</p>
+<p>Manage checkpoints</p>
 
 <p><a href="/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="1.25 API リファレンスを開く (別ウィンドウ)">API 1.25 以上</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
@@ -148,6 +148,102 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker checkpoint COMMAND
 </code></pre></div></div>
+
+<h2 id="extended-description">追加説明</h2>
+
+<p>Checkpoint and Restore is an experimental feature that allows you to freeze a running
+container by checkpointing it, which turns its state into a collection of files
+on disk. Later, the container can be restored from the point it was frozen.</p>
+
+<p>This is accomplished using a tool called <a href="http://criu.org">CRIU</a>, which is an
+external dependency of this feature. A good overview of the history of
+checkpoint and restore in Docker is available in this
+<a href="https://kubernetes.io/blog/2015/07/how-did-quake-demo-from-dockercon-work/">Kubernetes blog post</a>.</p>
+
+<h3 id="installing-criu">Installing CRIU</h3>
+
+<p>If you use a Debian system, you can add the CRIU PPA and install with <code class="language-plaintext highlighter-rouge">apt-get</code>
+<a href="https://launchpad.net/~criu/+archive/ubuntu/ppa">from the criu launchpad</a>.</p>
+
+<p>Alternatively, you can <a href="https://criu.org/Installation">build CRIU from source</a>.</p>
+
+<p>You need at least version 2.0 of CRIU to run checkpoint and restore in Docker.</p>
+
+<h3 id="use-cases-for-checkpoint-and-restore">Use cases for checkpoint and restore</h3>
+
+<p>This feature is currently focused on single-host use cases for checkpoint and
+restore. Here are a few:</p>
+
+<ul>
+  <li>Restarting the host machine without stopping/starting containers</li>
+  <li>Speeding up the start time of slow start applications</li>
+  <li>“Rewinding” processes to an earlier point in time</li>
+  <li>“Forensic debugging” of running processes</li>
+</ul>
+
+<p>Another primary use case of checkpoint and restore outside of Docker is the live
+migration of a server from one machine to another. This is possible with the
+current implementation, but not currently a priority (and so the workflow is
+not optimized for the task).</p>
+
+<h3 id="using-checkpoint-and-restore">Using checkpoint and restore</h3>
+
+<p>A new top level command <code class="language-plaintext highlighter-rouge">docker checkpoint</code> is introduced, with three subcommands:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">docker checkpoint create</code> (creates a new checkpoint)</li>
+  <li><code class="language-plaintext highlighter-rouge">docker checkpoint ls</code> (lists existing checkpoints)</li>
+  <li><code class="language-plaintext highlighter-rouge">docker checkpoint rm</code> (deletes an existing checkpoint)</li>
+</ul>
+
+<p>Additionally, a <code class="language-plaintext highlighter-rouge">--checkpoint</code> flag is added to the <code class="language-plaintext highlighter-rouge">docker container start</code> command.</p>
+
+<p>The options for <code class="language-plaintext highlighter-rouge">docker checkpoint create</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Usage:  docker checkpoint create [OPTIONS] CONTAINER CHECKPOINT
+
+Create a checkpoint from a running container
+
+  --leave-running=false    Leave the container running after checkpoint
+  --checkpoint-dir         Use a custom checkpoint storage directory
+</span></code></pre></div></div>
+
+<p>And to restore a container:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Usage:  docker start --checkpoint CHECKPOINT_ID [OTHER OPTIONS] CONTAINER
+</span></code></pre></div></div>
+
+<p>Example of using checkpoint and restore on a container:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--security-opt</span><span class="o">=</span>seccomp:unconfined <span class="nt">--name</span> cr <span class="nt">-d</span> busybox /bin/sh <span class="nt">-c</span> <span class="s1">'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'</span>
+<span class="go">abc0123
+
+</span><span class="gp">$</span><span class="w"> </span>docker checkpoint create cr checkpoint1
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span>&lt;later&gt;
+<span class="gp">$</span><span class="w"> </span>docker start <span class="nt">--checkpoint</span> checkpoint1 cr
+<span class="go">abc0123
+</span></code></pre></div></div>
+
+<p>This process just logs an incrementing counter to stdout. If you run <code class="language-plaintext highlighter-rouge">docker logs</code>
+in between running/checkpoint/restoring you should see that the counter
+increases while the process is running, stops while it’s checkpointed, and
+resumes from the point it left off once you restore.</p>
+
+<h3 id="known-limitations">Known limitations</h3>
+
+<p>seccomp is only supported by CRIU in very up to date kernels.</p>
+
+<p>External terminal (i.e. <code class="language-plaintext highlighter-rouge">docker run -t ..</code>) is not supported at the moment.
+If you try to create a checkpoint for a container with an external terminal,
+it would fail:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker checkpoint create cr checkpoint1
+<span class="go">Error response from daemon: Cannot checkpoint container c1: rpc error: code = 2 desc = exit status 1: "criu failed: type NOTIFY errno 0\nlog file: /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log\n"
+
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log
+<span class="go">Error (mount.c:740): mnt: 126:./dev/console doesn't have a proper root mount
+</span></code></pre></div></div>
 
 <p><!-- end if options --></p>
 
@@ -235,6 +331,14 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#description" class="nomunge">説明</a></li>
   <li><a href="#usage" class="nomunge">利用方法</a></li>
+  <li><a href="#extended-description" class="nomunge">追加説明</a>
+    <ul>
+      <li><a href="#installing-criu" class="nomunge">Installing CRIU</a></li>
+      <li><a href="#use-cases-for-checkpoint-and-restore" class="nomunge">Use cases for checkpoint and restore</a></li>
+      <li><a href="#using-checkpoint-and-restore" class="nomunge">Using checkpoint and restore</a></li>
+      <li><a href="#known-limitations" class="nomunge">Known limitations</a></li>
+    </ul>
+  </li>
   <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="#child-commands" class="nomunge">下位コマンド</a></li>
 </ul>
@@ -321,8 +425,8 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
-                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
-                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-twitter"><a href="https://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="https://www.youtube.com/user/dockerrun">Youtube</a></li>
                     <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
                     <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
                     <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
