@@ -2425,11 +2425,11 @@ The following examples show bind mount syntax:
 
 @x
 You can use templates for some flags of `service create`, using the syntax
-provided by the Go's [text/template](http://golang.org/pkg/text/template/)
+provided by the Go's [text/template](https://golang.org/pkg/text/template/)
 package.
 @y
 You can use templates for some flags of `service create`, using the syntax
-provided by the Go's [text/template](http://golang.org/pkg/text/template/)
+provided by the Go's [text/template](https://golang.org/pkg/text/template/)
 package.
 @z
 

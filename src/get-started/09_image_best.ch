@@ -24,11 +24,11 @@ description: Tips for building the images for our application
 
 @x
 When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
-Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
+Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 @y
 イメージをビルドしたら`docker scan`コマンドを実行して、イメージにセキュリティぜい弱性がないかどうかをスキャンする。
 これがベストプラクティスです。
-Docker は [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} 社と連携してセキュリティスキャンサービスを提供しています。
+Docker は [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} 社と連携してセキュリティスキャンサービスを提供しています。
 @z
 
 @x

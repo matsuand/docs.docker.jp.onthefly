@@ -49,7 +49,7 @@ This storage driver package comes bundled with several drivers:
 - [s3](s3.md): A driver storing objects in an Amazon Simple Storage Service (S3) bucket.
 - [azure](azure.md): A driver storing objects in [Microsoft Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/).
 - [swift](swift.md): A driver storing objects in [Openstack Swift](https://docs.openstack.org/swift/latest/).
-- [oss](oss.md): A driver storing objects in [Aliyun OSS](http://www.aliyun.com/product/oss).
+- [oss](oss.md): A driver storing objects in [Aliyun OSS](https://www.aliyun.com/product/oss).
 - [gcs](gcs.md): A driver storing objects in a [Google Cloud Storage](https://cloud.google.com/storage/) bucket.
 @y
 - [inmemory](inmemory.md): A temporary storage driver using a local inmemory map. This exists solely for reference and testing.
@@ -57,7 +57,7 @@ This storage driver package comes bundled with several drivers:
 - [s3](s3.md): A driver storing objects in an Amazon Simple Storage Service (S3) bucket.
 - [azure](azure.md): A driver storing objects in [Microsoft Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/).
 - [swift](swift.md): A driver storing objects in [Openstack Swift](https://docs.openstack.org/swift/latest/).
-- [oss](oss.md): A driver storing objects in [Aliyun OSS](http://www.aliyun.com/product/oss).
+- [oss](oss.md): A driver storing objects in [Aliyun OSS](https://www.aliyun.com/product/oss).
 - [gcs](gcs.md): A driver storing objects in a [Google Cloud Storage](https://cloud.google.com/storage/) bucket.
 @z
 
@@ -94,9 +94,9 @@ validation of the `storagedriver.StorageDriver` interface.
 @z
 
 @x
-The preferred method of selecting a storage driver is using the `StorageDriverFactory` interface in the `storagedriver/factory` package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the [Register](http://golang.org/pkg/database/sql/#Register) and [Open](http://golang.org/pkg/database/sql/#Open) methods in the builtin [database/sql](http://golang.org/pkg/database/sql) package.
+The preferred method of selecting a storage driver is using the `StorageDriverFactory` interface in the `storagedriver/factory` package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the [Register](https://golang.org/pkg/database/sql/#Register) and [Open](https://golang.org/pkg/database/sql/#Open) methods in the builtin [database/sql](https://golang.org/pkg/database/sql) package.
 @y
-The preferred method of selecting a storage driver is using the `StorageDriverFactory` interface in the `storagedriver/factory` package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the [Register](http://golang.org/pkg/database/sql/#Register) and [Open](http://golang.org/pkg/database/sql/#Open) methods in the builtin [database/sql](http://golang.org/pkg/database/sql) package.
+The preferred method of selecting a storage driver is using the `StorageDriverFactory` interface in the `storagedriver/factory` package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the [Register](https://golang.org/pkg/database/sql/#Register) and [Open](https://golang.org/pkg/database/sql/#Open) methods in the builtin [database/sql](https://golang.org/pkg/database/sql) package.
 @z
 
 @x

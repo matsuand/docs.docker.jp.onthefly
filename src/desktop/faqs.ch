@@ -603,10 +603,10 @@ Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [W
 @z
 
 @x
-### Why is Windows 10 required?
+### Why is Windows 10 or Windows 11 required?
 @y
-{: #why-is-windows-10-required }
-### なぜ Windows 10 が必要なのですか
+{: #why-is-windows-10-or-windows-11-required }
+### なぜ Windows 10 や Windows 11 が必要なのですか
 @z
 
 @x

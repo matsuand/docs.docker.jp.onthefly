@@ -100,17 +100,20 @@ Docker Desktop を正常にインストールするためには Windows マシ�
 @z
 
 @x
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Home or Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
-WSL 2 on Windows 10:
+WSL 2 on Windows 10 or Windows 11:
 @y
+- Windows 11 64 ビット: Home または Pro バージョン 21H2 またはそれ以降。
+  あるいは Enterprise または Education バージョン 21H2 またはそれ以降。
 - Windows 10 64 ビット: Home または Pro 2004 (build 19041) またはそれ以降、
   Enterprise または Education 1909 (build 18363) またはそれ以降。
 - Windows における WSL 2 機能の有効化。
   詳しくは [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"} を参照してください。
-- Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
+- Windows 10 上、または Windows 11 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
 @z
 
 @x
@@ -144,14 +147,17 @@ WSL 2 on Windows 10:
 @z
 
 @x
+- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
+  For Windows 10 and Windows 11 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
 @y
+- Windows 11 64 ビット: Pro バージョン 21H2 またはそれ以降。
+  あるいは Enterprise または Education バージョン 21H2 またはそれ以降。
 - Windows 10 64 ビット: Pro 2004 (build 19041) またはそれ以降、
   Enterprise または Education 1909 (build 18363) またはそれ以降。
 
-  Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#wsl-2-backend) を参照してください。
+  Windows 10 Home または Windows 11 Home については [WSL 2 バックエンドにおけるシステム要件](#wsl-2-backend) を参照してください。
 @z
 
 @x
@@ -459,7 +465,7 @@ Windows から Docker Desktop をアンインストールするには、以下�
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs.md) provide answers to frequently asked questions.
-* [Release notes]( release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 * [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
 @y
 * [はじめよう](index.md) では Docker Desktop for Windows を紹介しています。

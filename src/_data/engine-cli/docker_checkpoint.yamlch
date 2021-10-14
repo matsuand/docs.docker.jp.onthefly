@@ -4,56 +4,282 @@
 @x
 command: docker checkpoint
 short: Manage checkpoints
-long: Manage checkpoints
-usage: docker checkpoint
-pname: docker
-plink: docker.yaml
-cname:
 @y
 command: docker checkpoint
-short: チェックポイントを管理します。
-long: チェックポイントを管理します。
+short: Manage checkpoints
+@z
+
+@x
+long: |-
+  Checkpoint and Restore is an experimental feature that allows you to freeze a running
+  container by checkpointing it, which turns its state into a collection of files
+  on disk. Later, the container can be restored from the point it was frozen.
+@y
+long: |-
+  Checkpoint and Restore is an experimental feature that allows you to freeze a running
+  container by checkpointing it, which turns its state into a collection of files
+  on disk. Later, the container can be restored from the point it was frozen.
+@z
+
+@x
+  This is accomplished using a tool called [CRIU](http://criu.org), which is an
+  external dependency of this feature. A good overview of the history of
+  checkpoint and restore in Docker is available in this
+  [Kubernetes blog post](https://kubernetes.io/blog/2015/07/how-did-quake-demo-from-dockercon-work/).
+@y
+  This is accomplished using a tool called [CRIU](http://criu.org), which is an
+  external dependency of this feature. A good overview of the history of
+  checkpoint and restore in Docker is available in this
+  [Kubernetes blog post](https://kubernetes.io/blog/2015/07/how-did-quake-demo-from-dockercon-work/).
+@z
+
+@x
+  ### Installing CRIU
+@y
+  ### Installing CRIU
+@z
+
+@x
+  If you use a Debian system, you can add the CRIU PPA and install with `apt-get`
+  [from the criu launchpad](https://launchpad.net/~criu/+archive/ubuntu/ppa).
+@y
+  If you use a Debian system, you can add the CRIU PPA and install with `apt-get`
+  [from the criu launchpad](https://launchpad.net/~criu/+archive/ubuntu/ppa).
+@z
+
+@x
+  Alternatively, you can [build CRIU from source](https://criu.org/Installation).
+@y
+  Alternatively, you can [build CRIU from source](https://criu.org/Installation).
+@z
+
+@x
+  You need at least version 2.0 of CRIU to run checkpoint and restore in Docker.
+@y
+  You need at least version 2.0 of CRIU to run checkpoint and restore in Docker.
+@z
+
+@x
+  ### Use cases for checkpoint and restore
+@y
+  ### Use cases for checkpoint and restore
+@z
+
+@x
+  This feature is currently focused on single-host use cases for checkpoint and
+  restore. Here are a few:
+@y
+  This feature is currently focused on single-host use cases for checkpoint and
+  restore. Here are a few:
+@z
+
+@x
+  - Restarting the host machine without stopping/starting containers
+  - Speeding up the start time of slow start applications
+  - "Rewinding" processes to an earlier point in time
+  - "Forensic debugging" of running processes
+@y
+  - Restarting the host machine without stopping/starting containers
+  - Speeding up the start time of slow start applications
+  - "Rewinding" processes to an earlier point in time
+  - "Forensic debugging" of running processes
+@z
+
+@x
+  Another primary use case of checkpoint and restore outside of Docker is the live
+  migration of a server from one machine to another. This is possible with the
+  current implementation, but not currently a priority (and so the workflow is
+  not optimized for the task).
+@y
+  Another primary use case of checkpoint and restore outside of Docker is the live
+  migration of a server from one machine to another. This is possible with the
+  current implementation, but not currently a priority (and so the workflow is
+  not optimized for the task).
+@z
+
+@x
+  ### Using checkpoint and restore
+@y
+  ### Using checkpoint and restore
+@z
+
+@x
+  A new top level command `docker checkpoint` is introduced, with three subcommands:
+@y
+  A new top level command `docker checkpoint` is introduced, with three subcommands:
+@z
+
+@x
+  - `docker checkpoint create` (creates a new checkpoint)
+  - `docker checkpoint ls` (lists existing checkpoints)
+  - `docker checkpoint rm` (deletes an existing checkpoint)
+@y
+  - `docker checkpoint create` (creates a new checkpoint)
+  - `docker checkpoint ls` (lists existing checkpoints)
+  - `docker checkpoint rm` (deletes an existing checkpoint)
+@z
+
+@x
+  Additionally, a `--checkpoint` flag is added to the `docker container start` command.
+@y
+  Additionally, a `--checkpoint` flag is added to the `docker container start` command.
+@z
+
+@x
+  The options for `docker checkpoint create`:
+@y
+  The options for `docker checkpoint create`:
+@z
+
+@x
+  ```console
+  Usage:  docker checkpoint create [OPTIONS] CONTAINER CHECKPOINT
+
+  Create a checkpoint from a running container
+
+    --leave-running=false    Leave the container running after checkpoint
+    --checkpoint-dir         Use a custom checkpoint storage directory
+  ```
+@y
+  ```console
+  Usage:  docker checkpoint create [OPTIONS] CONTAINER CHECKPOINT
+
+  Create a checkpoint from a running container
+
+    --leave-running=false    Leave the container running after checkpoint
+    --checkpoint-dir         Use a custom checkpoint storage directory
+  ```
+@z
+
+@x
+  And to restore a container:
+@y
+  And to restore a container:
+@z
+
+@x
+  ```console
+  Usage:  docker start --checkpoint CHECKPOINT_ID [OTHER OPTIONS] CONTAINER
+  ```
+@y
+  ```console
+  Usage:  docker start --checkpoint CHECKPOINT_ID [OTHER OPTIONS] CONTAINER
+  ```
+@z
+
+@x
+  Example of using checkpoint and restore on a container:
+@y
+  Example of using checkpoint and restore on a container:
+@z
+
+@x
+  ```console
+  $ docker run --security-opt=seccomp:unconfined --name cr -d busybox /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
+  abc0123
+
+  $ docker checkpoint create cr checkpoint1
+
+  # <later>
+  $ docker start --checkpoint checkpoint1 cr
+  abc0123
+  ```
+@y
+  ```console
+  $ docker run --security-opt=seccomp:unconfined --name cr -d busybox /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
+  abc0123
+
+  $ docker checkpoint create cr checkpoint1
+
+  # <later>
+  $ docker start --checkpoint checkpoint1 cr
+  abc0123
+  ```
+@z
+
+@x
+  This process just logs an incrementing counter to stdout. If you run `docker logs`
+  in between running/checkpoint/restoring you should see that the counter
+  increases while the process is running, stops while it's checkpointed, and
+  resumes from the point it left off once you restore.
+@y
+  This process just logs an incrementing counter to stdout. If you run `docker logs`
+  in between running/checkpoint/restoring you should see that the counter
+  increases while the process is running, stops while it's checkpointed, and
+  resumes from the point it left off once you restore.
+@z
+
+@x
+  ### Known limitations
+@y
+  ### Known limitations
+@z
+
+@x
+  seccomp is only supported by CRIU in very up to date kernels.
+@y
+  seccomp is only supported by CRIU in very up to date kernels.
+@z
+
+@x
+  External terminal (i.e. `docker run -t ..`) is not supported at the moment.
+  If you try to create a checkpoint for a container with an external terminal,
+  it would fail:
+@y
+  External terminal (i.e. `docker run -t ..`) is not supported at the moment.
+  If you try to create a checkpoint for a container with an external terminal,
+  it would fail:
+@z
+
+@x
+  ```console
+  $ docker checkpoint create cr checkpoint1
+  Error response from daemon: Cannot checkpoint container c1: rpc error: code = 2 desc = exit status 1: "criu failed: type NOTIFY errno 0\nlog file: /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log\n"
+
+  $ cat /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log
+  Error (mount.c:740): mnt: 126:./dev/console doesn't have a proper root mount
+  ```
+@y
+  ```console
+  $ docker checkpoint create cr checkpoint1
+  Error response from daemon: Cannot checkpoint container c1: rpc error: code = 2 desc = exit status 1: "criu failed: type NOTIFY errno 0\nlog file: /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log\n"
+
+  $ cat /var/lib/docker/containers/eb62ebdbf237ce1a8736d2ae3c7d88601fc0a50235b0ba767b559a1f3c5a600b/checkpoints/checkpoint1/criu.work/dump.log
+  Error (mount.c:740): mnt: 126:./dev/console doesn't have a proper root mount
+  ```
+@z
+
+@x
 usage: docker checkpoint
 pname: docker
 plink: docker.yaml
+@y
+usage: docker checkpoint
+pname: docker
+plink: docker.yaml
+@z
+
+@x
 cname:
-@z
-
-@x
 - docker checkpoint create
+- docker checkpoint ls
+- docker checkpoint rm
 @y
+cname:
 - docker checkpoint create
-@z
-
-@x
 - docker checkpoint ls
-@y
-- docker checkpoint ls
-@z
-
-@x
 - docker checkpoint rm
+@z
+
+@x
 clink:
-@y
-- docker checkpoint rm
-clink:
-@z
-
-@x
 - docker_checkpoint_create.yaml
-@y
-- docker_checkpoint_create.yaml
-@z
-
-@x
 - docker_checkpoint_ls.yaml
-@y
-- docker_checkpoint_ls.yaml
-@z
-
-@x
 - docker_checkpoint_rm.yaml
 @y
+clink:
+- docker_checkpoint_create.yaml
+- docker_checkpoint_ls.yaml
 - docker_checkpoint_rm.yaml
 @z
 

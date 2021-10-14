@@ -842,9 +842,9 @@ This image was originally created on a white background and converted to a trans
 @z
 
 @x
-![alt_text](machine/img/provision-use-case.png){: .white-bg}
+![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
 @y
-![alt_text](machine/img/provision-use-case.png){: .white-bg}
+![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
 @z
 
 @x
