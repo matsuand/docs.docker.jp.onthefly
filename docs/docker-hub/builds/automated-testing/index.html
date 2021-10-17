@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-10-17 20:33:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リポジトリの自動テスト | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="リポジトリの自動テスト" />
   <meta property="og:description" content="自動テスト。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-17T20:33:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-17T20:33:33+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"リポジトリの自動テスト","description":"自動テスト。","url":"https://docs.docker.com/docker-hub/builds/automated-testing/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,8 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>リポジトリの自動テスト</h1>
-<p>Docker Hub ではコンテナーを利用して、ソースコードリポジトリへの変更を自動的にテストすることができます。
+                        <section class="section"><h1>リポジトリの自動テスト</h1><p>Docker Hub ではコンテナーを利用して、ソースコードリポジトリへの変更を自動的にテストすることができます。
 どのような <a href="/docker-hub/repos">Docker Hub リポジトリ</a> でも<code class="language-plaintext highlighter-rouge">Autotest</code>を有効にすれば、ソースコードリポジトリに対するプルリクエストごとのテスト実行が可能です。
 これによって継続的な統合テストサービスを実現することができます。</p>
 
@@ -123,9 +122,10 @@ Docker Hub リポジトリにビルドイメージをプッシュしたい場合
 
 <p>たとえば以下のとおりです。</p>
 
-<pre><code class="language-none">sut:
-  build: .
-  command: run_tests.sh
+<pre><code class="language-none">services:
+  sut:
+    build: .
+    command: run_tests.sh
 </code></pre>
 
 <p>上の例ではリポジトリをビルドし、ビルドイメージを用いてコンテナー内部で<code class="language-plaintext highlighter-rouge">run_tests.sh</code>を実行します。</p>
@@ -136,8 +136,10 @@ Docker Hub リポジトリにビルドイメージをプッシュしたい場合
 <code class="language-plaintext highlighter-rouge">sut</code>サービスが<code class="language-plaintext highlighter-rouge">0</code>を返すとテストは成功、そうでなければ <strong>失敗</strong> を表わします。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 起動されるサービスは<code class="language-plaintext highlighter-rouge">sut</code>サービスと、<code class="language-plaintext highlighter-rouge">depends_on</code>のもとに定義されたサービスだけです。
-たとえば何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを<code class="language-plaintext highlighter-rouge">depends_on</code>のリスト内に定義して、サービスがすべて起動されるようにします。</p>
+  <p><strong>メモ</strong>  起動されるサービスは<code class="language-plaintext highlighter-rouge">sut</code>サービスと、<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#depends_on"><code class="language-plaintext highlighter-rouge">depends_on</code></a> のもとに定義されたサービスだけです。
+たとえば何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#depends_on"><code class="language-plaintext highlighter-rouge">depends_on</code></a> のリスト内に定義して、サービスがすべて起動されるようにします。
+なお<code class="language-plaintext highlighter-rouge">depends_on</code>は、compose ファイル <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2.0</a> において追加されています。
+したがってファイルバージョンは 2.0 以降とするようにしてください。</p>
 </blockquote>
 
 <p>必要に応じて<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code>ファイルはいくつでも定義できます。

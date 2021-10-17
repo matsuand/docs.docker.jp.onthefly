@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-10-17 20:33:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>バイナリからの Docker Engine インストール | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="バイナリからの Docker Engine インストール" />
   <meta property="og:description" content="Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-17T20:33:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/binaries/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-17T20:33:33+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"バイナリからの Docker Engine インストール","description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.","url":"https://docs.docker.com/engine/install/binaries/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,26 +107,38 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>バイナリからの Docker Engine インストール</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><blockquote>
-  <p><strong>メモ</strong></p>
+                        <section class="section"><h1>バイナリからの Docker Engine インストール</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><blockquote class="important">
+  <p><strong>重要</strong></p>
 
-  <p>このページへはリダイレクトによりやってきたかもしれません。
-お使いの Linux ディストリビューションでは、ダイナミックリンクによる Docker パッケージが提供されていないためです。</p>
+  <p>このページでは、Docker のバイナリをインストールする方法について示しています。
+テスト目的であれば、この手順でも問題ありません。
+ただしこのバイナリを用いて、本番環境に Docker をインストールすることはお勧めしません。
+そうしてしまうと、セキュリティアップデートが自動的に適用されないためです。
+このページにおいて説明する Linux バイナリは、スタティックリンクが行われています。
+これはつまり、ビルド時に依存するパッケージ内にぜい弱性があると、利用する Linux ディストリビューションがセキュリティアップデートを行っても、自動的にパッチ適用されないということです。</p>
+
+  <p>Docker インストールを、パッケージマネージャーから行っていたり、Docker Desktop を通じて行っている場合に比べると、バイナリのインストールでは、更新作業が少々面倒です。
+Docker の新規リリースが行われた際には、インストール更新を (手動で) 行う必要があるためです。</p>
+
+  <p>またスタティックリンクによるバイナリでは、ダイナミックリンクに基づくパッケージが提供する機能が、すべて含まれていない場合があります。</p>
+
+  <p>Windows や Mac を利用する場合は、バイナリの代わりに <a href="/docs.docker.jp.onthefly/desktop/">Docker Desktop</a> のインストールをお勧めします。
+Linux の場合は、各ディストリビューションに固有のインストール手順に従うことをお勧めします。</p>
 </blockquote>
 
 <p>Docker を利用したい、あるいはテスト環境で使いたいと思っても、お使いのプラットフォームでは Docker がサポートされていません。
 そんなときはスタティックリンクされたバイナリをインストールしてみてください。
-可能であれば、お使いのオペレーティングシステム用にビルドされたパッケージを使い、オペレーティングシステムのパッケージ管理方法に基づいて Docker のインストールやアップグレードを行ってください。
-なお 32 ビットのスタティックバイナリには、Docker デーモンが含まれていない点に注意してください。</p>
+可能であれば、お使いのオペレーティングシステム用にビルドされたパッケージを使い、オペレーティングシステムのパッケージ管理方法に基づいて Docker のインストールやアップグレードを行ってください。</p>
 
-<p>Docker デーモンに対するスタティックバイナリは、Linux でのみ利用可能です（<code class="language-plaintext highlighter-rouge">dockerd</code>として）。
-Docker クライアントに対するスタティックバイナリは、Linux と macOS で利用可能です（<code class="language-plaintext highlighter-rouge">docker</code>として）。</p>
+<p>Docker デーモンに対するスタティックバイナリは、Linux (<code class="language-plaintext highlighter-rouge">dockerd</code>) と Windows (<code class="language-plaintext highlighter-rouge">dockerd.exe</code>) でのみ利用可能です。
+Docker クライアントに対するスタティックバイナリは、Linux、Windows、macOS で利用可能です（<code class="language-plaintext highlighter-rouge">docker</code>）。</p>
 
-<p>ここでは Linux と macOS におけるバイナリモジュールのインストール方法を説明します。</p>
+<p>ここでは Linux、Windows、macOS におけるバイナリモジュールのインストール方法を説明します。</p>
 
 <ul>
   <li><a href="#install-daemon-and-client-binaries-on-linux">Linux においてデーモンとクライアントのバイナリをインストール</a></li>
   <li><a href="#install-client-binaries-on-macos">macOS においてクライアントのバイナリをインストール</a></li>
+  <li><a href="#install-server-and-client-binaries-on-windows">Windows においてサーバーとクライアントのバイナリをインストール</a></li>
 </ul>
 
 <h2 id="install-daemon-and-client-binaries-on-linux">Linux においてデーモンとクライアントのバイナリをインストール</h2>
@@ -187,7 +199,6 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
   <li>
     <p>スタティックバイナリのアーカイブをダウンロードします。
 <a href="https://download.docker.com/linux/static/stable/">https://download.docker.com/linux/static/stable/</a> へ行き、対応するハードウェアプラットフォーム向けのものを選びます。
-（<code class="language-plaintext highlighter-rouge">stable</code>の部分は必要に応じて<code class="language-plaintext highlighter-rouge">nightly</code>や<code class="language-plaintext highlighter-rouge">test</code>とします。）
 必要としている Docker Engine のバージョンに対応づいた<code class="language-plaintext highlighter-rouge">.tgz</code>ファイルをダウンロードします。</p>
   </li>
   <li>
@@ -225,15 +236,29 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 
 <h2 id="install-client-binaries-on-macos">macOS においてクライアントのバイナリをインストール</h2>
 
-<p>macOS のバイナリには Docker クライアントのみが提供されます。
-つまり<code class="language-plaintext highlighter-rouge">dockerd</code>デーモンは含まれていません。</p>
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>以下に示す手順は、テスト目的であれば問題ありません。
+macOS のバイナリには Docker クライアントのみが含まれています。
+逆に、コンテナー起動に必要となる<code class="language-plaintext highlighter-rouge">dockerd</code>デーモンは含まれていません。
+したがって、この代わりに <a href="/docs.docker.jp.onthefly/desktop/">Docker Desktop</a> をインストールすることをお勧めします。</p>
+</blockquote>
+
+<p>Mac 用のバイナリには、以下のものは含まれません。</p>
+
+<ul>
+  <li>ランタイム環境。エンジンを機能させるためには、仮想マシンやリモートの Linux マシンを用意して環境設定を行う必要があります。</li>
+  <li><code class="language-plaintext highlighter-rouge">buildx</code>、<code class="language-plaintext highlighter-rouge">docker scan</code>、<code class="language-plaintext highlighter-rouge">docker compose</code>といった Docker コンポーネント。</li>
+</ul>
+
+<p>クライアント用バイナリをインストールするには、以下の手順を行います。</p>
 
 <ol>
   <li>
     <p>スタティックバイナリのアーカイブをダウンロードします。
-<a href="https://download.docker.com/mac/static/stable/x86_64/">https://download.docker.com/mac/static/stable/x86_64/</a> へ行きます。
-（<code class="language-plaintext highlighter-rouge">stable</code>の部分は必要に応じて<code class="language-plaintext highlighter-rouge">nightly</code>や<code class="language-plaintext highlighter-rouge">test</code>とします。）
-必要としている Docker Engine のバージョンに対応づいた<code class="language-plaintext highlighter-rouge">.tgz</code>ファイルをダウンロードします。</p>
+<a href="https://download.docker.com/mac/static/stable/">https://download.docker.com/mac/static/stable/</a> へ行って、<code class="language-plaintext highlighter-rouge">x86_64</code>(Intel チップの Mac の場合)、または<code class="language-plaintext highlighter-rouge">aarch64</code>(Apple シリコンの Mac の場合) を選びます。。
+そして、必要としている Docker Engine のバージョンに対応づいた<code class="language-plaintext highlighter-rouge">.tgz</code>ファイルをダウンロードします。</p>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">tar</code>ユーティリティーを使ってアーカイブを展開します。
@@ -244,11 +269,6 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
   </li>
   <li>
     <p>拡張属性をクリアして実行できるようにします。</p>
-
-    <p><code class="language-plaintext highlighter-rouge">docker/docker</code>を実行している場合には、<em>‘docker’ is</em> <em>damaged and cannot be opened. You should move it to the bin.</em>（’docker’ は壊れていて開くことができません。bin ディレクトリに移動させてください。） というエラーになります。</p>
-
-    <p>Apple はセキュリティのことを考慮してくれています。
-したがってモジュールを実行するためには、それを妨害しているセキュリティメカニズムを取り除かなければなりません。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>xattr <span class="nt">-rc</span> docker
 </code></pre></div>    </div>
@@ -274,6 +294,51 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 </code></pre></div>    </div>
 
     <p>このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
+コンテナーが起動すると、メッセージを表示して終了します。</p>
+  </li>
+</ol>
+
+<h2 id="install-server-and-client-binaries-on-windows">Windows においてサーバーとクライアントのバイナリをインストール</h2>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>以下に示す節では、Windows Server 上に Docker デーモンをインストールする方法を説明します。
+これは Windows コンテナーを動作させることしかできません。
+Windows 用のバイナリには、<code class="language-plaintext highlighter-rouge">buildx</code>、<code class="language-plaintext highlighter-rouge">docker scan</code>、<code class="language-plaintext highlighter-rouge">docker compose</code>といった Docker コンポーネントは含まれません。
+Windows 10 や 11 を利用している場合は、これの代わりに <a href="/docs.docker.jp.onthefly/desktop/">Docker Desktop</a> をインストールすることをお勧めします。</p>
+</blockquote>
+
+<p>Windows 用のバイナリパッケージには<code class="language-plaintext highlighter-rouge">dockerd.exe</code>と<code class="language-plaintext highlighter-rouge">docker.exe</code>の両方が含まれます。
+Windows においてこのバイナリは、ネイティブな Windows コンテナー (つまり Linux コンテナーではない) だけを実行する機能を提供しています。</p>
+
+<p>サーバーとクライアントのバイナリをインストールするには、以下の手順を行います。</p>
+
+<ol>
+  <li>
+    <p>スタティックバイナリのアーカイブをダウンロードします。
+<a href="https://download.docker.com/win/static/stable/x86_64">https://download.docker.com/win/static/stable/x86_64</a> へ行って、一覧の中から最新版を選択します。</p>
+  </li>
+  <li>
+    <p>以下の PowerShell コマンドを実行して、自マシンの program files にアーカイブを抽出、インストールします。</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Expand-Archive</span><span class="w"> </span><span class="nx">/path/to/</span><span class="err">&lt;</span><span class="nx">FILE</span><span class="err">&gt;</span><span class="o">.</span><span class="nf">zip</span><span class="w"> </span><span class="nt">-DestinationPath</span><span class="w"> </span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">ProgramFiles</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>サービス登録を行って Docker Engine を起動します。</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">ProgramFiles</span><span class="nx">\Docker\dockerd</span><span class="w"> </span><span class="nt">--register-service</span><span class="w">
+ </span><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Start-Service</span><span class="w"> </span><span class="nx">docker</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Docker が正しくインストールできたことを確認するため、<code class="language-plaintext highlighter-rouge">hello-world</code>イメージを実行します。</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">ProgramFiles</span><span class="nx">\Docker\docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">hello-world:nanoserver</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>上のコマンドはテストイメージをダウンロードして、コンテナー内において実行します。
 コンテナーが起動すると、メッセージを表示して終了します。</p>
   </li>
 </ol>
@@ -332,6 +397,7 @@ Docker を使ったアプリケーションの構築方法を学びます。</li
     </ul>
   </li>
   <li><a href="#install-client-binaries-on-macos" class="nomunge">macOS においてクライアントのバイナリをインストール</a></li>
+  <li><a href="#install-server-and-client-binaries-on-windows" class="nomunge">Windows においてサーバーとクライアントのバイナリをインストール</a></li>
   <li><a href="#upgrade-static-binaries" class="nomunge">スタティックバイナリのアップグレード</a></li>
   <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
