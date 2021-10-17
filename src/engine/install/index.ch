@@ -64,6 +64,22 @@ redirect_from:
 @z
 
 @x
+> **Docker Desktop for Linux**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+@y
+> **Docker Desktop for Linux**
+>
+> Docker Desktop は、Linux 上と同じように Mac や Windows 上でも、コンテナーのビルド、共有、実行を可能にします。
+> Docker は複雑な設定であっても、ユーザーがコードを書くことだけに専念させてくれます。
+> [サブスクリプションの更新](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} から得られた積極的なサポートのおかげで、[Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} の開発に着手しました。
+> これは公開ロードマップにおいて、2 番めに人気のある機能リクエストです。
+> すぐにでも体験してみたいという方は、[Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}（開発者プレビュープログラム）にサインアップしてください。
+{: .important}
+@z
+
+@x
 ## Supported platforms
 @y
 {: #supported-platforms }

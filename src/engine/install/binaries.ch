@@ -27,13 +27,46 @@ redirect_from:
 @z
 
 @x
-> **Note**: You may have been redirected to this page because there is no longer
-> a dynamically-linked Docker package for your Linux distribution.
-@y
-> **メモ**
+> **Important**
 >
-> このページへはリダイレクトによりやってきたかもしれません。
-> お使いの Linux ディストリビューションでは、ダイナミックリンクによる Docker パッケージが提供されていないためです。
+> This page contains information on how to install Docker using binaries. These
+> instructions are mostly suitable for testing purposes. We do not recommend
+> installing Docker using binaries in production environments as they will not be
+> updated automatically with security updates. The Linux binaries described on this
+> page are statically linked, which means that vulnerabilities in build-time
+> dependencies are not automatically patched by security updates of your Linux
+> distribution.
+>
+> Updating binaries is also slightly more involved when compared to Docker packages
+> installed using a package manager or through Docker Desktop, as it requires
+> (manually) updating the installed version whenever there is a new release of
+> Docker.
+>
+> Also, static binaries may not include all functionalities provided by the dynamic
+> packages.
+>
+> On Windows and Mac, we recommend that you install [Docker Desktop](../../desktop/index.md)
+> instead. For Linux, we recommend that you follow the instructions specific for
+> your distribution.
+{: .important}
+@y
+> **重要**
+>
+> このページでは、Docker のバイナリをインストールする方法について示しています。
+> テスト目的であれば、この手順でも問題ありません。
+> ただしこのバイナリを用いて、本番環境に Docker をインストールすることはお勧めしません。
+> そうしてしまうと、セキュリティアップデートが自動的に適用されないためです。
+> このページにおいて説明する Linux バイナリは、スタティックリンクが行われています。
+> これはつまり、ビルド時に依存するパッケージ内にぜい弱性があると、利用する Linux ディストリビューションがセキュリティアップデートを行っても、自動的にパッチ適用されないということです。
+>
+> Docker インストールを、パッケージマネージャーから行っていたり、Docker Desktop を通じて行っている場合に比べると、バイナリのインストールでは、更新作業が少々面倒です。
+> Docker の新規リリースが行われた際には、インストール更新を (手動で) 行う必要があるためです。
+>
+> またスタティックリンクによるバイナリでは、ダイナミックリンクに基づくパッケージが提供する機能が、すべて含まれていない場合があります。
+>
+> Windows や Mac を利用する場合は、バイナリの代わりに [Docker Desktop](../../desktop/index.md) のインストールをお勧めします。
+> Linux の場合は、各ディストリビューションに固有のインストール手順に従うことをお勧めします。
+{: .important}
 @z
 
 @x
@@ -41,35 +74,35 @@ If you want to try Docker or use it in a testing environment, but you're not on
 a supported platform, you can try installing from static binaries. If possible,
 you should use packages built for your operating system, and use your operating
 system's package management system to manage Docker installation and upgrades.
-Be aware that 32-bit static binary archives do not include the Docker daemon.
 @y
 Docker を利用したい、あるいはテスト環境で使いたいと思っても、お使いのプラットフォームでは Docker がサポートされていません。
 そんなときはスタティックリンクされたバイナリをインストールしてみてください。
 可能であれば、お使いのオペレーティングシステム用にビルドされたパッケージを使い、オペレーティングシステムのパッケージ管理方法に基づいて Docker のインストールやアップグレードを行ってください。
-なお 32 ビットのスタティックバイナリには、Docker デーモンが含まれていない点に注意してください。
 @z
 
 @x
 Static binaries for the Docker daemon binary are only available for Linux (as
-`dockerd`). 
-Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+`dockerd`) and Windows (as `dockerd.exe`).
+Static binaries for the Docker client are available for Linux, Windows, and macOS (as `docker`).
 @y
-Docker デーモンに対するスタティックバイナリは、Linux でのみ利用可能です（`dockerd`として）。
-Docker クライアントに対するスタティックバイナリは、Linux と macOS で利用可能です（`docker`として）。
+Docker デーモンに対するスタティックバイナリは、Linux (`dockerd`) と Windows (`dockerd.exe`) でのみ利用可能です。
+Docker クライアントに対するスタティックバイナリは、Linux、Windows、macOS で利用可能です（`docker`）。
 @z
 
 @x
-This topic discusses binary installation for both Linux and macOS:
+This topic discusses binary installation for Linux, Windows, and macOS:
 @y
-ここでは Linux と macOS におけるバイナリモジュールのインストール方法を説明します。
+ここでは Linux、Windows、macOS におけるバイナリモジュールのインストール方法を説明します。
 @z
 
 @x
-- [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux )
-- [Install client binaries on macOS](#install-client-binaries-on-macos )
+- [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux)
+- [Install client binaries on macOS](#install-client-binaries-on-macos)
+- [Install server and client binaries on Windows](#install-server-and-client-binaries-on-windows)
 @y
-- [Linux においてデーモンとクライアントのバイナリをインストール](#install-daemon-and-client-binaries-on-linux )
-- [macOS においてクライアントのバイナリをインストール](#install-client-binaries-on-macos )
+- [Linux においてデーモンとクライアントのバイナリをインストール](#install-daemon-and-client-binaries-on-linux)
+- [macOS においてクライアントのバイナリをインストール](#install-client-binaries-on-macos)
+- [Windows においてサーバーとクライアントのバイナリをインストール](#install-server-and-client-binaries-on-windows)
 @z
 
 @x
@@ -203,14 +236,12 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 
 @x
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
-    (or change `stable` to `nightly` or `test`),
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/),
     choose your hardware platform, and download the `.tgz` file relating to the
     version of Docker Engine you want to install.
 @y
 1.  スタティックバイナリのアーカイブをダウンロードします。
     [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/) へ行き、対応するハードウェアプラットフォーム向けのものを選びます。
-    （`stable`の部分は必要に応じて`nightly`や`test`とします。）
     必要としている Docker Engine のバージョンに対応づいた`.tgz`ファイルをダウンロードします。
 @z
 
@@ -308,24 +339,50 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 @z
 
 @x
-The macOS binary includes the Docker client only. It does not include the
-`dockerd` daemon.
+> **Note**
+>
+> The following instructions are mostly suitable for testing purposes. The macOS
+> binary includes the Docker client only. It does not include the `dockerd` daemon
+> which is required to run containers. Therefore, we recommend that you install
+> [Docker Desktop](../../desktop/index.md) instead.
 @y
-macOS のバイナリには Docker クライアントのみが提供されます。
-つまり`dockerd`デーモンは含まれていません。
+> **メモ**
+>
+> 以下に示す手順は、テスト目的であれば問題ありません。
+> macOS のバイナリには Docker クライアントのみが含まれています。
+> 逆に、コンテナー起動に必要となる`dockerd`デーモンは含まれていません。
+> したがって、この代わりに [Docker Desktop](../../desktop/index.md) をインストールすることをお勧めします。
+@z
+
+@x
+The binaries for Mac also do not contain:
+@y
+Mac 用のバイナリには、以下のものは含まれません。
+@z
+
+@x
+- A runtime environment. You must set up a functional engine either in a Virtual Machine, or on a remote Linux machine.
+- Docker components such as `buildx`, `docker scan`, and `docker compose`.
+@y
+- ランタイム環境。エンジンを機能させるためには、仮想マシンやリモートの Linux マシンを用意して環境設定を行う必要があります。
+- `buildx`、`docker scan`、`docker compose`といった Docker コンポーネント。
+@z
+
+@x
+To install client binaries, perform the following steps:
+@y
+クライアント用バイナリをインストールするには、以下の手順を行います。
 @z
 
 @x
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
-    (or change `stable` to `nightly` or `test`),
-    and download the `.tgz` file relating to the version of Docker Engine you want
+    [https://download.docker.com/mac/static/stable/](https://download.docker.com/mac/static/stable/) and select `x86_64` (for Mac on Intel chip) or `aarch64` (for Mac on Apple silicon),
+    and then download the `.tgz` file relating to the version of Docker Engine you want
     to install.
 @y
 1.  スタティックバイナリのアーカイブをダウンロードします。
-    [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/) へ行きます。
-    （`stable`の部分は必要に応じて`nightly`や`test`とします。）
-    必要としている Docker Engine のバージョンに対応づいた`.tgz`ファイルをダウンロードします。
+    [https://download.docker.com/mac/static/stable/](https://download.docker.com/mac/static/stable/) へ行って、`x86_64`(Intel チップの Mac の場合)、または`aarch64`(Apple シリコンの Mac の場合) を選びます。。
+    そして、必要としている Docker Engine のバージョンに対応づいた`.tgz`ファイルをダウンロードします。
 @z
 
 @x
@@ -350,21 +407,6 @@ macOS のバイナリには Docker クライアントのみが提供されます
 3.  Clear the extended attributes to allow it run.
 @y
 3.  拡張属性をクリアして実行できるようにします。
-@z
-
-@x
-    In case executing `docker/docker` you get the error message: *'docker' is*
-    *damaged and cannot be opened. You should move it to the bin.*
-@y
-    `docker/docker`を実行している場合には、*'docker' is* *damaged and cannot be opened. You should move it to the bin.*（'docker' は壊れていて開くことができません。bin ディレクトリに移動させてください。） というエラーになります。
-@z
-
-@x
-    Apple takes care about our security. Hence, we need to remove the security 
-    mechanism preventing us running the executable.
-@y
-    Apple はセキュリティのことを考慮してくれています。
-    したがってモジュールを実行するためには、それを妨害しているセキュリティメカニズムを取り除かなければなりません。
 @z
 
 @x
@@ -437,6 +479,112 @@ macOS のバイナリには Docker クライアントのみが提供されます
     container runs, it prints a message and exits.
 @y
     このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
+@z
+
+@x
+## Install server and client binaries on Windows
+@y
+{: #install-server-and-client-binaries-on-windows }
+## Windows においてサーバーとクライアントのバイナリをインストール
+@z
+
+@x
+> **Note**
+>
+> The following section describes how to install the Docker daemon on Windows
+> Server which allows you to run Windows containers only. The binaries for
+> Windows do not contain Docker components such as `buildx`, `docker scan`, and
+> `docker compose`. If you are running Windows 10 or 11, we recommend that you
+> install [Docker Desktop](../../desktop/index.md) instead.
+@y
+> **メモ**
+>
+> 以下に示す節では、Windows Server 上に Docker デーモンをインストールする方法を説明します。
+> これは Windows コンテナーを動作させることしかできません。
+> Windows 用のバイナリには、`buildx`、`docker scan`、`docker compose`といった Docker コンポーネントは含まれません。
+> Windows 10 や 11 を利用している場合は、これの代わりに [Docker Desktop](../../desktop/index.md) をインストールすることをお勧めします。
+@z
+
+@x
+Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows,
+these binaries only provide the ability to run native Windows containers (not
+Linux containers).
+@y
+Windows 用のバイナリパッケージには`dockerd.exe`と`docker.exe`の両方が含まれます。
+Windows においてこのバイナリは、ネイティブな Windows コンテナー (つまり Linux コンテナーではない) だけを実行する機能を提供しています。
+@z
+
+@x
+To install server and client binaries, perform the following steps:
+@y
+サーバーとクライアントのバイナリをインストールするには、以下の手順を行います。
+@z
+
+@x
+1. Download the static binary archive. Go to
+    [https://download.docker.com/win/static/stable/x86_64](https://download.docker.com/win/static/stable/x86_64) and select the latest version from the list.
+@y
+1. スタティックバイナリのアーカイブをダウンロードします。
+   [https://download.docker.com/win/static/stable/x86_64](https://download.docker.com/win/static/stable/x86_64) へ行って、一覧の中から最新版を選択します。
+@z
+
+@x
+2. Run the following PowerShell commands to install and extract the archive to your program files:
+@y
+2. 以下の PowerShell コマンドを実行して、自マシンの program files にアーカイブを抽出、インストールします。
+@z
+
+@x
+    ```powershell
+    PS C:\> Expand-Archive /path/to/<FILE>.zip -DestinationPath $Env:ProgramFiles
+    ```
+@y
+    ```powershell
+    PS C:\> Expand-Archive /path/to/<FILE>.zip -DestinationPath $Env:ProgramFiles
+    ```
+@z
+
+@x
+3. Register the service and start the Docker Engine:
+@y
+3. サービス登録を行って Docker Engine を起動します。
+@z
+
+@x
+    ```powershell
+    PS C:\> $Env:ProgramFiles\Docker\dockerd --register-service
+    PS C:\> Start-Service docker
+    ```
+@y
+    ```powershell
+    PS C:\> $Env:ProgramFiles\Docker\dockerd --register-service
+    PS C:\> Start-Service docker
+    ```
+@z
+
+@x
+4.  Verify that Docker is installed correctly by running the `hello-world`
+    image.
+@y
+4.  Docker が正しくインストールできたことを確認するため、`hello-world`イメージを実行します。
+@z
+
+@x
+    ```powershell
+    PS C:\> $Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+    ```
+@y
+    ```powershell
+    PS C:\> $Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+    ```
+@z
+
+@x
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints a message and exits.
+@y
+    上のコマンドはテストイメージをダウンロードして、コンテナー内において実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
 @z
 

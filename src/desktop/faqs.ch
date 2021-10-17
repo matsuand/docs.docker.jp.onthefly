@@ -73,10 +73,10 @@ By default, Docker Desktop is installed at the following location:
 @z
 
 @x
-Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
 The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022, for those that will require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 @y
-Docker Desktop は、小規模なビジネス向け（従業員 250名未満、かつ収益 1,000 万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、無償提供が継続されます。
+Docker Desktop は、小規模なビジネス向け（従業員 250名未満、かつ収益 1 千万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、無償提供が継続されます。
 大規模なエンタープライズ向けのプロフェッショナル利用に対しては、有償サブスクリプションが必要です。
 この条件の適用開始日は 2021 年 8 月31 日です。
 Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは、猶予期間が設けられています。

@@ -157,15 +157,15 @@ Refer to the subsection that corresponds to your cgroup version.
 @z
 
 @x
-> **Note**
->
-> As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
-> Fedora uses cgroup v2 by default since Fedora 31.
+cgroup v2 is used by default on the following distributions:
+- Fedora (since 31)
+- Debian GNU/Linux (since 11)
+- Ubuntu (since 21.10)
 @y
-> **Note**
->
-> As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
-> Fedora uses cgroup v2 by default since Fedora 31.
+cgroup v2 is used by default on the following distributions:
+- Fedora (since 31)
+- Debian GNU/Linux (since 11)
+- Ubuntu (since 21.10)
 @z
 
 @x

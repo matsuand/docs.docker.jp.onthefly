@@ -298,3 +298,23 @@ To ensure that each org member uses images in a safe and secure environment, you
 @y
         おめでとうございます。registry.json ファイルができあがりました。
 @z
+
+@x
+3. To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign in, they will receive an error message.
+@y
+3. 制約設定が正常に行われていることを確認するには、組織メンバーが Docker Desktop にサインインしてから、自分のローカルマシンにイメージをプルします。
+サインインができない場合には、エラーメッセージが表示されます。
+@z
+
+@x
+    For example, if you enable Image Access Management, your members can pull an Organization Image, Docker Official Image, or Verified Publisher Image onto their local machine. If you disable the restrictions, your members can pull any image, including Community Images.
+@y
+    イメージアクセス管理を有効にしていると、所属メンバーは、組織用のイメージ、Docker 公式イメージ、認証公開者によるイメージを、それぞれローカルマシンにプルできます。
+    制約設定を無効にすると、メンバーはコミュニティイメージなど、あらゆるイメージをプルできるようになります。
+@z
+
+@x
+     ![Image Access Management](images/image-access-management-error.png){:width="700px"}
+@y
+     ![イメージアクセス管理](images/image-access-management-error.png){:width="700px"}
+@z

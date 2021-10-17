@@ -26,6 +26,7 @@ images = \
 	hub-delete-edit-token.png      \
 	hub-edit-token.png             \
 	image-access-management.png    \
+	image-access-management-error.png \
 	image-management-dashboard.png \
 	index-create-repo.png          \
 	index-repo-created.png         \

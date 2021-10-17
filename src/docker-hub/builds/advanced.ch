@@ -76,19 +76,21 @@ service's environment as shown below.
 
 @x
 ```none
-sut:
-  build: .
-  command: run_tests.sh
-  environment:
-    - SOURCE_BRANCH
+services:
+  sut:
+    build: .
+    command: run_tests.sh
+    environment:
+      - SOURCE_BRANCH
 ```
 @y
 ```none
-sut:
-  build: .
-  command: run_tests.sh
-  environment:
-    - SOURCE_BRANCH
+services:
+  sut:
+    build: .
+    command: run_tests.sh
+    environment:
+      - SOURCE_BRANCH
 ```
 @z
 
