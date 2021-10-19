@@ -17,7 +17,7 @@ redirect_from:
 ---
 description: Change log / release notes for Docker Desktop for Mac
 keywords: Docker Desktop for Mac, release notes
-title: Docker Desktop for Mac release notes
+title: Docker Desktop for Mac リリースノート
 toc_min: 1
 toc_max: 2
 redirect_from:
@@ -62,10 +62,10 @@ This page contains information about the new features, improvements, known issue
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 @y
-> Download Docker Desktop
+> Docker Desktop のダウンロード
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 @z
 
 @x
@@ -76,13 +76,26 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
-- Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
-- Fixed menu entry to install a downloaded new Desktop update. When an update is ready to install `Restart` should change to `Update and restart`.
+> When upgrading from 4.1.0, the Docker menu does not change to **Update and restart** so you can just wait for the download to complete (icon changes) and then select **Restart**. This bug is fixed in 4.1.1, for future upgrades.
 @y
-- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
-- Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
-- Fixed menu entry to install a downloaded new Desktop update. When an update is ready to install `Restart` should change to `Update and restart`.
+> 4.1.0 にアップグレードする際に、Docker メニューの **Update and restart**（アップデートと再起動）は変化しません。
+> したがってダウンロードが終了する（アイコンが変わる）まで待って、**Restart**（再起動）を選んでください。
+> このバグは 4.1.1 において修正され、今後のアップグレード時には発生しません。
+@z
+
+@x
+- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug), then the most recently modified file will be used to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+- Fixed the update notification overlay sometimes getting out of sync between the **Settings** button and the **Software update** button in the Docker Dashboard.
+- Fixed the menu entry to install a newly downloaded Docker Desktop update. When an update is ready to install, the **Restart** option changes to **Update and restart**.
+@y
+- アップグレードにあたって`Docker.qcow2`ファイルが無視されて、代わりに新規の`Docker.raw`ファイルが用いられるというバグを修正しました。
+  このバグではコンテナーやイメージが表示されなくなっていました。
+  システムに（このバグによって）両方のファイルが存在している場合、更新日時の新しいファイルを用いることで、コンテナーやイメージが非表示となることを防ぎます。
+  古い`Docker.qcow2`を強制的に利用したい場合は、新しい`Docker.raw`ファイルを削除してください。
+  [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998) を Fix に。
+- Docker Dashboard の **Settings**（設定）ボタンと **Software update**（ソフトウェアアップデート）ボタンとの間で、アップデート通知の同期が行われなくなることがある不具合を修正しました。
+- メニュー項目を修正して、最新のダウンロード済 Docker Desktop の更新をインストールできるようにしました。
+  更新がインストール可能な状態になると、**Restart**（再起動）オプションは **Update and restart**（アップデートと再起動）に変わります。
 @z
 
 @x
@@ -148,7 +161,7 @@ This page contains information about the new features, improvements, known issue
 - [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
 - [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
 - [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
-- debian:bullseye に対するベースディストロ
+- ベースディストロを debian:bullseye に。
 @z
 
 @x
@@ -250,7 +263,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 @y
-- Docker Desktop は、小規模ビジネス向け（従業員 250 未満、かつ年間収益 1,000 万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、 **無償提供が継続** されます。
+- Docker Desktop は、小規模ビジネス向け（従業員 250 未満、かつ年間収益 1 千万ドル未満）、個人利用、教育目的、非商用のオープンソースプロジェクトに対しては、 **無償提供が継続** されます。
 - 大規模なエンタープライズ向けのプロフェッショナル利用に対しては、最低でも月額 5 ドルの有償サブスクリプション（**Pro, Team, Business**）が必要です。
 - この条件の適用開始日は 2021 年 8 月31 日です。
   Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
