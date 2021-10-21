@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-10-21 10:55:04 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop for Mac のネットワーク機能 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Desktop for Mac のネットワーク機能" />
   <meta property="og:description" content="ネットワーク機能。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-21T10:55:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/networking/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-21T10:55:04+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Desktop for Mac のネットワーク機能","description":"ネットワーク機能。","url":"https://docs.docker.com/desktop/mac/networking/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -139,6 +139,37 @@
 <h3 id="httphttps-proxy-support">HTTP/HTTPS プロキシーサポート</h3>
 
 <p><a href="/docs.docker.jp.onthefly/desktop/mac/#proxies">Proxies タブ</a> を参照してください。</p>
+
+<h3 id="ssh-agent-forwarding">SSH エージェント転送</h3>
+
+<p>Docker Desktop for Mac では、コンテナー内部からホストの SSH エージェントを利用することができます。
+これは以下のようにして実現します。</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">docker run</code>コマンドのパラメーターに以下を追加することで、SSH エージェントソケットをバインドマウントします。</p>
+
+    <p><code class="language-plaintext highlighter-rouge">--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock</code></p>
+  </li>
+  <li>
+    <p>コンテナー内において環境変数<code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code>を追加します。</p>
+
+    <p><code class="language-plaintext highlighter-rouge">-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"</code></p>
+  </li>
+</ol>
+
+<p>Docker Compose において SSH エージェントを有効にするために、サービスに以下のフラグを追加します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">/run/host-services/ssh-auth.sock</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/run/host-services/ssh-auth.sock</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock</span>
+</code></pre></div></div>
 
 <h2 id="known-limitations-use-cases-and-workarounds">既知の制約、利用状況、回避策</h2>
 
@@ -264,6 +295,7 @@ Linux 上であっても、コンテナーがブリッジネットワーク上�
       <li><a href="#vpn-passthrough" class="nomunge">VPN パススルー</a></li>
       <li><a href="#port-mapping" class="nomunge">ポートマッピング</a></li>
       <li><a href="#httphttps-proxy-support" class="nomunge">HTTP/HTTPS プロキシーサポート</a></li>
+      <li><a href="#ssh-agent-forwarding" class="nomunge">SSH エージェント転送</a></li>
     </ul>
   </li>
   <li><a href="#known-limitations-use-cases-and-workarounds" class="nomunge">既知の制約、利用状況、回避策</a>
