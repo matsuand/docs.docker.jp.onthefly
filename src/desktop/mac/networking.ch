@@ -122,6 +122,76 @@ See [Proxies](index.md#proxies).
 @z
 
 @x
+### SSH agent forwarding
+@y
+{: #ssh-agent-forwarding }
+### SSH エージェント転送
+@z
+
+@x
+Docker Desktop for Mac allows you to use the host’s SSH agent inside a container. To do this:
+@y
+Docker Desktop for Mac では、コンテナー内部からホストの SSH エージェントを利用することができます。
+これは以下のようにして実現します。
+@z
+
+@x
+1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
+@y
+1. `docker run`コマンドのパラメーターに以下を追加することで、SSH エージェントソケットをバインドマウントします。
+@z
+
+@x
+    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+@y
+    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+@z
+
+@x
+1. Add the `SSH_AUTH_SOCK` environment variable in your container:
+@y
+1. コンテナー内において環境変数`SSH_AUTH_SOCK`を追加します。
+@z
+
+@x
+    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+@y
+    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+@z
+
+@x
+To enable the SSH agent in Docker Compose, add the following flags to your service:
+@y
+Docker Compose において SSH エージェントを有効にするために、サービスに以下のフラグを追加します。
+@z
+
+@x
+ ```yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        source: /run/host-services/ssh-auth.sock
+        target: /run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+ ```
+@y
+ ```yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        source: /run/host-services/ssh-auth.sock
+        target: /run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+ ```
+@z
+
+@x
 ## Known limitations, use cases, and workarounds
 @y
 {: #known-limitations-use-cases-and-workarounds }

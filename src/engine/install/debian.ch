@@ -215,7 +215,6 @@ from the repository.
     $ sudo apt-get update
 
     $ sudo apt-get install \
-        apt-transport-https \
         ca-certificates \
         curl \
         gnupg \
@@ -226,7 +225,6 @@ from the repository.
     $ sudo apt-get update
 
     $ sudo apt-get install \
-        apt-transport-https \
         ca-certificates \
         curl \
         gnupg \
