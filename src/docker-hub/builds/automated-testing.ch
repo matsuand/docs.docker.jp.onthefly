@@ -23,11 +23,12 @@ title: リポジトリの自動テスト
 
 @x
 Docker Hub can automatically test changes to your source code repositories
-using containers. You can enable `Autotest` on [any Docker Hub repository](/docker-hub/repos) to run tests on each pull request to the source code
-repository to create a continuous integration testing service.
+using containers. You can enable `Autotest` on [any Docker Hub repository](../repos.md)
+to run tests on each pull request to the source code repository to create a
+continuous integration testing service.
 @y
 Docker Hub ではコンテナーを利用して、ソースコードリポジトリへの変更を自動的にテストすることができます。
-どのような [Docker Hub リポジトリ](/docker-hub/repos) でも`Autotest`を有効にすれば、ソースコードリポジトリに対するプルリクエストごとのテスト実行が可能です。
+どのような [Docker Hub リポジトリ](../repos.md) でも`Autotest`を有効にすれば、ソースコードリポジトリに対するプルリクエストごとのテスト実行が可能です。
 これによって継続的な統合テストサービスを実現することができます。
 @z
 
@@ -65,14 +66,14 @@ For example:
 @z
 
 @x
-```none
+```yaml
 services:
   sut:
     build: .
     command: run_tests.sh
 ```
 @y
-```none
+```yaml
 services:
   sut:
     build: .
@@ -99,12 +100,21 @@ Tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
 @z
 
 @x
-> **Note**: Only the `sut` service and all other services listed in [`depends_on`](https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on) are started. For instance, if you have services that poll for changes in other services, be sure to include the polling services in the [`depends_on`](https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on) list to make sure all of your services start.
-Also make sure to include a compose file version from 2.0 upward as `depends_on` was added in [version 2.0](https://docs.docker.com/compose/compose-file/compose-versioning/#version-2) file format.
+> **Note**
+> 
+> Only the `sut` service and all other services listed in
+> [`depends_on`](../../compose/compose-file/compose-file-v2.md#depends_on) are
+> started. If you have services that poll for changes in other services, be sure
+> to include the polling services in the [`depends_on`](../../compose/compose-file/compose-file-v2.md#depends_on)
+> list to make sure all of your services start.
+> Also make sure to include a compose file version from 2.0 upward as `depends_on`
+> was added in [version 2.0](../../compose/compose-file/compose-versioning.md#version-2)
+> file format.
 @y
-> **メモ**  起動されるサービスは`sut`サービスと、[`depends_on`]({{ site.baseurl }}/compose/compose-file/compose-file-v2/#depends_on) のもとに定義されたサービスだけです。
-> たとえば何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを [`depends_on`]({{ site.baseurl }}/compose/compose-file/compose-file-v2/#depends_on) のリスト内に定義して、サービスがすべて起動されるようにします。
-> なお`depends_on`は、compose ファイル [バージョン 2.0]({{ site.baseurl }}/compose/compose-file/compose-versioning/#version-2) において追加されています。
+> **メモ**
+> 起動されるサービスは`sut`サービスと、[`depends_on`](../../compose/compose-file/compose-file-v2/#depends_on) のもとに定義されたサービスだけです。
+> 何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを [`depends_on`](../../compose/compose-file/compose-file-v2/#depends_on) のリスト内に定義して、サービスがすべて起動されるようにします。
+> なお`depends_on`は、compose ファイル [バージョン 2.0](../../compose/compose-file/compose-versioning/#version-2) において追加されています。
 > したがってファイルバージョンは 2.0 以降とするようにしてください。
 @z
 

@@ -20,7 +20,8 @@ redirect_from:
 @z
 
 @x
-The following options allow you to customize your automated build and automated test processes.
+The following options allow you to customize your automated build and automated
+test processes.
 @y
 以降に示すオプションを利用することで、自動ビルドや自動テストの処理をカスタマイズすることができます。
 @z
@@ -75,7 +76,7 @@ service's environment as shown below.
 @z
 
 @x
-```none
+```yaml
 services:
   sut:
     build: .
@@ -84,7 +85,7 @@ services:
       - SOURCE_BRANCH
 ```
 @y
-```none
+```yaml
 services:
   sut:
     build: .
@@ -105,7 +106,8 @@ services:
 Docker Hub allows you to override and customize the `build`, `test` and `push`
 commands during automated build and test processes using hooks. For example, you
 might use a build hook to set build arguments used only during the build
-process. (You can also set up [custom build phase hooks](#custom-build-phase-hooks) to perform actions in between these commands.)
+process. (You can also set up [custom build phase hooks](#custom-build-phase-hooks)
+to perform actions in between these commands.)
 @y
 Docker Hub では自動ビルドや自動テストの処理過程において、フックを利用することによって`build`、`test`、`push`の各コマンドをオーバーライドしてカスタマイズすることができます。
 たとえばビルド処理においてのみ適用するビルド引数がある場合に、ビルドフックを利用できます。
@@ -126,7 +128,8 @@ command in the hook or your automated process does not complete.
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a file called
 `hooks/build`, `hooks/test`, or `hooks/push` and include commands that the
-builder process can execute, such as `docker` and `bash` commands (prefixed appropriately with `#!/bin/bash`).
+builder process can execute, such as `docker` and `bash` commands (prefixed
+appropriately with `#!/bin/bash`).
 @y
 この処理工程に対するオーバーライドは、ソースコードリポジトリ内に`hooks`というフォルダーを生成することで実現します。
 このフォルダーは Dockerfile と同じレベルのディレクトリ配下に生成します。
@@ -134,11 +137,15 @@ builder process can execute, such as `docker` and `bash` commands (prefixed appr
 @z
 
 @x
-These hooks will be running on an instance of [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"}, a distro based on Ubuntu, which includes interpreters such as Perl and Python and utilities such as `git` or `curl`. Please check the link above for the full list.
+These hooks will be running on an instance of [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"},
+a distro based on Red Hat Enterprise Linux (RHEL), which includes interpreters
+such as Perl or Python, and utilities such as `git` or `curl`. Refer to the
+[Amazon Linux 2 documentation](https://aws.amazon.com/amazon-linux-2/faqs/){:target="_blank" rel="noopener" class="_"}
+for the full list of available interpreters and utilities.
 @y
-このフックは [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"} や Ubuntu ベースの Linux において動作します。
+このフックは [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"} や Red Hat Enterprise Linux (RHEL) ベースの Linux において動作します。
 こういった Linux であれば Perl や Python といったインタープリター、`git`や`curl`のようなユーティリティーが含まれています。
-フックについては下記の一覧を確認してください。
+利用可能なインタープリターやユーティリティーは、[Amazon Linux 2 documentation](https://aws.amazon.com/amazon-linux-2/faqs/){:target="_blank" rel="noopener" class="_"} から確認してください。
 @z
 
 @x
@@ -160,7 +167,9 @@ autotest processes.
 @x
 Create a folder called `hooks` in your source code repository at the same
 directory level as your Dockerfile. Place files that define the hooks in that
-folder. Hook files can include both `docker` commands, and `bash` commands as long as they are prefixed appropriately with `#!/bin/bash`. The builder executes the commands in the files before and after each step.
+folder. Hook files can include both `docker` commands, and `bash` commands as
+long as they are prefixed appropriately with `#!/bin/bash`. The builder executes
+the commands in the files before and after each step.
 @y
 ソースコードリポジトリ内の Dockerfile と同レベルのディレクトリ内に`hooks`というフォルダーを生成します。
 フックを定義するファイルはそのディレクトリに置きます。
@@ -208,14 +217,19 @@ The following hooks are available:
 @z
 
 @x
-Docker Hub allows you to define build environment variables either in the hook files, or from the automated build interface (which you can then reference in hooks).
+Docker Hub allows you to define build environment variables either in the hook
+files, or from the automated build interface (which you can then reference in hooks).
 @y
 Docker Hub ではビルド環境変数の定義をフックファイル内で行うことができます。
 あるいは自動ビルドの設定画面にて行うこともできます（その後にフック内から参照します）。
 @z
 
 @x
-In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Hub build settings. `$DOCKERFILE_PATH` is a variable that we provide with the name of the Dockerfile we wish to build, and `$IMAGE_NAME` is the name of the image being built.
+In the following example, we define a build hook that uses `docker build` arguments
+to set the variable `CUSTOM` based on the value of variable we defined using the
+Docker Hub build settings. `$DOCKERFILE_PATH` is a variable that we provide with
+the name of the Dockerfile we wish to build, and `$IMAGE_NAME` is the name of
+the image being built.
 @y
 以下に示す利用例ではビルドフックを定義し、そこでは`docker build`の引数として`CUSTOM`という変数を設定します。
 その値は Docker Hub ビルド設定画面を通じて定義した変数値を用います。
@@ -224,12 +238,12 @@ In the following example, we define a build hook that uses `docker build` argume
 @z
 
 @x
-```none
-docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+```console
+$ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 @y
-```none
-docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+```console
+$ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 @z
 
@@ -238,13 +252,14 @@ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 @y
-> **注意**: `hooks/build`ファイルは、ビルド処理において用いられる基本的な [docker build](../../engine/reference/commandline/build.md) コマンドをオーバーライドします。
+> **注意** `hooks/build`ファイルは、ビルド処理において用いられる基本的な [docker build](../../engine/reference/commandline/build.md) コマンドをオーバーライドします。
 したがってフック内には同じようなビルドコマンドを用いなければなりません。
 そうしないと自動ビルドは失敗します。
 @z
 
 @x
-To learn more about Docker build-time variables, see the [docker build documentation](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg).
+Refer to the [docker build documentation](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg)
+to learn more about Docker build-time variables.
 @y
 Docker のビルド時における変数についての詳細は [docker build のドキュメント](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg) を参照してください。
 @z
@@ -257,21 +272,24 @@ Docker のビルド時における変数についての詳細は [docker build �
 @z
 
 @x
-By default the build process pushes the image only to the repository where the build settings are configured. If you need to push the same image to multiple repositories, you can set up a `post_push` hook to add additional tags and push to more repositories.
+By default the build process pushes the image only to the repository where the
+build settings are configured. If you need to push the same image to multiple
+repositories, you can set up a `post_push` hook to add additional tags and push
+to more repositories.
 @y
 ビルド処理においてプッシュされるイメージは、デフォルトではビルド設定において定めているリポジトリに対してのみ行われます。
 同じイメージを別の複数リポジトリにプッシュする必要がある場合は、`post_push`フックを用いてタグを追加し複数リポジトリへプッシュすることができます。
 @z
 
 @x
-```none
-docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
-docker push $DOCKER_REPO:$SOURCE_COMMIT
+```console
+$ docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
+$ docker push $DOCKER_REPO:$SOURCE_COMMIT
 ```
 @y
-```none
-docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
-docker push $DOCKER_REPO:$SOURCE_COMMIT
+```console
+$ docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
+$ docker push $DOCKER_REPO:$SOURCE_COMMIT
 ```
 @z
 
@@ -307,14 +325,19 @@ you do one of the following:
 @z
 
 @x
-		git fetch origin branch:mytargetbranch --depth 1
+    ```console
+    $ git fetch origin branch:mytargetbranch --depth 1
+    ```
 @y
-		git fetch origin branch:mytargetbranch --depth 1
+    ```console
+    $ git fetch origin branch:mytargetbranch --depth 1
+    ```
 @z
 
 @x
-* You can also "unshallow" the clone, which fetches the whole Git history (and potentially
-takes a long time / moves a lot of data) by using the `--unshallow` flag on the fetch:
+* You can also "unshallow" the clone, which fetches the whole Git history (and
+  potentially takes a long time / moves a lot of data) by using the `--unshallow`
+  flag on the fetch:
 @y
 * 「shallowではない」クローンを行うこともできます。
   その場合には Git の全履歴を取得することになります（おそらく取得に時間を要し、多大なデータを取得することになります）。
@@ -322,7 +345,11 @@ takes a long time / moves a lot of data) by using the `--unshallow` flag on the 
 @z
 
 @x
-		git fetch --unshallow origin
+    ```console
+    $ git fetch --unshallow origin
+    ```
 @y
-		git fetch --unshallow origin
+    ```console
+    $ git fetch --unshallow origin
+    ```
 @z

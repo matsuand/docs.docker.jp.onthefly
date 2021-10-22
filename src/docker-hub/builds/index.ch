@@ -29,13 +29,13 @@ title: 自動ビルドの設定
 
 @x
 {% include upgrade-cta.html
-  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images."
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images. If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} program to learn how Docker can support your project on Docker Hub."
   header-text="This feature requires a Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}
 @y
 {% include upgrade-cta.html
-  body="自動ビルド機能は Pro、Team、Business ユーザーが利用可能です。既存のプランをアップデートして、最新のイメージビルドおよびプッシュの自動化を始めてください。"
+  body="自動ビルド機能は Pro、Team、Business ユーザーが利用可能です。既存のプランをアップデートして、最新のイメージビルドおよびプッシュの自動化を始めてください。オープンプロジェクトにおいて自動ビルドを利用している場合は、[Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} プログラムに参加して、Docker Hub 上において Docker からのプロジェクトサポートを受けることができます。"
   header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}
@@ -50,20 +50,9 @@ title: 自動ビルドの設定
 
 @x
 Docker Hub can automatically build images from source code in an external
-repository and automatically push the built image to your Docker
-repositories.
+repository and automatically push the built image to your Docker repositories.
 @y
 Docker Hub においては、外部リポジトリ内のソースコードから自動的にイメージをビルドして、出来上がったイメージをリポジトリに自動プッシュすることができます。
-@z
-
-@x
-> **Note**
->
-> If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} program to learn how Docker can support your project on Docker Hub.
-@y
-> **メモ**
->
-> 自動ビルド機能をオープンソースプロジェクトに利用している場合は、私たちの [オープンソースコミュニティ](https://www.docker.com/community/open-source/application){: target="_blank" rel="noopener" class="_"} プログラムに参加していただき、Docker Hub 上にて Docker がどのようにプロジェクトをサポートするのかを学んでください。
 @z
 
 @x
@@ -103,10 +92,10 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 @z
 
 @x
-Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get concurrent builds, which means that `N`
-autobuilds can be run at the same time. `N` is configured by the plan that you
-subscribe to. Once `N+1` builds are running, any additional builds are
-queued to be run later.
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"},
+you may get concurrent builds, which means that `N` autobuilds can be run at the
+same time. `N` is configured by the plan that you subscribe to. Once `N+1` builds
+are running, any additional builds are queued to be run later.
 @y
 購入している [プラン](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} によっては、同時ビルドを行うこともできます。
 つまり`N`個の自動ビルドを同時に実行します。
@@ -115,14 +104,12 @@ queued to be run later.
 @z
 
 @x
-> **Note**
->
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of concurrent builds for Pro is 5 and for Team is 15.
+The total number of pending builds in the queue is limited to 30 and further
+requests will be discarded. The number of concurrent builds for Pro is 5 and
+for Team and Business is 15.
 @y
-> **メモ**
->
-> キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。
-> 同時ビルド数は Pro プランでは 5、Team プランでは 15 です。
+キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。
+同時ビルド数は Pro プランでは 5、Team プラン、Business プランでは 15 です。
 @z
 
 @x
@@ -167,9 +154,10 @@ Builds can be added to existing repositories, or added when you create a reposit
 @z
 
 @x
-3. If you are setting up automated builds for the first time, select
-the code repository service (GitHub or Bitbucket) where the image's source code is stored.
-You might redirected to the settings page to [link](link-source.md) the code repository service.
+3. If you are setting up automated builds for the first time, select the code
+   repository service (GitHub or Bitbucket) where the image's source code is stored.
+   You may be redirected to the settings page to [link](link-source.md) the code
+   repository service.
 @y
 3. 自動ビルドの設定を初めて行う場合は、イメージのソースコードを保存しているコードリポジトリサービス（GitHub または Bitbucket）を選択します。
    これを行うと、コードリポジトリサービスに [リンク](link-source.md) するための設定画面にリダイレクトされます。
@@ -198,14 +186,14 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 @z
 
 @x
-5.  Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+5. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 @y
-5.  任意の作業として [autotests](automated-testing.md#enable-automated-tests-on-a-repository)（自動テスト）を有効にします。
+5. 任意の作業として [autotests](automated-testing.md#enable-automated-tests-on-a-repository)（自動テスト）を有効にします。
 @z
 
 @x
-6.  Review the default **Build Rules**, and optionally click the
-**plus sign** to add and configure more build rules.
+6. Review the default **Build Rules**, and optionally click the
+   **plus sign** to add and configure more build rules.
 @y
 6.  デフォルトの **Build Rules**（ビルドルール）を確認し、必要に応じて **プラス記号** をクリックして追加のビルドルールを設定します。
 @z
@@ -230,9 +218,9 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 @z
 
 @x
-7.  For each branch or tag, enable or disable the **Autobuild** toggle.
+7. For each branch or tag, enable or disable the **Autobuild** toggle.
 @y
-7.  各ブランチやタグに対して **Autobuild** トグルを使って、自動ビルドの有効、無効を設定します。
+7. 各ブランチやタグに対して **Autobuild** トグルを使って、自動ビルドの有効、無効を設定します。
 @z
 
 @x
@@ -252,7 +240,8 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 @z
 
 @x
-    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
+    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache)
+    can save time if you are building a large image frequently or have
     many dependencies. You might want to leave build caching disabled to
     make sure all of your dependencies are resolved at build time, or if
     you have a large layer that is quicker to build locally.
@@ -263,7 +252,7 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 
 @x
 9. Click **Save** to save the settings, or click **Save and build** to save and
-run an initial test.
+   run an initial test.
 @y
 9. **Save** をクリックして設定を保存します。
    または **Save and build** をクリックして、保存とともに初回のテストを実施します。
@@ -309,9 +298,8 @@ For each source:
 @z
 
 @x
-* Select the **Source type** to build either a **tag** or a
-    **branch**. This tells the build system what to look for in the source code
-    repository.
+* Select the **Source type** to build either a **tag** or a **branch**. This
+  tells the build system what to look for in the source code repository.
 @y
 * **Source type**（ソースタイプ）として **tag**（タグ）または **branch**（ブランチ）のいずれをビルドするかを選びます。
   ビルドシステムがソースコードリポジトリ内のどちらを見にいくかを指示するものです。
@@ -358,21 +346,26 @@ For each source:
 @z
 
 @x
-* Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
+* Specify the **Dockerfile location** as a path relative to the root of the source
+  code repository. If the Dockerfile is at the repository root, leave this path
+  set to `/`.
 @y
 * **Dockerfile location**（Dockerfile の場所）として、ソースコードリポジトリのルートからの相対パスを指定します。
-  （Dockerfile がリポジトリのルートにあるのであれば、このパス設定は`/`のままとしてください。）
+  Dockerfile がリポジトリのルートにあるのであれば、このパス設定は`/`のままとしてください。
 @z
 
 @x
 > **Note**
 >
-> When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md) for more information.
+> When Docker Hub pulls a branch from a source code repository, it performs a
+> shallow clone (only the tip of the specified branch). Refer to
+> [Advanced options for Autobuild and Autotest](advanced.md#source-repository--branch-clones)
+> for more information.
 @y
 > **メモ**
 >
 > Docker Hub がソースコードリポジトリからブランチをプルする際には、shallow クローン（指定ブランチの最新履歴のみのクローン）を行います。
-> 詳しくは [自動ビルドや自動テストに対する高度なオプション](advanced.md) を参照してください。
+> 詳しくは [自動ビルドや自動テストに対する高度なオプション](advanced.md#source-repository--branch-clones) を参照してください。
 @z
 
 @x
@@ -498,8 +491,9 @@ display a **Retry** button.
 @x
 > **Note**
 >
-> If you are viewing the build details for a repository that belongs
-to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+> If you are viewing the build details for a repository that belongs to an
+> Organization, the Cancel and Retry buttons only appear if you have `Read & Write`
+> access to the repository.
 @y
 > **メモ**
 >
@@ -684,7 +678,9 @@ the case, you can specify a path where the build looks for the files.
 @z
 
 @x
-The _build context_ is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
+The _build context_ is the path to the files needed for the build, relative to
+the root of the repository. Enter the path to these files in the **Build context**
+field. Enter `/` to set the build context as the root of the source code repository.
 @y
 **ビルドコンテキスト** は、ビルドに必要となるファイルへのパスのことであり、リポジトリのルートからの相対パスとして表わされます。
 そのようなファイルパスを **Build context**（ビルドコンテキスト）欄に入力します。
@@ -694,12 +690,14 @@ The _build context_ is the path to the files needed for the build, relative to t
 @x
 > **Note**
 >
-> If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+> If you delete the default path `/` from the **Build context** field and leave
+> it blank, the build system uses the path to the Dockerfile as the build context.
+> However, to avoid confusion we recommend that you specify the complete path.
 @y
 > **メモ**
 >
 > **Build context** 欄のデフォルトパス`/`を削除して、そのまま空欄にすると、ビルド処理では Dockerfile へのパスをビルドコンテキストとして用います。
-ただし混乱を避けるため、完全なパス指定を行うことをお勧めします。
+> ただし混乱を避けるため、完全なパス指定を行うことをお勧めします。
 @z
 
 @x
@@ -742,14 +740,16 @@ these in the **Docker Tag** field using `{\1}` through `{\9}`.
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
 
-You could also use capture groups to build and label images that come from various sources. For example, you might have
+You could also use capture groups to build and label images that come from various
+sources. For example, you might have
 
 `/(alice|bob)-v([0-9.]+)/` -->
 @y
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
 
-You could also use capture groups to build and label images that come from various sources. For example, you might have
+You could also use capture groups to build and label images that come from various
+sources. For example, you might have
 
 `/(alice|bob)-v([0-9.]+)/` -->
 @z
@@ -762,7 +762,9 @@ You could also use capture groups to build and label images that come from vario
 @z
 
 @x
-Autobuilds use the BuildKit build system by default. If you want to use the legacy Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} `DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+Autobuilds use the BuildKit build system by default. If you want to use the legacy
+Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
+`DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
 page for more information on BuildKit.
 @y
 自動ビルドは、デフォルトで BuildKit ビルドシステムを利用します。
@@ -791,7 +793,9 @@ Docker Hub ではデプロイ鍵をソースコードリポジトリ内におい
 @z
 
 @x
-To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Hub's build system access to the repositories.
+To work around this, you can set up your automated build using the `SSH_PRIVATE`
+environment variable to override the deployment key and grant Docker Hub's build
+system access to the repositories.
 @y
 これを回避するには、自動ビルドにおいて環境変数`SSH_PRIVATE`を利用します。
 これによってデプロイ鍵をオーバーライドして Docker Hub によるビルド処理が他のリポジトリにアクセスできるようにします。
@@ -800,7 +804,10 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 @x
 > **Note**
 >
-> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds)
+> instead, and configure a service user for your source code provider. You can
+> also do this for an individual account to limit Docker Hub's access to your
+> source repositories.
 @y
 > **メモ**
 >
@@ -843,7 +850,8 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 @x
 > **Note**
 >
-> You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
+> You must configure your private git submodules using git clone over SSH
+> (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
 @y
 > **メモ**
 >
@@ -858,7 +866,8 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 @z
 
 @x
-When you create an automated build repository in your own account namespace, you can start, cancel, and retry builds, and edit and delete your own repositories.
+When you create an automated build repository in your own account namespace, you
+can start, cancel, and retry builds, and edit and delete your own repositories.
 @y
 自分のアカウント名前空間内において自動ビルドリポジトリを生成すれば、そのリポジトリ内での自動ビルドの起動、キャンセル、再ビルド、編集、削除は思いのままです。
 @z
@@ -961,7 +970,9 @@ variable to automated builds associated with the account.
 @z
 
 @x
-    Go to the repository's **Settings** page. On GitHub, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
+    Go to the repository's **Settings** page. On GitHub, add the new "build" team
+    to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team
+    to the list of approved users on the **Access management** screen.
 @y
     リポジトリの **Settings**（設定）ページにアクセスします。
     GitHub では **Collaborators and Teams**（協力者とチーム）の一覧に新たな「ビルド」チームを追加します。
@@ -1040,7 +1051,7 @@ integrates seamlessly with autobuild and autoredeploy.
 > **Note**
 >
 > While the Autotest feature builds an image for testing purposes, it
-does not push the resulting image to Docker Hub.
+> does not push the resulting image to Docker Hub.
 @y
 > **メモ**
 >
