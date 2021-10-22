@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-17 20:33:33 +0900-->
+<!-- Page generated 2021-10-22 21:58:34 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>自動ビルドおよび自動テストにおける高度なオプション | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="自動ビルドおよび自動テストにおける高度なオプション" />
   <meta property="og:description" content="自動ビルド。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-17T20:33:33+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-22T21:58:34+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/advanced/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-17T20:33:33+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-10-22T21:58:34+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"自動ビルドおよび自動テストにおける高度なオプション","description":"自動ビルド。","url":"https://docs.docker.com/docker-hub/builds/advanced/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>自動ビルドおよび自動テストにおける高度なオプション</h1><p>以降に示すオプションを利用することで、自動ビルドや自動テストの処理をカスタマイズすることができます。</p>
+                        <section class="section"><h1>自動ビルドおよび自動テストにおける高度なオプション</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>以降に示すオプションを利用することで、自動ビルドや自動テストの処理をカスタマイズすることができます。</p>
 
 <h2 id="environment-variables-for-building-and-testing">ビルド時およびテスト時の環境変数</h2>
 
@@ -130,13 +130,13 @@
 
 <p>自動テストにあたって<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code>ファイルにこれらの環境変数を利用する場合、以下に示すようにその宣言を<code class="language-plaintext highlighter-rouge">sut</code>サービス環境内で行います。</p>
 
-<pre><code class="language-none">services:
-  sut:
-    build: .
-    command: run_tests.sh
-    environment:
-      - SOURCE_BRANCH
-</code></pre>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">sut</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">run_tests.sh</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SOURCE_BRANCH</span>
+</code></pre></div></div>
 
 <h2 id="override-build-test-or-push-commands">ビルド、テスト、プッシュでの各コマンドのオーバーライド</h2>
 
@@ -152,9 +152,9 @@
 このフォルダーは Dockerfile と同じレベルのディレクトリ配下に生成します。
 <code class="language-plaintext highlighter-rouge">hooks/build</code>、<code class="language-plaintext highlighter-rouge">hooks/test</code>、<code class="language-plaintext highlighter-rouge">hooks/push</code>というファイルを生成して、ビルド処理が実行可能なコマンド、たとえば<code class="language-plaintext highlighter-rouge">docker</code>や<code class="language-plaintext highlighter-rouge">bash</code>コマンド（適切に<code class="language-plaintext highlighter-rouge">#!/bin/bash</code>が宣言されたもの）などを記述します。</p>
 
-<p>このフックは <a href="https://aws.amazon.com/amazon-linux-2/" target="_blank" rel="noopener" class="_">Amazon Linux 2</a> や Ubuntu ベースの Linux において動作します。
+<p>このフックは <a href="https://aws.amazon.com/amazon-linux-2/" target="_blank" rel="noopener" class="_">Amazon Linux 2</a> や Red Hat Enterprise Linux (RHEL) ベースの Linux において動作します。
 こういった Linux であれば Perl や Python といったインタープリター、<code class="language-plaintext highlighter-rouge">git</code>や<code class="language-plaintext highlighter-rouge">curl</code>のようなユーティリティーが含まれています。
-フックについては下記の一覧を確認してください。</p>
+利用可能なインタープリターやユーティリティーは、<a href="https://aws.amazon.com/amazon-linux-2/faqs/" target="_blank" rel="noopener" class="_">Amazon Linux 2 documentation</a> から確認してください。</p>
 
 <h2 id="custom-build-phase-hooks">ビルド時のカスタムフック</h2>
 
@@ -191,11 +191,11 @@
 また<code class="language-plaintext highlighter-rouge">$DOCKERFILE_PATH</code>という変数は、ビルド対象とする Dockerfile 名を定めるものです。
 そして<code class="language-plaintext highlighter-rouge">$IMAGE_NAME</code>はビルドするイメージ名です。</p>
 
-<pre><code class="language-none">docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
-</code></pre>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--build-arg</span> <span class="nv">CUSTOM</span><span class="o">=</span><span class="nv">$VAR</span> <span class="nt">-f</span> <span class="nv">$DOCKERFILE_PATH</span> <span class="nt">-t</span> <span class="nv">$IMAGE_NAME</span> <span class="nb">.</span>
+</code></pre></div></div>
 
 <blockquote>
-  <p><strong>注意</strong>: <code class="language-plaintext highlighter-rouge">hooks/build</code>ファイルは、ビルド処理において用いられる基本的な <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/">docker build</a> コマンドをオーバーライドします。
+  <p><strong>注意</strong> <code class="language-plaintext highlighter-rouge">hooks/build</code>ファイルは、ビルド処理において用いられる基本的な <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/">docker build</a> コマンドをオーバーライドします。
 したがってフック内には同じようなビルドコマンドを用いなければなりません。
 そうしないと自動ビルドは失敗します。</p>
 </blockquote>
@@ -207,9 +207,9 @@
 <p>ビルド処理においてプッシュされるイメージは、デフォルトではビルド設定において定めているリポジトリに対してのみ行われます。
 同じイメージを別の複数リポジトリにプッシュする必要がある場合は、<code class="language-plaintext highlighter-rouge">post_push</code>フックを用いてタグを追加し複数リポジトリへプッシュすることができます。</p>
 
-<pre><code class="language-none">docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
-docker push $DOCKER_REPO:$SOURCE_COMMIT
-</code></pre>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag <span class="nv">$IMAGE_NAME</span> <span class="nv">$DOCKER_REPO</span>:<span class="nv">$SOURCE_COMMIT</span>
+<span class="gp">$</span><span class="w"> </span>docker push <span class="nv">$DOCKER_REPO</span>:<span class="nv">$SOURCE_COMMIT</span>
+</code></pre></div></div>
 
 <h2 id="source-repository--branch-clones">ソースリポジトリ / ブランチのクローン</h2>
 
@@ -222,7 +222,7 @@ docker push $DOCKER_REPO:$SOURCE_COMMIT
   <li>
     <p>以下のようにして対象とするブランチの shallow チェックアウトを行います。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch origin branch:mytargetbranch --depth 1
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>git fetch origin branch:mytargetbranch <span class="nt">--depth</span> 1
 </code></pre></div>    </div>
   </li>
   <li>
@@ -230,7 +230,7 @@ docker push $DOCKER_REPO:$SOURCE_COMMIT
 その場合には Git の全履歴を取得することになります（おそらく取得に時間を要し、多大なデータを取得することになります）。
 取得するには<code class="language-plaintext highlighter-rouge">--unshallow</code>フラグを利用します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch --unshallow origin
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>git fetch <span class="nt">--unshallow</span> origin
 </code></pre></div>    </div>
   </li>
 </ul>
