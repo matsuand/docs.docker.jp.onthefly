@@ -85,10 +85,12 @@ Docker Engine をインストールするには、以下に示す Ubuntu の 64 
 @z
 
 @x
+- Ubuntu Impish 21.10
 - Ubuntu Hirsute 21.04
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 @y
+- Ubuntu Impish 21.10
 - Ubuntu Hirsute 21.04
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)

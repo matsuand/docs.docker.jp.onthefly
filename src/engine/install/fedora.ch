@@ -58,9 +58,11 @@ Docker Engine をインストールするには、以下に示す Fedora の 64 
 @x
 - Fedora 33
 - Fedora 34
+- Fedora 35
 @y
 - Fedora 33
 - Fedora 34
+- Fedora 35
 @z
 
 @x

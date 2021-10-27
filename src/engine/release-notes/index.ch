@@ -58,6 +58,102 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.10
+2021-10-25
+@y
+## 20.10.10
+2021-10-25
+@z
+
+@x
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+@y
+> **重要**
+>
+> [Go 1.16](https://golang.org/doc/go1.16#net/http) における [net/http 変更](https://github.com/golang/go/issues/40909) に基づいて、環境変数`$HTTP_PROXY`を通じて設定された HTTP プロキシーは、TLS (`https://`) 接続には使われなくなりました。
+> `https://` URL のリクエスト処理に対しては、環境変数`$HTTPS_PROXY`も利用していることを確認してください。
+>
+> [HTTP/HTTPS プロキシーの節](../../config/daemon/systemd.md#httphttps-proxy) を参照して、Docker デーモンがプロキシーサーバーを利用する設定方法について確認してください。
+{: .important }
+@z
+
+@x
+### Builder
+@y
+### Builder
+@z
+
+@x
+- Fix platform-matching logic to fix `docker build` using not finding images in
+  the local image cache on Arm machines when using BuildKit [moby/moby#42954](https://github.com/moby/moby/pull/42954)
+@y
+- ARM マシンにおいて BuildKit を利用する場合に、ローカルのイメージキャッシュが見つからないことを利用して、`docker build`修正のため、プラットフォームに応じたマッチングロジックを修正しました。
+  [moby/moby#42954](https://github.com/moby/moby/pull/42954)
+@z
+
+@x
+## Runtime
+@y
+{: #runtime }
+## ランタイム
+@z
+
+@x
+- Add support for `clone3` syscall in the default seccomp policy to support running
+  containers based on recent versions of Fedora and Ubuntu. [moby/moby/#42836](https://github.com/moby/moby/pull/42836).
+- Windows: update hcsshim library to fix a bug in sparse file handling in container
+  layers, which was exposed by recent changes in Windows [moby/moby#42944](https://github.com/moby/moby/pull/42944).
+- Fix some situations where `docker stop` could hang forever [moby/moby#42956](https://github.com/moby/moby/pull/42956).
+@y
+- Fedora および Ubuntu の最新版においてコンテナー実行をサポートするために、デフォルトの seccomp ポリシー内に`clone3`システムコールへの対応を追加しました。
+  [moby/moby/#42836](https://github.com/moby/moby/pull/42836).
+- Windows: hcsshim ライブラリを修正し、コンテナーレイヤー内においてスパースファイルの扱いに関するバグを修正しました。
+  これは Windows における最新の変更において公開されています。
+  [moby/moby#42944](https://github.com/moby/moby/pull/42944).
+- `docker stop`がハングしてしまう状況を修正しました。
+  [moby/moby#42956](https://github.com/moby/moby/pull/42956).
+@z
+
+@x
+### Swarm
+@y
+### Swarm
+@z
+
+@x
+- Fix an issue where updating a service did not roll back on failure [moby/moby#42875](https://github.com/moby/moby/pull/42875).
+@y
+- サービス更新の際に、処理失敗があってもロールバックしていなかった点を修正しました。
+  [moby/moby#42875](https://github.com/moby/moby/pull/42875).
+@z
+
+@x
+## Packaging
+@y
+{: #packaging }
+## パッケージ
+@z
+
+@x
+- Add packages for Ubuntu 21.10 "Impish Indri" and Fedora 35.
+- Update `docker scan` to v0.9.0
+- Update Golang runtime to Go 1.16.9.
+@y
+- Ubuntu 21.10 "Impish Indri" と Fedora 35 向けにパッケージを追加しました。
+- `docker scan`を v0.9.0 にアップデートしました。
+- Go 言語ランタイムを Go 1.16.9 にアップデートしました。
+@z
+
+@x
 ## 20.10.9
 2021-10-04
 @y
