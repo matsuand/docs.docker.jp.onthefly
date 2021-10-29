@@ -27,6 +27,25 @@ known issues for each Docker Hub release.
 @z
 
 @x
+## 2021-10-27
+@y
+## 2021-10-27
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+* **Beta:** Try [Beta IPv6 support for Docker Hub Registry](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) and [provide your feedback](https://github.com/docker/hub-feedback/issues/2165).
+@y
+* **Beta:** Try [Beta IPv6 support for Docker Hub Registry](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) and [provide your feedback](https://github.com/docker/hub-feedback/issues/2165).
+@z
+
+@x
 ## 2021-08-31
 @y
 ## 2021-08-31
@@ -35,7 +54,8 @@ known issues for each Docker Hub release.
 @x
 ### New
 @y
-### New
+{: #new }
+### 新機能
 @z
 
 @x
@@ -223,8 +243,7 @@ For more information about this feature and for instructions on how to use it, s
 @z
 
 @x
-The **Repositories** view now shows which images have gone stale because they haven't been 
-pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
 @y
 **Repositories**（リポジトリ）画面では、プルやプッシュが行われずに古い扱いとなったイメージがどれであるかを確認できるようになりました。
 詳しくは [リポジトリタグ](repos.md#viewing-repository-tags) を参照してください。

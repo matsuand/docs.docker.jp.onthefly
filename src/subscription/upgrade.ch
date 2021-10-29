@@ -284,9 +284,9 @@ You can view the confirmation of the upgrade with an invoice containing details 
 @z
 
 @x
-You must be on owner of the organization to make changes to the billing information.
+You must be an owner of the organization to make changes to the billing information.
 @y
-You must be on owner of the organization to make changes to the billing information.
+You must be an owner of the organization to make changes to the billing information.
 @z
 
 @x
