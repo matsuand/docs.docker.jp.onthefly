@@ -95,6 +95,24 @@ any time.
 @z
 
 @x
+The following video walks you through the process of managing access tokens.
+@y
+以下のビデオでは、アクセストークンの管理手順について示しています。
+@z
+
+@x
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Qs5xGj85Aek" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@y
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Qs5xGj85Aek" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@z
+
+@x
+<br>
+@y
+<br>
+@z
+
+@x
 You can create as many tokens as you need.
 @y
 アクセストークンは必要な分だけ生成することができます。

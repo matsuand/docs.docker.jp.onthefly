@@ -40,14 +40,16 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 @x
 > **Note:**
 >
-> - You must be a member of the ‘Owners’ team to remove seats from your organization.
->
-To remove seats from a monthly or an annual subscription:
+> You must be a member of the ‘Owners’ team to remove seats from your organization.
 @y
 > **Note:**
 >
-> - You must be a member of the ‘Owners’ team to remove seats from your organization.
->
+> You must be a member of the ‘Owners’ team to remove seats from your organization.
+@z
+
+@x
+To remove seats from a monthly or an annual subscription:
+@y
 To remove seats from a monthly or an annual subscription:
 @z
 
