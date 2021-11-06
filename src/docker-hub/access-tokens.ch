@@ -113,9 +113,9 @@ The following video walks you through the process of managing access tokens.
 @z
 
 @x
-You can create as many tokens as you need.
+To create your access token:
 @y
-アクセストークンは必要な分だけ生成することができます。
+アクセストークンを生成するには以下を行います。
 @z
 
 @x
