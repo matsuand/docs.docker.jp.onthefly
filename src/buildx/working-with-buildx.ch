@@ -73,7 +73,7 @@ $ chmod a+x ~/.docker/cli-plugins/docker-buildx
 Here is how to use buildx inside a Dockerfile through the
 [`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) image:
 @y
-以下に示すのは、[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) イメージを使って、DOckerfile 内において buildx を利用する例です。
+以下に示すのは、[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) イメージを使って、Dockerfile 内において buildx を利用する例です。
 @z
 
 @x
