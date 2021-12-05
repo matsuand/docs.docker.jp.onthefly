@@ -119,7 +119,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
    ```dockerfile
    # syntax=docker/dockerfile:1
    FROM node:12-alpine
-   RUN apk add --no-cache python g++ make
+   RUN apk add --no-cache python3 g++ make
    WORKDIR /app
    COPY . .
    RUN yarn install --production
@@ -129,7 +129,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
    ```dockerfile
    # syntax=docker/dockerfile:1
    FROM node:12-alpine
-   RUN apk add --no-cache python g++ make
+   RUN apk add --no-cache python3 g++ make
    WORKDIR /app
    COPY . .
    RUN yarn install --production

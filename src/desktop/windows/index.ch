@@ -108,23 +108,15 @@ This section explains the configuration options accessible from the **Settings**
 @z
 
 @x
-On the **General** tab of the Settings dialog, you can configure when to start and update Docker.
+On the **General** tab, you can configure when to start Docker and specify other settings.
 @y
-Settings ダイアログの **General** タブにおいて、Docker の起動や更新をいつ行うのかを設定します。
+Settings ダイアログの **General** タブにおいて、Docker の起動をいつ行うかなどを設定します。
 @z
 
 @x
-![Settings](images/settings-general.png){:width="750px"}
+![Settings](/images/settings-general.png){:width="750px"}
 @y
 ![Settings ダイアログ](images/settings-general.png){:width="750px"}
-@z
-
-@x
-- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
-@y
-- **Automatically check for updates**（アップデートの自動チェック）＝ デフォルトで Docker Desktop は新たなバージョンがあるかどうかを自動的に確認するように設定されています。
-  組織に属する一人として Docker Desktop をインストールしている場合、自分では Docker Desktop の更新が許可されていないことがあるかもしれません。
-  その場合は [既存組織のチームプランへのアップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) を行って、このチェックボックスをオフとし、更新の自動チェックを無効にしてください。
 @z
 
 @x
@@ -205,8 +197,8 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 @x
 > **Note**
 >
-> The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
-> Windows container mode these resources are managed by Windows. In WSL 2 
+> The Advanced tab is only available in Hyper-V mode, because Windows manages
+> the resources in WSL 2 mode and Windows container mode. In WSL 2
 > mode, you can configure limits on the memory, CPU, and swap size allocated
 > to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
 class="_"}.
@@ -214,7 +206,7 @@ class="_"}.
 > **メモ**
 >
 > Advanced タブは Hyper-V モードにおいてのみ利用可能です。
-> WSL 2 モードや Windows コンテナーモードでは、ここで扱うリソースは Windows において管理されます。
+> WSL 2 モードや Windows コンテナーモードでは、ここで扱うリソースは Windows において管理されるからです。
 > WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank" class="_"} に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
 @z
 
@@ -226,8 +218,8 @@ Advanced タブでは、Docker におけるリソースの利用制限を設定�
 
 @x
 - **CPUs**: By default, Docker Desktop is set to use half the number of processors
-available on the host machine. To increase processing power, set this to a
-higher number; to decrease, lower the number.
+available on the host machine. To increase the processing power, set this to a
+higher number. To decrease the processing power, set this to a lower number.
 @y
 - **CPU** ＝ デフォルトにおいて Docker Desktop は、ホストマシン上で利用可能なプロセッサー数の半分を利用するものとして設定されています。
 プロセッサー性能を向上させるには、この設定値を大きくします。
@@ -236,7 +228,7 @@ higher number; to decrease, lower the number.
 
 @x
 - **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
-allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease the RAM, lower the number.
 @y
 - **メモリ** ＝ デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
 この値はマシン上において利用可能な全メモリ容量の中から割り当てられます。
@@ -280,13 +272,13 @@ You can also move the disk image to a different location. If you attempt to move
 @x
 > **Note**
 >
-> The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
-> and Windows container mode all files are automatically shared by Windows.
+> The File sharing tab is only available in Hyper-V mode because the files
+> are automatically shared in WSL 2 mode and Windows container mode.
 @y
 > **メモ**
 >
 > Advanced タブは Hyper-V モードにおいてのみ利用可能です。
-> WSL 2 モードや Windows コンテナーモードでは、ファイルはすべて Windows において自動的に共有されます。
+> WSL 2 モードや Windows コンテナーモードでは、ファイルはすべて Windows において自動的に共有されるからです。
 @z
 
 @x
@@ -338,7 +330,7 @@ File share settings are:
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
- * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
+ * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux, it is possible to create two separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 @y
 > 共有フォルダー、パーミッション、ボリュームマウントに関するヒント
 >
@@ -388,7 +380,7 @@ popup asking if you want to share the specified folder.
 @z
 
 @x
-You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
+You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 @y
 **Share it**（共有する）を選択すると、Docker Desktop の共有フォルダーリストに追加されて、コンテナーから利用可能になります。
@@ -429,10 +421,10 @@ environment variables for them, just like you would do on Linux, for example:
 
 @x
 ```ps
-> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 @y
 ```ps
-> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 @z
 
 @x
@@ -468,13 +460,13 @@ see [Set environment variables](/engine/reference/commandline/run/#set-environme
 @x
 > **Note**
 >
-> The Network tab is not available in Windows container mode because networking is 
-> managed by Windows.
+> The Network tab is not available in the Windows container mode because
+> Windows manages networking.
 @y
 > **メモ**
 >
 > Network タブは Windows コンテナーモードでは利用できません。
-> ネットワークは Windows によって管理されます。
+> ネットワークは Windows によって管理されているからです。
 @z
 
 @x
@@ -735,17 +727,73 @@ Docker Desktop における Kubernetes 統合機能の利用方法について�
 @z
 
 @x
-The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+The **Software Updates** section notifies you of any updates available to Docker Desktop. When there's a new update, you can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
 @y
-Software Updates（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
-アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
+**Software Updates**（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
+最新アップデートがあれば、即座にダウンロードすることができます。
+または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
 @z
 
 @x
-If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+> **Disable automatic check for updates**
+>
+> Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../windows/release-notes/index.md) to start using this feature.
+{: .important}
 @y
-Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
-これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
+> **アップデート自動チェックの無効化**
+>
+> Docker Desktop 4.2.0 からは、Docker Personal や Docker Pro など、すべての Docker サブスクリプションにおいて、このオプションによる自動更新を無効にすることができます。
+> [Docker Desktop 4.2.0](../windows/release-notes/index.md) に更新して、この機能を利用してみてください。
+{: .important}
+@z
+
+@x
+Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+@y
+チェックボックス **Automatically Check for Updates**（アップデートの自動チェック）をオフにすることで、この機能を無効にします。
+これを行うと Docker メニューにおける通知が無効になります。
+また Docker ダッシュボード上の通知バッチも表示されなくなります。
+アップデートを手動でチェックするには、Docker メニューの **Check for updates**（アップデートのチェック）オプションを実行します。
+@z
+
+@x
+To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
+@y
+Docker Desktop による最新アップデートの自動ダウンロードを、バックグラウンド実行により行うには、**Always download updates**（アップデートの常時ダウンロード）を選びます。
+これを選ぶと、アップデートが入手可能になると、最新版がダウンロードされます。
+アップデートのダウンロードが終了したら、**Apply and Restart**（適用と再起動）をクリックして、アップデートをインストールします。
+同じことは Docker メニューか、あるいは Docker ダッシュボード内の **Updates**（更新）セクションからも行うことができます。
+@z
+
+@x
+## Dashboard
+@y
+{: #dashboard }
+## ダッシュボード
+@z
+
+@x
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
+@y
+Docker ダッシュボードを利用すると、コンテナーやアプリケーションとのやりとりが行えるようになり、アプリケーションのライフサイクルを手元のマシンから管理することができます。
+ダッシュボードの UI にはすべてのコンテナーが表示され、実行中、停止中、開始中といった状態が示されます。
+提供されている UI は直感的になっていて、コンテナーや Docker Compose アプリケーションを確認したり管理したりといった通常操作を行うことができます。
+詳しくは [Docker ダッシュボード](../dashboard.md) を参照してください。
+@z
+
+@x
+## Add TLS certificates
+@y
+{: #add-tls-certificates }
+## TLS 証明書の追加
+@z
+
+@x
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
+@y
+Docker デーモンに対しては、信頼できる認証局（Certificate Authorities; CAs）（レジストリサーバー証明書の確認のため）やクライアント証明書（レジストリの認証のため）を追加することができます。
 @z
 
 @x
@@ -892,12 +940,12 @@ Linux コンテナーに戻した場合、プロキシーやデーモンの設�
 @z
 
 @x
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
 @y
-Docker Desktop ダッシュボードは、コンテナーやアプリケーションを対話的に操作できるようにするものであり、アプリケーションのライフサイクルを手元のマシンから直接管理できます。 
+Docker ダッシュボードは、コンテナーやアプリケーションを対話的に操作できるようにするものであり、アプリケーションのライフサイクルを手元のマシンから直接管理できます。 
 ダッシュボードの UI 画面からは、すべてのコンテナーが実行中、停止中、起動中といったステータスとともに表示されます。
 直感的なインターフェースを通じて、コンテナーや Docker Compose ベースのアプリケーションといった Docker オブジェクトを、確認し管理することができます。
-[Docker Desktop ダッシュボード](../dashboard.md) を参照してください。
+[Docker ダッシュボード](../dashboard.md) を参照してください。
 @z
 
 @x
@@ -983,6 +1031,70 @@ After you have enabled two-factor authentication:
 After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
 @y
 認証が正常に行われたら、Docker Desktop メニューから組織やリポジトリに直接アクセスできるようになります。
+@z
+
+@x
+## Pause/Resume
+@y
+{: pauseresume}
+## 一時停止／再開
+@z
+
+@x
+Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine will be paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+@y
+Docker Desktop 4.2 のリリース以降では、Docker Desktop セッションを活用していない場合に、これを一時停止できるようになりました。
+これにより、マシンの CPU リソース消費を節約できます。
+Docker Desktop を一時停止すると、Docker Engine を稼働させている Linux VM が一時停止します。
+そして各コンテナーのその時点での状態が、すべてメモリ上に保存された上で、すべてのプロセスは停止します。
+このときには CPU 使用量が軽減され、ノート PC であればバッテリー駆動を長く保つことができます。
+Resume（再開）オプションをクリックすれば、いつでも Docker Desktop を再開することができます。
+@z
+
+@x
+> **Note**
+>
+> The Pause/Resume feature is currently not available in the Windows containers mode.
+@y
+> **メモ**
+>
+> The Pause/Resume feature is currently not available in the Windows containers mode.
+@z
+
+@x
+To pause Docker Desktop, right-click the Docker icon in the notifications area (or System tray) and then click **Pause**.
+@y
+Docker Desktop を一時停止するには、通知エリア（またはシステムトレイ）の Docker アイコンを右クリックして、**Pause**（一時停止）をクリックします。
+@z
+
+@x
+![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
+@y
+![Docker Desktop ポップアップメニュー](images/docker-menu-settings.png){:width="300px"}
+@z
+
+@x
+Docker Desktop now displays the paused status on the Docker menu and on all screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+@y
+Docker Desktop は一時停止のステータスであることが Docker メニュー上に表示されます。
+同様に Docker ダッシュボード上の全画面にも表示されます。
+Docker Desktop が一時停止されていても、ダッシュボードの **Preferences** と **Troubleshoot** メニューにはアクセスすることができます。
+@z
+
+@x
+Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
+@y
+![クジラメニュー](images/whale-x.png){: .inline} > **Resume**（再開）を選べば、Docker Desktop を再開できます。
+@z
+
+@x
+> **Note**
+>
+> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
+@y
+> **メモ**
+>
+> Docker Desktop を一時停止すると、Docker CLI において実行中であったコマンドは、後に Docker Desktop を自動的に再開させます。
 @z
 
 @x

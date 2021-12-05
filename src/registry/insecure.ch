@@ -184,9 +184,9 @@ This is more secure than the insecure registry solution.
 @z
 
 @x
-    Be sure to use the name `myregistrydomain.com` as a CN.
+    Be sure to use the name `myregistry.domain.com` as a CN.
 @y
-    Be sure to use the name `myregistrydomain.com` as a CN.
+    Be sure to use the name `myregistry.domain.com` as a CN.
 @z
 
 @x

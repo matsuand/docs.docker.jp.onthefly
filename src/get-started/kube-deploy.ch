@@ -169,7 +169,7 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 @x
     In this Kubernetes YAML file, we have two objects, separated by the `---`:
     - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `bulletinboard:1.0` image from the previous step in this tutorial.
-    - A `NodePort` service, which will route traffic from port 30001 on your host to port 8080 inside the pods it routes to, allowing you to reach your bulletin board from the network.
+    - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your bulletin board from the network.
 @y
     この Kubernetes YAML ファイルには二つのオブジェクトを定義しています。
     それらは `---` で区切られています。
@@ -177,7 +177,7 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
       この例では`replica`すなわちポッドのコピーを１つだけ用意します。
       そしてこのポッドは、その中に１つだけコンテナーを持ちます（このことは`template:`キー配下により示されます）。
       ベースとするイメージは、本チュートリアルの以前の手順にて利用した`bulletinboard:1.0`です。
-    - `NodePort`サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 8080 ポートへ接続します。
+    - `NodePort`サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 3000 ポートへ接続します。
       こうしてネットワーク上から掲示板アプリへアクセスできるようになります。
 @z
 
@@ -288,12 +288,12 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 
 @x
     NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    bb-entrypoint   NodePort    10.106.145.116   <none>        8080:30001/TCP   53s
+    bb-entrypoint   NodePort    10.106.145.116   <none>        3000:30001/TCP   53s
     kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          138d
     ```
 @y
     NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    bb-entrypoint   NodePort    10.106.145.116   <none>        8080:30001/TCP   53s
+    bb-entrypoint   NodePort    10.106.145.116   <none>        3000:30001/TCP   53s
     kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          138d
     ```
 @z

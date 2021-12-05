@@ -481,11 +481,11 @@ Compose は`pip`を使って [pypi](https://pypi.python.org/pypi/docker-compose)
 
 @x
 ```console
-$ pip install docker-compose
+$ pip3 install docker-compose
 ```
 @y
 ```console
-$ pip install docker-compose
+$ pip3 install docker-compose
 ```
 @z
 

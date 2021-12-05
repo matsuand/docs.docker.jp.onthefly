@@ -1276,10 +1276,10 @@ Volumes are useful for backups, restores, and migrations. Use the
 @z
 
 @x
-### Backup a container
+### Back up a volume
 @y
-{: #backup-a-container }
-### コンテナーのバックアップ
+{: #back-up-a-volume }
+### ボリュームのバックアップ
 @z
 
 @x
@@ -1333,10 +1333,10 @@ our `dbdata` volume.
 @z
 
 @x
-### Restore container from backup
+### Restore volume from backup
 @y
-{: #restore-container-from-backup }
-### バックアップからのコンテナー復元
+{: #restore-volume-from-backup }
+### バックアップからのボリュームの復元
 @z
 
 @x

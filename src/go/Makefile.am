@@ -23,8 +23,10 @@ bases = \
 	deprecated           \
 	experimental         \
 	formatting           \
+	mac-desktop-pause    \
 	rootless             \
 	tip-scanning         \
+	win-desktop-pause    \
 	wsl2
 
 ch_mds = $(bases:=.ch)

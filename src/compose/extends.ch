@@ -417,7 +417,8 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
 > discussion thread on the possibility of adding support for `extends` in some form in
-> future versions.
+> future versions. The `extends` keyword has been included in docker-compose versions 1.27
+> and higher.
 @y
 > **メモ**
 >
@@ -426,6 +427,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > これは Compose バージョン 3.x ではサポートされていません。
 > キーワードの追加、削除に関しては [バージョン 3 のまとめ](compose-file/compose-versioning.md#version-3) や [アップグレード方法](compose-file/compose-versioning.md#upgrading) を参照してください。
 > また [moby/moby#31101](https://github.com/moby/moby/issues/31101) では、将来のバージョンにおいて何らかの形式で`extends`をサポートする可能性について議論するスレッドがありますので、確認してみてください。
+> キーワード`extends`は、docker-compose のバージョン 1.27 およびそれ以降から含まれるようになりました。
 @z
 
 @x

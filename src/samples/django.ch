@@ -82,6 +82,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    ```dockerfile
    # syntax=docker/dockerfile:1
    FROM python:3
+   ENV PYTHONDONTWRITEBYTECODE=1
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code
    COPY requirements.txt /code/
@@ -92,6 +93,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    ```dockerfile
    # syntax=docker/dockerfile:1
    FROM python:3
+   ENV PYTHONDONTWRITEBYTECODE=1
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code
    COPY requirements.txt /code/
@@ -136,10 +138,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 @x
        Django>=3.0,<4.0
-       psycopg2-binary>=2.8
+       psycopg2>=2.8
 @y
        Django>=3.0,<4.0
-       psycopg2-binary>=2.8
+       psycopg2>=2.8
 @z
 
 @x
@@ -186,10 +188,6 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        image: postgres
        volumes:
          - ./data/db:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_DB=postgres
-         - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=postgres
      web:
        build: .
        command: python manage.py runserver 0.0.0.0:8000
@@ -197,6 +195,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
          - .:/code
        ports:
          - "8000:8000"
+       environment:
+         - POSTGRES_NAME=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
        depends_on:
          - db
    ```
@@ -209,10 +211,6 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        image: postgres
        volumes:
          - ./data/db:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_DB=postgres
-         - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=postgres
      web:
        build: .
        command: python manage.py runserver 0.0.0.0:8000
@@ -220,6 +218,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
          - .:/code
        ports:
          - "8000:8000"
+       environment:
+         - POSTGRES_NAME=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
        depends_on:
          - db
    ```
@@ -418,12 +420,16 @@ In this section, you set up the database connection for Django.
    ```python
    # settings.py
    
+   import os
+   
+   [...]
+   
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'postgres',
-           'USER': 'postgres',
-           'PASSWORD': 'postgres',
+           'NAME': os.environ.get('POSTGRES_NAME'),
+           'USER': os.environ.get('POSTGRES_USER'),
+           'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
            'HOST': 'db',
            'PORT': 5432,
        }
@@ -433,12 +439,16 @@ In this section, you set up the database connection for Django.
    ```python
    # settings.py
    
+   import os
+   
+   [...]
+   
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'postgres',
-           'USER': 'postgres',
-           'PASSWORD': 'postgres',
+           'NAME': os.environ.get('POSTGRES_NAME'),
+           'USER': os.environ.get('POSTGRES_USER'),
+           'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
            'HOST': 'db',
            'PORT': 5432,
        }

@@ -90,10 +90,10 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-- **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.15 or newer**. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
 @y
-- **macOS はバージョン 10.14 またはそれ以降であること**。
-  つまり Catalina、Mojave、Big Sur であることが必要です。
+- **macOS はバージョン 10.15 またはそれ以降であること**。
+  つまり Catalina, Big Sur, Monterey であることが必要です。
   macOS は最新バージョンにアップグレードすることをお勧めします。
 @z
 
@@ -106,14 +106,14 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @x
   > **Note**
   >
-  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Catalina, macOS Big Sur, and macOS Monterey.
 @y
   > **メモ**
   >
   > Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
   > 具体的には、現状最新の macOS とその前の 2 つのリリースまで含みます。
   > 最新の macOS バージョンが利用可能となっているため、Docker では古いバージョンへのサポートは取りやめとし、最新バージョン（それに加えて直前の 2 リリース）のみをサポートすることにします。
-  > Docker Desktop が現時点でサポートするのは、macOS Mojave、macOS Catalina、macOS Big Sur です。
+  > Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Big Sur、macOS Monterey です。
 @z
 
 @x
@@ -145,10 +145,13 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-- You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 @y
-- バイナリの中に Darwin/AMD64 向けのものが残っているため **Rosetta 2** のインストールが必要です。
-  Rosetta 2 のインストールはコマンドラインから手動で、以下のようにして行います。
+- Docker Desktop 4.3.0 からは、**Rosetta 2** をインストールするためのハードウェア要件を削除しています。
+  Darwin/AMD64 を利用するにあたって、Rosetta 2 を必要とするコマンドラインツールが少しはあります。
+  以下の [既知の問題](apple-silicon.md#known-issues) の節を確認してください。
+  ただし十分な機能性を確保するためには、Rosetta 2 のインストールをお勧めします。
+  Rosetta 2 のインストールは、コマンドラインから手動で、以下のようにして行います。
 @z
 
 @x
@@ -258,7 +261,7 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 @y
     インストーラーによるインストールを終えたら、Docker Desktop のチュートリアルが開始されます。
     このチュートリアルでは、単純な課題を通じてサンプルの Docker イメージを構築し、コンテナーとして実行、そのイメージを Docker Hub にプッシュして保存することを行います。

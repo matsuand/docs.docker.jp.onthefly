@@ -173,6 +173,72 @@ Dev 環境を利用する一番簡単な方法は、作業プロジェクトの 
 @z
 
 @x
+> **Note**
+>
+> If you have enabled the WSL 2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL 2 distribution.
+
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
+    How to start an SSH agent in WSL2
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapse-wsl2-ssh">
+    If your WSL 2 distribution doesn't have an `ssh-agent` running, you can append this script at the end of your profile file (that is: ~/.profile, ~/.zshrc, ...).
+<pre><code>
+SSH_ENV="$HOME/.ssh/agent-environment"
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+}
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+</code></pre>
+    </div>
+</div>
+@y
+> **メモ**
+>
+> Docker Desktop for Windows において WSL 2 統合環境を有効にしている場合は、WSL 2 ディストリビューション内において、 SSH エージェントが稼働していることを確認してください。
+
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
+    WSL2 内での SSH エージェント起動方法
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapse-wsl2-ssh">
+    WSL 2 ディストリビューションにおいて`ssh-agent`が稼働していない場合は、以下のスクリプトを自分のプロファイル（~/.profile, ~/.zshrc, ... など）に追加してください。
+<pre><code>
+SSH_ENV="$HOME/.ssh/agent-environment"
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+}
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+</code></pre>
+    </div>
+</div>
+@z
+
+@x
 1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 @y

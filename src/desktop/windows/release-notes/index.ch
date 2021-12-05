@@ -49,11 +49,17 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 4.1.1
-2021-10-12
+Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 @y
-## Docker Desktop 4.1.1
-2021-10-12
+次に予定されているものが何であるのかを見るには、[Docker 公開ロードマップ](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} を確認してください。
+@z
+
+@x
+## Docker Desktop 4.3.0
+2021-12-02
+@y
+## Docker Desktop 4.3.0
+2021-12-02
 @z
 
 @x
@@ -64,6 +70,204 @@ This page contains information about the new features, improvements, known issue
 > Docker Desktop のダウンロード
 >
 > [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+@z
+
+@x
+### Deprecation
+@y
+{: #deprecation }
+### 廃止決定
+@z
+
+@x
+- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
+- Removed: Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
+@y
+- 以下に示す内部 DNS 名は廃止決定となり、将来のリリースにおいて削除される予定です。
+  `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, `gateway.docker.internal`
+- 削除 ＝ カスタムの RBAC ルールは Docker Desktop から削除されました。
+  これにより`cluster-admin`権限は、すべてのサービスアカウントに与えられます。
+  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774) を Fix に。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.11](https://docs.docker.com/engine/release-notes/#201011)
+- [containerd v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12)
+- [Buildx 0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1)
+- [Compose v2.2.1](https://github.com/docker/compose/releases/tag/v2.2.1)
+- [Kubernetes 1.22.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.4)
+- [Docker Hub Tool v0.4.4](https://github.com/docker/hub-tool/releases/tag/v0.4.4)
+- [Go 1.17.3](https://golang.org/doc/go1.17)
+@y
+- [Docker Engine v20.10.11](https://docs.docker.com/engine/release-notes/#201011)
+- [containerd v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12)
+- [Buildx 0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1)
+- [Compose v2.2.1](https://github.com/docker/compose/releases/tag/v2.2.1)
+- [Kubernetes 1.22.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.4)
+- [Docker Hub Tool v0.4.4](https://github.com/docker/hub-tool/releases/tag/v0.4.4)
+- [Go 1.17.3](https://golang.org/doc/go1.17)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
+- Fixed an issue that caused Docker Desktop to fail during startup if the home directory path contains a character used in regular expressions. Fixes [docker/for-win#12374](https://github.com/docker/for-win/issues/12374).
+- Added a self-diagnose warning if the host lacks Internet connectivity.
+- Docker Desktop now uses cgroupv2. If you need to run `systemd` in a container then:
+  - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
+  - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
+@y
+- ボリューム UI における Save As オプションを使った際に、ボリュームからファイル保存ができなかった問題を修正しました。
+  [docker/for-win#12407](https://github.com/docker/for-win/issues/12407) を Fix に。
+- ホームディレクトリパスに正規表現が含まれる場合に、Docker Desktop の起動に失敗する問題を修正しました。
+  [docker/for-win#12374](https://github.com/docker/for-win/issues/12374) を Fix に。
+- ホストのインターネット接続が不能である場合に、自己診断警告メッセージを追加しました。
+- Docker Desktop では cgroupv2 を用いることにしました。
+  コンテナー内において`systemd`の起動が必要な場合は、以下を行ってください。
+  - インストールしている`systemd`が cgroupv2 をサポートしていることを確認してください。
+    [最低でも`systemd` 247 が必要です](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075)。
+    `centos:7`イメージの場合は、`centos:8`にアップグレードすることを検討してください。
+  - `systemd`を起動するコンテナーでは、以下のオプションが必要です。
+    [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva)
+@z
+
+@x
+## Docker Desktop 4.2.0
+2021-11-09
+@y
+## Docker Desktop 4.2.0
+2021-11-09
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+**Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. For more information, see [Pause/Resume](../index.md#pauseresume).
+@y
+**Pause/Resume**（一時停止/再開）＝ Docker Desktop セッションを活用していない場合に、これを一時停止できるようになりました。
+  これにより、マシンの CPU リソース消費を節約できます。
+  詳しくは [一時停止/再開](../index.md#pauseresume) を参照してください。
+@z
+
+@x
+- Ships [Docker Public Roadmap#226](https://github.com/docker/roadmap/issues/226){: target="_blank" rel="noopener" class="_"}
+@y
+- [Docker 公開ロードマップ#226](https://github.com/docker/roadmap/issues/226){: target="_blank" rel="noopener" class="_"} を公開しました。
+@z
+
+@x
+**Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. For more information, see [Software updates](../index.md#software-updates).
+@y
+**Software Updates**（ソフトウェアアップデート）＝ Docker Desktop 4.2.0 からは、Docker Personal や Docker Pro など、すべての Docker サブスクリプションにおいて、ソフトウェアアップデートの自動更新を無効にすることができます。
+  アップデートに関する設定は、すべて **Software Updates**（ソフトウェアアップデート）のセクションに移動しました。
+  詳しくは [ソフトウェアアップデート](../index.md#software-updates) を参照してください。
+@z
+
+@x
+- Ships [Docker Public Roadmap#228](https://github.com/docker/roadmap/issues/228){: target="_blank" rel="noopener" class="_"}
+@y
+- [Docker 公開ロードマップ#228](https://github.com/docker/roadmap/issues/228){: target="_blank" rel="noopener" class="_"} を公開しました。
+@z
+
+@x
+**Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
+@y
+**Window management**（画面管理）＝ Docker ダッシュボードのウィンドウサイズや位置を、Docker Desktop のクローズと再オープンを通じて維持されるようにしました。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
+- [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
+- [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
+- [Go 1.17.2](https://golang.org/doc/go1.17)
+- [Compose v2.1.1](https://github.com/docker/compose/releases/tag/v2.1.1)
+- [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
+@y
+- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
+- [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
+- [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
+- [Go 1.17.2](https://golang.org/doc/go1.17)
+- [Compose v2.1.1](https://github.com/docker/compose/releases/tag/v2.1.1)
+- [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
+- Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
+- Fixed Docker Desktop sometimes hanging when clicking Exit in the fatal error dialog.
+- Fixed an issue that frequently displayed the **Download update** popup when an update has been downloaded but hasn't been applied yet [docker/for-win#12188](https://github.com/docker/for-win/issues/12188).
+- Fixed installing a new update killing the application before it has time to shut down.
+- Fixed: Installation of Docker Desktop now works even with group policies preventing users to start prerequisite services (e.g. LanmanServer) [docker/for-win#12291](https://github.com/docker/for-win/issues/12291).
+@y
+- 改善 ＝ 自己診断機能において、ホスト IP と`docker networks`のオーバーラップもチェックするようになりました。
+- Docker ダッシュボードにおいて、アップデートの利用可能性を表すインジケーターの位置を調整しました。
+- Docker Desktop において、致命的エラーダイアログ上の Exit（終了）ボタンをクリックした際に、
+  ハングすることがある不具合を修正しました。
+- アップデートをダウンロードした後に、まだ適用されていないにも関わらず、**Download update** ポップアップ画面がしばしば表示されてしまう不具合を修正しました。 
+  [docker/for-win#12188](https://github.com/docker/for-win/issues/12188)
+- アップデートをインストールする際に、他のアプリケーションを終了すべきであることを示さずに終了してしまう問題を修正しました。
+- 修正 ＝ Docker Desktop のインストールにあたって、グループポリシーの設定によって、ユーザーによる必須サービス（たとえば LanmanServer）の起動ができない場合であっても、インストールが動作するようにしました。
+  [docker/for-win#12291](https://github.com/docker/for-win/issues/12291)
+@z
+
+@x
+## Docker Desktop 4.1.1
+2021-10-12
+@y
+## Docker Desktop 4.1.1
+2021-10-12
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -110,7 +314,7 @@ This page contains information about the new features, improvements, known issue
 @x
 - **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../index.md#software-updates).
 - **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/cli-command.md) in the General settings.
-- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../../dashboard.md#explore-volumes).
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../../dashboard.md#explore-volumes). Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
 @y
 - **ソフトウェア更新** ＝ Settings（設定）タブに新たなセクションが追加され、Docker Desktop のアップデートを管理できるようになりました。
   **Software Updates**（ソフトウェア更新）セクションでは、新たな更新があれば通知されます。
@@ -119,6 +323,7 @@ This page contains information about the new features, improvements, known issue
 - **Compose V2** ＝ General（一般）において [Docker Compose V2](../../../compose/cli-command.md) を利用するかどうかが設定できるようになりました。
 - **ボリューム管理** ＝ Docker Desktop 4.1.0 リリースから、Docker Personal も含め、どのサブスクリプションユーザーであっても、ボリューム管理機能が利用できるようになりました。
   詳しくは [ボリュームの確認](../../dashboard.md#explore-volumes) を参照してください。
+  [Docker 公開ロードマップ#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"} を公開しました。
 @z
 
 @x

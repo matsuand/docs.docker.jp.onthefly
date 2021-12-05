@@ -472,9 +472,27 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-1. We'll specify each of the environment variables above, as well as connect the container to our app network.
+1. **Note**: for MySQL versions 8.0 and higher, make sure to include the following commands in `mysql`.
 @y
-1. 上で説明した環境変数をそれぞれ設定して、コンテナーへの接続を通じてネットワークにアクセスします。
+1. **メモ**: MySQL バージョン 8.0 およびそれ以降では、`mysql`では以下のコマンドが含まれていることを確認してください。
+@z
+
+@x
+    ```console
+    mysql> ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'secret';
+    mysql> flush privileges;
+    ```
+@y
+    ```console
+    mysql> ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'secret';
+    mysql> flush privileges;
+    ```
+@z
+
+@x
+2. We'll specify each of the environment variables above, as well as connect the container to our app network.
+@y
+2. 上で説明した環境変数をそれぞれ設定して、コンテナーへの接続を通じてネットワークにアクセスします。
 @z
 
 @x
@@ -536,10 +554,10 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-2. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+3. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 @y
-2. コンテナーのログ（`docker logs <container-id>`）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。
+3. コンテナーのログ（`docker logs <container-id>`）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。
 @z
 
 @x
@@ -565,16 +583,16 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-3. Open the app in your browser and add a few items to your todo list.
+4. Open the app in your browser and add a few items to your todo list.
 @y
-3. ブラウザー上においてアプリを開き、Todo リストに 2、3 のアイテムを追加します。
+4. ブラウザー上においてアプリを開き、Todo リストに 2、3 のアイテムを追加します。
 @z
 
 @x
-4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+5. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is **secret**.
 @y
-4. MySQL データベースに接続してみて、間違いなくアイテムがデータベースに書き込まれたことを確認します。
+5. MySQL データベースに接続してみて、間違いなくアイテムがデータベースに書き込まれたことを確認します。
    パスワードは **secret** です。
 @z
 

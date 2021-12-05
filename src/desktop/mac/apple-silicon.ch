@@ -68,10 +68,13 @@ Docker Desktop for Apple silicon はマルチプラットフォームイメー�
 @z
 
 @x
-You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the Known issues section below. However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 @y
-バイナリの中に Darwin/AMD64 向けのものが残っているため **Rosetta 2** のインストールが必要です。
-Rosetta 2 のインストールはコマンドラインから手動で、以下のようにして行います。
+Docker Desktop 4.3.0 からは、**Rosetta 2** をインストールするためのハードウェア要件を削除しています。
+Darwin/AMD64 を利用するにあたって、Rosetta 2 を必要とするコマンドラインツールが少しはあります。
+以下の既知の問題の節を確認してください。
+ただし十分な機能性を確保するためには、Rosetta 2 のインストールをお勧めします。
+Rosetta 2 のインストールは、コマンドラインから手動で、以下のようにして行います。
 @z
 
 @x
@@ -82,12 +85,6 @@ $ softwareupdate --install-rosetta
 ```console
 $ softwareupdate --install-rosetta
 ```
-@z
-
-@x
-We expect to fix this in a future release.
-@y
-これは将来のリリースにおいて修正する予定です。
 @z
 
 @x
@@ -95,6 +92,20 @@ We expect to fix this in a future release.
 @y
 {: #known-issues }
 ### 既知の問題
+@z
+
+@x
+- Some command line tools do not work when Rosetta 2 is not installed.
+  - The old version 1.x of `docker-compose`. We recommend that you use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](./index.md#general).
+  - The `docker scan` command and the underlying `snyk` binary.
+  - The `docker-credential-ecr-login` credential helper.
+@y
+- コマンドラインツールの中には、Rosetta 2 がインストールされていないと、動作しないものがあります。
+  - 旧バージョン 1.x における`docker-compose`。
+    これにかわって Compose V2 の利用をお勧めします。
+    `docker compose`と入力するか、あるいは [一般タブ](./index.md#general) の **Use Docker Compose V2**（Docker Compose V2 の利用）オプションを有効にしてください。
+  - `docker scan`コマンドと、それが依存している`snyk`バイナリ。
+  - `docker-credential-ecr-login` credential helper。
 @z
 
 @x
@@ -107,7 +118,7 @@ We expect to fix this in a future release.
 @z
 
 @x
-   However, attempts to run Intel-based containers on Apple Silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
+   However, attempts to run Intel-based containers on Apple silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
 @y
    しかし Apple silicon 上において Intel ベースのコンテナーを実行しようとしても、qemu によるコンテナー実行が失敗することがあるため、エミュレーションがクラッシュすることがあります。
    さらに qemu エミュレーションのもとでは、ファイルシステム変更通知 API（たとえば`inotify`）は動作しません。
@@ -115,10 +126,10 @@ We expect to fix this in a future release.
 @z
 
 @x
-   In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running arm64 containers on Apple Silicon machines whenever possible, and encouraging container authors to produce arm64, or multi-arch, versions of their containers. We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+   In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running arm64 containers on Apple silicon machines whenever possible, and encouraging container authors to produce arm64, or multi-arch, versions of their containers. We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
 @y
    上のことをまとめると、Arm ベースのマシン上において Intel ベースのコンテナーを動作させているのは「ベストエフォート」にすぎない、言い換えればできる範囲での対応でしかない、ということです。
-   したがって Apple Silicon 上では可能なら arm64 コンテナーの実行をお勧めします。
+   したがって Apple silicon 上では可能なら arm64 コンテナーの実行をお勧めします。
    またコンテナーを制作する方は arm64 やこれを含むマルチアーキテクチャーのコンテナーとすることをお勧めします。
    この問題は時が経つにつれて、また [マルチアーキテクチャーをサポートする](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/) イメージが今後さらに再ビルドされていくにつれて、まれな問題となっていくものと考えています。
 @z

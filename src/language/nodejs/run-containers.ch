@@ -82,7 +82,7 @@ $ docker run node-docker
 @z
 
 @x
-When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without return control back to the OS until we stop the container.
+When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 @y
 このコマンドを実行しても、コマンドプロンプトの入力状態には戻りません。
 この理由は、実行したアプリケーションが REST サーバーであって、入ってくる要求を待ち受けるためのループ内で実行されるからです。
@@ -245,9 +245,7 @@ Again, let’s make sure that our container is running properly. Run the same cu
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 {"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
 ```
 @y
@@ -255,9 +253,7 @@ $ curl --request POST \
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 {"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
 ```
 @z

@@ -121,7 +121,50 @@ Docker Desktop は Mac と Windows において利用できます。
 @x
 For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 @y
-For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
+Docker Desktop のライセンスに関する詳細は、[Docker Desktop 利用契約](../subscription/index.md#docker-desktop-license-agreement) を参照してください。
+@z
+
+@x
+## Sign in to Docker Desktop
+@y
+{: #sign-in-to-docker-desktop }
+## Docker Desktop へのサインイン
+@z
+
+@x
+After you’ve successfully installed and started Docker Desktop, we recommend that you authenticate using the **Sign in/Create ID** option from the Docker menu.
+@y
+Docker Desktop のインストールを終えてこれを起動したら、Docker メニューの **Sign in/Create ID**（サインイン/ID 生成）を使って、認証を行うことをお勧めします。
+@z
+
+@x
+Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+@y
+認証を行ったユーザーは匿名ユーザーよりも、より高いプル制限率を得ることができます。
+たとえば認証を行っていると、6 時間以内において 200 プルを行うことができます。
+これが匿名ユーザーになると、その IP アドレスに対して 6 時間以内では 100 プルしか行うことができません。
+より詳しい情報は [ダウンロードレート制限](../docker-hub/download-rate-limit.md) を参照してください。
+@z
+
+@x
+Authenticating through Docker Desktop also allows administrators to configure Docker Desktop and set up guardrails using the [Image Access Management](../docker-hub/image-access-management.md) feature to allow team members to:
+@y
+Docker Desktop を通じて認証を行っておくと、管理者が Docker Desktop を設定できるようになります。
+そして [イメージアクセス管理](../docker-hub/image-access-management.md) 機能を利用して、チームメンバーに対して、以下のような操作制限を行うことができます。
+@z
+
+@x
+* Only have access to Trusted Content on Docker Hub
+* Pull only from the specified categories of images
+@y
+* Docker Hub 上のトラストコンテントのみにアクセスできるようにします。
+* 特定カテゴリーのイメージのみプルできるようにします。
+@z
+
+@x
+To authenticate using Docker Desktop, click the **Sign in/Create ID** option on the Docker menu and follow the on-screen instructions.
+@y
+Docker Desktop を使って認証を行うには、Docker メニュー内の **Sign in/Create ID**（サインイン/ID 生成）オプションをクリックして、画面説明に従って操作します。
 @z
 
 @x

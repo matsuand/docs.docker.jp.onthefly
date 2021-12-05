@@ -230,7 +230,7 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 @z
 
 @x
-When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 @y
 Docker Engine 上において [Swarm モードの有効化](../engine/swarm/index.md) を行い、Compose アプリケーションをデプロイする際には、ビルトインされている`overlay`ドライバーを利用して、複数ホスト間での通信が利用可能です。
@@ -410,8 +410,8 @@ services:
     build: .
     ports:
       - "8000:8000"
- db:
-   image: postgres
+  db:
+    image: postgres
 
 networks:
   default:
@@ -426,8 +426,8 @@ services:
     build: .
     ports:
       - "8000:8000"
- db:
-   image: postgres
+  db:
+    image: postgres
 
 networks:
   default:

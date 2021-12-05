@@ -58,6 +58,78 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.11
+2021-11-17
+@y
+## 20.10.11
+2021-11-17
+@z
+
+@x
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+@y
+> **重要**
+>
+> [Go 1.16](https://golang.org/doc/go1.16#net/http) における [net/http 変更](https://github.com/golang/go/issues/40909) に基づいて、環境変数`$HTTP_PROXY`を通じて設定された HTTP プロキシーは、TLS (`https://`) 接続には使われなくなりました。
+> `https://` URL のリクエスト処理に対しては、環境変数`$HTTPS_PROXY`も利用していることを確認してください。
+>
+> [HTTP/HTTPS プロキシーの節](../../config/daemon/systemd.md#httphttps-proxy) を参照して、Docker デーモンがプロキシーサーバーを利用する設定方法について確認してください。
+{: .important }
+@z
+
+@x
+### Distribution
+@y
+{: #distribution }
+### ディストリビューション
+@z
+
+@x
+- Handle ambiguous OCI manifest parsing to mitigate [CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190) / [GHSA-mc8v-mgrf-8f4m](https://github.com/opencontainers/distribution-spec/security/advisories/GHSA-mc8v-mgrf-8f4m).
+  See [GHSA-xmmx-7jpf-fx42](https://github.com/moby/moby/security/advisories/GHSA-xmmx-7jpf-fx42) for details.
+@y
+- あいまいな OCI マニフェスト解析を取り扱うことにより、[CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190) / [GHSA-mc8v-mgrf-8f4m](https://github.com/opencontainers/distribution-spec/security/advisories/GHSA-mc8v-mgrf-8f4m) を軽減しました。
+  詳しくは [GHSA-xmmx-7jpf-fx42](https://github.com/moby/moby/security/advisories/GHSA-xmmx-7jpf-fx42) を参照してください。
+@z
+
+@x
+### Windows
+@y
+### Windows
+@z
+
+@x
+- Fix panic.log file having read-only attribute set [moby/moby#42987](https://github.com/moby/moby/pull/42987).
+@y
+- 読み込み専用属性になっていた panic.log ファイルを修正しました。
+  [moby/moby#42987](https://github.com/moby/moby/pull/42987)
+@z
+
+@x
+## Packaging
+@y
+{: #packaging }
+## パッケージ
+@z
+
+@x
+- Update containerd to [v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12) to mitigate [CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190).
+- Update Golang runtime to Go 1.16.10.
+@y
+- containerd を [v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12) にアップデートし、[CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190) を軽減しました。
+- Go 言語ランタイムを Go 1.16.10 にアップデートしました。
+@z
+
+@x
 ## 20.10.10
 2021-10-25
 @y

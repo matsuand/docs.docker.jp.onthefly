@@ -8,27 +8,28 @@
 @z
 
 @x
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version.
+When an update is available, Docker Desktop displays an icon on the Docker menu to indicate the availability of a newer version. Additionally, the **Software Updates** section in **Preferences** (**Settings** on Windows) also notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
 @y
-アップデートが利用可能になると、Docker Desktop はアイコンを表示して、新たなバージョンが入手可能であることを知らせます。
+アップデートが利用可能になると、Docker Desktop の Docker メニューにアイコンが表示されて、新たなバージョンが入手可能であることを知らせます。
+さらに **Preferences**（Windows の場合は **Settings**）の **Software Updates** セクションにおいても、Docker Desktop の入手可能な更新が示されます。
+更新はその場ですぐにダウンロードすることができます。
+そして **Release Notes** オプションをクリックすれば、更新版に含まれる内容を確認できます。
 @z
 
 @x
-Starting with Docker Desktop 4.1.0, the **Software Updates** section in the [General](../#general) tab also notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version. If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](../#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. For more information, see [Software Updates](../#software-updates).
 @y
-Docker Desktop 4.1.0 からは、[General](../#general) タブ内の **Software Updates**（ソフトウェア更新）セクションにおいても、Docker Desktop の最新版更新があるかどうかが通知されるようになりました。
-アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
-Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
-これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
+Docker Desktop 4.2.0 からは、Docker Personal や Docker Pro など、すべての Docker サブスクリプションにおいて、このオプションによる自動更新を無効にすることができます。
+詳しくは [ソフトウェア更新](../#software-updates) を参照してください。
 @z
 
-@x
-To encourage developers to stay up to date, Docker Desktop displays a reminder two weeks after an update becomes available. You can dismiss this daily reminder by clicking **Snooze**. You can skip an update when a reminder appears by clicking the **Skip this update** option.
-@y
-開発者に対して最新版への更新を推奨するため Docker Desktop は、最新版が入手可能になった後、2 週間はリマインダー通知を表示します。
-この通知を非表示にするには **Snooze** をクリックしてください。
-リマインダー通知が表示された際に **Skip this update** (更新のスキップ) オプションをクリックすれば、更新をスキップすることができます。
-@z
+%@x
+%To encourage developers to stay up to date, Docker Desktop displays a reminder two weeks after an update becomes available. You can dismiss this daily reminder by clicking **Snooze**. You can skip an update when a reminder appears by clicking the **Skip this update** option.
+%@y
+%開発者に対して最新版への更新を推奨するため Docker Desktop は、最新版が入手可能になった後、2 週間はリマインダー通知を表示します。
+%この通知を非表示にするには **Snooze** をクリックしてください。
+%リマインダー通知が表示された際に **Skip this update** (更新のスキップ) オプションをクリックすれば、更新をスキップすることができます。
+%@z
 
 @x
 > **Docker Subscription Service Agreement**

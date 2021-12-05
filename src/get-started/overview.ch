@@ -240,6 +240,21 @@ Docker クライアントは複数のデーモンと通信することができ�
 @z
 
 @x
+### Docker Desktop
+@y
+### Docker Desktop
+@z
+
+@x
+Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
+@y
+Docker Desktop は Mac や Windows 環境に簡単にインストールできるアプリケーションです。
+これを使って、コンテナー化アプリケーションやマイクロサービスをビルドし共有することができます。
+Docker Desktop には Docker daemon (`dockerd`)、Docker クライアント (`docker`)、Docker Compose、Docker Content Trust、Kubernetes、Credential Helper が含まれます。
+より詳しくは [Docker Desktop](../desktop/index.md) を参照してください。
+@z
+
+@x
 ### Docker registries
 @y
 {: #docker-registries }

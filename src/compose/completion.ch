@@ -213,13 +213,13 @@ Make sure you have [installed `oh-my-zsh`](https://ohmyz.sh/) on your computer.
 Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run
 autocompletion within the oh-my-zsh shell. In the following example, `...`
 represent other Zsh plugins you may have installed. After that, type `source ~/.zshrc` to bring the changes. 
-To test whether it is successful, type `docker ps + tab`.
+To test whether it is successful, type `docker ps` and then press the **Tab** key.
 @y
 `~/.zshrc`内のプラグインリストに`docker`と`docker-compose`を加えます。
 これにより oh-my-zsh シェル内での自動補完機能を有効にします。
 以下の例において`...`の部分は、以前からインストールされている Zsh プラグインを表わします。
 その後に`source ~/.zshrc`を実行して、変更を有効にします。
-うまく設定できているかどうかは、`docker ps + tab`を実行して確認します。
+うまく設定できているかどうかは、`docker ps`と入力してから、**タブ** キーを入力します。
 @z
 
 @x

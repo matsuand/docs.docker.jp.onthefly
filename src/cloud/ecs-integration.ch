@@ -632,6 +632,16 @@ Services can retrieve their dependencies using Compose service names (as they do
 @z
 
 @x
+> **Note**
+> 
+> Short service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
+@y
+> **メモ**
+>
+> VPC 内においてパブリック DNS 名を有効にしていない限り、完全修飾サービス名ではなく、短いサービス名が名前解決されます。
+@z
+
+@x
 ### Dependent service startup time and DNS resolution
 @y
 ### 依存サービスの起動時間と DNS 名前解決

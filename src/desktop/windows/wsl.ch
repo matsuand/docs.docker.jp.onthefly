@@ -79,13 +79,13 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
 
 @x
 1. Install Windows 10, version 1903 or higher or Windows 11.
-2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
+2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
+3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
 @y
 1. Windows 10、バージョン 2004 またはそれ以上、あるいは Windows 11 をインストールします。
 2. Windows 上において WSL 2 機能を有効にします。
-   詳しい手順については [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10) を参照してください。
-3. [Linux カーネル更新プログラムパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel) をダウンロードしてインストールします。
+   詳しい手順については [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"} を参照してください。
+3. [Linux カーネル更新プログラムパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"} をダウンロードしてインストールします。
 @z
 
 @x
@@ -111,8 +111,8 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
       `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
   - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
       where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/vhd-size){:target="_blank" rel="noopener" class="_"}.
+- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig){:target="_blank" rel="noopener" class="_"}.
 - To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](../../engine/install/ubuntu.md#uninstall-docker-engine) and CLI installed directly through Linux distributions before installing Docker Desktop.
 @y
   - 元のファイルを Linux ファイルシステムに保存しているのであれば、Linux コンテナーはファイル変更のイベント（「inotify」イベント）のみを受けつけるようにしてください。
@@ -121,8 +121,8 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
     したがって`docker run -v /mnt/c/users:/users`（ここで`/mnt/c`は Windows からのマウント）とすることは避けてください。
   - 上のかわりに Linux シェルから`docker run -v ~/my-project:/sources <my-image>`のようなコマンドを実行してください。
     ここで`~`は Linux シェルが`$HOME`に展開することを表わします。
-- Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、[WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size) を確認してください。
-- CPU や メモリの使用量について気にかける必要がある場合は [WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
+- Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、[WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/vhd-size){:target="_blank" rel="noopener" class="_"} を確認してください。
+- CPU や メモリの使用量について気にかける必要がある場合は [WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig){:target="_blank" rel="noopener" class="_"} に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
 - Docker Desktop 上での WSL 2 利用において、衝突のリスクを避けるには、[Docker Engine の古いバージョンのアンインストール](../../engine/install/ubuntu.md#uninstall-docker-engine) を行い、Docker Desktop のインストール前に Linux ディストリビューションに対して CLI を直接インストールするようにしてください。
 @z
 
@@ -134,9 +134,9 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
 @z
 
 @x
-Download [Docker Desktop Stable 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) or a later release.
+Download [Docker Desktop 2.3.0.2](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) or a later release.
 @y
-[Docker Desktop 安定版 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) またはこれよりも最新版をダウンロードします。
+[Docker Desktop 2.3.0.2](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) またはこれよりも最新版をダウンロードします。
 @z
 
 @x
@@ -436,8 +436,8 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 @z
 
 @x
-Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
+Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and adding the **WSL 2** label.
 @y
 みなさんからのフィードバックは大変重要です。
-フィードバックをいただくには、Github レポジトリ [Docker Desktop for Windows](https://github.com/docker/for-win/issues) に issue をあげて、**WSL 2** というラベルをつけてください。
+フィードバックをいただくには、Github レポジトリ [Docker Desktop for Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} に issue をあげて、**WSL 2** というラベルをつけてください。
 @z

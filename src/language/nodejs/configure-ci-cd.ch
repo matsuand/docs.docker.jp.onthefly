@@ -583,8 +583,8 @@ Next, change your Docker Hub login to a GitHub container registry login:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 @y
@@ -594,15 +594,29 @@ Next, change your Docker Hub login to a GitHub container registry login:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 @z
 
 @x
+To authenticate against the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry), use the [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow) for the best security and experience.
+@y
+[GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) に対して認証を行うには、十分なセキュリティを得るために [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow) を用いてください。
+@z
+
+@x
+You may need to [manage write and read access of GitHub Actions](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio) for repositories in the container settings.
+@y
+コンテナー設定において、レジストリに対する [manage write and read access of GitHub Actions](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio)（GitHub Action の読み書き権限の管理）を行う必要があります。
+@z
+
+@x
+You can also use a [personal access token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the [appropriate scopes](https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry).
 Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:
 @y
+また [appropriate scopes](https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry)（適切なスコープ）を使って、[パーソナルアクセストークン (personal access token; PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) を利用することもできます。
 イメージへのタグづけを変更することを忘れないでください。
 以下の例においては「latest」のまま、これを唯一のタグとします。
 必要に応じてタグ追加を行ってください。

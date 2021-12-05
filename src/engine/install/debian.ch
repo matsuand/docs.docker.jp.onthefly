@@ -259,22 +259,6 @@ from the repository.
 @z
 
 @x
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `helium`. Sometimes, in a distribution
-    > like BunsenLabs Linux, you might need to change `$(lsb_release -cs)`
-    > to your parent Debian distribution. For example, if you are using
-    >  `BunsenLabs Linux Helium`, you could use `stretch`. Docker does not offer any guarantees on untested
-    > and unsupported Debian distributions.
-@y
-    > **メモ**
-    >
-    > サブコマンド`lsb_release -cs`は Debian ディストリビューションの名前、たとえば`helium`といったものを返します。
-    > BunsenLabs Linux のようなディストリビューションなどでは、`$(lsb_release -cs)`とする必要があります。
-    > たとえば`BunsenLabs Linux Helium`を使っている場合、`stretch`を利用することになります。
-    > テスト対象外、サポート対象外の Debian ディストリビューションに対して Docker は何ら動作保証しません。
-@z
-
-@x
     ```console
     $ echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
@@ -332,6 +316,21 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     > Docker リポジトリを複数有効にしていて、バージョン指定をせずに`apt-get install`
     > によるインストール、または`apt-get update`によるアップデートを行うと、入手可能な最新版がインストールされます。
     > 安定した版が必要である場合には、適切でない場合があります。
+@z
+
+@x
+    > Receiving a GPG error when running `apt-get update`?
+    >  
+    > Your default umask may not be set correctly, causing the public key file
+    > for the repo to not be detected. Run the following command and then try to
+    > update your repo again: `sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg`.
+@y
+    > `apt-get update`実行中に GPG エラー受信？
+    >  
+    > デフォルトの umask が適切に設定されていない場合があります。
+    > その場合、リポジトリに対する公開鍵ファイルが検出できないことになります。
+    > 以下のコマンドを実行して、再度リポジトリを更新してみてください。
+    > `sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg`
 @z
 
 @x

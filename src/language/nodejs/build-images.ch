@@ -381,13 +381,32 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 @z
 
 @x
-Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
+Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters: `src` and `dest`. The first parameter `src` tells Docker what file(s) you would like to copy into the image. The second parameter `dest` tells Docker where you want that file(s) to be copied to. For example:
 @y
 `npm install`を実行する前には、`package.json`と`package-lock.json`の両ファイルをイメージ内にコピーしておくことが必要です。
 `COPY`コマンドを使ってこれを行います。
-`COPY`コマンドには引数が 2 つあります。
-1 つめの引数は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
-2 つめの引数は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
+`COPY`コマンドには 2 つの引数`src`と`dest`があります。
+1 つめの引数`src`は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
+2 つめの引数`dest`は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
+たとえば以下のとおりです。
+@z
+
+@x
+ ```dockerfile
+ COPY ["<src>", "<dest>"]
+ ```
+@y
+ ```dockerfile
+ COPY ["<src>", "<dest>"]
+ ```
+@z
+
+@x
+You can specify multiple `src` resources seperated by a comma. For example, `COPY ["<src1>", "<src2>",..., "<dest>"]`.
+We’ll copy the `package.json` and the `package-lock.json` file into our working directory `/app`.
+@y
+複数の`src`がある場合は、カンマで区切って指定します。
+たとえば`COPY ["<src1>", "<src2>",..., "<dest>"]`とします。
 ここでは`package.json`と`package-lock.json`をワーキングディレクトリ`/app`にコピーします。
 @z
 

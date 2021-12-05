@@ -84,12 +84,6 @@ menu bar and configure the runtime options described below.
 @z
 
 @x
-![Docker context menu](images/menu/prefs.png){:width="250px"}
-@y
-![Docker コンテキストメニュー](images/menu/prefs.png){:width="250px"}
-@z
-
-@x
 ### General
 @y
 {: #general }
@@ -103,17 +97,9 @@ menu bar and configure the runtime options described below.
 @z
 
 @x
-On the **General** tab, you can configure when to start and update Docker:
+On the **General** tab, you can configure when to start Docker and specify other settings:
 @y
-**General** タブにおいて Docker の起動や更新をいつ行うのかを設定します。
-@z
-
-@x
-- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
-@y
-- **Automatically check for updates**（アップデートの自動チェック）＝ デフォルトで Docker Desktop は新たなバージョンがあるかどうかを自動的に確認するように設定されています。
-  組織に属する一人として Docker Desktop をインストールしている場合、自分では Docker Desktop の更新が許可されていないことがあるかもしれません。
-  その場合は [既存組織のチームプランへのアップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) を行って、このチェックボックスをオフとし、更新の自動チェックを無効にしてください。
+**General** タブにおいて Docker の起動をいつ行うかなどを設定します。
 @z
 
 @x
@@ -130,7 +116,7 @@ On the **General** tab, you can configure when to start and update Docker:
 @z
 
 @x
-- **Use gRPC FUSE for file sharing**: Clear this checkbox to use the legacy osxfs file sharing instead.
+- **Use gRPC FUSE for file sharing**: Clear this check box to use the legacy osxfs file sharing instead.
 @y
 - **Use gRPC FUSE for file sharing**（ファイル共有での gRPC FUSE の利用）＝ このチェックボックスをオフにすると、ファイル共有として従来の osxfs を利用します。
 @z
@@ -596,17 +582,42 @@ For information about the reset options, see [Logs and Troubleshooting](troubles
 @z
 
 @x
-The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+The **Software Updates** section notifies you of any updates available to Docker Desktop. When there's a new update, you can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
 @y
-Software Updates（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
-アップデートを即座にダウンロードすることができ、または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
+**Software Updates**（ソフトウェア更新）セクションは、Docker Desktop の最新版が利用可能であるかどうかを通知します。
+最新アップデートがあれば、即座にダウンロードすることができます。
+または **Release Notes**（リリースノート）オプションをクリックして、最新バージョンに含まれる内容を確認することもできます。
 @z
 
 @x
-If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+> **Disable automatic check for updates**
+>
+> Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../mac/release-notes/index.md) to start using this feature.
+{: .important}
 @y
-Docker Team または Business サブスクリプションである場合は、[General](../#general) 設定内のチェックボックス **Automatically Check for Updates**（最新版の自動チェック）をオフにすれば、最新版のチェック機能を無効にすることができます。
-これを行うと、Docker ダッシュボード上の通知バッチも無効になります。
+> **アップデート自動チェックの無効化**
+>
+> Docker Desktop 4.2.0 からは、Docker Personal や Docker Pro など、すべての Docker サブスクリプションにおいて、このオプションによる自動更新を無効にすることができます。
+> [Docker Desktop 4.2.0](../mac/release-notes/index.md) に更新して、この機能を利用してみてください。
+{: .important}
+@z
+
+@x
+Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+@y
+チェックボックス **Automatically Check for Updates**（アップデートの自動チェック）をオフにすることで、この機能を無効にします。
+これを行うと Docker メニューにおける通知が無効になります。
+また Docker ダッシュボード上の通知バッチも表示されなくなります。
+アップデートを手動でチェックするには、Docker メニューの **Check for updates**（アップデートのチェック）オプションを実行します。
+@z
+
+@x
+To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
+@y
+Docker Desktop による最新アップデートの自動ダウンロードを、バックグラウンド実行により行うには、**Always download updates**（アップデートの常時ダウンロード）を選びます。
+これを選ぶと、アップデートが入手可能になると、最新版がダウンロードされます。
+アップデートのダウンロードが終了したら、**Apply and Restart**（適用と再起動）をクリックして、アップデートをインストールします。
+同じことは Docker メニューか、あるいは Docker ダッシュボード内の **Updates**（更新）セクションからも行うことができます。
 @z
 
 @x
@@ -617,12 +628,12 @@ Docker Team または Business サブスクリプションである場合は、[
 @z
 
 @x
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
 @y
-Docker Desktop ダッシュボードを利用すると、コンテナーやアプリケーションとのやりとりが行えるようになり、アプリケーションのライフサイクルを手元のマシンから管理することができます。
+Docker ダッシュボードを利用すると、コンテナーやアプリケーションとのやりとりが行えるようになり、アプリケーションのライフサイクルを手元のマシンから管理することができます。
 ダッシュボードの UI にはすべてのコンテナーが表示され、実行中、停止中、開始中といった状態が示されます。
 提供されている UI は直感的になっていて、コンテナーや Docker Compose アプリケーションを確認したり管理したりといった通常操作を行うことができます。
-詳しくは [Docker Desktop ダッシュボード](../dashboard.md) を参照してください。
+詳しくは [Docker ダッシュボード](../dashboard.md) を参照してください。
 @z
 
 @x
@@ -1025,39 +1036,6 @@ $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-co
 @z
 
 @x
-## Give feedback and get help
-@y
-{: #give-feedback-and-get-help }
-## フィードバックやヘルプ
-@z
-
-@x
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker Desktop for Mac
-forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
-@y
-コミュニティのヘルプを必要とする場合は、最新のユーザートピックを確認し、ディスカッションへの参加、開始をしてみてください。
-[Docker Desktop for Mac フォーラム](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"} にログインして行います。
-@z
-
-@x
-To report bugs or problems, log on to Docker Desktop [for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
-where you can review community reported issues, and file new ones.  See
-[Logs and Troubleshooting](troubleshoot.md) for more details.
-@y
-バグや問題を報告するには、[Docker Desktop for Mac 向けの GitHub issue](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"} にログインして、コミュニティによって報告済みの issue を確認してください。
-そして新たな issue をあげてください。
-詳しくは [ログ機能とトラブルシューティング](troubleshoot.md) を参照してください。
-@z
-
-@x
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
-@y
-ドキュメントに関するフィードバックや更新提案については [ドキュメントへの貢献](/opensource/) を参照してください。
-@z
-
-@x
 ## Docker Hub
 @y
 ## Docker Hub
@@ -1141,6 +1119,93 @@ After you have enabled two-factor authentication:
 After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
 @y
 認証が正常に行われたら、Docker Desktop メニューから組織やリポジトリに直接アクセスできるようになります。
+@z
+
+@x
+## Pause/Resume
+@y
+{: pauseresume}
+## 一時停止／再開
+@z
+
+@x
+Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+@y
+Docker Desktop 4.2 のリリース以降では、Docker Desktop セッションを活用していない場合に、これを一時停止できるようになりました。
+これにより、マシンの CPU リソース消費を節約できます。
+Docker Desktop を一時停止すると、Docker Engine を稼働させている Linux VM が一時停止します。
+そして各コンテナーのその時点での状態が、すべてメモリ上に保存された上で、すべてのプロセスは停止します。
+このときには CPU 使用量が軽減され、ノート PC であればバッテリー駆動を長く保つことができます。
+Resume（再開）オプションをクリックすれば、いつでも Docker Desktop を再開することができます。
+@z
+
+@x
+From the Docker menu, select ![whale menu](images/whale-x.png){: .inline} > **Pause** to pause Docker Desktop.
+@y
+Docker メニューから ![クジラメニュー](images/whale-x.png){: .inline} > **Pause**（一時停止）を選べば、Docker Desktop が一時停止されます。
+@z
+
+@x
+![Docker context menu](images/menu/prefs.png){:width="250px"}
+@y
+![Docker コンテキストメニュー](images/menu/prefs.png){:width="250px"}
+@z
+
+@x
+Docker Desktop now displays the paused status on the Docker menu and on the  **Containers / Apps**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+@y
+Docker Desktop は一時停止のステータスであることが Docker メニュー上に表示されます。
+同様に Docker ダッシュボード上の **Containers / Apps**、**Images**、**Volumes**、**Dev Environment** の各画面にも表示されます。
+Docker Desktop が一時停止されていても、ダッシュボードの **Preferences** と **Troubleshoot** メニューにはアクセスすることができます。
+@z
+
+@x
+Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
+@y
+![クジラメニュー](images/whale-x.png){: .inline} > **Resume**（再開）を選べば、Docker Desktop を再開できます。
+@z
+
+@x
+> **Note**
+>
+> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
+@y
+> **メモ**
+>
+> Docker Desktop を一時停止すると、Docker CLI において実行中であったコマンドは、後に Docker Desktop を自動的に再開させます。
+@z
+
+@x
+## Give feedback and get help
+@y
+{: #give-feedback-and-get-help }
+## フィードバックやヘルプ
+@z
+
+@x
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker Desktop for Mac
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
+@y
+コミュニティのヘルプを必要とする場合は、最新のユーザートピックを確認し、ディスカッションへの参加、開始をしてみてください。
+[Docker Desktop for Mac フォーラム](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"} にログインして行います。
+@z
+
+@x
+To report bugs or problems, log on to Docker Desktop [for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
+where you can review community reported issues, and file new ones.  See
+[Logs and Troubleshooting](troubleshoot.md) for more details.
+@y
+バグや問題を報告するには、[Docker Desktop for Mac 向けの GitHub issue](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"} にログインして、コミュニティによって報告済みの issue を確認してください。
+そして新たな issue をあげてください。
+詳しくは [ログ機能とトラブルシューティング](troubleshoot.md) を参照してください。
+@z
+
+@x
+For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
+@y
+ドキュメントに関するフィードバックや更新提案については [ドキュメントへの貢献](/opensource/) を参照してください。
 @z
 
 @x

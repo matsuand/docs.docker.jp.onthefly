@@ -603,12 +603,12 @@ failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manif
 @z
 
 @x
-Solution : secure your registry properly. You can get SSL certificates from
-Let's Encrypt for free. See /registry/deploying/
+Solution: secure your registry properly. You can get SSL certificates from
+Let's Encrypt for free. See [Deploy a registry server](../../registry/deploying.md).
 @y
-解決方法 : レジストリを適切にセキュアなものにしてください。
+解決方法 ＝ レジストリを適切にセキュアなものにしてください。
 無償の Let's Encrypt から SSL 証明書を取得することができます。
-/registry/deploying/ を参照してください。
+[Registry サーバーのデプロイ](../../registry/deploying.md) を参照してください。
 @z
 
 @x

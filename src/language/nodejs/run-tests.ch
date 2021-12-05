@@ -141,18 +141,14 @@ Now let’s test our application by POSTing a JSON payload and then make an HTTP
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 ```
 @y
 ```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 ```
 @z
 

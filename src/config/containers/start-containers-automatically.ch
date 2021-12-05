@@ -66,14 +66,14 @@ any of the following:
 | Flag             | Description                                                                                     |
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | Do not automatically restart the container. (the default)                                       |
-| `on-failure`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.     |
+| `on-failure[:max-retries]`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.  Optionally, limit the number of times the Docker daemon attempts to restart the container using the `:max-retries` option.   |
 | `always`         | Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details)) |
 | `unless-stopped` | Similar to `always`, except that when the container is stopped (manually or otherwise), it is not restarted even after Docker daemon restarts. |
 @y
 | フラグ           | 内容説明                                                                                        |
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | コンテナーを自動では再起動しません。（デフォルト）                                              |
-| `on-failure`     | エラー発生により停止したコンテナーを再起動します。非ゼロの終了コードが返ります。                |
+| `on-failure[:max-retries]`     | エラー発生により停止したコンテナーを再起動します。非ゼロの終了コードが返ります。任意として、`:max-retries`オプションを使って Docker デーモンによるコンテナー再起動回数を制限します。|
 | `always`         | コンテナー停止時に常に再起動します。手動で停止させた場合は、Docker デーモン再起動時、あるいはコンテナーそのものが手動で再起動された場合のみ再起動します。 ([再起動ポリシーの詳細](#restart-policy-details) における 2 項めを参照してください。) |
 | `unless-stopped` | `always`と同様。ただしコンテナーが（手動またはその他によって）停止した場合は除きます。Docker デーモンが再起動した場合には再起動しません。|
 @z

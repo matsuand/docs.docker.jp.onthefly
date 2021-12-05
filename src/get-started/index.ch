@@ -331,13 +331,27 @@ Now that you've run a container, what _is_ a container? Simply put, a container 
 a sandboxed process on your machine that is isolated from all other processes
 on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
 features that have been in Linux for a long time. Docker has worked to make these
-capabilities approachable and easy to use.
+capabilities approachable and easy to use. To summarize, a container:
 @y
 上でコンテナーというものを実行したわけですが、コンテナーとは何でしょう。
 簡単に言うと、コンテナーとはマシン上の単なる 1 つのプロセスであって、ホスト上の他のプロセスとは分離された、サンドボックス化したプロセスです。
 この分離状態は [カーネルの名前空間と cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504) によって実現されています。
 それは Linux において長らく実現されてきている機能です。
 Docker はそういった機能を活用し利用しやすくして動作しています。
+コンテナーについてまとめると、以下となります。
+@z
+
+@x
+- is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
+- can be run on local machines, virtual machines or deployed to the cloud.
+- is portable (can be run on any OS)
+- Containers are isolated from each other and run their own software, binaries, and configurations.
+@y
+- イメージが実行されたインスタンスのことです。
+  DockerAPI や CLI を使って、コンテナーの生成、起動、停止、移動、削除を行うことができます。
+- ローカルマシン、仮想マシン、デプロイしたクラウドの各環境上において実行することができます。
+- 移植性が高いものです（どのような OS 上でも実行できます）。
+- 複数のコンテナーは互いに独立していて、独自のソフトウェア、実行ファイル、設定により動作します。
 @z
 
 @x

@@ -316,22 +316,6 @@ from the repository.
 @z
 
 @x
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
-    > like Linux Mint, you might need to change `$(lsb_release -cs)`
-    > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
-    > and unsupported Ubuntu distributions.
-@y
-    > **メモ**
-    >
-    > サブコマンド`lsb_release -cs`は Ubuntu ディストリビューションの名前、たとえば`xenial`といったものを返します。
-    > Linux Mint のようなディストリビューションなどでは、`$(lsb_release -cs)`とする必要があります。
-    > たとえば`Linux Mint Tessa`を使っている場合、`bionic`を利用することになります。
-    > テスト対象外、サポート対象外の Ubuntu ディストリビューションに対して Docker は何ら動作保証しません。
-@z
-
-@x
     ```console
     $ echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \

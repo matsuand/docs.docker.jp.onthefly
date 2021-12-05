@@ -38,13 +38,13 @@ This page contains release notes for Docker Desktop for Mac 2.x.
 >
 > {%- include eula.md -%}
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/49550/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/49550/Docker.dmg){: .accept-eula }
 @y
 > Download Docker Desktop
 >
 > {%- include eula.md -%}
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/49550/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/49550/Docker.dmg){: .accept-eula }
 @z
 
 @x

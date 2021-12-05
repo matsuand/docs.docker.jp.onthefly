@@ -149,12 +149,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	defer reader.Close()
 	io.Copy(os.Stdout, reader)
 @y
 	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
+
+	defer reader.Close()
 	io.Copy(os.Stdout, reader)
 @z
 
@@ -446,12 +450,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer out.Close()
 	io.Copy(os.Stdout, out)
 @y
 	out, err := cli.ImagePull(ctx, imageName, types.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
+	defer out.Close()
 	io.Copy(os.Stdout, out)
 @z
 
