@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure CI/CD for your application | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Configure CI/CD for your application" />
   <meta property="og:description" content="Learn how to Configure CI/CD for your application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Configure CI/CD for your application","description":"Learn how to Configure CI/CD for your application","url":"https://docs.docker.com/language/java/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -323,11 +323,16 @@ Next, change your Docker Hub login to a GitHub container registry login:</p>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">registry</span><span class="pi">:</span> <span class="s">ghcr.io</span>
-          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.repository_owner }}</span>
-          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GHCR_TOKEN }}</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.actor }}</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
-<p>Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:</p>
+<p>To authenticate against the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a>, use the <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a> for the best security and experience.</p>
+
+<p>You may need to <a href="https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio">manage write and read access of GitHub Actions</a> for repositories in the container settings.</p>
+
+<p>You can also use a <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">personal access token (PAT)</a> with the <a href="https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry">appropriate scopes</a>.
+Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">tags</span><span class="pi">:</span> <span class="s">ghcr.io/${{ github.repository_owner }}/simplewhale:latest</span>
 </code></pre></div></div>

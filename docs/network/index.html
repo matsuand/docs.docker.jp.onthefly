@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ネットワーク概要 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ネットワーク概要" />
   <meta property="og:description" content="Docker ネットワークとその概念" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ネットワーク概要","description":"Docker ネットワークとその概念","url":"https://docs.docker.com/network/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,8 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ネットワーク概要</h1>
-<p>Docker コンテナーやサービスの機能が強力である理由は、これらを互いに接続することができ、あるいは Docker ではないシステムとも接続ができる点です。
+                        <section class="section"><h1>ネットワーク概要</h1><p>Docker コンテナーやサービスの機能が強力である理由は、これらを互いに接続することができ、あるいは Docker ではないシステムとも接続ができる点です。
 Docker コンテナーやサービスはどちらも、Docker によってデプロイされたものであるかを知っておく必要がなく、さらに接続された先が Docker によるものかどうかすら、わかっていなくてよいのです。
 Docker ホストが Linux や Windows 上で、あるいはその両方が混在した上で動作しているとしても、Docker を使えばプラットフォームに依存せずに Docker ホストを管理することができます。</p>
 
@@ -117,7 +116,7 @@ Docker ホストが Linux や Windows 上で、あるいはその両方が混在
 <h2 id="scope-of-this-topic">説明を行う範囲</h2>
 
 <p>Docker ネットワークがどのように動作するのかに関して、OS 固有の話にまで踏み込んで説明するつもりは <strong>ありません</strong>。
-したがって Linux 上において Docker がどのようにして <code class="language-plaintext highlighter-rouge">iptables</code> ルールを処理するのか、Windows Server 上にてルーティング規則をどのように処理するのか、といった情報を示すことはありません。
+したがって Linux 上において Docker がどのようにして<code class="language-plaintext highlighter-rouge">iptables</code>ルールを処理するのか、Windows Server 上にてルーティング規則をどのように処理するのか、といった情報を示すことはありません。
 さらに Docker がパケットを構成しカプセル化する様子や暗号化を取り扱うところに関して、詳細情報も示しません。
 技術的にかなり踏み込んだ詳細に関しては <a href="/docs.docker.jp.onthefly/network/iptables/">Docker と iptable</a> を参照してください。</p>
 
@@ -148,15 +147,20 @@ Docker ホストが Linux や Windows 上で、あるいはその両方が混在
 <a href="/docs.docker.jp.onthefly/network/overlay/">オーバーレイネットワーク</a> を参照してください。</p>
   </li>
   <li>
+    <p><code class="language-plaintext highlighter-rouge">ipvlan</code>: IPvlan ネットワークは、IPv4 と IPv6 のアドレッシングが、完全にユーザーにより制御可能となります。
+VLAN ドライバーがその上に構築されているため、アンダーレイネットワーク統合に関心のあるユーザーにとっては、レイヤー 2 VLAN タギングや IPvlan L3 ルーティングでさえ、完全に制御可能としています。
+<a href="/docs.docker.jp.onthefly/network/ipvlan/">IPvlan ネットワーク</a> を参照してください。</p>
+  </li>
+  <li>
     <p><code class="language-plaintext highlighter-rouge">macvlan</code>: Macvlan ネットワークは、コンテナーに対して MAC アドレスを割り当てられるようにし、ネットワーク上の物理デバイスであるかのように見せることができます。
 Docker デーモンはその MAC アドレスによって各コンテナー間のトラフィックを処理します。
-<code class="language-plaintext highlighter-rouge">macvlan</code> ドライバーは、古いアプリケーションを取り扱う際、Docker ホストのネットワーク層を通じての処理ではなく、物理ネットワークに直接接続することが求められている場合に、ベストな選択となる場合があります。
+<code class="language-plaintext highlighter-rouge">macvlan</code>ドライバーは、古いアプリケーションを取り扱う際、Docker ホストのネットワーク層を通じての処理ではなく、物理ネットワークに直接接続することが求められている場合に、ベストな選択となる場合があります。
 <a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan ネットワーク</a> を参照してください。</p>
   </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">none</code>: これが指定されたコンテナーでは、ネットワーク機能がすべて無効化されます。
 通常はカスタムネットワークドライバーと組み合わせて利用されます。
-<code class="language-plaintext highlighter-rouge">none</code> は swarm サービスに対して利用することはできません。
+<code class="language-plaintext highlighter-rouge">none</code>は swarm サービスに対して利用することはできません。
 <a href="/docs.docker.jp.onthefly/network/none/">コンテナーのネットワーク無効化</a> を参照してください。</p>
   </li>
   <li>
@@ -170,22 +174,12 @@ Docker では、サードパーティー製のネットワークドライバー�
 <h3 id="network-driver-summary">ネットワークドライバーのまとめ</h3>
 
 <ul>
-  <li>
-    <p><strong>ユーザー定義ブリッジネットワーク</strong> は、同一 Docker ホスト上で複数コンテナーが通信する場合に利用します。</p>
-  </li>
-  <li>
-    <p><strong>ホストネットワーク</strong> は、ネットワーク層が Docker ホストとは隔離されないことが必要な場合、そしてコンテナーの隔離は別の観点で必要な場合に利用します。</p>
-  </li>
-  <li>
-    <p><strong>オーバーレイネットワーク</strong> は、異なる Docker ホスト上においてコンテナーが互いに通信する必要がある場合に利用します。
-あるいは swarm サービスを利用して複数アプリケーションを動作させる場合に利用します。</p>
-  </li>
-  <li>
-    <p><strong>Macvlan ネットワーク</strong> は、VM 環境から移行する場合や、ネットワーク上の物理ホストのようにコンテナーを扱う必要がある場合に利用します。  個々においては固有の MAC アドレスが用いられます。</p>
-  </li>
-  <li>
-    <p><strong>サードパーティー製ネットワークプラグイン</strong> は、Docker に特別なネットワークスタックを統合します。</p>
-  </li>
+  <li><strong>ユーザー定義ブリッジネットワーク</strong> は、同一 Docker ホスト上で複数コンテナーが通信する場合に利用します。</li>
+  <li><strong>ホストネットワーク</strong> は、ネットワーク層が Docker ホストとは隔離されないことが必要な場合、そしてコンテナーの隔離は別の観点で必要な場合に利用します。</li>
+  <li><strong>オーバーレイネットワーク</strong> は、異なる Docker ホスト上においてコンテナーが互いに通信する必要がある場合に利用します。
+あるいは swarm サービスを利用して複数アプリケーションを動作させる場合に利用します。</li>
+  <li><strong>Macvlan ネットワーク</strong> は、VM 環境から移行する場合や、ネットワーク上の物理ホストのようにコンテナーを扱う必要がある場合に利用します。  個々においては固有の MAC アドレスが用いられます。</li>
+  <li><strong>サードパーティー製ネットワークプラグイン</strong> は、Docker に特別なネットワークスタックを統合します。</li>
 </ul>
 
 <h2 id="networking-tutorials">ネットワークに関するチュートリアル</h2>

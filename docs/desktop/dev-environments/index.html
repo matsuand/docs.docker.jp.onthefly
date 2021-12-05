@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dev 環境プレビュー | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Dev 環境プレビュー" />
   <meta property="og:description" content="Dev 環境" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/desktop/dev-environments/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Dev 環境プレビュー","description":"Dev 環境","url":"https://docs.docker.com/desktop/dev-environments/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -177,6 +177,39 @@ Docker メニューから <strong>Quit Docker Desktop</strong>（Docker Desktop 
   <p>SSH を経由して Git リポジトリをクローンする場合は、ssh-agent に対して SSH 鍵を追加しておくのを忘れないでください。
 これを行うには、ターミナルを開いて<code class="language-plaintext highlighter-rouge">ssh-add &lt;秘密鍵へのパス&gt;</code>を実行します。</p>
 </blockquote>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>Docker Desktop for Windows において WSL 2 統合環境を有効にしている場合は、WSL 2 ディストリビューション内において、 SSH エージェントが稼働していることを確認してください。</p>
+</blockquote>
+
+<div class="panel panel-default">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
+WSL2 内での SSH エージェント起動方法 <em class="chevron fa fa-fw"></em>
+  </div>
+  <div class="collapse block" id="collapse-wsl2-ssh">
+WSL 2 ディストリビューションにおいて`ssh-agent`が稼働していない場合は、以下のスクリプトを自分のプロファイル（~/.profile, ~/.zshrc, ... など）に追加してください。     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+SSH_ENV="$HOME/.ssh/agent-environment"
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' &gt; "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" &gt; /dev/null
+}
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" &gt; /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ &gt; /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+</code></pre></div>    </div>
+  </div>
+</div>
 
 <ol>
   <li><strong>Create New Environment</strong> (新規環境の生成) をクリックします。

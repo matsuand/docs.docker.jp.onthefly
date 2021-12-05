@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Django | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Django" />
   <meta property="og:description" content="Django を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/django/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Django","description":"Django を使って Docker Compose をはじめる。","url":"https://docs.docker.com/samples/django/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -134,6 +134,7 @@
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> python:3</span>
+<span class="k">ENV</span><span class="s"> PYTHONDONTWRITEBYTECODE=1</span>
 <span class="k">ENV</span><span class="s"> PYTHONUNBUFFERED=1</span>
 <span class="k">WORKDIR</span><span class="s"> /code</span>
 <span class="k">COPY</span><span class="s"> requirements.txt /code/</span>
@@ -157,7 +158,7 @@
     <p>上のファイルに必要となるソフトウェアを記述します。</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Django&gt;=3.0,&lt;4.0
-psycopg2-binary&gt;=2.8
+psycopg2&gt;=2.8
 </code></pre></div>    </div>
   </li>
   <li>
@@ -183,10 +184,6 @@ psycopg2-binary&gt;=2.8
     <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">./data/db:/var/lib/postgresql/data</span>
-    <span class="na">environment</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">POSTGRES_DB=postgres</span>
-      <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
-      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=postgres</span>
   <span class="na">web</span><span class="pi">:</span>
     <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
     <span class="na">command</span><span class="pi">:</span> <span class="s">python manage.py runserver 0.0.0.0:8000</span>
@@ -194,6 +191,10 @@ psycopg2-binary&gt;=2.8
       <span class="pi">-</span> <span class="s">.:/code</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_NAME=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=postgres</span>
     <span class="na">depends_on</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">db</span>
 </code></pre></div>    </div>
@@ -281,12 +282,16 @@ drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># settings.py
 </span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="p">[...]</span>
+
 <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'default'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'ENGINE'</span><span class="p">:</span> <span class="s">'django.db.backends.postgresql'</span><span class="p">,</span>
-        <span class="s">'NAME'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
-        <span class="s">'USER'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
-        <span class="s">'PASSWORD'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
+        <span class="s">'NAME'</span><span class="p">:</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'POSTGRES_NAME'</span><span class="p">),</span>
+        <span class="s">'USER'</span><span class="p">:</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'POSTGRES_USER'</span><span class="p">),</span>
+        <span class="s">'PASSWORD'</span><span class="p">:</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'POSTGRES_PASSWORD'</span><span class="p">),</span>
         <span class="s">'HOST'</span><span class="p">:</span> <span class="s">'db'</span><span class="p">,</span>
         <span class="s">'PORT'</span><span class="p">:</span> <span class="mi">5432</span><span class="p">,</span>
     <span class="p">}</span>

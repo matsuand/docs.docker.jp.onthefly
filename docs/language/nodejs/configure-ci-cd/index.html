@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アプリケーションにおける CI/CD 設定 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="アプリケーションにおける CI/CD 設定" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"アプリケーションにおける CI/CD 設定","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/nodejs/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>アプリケーションにおける CI/CD 設定</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
+                        <section class="section"><h1>アプリケーションにおける CI/CD 設定</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/develop/">開発向けコンテナー利用</a></li>
@@ -361,11 +361,16 @@
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">registry</span><span class="pi">:</span> <span class="s">ghcr.io</span>
-          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.repository_owner }}</span>
-          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GHCR_TOKEN }}</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.actor }}</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
-<p>イメージへのタグづけを変更することを忘れないでください。
+<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a> に対して認証を行うには、十分なセキュリティを得るために <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a> を用いてください。</p>
+
+<p>コンテナー設定において、レジストリに対する <a href="https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio">manage write and read access of GitHub Actions</a>（GitHub Action の読み書き権限の管理）を行う必要があります。</p>
+
+<p>また <a href="https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry">appropriate scopes</a>（適切なスコープ）を使って、<a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">パーソナルアクセストークン (personal access token; PAT)</a> を利用することもできます。
+イメージへのタグづけを変更することを忘れないでください。
 以下の例においては「latest」のまま、これを唯一のタグとします。
 必要に応じてタグ追加を行ってください。</p>
 
