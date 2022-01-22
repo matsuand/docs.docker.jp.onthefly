@@ -2183,12 +2183,12 @@ use it, then remove the old secret.
 
 @x
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_secret` and keeping the file permissions at
+    path at `/run/secrets/wp_db_password` and keeping the file permissions at
     `0400`.  This triggers a rolling restart of the WordPress service and
     the new secret is used.
 @y
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_secret` and keeping the file permissions at
+    path at `/run/secrets/wp_db_password` and keeping the file permissions at
     `0400`.  This triggers a rolling restart of the WordPress service and
     the new secret is used.
 @z

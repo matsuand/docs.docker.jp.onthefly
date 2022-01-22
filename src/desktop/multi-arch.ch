@@ -41,11 +41,11 @@ selects the image variant that matches your OS and architecture.
 Most of the Docker Official Images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64){: target="_blank" rel="noopener" class="_" }.
 For example, the `busybox` image supports `amd64`, `arm32v5`, `arm32v6`,
 `arm32v7`, `arm64v8`, `i386`, `ppc64le`, and `s390x`. When running this image
-on an `x86_64` / `amd64` machine, the `x86_64` variant is pulled and run.
+on an `x86_64` / `amd64` machine, the `amd64` variant is pulled and run.
 @y
 Docker Hub から提供されている Docker 公式イメージは、ほとんどが [複数アーキテクチャー](https://github.com/docker-library/official-images#architectures-other-than-amd64){: target="_blank" rel="noopener" class="_" } に対応しています。
 たとえば`busybox`イメージがサポートするアーキテクチャーは`amd64`、`arm32v5`、`arm32v6`、`arm32v7`、`arm64v8`、`i386`、`ppc64le`、`s390x`です。 
-このイメージを`x86_64`あるいは`amd64`マシン上で実行した場合、`x86_64`バリアントがプルされて実行されます。
+このイメージを`x86_64`あるいは`amd64`マシン上で実行した場合、`amd64`バリアントがプルされて実行されます。
 @z
 
 @x

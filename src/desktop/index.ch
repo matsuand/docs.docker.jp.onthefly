@@ -30,15 +30,19 @@ redirect_from:
 @x
 > **Update to the Docker Desktop terms**
 >
-> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in annual revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022 for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 @y
 > **Docker Desktop 利用契約の更新**
 >
-> 大規模エンタープライズ向けの Docker Desktop のプロフェッショナル利用 (従業員 250名以上、または年間収益 1 千万ドル以上) に対しては、有償の Docker サブスクリプションが必要です。
-> この条件の適用開始日は 2021 年 8 月31 日です。
-> Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
-> 詳しくは [Docker Desktop ライセンス契約](../subscription/index.md#docker-desktop-license-agreement) を参照してください。
+> 大規模エンタープライズ (従業員 250名以上、または年間収益 1 千万 US ドル以上) 向けの商用利用に対しては、有償サブスクリプションが必要です。
+> この有償サブスクリプションには、2022 年 1 月 31 日までの猶予期間が設けられています。
+> 詳しくは [こちら](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} を参照してください。
 {: .important}
 @z
 

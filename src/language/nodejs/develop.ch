@@ -178,7 +178,7 @@ server.start()
 @z
 
 @x
-We’ve add the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
 @y
 ここでは`ronin-database`モジュールを追加して、データベースへの接続を行うようにコード変更を行いました。
 メモリ保存フラグは false に設定しています。

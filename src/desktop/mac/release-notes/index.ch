@@ -30,15 +30,19 @@ redirect_from:
 @x
 > **Update to the Docker Desktop terms**
 >
-> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in annual revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022 for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](../../../subscription/index.md#docker-desktop-license-agreement).
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 @y
 > **Docker Desktop 利用契約の更新**
 >
-> 大規模エンタープライズ向けの Docker Desktop のプロフェッショナル利用 (従業員 250名以上、または年間収益 1 千万ドル以上) に対しては、有償の Docker サブスクリプションが必要です。
-> この条件の適用開始日は 2021 年 8 月31 日です。
-> Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
-> 詳しくは [Docker Desktop ライセンス契約](../../../subscription/index.md#docker-desktop-license-agreement) を参照してください。
+> 大規模エンタープライズ (従業員 250名以上、または年間収益 1 千万 US ドル以上) 向けの商用利用に対しては、有償サブスクリプションが必要です。
+> この有償サブスクリプションには、2022 年 1 月 31 日までの猶予期間が設けられています。
+> 詳しくは [こちら](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} を参照してください。
 {: .important}
 @z
 
@@ -55,6 +59,273 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
+## Docker Desktop 4.4.2
+2022-01-13
+@y
+## Docker Desktop 4.4.2
+2022-01-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple
+> chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
+> .button .primary-btn }
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
+> .button .primary-btn }
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@y
+- 現時点において Docker Desktop バージョン 4.3.0 および 4.3.1 のユーザーに影響する [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) を修正しました。
+@z
+
+@x
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@y
+Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
+ログインの際に、ユーザーマシン内に機密情報 (アクセストークンやパスワード) をログ出力することがあります。
+この影響を受けるのは、Docker Desktop 4.3.0 または 4.3.1 をインストールしていて、それを使ってログインをしているユーザーに限ります。
+このデータにアクセスするには、ユーザーのローカルファイルにアクセスする必要があります。
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+@y
+- Auth0 とシングルサインオンを使った、簡単でセキュアなサインイン
+  - シングルサインオン: Docker Business サブスクリプションを使うユーザーは、Docker にアクセスする際に、アイデンティティープロバイダー (IdPs) を使って認証するように SSO を設定できるようになりました。
+    詳しくは [シングルサインオン](../../../single-sign-on/index.md) を参照してください。
+  - Docker Desktop へのサインインは、ブラウザーを通じて可能になりました。
+    したがってパスワードマネージャーによる自動入力機能を活用することができます。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@y
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed the memory statistics for containers in the Dashboard. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/6076).
+- Added a deprecated option to `settings.json`: `"deprecatedCgroupsv1": true`, which switches the Linux environment back to cgroups v1. This option will be removed in future releases. If your software requires cgroups v1, you must update it to be compatible with cgroups v2.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Fixed an issue where putting the machine to Sleep mode after pausing Docker Desktop results in Docker Desktop not being able to resume from pause after the machine comes out of Sleep mode. Fixes [for-mac#6058](https://github.com/docker/for-mac/issues/6058).
+@y
+- Docker Desktop の`registry.json`においては、`allowedOrgs`項目に複数組織が含まれる場合にはエラーになります。
+  異なる開発グループにおいて複数の組織を利用する場合には、各グループごとに`registry.json`ファイルを分けなければなりません。
+- ダッシュボードにおいて、コンテナーに対するメモリー統計を修正しました。
+  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/6076) を Fix に。
+- `settings.json`に、非推奨を表すオプション`"deprecatedCgroupsv1": true`を追加しました。
+  これは Linux 環境において cgroups v1 の利用に切り替えます。
+  このオプションは、将来のリリースにおいて削除される予定です。
+  開発するソフトウェアが cgroups v1 を必要としている場合は、cgroups v2 互換となるようにアップデートすることが必要です。
+- Compose において、コンテナー名のセパレーター`-`が`_`になってしまった不備を修正しました。
+  [docker/compose-switch](https://github.com/docker/compose-switch/issues/24) を Fix に。
+- Docker Desktop を一時停止させた状態でマシンがスリープモードになった場合に、マシンがスリープモードから復活した後に、Docker Desktop が一時停止から復旧できなくなる不備を修正しました。
+  [for-mac#6058](https://github.com/docker/for-mac/issues/6058) を Fix に。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+@y
+- `registry.json`ファイルを通じて組織に対する制限が有効になっている場合に、必ず実施するログイン画面において、その上段に今週のメモ (tip) が表示されます。
+@z
+
+@x
+## Docker Desktop 4.3.2
+2021-12-21
+@y
+## Docker Desktop 4.3.2
+2021-12-21
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72729/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72729/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/72729/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/72729/Docker.dmg)
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@y
+- 現時点において Docker Desktop バージョン 4.3.0 および 4.3.1 のユーザーに影響する [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) を修正しました。
+@z
+
+@x
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@y
+Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
+ログインの際に、ユーザーマシン内に機密情報 (アクセストークンやパスワード) をログ出力することがあります。
+この影響を受けるのは、Docker Desktop 4.3.0 または 4.3.1 をインストールしていて、それを使ってログインをしているユーザーに限ります。
+このデータにアクセスするには、ユーザーのローカルファイルにアクセスする必要があります。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+@y
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin.
+This new version of `docker scan` is able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} and [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046).
+@y
+**Log4j 2 CVE-2021-44228**: `docker scan` CLI プラグインを更新しました。
+この`docker scan`の新バージョンは [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} と [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046) を検出できるようになりました。
+@z
+
+@x
+For more information, read the blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+@y
+詳しくはブログ投稿 [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
+## Docker Desktop 4.3.1
+2021-12-11
+@y
+## Docker Desktop 4.3.1
+2021-12-11
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72247/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72247/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/72247/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/72247/Docker.dmg)
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+@y
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
+Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
+not able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"}.
+@y
+**Log4j 2 CVE-2021-44228**: `docker scan` CLI プラグインを更新しました。
+Docker Desktop 4.3.0 およびそれ以前の`docker scan`では、[Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} を検出することはできません。
+@z
+
+@x
+For more information, read the
+blog post [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+@y
+詳しくはブログ投稿 [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
 ## Docker Desktop 4.3.0
 2021-12-02
 @y
@@ -65,31 +336,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @x
 > Download Docker Desktop
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/71786/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/71786/Docker.dmg)
 @y
 > Docker Desktop のダウンロード
 >
-> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
-@z
-
-@x
-### Deprecation
-@y
-{: #deprecation }
-### 廃止決定
-@z
-
-@x
-- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
-- Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
-@y
-- 以下に示す内部 DNS 名は廃止決定となり、将来のリリースにおいて削除される予定です。
-  `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, `gateway.docker.internal`
-- カスタムの RBAC ルールは Docker Desktop から削除されました。
-  これにより`cluster-admin`権限は、すべてのサービスアカウントに与えられます。
-  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774) を Fix に。
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/71786/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/71786/Docker.dmg)
 @z
 
 @x
@@ -125,7 +378,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-- Docker Desktop on Apple silicon no longer requires Rosetta 2.
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](../apple-silicon/#known-issues).
 - Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
 - Fixed an issue that sometimes launched the existing version of Docker Desktop even after updating to a newer version.
 - Added a self-diagnose warning if the host lacks Internet connectivity.
@@ -133,7 +386,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
   - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
 @y
-- Apple silicon 上の Docker Desktop は、Rosetta 2 を必要としなくなりました。
+- Apple silicon 上の Docker Desktop は、[ここに示す任意のコマンドラインツール](../apple-silicon/#known-issues) を除くと、Rosetta 2 を必要としなくなりました。
 - ボリューム UI における Save As オプションを使った際に、ボリュームからファイル保存ができなかった問題を修正しました。
   [docker/for-win#12407](https://github.com/docker/for-win/issues/12407) を Fix に。
 - Docker Desktop を新バージョンにアップデートした後に、それまでの古いバージョンが起動されてしまう場合がある問題を修正しました。
@@ -148,6 +401,43 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
+### Known issue
+@y
+{: #known-issue }
+### 既知の問題
+@z
+
+@x
+Docker Dashboard incorrectly displays the container memory usage as zero.
+You can use the [`docker stats`](../../../engine/reference/commandline/stats.md)
+command on the command line as a workaround to view the
+actual memory usage. See
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).
+@y
+Docker ダッシュボードでは、コンテナーのメモリー使用量を誤ってゼロと表示することがあります。
+この回避策としては、コマンドライン上から [`docker stats`](../../../engine/reference/commandline/stats.md) を実行して、実際のメモリー使用量を確認してください。
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076) 参照。
+@z
+
+@x
+### Deprecation
+@y
+{: #deprecation }
+### 廃止決定
+@z
+
+@x
+- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
+- Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
+@y
+- 以下に示す内部 DNS 名は廃止決定となり、将来のリリースにおいて削除される予定です。
+  `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, `gateway.docker.internal`
+- カスタムの RBAC ルールは Docker Desktop から削除されました。
+  これにより`cluster-admin`権限は、すべてのサービスアカウントに与えられます。
+  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774) を Fix に。
+@z
+
+@x
 ## Docker Desktop 4.2.0
 2021-11-09
 @y
@@ -157,12 +447,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 @x
 > Download Docker Desktop
-
+>
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/70708/Docker.dmg)
 @y
 > Download Docker Desktop
-
+>
 > [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg) |
 > [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/70708/Docker.dmg)
 @z

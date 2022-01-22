@@ -18,6 +18,7 @@ bases = \
 	apple-silicon        \
 	attack-surface       \
 	buildkit             \
+	buildx               \
 	compose-native-build \
 	daemon-access        \
 	deprecated           \

@@ -91,6 +91,62 @@ Docker Desktop ライセンスの詳細は、[Docker Desktop ライセンス契�
 @z
 
 @x
+### Can I use Docker Desktop offline?
+@y
+{: #can-i-use-docker-desktop-offline }
+### Docker Desktop はオフラインでも利用できますか
+@z
+
+@x
+Yes, you can use Docker Desktop offline. However, you
+will not be able to access features that require an active internet
+connection. Additionally, any functionality that requires you to sign in will
+also not work while using Docker Desktop offline or in air-gapped environments.
+This includes:
+@y
+はい。
+Docker Desktop はオフラインでも利用できます。
+ただしインターネット接続がアクティブであることを必要とする機能は利用できません。
+さらにサインインを必要とする機能も、Docker Desktop がオフラインであったり、外部とのアクセスが厳しい環境であったりすると、利用できなくなります。
+例として以下のものがあります。
+@z
+
+@x
+- The in-app [Quick Start Guide](/mac/install.md#quick-start-guide)
+- Pull or push an image to Docker Hub
+- [Image Access Management](../docker-hub/image-access-management.md)
+- [Vulnerability scanning](../docker-hub/vulnerability-scanning.md)
+- View remote images in the [Docker Dashboard](dashboard.md)
+- Set up [Dev Environments](dev-environments.md)
+- Docker build when using [Buildkit](../develop/develop-images/build_enhancements.md). You can work around this by disabling
+  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Deploying an app to the cloud through Compose
+  [ACI](../cloud/aci-integration.md) and [ECS](../cloud/ecs-integration.md)
+  integrations
+- [Kubernetes](kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Check for updates](/mac/install.md#updates) (manual and automatic)
+- [In-app diagnostics](/mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](/mac/troubleshoot.md#self-diagnose-tool))
+- Tip of the week
+- Sending usage statistics
+@y
+- アプリ内に含まれている [クイックスタートガイド](/mac/install.md#quick-start-guide)。
+- Docker Hub との間でのイメージのプルとプッシュ。
+- [イメージアクセス管理](../docker-hub/image-access-management.md)。
+- [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md)。
+- [Docker ダッシュボード](dashboard.md) 内のリモートイメージ参照。
+- [Dev 環境](dev-environments.md) の設定。
+- [Buildkit](../develop/develop-images/build_enhancements.md) を使った Docker ビルド。
+  これは BuildKit を無効化すれば回避できます。
+  `DOCKER_BUILDKIT=0 docker build .`とすることで BuildKit は無効化されます。
+- Compose [ACI](../cloud/aci-integration.md) and [ECS](../cloud/ecs-integration.md) 統合を通じての、クラウドへのアプリのデプロイ。
+- [Kubernetes](kubernetes.md) (Kubernetes を初めて有効化した際にはイメージがダウンロードされます。)
+- [アップデート確認](/mac/install.md#updates) (手動および自動)。
+- [アプリ内の診断処理](/mac/troubleshoot.md#diagnose-and-feedback) ([自己診断ツール](/mac/troubleshoot.md#self-diagnose-tool) があります)。
+- 今週のメモ (tip)。
+- 利用統計の送信。Sending usage statistics
+@z
+
+@x
 ### What is an experimental feature?
 @y
 {: #what-is-an-experimental-feature }

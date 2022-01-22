@@ -304,8 +304,8 @@ networks:
     # Use a custom driver which takes special options
     driver: custom-driver-2
     driver_opts:
-    foo: "1"
-    bar: "2"
+      foo: "1"
+      bar: "2"
 ```
 @y
 ```yaml
@@ -334,8 +334,8 @@ networks:
     # 所定のオプションを用いる独自ドライバーの利用
     driver: custom-driver-2
     driver_opts:
-    foo: "1"
-    bar: "2"
+      foo: "1"
+      bar: "2"
 ```
 @z
 

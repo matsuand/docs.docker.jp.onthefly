@@ -17,20 +17,21 @@ keywords: docker scan, scan, images, snyk, vulnerability
 
 @x
 {% include sign-up-cta.html
-  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
-  header-text="This feature requires a Docker subscription"
+  body="Did you know that you can now get 10 free scans per month? Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="Scan your images for free"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @y
 {% include sign-up-cta.html
-  body="Docker サブスクリプションの機能の一部として、毎月 10 回の無償スキャンが実行可能です。Docker にサインインして、イメージのぜい弱性スキャンを始めてください。"
-  header-text="この機能を利用するには、Docker サブスクリプションが必要です。"
+  body="1 ヶ月ごとに 10 個のスキャンが無料なのをご存知ですか？ Docker にサインインして、イメージのぜい弱性スキャンを行ってください。"
+  header-text="無料のイメージスキャンを行ってください。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @z
 
 @x
-This page contains recommendations and best practices for scanning and building secure images.
+This page contains recommendations and best practices for scanning and building
+secure images.
 @y
 このページでは、イメージをスキャンしてセキュアなイメージをビルドするための、推奨するベストプラクティスを示します。
 @z
@@ -77,6 +78,26 @@ Docker プラットフォームへのオプションとしてぜい弱性スキ�
 @y
 {: #scanning-images }
 ## イメージのスキャン
+@z
+
+@x
+> **Log4j 2 CVE-2021-44228**
+>
+> Versions of `docker scan` earlier than `v0.11.0` are not able to detect [Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"}. You must update your Docker Desktop
+> installation to version 4.3.1 or higher to fix this issue. For more information,
+> see [Scan images for Log4j 2 CVE](../../engine/scan#scan-images-for-log4j-2-cve). 
+{: .important}
+@y
+> **Log4j 2 CVE-2021-44228**
+>
+> `docker scan`のバージョン`v0.11.0`よりも前の版においては [Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"} の検出ができません。
+> この問題に対処するには、Docker Desktop のインストールをバージョン 4.3.1 かそれ以降にしてください。
+> 詳しくは [Log4j 2 CVE に対処したスキャンイメージ](../../engine/scan#scan-images-for-log4j-2-cve) を参照してください。
+{: .important}
 @z
 
 @x

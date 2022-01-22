@@ -30,15 +30,19 @@ redirect_from:
 @x
 > **Update to the Docker Desktop terms**
 >
-> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in annual revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022 for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](../../../subscription/index.md#docker-desktop-license-agreement).
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 @y
 > **Docker Desktop 利用契約の更新**
 >
-> 大規模エンタープライズ向けの Docker Desktop のプロフェッショナル利用 (従業員 250名以上、または年間収益 1 千万ドル以上) に対しては、有償の Docker サブスクリプションが必要です。
-> この条件の適用開始日は 2021 年 8 月31 日です。
-> Docker Deskop の利用に有償サブスクリプションが必要とされるものであっても、 2022 年 1 月 31 日までは猶予期間が設けられています。
-> 詳しくは [Docker Desktop ライセンス契約](../../../subscription/index.md#docker-desktop-license-agreement) を参照してください。
+> 大規模エンタープライズ (従業員 250名以上、または年間収益 1 千万 US ドル以上) 向けの商用利用に対しては、有償サブスクリプションが必要です。
+> この有償サブスクリプションには、2022 年 1 月 31 日までの猶予期間が設けられています。
+> 詳しくは [こちら](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} を参照してください。
 {: .important}
 @z
 
@@ -55,6 +59,377 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
+## Docker Desktop 4.4.3
+2022-01-14
+@y
+## Docker Desktop 4.4.3
+2022-01-14
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For
+> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
+> .button .primary-btn }
+@y
+> Docker Desktop のダウンロード
+>
+> [For
+> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
+> .button .primary-btn }
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@y
+- 現時点において Docker Desktop バージョン 4.3.0 および 4.3.1 のユーザーに影響する [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) を修正しました。
+@z
+
+@x
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@y
+Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
+ログインの際に、ユーザーマシン内に機密情報 (アクセストークンやパスワード) をログ出力することがあります。
+この影響を受けるのは、Docker Desktop 4.3.0 または 4.3.1 をインストールしていて、それを使ってログインをしているユーザーに限ります。
+このデータにアクセスするには、ユーザーのローカルファイルにアクセスする必要があります。
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+@y
+- Auth0 とシングルサインオンを使った、簡単でセキュアなサインイン
+  - シングルサインオン: Docker Business サブスクリプションを使うユーザーは、Docker にアクセスする際に、アイデンティティープロバイダー (IdPs) を使って認証するように SSO を設定できるようになりました。
+    詳しくは [シングルサインオン](../../../single-sign-on/index.md) を参照してください。
+  - Docker Desktop へのサインインは、ブラウザーを通じて可能になりました。
+    したがってパスワードマネージャーによる自動入力機能を活用することができます。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@y
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
+- Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
+@y
+- Docker Desktop の`registry.json`においては、`allowedOrgs`項目に複数組織が含まれる場合にはエラーになります。
+  異なる開発グループにおいて複数の組織を利用する場合には、各グループごとに`registry.json`ファイルを分けなければなりません。
+- Compose において、コンテナー名のセパレーター`-`が`_`になってしまった不備を修正しました。
+  [docker/compose-switch](https://github.com/docker/compose-switch/issues/24) を Fix に。
+- `Reset to factory defaults`では Docker Desktop をシャットダウンしないようにしました。
+- ダッシュボードに対するショートカットは、画面最小化時や非フォーカス時にも反応しないようにしました。
+  [docker/for-win#12495](https://github.com/docker/for-win/issues/12495) を Fix に。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+@y
+- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+@z
+
+@x
+## Docker Desktop 4.4.2
+2022-01-13
+@y
+## Docker Desktop 4.4.2
+2022-01-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@y
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@z
+
+@x
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@y
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+@y
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@y
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
+@y
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+- When the Dashboard is open, even if it does not have focus or is minimized, it will still catch keyboard shortcuts (e.g. ctrl-r for Restart)
+@y
+- ブラウザーからログインした後に «Proceed to Desktop» をクリックすると、ダッシュボード画面が前面に表示されない場合があります。
+- ログインしてダッシュボード画面にフォーカスが当たった後に、背後の画面をクリックしても、前面に表示されたままとなる場合があります。
+  回避策として、他のアプリケーション画面をクリックする前に、一度ダッシュボード画面をクリックしてください。
+- `registry.json`ファイルを通じて組織に対する制限が有効になっている場合に、必ず実施するログイン画面において、その上段に今週のメモ (tip) が表示されます。
+- ダッシュボードを開いている際に、フォーカスがない場合や最小化されている場合でも、キーボードショートカットを検出してしまいます (たとえば再起動を行う ctrl-r など)。
+@z
+
+@x
+## Docker Desktop 4.3.2
+2021-12-21
+@y
+## Docker Desktop 4.3.2
+2021-12-21
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/72729/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/72729/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+@y
+- 現時点において Docker Desktop バージョン 4.3.0 および 4.3.1 のユーザーに影響する [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) を修正しました。
+@z
+
+@x
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+@y
+Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
+ログインの際に、ユーザーマシン内に機密情報 (アクセストークンやパスワード) をログ出力することがあります。
+この影響を受けるのは、Docker Desktop 4.3.0 または 4.3.1 をインストールしていて、それを使ってログインをしているユーザーに限ります。
+このデータにアクセスするには、ユーザーのローカルファイルにアクセスする必要があります。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+@y
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin.
+This new version of `docker scan` is able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} and [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046)
+@y
+**Log4j 2 CVE-2021-44228**: `docker scan` CLI プラグインを更新しました。
+この`docker scan`の新バージョンは [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} と [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046) を検出できるようになりました。
+@z
+
+@x
+For more information, read the blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+@y
+詳しくはブログ投稿 [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
+## Docker Desktop 4.3.1
+2021-12-11
+@y
+## Docker Desktop 4.3.1
+2021-12-11
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+@y
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
+Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
+not able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"}.
+@y
+**Log4j 2 CVE-2021-44228**: `docker scan` CLI プラグインを更新しました。
+Docker Desktop 4.3.0 およびそれ以前の`docker scan`では、[Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} を検出することはできません。
+@z
+
+@x
+For more information, read the
+blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+@y
+詳しくはブログ投稿 [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
 ## Docker Desktop 4.3.0
 2021-12-02
 @y
@@ -65,29 +440,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @x
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe)
 @y
 > Docker Desktop のダウンロード
 >
-> [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
-@z
-
-@x
-### Deprecation
-@y
-{: #deprecation }
-### 廃止決定
-@z
-
-@x
-- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
-- Removed: Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
-@y
-- 以下に示す内部 DNS 名は廃止決定となり、将来のリリースにおいて削除される予定です。
-  `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, `gateway.docker.internal`
-- 削除 ＝ カスタムの RBAC ルールは Docker Desktop から削除されました。
-  これにより`cluster-admin`権限は、すべてのサービスアカウントに与えられます。
-  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774) を Fix に。
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -128,7 +485,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Added a self-diagnose warning if the host lacks Internet connectivity.
 - Docker Desktop now uses cgroupv2. If you need to run `systemd` in a container then:
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
-  - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
+  - Containers running `systemd` need the following options: [`--privileged
+    --cgroupns=host -v
+    /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
 @y
 - ボリューム UI における Save As オプションを使った際に、ボリュームからファイル保存ができなかった問題を修正しました。
   [docker/for-win#12407](https://github.com/docker/for-win/issues/12407) を Fix に。
@@ -142,6 +501,44 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
     `centos:7`イメージの場合は、`centos:8`にアップグレードすることを検討してください。
   - `systemd`を起動するコンテナーでは、以下のオプションが必要です。
     [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva)
+@z
+
+@x
+### Known issue
+@y
+{: #known-issue }
+### 既知の問題
+@z
+
+@x
+Docker Dashboard incorrectly displays the container memory usage as zero on
+Hyper-V based machines.
+You can use the [`docker stats`](../../../engine/reference/commandline/stats.md)
+command on the command line as a workaround to view the
+actual memory usage. See
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).
+@y
+Docker ダッシュボードでは、Hyper-V ベースのマシン上において、コンテナーのメモリー使用量を誤ってゼロと表示することがあります。
+この回避策としては、コマンドライン上から [`docker stats`](../../../engine/reference/commandline/stats.md) を実行して、実際のメモリー使用量を確認してください。
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076) 参照。
+@z
+
+@x
+### Deprecation
+@y
+{: #deprecation }
+### 廃止決定
+@z
+
+@x
+- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
+- Removed: Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
+@y
+- 以下に示す内部 DNS 名は廃止決定となり、将来のリリースにおいて削除される予定です。
+  `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, `gateway.docker.internal`
+- 削除 ＝ カスタムの RBAC ルールは Docker Desktop から削除されました。
+  これにより`cluster-admin`権限は、すべてのサービスアカウントに与えられます。
+  [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774) を Fix に。
 @z
 
 @x

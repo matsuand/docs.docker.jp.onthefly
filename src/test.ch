@@ -95,12 +95,12 @@ topics).
 By default, this is the highest heading included in the right navigation bar. To
 include more heading levels, set `toc_min: 1` in the page's front-matter (as is
 done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
-geater than `toc_max` then no headings are shown.
+greater than `toc_max` then no headings are shown.
 @y
 By default, this is the highest heading included in the right navigation bar. To
 include more heading levels, set `toc_min: 1` in the page's front-matter (as is
 done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
-geater than `toc_max` then no headings are shown.
+greater than `toc_max` then no headings are shown.
 @z
 
 @x
@@ -239,12 +239,10 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 @x
 - [a markdown link](https://docker.com/)
-https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 @y
 - [a markdown link](https://docker.com/)
-https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 @z
@@ -297,13 +295,13 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   - If you can't find a reference page in the `docker.github.io`
   GitHub repository, but see it out on `docs.docker.com`, you can
   surmise that it's probably auto-generated from the codebase.
-  (FYI, to view the markdown source for the file, just click
+  (FYI, to view the Markdown source for the file, just click
   **Edit this page** on `docs.docker.com`. But don't use that URL in your docs.)
 @y
   - If you can't find a reference page in the `docker.github.io`
   GitHub repository, but see it out on `docs.docker.com`, you can
   surmise that it's probably auto-generated from the codebase.
-  (FYI, to view the markdown source for the file, just click
+  (FYI, to view the Markdown source for the file, just click
   **Edit this page** on `docs.docker.com`. But don't use that URL in your docs.)
 @z
 
@@ -331,11 +329,15 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 
 @x
 #### Using a custom target ID
-This topic has a custom target ID above its heading that can be used to link to
-it, in addition to, or instead of, the default concatenated heading style. The
-format of this ID is `{: id="custom-target-id"}`.
 @y
 #### Using a custom target ID
+@z
+
+@x
+This topic has a custom target ID above its heading that can be used to link to
+it, in addition to, or instead of, the default concatenated heading style. The
+format of this ID is `{: id="custom-target-id"}`.
+@y
 This topic has a custom target ID above its heading that can be used to link to
 it, in addition to, or instead of, the default concatenated heading style. The
 format of this ID is `{: id="custom-target-id"}`.
@@ -354,12 +356,12 @@ target.
 @x
 An example of a custom target ID in the documentation is the topic on
 [Compose file version 2 topic on CPU and other resources](compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
-It has a long heading that breaks the normal markdown linking mechanism,
+It has a long heading that breaks the normal Markdown linking mechanism,
 so we added a custom ID above the target heading.
 @y
 An example of a custom target ID in the documentation is the topic on
 [Compose file version 2 topic on CPU and other resources](compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
-It has a long heading that breaks the normal markdown linking mechanism,
+It has a long heading that breaks the normal Markdown linking mechanism,
 so we added a custom ID above the target heading.
 @z
 
@@ -402,10 +404,10 @@ so we added a custom ID above the target heading.
 @z
 
 @x
-[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/)
+[Some Bootstrap image classes](https://getbootstrap.com/docs/3.4/css/#images){: target="_blank" rel="noopener" class="_" }
 might be interesting. You can use them with Markdown or HTML images.
 @y
-[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/)
+[Some Bootstrap image classes](https://getbootstrap.com/docs/3.4/css/#images){: target="_blank" rel="noopener" class="_" }
 might be interesting. You can use them with Markdown or HTML images.
 @z
 
@@ -428,9 +430,33 @@ might be interesting. You can use them with Markdown or HTML images.
 @z
 
 @x
-You can add a link to a YouTube video like this:
+To embed a YouTube video on a docs page, open the video on YouTube, click
+**Share** > **Embed** and then copy the code displayed.
 @y
-You can add a link to a YouTube video like this:
+To embed a YouTube video on a docs page, open the video on YouTube, click
+**Share** > **Embed** and then copy the code displayed.
+@z
+
+@x
+For example, the video embedded on the Get Started page has the following code:
+@y
+For example, the video embedded on the Get Started page has the following code:
+@z
+
+@x
+```html
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+@y
+```html
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+@z
+
+@x
+You can also add a link to a YouTube video like this:
+@y
+You can also add a link to a YouTube video like this:
 @z
 
 @x
@@ -564,7 +590,7 @@ Some tables in markdown and html.
 |                                                                          | Previous cell is empty. A `--flag` in mono text.             |
 | Read                                                                     | Pull                                                         |
 | Read/Write                                                               | Pull, push                                                   |
-| Admin                                                                    | All of the above, plus update description, create and delete |
+| Admin                                                                    | All of the above, plus update description, create, and delete |
 @y
 | Permission level                                                         | Access                                                       |
 |:-------------------------------------------------------------------------|:-------------------------------------------------------------|
@@ -572,7 +598,7 @@ Some tables in markdown and html.
 |                                                                          | Previous cell is empty. A `--flag` in mono text.             |
 | Read                                                                     | Pull                                                         |
 | Read/Write                                                               | Pull, push                                                   |
-| Admin                                                                    | All of the above, plus update description, create and delete |
+| Admin                                                                    | All of the above, plus update description, create, and delete |
 @z
 
 @x
@@ -830,24 +856,6 @@ You can nest captures within each other to represent more complex logic with Liq
 @z
 
 @x
-### Image formatting
-@y
-### Image formatting
-@z
-
-@x
-This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
-@y
-This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
-@z
-
-@x
-![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
-@y
-![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
-@z
-
-@x
 ## Bootstrap and CSS tricks
 @y
 ## Bootstrap and CSS tricks
@@ -922,14 +930,18 @@ as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 </ul>
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active" markdown="1">
+@y
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab4">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab3" class="tab-pane fade in active" markdown="1">
+@z
+
+@x
 #### A Markdown header
 @y
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
-  <li><a data-toggle="tab" data-target="#tab4">TAB 2 HEADER</a></li>
-</ul>
-<div class="tab-content">
-<div id="tab3" class="tab-pane fade in active" markdown="1">
 #### A Markdown header
 @z
 
@@ -939,13 +951,17 @@ as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 <hr>
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
+@y
+- list item 1
+- list item 2
+<hr>
+</div>
+<div id="tab4" class="tab-pane fade" markdown="1">
+@z
+
+@x
 #### Another Markdown header
 @y
-- list item 1
-- list item 2
-<hr>
-</div>
-<div id="tab4" class="tab-pane fade" markdown="1">
 #### Another Markdown header
 @z
 
@@ -1161,8 +1177,8 @@ to see another example.
 $ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-b04784fba78d: Pull complete
-Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+2db29710123e: Pull complete
+Digest: sha256:cc15c5b292d8525effc0f89cb299f1804f3a725c8d05e158653a563f15e4f685
 Status: Downloaded newer image for hello-world:latest
 @y
 <div class="panel panel-default">
@@ -1174,8 +1190,8 @@ Status: Downloaded newer image for hello-world:latest
 $ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-b04784fba78d: Pull complete
-Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+2db29710123e: Pull complete
+Digest: sha256:cc15c5b292d8525effc0f89cb299f1804f3a725c8d05e158653a563f15e4f685
 Status: Downloaded newer image for hello-world:latest
 @z
 
@@ -1189,28 +1205,36 @@ This message shows that your installation appears to be working correctly.
 
 @x
 To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
 @y
 To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
+@z
+
+@x
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+3. The Docker daemon created a new container from that image which runs the
+4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+@y
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+3. The Docker daemon created a new container from that image which runs the
+4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 @z
 
 @x
 To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
 @y
 To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
+@z
+
+@x
+$ docker run -it ubuntu bash
+@y
+$ docker run -it ubuntu bash
 @z
 
 @x
@@ -1223,13 +1247,7 @@ Share images, automate workflows, and more with a free Docker ID:
 
 @x
 For more examples and ideas, visit:
- https://docs.docker.com/engine/userguide/
-@y
-For more examples and ideas, visit:
- https://docs.docker.com/engine/userguide/
-@z
-
-@x
+ https://docs.docker.com/get-started/
 </code></pre>
     </div>
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
@@ -1244,6 +1262,8 @@ culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </div>
 @y
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
 </code></pre>
     </div>
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
@@ -1460,12 +1480,6 @@ Bootstrap JS are loaded.
 @z
 
 @x
-> **Note**: In general, this is a bad idea.
-@y
-> **Note**: In general, this is a bad idea.
-@z
-
-@x
 ## Admonitions (notes)
 @y
 ## Admonitions (notes)
@@ -1482,11 +1496,11 @@ support these broad categories of admonitions:
 @z
 
 @x
-- Notes (no Liquid tag required) (deprecated)
+- Notes (no Liquid tag required)
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
 @y
-- Notes (no Liquid tag required) (deprecated)
+- Notes (no Liquid tag required)
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
 @z
@@ -1510,15 +1524,9 @@ Examples are shown in the following sections.
 @z
 
 @x
-### Note (Deprecated)
+### Note
 @y
-### Note (Deprecated)
-@z
-
-@x
-Notes are deprecated and should not longer be used. Use important or warning instead.
-@y
-Notes are deprecated and should not longer be used. Use important or warning instead.
+### Note
 @z
 
 @x
@@ -1528,7 +1536,7 @@ A standard note is formatted like this:
 @z
 
 @x
-```
+```markdown
 > Handling transient errors
 >
 > Note the way the `get_hit_count` function is written. This basic retry
@@ -1540,7 +1548,7 @@ A standard note is formatted like this:
 > nodes.
 ```
 @y
-```
+```markdown
 > Handling transient errors
 >
 > Note the way the `get_hit_count` function is written. This basic retry
@@ -1554,37 +1562,51 @@ A standard note is formatted like this:
 @z
 
 @x
-It renders like this with a colored sidebar and icon:
+A note renders as follows:
 @y
-It renders like this with a colored sidebar and icon:
+A note renders as follows:
 @z
 
 @x
-![note admonition example](/images/note-admonition-example.png)
+  > Handling transient errors
+  >
+  > Note the way the `get_hit_count` function is written. This basic retry
+  > loop lets us attempt our request multiple times if the redis service is
+  > not available. This is useful at startup while the application comes
+  > online, but also makes our application more resilient if the Redis
+  > service needs to be restarted anytime during the app's lifetime. In a
+  > cluster, this also helps handling momentary connection drops between
+  > nodes.
 @y
-![note admonition example](/images/note-admonition-example.png)
+  > Handling transient errors
+  >
+  > Note the way the `get_hit_count` function is written. This basic retry
+  > loop lets us attempt our request multiple times if the redis service is
+  > not available. This is useful at startup while the application comes
+  > online, but also makes our application more resilient if the Redis
+  > service needs to be restarted anytime during the app's lifetime. In a
+  > cluster, this also helps handling momentary connection drops between
+  > nodes.
 @z
 
 @x
-Notes were previously formatted like this:
+Notes are also formatted like this:
 @y
-Notes were previously formatted like this:
+Notes are also formatted like this:
 @z
 
 @x
-```
-> **Note**: This is a note using the old note style.
+```markdown
+> **Note**
+>
+> This is another way to format a note.
 ```
 @y
+```markdown
+> **Note**
+>
+> This is another way to format a note.
 ```
-> **Note**: This is a note using the old note style.
-```
-@z
-
-@x
-These will still render as a note with a colored sidebar to the left but no icon will be added.
-@y
-These will still render as a note with a colored sidebar to the left but no icon will be added.
 @z
 
 @x
@@ -1600,14 +1622,14 @@ Add the `important` class to your blockquotes if you want to tell users to be ca
 @z
 
 @x
-```
+```markdown
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
 {: .important}
 ```
 @y
-```
+```markdown
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
@@ -1616,15 +1638,23 @@ Add the `important` class to your blockquotes if you want to tell users to be ca
 @z
 
 @x
-It renders like this  with a colored sidebar and icon:
+The 'important' class renders as follows:
 @y
-It renders like this  with a colored sidebar and icon:
+The 'important' class renders as follows:
 @z
 
 @x
-![important admonition example](/images/important-admonition-example.png)
+> **Important**
+>
+> Treat access tokens like your password and keep them secret. Store your
+> tokens securely (for example, in a credential manager).
+{: .important}
 @y
-![important admonition example](/images/important-admonition-example.png)
+> **Important**
+>
+> Treat access tokens like your password and keep them secret. Store your
+> tokens securely (for example, in a credential manager).
+{: .important}
 @z
 
 @x
@@ -1640,7 +1670,7 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 @z
 
 @x
-```
+```markdown
 > Ouch, don't do that!
 >
 > Sticking your finger in an electrical outlet can result in an electric shock.
@@ -1649,7 +1679,7 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 {: .warning}
 ```
 @y
-```
+```markdown
 > Ouch, don't do that!
 >
 > Sticking your finger in an electrical outlet can result in an electric shock.
@@ -1660,15 +1690,33 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 @z
 
 @x
-It will render like this  with a colored sidebar and icon:
+The 'warning' class renders as follows:
 @y
-It will render like this  with a colored sidebar and icon:
+The 'warning' class renders as follows:
 @z
 
 @x
-![warning admonition example](/images/warning-admonition-example.png)
+> **Warning**
+>
+> Removing Volumes
+>
+> By default, named volumes in your compose file are NOT removed when running
+> `docker-compose down`. If you want to remove the volumes, you will need to add
+> the `--volumes` flag.
+>
+> The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+{: .warning}
 @y
-![warning admonition example](/images/warning-admonition-example.png)
+> **Warning**
+>
+> Removing Volumes
+>
+> By default, named volumes in your compose file are NOT removed when running
+> `docker-compose down`. If you want to remove the volumes, you will need to add
+> the `--volumes` flag.
+>
+> The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+{: .warning}
 @z
 
 @x
@@ -1964,11 +2012,11 @@ syntax for comments in JSON!
 @z
 
 @x
-```md
+```markdown
 # Hello
 ```
 @y
-```md
+```markdown
 # Hello
 ```
 @z

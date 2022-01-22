@@ -61,7 +61,6 @@ images = \
 	icon-registry@2X.png \
 	icon-ucp@2X.png \
 	icon-windows@2X.png \
-	important-admonition-example.png \
 	language-guides.svg \
 	laptop.svg \
 	linux_48.svg \
@@ -73,7 +72,6 @@ images = \
 	machine_48.svg \
 	machinen_48.svg \
 	manuals.svg \
-	note-admonition-example.png \
 	placeholder_24517_13.png \
 	reference.svg \
 	resources_file_icon.svg \
@@ -89,7 +87,6 @@ images = \
 	social_icons_24518.png \
 	up.png \
 	video.svg \
-	warning-admonition-example.png \
 	whale-x.png \
 	whats-new.svg \
 	windows_48.svg \

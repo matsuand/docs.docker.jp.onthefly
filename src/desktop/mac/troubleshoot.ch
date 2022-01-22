@@ -44,7 +44,8 @@ This page contains information on how to diagnose and troubleshoot Docker Deskto
 @x
 ## Troubleshoot
 @y
-## Troubleshoot
+{: #troubleshoot }
+## トラブルシューティング
 @z
 
 @x
@@ -300,8 +301,7 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 @x
 ### Self-diagnose tool
 @y
-{: #self-diagnose-tool }
-### 自己診断ツール
+### Self-diagnose tool
 @z
 
 @x
@@ -309,16 +309,15 @@ Docker Desktop contains a self-diagnose tool which helps you to identify some co
 in the Applications directory, then the self-diagnose tool will be located at
 `/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
 @y
-Docker Desktop には自己診断（self-diagnose）ツールが含まれます。
-これを使えば、ごく普通の問題を特定できるようになります。
-この自己診断ツールを実行するには、まずは`com.docker.diagnose`を探し出します。
-Docker Desktop を Applications ディレクトリにインストールしていれば、これは`/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`にあります。
+Docker Desktop contains a self-diagnose tool which helps you to identify some common problems. Before you run the self-diagnose tool, locate `com.docker.diagnose`. If you have installed Docker Desktop
+in the Applications directory, then the self-diagnose tool will be located at
+`/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
 @z
 
 @x
 To run the self-diagnose tool, run:
 @y
-自己診断ツールを以下のようにして実行します。
+To run the self-diagnose tool, run:
 @z
 
 @x
@@ -707,7 +706,50 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @x
 ## Known issues
 @y
-## Known issues
+{: #known-issues }
+## 既知の問題
+@z
+
+@x
+* The following issues are seen when using the `virtualization.framework` experimental feature:
+@y
+* The following issues are seen when using the `virtualization.framework` experimental feature:
+@z
+
+@x
+  * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
+@y
+  * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
+@z
+
+@x
+    This is an interaction between `vmnet.framework` (as used by `virtualization.framework`) and the VPN clients.
+@y
+    This is an interaction between `vmnet.framework` (as used by `virtualization.framework`) and the VPN clients.
+@z
+
+@x
+  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389). Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host. We have also observed specific performance problems when using the `virtualization.framework` on Intel chips on MacOS Monterey.
+@y
+  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389). Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host. We have also observed specific performance problems when using the `virtualization.framework` on Intel chips on MacOS Monterey.
+@z
+
+@x
+    This is an artifact of the new `virtualization.framework`. 
+@y
+    This is an artifact of the new `virtualization.framework`. 
+@z
+
+@x
+  * The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.
+@y
+  * The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.
+@z
+
+@x
+    We are still gathering data and testing alternate kernel versions.
+@y
+    We are still gathering data and testing alternate kernel versions.
 @z
 
 @x

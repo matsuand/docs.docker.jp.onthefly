@@ -463,11 +463,11 @@ For example, the following command is used when initializing Swarm:
 
 @x
 ```console
-$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26
 ```
 @y
 ```console
-$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26
 ```
 @z
 

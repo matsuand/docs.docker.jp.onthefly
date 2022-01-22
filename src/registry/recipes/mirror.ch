@@ -48,11 +48,11 @@ there, to avoid this extra internet traffic.
 @x
 > **Note**
 >
-> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images to third parties without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+> Docker Official Images are an intellectual property of Docker.
 @y
 > **Note**
 >
-> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images to third parties without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+> Docker Official Images are an intellectual property of Docker.
 @z
 
 @x

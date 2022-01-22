@@ -41,51 +41,164 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
 @z
 
 @x
-Docker Buildx is included in Docker Desktop and Docker Linux packages when
-installed using the [DEB or RPM packages](../engine/install/index.md).
+### Windows and macOS
 @y
-Docker Buildx は Docker Desktop に含まれます。
-また [DEB または RPM パッケージ](../engine/install/index.md) により Linux 上にインストールする Docker パッケージに含まれます。
+{: #windows-and-macos }
+### Windows と macOS
 @z
 
 @x
-You can also download the latest `buildx` binary from the
-[Docker buildx](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"} releases page
-on GitHub, copy it to `~/.docker/cli-plugins` folder with name
-`docker-buildx` and change the permission to execute:
+Docker Buildx is included in [Docker Desktop](../desktop/index.md) for Windows
+and macOS.
 @y
-また最新の`buildx`バイナリを GitHub 上の [Docker buildx](https://github.com/docker/buildx/) リリースページからダウンロードすることもできます。
-ダウンロードしたら、`~/.docker/cli-plugins`フォルダーにコピーして、名前を`docker-buildx`とします。
-そして以下のようにして実行権限を与えます。
+Docker Buildx は Windows と macOS に対しては [Docker Desktop](../desktop/index.md) に含まれます。
 @z
 
 @x
-```console
-$ chmod a+x ~/.docker/cli-plugins/docker-buildx
-```
+### Linux packages
 @y
-```console
-$ chmod a+x ~/.docker/cli-plugins/docker-buildx
-```
+{: #linux-packages }
+### Linux パッケージ
 @z
 
 @x
-Here is how to use buildx inside a Dockerfile through the
+Docker Linux packages also include Docker Buildx when installed using the
+[DEB or RPM packages](../engine/install/index.md).
+@y
+[DEB や RPM パッケージ](../engine/install/index.md) を利用する場合も、Linux パッケージとして Docker Buildx が含まれます。
+@z
+
+@x
+### Manual download
+@y
+{: #manual-download }
+### 手動によるダウンロード
+@z
+
+@x
+> **Important**
+>
+> This section is for unattended installation of the buildx component. These
+> instructions are mostly suitable for testing purposes. We do not recommend
+> installing buildx using manual download in production environments as they
+> will not be updated automatically with security updates.
+>
+> On Windows and macOS, we recommend that you install [Docker Desktop](../desktop/index.md)
+> instead. For Linux, we recommend that you follow the [instructions specific for your distribution](#linux-packages).
+{: .important}
+@y
+> **重要**
+>
+> This section is for unattended installation of the buildx component. These
+> instructions are mostly suitable for testing purposes. We do not recommend
+> installing buildx using manual download in production environments as they
+> will not be updated automatically with security updates.
+>
+> On Windows and macOS, we recommend that you install [Docker Desktop](../desktop/index.md)
+> instead. For Linux, we recommend that you follow the [instructions specific for your distribution](#linux-packages).
+{: .important}
+@z
+
+@x
+You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"}.
+@y
+最新のバイナリは [GitHub 上のリリースページ](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"} からダウンロードすることもできます。
+@z
+
+@x
+Rename the relevant binary and copy it to the destination matching your OS:
+@y
+対応するバイナリの名前を変更して、OS において適当な場所にコピーします。
+@z
+
+@x
+| OS       | Binary name          | Destination folder                       |
+| -------- | -------------------- | -----------------------------------------|
+| Linux    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
+| macOS    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
+| Windows  | `docker-buildx.exe`  | `%USERPROFILE%\.docker\cli-plugins`      |
+@y
+| OS       | バイナリ名           | 配置するフォルダー                       |
+| -------- | -------------------- | -----------------------------------------|
+| Linux    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
+| macOS    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
+| Windows  | `docker-buildx.exe`  | `%USERPROFILE%\.docker\cli-plugins`      |
+@z
+
+@x
+Or copy it into one of these folders for installing it system-wide.
+@y
+あるいはシステムワイドなインストール先ディレクトリのいずれかにコピーします。
+@z
+
+@x
+On Unix environments:
+@y
+Unix 環境では以下とします。
+@z
+
+@x
+* `/usr/local/lib/docker/cli-plugins` OR `/usr/local/libexec/docker/cli-plugins`
+* `/usr/lib/docker/cli-plugins` OR `/usr/libexec/docker/cli-plugins`
+@y
+* `/usr/local/lib/docker/cli-plugins` あるいは `/usr/local/libexec/docker/cli-plugins`
+* `/usr/lib/docker/cli-plugins` あるいは `/usr/libexec/docker/cli-plugins`
+@z
+
+@x
+On Windows:
+@y
+Windows では以下とします。
+@z
+
+@x
+* `C:\ProgramData\Docker\cli-plugins`
+* `C:\Program Files\Docker\cli-plugins`
+@y
+* `C:\ProgramData\Docker\cli-plugins`
+* `C:\Program Files\Docker\cli-plugins`
+@z
+
+@x
+> **Note**
+> 
+> On Unix environments, it may also be necessary to make it executable with `chmod +x`:
+> ```shell
+> $ chmod +x ~/.docker/cli-plugins/docker-buildx
+> ```
+@y
+> **メモ**
+> 
+> On Unix environments, it may also be necessary to make it executable with `chmod +x`:
+> ```shell
+> $ chmod +x ~/.docker/cli-plugins/docker-buildx
+> ```
+@z
+
+@x
+### Dockerfile
+@y
+### Dockerfile
+@z
+
+@x
+Here is how to install and use Buildx inside a Dockerfile through the
 [`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) image:
 @y
-以下に示すのは、[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) イメージを使って、Dockerfile 内において buildx を利用する例です。
+Here is how to install and use Buildx inside a Dockerfile through the
+[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) image:
 @z
 
 @x
 ```dockerfile
 FROM docker
-COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
+COPY --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/docker-buildx
 RUN docker buildx version
 ```
 @y
 ```dockerfile
 FROM docker
-COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
+COPY --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/docker-buildx
 RUN docker buildx version
 ```
 @z
@@ -93,8 +206,7 @@ RUN docker buildx version
 @x
 ## Set buildx as the default builder
 @y
-{: #set-buildx-as-the-default-builder }
-## デフォルトビルダーとして buildx を設定
+## Set buildx as the default builder
 @z
 
 @x
@@ -103,14 +215,16 @@ sets up docker builder command as an alias to `docker buildx`. This results in
 the ability to have [`docker build`](../engine/reference/commandline/build.md)
 use the current buildx builder.
 @y
-コマンド [`docker buildx install`](../engine/reference/commandline/buildx_install.md) を実行すれば builder コマンドが`docker buildx`へのエイリアスとして設定されます。
-これによって [`docker build`](../engine/reference/commandline/build.md) が現時点での buildx builder を利用するようになります。
+Running the command [`docker buildx install`](../engine/reference/commandline/buildx_install.md)
+sets up docker builder command as an alias to `docker buildx`. This results in
+the ability to have [`docker build`](../engine/reference/commandline/build.md)
+use the current buildx builder.
 @z
 
 @x
 To remove this alias, run [`docker buildx uninstall`](../engine/reference/commandline/buildx_uninstall.md).
 @y
-このエイリアスを削除するには [`docker buildx uninstall`](../engine/reference/commandline/buildx_uninstall.md) を実行します。
+To remove this alias, run [`docker buildx uninstall`](../engine/reference/commandline/buildx_uninstall.md).
 @z
 
 @x

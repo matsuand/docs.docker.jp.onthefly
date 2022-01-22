@@ -6,6 +6,7 @@
 description: How to set up and use certificates with a registry to verify access
 keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
 redirect_from:
+- /articles/certificates/
 - /engine/articles/certificates/
 title: Verify repository client with certificates
 ---
@@ -14,6 +15,7 @@ title: Verify repository client with certificates
 description: レジストリへのアクセス認証に証明書を使うための設定方法を示します。
 keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
 redirect_from:
+- /articles/certificates/
 - /engine/articles/certificates/
 title: 証明書を使ったリポジトリクライアントの確認
 ---
@@ -145,11 +147,15 @@ OpenSSL の`genrsa`コマンドと`req`コマンドを使って、まずは RSA 
 @z
 
 @x
-    $ openssl genrsa -out client.key 4096
-    $ openssl req -new -x509 -text -key client.key -out client.cert
+```console
+$ openssl genrsa -out client.key 4096
+$ openssl req -new -x509 -text -key client.key -out client.cert
+```
 @y
-    $ openssl genrsa -out client.key 4096
-    $ openssl req -new -x509 -text -key client.key -out client.cert
+```console
+$ openssl genrsa -out client.key 4096
+$ openssl req -new -x509 -text -key client.key -out client.cert
+```
 @z
 
 @x

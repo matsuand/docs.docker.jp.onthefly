@@ -6,14 +6,12 @@
 description: Image Access Management
 keywords: image, access, management
 title: Image Access Management
-toc_max: 2
 ---
 @y
 ---
 description: Image Access Management
 keywords: image, access, management
 title: イメージアクセス管理
-toc_max: 2
 ---
 @z
 
@@ -48,11 +46,13 @@ The following video walks you through the process of configuring Image Access Ma
 
 @x
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<br>
 @y
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@z
 
+@x
+<br>
+@y
 <br>
 @z
 
@@ -122,199 +122,241 @@ To configure Image Access Management permissions, perform the following steps:
 @z
 
 @x
-To ensure that each org member uses images in a safe and secure environment, you can  perform the following steps below to enforce sign-in under your organization.
+### Enforce authentication
+@y
+{: #enforce-authentication }
+### 強制的な認証
+@z
+
+@x
+To ensure that each org member uses images in a safe and secure environment, you
+can perform the following steps below to enforce sign-in under your
+organization. To do this:
 @y
 組織内の各メンバーが、安全でセキュアな環境のもとでイメージを利用するように仕向けるため、以下の手順を実施して、組織内においては強制的にサインインさせるようにします。
+これは以下のようにします。
 @z
 
 @x
-1. Download Docker Desktop 4.0 or a later release.
+1. Download the latest version of Docker Desktop, and then
+2. Create a `registry.json` file.
 @y
-1. Docker Desktop 4.0 またはそれ以降のリリースをダウンロードします。
+1. Docker Desktop の最新版をダウンロードします。そして、
+2. `registry.json`ファイルを生成します。
 @z
 
 @x
-    - [Download and install for Windows](/desktop/windows/install/)
-    - [Download and install for Mac](/desktop/mac/install/)
+Download Docker Desktop 4.0 or a later release.
 @y
-    - [Windows 向けのダウンロードとインストール]({{ site.baseurl }}/desktop/windows/install/)
-    - [Mac 向けのダウンロードとインストール]({{ site.baseurl }}/desktop/mac/install/)
+Docker Desktop 4.0 またはそれ以降のリリースをダウンロードします。
 @z
 
 @x
-    > **Note**
-    >
-    > There currently is no Docker Desktop for Linux. Linux users will have the same restrictions as Mac and Windows users while logged in, but there is currently no way to require them to log in.
+- [Download and install for Windows](/desktop/windows/install/)
+- [Download and install for Mac](/desktop/mac/install/)
 @y
-    > **メモ**
-    >
-    > 現在のところ Linux 向けの Docker Desktop はありません。
-    > ログインに際しては Linux ユーザーも、 Mac や Windows ユーザーと同様の制約を持つことになりますが、現在のところ、ログイン時にこれを要求する方法はありません。
+- [Windows 向けのダウンロードとインストール]({{ site.baseurl }}/desktop/windows/install/)
+- [Mac 向けのダウンロードとインストール]({{ site.baseurl }}/desktop/mac/install/)
 @z
 
 @x
-2. Create a registry.json file on Windows or Mac.
+> **Note**
+>
+> There is currently no Docker Desktop for Linux. Linux users will have the same
+> restrictions as Mac and Windows users while logged in. However, there is
+> currently no way to enforce Linux users to log in.
 @y
-2. Windows または Mac 上に registry.json ファイルを生成します。
+> **メモ**
+>
+> 現在のところ Linux 向けの Docker Desktop はありません。
+> ログインに際しては Linux ユーザーも、 Mac や Windows ユーザーと同様の制約を持つことになりますが、現在のところ、ログイン時にこれを強制する方法はありません。
 @z
 
 @x
-    For **Windows**:
+#### Create a registry json file
 @y
-    **Windows** の場合
+{: #create-a-registry-json-file }
+#### レジストリ json ファイルの生成
 @z
 
 @x
-    Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
+After you've successfully installed Docker Desktop, create a `registry.json` file on Windows or Mac.
 @y
-    `C:\ProgramData\DockerDesktop\registry.json`というファイルを生成します。
-    そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
-    このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
+Docker Desktop のインストールを正常に終えたら、Windows または Mac において`registry.json`ファイルを生成します。
 @z
 
 @x
-    To create your registry.json file:
+**On Windows**
 @y
-    個人用の registry.json ファイルを生成するには以下を行います。
+**Windows の場合**
 @z
 
 @x
-    1. Open Windows Powershell and select Run as Administrator.
-    2. Type the following command: `cd /ProgramData/DockerDesktop/`
-    3. In Notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
+Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
 @y
-    1. Windows Powershell を開いて Run as Administrator（管理者として実行）を選択します。
-    2. 以下のコマンドを入力します。 `cd /ProgramData/DockerDesktop/`
-    3. メモ帳を開いて、`registry.json`を入力し、`allowedOrgs`キー内に必要な分だけ組織名を記述します。
-       そして Save をクリックします。
+`C:\ProgramData\DockerDesktop\registry.json`というファイルを生成します。
+そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
+このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
 @z
 
 @x
-        Example:
+To create your `registry.json` file on Windows:
 @y
-        たとえば以下のようにします。
+Windows において個人用の`registry.json`ファイルを生成するには以下を行います。
 @z
 
 @x
-        ```json
-        {
-         "allowedOrgs": ["mycompany"]
-         }
-        ```
-    4. Navigate to Powershell and type ```start .```
+1. Open Windows Powershell and select Run as Administrator.
+2. Type the following command: `cd /ProgramData/DockerDesktop/`
+3. In Notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
 @y
-        ```json
-        {
-         "allowedOrgs": ["mycompany"]
-         }
-        ```
-    4. Powershell において ```start .``` を入力します。
+1. Windows Powershell を開いて Run as Administrator（管理者として実行）を選択します。
+2. 以下のコマンドを入力します。 `cd /ProgramData/DockerDesktop/`
+3. メモ帳を開いて、`registry.json`を入力し、`allowedOrgs`キー内に必要な分だけ組織名を記述します。
+   そして Save をクリックします。
 @z
 
 @x
-        Congratulations, you have just created the registry.json file.
+    For example:
 @y
-        おめでとうございます。registry.json ファイルができあがりました。
+    たとえば以下のようにします。
 @z
 
 @x
-    For **macOS**:
+    ```json
+    {
+    "allowedOrgs": ["mycompany"]
+    }
+    ```
 @y
-    **macOS** の場合
+    ```json
+    {
+    "allowedOrgs": ["mycompany"]
+    }
+    ```
 @z
 
 @x
-    Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
+4. Navigate to Powershell and type ```start .```
 @y
-    `/Library/Application Support/com.docker.docker/registry.json`というファイルを生成します。
-    そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
-    このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
-    Docker Desktop を利用するユーザーは、あらかじめサインインができていて、その組織のうちの 1 つのメンバーであることが必要です。
+4. Powershell において ```start .``` を入力します。
 @z
 
 @x
-    To create your registry.json file:
-    1. Navigate to VS Code or any text editor of your choice.
-    2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
+Congratulations! You have just created the registry.json file.
 @y
-    個人用の registry.json ファイルを生成するには以下を行います。
-    1. VS Code か、好みのテキストエディターを開きます。
-    2. `allowedOrgs`キー内に必要な分だけ組織名を記述します。
-       そしてファイルを保存します。
+おめでとうございます。registry.json ファイルができあがりました。
 @z
 
 @x
-        Example:
+**On macOS**:
 @y
-        たとえば以下のようにします。
+**macOS の場合**
 @z
 
 @x
-       ```json
-        {
-          "allowedOrgs": ["mycompany"]
-        }
-        ```
+Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
 @y
-       ```json
-        {
-          "allowedOrgs": ["mycompany"]
-        }
-        ```
+`/Library/Application Support/com.docker.docker/registry.json`というファイルを生成します。
+そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
+このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
+Docker Desktop を利用するユーザーは、あらかじめサインインができていて、その組織のうちの 1 つのメンバーであることが必要です。
 @z
 
 @x
-    3. Open a new terminal and type the following command:
+To create your `registry.json` file on macOS:
 @y
-    3. 別の端末画面を開いて、以下のコマンドを入力します。
+macOS 上において個人用の`registry.json`ファイルを生成するには以下を行います。
 @z
 
 @x
-         `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
+1. Navigate to VS Code or any text editor of your choice.
+2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
 @y
-         `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
+1. VS Code か、好みのテキストエディターを開きます。
+2. `allowedOrgs`キー内に必要な分だけ組織名を記述します。
+   そしてファイルを保存します。
 @z
 
 @x
-        Note: if prompted, type your password associated with your local computer.
+    For example:
 @y
-        メモ： プロンプトが表示されたら、そのマシンにおけるパスワードを入力してください。
+    たとえば以下のようにします。
 @z
 
 @x
-    4. Type the following command:
+    ```json
+    {
+     "allowedOrgs": ["mycompany"]
+    }
+    ```
 @y
-    4. 以下のコマンドを入力します。
+    ```json
+    {
+     "allowedOrgs": ["mycompany"]
+    }
+    ```
 @z
 
 @x
-        `Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
+ 3. Open a new terminal and type the following command:
 @y
-        `Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
+ 3. 別の端末画面を開いて、以下のコマンドを入力します。
 @z
 
 @x
-        Congratulations, you have just created the registry.json file.
+    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
 @y
-        おめでとうございます。registry.json ファイルができあがりました。
+    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
 @z
 
 @x
-3. To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign in, they will receive an error message.
+    Note: if prompted, type your password associated with your local computer.
 @y
-3. 制約設定が正常に行われていることを確認するには、組織メンバーが Docker Desktop にサインインしてから、自分のローカルマシンにイメージをプルします。
-サインインができない場合には、エラーメッセージが表示されます。
+    メモ： プロンプトが表示されたら、そのマシンにおけるパスワードを入力してください。
 @z
 
 @x
-    For example, if you enable Image Access Management, your members can pull an Organization Image, Docker Official Image, or Verified Publisher Image onto their local machine. If you disable the restrictions, your members can pull any image, including Community Images.
+4. Type the following command:
 @y
-    イメージアクセス管理を有効にしていると、所属メンバーは、組織用のイメージ、Docker 公式イメージ、認証公開者によるイメージを、それぞれローカルマシンにプルできます。
-    制約設定を無効にすると、メンバーはコミュニティイメージなど、あらゆるイメージをプルできるようになります。
+4. 以下のコマンドを入力します。
 @z
 
 @x
-     ![Image Access Management](images/image-access-management-error.png){:width="700px"}
+    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
 @y
-     ![イメージアクセス管理](images/image-access-management-error.png){:width="700px"}
+    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
+@z
+
+@x
+Congratulations! You have just created the `registry.json` file.
+@y
+おめでとうございます。 `registry.json`ファイルができあがりました。
+@z
+
+@x
+### Verify the restrictions
+@y
+{: #verify-the-restrictions }
+### 制限の確認
+@z
+
+@x
+   To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign in, they will receive an error message.
+@y
+   制約設定が正常に行われていることを確認するには、組織メンバーが Docker Desktop にサインインしてから、自分のローカルマシンにイメージをプルします。
+   サインインができない場合には、エラーメッセージが表示されます。
+@z
+
+@x
+   For example, if you enable Image Access Management, your members can pull an Organization Image, Docker Official Image, or Verified Publisher Image onto their local machine. If you disable the restrictions, your members can pull any image, including Community Images.
+@y
+   イメージアクセス管理を有効にしていると、所属メンバーは、組織用のイメージ、Docker 公式イメージ、認証公開者によるイメージを、それぞれローカルマシンにプルできます。
+   制約設定を無効にすると、メンバーはコミュニティイメージなど、あらゆるイメージをプルできるようになります。
+@z
+
+@x
+   ![Image Access Management](images/image-access-management-error.png){:width="700px"}
+@y
+   ![イメージアクセス管理](images/image-access-management-error.png){:width="700px"}
 @z

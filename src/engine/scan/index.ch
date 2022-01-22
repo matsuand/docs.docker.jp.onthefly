@@ -21,14 +21,14 @@ toc_max: 2
 
 @x
 {% include sign-up-cta.html
-  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
-  header-text="This feature requires a Docker subscription"
+  body="Did you know that you can now get 10 free scans per month? Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="Scan your images for free"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @y
 {% include sign-up-cta.html
-  body="Docker サブスクリプションの機能の一部として、毎月 10 回の無償スキャンが実行可能です。Docker にサインインして、イメージのぜい弱性スキャンを始めてください。"
-  header-text="この機能を利用するには、Docker サブスクリプションが必要です。"
+  body="1 ヶ月ごとに 10 個のスキャンが無料なのをご存知ですか？ Docker にサインインして、イメージのぜい弱性スキャンを行ってください。"
+  header-text="無料のイメージスキャンを行ってください。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 @z
@@ -51,10 +51,34 @@ Docker スキャンは Snyk エンジンを使って動作します。
 @z
 
 @x
-Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan results contain a list of Common Vulnerabilities and Exposures (CVEs), the sources, such as OS packages and libraries, versions in which they were introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+Users trigger vulnerability scans through the CLI, and use the CLI to view the
+scan results. The scan results contain a list of Common Vulnerabilities and
+Exposures (CVEs), the sources, such as OS packages and libraries, versions in
+which they were introduced, and a recommended fixed version (if available) to
+remediate the CVEs discovered.
 @y
 ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
 スキャン結果は、ぜい弱性情報データベース CVE（Common Vulnerabilities and Exposures）の一覧として構成され、そこにはぜい弱性の発生源、つまり OS パッケージやライブラリなど、またぜい弱性が発生したバージョン、CVE によって検出された問題を修復するための推奨される修正バージョン（入手可能である場合）が示されます。
+@z
+
+@x
+> **Log4j 2 CVE-2021-44228**
+>
+> Versions of `docker Scan` earlier than `v0.11.0` are not able to detect [Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"}. You must update your Docker
+> Desktop installation to 4.3.1 or higher to fix this issue. For more
+> information, see [Scan images for Log4j 2 CVE](#scan-images-for-log4j-2-cve).
+{: .important}
+@y
+> **Log4j 2 CVE-2021-44228**
+>
+> `docker scan`のバージョンが`v0.11.0`よりも古い場合、[Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"} を検出することができません。
+> この問題を解決するためには Docker Desktop のバージョンが 4.3.1 またはそれ以降のものをインストールする必要があります。
+> 詳しくは [Log4j 2 CVE に対するイメージスキャン](#scan-images-for-log4j-2-cve) を参照してください。
+{: .important}
 @z
 
 @x
@@ -64,10 +88,154 @@ For information about the system requirements to run vulnerability scanning, see
 @z
 
 @x
-This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+This page contains information about the `docker scan` CLI command. For
+information about automatically scanning Docker images through Docker Hub, see
+[Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
 @y
 本ページでは CLI コマンド`docker scan`の情報を示します。
 Docker Hub を通じて Docker イメージを自動スキャンする情報に関しては [Docker Hub のぜい弱性スキャン]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を参照してください。
+@z
+
+@x
+## Scan images for Log4j 2 CVE
+@y
+{: #scan-images-for-log4j-2-cve }
+## Log4j 2 CVE に対するイメージスキャン
+@z
+
+@x
+Docker Scan versions earlier than `v0.11.0` do not detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} when you scan your
+images for vulnerabilities. You must update your Docker installation to the
+latest version to fix this issue.
+@y
+Docker スキャンのバージョンが`v0.11.0`よりも古い場合、イメージのぜい弱性スキャンを行っても [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} を検出することができません。
+この問題を解決するには Docker の最新版をインストールする必要があります。
+@z
+
+@x
+If you are using the `docker scan` plugin shipped
+with Docker Desktop, update Docker Desktop to version 4.3.1 or
+higher. See the release notes for [Mac](../../desktop/mac/release-notes/index.md) and
+[Windows](../../desktop/windows/release-notes/index.md) for download information.
+@y
+Docker Desktop に含まれている`docker scan`プラグインを利用している場合は、Docker Desktop のバージョンを 4.3.1 またはそれ以降にアップデートしてください。
+ダウンロードに関しては、[Mac](../../desktop/mac/release-notes/index.md) のリリースノート、あるいは [Windows](../../desktop/windows/release-notes/index.md) のリリースノートを参照してください。
+@z
+
+@x
+If you are using Linux, run the following command to manually install the latest
+version of `docker scan`:
+@y
+Linux を利用している場合は、以下のコマンドを手作業により実行して、最新の`docker scan`をインストールします。
+@z
+
+@x
+On `.deb` based distros, such as Ubuntu and Debian:
+@y
+Ubuntu や Debian のような`.deb`をベースとするディストリビューションでは、以下のようにします。
+@z
+
+@x
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+@y
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+@z
+
+@x
+On rpm-based distros, such as CentOS or Fedora:
+@y
+CentOS や Fedora のような rpm ベースのディストリビューションでは、以下のようにします。
+@z
+
+@x
+```console
+$ yum install docker-scan-plugin
+```
+@y
+```console
+$ yum install docker-scan-plugin
+```
+@z
+
+@x
+Alternatively, you can manually download the `docker scan` binaries from the [Docker Scan](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){:
+target="_blank" rel="noopener" class="_"} GitHub repository and
+[install](https://github.com/docker/scan-cli-plugin){:
+target="_blank" rel="noopener" class="_"}  in the plugins directory.
+@y
+上とは別に`docker scan`のバイナリは、GitHub レジストリ [Docker Scan](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){:target="_blank" rel="noopener" class="_"} やプラグインディレクトリ内の [install](https://github.com/docker/scan-cli-plugin){:target="_blank" rel="noopener" class="_"}  からダウンロードすることができます。
+@z
+
+@x
+### Verify the `docker scan` version
+@y
+{: #verify-the-docker-scan-version }
+### `docker scan`のバージョン確認
+@z
+
+@x
+After upgrading `docker scan`, verify you are running the latest version by
+running the following command:
+@y
+`docker scan`のアップグレードを行ったら、インストールした`docker scan`が最新であるかどうかを、以下のコマンドを実行して確認します。
+@z
+
+@x
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+@y
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+@z
+
+@x
+If your code output contains `ORGAPACHELOGGINGLOG4J`, it is
+likely that your code is affected by the Log4j 2 CVE-2021-44228 vulnerability. When you run the updated version of `docker scan`, you should also see a message
+in the output log similar to:
+@y
+If your code output contains `ORGAPACHELOGGINGLOG4J`, it is
+likely that your code is affected by the Log4j 2 CVE-2021-44228 vulnerability. When you run the updated version of `docker scan`, you should also see a message
+in the output log similar to:
+@z
+
+@x
+```console
+Upgrade org.apache.logging.log4j:log4j-core@2.14.0 to org.apache.logging.log4j:log4j-core@2.15.0 to fix
+✗ Arbitrary Code Execution (new) [Critical Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720] in org.apache.logging.log4j:log4j-core@2.14.0
+introduced by org.apache.logging.log4j:log4j-core@2.14.0
+```
+@y
+```console
+Upgrade org.apache.logging.log4j:log4j-core@2.14.0 to org.apache.logging.log4j:log4j-core@2.15.0 to fix
+✗ Arbitrary Code Execution (new) [Critical Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720] in org.apache.logging.log4j:log4j-core@2.14.0
+introduced by org.apache.logging.log4j:log4j-core@2.14.0
+```
+@z
+
+@x
+For more information, read our blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){:
+target="_blank" rel="noopener" class="_"}.
+@y
+For more information, read our blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){:
+target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -781,9 +949,9 @@ Docker イメージに対してぜい弱性スキャンを実行するには、�
 @z
 
 @x
-1. Download and install Docker Desktop.
+1. Download and install the latest version of Docker Desktop.
 @y
-1. Docker Desktop をダウンロードしインストールしていること。
+1. Docker Desktop の最新版をダウンロードしインストールしていること。
 @z
 
 @x

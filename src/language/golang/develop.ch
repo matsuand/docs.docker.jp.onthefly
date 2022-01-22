@@ -444,9 +444,9 @@ oliver@hki:~$
 @z
 
 @x
-Now that we have started and configured the database engine, we can swith our attention to the application. 
+Now that we have started and configured the database engine, we can switch our attention to the application. 
 @y
-Now that we have started and configured the database engine, we can swith our attention to the application. 
+Now that we have started and configured the database engine, we can switch our attention to the application. 
 @z
 
 @x
@@ -1385,7 +1385,7 @@ services:
       - PGPASSWORD=${PGPASSWORD:?database password not set}
       - PGHOST=${PGHOST:-db}
       - PGPORT=${PGPORT:-26257}
-      - PGDATABASE=${PGDATABASE-mydb}
+      - PGDATABASE=${PGDATABASE:-mydb}
     deploy:
       restart_policy:
         condition: on-failure
@@ -1419,7 +1419,7 @@ services:
       - PGPASSWORD=${PGPASSWORD:?database password not set}
       - PGHOST=${PGHOST:-db}
       - PGPORT=${PGPORT:-26257}
-      - PGDATABASE=${PGDATABASE-mydb}
+      - PGDATABASE=${PGDATABASE:-mydb}
     deploy:
       restart_policy:
         condition: on-failure

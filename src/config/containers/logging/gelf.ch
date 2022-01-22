@@ -130,13 +130,13 @@ You can set the logging driver for a specific container by setting the
 @x
 ```console
 $ docker run \
-      --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+      --log-driver gelf --log-opt gelf-address=udp://1.2.3.4:12201 \
       alpine echo hello world
 ```
 @y
 ```console
 $ docker run \
-      --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+      --log-driver gelf --log-opt gelf-address=udp://1.2.3.4:12201 \
       alpine echo hello world
 ```
 @z

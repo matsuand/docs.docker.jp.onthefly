@@ -58,6 +58,133 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.12
+2021-12-13
+@y
+## 20.10.12
+2021-12-13
+@z
+
+@x
+This release of Docker Engine contains changes in packaging only, and provides
+updates to the `docker scan` and `docker buildx` commands. Versions of `docker scan`
+before v0.11.0 are not able to detect the [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+We are shipping an updated version of `docker scan` in this release to help you
+scan your images for this vulnerability.
+@y
+Docker Engine の本リリースでの変更は、パッケージング部分のみです。
+また更新は`docker scan`と`docker buildx`のコマンドに対して行っています。
+バージョンが v0.11.0 以前の`docker scan`は [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) を検出することはできません。
+本リリースにおいては更新版の`docker scan`を提供しています。
+これを使えば、イメージのぜい弱性をスキャンすることができます。
+@z
+
+@x
+> **Note**
+>
+> The `docker scan` command on Linux is currently only supported on x86 platforms.
+> We do not yet provide a package for other hardware architectures on Linux.
+@y
+> **メモ**
+>
+> Linux 上における`docker scan`コマンドは、現在のところ x86 プラットフォームにおいてのみサポートしています。
+> Linux 上におけるそれ以外のハードウェアアーキテクチャーに対しては、まだパッケージ提供は行っていません。
+@z
+
+@x
+The `docker scan` feature is provided as a separate package and, depending on your
+upgrade or installation method, 'docker scan' may not be updated automatically to
+the latest version. Use the instructions below to update `docker scan` to the latest
+version. You can also use these instructions to install, or upgrade the `docker scan`
+package without upgrading the Docker Engine:
+@y
+`docker scan`の機能は、個別のパッケージとして提供しています。
+これはアップデートやインストールの方法によって状況が異なることになります。
+最新版の'docker scan'は自動的には更新されていない場合があります。
+最新の`docker scan`に更新するには、以下の手順に従ってください。
+またその手順に従えば、Docker Engine をアップグレードしなくても、`docker scan`パッケージのインストールやアップグレードを行うこともできます。
+@z
+
+@x
+On `.deb` based distros, such as Ubuntu and Debian:
+@y
+Ubuntu や Debian のような`.deb`をベースとするディストリビューションでは、以下のようにします。
+@z
+
+@x
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+@y
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+@z
+
+@x
+On rpm-based distros, such as CentOS or Fedora:
+@y
+CentOS や Fedora のような rpm ベースのディストリビューションでは、以下のようにします。
+@z
+
+@x
+```console
+$ yum install docker-scan-plugin
+```
+@y
+```console
+$ yum install docker-scan-plugin
+```
+@z
+
+@x
+After upgrading, verify you have the latest version of `docker scan` installed:
+@y
+アップグレードを行ったら、インストールした`docker scan`が最新であるかどうかを確認します。
+@z
+
+@x
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+@y
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+@z
+
+@x
+[Read our blog post on CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/)
+to learn how to use the `docker scan` command to check if images are vulnerable.
+@y
+[CVE-2021-44228 に関するブログ投稿](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/) を読んでください。
+`docker scan`コマンドによって、イメージのぜい弱性がチェックされることを確認してください。
+@z
+
+@x
+### Packaging
+@y
+{: #packaging }
+### パッケージ
+@z
+
+@x
+- Update `docker scan` to [v0.12.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0).
+- Update `docker buildx` to [v0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1).
+- Update Golang runtime to Go 1.16.12.
+@y
+- Update `docker scan` to [v0.12.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0).
+- Update `docker buildx` to [v0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1).
+- Update Golang runtime to Go 1.16.12.
+@z
+
+@x
 ## 20.10.11
 2021-11-17
 @y
@@ -115,10 +242,10 @@ for Docker Engine.
 @z
 
 @x
-## Packaging
+### Packaging
 @y
 {: #packaging }
-## パッケージ
+### パッケージ
 @z
 
 @x
@@ -173,10 +300,10 @@ for Docker Engine.
 @z
 
 @x
-## Runtime
+### Runtime
 @y
 {: #runtime }
-## ランタイム
+### ランタイム
 @z
 
 @x
@@ -209,10 +336,10 @@ for Docker Engine.
 @z
 
 @x
-## Packaging
+### Packaging
 @y
 {: #packaging }
-## パッケージ
+### パッケージ
 @z
 
 @x
@@ -263,10 +390,10 @@ well as updated versions of the containerd.io package.
 @z
 
 @x
-## Client
+### Client
 @y
 {: #client }
-## クライアント
+### クライアント
 @z
 
 @x
@@ -280,10 +407,10 @@ well as updated versions of the containerd.io package.
 @z
 
 @x
-## Runtime
+### Runtime
 @y
 {: #runtime }
-## ランタイム
+### ランタイム
 @z
 
 @x
@@ -302,10 +429,10 @@ well as updated versions of the containerd.io package.
 @z
 
 @x
-## Packaging
+### Packaging
 @y
 {: #packaging }
-## パッケージ
+### パッケージ
 @z
 
 @x

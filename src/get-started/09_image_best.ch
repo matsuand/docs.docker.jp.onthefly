@@ -34,13 +34,13 @@ Docker は [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} �
 @x
 > **Note**
 > 
-> You must be logged in to Docker Hub to scan your images. Run the command `docker login`, and then scan your images using
+> You must be logged in to Docker Hub to scan your images. Run the command `docker scan --login`, and then scan your images using
 > `docker scan <image-name>`.
 @y
 > **メモ**
 > 
 > イメージをスキャンするには、Docker Hub にログインしておくことが必要です。
-> `docker login`コマンドの実行後に、`docker scan <image-name>`を実行して、イメージのスキャンを行います。
+> `docker scan --login`コマンドの実行後に、`docker scan <image-name>`を実行して、イメージのスキャンを行います。
 @z
 
 @x

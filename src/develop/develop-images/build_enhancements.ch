@@ -459,36 +459,54 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 @z
 
 @x
-The `docker build` has a `--ssh` option to allow the Docker Engine to forward
-SSH agent connections. For more information on SSH agent, see the
-[OpenSSH man page](https://man.openbsd.org/ssh-agent).
+Some commands in a `Dockerfile` may need specific SSH authentication - for example, to clone a private repository.
+Rather than copying private keys into the image, which runs the risk of exposing them publicly, `docker build` provides a way to use the host system's ssh access while building the image.
 @y
-`docker build`には`--ssh`オプションがあります。
-これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
-SSH エージェントについては [OpenSSH man ページ](https://man.openbsd.org/ssh-agent) を参照してください。
+`Dockerfile`内のコマンドにおいて SSH 認証を必要とするものがあります。
+たとえばプライベートリポジトリを生成する場合です。
+秘密鍵をイメージ内にコピーすると、機密情報を公開する危険にさらされます。
+そうではなく`docker build`を使えば、イメージビルドの際に、ホストシステムの ssh アクセスが利用できます。
 @z
 
 @x
-Only the commands in the `Dockerfile` that have explicitly requested the SSH
-access by defining `type=ssh` mount have access to SSH agent connections. The
-other commands have no knowledge of any SSH agent being available.
+There are three steps to this process.
 @y
-`Dockerfile`内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを`type=ssh`とするだけです。
-これが SSH エージェントによる接続を行うものとなります。
-これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。
+その作業を進めるには以下の 3 つの手順を行います。
 @z
 
 @x
-To request SSH access for a `RUN` command in the `Dockerfile`, define a mount
-with type `ssh`. This will set up the `SSH_AUTH_SOCK` environment variable to
-make programs relying on SSH automatically use that socket.
+First, run `ssh-add` to add private key identities to the authentication agent.
+If you have more than one SSH key and your default `id_rsa` is not the one you use for accessing the resources in question, you'll need to add that key by path: `ssh-add ~/.ssh/<some other key>`.
+(For more information on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).)
 @y
-`Dockerfile`内の`RUN`コマンドにおいて SSH アクセスを指定するには、マウントタイプを`ssh`として定義します。
-これにより環境変数`SSH_AUTH_SOCK`が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。
+まずは`ssh-add`を実行して秘密鍵の追加を行い、認証エージェントが認識できるようにします。
+SSH 鍵を複数持っていて、デフォルトの`id_rsa`が、これから行うリソースアクセス用ではなかった場合には、鍵へのパスを指定して、`ssh-add ~/.ssh/<some other key>`のように実行する必要があります。
+(SSH エージェントに関する詳細は [OpenSSH man ページ](https://man.openbsd.org/ssh-agent) を参照してください。)
 @z
 
 @x
-Here is an example Dockerfile using SSH in the container:
+Second, when running `docker build`, use the `--ssh` option to pass in an existing SSH agent connection socket.
+For example, `--ssh default=$SSH_AUTH_SOCK`, or the shorter equivalent, `--ssh default`.
+@y
+次に`docker build`の実行にあたっては`--ssh`オプションを使って、SSH エージェントの既存の接続ソケットへのパスを指定します。
+たとえば`--ssh default=$SSH_AUTH_SOCK`とするか、同じことを短縮して`--ssh default`とします。
+@z
+
+@x
+Third, to make use of that SSH access in a `RUN` command in the `Dockerfile`, define a mount with type `ssh`.
+This will set the `SSH_AUTH_SOCK` environment variable for that command to the value provided by the host to `docker build`, which will cause any programs in the `RUN` command which rely on SSH to automatically use that socket.
+Only the commands in the `Dockerfile` that have explicitly requested SSH access by defining `type=ssh` mount will have access to SSH agent connections.
+The other commands have will no knowledge of any SSH agent being available.
+@y
+最後に、`Dockerfile`内の`RUN`コマンドにおいて SSH アクセスが可能となるように、`ssh`タイプのマウントを定義します。
+これによって、`docker build`の実行にあたって環境変数`SSH_AUTH_SOCK`が設定されることになり、その値はホストから提供されるものとなります。
+こうすれば SSH 接続を行うような`RUN`コマンドが含まれていると、自動的にそのソケットが利用されます。
+`Dockerfile`内にあるコマンドでは、`type=ssh`としてマウント定義された SSH アクセスを明示的に要求したものだけが、SSH エージェント接続を求めることになります。
+それ以外のコマンドは、どの SSH エージェントが利用可能であるのかを知ることはできません。
+@z
+
+@x
+Here is an example `Dockerfile` using SSH in the container:
 @y
 Docker ファイル内にてコンテナーが SSH を利用する例が以下です。
 @z
@@ -530,10 +548,9 @@ RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 @z
 
 @x
-Once the `Dockerfile` is created, use the `--ssh` option for connectivity with
-the SSH agent.
+The image could be built as follows:
 @y
-`Dockerfile`の用意ができたら SSH エージェント接続を行う`--ssh`オプションを使います。
+イメージは以下のようにしてビルドすることができます。
 @z
 
 @x
@@ -547,9 +564,15 @@ $ docker build --ssh default .
 @z
 
 @x
-You may need to run `ssh-add` to add private key identities to the authentication agent first for this to work.
+As with `--mount=type=secret`, you can specify an `id` if you want to use multiple sockets per build and want to differentiate them.
+For example, you could run `docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK`.
+In your `Dockerfile`, you could then have a `RUN --mount=type=ssh,id=main` and a `RUN --mount=type=ssh,id=other` to use those two sockets.
+If a `--mount=type=ssh` doesn't specify an `id`, `default` is assumed.
 @y
-エージェントに対して秘密鍵の認証がまず必要な場合には、`ssh-add`の利用が必要な場合があります。
+`--mount=type=secret`と同じように、各ビルドごとに複数ソケットを利用したい場合やそれらを区別したい場合には`id`を指定します。
+たとえば`docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK`とすることもできます。
+`Dockerfile`内には、2 つのソケットを利用するために`RUN --mount=type=ssh,id=main`と`RUN --mount=type=ssh,id=other`を記述することができます。
+`--mount=type=ssh`において`id`を指定しなかった場合は`default`として扱われます。
 @z
 
 @x

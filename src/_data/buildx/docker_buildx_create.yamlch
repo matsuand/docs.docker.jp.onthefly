@@ -14,10 +14,6 @@ long: |-
 
   Builder instances are isolated environments where builds can be invoked. All
   Docker contexts also get the default builder instance.
-usage: docker buildx create [OPTIONS] [CONTEXT|ENDPOINT]
-pname: docker buildx
-plink: docker_buildx.yaml
-options:
 @y
 command: docker buildx create
 short: 新規にビルダーインスタンスを生成します。
@@ -31,6 +27,14 @@ long: |-
 
   Builder instances are isolated environments where builds can be invoked. All
   Docker contexts also get the default builder instance.
+@z
+
+@x
+usage: docker buildx create [OPTIONS] [CONTEXT|ENDPOINT]
+pname: docker buildx
+plink: docker_buildx.yaml
+options:
+@y
 usage: docker buildx create [オプション] [CONTEXT|ENDPOINT]
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -54,6 +58,29 @@ options:
   default_value: "false"
   description: ビルダーを変更することなく、ビルダーにノードを追加します。
   details_url: '#append'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: bootstrap
+  value_type: bool
+  default_value: "false"
+  description: Boot builder after creation
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: 
+- option: bootstrap
+  value_type: bool
+  default_value: "false"
+  description: ビルダーを生成後に起動します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -108,7 +135,8 @@ options:
 @x
 - option: driver
   value_type: string
-  description: 'Driver to use (available: [])'
+  description: |
+    Driver to use (available: `docker`, `docker-container`, `kubernetes`)
   details_url: '#driver'
   deprecated: false
   experimental: false
@@ -118,7 +146,8 @@ options:
 @y
 - option: driver
   value_type: string
-  description: '利用するドライバーを指定します（[] が指定可能）。'
+  description: |
+    利用するドライバーを指定します (`docker`, `docker-container`, `kubernetes`)
   details_url: '#driver'
   deprecated: false
   experimental: false
@@ -400,6 +429,18 @@ examples: |-
 @z
 
 @x
+  Note that if you create a `docker-container` builder and have specified
+  certificates for registries in the `buildkitd.toml` configuration, the files
+  will be copied into the container under `/etc/buildkit/certs` and configuration
+  will be updated to reflect that.
+@y
+  Note that if you create a `docker-container` builder and have specified
+  certificates for registries in the `buildkitd.toml` configuration, the files
+  will be copied into the container under `/etc/buildkit/certs` and configuration
+  will be updated to reflect that.
+@z
+
+@x
   ### Set the builder driver to use (--driver) {#driver}
 @y
   ### Set the builder driver to use (--driver) {#driver}
@@ -424,27 +465,69 @@ examples: |-
 @z
 
 @x
-  - `docker` - Uses the builder that is built into the docker daemon. With this
-    driver, the [`--load`](buildx_build.md#load) flag is implied by default on
-    `buildx build`. However, building multi-platform images or exporting cache is
-    not currently supported.
-  - `docker-container` - Uses a buildkit container that will be spawned via docker.
-    With this driver, both building multi-platform images and exporting cache are
-    supported. However, images built will not automatically appear in `docker images`
-    (see [`build --load`](buildx_build.md#load)).
-  - `kubernetes` - Uses a kubernetes pods. With this driver, you can spin up pods
-    with defined buildkit container image to build your images.
+  #### `docker` driver
 @y
-  - `docker` - Uses the builder that is built into the docker daemon. With this
-    driver, the [`--load`](buildx_build.md#load) flag is implied by default on
-    `buildx build`. However, building multi-platform images or exporting cache is
-    not currently supported.
-  - `docker-container` - Uses a buildkit container that will be spawned via docker.
-    With this driver, both building multi-platform images and exporting cache are
-    supported. However, images built will not automatically appear in `docker images`
-    (see [`build --load`](buildx_build.md#load)).
-  - `kubernetes` - Uses a kubernetes pods. With this driver, you can spin up pods
-    with defined buildkit container image to build your images.
+  #### `docker` driver
+@z
+
+@x
+  Uses the builder that is built into the docker daemon. With this driver,
+  the [`--load`](buildx_build.md#load) flag is implied by default on
+  `buildx build`. However, building multi-platform images or exporting cache is
+  not currently supported.
+@y
+  Uses the builder that is built into the docker daemon. With this driver,
+  the [`--load`](buildx_build.md#load) flag is implied by default on
+  `buildx build`. However, building multi-platform images or exporting cache is
+  not currently supported.
+@z
+
+@x
+  #### `docker-container` driver
+@y
+  #### `docker-container` driver
+@z
+
+@x
+  Uses a BuildKit container that will be spawned via docker. With this driver,
+  both building multi-platform images and exporting cache are supported.
+@y
+  Uses a BuildKit container that will be spawned via docker. With this driver,
+  both building multi-platform images and exporting cache are supported.
+@z
+
+@x
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
+@y
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
+@z
+
+@x
+  #### `kubernetes` driver
+@y
+  #### `kubernetes` driver
+@z
+
+@x
+  Uses a kubernetes pods. With this driver, you can spin up pods with defined
+  BuildKit container image to build your images.
+@y
+  Uses a kubernetes pods. With this driver, you can spin up pods with defined
+  BuildKit container image to build your images.
+@z
+
+@x
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
+@y
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
 @z
 
 @x
@@ -471,41 +554,201 @@ examples: |-
 
 @x
   - `docker` - No driver options
-  - `docker-container`
-      - `image=IMAGE` - Sets the container image to be used for running buildkit.
-      - `network=NETMODE` - Sets the network mode for running the buildkit container.
-      - Example:
-
-        ```console
-        --driver docker-container --driver-opt image=moby/buildkit:master,network=host
-        ```
-  - `kubernetes`
-      - `image=IMAGE` - Sets the container image to be used for running buildkit.
-      - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
-      - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
-      - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
-      - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
-      - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
 @y
   - `docker` - No driver options
-  - `docker-container`
-      - `image=IMAGE` - Sets the container image to be used for running buildkit.
-      - `network=NETMODE` - Sets the network mode for running the buildkit container.
-      - Example:
+@z
 
-        ```console
-        --driver docker-container --driver-opt image=moby/buildkit:master,network=host
-        ```
-  - `kubernetes`
+@x
+  - `docker-container`
+@y
+  - `docker-container`
+@z
+
+@x
       - `image=IMAGE` - Sets the container image to be used for running buildkit.
+@y
+      - `image=IMAGE` - Sets the container image to be used for running buildkit.
+@z
+
+@x
+      - `network=NETMODE` - Sets the network mode for running the buildkit container.
+@y
+      - `network=NETMODE` - Sets the network mode for running the buildkit container.
+@z
+
+@x
+      - `cgroup-parent=CGROUP` - Sets the cgroup parent of the buildkit container if docker is using the "cgroupfs" driver. Defaults to `/docker/buildx`.
+@y
+      - `cgroup-parent=CGROUP` - Sets the cgroup parent of the buildkit container if docker is using the "cgroupfs" driver. Defaults to `/docker/buildx`.
+@z
+
+@x
+  - `kubernetes`
+@y
+  - `kubernetes`
+@z
+
+@x
+      - `image=IMAGE` - Sets the container image to be used for running buildkit.
+@y
+      - `image=IMAGE` - Sets the container image to be used for running buildkit.
+@z
+
+@x
       - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
+@y
+      - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
+@z
+
+@x
       - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
+@y
+      - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
+@z
+
+@x
+      - `requests.cpu` - Sets the request CPU value specified in units of Kubernetes CPU. Example `requests.cpu=100m`, `requests.cpu=2`
+@y
+      - `requests.cpu` - Sets the request CPU value specified in units of Kubernetes CPU. Example `requests.cpu=100m`, `requests.cpu=2`
+@z
+
+@x
+      - `requests.memory` - Sets the request memory value specified in bytes or with a valid suffix. Example `requests.memory=500Mi`, `requests.memory=4G`
+@y
+      - `requests.memory` - Sets the request memory value specified in bytes or with a valid suffix. Example `requests.memory=500Mi`, `requests.memory=4G`
+@z
+
+@x
+      - `limits.cpu` - Sets the limit CPU value specified in units of Kubernetes CPU. Example `limits.cpu=100m`, `limits.cpu=2`
+@y
+      - `limits.cpu` - Sets the limit CPU value specified in units of Kubernetes CPU. Example `limits.cpu=100m`, `limits.cpu=2`
+@z
+
+@x
+      - `limits.memory` - Sets the limit memory value specified in bytes or with a valid suffix. Example `limits.memory=500Mi`, `limits.memory=4G`
+@y
+      - `limits.memory` - Sets the limit memory value specified in bytes or with a valid suffix. Example `limits.memory=500Mi`, `limits.memory=4G`
+@z
+
+@x
       - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
+@y
+      - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
+@z
+
+@x
       - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
+@y
+      - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
+@z
+
+@x
+      - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
+@y
       - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
 @z
 
 @x
+      - `qemu.install=(true|false)` - Install QEMU emulation for multi platforms support.
+@y
+      - `qemu.install=(true|false)` - Install QEMU emulation for multi platforms support.
+@z
+
+@x
+      - `qemu.image=IMAGE` - Sets the QEMU emulation image. Defaults to `tonistiigi/binfmt:latest`
+@y
+      - `qemu.image=IMAGE` - Sets the QEMU emulation image. Defaults to `tonistiigi/binfmt:latest`
+@z
+
+@x
+  **Examples**
+@y
+  **Examples**
+@z
+
+@x
+  #### Use a custom network
+@y
+  #### Use a custom network
+@z
+
+@x
+  ```console
+  $ docker network create foonet
+@y
+  ```console
+  $ docker network create foonet
+@z
+
+@x
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=foonet --use
+@y
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=foonet --use
+@z
+
+@x
+  $ docker buildx inspect --bootstrap
+@y
+  $ docker buildx inspect --bootstrap
+@z
+
+@x
+  $ docker inspect buildx_buildkit_builder0 --format={{.NetworkSettings.Networks}}
+  map[foonet:0xc00018c0c0]
+  ```
+@y
+  $ docker inspect buildx_buildkit_builder0 --format={{.NetworkSettings.Networks}}
+  map[foonet:0xc00018c0c0]
+  ```
+@z
+
+@x
+  #### OpenTelemetry support
+@y
+  #### OpenTelemetry support
+@z
+
+@x
+  To capture the trace to [Jaeger](https://github.com/jaegertracing/jaeger), set
+@y
+  To capture the trace to [Jaeger](https://github.com/jaegertracing/jaeger), set
+@z
+
+@x
+  `JAEGER_TRACE` environment variable to the collection address using the `driver-opt`:
+@y
+  `JAEGER_TRACE` environment variable to the collection address using the `driver-opt`:
+@z
+
+@x
+  ```console
+@y
+  ```console
+@z
+
+@x
+  $ docker run -d --name jaeger -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one
+@y
+  $ docker run -d --name jaeger -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one
+@z
+
+@x
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=host --driver-opt env.JAEGER_TRACE=localhost:6831 --use
+@y
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=host --driver-opt env.JAEGER_TRACE=localhost:6831 --use
+@z
+
+@x
+  $ docker buildx inspect --bootstrap
+  # buildx command should be traced at http://127.0.0.1:16686/
+  ```
+@y
+  $ docker buildx inspect --bootstrap
+  # buildx command should be traced at http://127.0.0.1:16686/
+  ```
+@z
+
+@x
   ### Remove a node from a builder (--leave) {#leave}
 @y
   ### Remove a node from a builder (--leave) {#leave}
@@ -513,11 +756,19 @@ examples: |-
 
 @x
   The `--leave` flag changes the action of the command to remove a node from a
-  builder. The builder needs to be specified with `--name` and node that is removed
-  is set with `--node`.
 @y
   The `--leave` flag changes the action of the command to remove a node from a
+@z
+
+@x
   builder. The builder needs to be specified with `--name` and node that is removed
+@y
+  builder. The builder needs to be specified with `--name` and node that is removed
+@z
+
+@x
+  is set with `--node`.
+@y
   is set with `--node`.
 @z
 
@@ -529,10 +780,14 @@ examples: |-
 
 @x
   ```console
+@y
+  ```console
+@z
+
+@x
   $ docker buildx create --name mybuilder --node mybuilder0 --leave
   ```
 @y
-  ```console
   $ docker buildx create --name mybuilder --node mybuilder0 --leave
   ```
 @z
@@ -545,10 +800,14 @@ examples: |-
 
 @x
   ```
+@y
+  ```
+@z
+
+@x
   --name NAME
   ```
 @y
-  ```
   --name NAME
   ```
 @z
@@ -569,10 +828,14 @@ examples: |-
 
 @x
   ```
+@y
+  ```
+@z
+
+@x
   --node NODE
   ```
 @y
-  ```
   --node NODE
   ```
 @z
@@ -595,22 +858,30 @@ examples: |-
 
 @x
   ```
+@y
+  ```
+@z
+
+@x
   --platform PLATFORMS
   ```
 @y
-  ```
   --platform PLATFORMS
   ```
 @z
 
 @x
   The `--platform` flag sets the platforms supported by the node. It expects a
+@y
+  The `--platform` flag sets the platforms supported by the node. It expects a
+@z
+
+@x
   comma-separated list of platforms of the form OS/architecture/variant. The node
   will also automatically detect the platforms it supports, but manual values take
   priority over the detected ones and can be used when multiple nodes support
   building for the same platform.
 @y
-  The `--platform` flag sets the platforms supported by the node. It expects a
   comma-separated list of platforms of the form OS/architecture/variant. The node
   will also automatically detect the platforms it supports, but manual values take
   priority over the detected ones and can be used when multiple nodes support
@@ -625,12 +896,20 @@ examples: |-
 
 @x
   ```console
-  $ docker buildx create --platform linux/amd64
-  $ docker buildx create --platform linux/arm64,linux/arm/v8
-  ```
 @y
   ```console
+@z
+
+@x
   $ docker buildx create --platform linux/amd64
+@y
+  $ docker buildx create --platform linux/amd64
+@z
+
+@x
+  $ docker buildx create --platform linux/arm64,linux/arm/v8
+  ```
+@y
   $ docker buildx create --platform linux/arm64,linux/arm/v8
   ```
 @z
@@ -644,18 +923,14 @@ examples: |-
 @x
   The `--use` flag automatically switches the current builder to the newly created
   one. Equivalent to running `docker buildx use $(docker buildx create ...)`.
-@y
-  The `--use` flag automatically switches the current builder to the newly created
-  one. Equivalent to running `docker buildx use $(docker buildx create ...)`.
-@z
-
-@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
+  The `--use` flag automatically switches the current builder to the newly created
+  one. Equivalent to running `docker buildx use $(docker buildx create ...)`.
 deprecated: false
 experimental: false
 experimentalcli: false

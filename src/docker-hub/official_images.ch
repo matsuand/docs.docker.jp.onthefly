@@ -93,12 +93,11 @@ GitHub 上にて公開で行われているため、そこに参加すること�
 @x
 > **Note**
 >
-> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+> Docker Official Images are an intellectual property of Docker.
 @y
 > **メモ**
 >
 > Docker 公式イメージは Docker の知的財産です。
-> 事前の許諾なしに Docker 公式イメージを配布することは、[Docker 利用規約](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”} に違反する可能性があります。
 @z
 
 @x

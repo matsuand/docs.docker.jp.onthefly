@@ -12,10 +12,6 @@ long: |-
   be manifest lists or single platform distribution manifests and must already
   exist in the registry where the new manifest is created. If only one source is
   specified, create performs a carbon copy.
-usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
-pname: docker buildx imagetools
-plink: docker_buildx_imagetools.yaml
-options:
 @y
 command: docker buildx imagetools create
 short: ソースイメージに基づいて新たなイメージを生成します。
@@ -27,6 +23,14 @@ long: |-
   be manifest lists or single platform distribution manifests and must already
   exist in the registry where the new manifest is created. If only one source is
   specified, create performs a carbon copy.
+@z
+
+@x
+usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
+pname: docker buildx imagetools
+plink: docker_buildx_imagetools.yaml
+options:
+@y
 usage: docker buildx imagetools create [オプション] [SOURCE] [SOURCE...]
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
@@ -138,6 +142,7 @@ inherited_options:
 - option: builder
   value_type: string
   description: Override the configured builder instance
+  details_url: '#builder'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -148,6 +153,7 @@ inherited_options:
 - option: builder
   value_type: string
   description: 設定された builder インスタンスをオーバーライドします。
+  details_url: '#builder'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -172,6 +178,18 @@ examples: |-
 @z
 
 @x
+  ### Override the configured builder instance (--builder) {#builder}
+@y
+  ### Override the configured builder instance (--builder) {#builder}
+@z
+
+@x
+  Same as [`buildx --builder`](buildx.md#builder).
+@y
+  Same as [`buildx --builder`](buildx.md#builder).
+@z
+
+@x
   ### Show final image instead of pushing (--dry-run) {#dry-run}
 @y
   ### Show final image instead of pushing (--dry-run) {#dry-run}
@@ -205,6 +223,38 @@ examples: |-
 @y
   Reads source from files. A source can be a manifest digest, manifest reference,
   or a JSON of OCI descriptor object.
+@z
+
+@x
+  In order to define annotations or additional platform properties like `os.version` and
+  `os.features` you need to add them in the OCI descriptor object encoded in JSON.
+@y
+  In order to define annotations or additional platform properties like `os.version` and
+  `os.features` you need to add them in the OCI descriptor object encoded in JSON.
+@z
+
+@x
+  ```
+  docker buildx imagetools inspect --raw alpine | jq '.manifests[0] | .platform."os.version"="10.1"' > descr.json
+  docker buildx imagetools create -f descr.json myuser/image
+  ```
+@y
+  ```
+  docker buildx imagetools inspect --raw alpine | jq '.manifests[0] | .platform."os.version"="10.1"' > descr.json
+  docker buildx imagetools create -f descr.json myuser/image
+  ```
+@z
+
+@x
+  The descriptor in the file is merged with existing descriptor in the registry if it exists.
+@y
+  The descriptor in the file is merged with existing descriptor in the registry if it exists.
+@z
+
+@x
+  The supported fields for the descriptor are defined in [OCI spec](https://github.com/opencontainers/image-spec/blob/master/descriptor.md#properties) .
+@y
+  The supported fields for the descriptor are defined in [OCI spec](https://github.com/opencontainers/image-spec/blob/master/descriptor.md#properties) .
 @z
 
 @x

@@ -687,6 +687,35 @@ In our example, the Docker Compose files are the same. However, they could be di
 @z
 
 @x
+## Specify a Dockerfile 
+@y
+{: #specify-a-dockerfile }
+## Dockerfile の指定
+@z
+
+@x
+In this preview, Dev Environments support a JSON file which allows you to specify a Dockerfile to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
+@y
+このプレビューでは Dev 環境を通じて、JSON ファイルを使って Dev 環境を定義する Dockerfile を指定するようにしています。
+これを`.docker`フォルダー内に、`config.json`ファイルとして加える必要があります。
+たとえば以下のとおりです。
+@z
+
+@x
+```jsx
+{
+    "dockerfile": "Dockerfile.devenv"
+}
+```
+@y
+```jsx
+{
+    "dockerfile": "Dockerfile.devenv"
+}
+```
+@z
+
+@x
 ## Specify a base image
 @y
 {: #specify-a-base-image }
@@ -694,11 +723,11 @@ In our example, the Docker Compose files are the same. However, they could be di
 @z
 
 @x
-In this preview, Dev Environments support a simple YAML file which allows you to specify the base image that you would like to use as part of your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
+If you already have an image built, you can specify it as a base image to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
 @y
-このプレビューにおいては、簡単な YAML ファイルをサポートしていて、Dev 環境の一部として利用したいベースイメージを指定するものとなっています。
-このファイルを`.docker`フォルダーの一部として含めて、`config.json`ファイルとして追加することが必要です。
-たとえば Jekyll ベースイメージを用いる場合には、以下のようにします。
+イメージビルドをすでに行っている場合は、 それをベースイメージとして指定することで Dev 環境を定義します。
+これを`.docker`フォルダー内に、`config.json`ファイルとして加える必要があります。
+たとえば Jekyll ベースイメージを利用するには、以下のように追加します。
 @z
 
 @x

@@ -6,9 +6,10 @@
 description: Controlling and configuring Docker using systemd
 keywords: docker, daemon, systemd, configuration
 redirect_from:
-- /engine/articles/systemd/
+- /articles/host_integration/
 - /articles/systemd/
 - /engine/admin/systemd/
+- /engine/articles/systemd/
 title: Control Docker with systemd
 ---
 @y
@@ -16,9 +17,10 @@ title: Control Docker with systemd
 description: Controlling and configuring Docker using systemd
 keywords: docker, daemon, systemd, configuration
 redirect_from:
-- /engine/articles/systemd/
+- /articles/host_integration/
 - /articles/systemd/
 - /engine/admin/systemd/
+- /engine/articles/systemd/
 title: systemd を用いた Docker の管理
 ---
 @z

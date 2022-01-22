@@ -3,8 +3,8 @@ SUBDIRS = _data _includes _layouts _samples _scss buildx \
 	datacenter desktop develop \
 	docker-hub docker-id ee engine get-started \
 	go images js language kitematic machine network \
-	opensource reference registry release-notes samples storage \
-	subscription toolbox
+	opensource reference registry release-notes samples \
+	security single-sign-on storage subscription toolbox
 
 origdir     = @abs_origdir@
 srcdir      = @srcdir@

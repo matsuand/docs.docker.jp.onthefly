@@ -963,18 +963,20 @@ Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
 @z
 
 @x
-To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary.
+To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary and restart the daemon.
 @y
-特権ポート（1024 未満）を公開するには、`rootlesskit`バイナリに対して`CAP_NET_BIND_SERVICE`を設定します。
+特権ポート（1024 未満）を公開するには、`rootlesskit`バイナリに対して`CAP_NET_BIND_SERVICE`を設定して、デーモンを再起動します。
 @z
 
 @x
 ```console
-$ sudo setcap cap_net_bind_service=ep $HOME/bin/rootlesskit
+$ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
+$ systemctl --user restart docker
 ```
 @y
 ```console
-$ sudo setcap cap_net_bind_service=ep $HOME/bin/rootlesskit
+$ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
+$ systemctl --user restart docker
 ```
 @z
 

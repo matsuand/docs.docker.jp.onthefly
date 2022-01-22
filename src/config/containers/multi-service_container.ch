@@ -6,9 +6,10 @@
 description: How to run more than one process in a container
 keywords: docker, supervisor, process management
 redirect_from:
-- /engine/articles/using_supervisord/
-- /engine/admin/using_supervisord/
+- /articles/using_supervisord/
 - /engine/admin/multi-service_container/
+- /engine/admin/using_supervisord/
+- /engine/articles/using_supervisord/
 title: Run multiple services in a container
 ---
 @y
@@ -16,9 +17,10 @@ title: Run multiple services in a container
 description: How to run more than one process in a container
 keywords: docker, supervisor, process management
 redirect_from:
-- /engine/articles/using_supervisord/
-- /engine/admin/using_supervisord/
+- /articles/using_supervisord/
 - /engine/admin/multi-service_container/
+- /engine/admin/using_supervisord/
+- /engine/articles/using_supervisord/
 title: コンテナー内での複数サービス起動
 ---
 @z

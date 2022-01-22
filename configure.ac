@@ -195,6 +195,9 @@ AC_CONFIG_FILES([Makefile
 		 src/release-notes/Makefile
 		 src/samples/Makefile
 		 src/samples/images/Makefile
+		 src/security/Makefile
+		 src/single-sign-on/Makefile
+		 src/single-sign-on/images/Makefile
 		 src/storage/Makefile
 		 src/storage/images/Makefile
 		 src/storage/storagedriver/Makefile

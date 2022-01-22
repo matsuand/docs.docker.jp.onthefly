@@ -250,7 +250,7 @@ def hello_world():
 
 @x
 @app.route('/widgets')
-def get_widgets() :
+def get_widgets():
   mydb = mysql.connector.connect(
     host="mysqldb",
     user="root",
@@ -260,7 +260,7 @@ def get_widgets() :
   cursor = mydb.cursor()
 @y
 @app.route('/widgets')
-def get_widgets() :
+def get_widgets():
   mydb = mysql.connector.connect(
     host="mysqldb",
     user="root",
