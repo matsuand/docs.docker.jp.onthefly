@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker ローカルイメージに対するぜい弱性スキャン | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker ローカルイメージに対するぜい弱性スキャン" />
   <meta property="og:description" content="Dockerローカルイメージに対するぜい弱性スキャン。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/scan/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker ローカルイメージに対するぜい弱性スキャン","description":"Dockerローカルイメージに対するぜい弱性スキャン。","url":"https://docs.docker.com/engine/scan/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,11 +107,11 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker ローカルイメージに対するぜい弱性スキャン</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><div class="docker-upgrade-cta" role="alert">
+                        <section class="section"><h1>Docker ローカルイメージに対するぜい弱性スキャン</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p><div class="docker-upgrade-cta" role="alert">
   <div class="docker-upgrade-cta__heading">
-この機能を利用するには、Docker サブスクリプションが必要です。
+無料のイメージスキャンを行ってください。
   </div>
-  <p>Docker サブスクリプションの機能の一部として、毎月 10 回の無償スキャンが実行可能です。Docker にサインインして、イメージのぜい弱性スキャンを始めてください。</p>
+  <p>1 ヶ月ごとに 10 個のスキャンが無料なのをご存知ですか？ Docker にサインインして、イメージのぜい弱性スキャンを行ってください。</p>
  <a class="btn btn-primary" role="button" href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade_scan" target="_blank"> サインイン </a>
 </div>
 
@@ -127,10 +127,64 @@ Docker スキャンは Snyk エンジンを使って動作します。
 <p>ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
 スキャン結果は、ぜい弱性情報データベース CVE（Common Vulnerabilities and Exposures）の一覧として構成され、そこにはぜい弱性の発生源、つまり OS パッケージやライブラリなど、またぜい弱性が発生したバージョン、CVE によって検出された問題を修復するための推奨される修正バージョン（入手可能である場合）が示されます。</p>
 
+<blockquote class="important">
+  <p><strong>Log4j 2 CVE-2021-44228</strong></p>
+
+  <p><code class="language-plaintext highlighter-rouge">docker scan</code>のバージョンが<code class="language-plaintext highlighter-rouge">v0.11.0</code>よりも古い場合、<a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener" class="_">Log4j 2
+CVE-2021-44228</a> を検出することができません。
+この問題を解決するためには Docker Desktop のバージョンが 4.3.1 またはそれ以降のものをインストールする必要があります。
+詳しくは <a href="#scan-images-for-log4j-2-cve">Log4j 2 CVE に対するイメージスキャン</a> を参照してください。</p>
+</blockquote>
+
 <p>ぜい弱性スキャンの実行に必要となるシステム要件については <a href="#prerequisites">前提条件</a> を参照してください。</p>
 
 <p>本ページでは CLI コマンド<code class="language-plaintext highlighter-rouge">docker scan</code>の情報を示します。
 Docker Hub を通じて Docker イメージを自動スキャンする情報に関しては <a href="/docs.docker.jp.onthefly/docker-hub/vulnerability-scanning/">Docker Hub のぜい弱性スキャン</a> を参照してください。</p>
+
+<h2 id="scan-images-for-log4j-2-cve">Log4j 2 CVE に対するイメージスキャン</h2>
+
+<p>Docker スキャンのバージョンが<code class="language-plaintext highlighter-rouge">v0.11.0</code>よりも古い場合、イメージのぜい弱性スキャンを行っても <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener" class="_">Log4j 2
+CVE-2021-44228</a> を検出することができません。
+この問題を解決するには Docker の最新版をインストールする必要があります。</p>
+
+<p>Docker Desktop に含まれている<code class="language-plaintext highlighter-rouge">docker scan</code>プラグインを利用している場合は、Docker Desktop のバージョンを 4.3.1 またはそれ以降にアップデートしてください。
+ダウンロードに関しては、<a href="/docs.docker.jp.onthefly/desktop/mac/release-notes/">Mac</a> のリリースノート、あるいは <a href="/docs.docker.jp.onthefly/desktop/windows/release-notes/">Windows</a> のリリースノートを参照してください。</p>
+
+<p>Linux を利用している場合は、以下のコマンドを手作業により実行して、最新の<code class="language-plaintext highlighter-rouge">docker scan</code>をインストールします。</p>
+
+<p>Ubuntu や Debian のような<code class="language-plaintext highlighter-rouge">.deb</code>をベースとするディストリビューションでは、以下のようにします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install </span>docker-scan-plugin
+</code></pre></div></div>
+
+<p>CentOS や Fedora のような rpm ベースのディストリビューションでは、以下のようにします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>yum <span class="nb">install </span>docker-scan-plugin
+</code></pre></div></div>
+
+<p>上とは別に<code class="language-plaintext highlighter-rouge">docker scan</code>のバイナリは、GitHub レジストリ <a href="https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0" target="_blank" rel="noopener" class="_">Docker Scan</a> やプラグインディレクトリ内の <a href="https://github.com/docker/scan-cli-plugin" target="_blank" rel="noopener" class="_">install</a>  からダウンロードすることができます。</p>
+
+<h3 id="verify-the-docker-scan-version"><code class="language-plaintext highlighter-rouge">docker scan</code>のバージョン確認</h3>
+
+<p><code class="language-plaintext highlighter-rouge">docker scan</code>のアップグレードを行ったら、インストールした<code class="language-plaintext highlighter-rouge">docker scan</code>が最新であるかどうかを、以下のコマンドを実行して確認します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker scan <span class="nt">--accept-license</span> <span class="nt">--version</span>
+<span class="go">Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+</span></code></pre></div></div>
+
+<p>If your code output contains <code class="language-plaintext highlighter-rouge">ORGAPACHELOGGINGLOG4J</code>, it is
+likely that your code is affected by the Log4j 2 CVE-2021-44228 vulnerability. When you run the updated version of <code class="language-plaintext highlighter-rouge">docker scan</code>, you should also see a message
+in the output log similar to:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Upgrade org.apache.logging.log4j:log4j-core@2.14.0 to org.apache.logging.log4j:log4j-core@2.15.0 to fix
+✗ Arbitrary Code Execution (new) [Critical Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720] in org.apache.logging.log4j:log4j-core@2.14.0
+introduced by org.apache.logging.log4j:log4j-core@2.14.0
+</span></code></pre></div></div>
+
+<p>For more information, read our blog post <a href="https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/" target="_blank" rel="noopener" class="_">Apache Log4j 2
+CVE-2021-44228</a>.</p>
 
 <h2 id="how-to-scan-images">イメージのスキャン方法</h2>
 
@@ -452,7 +506,7 @@ Your account has been authenticated. Snyk is now ready to be used.
 
 <ol>
   <li>
-    <p>Docker Desktop をダウンロードしインストールしていること。</p>
+    <p>Docker Desktop の最新版をダウンロードしインストールしていること。</p>
 
     <ul>
       <li><a href="https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs-driven-download-mac-amd64">Intel チップの Mac 向けダウンロード</a></li>
@@ -594,8 +648,9 @@ Provider:   Snyk (1.432.0)
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#how-to-scan-images" class="nomunge">イメージのスキャン方法</a>
+  <li><a href="#scan-images-for-log4j-2-cve" class="nomunge">Log4j 2 CVE に対するイメージスキャン</a>
     <ul>
+      <li><a href="#how-to-scan-images" class="nomunge">イメージのスキャン方法</a></li>
       <li><a href="#provider-authentication" class="nomunge">プロバイダー認証</a></li>
       <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
       <li><a href="#supported-options" class="nomunge">サポートされているオプション</a></li>

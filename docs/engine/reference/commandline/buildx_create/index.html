@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker buildx create | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="docker buildx create" />
   <meta property="og:description" content="docker buildx create: Create makes a new builder instance pointing to a docker context or endpoint, where context is the name of a context from `docker context ls` and endpoint..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/buildx_create/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"docker buildx create","description":"docker buildx create: Create makes a new builder instance pointing to a docker context or endpoint, where context is the name of a context from `docker context ls` and endpoint...","url":"https://docs.docker.com/engine/reference/commandline/buildx_create/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker buildx create</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><!--
+                        <section class="section"><h1>docker buildx create</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p><!--
 This page is automatically generated from Docker's source code. If you want to
 suggest a change to the text that appears here, open a ticket or pull request
 in the source repository on GitHub:
@@ -162,7 +162,21 @@ Docker contexts also get the default builder instance.</p>
   <tr>
     <td><a href="#append"><code class="language-plaintext highlighter-rouge">--append</code></a></td>
     <td></td>
-    <td>ビルダーを変更することなく、ビルダーにノードを追加します。</td>
+    <td></td>
+  </tr>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--bootstrap</code></td>
+    <td></td>
+    <td>ビルダーを生成後に起動します。</td>
   </tr>
 
   
@@ -204,7 +218,7 @@ Docker contexts also get the default builder instance.</p>
   <tr>
     <td><a href="#driver"><code class="language-plaintext highlighter-rouge">--driver</code></a></td>
     <td></td>
-    <td>利用するドライバーを指定します（[] が指定可能）。</td>
+    <td>利用するドライバーを指定します (<code class="language-plaintext highlighter-rouge">docker</code>, <code class="language-plaintext highlighter-rouge">docker-container</code>, <code class="language-plaintext highlighter-rouge">kubernetes</code>)</td>
   </tr>
 
   
@@ -349,6 +363,11 @@ for the available flags.</p>
 can be overridden by <a href="#buildkitd-flags"><code class="language-plaintext highlighter-rouge">--buildkitd-flags</code></a>.
 See an <a href="https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md">example buildkitd configuration file</a>.</p>
 
+<p>Note that if you create a <code class="language-plaintext highlighter-rouge">docker-container</code> builder and have specified
+certificates for registries in the <code class="language-plaintext highlighter-rouge">buildkitd.toml</code> configuration, the files
+will be copied into the container under <code class="language-plaintext highlighter-rouge">/etc/buildkit/certs</code> and configuration
+will be updated to reflect that.</p>
+
 <h3 id="driver">Set the builder driver to use (--driver)</h3>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--driver DRIVER
@@ -357,18 +376,30 @@ See an <a href="https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml
 <p>Sets the builder driver to be used. There are two available drivers, each have
 their own specificities.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">docker</code> - Uses the builder that is built into the docker daemon. With this
-driver, the <a href="/engine/reference/commandline/buildx_build/#load"><code class="language-plaintext highlighter-rouge">--load</code></a> flag is implied by default on
+<h4 id="docker-driver"><code class="language-plaintext highlighter-rouge">docker</code> driver</h4>
+
+<p>Uses the builder that is built into the docker daemon. With this driver,
+the <a href="/engine/reference/commandline/buildx_build/#load"><code class="language-plaintext highlighter-rouge">--load</code></a> flag is implied by default on
 <code class="language-plaintext highlighter-rouge">buildx build</code>. However, building multi-platform images or exporting cache is
-not currently supported.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker-container</code> - Uses a buildkit container that will be spawned via docker.
-With this driver, both building multi-platform images and exporting cache are
-supported. However, images built will not automatically appear in <code class="language-plaintext highlighter-rouge">docker images</code>
-(see <a href="/engine/reference/commandline/buildx_build/#load"><code class="language-plaintext highlighter-rouge">build --load</code></a>).</li>
-  <li><code class="language-plaintext highlighter-rouge">kubernetes</code> - Uses a kubernetes pods. With this driver, you can spin up pods
-with defined buildkit container image to build your images.</li>
-</ul>
+not currently supported.</p>
+
+<h4 id="docker-container-driver"><code class="language-plaintext highlighter-rouge">docker-container</code> driver</h4>
+
+<p>Uses a BuildKit container that will be spawned via docker. With this driver,
+both building multi-platform images and exporting cache are supported.</p>
+
+<p>Unlike <code class="language-plaintext highlighter-rouge">docker</code> driver, built images will not automatically appear in
+<code class="language-plaintext highlighter-rouge">docker images</code> and <a href="/engine/reference/commandline/buildx_build/#load"><code class="language-plaintext highlighter-rouge">build --load</code></a> needs to be used
+to achieve that.</p>
+
+<h4 id="kubernetes-driver"><code class="language-plaintext highlighter-rouge">kubernetes</code> driver</h4>
+
+<p>Uses a kubernetes pods. With this driver, you can spin up pods with defined
+BuildKit container image to build your images.</p>
+
+<p>Unlike <code class="language-plaintext highlighter-rouge">docker</code> driver, built images will not automatically appear in
+<code class="language-plaintext highlighter-rouge">docker images</code> and <a href="/engine/reference/commandline/buildx_build/#load"><code class="language-plaintext highlighter-rouge">build --load</code></a> needs to be used
+to achieve that.</p>
 
 <h3 id="driver-opt">Set additional driver-specific options (--driver-opt)</h3>
 
@@ -383,12 +414,7 @@ with defined buildkit container image to build your images.</li>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">image=IMAGE</code> - Sets the container image to be used for running buildkit.</li>
       <li><code class="language-plaintext highlighter-rouge">network=NETMODE</code> - Sets the network mode for running the buildkit container.</li>
-      <li>
-        <p>Example:</p>
-
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">--driver docker-container --driver-opt image=moby/buildkit:master,network=host
-</span></code></pre></div>        </div>
-      </li>
+      <li><code class="language-plaintext highlighter-rouge">cgroup-parent=CGROUP</code> - Sets the cgroup parent of the buildkit container if docker is using the “cgroupfs” driver. Defaults to <code class="language-plaintext highlighter-rouge">/docker/buildx</code>.</li>
     </ul>
   </li>
   <li><code class="language-plaintext highlighter-rouge">kubernetes</code>
@@ -396,12 +422,40 @@ with defined buildkit container image to build your images.</li>
       <li><code class="language-plaintext highlighter-rouge">image=IMAGE</code> - Sets the container image to be used for running buildkit.</li>
       <li><code class="language-plaintext highlighter-rouge">namespace=NS</code> - Sets the Kubernetes namespace. Defaults to the current namespace.</li>
       <li><code class="language-plaintext highlighter-rouge">replicas=N</code> - Sets the number of <code class="language-plaintext highlighter-rouge">Pod</code> replicas. Defaults to 1.</li>
+      <li><code class="language-plaintext highlighter-rouge">requests.cpu</code> - Sets the request CPU value specified in units of Kubernetes CPU. Example <code class="language-plaintext highlighter-rouge">requests.cpu=100m</code>, <code class="language-plaintext highlighter-rouge">requests.cpu=2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">requests.memory</code> - Sets the request memory value specified in bytes or with a valid suffix. Example <code class="language-plaintext highlighter-rouge">requests.memory=500Mi</code>, <code class="language-plaintext highlighter-rouge">requests.memory=4G</code></li>
+      <li><code class="language-plaintext highlighter-rouge">limits.cpu</code> - Sets the limit CPU value specified in units of Kubernetes CPU. Example <code class="language-plaintext highlighter-rouge">limits.cpu=100m</code>, <code class="language-plaintext highlighter-rouge">limits.cpu=2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">limits.memory</code> - Sets the limit memory value specified in bytes or with a valid suffix. Example <code class="language-plaintext highlighter-rouge">limits.memory=500Mi</code>, <code class="language-plaintext highlighter-rouge">limits.memory=4G</code></li>
       <li><code class="language-plaintext highlighter-rouge">nodeselector="label1=value1,label2=value2"</code> - Sets the kv of <code class="language-plaintext highlighter-rouge">Pod</code> nodeSelector. No Defaults. Example <code class="language-plaintext highlighter-rouge">nodeselector=kubernetes.io/arch=arm64</code></li>
       <li><code class="language-plaintext highlighter-rouge">rootless=(true|false)</code> - Run the container as a non-root user without <code class="language-plaintext highlighter-rouge">securityContext.privileged</code>. <a href="https://github.com/moby/buildkit/blob/master/docs/rootless.md">Using Ubuntu host kernel is recommended</a>. Defaults to false.</li>
       <li><code class="language-plaintext highlighter-rouge">loadbalance=(sticky|random)</code> - Load-balancing strategy. If set to “sticky”, the pod is chosen using the hash of the context path. Defaults to “sticky”</li>
+      <li><code class="language-plaintext highlighter-rouge">qemu.install=(true|false)</code> - Install QEMU emulation for multi platforms support.</li>
+      <li><code class="language-plaintext highlighter-rouge">qemu.image=IMAGE</code> - Sets the QEMU emulation image. Defaults to <code class="language-plaintext highlighter-rouge">tonistiigi/binfmt:latest</code></li>
     </ul>
   </li>
 </ul>
+
+<p><strong>Examples</strong></p>
+
+<h4 id="use-a-custom-network">Use a custom network</h4>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create foonet
+<span class="gp">$</span><span class="w"> </span>docker buildx create <span class="nt">--name</span> builder <span class="nt">--driver</span> docker-container <span class="nt">--driver-opt</span> <span class="nv">network</span><span class="o">=</span>foonet <span class="nt">--use</span>
+<span class="gp">$</span><span class="w"> </span>docker buildx inspect <span class="nt">--bootstrap</span>
+<span class="gp">$</span><span class="w"> </span>docker inspect buildx_buildkit_builder0 <span class="nt">--format</span><span class="o">={{</span>.NetworkSettings.Networks<span class="o">}}</span>
+<span class="go">map[foonet:0xc00018c0c0]
+</span></code></pre></div></div>
+
+<h4 id="opentelemetry-support">OpenTelemetry support</h4>
+
+<p>To capture the trace to <a href="https://github.com/jaegertracing/jaeger">Jaeger</a>, set
+<code class="language-plaintext highlighter-rouge">JAEGER_TRACE</code> environment variable to the collection address using the <code class="language-plaintext highlighter-rouge">driver-opt</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--name</span> jaeger <span class="nt">-p</span> 6831:6831/udp <span class="nt">-p</span> 16686:16686 jaegertracing/all-in-one
+<span class="gp">$</span><span class="w"> </span>docker buildx create <span class="nt">--name</span> builder <span class="nt">--driver</span> docker-container <span class="nt">--driver-opt</span> <span class="nv">network</span><span class="o">=</span>host <span class="nt">--driver-opt</span> env.JAEGER_TRACE<span class="o">=</span>localhost:6831 <span class="nt">--use</span>
+<span class="gp">$</span><span class="w"> </span>docker buildx inspect <span class="nt">--bootstrap</span>
+<span class="gp">#</span><span class="w"> </span>buildx <span class="nb">command </span>should be traced at http://127.0.0.1:16686/
+</code></pre></div></div>
 
 <h3 id="leave">Remove a node from a builder (--leave)</h3>
 
@@ -465,7 +519,7 @@ one. Equivalent to running <code class="language-plaintext highlighter-rouge">do
   <tbody>
     <tr>
       <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx/">docker buildx</a></td>
-      <td>BuildKit を使ってビルドします。</td>
+      <td>Docker Buildx</td>
     </tr>
   </tbody>
 </table>

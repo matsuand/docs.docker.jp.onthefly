@@ -1,4 +1,4 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>BuildKit によるイメージ構築 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="BuildKit によるイメージ構築" />
   <meta property="og:description" content="BuildKit により Docker ビルドについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"BuildKit によるイメージ構築","description":"BuildKit により Docker ビルドについて学びます。","url":"https://docs.docker.com/develop/develop-images/build_enhancements/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -283,16 +283,25 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
   <p>詳しい情報と利用例については <a href="https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066">Build secrets and SSH forwarding in Docker 18.09</a> （Docker 18.09 における機密情報生成と SSH フォワーディング）を参照してください。</p>
 </blockquote>
 
-<p><code class="language-plaintext highlighter-rouge">docker build</code>には<code class="language-plaintext highlighter-rouge">--ssh</code>オプションがあります。
-これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
-SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent">OpenSSH man ページ</a> を参照してください。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>内のコマンドにおいて SSH 認証を必要とするものがあります。
+たとえばプライベートリポジトリを生成する場合です。
+秘密鍵をイメージ内にコピーすると、機密情報を公開する危険にさらされます。
+そうではなく<code class="language-plaintext highlighter-rouge">docker build</code>を使えば、イメージビルドの際に、ホストシステムの ssh アクセスが利用できます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを<code class="language-plaintext highlighter-rouge">type=ssh</code>とするだけです。
-これが SSH エージェントによる接続を行うものとなります。
-これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。</p>
+<p>その作業を進めるには以下の 3 つの手順を行います。</p>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>内の<code class="language-plaintext highlighter-rouge">RUN</code>コマンドにおいて SSH アクセスを指定するには、マウントタイプを<code class="language-plaintext highlighter-rouge">ssh</code>として定義します。
-これにより環境変数<code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code>が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。</p>
+<p>まずは<code class="language-plaintext highlighter-rouge">ssh-add</code>を実行して秘密鍵の追加を行い、認証エージェントが認識できるようにします。
+SSH 鍵を複数持っていて、デフォルトの<code class="language-plaintext highlighter-rouge">id_rsa</code>が、これから行うリソースアクセス用ではなかった場合には、鍵へのパスを指定して、<code class="language-plaintext highlighter-rouge">ssh-add ~/.ssh/&lt;some other key&gt;</code>のように実行する必要があります。
+(SSH エージェントに関する詳細は <a href="https://man.openbsd.org/ssh-agent">OpenSSH man ページ</a> を参照してください。)</p>
+
+<p>次に<code class="language-plaintext highlighter-rouge">docker build</code>の実行にあたっては<code class="language-plaintext highlighter-rouge">--ssh</code>オプションを使って、SSH エージェントの既存の接続ソケットへのパスを指定します。
+たとえば<code class="language-plaintext highlighter-rouge">--ssh default=$SSH_AUTH_SOCK</code>とするか、同じことを短縮して<code class="language-plaintext highlighter-rouge">--ssh default</code>とします。</p>
+
+<p>最後に、<code class="language-plaintext highlighter-rouge">Dockerfile</code>内の<code class="language-plaintext highlighter-rouge">RUN</code>コマンドにおいて SSH アクセスが可能となるように、<code class="language-plaintext highlighter-rouge">ssh</code>タイプのマウントを定義します。
+これによって、<code class="language-plaintext highlighter-rouge">docker build</code>の実行にあたって環境変数<code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code>が設定されることになり、その値はホストから提供されるものとなります。
+こうすれば SSH 接続を行うような<code class="language-plaintext highlighter-rouge">RUN</code>コマンドが含まれていると、自動的にそのソケットが利用されます。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code>内にあるコマンドでは、<code class="language-plaintext highlighter-rouge">type=ssh</code>としてマウント定義された SSH アクセスを明示的に要求したものだけが、SSH エージェント接続を求めることになります。
+それ以外のコマンドは、どの SSH エージェントが利用可能であるのかを知ることはできません。</p>
 
 <p>Docker ファイル内にてコンテナーが SSH を利用する例が以下です。</p>
 
@@ -309,12 +318,15 @@ SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent
 <span class="k">RUN </span><span class="nt">--mount</span><span class="o">=</span><span class="nb">type</span><span class="o">=</span>ssh git clone git@github.com:myorg/myproject.git myproject
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>の用意ができたら SSH エージェント接続を行う<code class="language-plaintext highlighter-rouge">--ssh</code>オプションを使います。</p>
+<p>イメージは以下のようにしてビルドすることができます。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--ssh</span> default <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>エージェントに対して秘密鍵の認証がまず必要な場合には、<code class="language-plaintext highlighter-rouge">ssh-add</code>の利用が必要な場合があります。</p>
+<p><code class="language-plaintext highlighter-rouge">--mount=type=secret</code>と同じように、各ビルドごとに複数ソケットを利用したい場合やそれらを区別したい場合には<code class="language-plaintext highlighter-rouge">id</code>を指定します。
+たとえば<code class="language-plaintext highlighter-rouge">docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK</code>とすることもできます。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code>内には、2 つのソケットを利用するために<code class="language-plaintext highlighter-rouge">RUN --mount=type=ssh,id=main</code>と<code class="language-plaintext highlighter-rouge">RUN --mount=type=ssh,id=other</code>を記述することができます。
+<code class="language-plaintext highlighter-rouge">--mount=type=ssh</code>において<code class="language-plaintext highlighter-rouge">id</code>を指定しなかった場合は<code class="language-plaintext highlighter-rouge">default</code>として扱われます。</p>
 
 <h2 id="troubleshooting--issues-with-private-registries">トラブルシューティング： プライベートレジストリに関する問題</h2>
 

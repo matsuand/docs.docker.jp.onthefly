@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>GitHub アクションの設定 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="GitHub アクションの設定" />
   <meta property="og:description" content="GitHub Actions の設定。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/github-actions/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"GitHub アクションの設定","description":"GitHub Actions の設定。","url":"https://docs.docker.com/ci-cd/github-actions/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>GitHub アクションの設定</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>本ページでは Docker コンテナーにおいて CI/CD と連携させるための GitHub アクションの設定手順を示します。
+                        <section class="section"><h1>GitHub アクションの設定</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>本ページでは Docker において CI/CD と連携させるための GitHub アクションの設定手順を示します。
 新たな連携を設定するにあたっては、CI/CD のベストプラクティスとして <a href="https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/" target="_blank" rel="noopener" class="_">Ben のブログ</a> を一読してください。</p>
 
 <p>ここに説明する手順は以下のものです。</p>
@@ -115,7 +115,7 @@
 <ol>
   <li>GitHub アクションを設定する Docker プロジェクトを例として用います。</li>
   <li>GitHub アクションのワークフローを設定します。</li>
-  <li>ワークフローの最適化を行って、プルリクエスト数と総ビルド時間を軽減します。</li>
+  <li>ワークフローの最適化を行って、ビルド時間を軽減します。</li>
   <li>特定バージョンのみを Docker Hub にプッシュします。</li>
 </ol>
 
@@ -161,13 +161,7 @@ GitHub リポジトリにアクセスして <strong>Settings</strong> &gt; <stro
 
 <p>前節において PAT を生成し GitHub に追加しました。
 これによってどのワークフローからでも Docker Hub にアクセスできるようになりました。
-そこで GitHub アクションワークフローを設定して、GitHub 上のイメージのビルドと保存を行ってみます。
-これを行うには以下の 2 つの Docker アクションを生成します。</p>
-
-<ol>
-  <li>1 つめのアクションは、GitHub リポジトリに保存した secret を利用して Docker Hub へのログインを行います。</li>
-  <li>2 つめのアクションはビルドとプッシュを行います。</li>
-</ol>
+そこで GitHub アクションワークフローを設定して、GitHub 上のイメージのビルドと保存を行ってみます。</p>
 
 <p>この例においては push フラグを<code class="language-plaintext highlighter-rouge">true</code>に設定し、プッシュができるようにします。
 さらにタグを 1 つ追加して、常に最新版にアクセスするようにします。
@@ -183,7 +177,7 @@ GitHub リポジトリにアクセスして <strong>Settings</strong> &gt; <stro
 
 <p>まずはワークフローに名前をつけます。</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CI to Docker Hub</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ci</span>
 </code></pre></div></div>
 
 <p>そしてこのワークフローをいつ実行するかを決めます。
@@ -191,50 +185,47 @@ GitHub リポジトリにアクセスして <strong>Settings</strong> &gt; <stro
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
   <span class="na">push</span><span class="pi">:</span>
-    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">main'</span>
 </code></pre></div></div>
 
-<p>次にこのアクション内において、どのようなことを行いたいか（どんなジョブ（jobs）とするか）を指定します。
+<p>次にこのワークフロー内において、どのようなことを行いたいか（どんなジョブ（jobs）とするか）を指定します。
 ここではビルド処理を指定し、入手可能な最新の Ubuntu インスタンス上で実行するようにします。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
-
   <span class="na">build</span><span class="pi">:</span>
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
 </code></pre></div></div>
 
-<p>そして必要となる手順を追加します。
-まず $GITHUB_WORKSPACE にあるリポジトリをチェックアウトして、ワークフローからアクセスできるようにします。
-2 つめとして、PAT とユーザー名を使って Docker Hub にログインします。
-3 つめはビルダーです。
-このアクションは BuildKit を利用するものであり、さらに設定する単純な Buildx アクションを実行します。</p>
+<p>そして必要となる手順を追加します。</p>
+<ul>
+  <li>まず<code class="language-plaintext highlighter-rouge">$GITHUB_WORKSPACE</code>にあるリポジトリをチェックアウトして、ワークフローからアクセスできるようにします。</li>
+  <li>2 つめとして、PAT とユーザー名を使って Docker Hub にログインします。</li>
+  <li>3 つめはビルダーです。
+このアクションは Docker Buildx を設定するものであり、BuildKit コンテナーを内部で利用するビルダーインスタンスを生成します。</li>
+</ul>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Check Out Repo</span>
+      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
+      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">username</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}</span>
           <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Docker Buildx</span>
-        <span class="na">id</span><span class="pi">:</span> <span class="s">buildx</span>
+      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Docker Buildx</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/setup-buildx-action@v1</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
-        <span class="na">id</span><span class="pi">:</span> <span class="s">docker_build</span>
+      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">context</span><span class="pi">:</span> <span class="s">./</span>
+          <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
           <span class="na">file</span><span class="pi">:</span> <span class="s">./Dockerfile</span>
           <span class="na">push</span><span class="pi">:</span> <span class="no">true</span>
           <span class="na">tags</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Image digest</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="s">echo ${{ steps.docker_build.outputs.digest }}</span>
 </code></pre></div></div>
 
 <p>ではとりあえずワークフローを動かしてみましょう。
@@ -245,145 +236,136 @@ CI が実行され、イメージに対する新たな変更がプッシュさ�
 
 <h2 id="optimizing-the-workflow">ワークフローの最適化</h2>
 
-<p>ここからは、ビルドキャッシュを利用して GitHub アクションワークフローを最適化する方法について見ていきます。
-最適化には主に 2 つの利点があります。</p>
+<p>ここからは、レジストリを利用したビルドキャッシュを通じて、GitHub アクションワークフローを最適化する方法について見ていきます。
+Dockerfile やソースコードの中で、変更が発生していない命令は実行する必要がなくなるため、ビルド時間の削減につながります。
+また Docker Hub に対して実施するプル総数も減らすことができます。</p>
 
-<ol>
-  <li>ビルドキャッシュはビルド時間を減らすためのものです。
-イメージのダウンロードをすべて行わなくても済みます。</li>
-  <li>また Docker Hub に対して実施するプル数を減らします。
-これを利用するためには GitHub キャッシュの利用を必要とします。</li>
-</ol>
+<p>この例では、ビルドおよびプッシュの手順に向けて、さらなる属性追加が必要になります。</p>
 
-<p>そこでビルドキャッシュを用いる Builder の設定を行います。
-まずビルダーに対するキャッシュを設定します。
-本例においては、GitHub キャッシュを利用して、パスや鍵の保存先として追加することにします。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cache Docker layers</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v2</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
-          <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
-          <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">${{ runner.os }}-buildx-</span>
-</code></pre></div></div>
-
-<p>ビルダーとビルドキャッシュの記述をアクションファイルの上位に加えたら、ビルドとプッシュの処理ステップにおいて必要となる属性をさらに追加していきます。</p>
-
-<p>buildx の処理ステップの出力をビルダーで利用する設定を行います。
-そして上で設定したビルダー用のキャッシュを利用した保存とデータ抽出を行います。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">username</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}</span>
           <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
-        <span class="na">id</span><span class="pi">:</span> <span class="s">docker_build</span>
+      <span class="pi">-</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">context</span><span class="pi">:</span> <span class="s">./</span>
           <span class="na">file</span><span class="pi">:</span> <span class="s">./Dockerfile</span>
           <span class="na">builder</span><span class="pi">:</span> <span class="s">${{ steps.buildx.outputs.name }}</span>
           <span class="na">push</span><span class="pi">:</span> <span class="no">true</span>
-          <span class="na">tags</span><span class="pi">:</span>  <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest</span>
-          <span class="na">cache-from</span><span class="pi">:</span> <span class="s">type=local,src=/tmp/.buildx-cache</span>
-          <span class="na">cache-to</span><span class="pi">:</span> <span class="s">type=local,dest=/tmp/.buildx-cache</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Image digest</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="s">echo ${{ steps.docker_build.outputs.digest }}</span>
+          <span class="na">tags</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest</span>
+          <span class="na">cache-from</span><span class="pi">:</span> <span class="s">type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:buildcache</span>
+          <span class="na">cache-to</span><span class="pi">:</span> <span class="s">type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:buildcache,mode=max</span>
 </code></pre></div></div>
 
-<p>そこで再びワークフローを実行して、ビルドキャッシュが利用されていることを確認します。</p>
+<p>As you can see, we are using the <code class="language-plaintext highlighter-rouge">type=registry</code> cache exporter to import/export
+cache from a cache manifest or (special) image configuration. Here it will be
+pushed as a specific tag named <code class="language-plaintext highlighter-rouge">buildcache</code> for our image build.</p>
 
-<h2 id="push-tagged-versions-to-docker-hub">タグづけしたバージョンのプッシュ</h2>
+<p>Now, run the workflow again and verify that it uses the build cache.</p>
 
-<p>ここまで Docker プロジェクトに対して GitHub アクションワークフローの設定方法と、そのワークフローの最適化を行うためにビルドキャッシュを利用したビルダーの設定方法を見てきました。
-そこでここからは、それをさらに改善していく方法を見ていきます。
-この改善というのはタグづけされたバージョンを利用するものであり、master へのコミットに対して異なる動作となる機能を追加することで実現します。
-つまり Docker Hub 上において全コミットが最新版を更新するのではなく、特定バージョンのみをプッシュするようにします。</p>
+<h2 id="push-tagged-versions-and-handle-pull-requests">Push tagged versions and handle pull requests</h2>
 
-<p>この方法を使えば、コミット先をローカルレジストリとして、最新版のテストに利用することができます。
-こうすることで、リリース向けとするタグつきバージョンを保持しつつ、常に最新版をテストしていくことができます。</p>
+<p>Earlier, we learnt how to set up a GitHub Actions workflow to a Docker project,
+how to optimize the workflow by setting up cache. Let’s now look at how we can
+improve it further. We can do this by adding the ability to have tagged versions
+behave differently to all commits to master. This means, only specific versions
+are pushed, instead of every commit updating the latest version on Docker Hub.</p>
 
-<p>その際には以下の 2 つの手順を行います。</p>
+<p>You can consider this approach to have your commits pushed as an edge tag to
+then use it in nightly tests. By doing this, you can always test the last
+changes of your active branch while reserving your tagged versions for release
+to Docker Hub.</p>
 
-<ol>
-  <li>GitHub ワークフローを修正して、Docker Hub の特定タグに対するコミットのみをプッシュするようにします。</li>
-  <li>GitHub アクションファイルを設定します。
-最新のコミットを GitHub レジストリ内のイメージとして保存します。</li>
-</ol>
-
-<p>まず既存の GitHub ワークフローを修正して、特定のタグがある場合にのみ Docker Hub へのプッシュを行うようにします。
-たとえば以下のとおりです。</p>
+<p>First, let us modify our existing GitHub workflow to take into account pushed
+tags and pull requests:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
   <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">main'</span>
     <span class="na">tags</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">v*.*.*"</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">v*'</span>
 </code></pre></div></div>
 
-<p>これにより、コミットに<code class="language-plaintext highlighter-rouge">v1.0.2</code>といったようなタグをつけた場合にのみ、主要な CI が起動されるようになります。
-テストしてみます。
-たとえば以下のようなコマンドを実行します。</p>
+<p>This ensures that the CI will trigger your workflow on push events
+(branch and tags). If we tag our commit with something like <code class="language-plaintext highlighter-rouge">v1.0.2</code>:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git tag <span class="nt">-a</span> v1.0.2
 <span class="gp">$</span><span class="w"> </span>git push origin v1.0.2
 </code></pre></div></div>
 
-<p>GitHub にアクセスしてアクションを確認します。</p>
+<p>Now, go to GitHub and check your Actions</p>
 
-<p><img src="/docs.docker.jp.onthefly/ci-cd/images/push-tagged-version.png" alt="タグづけバージョンのプッシュ" width="500px" /></p>
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/push-tagged-version.png" alt="Push tagged version" width="500px" /></p>
 
-<p>次に 2 つめの GitHub アクションファイルを生成し、最新のコミットを GitHub コンテナーレポジトリ内にイメージとして保存するようにします。
-これはたとえば以下のような場合に利用できます。</p>
+<p>Let’s reuse our current workflow to also handle pull requests for testing
+purpose but also push our image in the GitHub Container Registry.</p>
 
-<ol>
-  <li>最新版のテストを実施したり、定期的なテストを実施したりする場合。</li>
-  <li>開発者間において作業中のイメージを共有したい場合。</li>
-</ol>
+<p>First we have to handle pull request events:</p>
 
-<p>そこで上の GitHub アクションをクローンして、すべてのプッシュに関する前回のロジックを再度追加します。
-つまりここで 2 つのワークフローファイルを作り出し、前回のものと今回のものがともに動くということです。</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">main'</span>
+    <span class="na">tags</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">v*'</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">main'</span>
+</code></pre></div></div>
 
-<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" target="_blank" rel="noopener" class="_">GitHub コンテナーレジストリ</a> に対して認証を得るために、<a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a> を使えば、最適なセキュリティが確保できます。</p>
+<p>To authenticate against the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" target="_blank" rel="noopener" class="_">GitHub Container Registry</a>,
+use the <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a>
+for the best security and experience.</p>
 
-<p>そこで Docker Hub ログインは GitHub コンテナーレジストリのログインに切り替えます。</p>
+<p>Now let’s change the Docker Hub login with the GitHub Container Registry one:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="na">if</span><span class="pi">:</span> <span class="s">github.event_name != 'pull_request'</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">registry</span><span class="pi">:</span> <span class="s">ghcr.io</span>
-          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.repository_owner }}</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ github.actor }}</span>
           <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
-<p>タグづけしたイメージをどのように変更するかをよく見ておいてください。
-以下の例では‘latest’というタグだけを引き継いでいます。
-ここに加えるロジックは必要に応じて書き換えてください。</p>
+<p>Remember to change how the image is tagged. The following example keeps ‘latest’
+as the only tag. However, you can add any logic to this if you prefer:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">tags</span><span class="pi">:</span> <span class="s">ghcr.io/${{ github.repository_owner }}/simplewhale:latest</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">tags</span><span class="pi">:</span> <span class="s">ghcr.io/&lt;username&gt;/simplewhale:latest</span>
 </code></pre></div></div>
 
-<p><img src="/docs.docker.jp.onthefly/ci-cd/images/ghcr-logic.png" alt="タグづけイメージの更新" width="500px" /></p>
+<blockquote>
+  <p><strong>Note</strong>: Replace <code class="language-plaintext highlighter-rouge">&lt;username&gt;</code> with the repository owner. We could use
+<code class="language-plaintext highlighter-rouge">${{ github.repository_owner }}</code> but this value can be mixed-case, so it could
+fail as <a href="https://github.com/docker/build-push-action/blob/master/TROUBLESHOOTING.md#repository-name-must-be-lowercase" target="_blank" rel="noopener" class="_">repository name must be lowercase</a>.</p>
+</blockquote>
 
-<p>このように 2 つのフローを作ってみました。
-1 つは master へ変更を適用するものであり、もう 1 つはプッシュしたタグに対応するものです。
-次に必要になってくるのは、これを修正して、Docker Hub に向けてではなく GitHub リポジトリに対して PR をプッシュすることでしょう。</p>
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/ghcr-logic.png" alt="Update tagged images" width="500px" /></p>
+
+<p>Now, we will have two different flows: one for our changes to master, and one
+for our pushed tags. Next, we need to modify what we had before to ensure we are
+pushing our PRs to the GitHub registry rather than to Docker Hub.</p>
 
 <h2 id="conclusion">まとめ</h2>
 
-<p>本ガイドを通じて、Docker プロジェクトに対する GitHub アクションワークフローの設定方法を説明しました。
-またそのワークフローを最適化して、ビルド時間とプルリクエスト数の削減を行いました。
-そして Docker Hub に対して特定バージョンのみをプッシュする方法を実現しました。</p>
+<p>In this guide, you have learnt how to set up GitHub Actions workflow to an
+existing Docker project, optimize your workflow to improve build times and
+reduce the number of pull requests, and finally, we learnt how to push only
+specific versions to Docker Hub.</p>
 
 <h2 id="next-steps">次のステップ</h2>
 
-<p>次に設定してみる内容としては、最新タグに対する最新テストの設定、各 PR の確認などがあります。
-また利用しているタグを賢く利用する方法や、Git 上のタグをイメージ内のタグとして活用する方法などもあります。</p>
+<p>You can now consider setting up nightly builds, test your image before pushing
+it, setting up secrets, share images between jobs or automatically handle
+tags and OCI Image Format Specification labels generation.</p>
 
-<p>上に示したような作業を実現するために、あるいはここで実現してきた内容の完全な例を確認するために、<a href="https://github.com/metcalfc/docker-action-examples" target="_blank" rel="noopener" class="_">Chad のリポジトリ</a> の説明を参照してください。
-さらに最新の GitHub アクションに関しての詳細も説明しています。</p>
+<p>To look at how you can do one of these, or to get a full example on how to set
+up what we have accomplished today, check out <a href="https://github.com/docker/build-push-action/tree/master/docs/advanced" target="_blank" rel="noopener" class="_">our advanced examples</a>
+which runs you through this and more details.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=CI/CD">CI/CD</a>, <a href="/docs.docker.jp.onthefly/search/?q=GitHub Actions">GitHub Actions</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -420,7 +402,7 @@ CI が実行され、イメージに対する新たな変更がプッシュさ�
   <li><a href="#set-up-a-docker-project" class="nomunge">Docker プロジェクトの設定</a></li>
   <li><a href="#set-up-the-gitHub-actions-workflow" class="nomunge">GitHub アクションワークフローの設定</a></li>
   <li><a href="#optimizing-the-workflow" class="nomunge">ワークフローの最適化</a></li>
-  <li><a href="#push-tagged-versions-to-docker-hub" class="nomunge">タグづけしたバージョンのプッシュ</a></li>
+  <li><a href="#push-tagged-versions-and-handle-pull-requests" class="nomunge">Push tagged versions and handle pull requests</a></li>
   <li><a href="#conclusion" class="nomunge">まとめ</a></li>
   <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
 </ul>

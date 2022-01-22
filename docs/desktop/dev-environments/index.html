@@ -1,4 +1,4 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dev 環境プレビュー | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Dev 環境プレビュー" />
   <meta property="og:description" content="Dev 環境" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/desktop/dev-environments/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Dev 環境プレビュー","description":"Dev 環境","url":"https://docs.docker.com/desktop/dev-environments/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -418,11 +418,22 @@ VS Code からプロジェクトを直接利用でき、データベースやフ
 実際には異なる定義になっていくはずです。
 またメインの Compose ファイルにて定義されたサービスが、別にビルドを行うターゲットを利用したり、別のイメージを直接参照したり、といったようにもなるでしょう。</p>
 
+<h2 id="specify-a-dockerfile">Dockerfile の指定</h2>
+
+<p>このプレビューでは Dev 環境を通じて、JSON ファイルを使って Dev 環境を定義する Dockerfile を指定するようにしています。
+これを<code class="language-plaintext highlighter-rouge">.docker</code>フォルダー内に、<code class="language-plaintext highlighter-rouge">config.json</code>ファイルとして加える必要があります。
+たとえば以下のとおりです。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">dockerfile</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dockerfile.devenv</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h2 id="specify-a-base-image">ベースイメージの指定</h2>
 
-<p>このプレビューにおいては、簡単な YAML ファイルをサポートしていて、Dev 環境の一部として利用したいベースイメージを指定するものとなっています。
-このファイルを<code class="language-plaintext highlighter-rouge">.docker</code>フォルダーの一部として含めて、<code class="language-plaintext highlighter-rouge">config.json</code>ファイルとして追加することが必要です。
-たとえば Jekyll ベースイメージを用いる場合には、以下のようにします。</p>
+<p>イメージビルドをすでに行っている場合は、 それをベースイメージとして指定することで Dev 環境を定義します。
+これを<code class="language-plaintext highlighter-rouge">.docker</code>フォルダー内に、<code class="language-plaintext highlighter-rouge">config.json</code>ファイルとして加える必要があります。
+たとえば Jekyll ベースイメージを利用するには、以下のように追加します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">image</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jekyll/jekyll</span><span class="dl">"</span>
@@ -520,6 +531,7 @@ VS Code のターミナルが適切に動作しないことがあります。
       <li><a href="#share-your-dev-environment" class="nomunge">Dev 環境の共有</a></li>
       <li><a href="#start-a-sample-compose-dev-environment" class="nomunge">compose による Dev 環境例の起動</a></li>
       <li><a href="#set-up-your-own-compose-dev-environment" class="nomunge">独自の Compose Dev 環境の設定</a></li>
+      <li><a href="#specify-a-dockerfile" class="nomunge">Dockerfile の指定</a></li>
       <li><a href="#specify-a-base-image" class="nomunge">ベースイメージの指定</a></li>
       <li><a href="#start-a-dev-environment-from-a-local-folder" class="nomunge">ローカルフォルダーからの Dev 環境の起動</a></li>
       <li><a href="#known-issues" class="nomunge">既知の問題</a></li>

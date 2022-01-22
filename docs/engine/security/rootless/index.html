@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>root ユーザー以外による Docker デーモン起動（rootless モード） | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="root ユーザー以外による Docker デーモン起動（rootless モード）" />
   <meta property="og:description" content="root ユーザー以外によって Docker デーモンを起動します（rootless モード）。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"root ユーザー以外による Docker デーモン起動（rootless モード）","description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。","url":"https://docs.docker.com/engine/security/rootless/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a>本番環境でのアプリ運用</a></li><li><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/">コンテナーの設定</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -519,9 +519,10 @@ Current context is now "rootless"
 
 <h3 id="exposing-privileged-ports">特権ポートの公開</h3>
 
-<p>特権ポート（1024 未満）を公開するには、<code class="language-plaintext highlighter-rouge">rootlesskit</code>バイナリに対して<code class="language-plaintext highlighter-rouge">CAP_NET_BIND_SERVICE</code>を設定します。</p>
+<p>特権ポート（1024 未満）を公開するには、<code class="language-plaintext highlighter-rouge">rootlesskit</code>バイナリに対して<code class="language-plaintext highlighter-rouge">CAP_NET_BIND_SERVICE</code>を設定して、デーモンを再起動します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>ep <span class="nv">$HOME</span>/bin/rootlesskit
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>ep <span class="si">$(</span>which rootlesskit<span class="si">)</span>
+<span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> restart docker
 </code></pre></div></div>
 
 <p>または<code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（あるいは<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">net.ipv4.ip_unprivileged_port_start=0</code>を追加して<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行します。</p>

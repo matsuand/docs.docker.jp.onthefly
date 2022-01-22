@@ -1,4 +1,4 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -120,6 +120,57 @@
 
 <h1 id="version-2010">Version 20.10</h1>
 
+<h2 id="201012">20.10.12</h2>
+<p>2021-12-13</p>
+
+<p>Docker Engine の本リリースでの変更は、パッケージング部分のみです。
+また更新は<code class="language-plaintext highlighter-rouge">docker scan</code>と<code class="language-plaintext highlighter-rouge">docker buildx</code>のコマンドに対して行っています。
+バージョンが v0.11.0 以前の<code class="language-plaintext highlighter-rouge">docker scan</code>は <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">Log4j 2 CVE-2021-44228</a> を検出することはできません。
+本リリースにおいては更新版の<code class="language-plaintext highlighter-rouge">docker scan</code>を提供しています。
+これを使えば、イメージのぜい弱性をスキャンすることができます。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>Linux 上における<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドは、現在のところ x86 プラットフォームにおいてのみサポートしています。
+Linux 上におけるそれ以外のハードウェアアーキテクチャーに対しては、まだパッケージ提供は行っていません。</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">docker scan</code>の機能は、個別のパッケージとして提供しています。
+これはアップデートやインストールの方法によって状況が異なることになります。
+最新版の’docker scan’は自動的には更新されていない場合があります。
+最新の<code class="language-plaintext highlighter-rouge">docker scan</code>に更新するには、以下の手順に従ってください。
+またその手順に従えば、Docker Engine をアップグレードしなくても、<code class="language-plaintext highlighter-rouge">docker scan</code>パッケージのインストールやアップグレードを行うこともできます。</p>
+
+<p>Ubuntu や Debian のような<code class="language-plaintext highlighter-rouge">.deb</code>をベースとするディストリビューションでは、以下のようにします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install </span>docker-scan-plugin
+</code></pre></div></div>
+
+<p>CentOS や Fedora のような rpm ベースのディストリビューションでは、以下のようにします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>yum <span class="nb">install </span>docker-scan-plugin
+</code></pre></div></div>
+
+<p>アップグレードを行ったら、インストールした<code class="language-plaintext highlighter-rouge">docker scan</code>が最新であるかどうかを確認します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker scan <span class="nt">--accept-license</span> <span class="nt">--version</span>
+<span class="go">Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+</span></code></pre></div></div>
+
+<p><a href="https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/">CVE-2021-44228 に関するブログ投稿</a> を読んでください。
+<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドによって、イメージのぜい弱性がチェックされることを確認してください。</p>
+
+<h3 id="packaging">パッケージ</h3>
+
+<ul>
+  <li>Update <code class="language-plaintext highlighter-rouge">docker scan</code> to <a href="https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0">v0.12.0</a>.</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">docker buildx</code> to <a href="https://github.com/docker/buildx/releases/tag/v0.7.1">v0.7.1</a>.</li>
+  <li>Update Golang runtime to Go 1.16.12.</li>
+</ul>
+
 <h2 id="201011">20.10.11</h2>
 <p>2021-11-17</p>
 
@@ -146,7 +197,7 @@
 <a href="https://github.com/moby/moby/pull/42987">moby/moby#42987</a></li>
 </ul>
 
-<h2 id="packaging">パッケージ</h2>
+<h3 id="packaging">パッケージ</h3>
 
 <ul>
   <li>containerd を <a href="https://github.com/containerd/containerd/releases/tag/v1.4.12">v1.4.12</a> にアップデートし、<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190">CVE-2021-41190</a> を軽減しました。</li>
@@ -172,7 +223,7 @@
 <a href="https://github.com/moby/moby/pull/42954">moby/moby#42954</a></li>
 </ul>
 
-<h2 id="runtime">ランタイム</h2>
+<h3 id="runtime">ランタイム</h3>
 
 <ul>
   <li>Fedora および Ubuntu の最新版においてコンテナー実行をサポートするために、デフォルトの seccomp ポリシー内に<code class="language-plaintext highlighter-rouge">clone3</code>システムコールへの対応を追加しました。
@@ -191,7 +242,7 @@
 <a href="https://github.com/moby/moby/pull/42875">moby/moby#42875</a>.</li>
 </ul>
 
-<h2 id="packaging">パッケージ</h2>
+<h3 id="packaging">パッケージ</h3>
 
 <ul>
   <li>Ubuntu 21.10 “Impish Indri” と Fedora 35 向けにパッケージを追加しました。</li>
@@ -214,7 +265,7 @@
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。</p>
 </blockquote>
 
-<h2 id="client">クライアント</h2>
+<h3 id="client">クライアント</h3>
 
 <ul>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092">CVE-2021-41092</a>
@@ -222,7 +273,7 @@
 これにより、資格情報がデフォルトのレジストリに送信されないようにしました。</li>
 </ul>
 
-<h2 id="runtime">ランタイム</h2>
+<h3 id="runtime">ランタイム</h3>
 
 <ul>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089">CVE-2021-41089</a>
@@ -232,7 +283,7 @@
 ファイルパーミッションを下げることによって、非特権ユーザーにより、<code class="language-plaintext highlighter-rouge">/var/lib/docker</code>内を検索したり、プログラム実行ができることがないようにしました。</li>
 </ul>
 
-<h2 id="packaging">パッケージ</h2>
+<h3 id="packaging">パッケージ</h3>
 
 <blockquote>
   <p><strong>既知の問題</strong></p>
@@ -970,15 +1021,10 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#201012" class="nomunge">20.10.12</a></li>
       <li><a href="#201011" class="nomunge">20.10.11</a></li>
-      <li><a href="#packaging" class="nomunge">パッケージ</a></li>
       <li><a href="#201010" class="nomunge">20.10.10</a></li>
-      <li><a href="#runtime" class="nomunge">ランタイム</a></li>
-      <li><a href="#packaging" class="nomunge">パッケージ</a></li>
       <li><a href="#20109" class="nomunge">20.10.9</a></li>
-      <li><a href="#client" class="nomunge">クライアント</a></li>
-      <li><a href="#runtime" class="nomunge">ランタイム</a></li>
-      <li><a href="#packaging" class="nomunge">パッケージ</a></li>
       <li><a href="#20108" class="nomunge">20.10.8</a></li>
       <li><a href="#20107" class="nomunge">20.10.7</a></li>
       <li><a href="#20106" class="nomunge">20.10.6</a></li>

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Buildx | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Buildx" />
   <meta property="og:description" content="Docker Buildx の利用" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Buildx","description":"Docker Buildx の利用","url":"https://docs.docker.com/buildx/working-with-buildx/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,36 +107,108 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><h2 id="overview">概要</h2>
+                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><h2 id="overview">概要</h2>
 
 <p>Docker Buildx は Docker コマンドを拡張する CLI プラグインであり、<a href="https://github.com/moby/buildkit" target="_blank" rel="noopener" class="_">Moby BuildKit</a> ビルダーツールキットにより提供される機能に完全対応するものです。
 Docker ビルドと同様のユーザー操作を提供し、さらにスコープ化されたビルダーインスタンス、複数ノードへの同時ビルドなど、数多くの新機能を提供します。</p>
 
 <h2 id="install">インストール</h2>
 
-<p>Docker Buildx は Docker Desktop に含まれます。
-また <a href="/docs.docker.jp.onthefly/engine/install/">DEB または RPM パッケージ</a> により Linux 上にインストールする Docker パッケージに含まれます。</p>
+<h3 id="windows-and-macos">Windows と macOS</h3>
 
-<p>また最新の<code class="language-plaintext highlighter-rouge">buildx</code>バイナリを GitHub 上の <a href="https://github.com/docker/buildx/">Docker buildx</a> リリースページからダウンロードすることもできます。
-ダウンロードしたら、<code class="language-plaintext highlighter-rouge">~/.docker/cli-plugins</code>フォルダーにコピーして、名前を<code class="language-plaintext highlighter-rouge">docker-buildx</code>とします。
-そして以下のようにして実行権限を与えます。</p>
+<p>Docker Buildx は Windows と macOS に対しては <a href="/docs.docker.jp.onthefly/desktop/">Docker Desktop</a> に含まれます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod </span>a+x ~/.docker/cli-plugins/docker-buildx
-</code></pre></div></div>
+<h3 id="linux-packages">Linux パッケージ</h3>
 
-<p>以下に示すのは、<a href="https://hub.docker.com/r/docker/buildx-bin"><code class="language-plaintext highlighter-rouge">docker/buildx-bin</code></a> イメージを使って、DOckerfile 内において buildx を利用する例です。</p>
+<p><a href="/docs.docker.jp.onthefly/engine/install/">DEB や RPM パッケージ</a> を利用する場合も、Linux パッケージとして Docker Buildx が含まれます。</p>
+
+<h3 id="manual-download">手動によるダウンロード</h3>
+
+<blockquote class="important">
+  <p><strong>重要</strong></p>
+
+  <p>This section is for unattended installation of the buildx component. These
+instructions are mostly suitable for testing purposes. We do not recommend
+installing buildx using manual download in production environments as they
+will not be updated automatically with security updates.</p>
+
+  <p>On Windows and macOS, we recommend that you install <a href="/docs.docker.jp.onthefly/desktop/">Docker Desktop</a>
+instead. For Linux, we recommend that you follow the <a href="#linux-packages">instructions specific for your distribution</a>.</p>
+</blockquote>
+
+<p>最新のバイナリは <a href="https://github.com/docker/buildx/releases/latest" target="_blank" rel="noopener" class="_">GitHub 上のリリースページ</a> からダウンロードすることもできます。</p>
+
+<p>対応するバイナリの名前を変更して、OS において適当な場所にコピーします。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>バイナリ名</th>
+      <th>配置するフォルダー</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Linux</td>
+      <td><code class="language-plaintext highlighter-rouge">docker-buildx</code></td>
+      <td><code class="language-plaintext highlighter-rouge">$HOME/.docker/cli-plugins</code></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td><code class="language-plaintext highlighter-rouge">docker-buildx</code></td>
+      <td><code class="language-plaintext highlighter-rouge">$HOME/.docker/cli-plugins</code></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td><code class="language-plaintext highlighter-rouge">docker-buildx.exe</code></td>
+      <td><code class="language-plaintext highlighter-rouge">%USERPROFILE%\.docker\cli-plugins</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>あるいはシステムワイドなインストール先ディレクトリのいずれかにコピーします。</p>
+
+<p>Unix 環境では以下とします。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/usr/local/lib/docker/cli-plugins</code> あるいは <code class="language-plaintext highlighter-rouge">/usr/local/libexec/docker/cli-plugins</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/usr/lib/docker/cli-plugins</code> あるいは <code class="language-plaintext highlighter-rouge">/usr/libexec/docker/cli-plugins</code></li>
+</ul>
+
+<p>Windows では以下とします。</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">C:\ProgramData\Docker\cli-plugins</code></li>
+  <li><code class="language-plaintext highlighter-rouge">C:\Program Files\Docker\cli-plugins</code></li>
+</ul>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>On Unix environments, it may also be necessary to make it executable with <code class="language-plaintext highlighter-rouge">chmod +x</code>:</p>
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chmod</span> +x ~/.docker/cli-plugins/docker-buildx
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="dockerfile">Dockerfile</h3>
+
+<p>Here is how to install and use Buildx inside a Dockerfile through the
+<a href="https://hub.docker.com/r/docker/buildx-bin"><code class="language-plaintext highlighter-rouge">docker/buildx-bin</code></a> image:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> docker</span>
-<span class="k">COPY</span><span class="s"> --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx</span>
+<span class="k">COPY</span><span class="s"> --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/docker-buildx</span>
 <span class="k">RUN </span>docker buildx version
 </code></pre></div></div>
 
-<h2 id="set-buildx-as-the-default-builder">デフォルトビルダーとして buildx を設定</h2>
+<h2 id="set-buildx-as-the-default-builder">Set buildx as the default builder</h2>
 
-<p>コマンド <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_install/"><code class="language-plaintext highlighter-rouge">docker buildx install</code></a> を実行すれば builder コマンドが<code class="language-plaintext highlighter-rouge">docker buildx</code>へのエイリアスとして設定されます。
-これによって <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/"><code class="language-plaintext highlighter-rouge">docker build</code></a> が現時点での buildx builder を利用するようになります。</p>
+<p>Running the command <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_install/"><code class="language-plaintext highlighter-rouge">docker buildx install</code></a>
+sets up docker builder command as an alias to <code class="language-plaintext highlighter-rouge">docker buildx</code>. This results in
+the ability to have <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/"><code class="language-plaintext highlighter-rouge">docker build</code></a>
+use the current buildx builder.</p>
 
-<p>このエイリアスを削除するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_uninstall/"><code class="language-plaintext highlighter-rouge">docker buildx uninstall</code></a> を実行します。</p>
+<p>To remove this alias, run <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_uninstall/"><code class="language-plaintext highlighter-rouge">docker buildx uninstall</code></a>.</p>
 
 <h2 id="build-with-buildx">buildx を使ったビルド</h2>
 
@@ -325,8 +397,15 @@ GitHub repository.</p>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#overview" class="nomunge">概要</a></li>
-  <li><a href="#install" class="nomunge">インストール</a></li>
-  <li><a href="#set-buildx-as-the-default-builder" class="nomunge">デフォルトビルダーとして buildx を設定</a></li>
+  <li><a href="#install" class="nomunge">インストール</a>
+    <ul>
+      <li><a href="#windows-and-macos" class="nomunge">Windows と macOS</a></li>
+      <li><a href="#linux-packages" class="nomunge">Linux パッケージ</a></li>
+      <li><a href="#manual-download" class="nomunge">手動によるダウンロード</a></li>
+      <li><a href="#dockerfile" class="nomunge">Dockerfile</a></li>
+    </ul>
+  </li>
+  <li><a href="#set-buildx-as-the-default-builder" class="nomunge">Set buildx as the default builder</a></li>
   <li><a href="#build-with-buildx" class="nomunge">buildx を使ったビルド</a></li>
   <li><a href="#work-with-builder-instances" class="nomunge">ビルダーインスタンスを使った操作</a></li>
   <li><a href="#build-multi-platform-images" class="nomunge">マルチプラットフォームのイメージビルド</a></li>

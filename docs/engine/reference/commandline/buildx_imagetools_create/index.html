@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker buildx imagetools create | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="docker buildx imagetools create" />
   <meta property="og:description" content="docker buildx imagetools create: Imagetools contains commands for working with manifest lists in the registry. These commands are useful for inspecting multi-platform build results. Create a new manifest list based..." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/buildx_imagetools_create/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"docker buildx imagetools create","description":"docker buildx imagetools create: Imagetools contains commands for working with manifest lists in the registry. These commands are useful for inspecting multi-platform build results. Create a new manifest list based...","url":"https://docs.docker.com/engine/reference/commandline/buildx_imagetools_create/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -214,7 +214,7 @@ specified, create performs a carbon copy.</p>
   
   
   <tr>
-    <td><code class="language-plaintext highlighter-rouge">--builder</code></td>
+    <td><a href="#builder"><code class="language-plaintext highlighter-rouge">--builder</code></a></td>
     <td></td>
     <td>設定された builder インスタンスをオーバーライドします。</td>
   </tr>
@@ -230,6 +230,10 @@ specified, create performs a carbon copy.</p>
 <p>Use the <code class="language-plaintext highlighter-rouge">--append</code> flag to append the new sources to an existing manifest list
 in the destination.</p>
 
+<h3 id="builder">Override the configured builder instance (--builder)</h3>
+
+<p>Same as <a href="/engine/reference/commandline/buildx/#builder"><code class="language-plaintext highlighter-rouge">buildx --builder</code></a>.</p>
+
 <h3 id="dry-run">Show final image instead of pushing (--dry-run)</h3>
 
 <p>Use the <code class="language-plaintext highlighter-rouge">--dry-run</code> flag to not push the image, just show it.</p>
@@ -241,6 +245,17 @@ in the destination.</p>
 
 <p>Reads source from files. A source can be a manifest digest, manifest reference,
 or a JSON of OCI descriptor object.</p>
+
+<p>In order to define annotations or additional platform properties like <code class="language-plaintext highlighter-rouge">os.version</code> and
+<code class="language-plaintext highlighter-rouge">os.features</code> you need to add them in the OCI descriptor object encoded in JSON.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker buildx imagetools inspect --raw alpine | jq '.manifests[0] | .platform."os.version"="10.1"' &gt; descr.json
+docker buildx imagetools create -f descr.json myuser/image
+</code></pre></div></div>
+
+<p>The descriptor in the file is merged with existing descriptor in the registry if it exists.</p>
+
+<p>The supported fields for the descriptor are defined in <a href="https://github.com/opencontainers/image-spec/blob/master/descriptor.md#properties">OCI spec</a> .</p>
 
 <h3 id="tag">Set reference for new image  (-t, --tag)</h3>
 
@@ -339,6 +354,7 @@ or a JSON of OCI descriptor object.</p>
   <li><a href="#examples" class="nomunge">利用例</a>
     <ul>
       <li><a href="#append" class="nomunge">Append new sources to an existing manifest list (--append)</a></li>
+      <li><a href="#builder" class="nomunge">Override the configured builder instance (--builder)</a></li>
       <li><a href="#dry-run" class="nomunge">Show final image instead of pushing (--dry-run)</a></li>
       <li><a href="#file" class="nomunge">Read source descriptor from a file (-f, --file)</a></li>
       <li><a href="#tag" class="nomunge">Set reference for new image  (-t, --tag)</a></li>
