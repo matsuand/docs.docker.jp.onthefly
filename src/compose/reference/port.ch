@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: port [options] SERVICE PRIVATE_PORT
+Usage: docker-compose port [options] SERVICE PRIVATE_PORT
 
 Options:
     --protocol=proto  tcp or udp [default: tcp]
@@ -35,7 +35,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: port [options] SERVICE PRIVATE_PORT
+Usage: docker-compose port [options] SERVICE PRIVATE_PORT
 
 Options:
     --protocol=proto  tcp or udp [default: tcp]
@@ -48,9 +48,9 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: port [オプション] SERVICE PRIVATE_PORT
+利用方法: docker-compose port [オプション] SERVICE PRIVATE_PORT
 
-Options:
+オプション:
     --protocol=proto  tcp または udp [デフォルト: tcp]
     --index=index     サービスが複数インスタンスによって構成されている場合、
                       そのコンテナーのインデックス。[デフォルト: 1]

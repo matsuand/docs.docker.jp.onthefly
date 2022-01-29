@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: pull [options] [SERVICE...]
+Usage: docker-compose pull [options] [SERVICE...]
 
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
@@ -37,7 +37,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: pull [options] [SERVICE...]
+Usage: docker-compose pull [options] [SERVICE...]
 
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
@@ -52,7 +52,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: pull [オプション] [SERVICE...]
+利用方法: docker-compose pull [オプション] [サービス名...]
 
 オプション:
     --ignore-pull-failures  可能なものはプルし、失敗するものは無視します。

@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: pause [SERVICE...]
+Usage: docker-compose pause [SERVICE...]
 ```
 @y
 <ul class="nav nav-tabs">
@@ -30,7 +30,7 @@ Usage: pause [SERVICE...]
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: pause [SERVICE...]
+Usage: docker-compose pause [SERVICE...]
 ```
 {% endcapture %}
 {{ original-content | markdownify }}
@@ -38,7 +38,7 @@ Usage: pause [SERVICE...]
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: pause [SERVICE...]
+利用方法: docker-compose pause [サービス名...]
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}

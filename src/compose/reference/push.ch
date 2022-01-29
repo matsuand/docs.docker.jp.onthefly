@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: push [options] [SERVICE...]
+Usage: docker-compose push [options] [SERVICE...]
 
 Options:
     --ignore-push-failures  Push what it can and ignores images with push failures.
@@ -33,7 +33,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: push [options] [SERVICE...]
+Usage: docker-compose push [options] [SERVICE...]
 
 Options:
     --ignore-push-failures  Push what it can and ignores images with push failures.
@@ -44,7 +44,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: push [オプション] [SERVICE...]
+利用方法: docker-compose push [オプション] [サービス名...]
 
 オプション:
     --ignore-push-failures  可能なものはプッシュし、失敗するものは無視します。

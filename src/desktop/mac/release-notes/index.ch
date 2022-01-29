@@ -150,7 +150,7 @@ Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
 @x
 - Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
 - Fixed the memory statistics for containers in the Dashboard. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/6076).
-- Added a deprecated option to `settings.json`: `"deprecatedCgroupsv1": true`, which switches the Linux environment back to cgroups v1. This option will be removed in future releases. If your software requires cgroups v1, you must update it to be compatible with cgroups v2.
+- Added a deprecated option to `settings.json`: `"deprecatedCgroupv1": true`, which switches the Linux environment back to cgroups v1. If your software requires cgroups v1, you should update it to be compatible with cgroups v2. Although cgroups v1 should continue to work, it is likely that some future features will depend on cgroups v2. It is also possible that some Linux kernel bugs will only be fixed with cgroups v2.
 - Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
 - Fixed an issue where putting the machine to Sleep mode after pausing Docker Desktop results in Docker Desktop not being able to resume from pause after the machine comes out of Sleep mode. Fixes [for-mac#6058](https://github.com/docker/for-mac/issues/6058).
 @y
@@ -158,10 +158,11 @@ Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
   異なる開発グループにおいて複数の組織を利用する場合には、各グループごとに`registry.json`ファイルを分けなければなりません。
 - ダッシュボードにおいて、コンテナーに対するメモリー統計を修正しました。
   [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/6076) を Fix に。
-- `settings.json`に、非推奨を表すオプション`"deprecatedCgroupsv1": true`を追加しました。
-  これは Linux 環境において cgroups v1 の利用に切り替えます。
-  このオプションは、将来のリリースにおいて削除される予定です。
+- `settings.json`に、非推奨を表すオプション`"deprecatedCgroupv1": true`を追加しました。
   開発するソフトウェアが cgroups v1 を必要としている場合は、cgroups v2 互換となるようにアップデートすることが必要です。
+  cgroups v1 は今でも動作します。
+  しかし将来実現される機能は cgroups v2 を利用します。
+  また Linux カーネルにバグがあれば、それは cgroups v2 についてのみ修正されます。
 - Compose において、コンテナー名のセパレーター`-`が`_`になってしまった不備を修正しました。
   [docker/compose-switch](https://github.com/docker/compose-switch/issues/24) を Fix に。
 - Docker Desktop を一時停止させた状態でマシンがスリープモードになった場合に、マシンがスリープモードから復活した後に、Docker Desktop が一時停止から復旧できなくなる不備を修正しました。

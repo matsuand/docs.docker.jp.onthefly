@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: down [options]
+Usage: docker-compose down [options]
 
 Options:
     --rmi type              Remove images. Type must be one of:
@@ -43,7 +43,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: down [options]
+Usage: docker-compose down [options]
 
 Options:
     --rmi type              Remove images. Type must be one of:
@@ -64,7 +64,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: down [オプション]
+利用方法: docker-compose down [オプション]
 
 オプション:
     --rmi type              イメージを削除します。type は以下のいずれか。

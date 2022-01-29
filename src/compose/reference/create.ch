@@ -29,7 +29,7 @@ instead.
 
 @x
 ```none
-Usage: create [options] [SERVICE...]
+Usage: docker-compose create [options] [SERVICE...]
 
 Options:
     --force-recreate       Recreate containers even if their configuration and
@@ -48,7 +48,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: create [options] [SERVICE...]
+Usage: docker-compose create [options] [SERVICE...]
 
 Options:
     --force-recreate       Recreate containers even if their configuration and
@@ -64,7 +64,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: create [オプション] [サービス名...]
+利用方法: docker-compose create [オプション] [サービス名...]
 
 オプション:
     --force-recreate       設定やイメージに変更がなくてもコンテナーを再生成します。

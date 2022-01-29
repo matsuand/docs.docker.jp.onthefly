@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: help [COMMAND]
+Usage: docker-compose help [COMMAND]
 ```
 @y
 <ul class="nav nav-tabs">
@@ -30,7 +30,7 @@ Usage: help [COMMAND]
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: help [COMMAND]
+Usage: docker-compose help [COMMAND]
 ```
 {% endcapture %}
 {{ original-content | markdownify }}
@@ -38,7 +38,7 @@ Usage: help [COMMAND]
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: help [コマンド]
+利用方法: docker-compose help [コマンド]
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}

@@ -23,7 +23,7 @@ redirect_from:
 
 @x
 ```none
-Usage: config [options]
+Usage: docker-compose config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
@@ -45,7 +45,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: config [options]
+Usage: docker-compose config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
@@ -64,7 +64,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: config [オプション]
+利用方法: docker-compose config [オプション]
 
 オプション:
     --resolve-image-digests  イメージタグをダイジェストに固定します。

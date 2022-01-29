@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: events [options] [SERVICE...]
+Usage: docker-compose events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects
@@ -33,7 +33,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: events [options] [SERVICE...]
+Usage: docker-compose events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects
@@ -44,7 +44,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: events [オプション] [SERVICE...]
+利用方法: docker-compose events [オプション] [サービス名...]
 
 オプション:
     --json      JSON オブジェクトのストリームとしてイベントを出力します。

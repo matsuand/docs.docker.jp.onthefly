@@ -59,11 +59,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-## Docker Desktop 4.4.3
-2022-01-14
+## Docker Desktop 4.4.4
+2022-01-24
 @y
-## Docker Desktop 4.4.3
-2022-01-14
+## Docker Desktop 4.4.4
+2022-01-24
 @z
 
 @x
@@ -75,9 +75,121 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @y
 > Docker Desktop のダウンロード
 >
-> [For
-> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
+@y
+- システム内の任意のファイルが移動できてしまう [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) を修正しました。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed logging in from WSL 2. Fixes [docker/for-win#12500](https://github.com/docker/for-win/issues/12500).
+@y
+- WSL 2 からのログインを修正しました。
+  [docker/for-win#12500](https://github.com/docker/for-win/issues/12500) を Fix に。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Clicking **Proceed to Desktop** after signing in through the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+@y
+- ブラウザー上からサインインした後に **Proceed to Desktop** (Desktop へ進む) をクリックすると、ダッシュボード画面が前面に表示されない場合があります。
+- ログインしてダッシュボード画面にフォーカスが当たった後に、背後の画面をクリックしても、前面に表示されたままとなる場合があります。
+  回避策として、他のアプリケーション画面をクリックする前に、一度ダッシュボード画面をクリックしてください。
+- `registry.json`ファイルを通じて組織に対する制限が有効になっている場合に、必ず実施するログイン画面において、その上段に今週のメモ (tip) が表示されます。
+@z
+
+@x
+## Docker Desktop 4.4.3
+2022-01-14
+@y
+## Docker Desktop 4.4.3
+2022-01-14
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
+@y
+- ダッシュボードに対するショートカットは、画面最小化時や非フォーカス時にも反応しないようにしました。
+  [docker/for-win#12495](https://github.com/docker/for-win/issues/12495) を Fix に。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Clicking **Proceed to Desktop** after signing in through the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+@y
+- ブラウザー上からサインインした後に **Proceed to Desktop** (Desktop へ進む) をクリックすると、ダッシュボード画面が前面に表示されない場合があります。
+- ログインしてダッシュボード画面にフォーカスが当たった後に、背後の画面をクリックしても、前面に表示されたままとなる場合があります。
+  回避策として、他のアプリケーション画面をクリックする前に、一度ダッシュボード画面をクリックしてください。
+- `registry.json`ファイルを通じて組織に対する制限が有効になっている場合に、必ず実施するログイン画面において、その上段に今週のメモ (tip) が表示されます。
+@z
+
+@x
+## Docker Desktop 4.4.2
+2022-01-13
+@y
+## Docker Desktop 4.4.2
+2022-01-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -150,122 +262,12 @@ Docker Desktop バージョン 4.3.0 と 4.3.1 にはバグがあります。
 - Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
 - Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
 - Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
-- Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
 @y
 - Docker Desktop の`registry.json`においては、`allowedOrgs`項目に複数組織が含まれる場合にはエラーになります。
   異なる開発グループにおいて複数の組織を利用する場合には、各グループごとに`registry.json`ファイルを分けなければなりません。
 - Compose において、コンテナー名のセパレーター`-`が`_`になってしまった不備を修正しました。
   [docker/compose-switch](https://github.com/docker/compose-switch/issues/24) を Fix に。
-- `Reset to factory defaults`では Docker Desktop をシャットダウンしないようにしました。
-- ダッシュボードに対するショートカットは、画面最小化時や非フォーカス時にも反応しないようにしました。
-  [docker/for-win#12495](https://github.com/docker/for-win/issues/12495) を Fix に。
-@z
-
-@x
-### Known issues
-@y
-{: #known-issues }
-### 既知の問題
-@z
-
-@x
-- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
-- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
-- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
-@y
-- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
-- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
-- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
-@z
-
-@x
-## Docker Desktop 4.4.2
-2022-01-13
-@y
-## Docker Desktop 4.4.2
-2022-01-13
-@z
-
-@x
-> Download Docker Desktop
->
-> [For Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
-@y
-> Docker Desktop のダウンロード
->
-> [Windows 向け](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
-@z
-
-@x
-### Security
-@y
-{: #security }
-### セキュリティ
-@z
-
-@x
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
-@y
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
-@z
-
-@x
-Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
-This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
-@y
-Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
-This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
-@z
-
-@x
-### New
-@y
-{: #new }
-### 新機能
-@z
-
-@x
-- Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
-  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
-@y
-- Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
-  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
-@z
-
-@x
-### Upgrades
-@y
-{: #upgrades }
-### アップグレード
-@z
-
-@x
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
-- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
-- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
-@y
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
-- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
-- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{: #bug-fixes-and-minor-changes }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
-- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
-- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
-@y
-- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
-- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
-- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
+- `Reset to factory defaults`を行っても Docker Desktop をシャットダウンしないようにしました。
 @z
 
 @x

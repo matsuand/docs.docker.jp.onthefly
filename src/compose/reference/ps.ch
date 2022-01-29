@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: ps [options] [SERVICE...]
+Usage: docker-compose ps [options] [SERVICE...]
 
 Options:
     -q, --quiet          Only display IDs
@@ -36,7 +36,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: ps [options] [SERVICE...]
+Usage: docker-compose ps [options] [SERVICE...]
 
 Options:
     -q, --quiet          Only display IDs
@@ -50,7 +50,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: ps [オプション] [SERVICE...]
+利用方法: docker-compose ps [オプション] [サービス名...]
 
 オプション:
     -q, --quiet          ID のみを表示します。

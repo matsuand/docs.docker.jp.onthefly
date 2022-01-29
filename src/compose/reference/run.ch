@@ -20,7 +20,7 @@ notoc: true
 @x
 ```none
 Usage:
-    run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+    docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
         SERVICE [COMMAND] [ARGS...]
 
 Options:
@@ -53,7 +53,7 @@ Options:
 {% capture original-content %}
 ```none
 Usage:
-    run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+    docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
         SERVICE [COMMAND] [ARGS...]
 
 Options:
@@ -83,7 +83,7 @@ Options:
 {% capture japanese-content %}
 ```none
 利用方法:
-    run [オプション] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+    docker-compose run [オプション] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
         SERVICE [COMMAND] [ARGS...]
 
 オプション:

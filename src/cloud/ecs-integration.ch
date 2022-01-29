@@ -905,7 +905,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
-    keys:
+    x-aws-keys:
       - "bar"
 ```
 @y
@@ -919,7 +919,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
-    keys:
+    x-aws-keys:
       - "bar"
 ```
 @z

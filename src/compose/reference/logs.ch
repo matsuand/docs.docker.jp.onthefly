@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: logs [options] [SERVICE...]
+Usage: docker-compose logs [options] [SERVICE...]
 
 Options:
     --no-color          Produce monochrome output.
@@ -37,7 +37,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: logs [options] [SERVICE...]
+Usage: docker-compose logs [options] [SERVICE...]
 
 Options:
     --no-color          Produce monochrome output.
@@ -52,9 +52,9 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: logs [オプション] [SERVICE...]
+利用方法: docker-compose logs [オプション] [サービス名...]
 
-Options:
+オプション:
     --no-color          モノクロ出力を行います。
     -f, --follow        ログ出力を監視します。
     -t, --timestamps    タイムスタンプを表示します。

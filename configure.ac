@@ -97,6 +97,7 @@ AC_CONFIG_FILES([Makefile
 		 src/desktop/Makefile
 		 src/desktop/enterprise/Makefile
 		 src/desktop/images/Makefile
+		 src/desktop/linux/Makefile
 		 src/desktop/mac/Makefile
 		 src/desktop/mac/images/Makefile
 		 src/desktop/mac/images/menu/Makefile

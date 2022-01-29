@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: stop [options] [SERVICE...]
+Usage: docker-compose stop [options] [SERVICE...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
@@ -34,7 +34,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: stop [options] [SERVICE...]
+Usage: docker-compose stop [options] [SERVICE...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
@@ -46,7 +46,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: stop [オプション] [SERVICE...]
+利用方法 docker-compose stop [オプション] [サービス名...]
 
 オプション:
   -t, --timeout TIMEOUT      シャットダウンに要するタイムアウト時間を秒数で指定します。

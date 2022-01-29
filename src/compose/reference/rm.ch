@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: rm [options] [SERVICE...]
+Usage: docker-compose rm [options] [SERVICE...]
 
 Options:
     -f, --force   Don't ask to confirm removal
@@ -36,7 +36,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: rm [options] [SERVICE...]
+Usage: docker-compose rm [options] [SERVICE...]
 
 Options:
     -f, --force   Don't ask to confirm removal
@@ -50,7 +50,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: rm [オプション] [SERVICE...]
+利用方法: docker-compose rm [オプション] [サービス名...]
 
 オプション:
     -f, --force   削除確認を行いません。

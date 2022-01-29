@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Usage: docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
     -d, --detach               Detached mode: Run containers in the background,
@@ -62,7 +62,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Usage: docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
     -d, --detach               Detached mode: Run containers in the background,
@@ -102,7 +102,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: up [オプション] [--scale SERVICE=NUM...] [SERVICE...]
+利用方法: docker-compose up [オプション] [--scale SERVICE=NUM...] [SERVICE...]
 
 オプション:
     -d, --detach               デタッチモード。コンテナーをバックグラウンド起動し、

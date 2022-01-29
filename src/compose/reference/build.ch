@@ -21,7 +21,7 @@ notoc: true
 
 @x
 ```none
-Usage: build [options] [--build-arg key=val...] [SERVICE...]
+Usage: docker-compose build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
     --build-arg key=val     Set build-time variables for services.
@@ -44,7 +44,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: build [options] [--build-arg key=val...] [SERVICE...]
+Usage: docker-compose build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
     --build-arg key=val     Set build-time variables for services.
@@ -64,7 +64,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: build [オプション] [--build-arg key=val...] [SERVICE...]
+利用方法: docker-compose build [オプション] [--build-arg key=val...] [SERVICE...]
 
 オプション:
     --build-arg key=val     サービスに対してビルド時の変数を設定します。

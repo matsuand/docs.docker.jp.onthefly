@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
+Usage: docker-compose exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
 Options:
     -d, --detach      Detached mode: Run command in the background.
@@ -42,7 +42,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
+Usage: docker-compose exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
 Options:
     -d, --detach      Detached mode: Run command in the background.
@@ -62,7 +62,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: exec [オプション] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
+利用方法: docker-compose exec [オプション] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
 オプション:
     -d, --detach      デタッチモード。コマンドをバックグラウンドで実行します。

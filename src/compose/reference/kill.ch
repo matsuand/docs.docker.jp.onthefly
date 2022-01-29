@@ -19,7 +19,7 @@ notoc: true
 
 @x
 ```none
-Usage: kill [options] [SERVICE...]
+Usage: docker-compose kill [options] [SERVICE...]
 
 Options:
     -s SIGNAL         SIGNAL to send to the container.
@@ -34,7 +34,7 @@ Options:
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
 ```none
-Usage: kill [options] [SERVICE...]
+Usage: docker-compose kill [options] [SERVICE...]
 
 Options:
     -s SIGNAL         SIGNAL to send to the container.
@@ -46,7 +46,7 @@ Options:
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
 ```none
-利用方法: kill [オプション] [SERVICE...]
+Usage: docker-compose kill [利用方法] [サービス名...]
 
 オプション:
     -s SIGNAL         コンテナーに送信する SIGNAL を指定します。

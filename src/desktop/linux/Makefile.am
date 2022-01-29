@@ -1,10 +1,8 @@
-SUBDIRS = enterprise images linux mac windows
-
-thisdir    = desktop
-origdir    = @abs_origdir@/$(thisdir)
-srcdir     = @srcdir@
-mysrcdir   = $(shell cd $(srcdir) && pwd)
-targetdir  = @abs_targetdir@/$(thisdir)
+thisdir   = desktop/linux
+origdir   = @abs_origdir@/$(thisdir)
+srcdir    = @srcdir@
+mysrcdir  = $(shell cd $(srcdir) && pwd)
+targetdir = @abs_targetdir@/$(thisdir)
 publishdir = @abs_publishdir@/$(thisdir)
 uploaddir  = @UPLOADDIR@/$(thisdir)
 
@@ -15,13 +13,7 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	backup-and-restore \
-	dashboard          \
-	dev-environments   \
-	faqs               \
-	index              \
-	kubernetes         \
-	multi-arch
+	index
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files
