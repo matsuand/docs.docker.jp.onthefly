@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-01-29 12:46:04 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>compose コマンドの docker-compose との互換性 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="compose コマンドの docker-compose との互換性" />
   <meta property="og:description" content="compose コマンドの docker-compose との互換性" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-29T12:46:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/cli-command-compatibility/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-01-29T12:46:04+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"compose コマンドの docker-compose との互換性","description":"compose コマンドの docker-compose との互換性","url":"https://docs.docker.com/compose/cli-command-compatibility/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -138,8 +138,50 @@
 <p>グローバルフラグ</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">compose --compatibility</code> docker-compose において非推奨。</li>
+  <li><code class="language-plaintext highlighter-rouge">--compatibility</code>は Docker Compose V2 として再署名されました。
+これはつまり、それまで V1 として実行されていたコマンドが V2 として実行されるということです。
+    <ul>
+      <li>違いの 1 つとして、コンテナー名の中での単語の区切り文字があります。
+V1 では区切り文字として<code class="language-plaintext highlighter-rouge">_</code>を使っていましたが、V2では<code class="language-plaintext highlighter-rouge">-</code>を使います。
+これによってホスト名と同じように扱いやすくなります。
+ただし<code class="language-plaintext highlighter-rouge">--compatibility</code>を利用する際には、Docker Compose は<code class="language-plaintext highlighter-rouge">_</code>を使うことになります。
+利用にあたってはどちらかに統一するようにしてください。
+そうしておかないと、Docker Compose がコンテナーをサービスのインスタンスとして識別できなくなります。</li>
+    </ul>
+  </li>
 </ul>
+
+<h2 id="config-command">config コマンド</h2>
+
+<p>config コマンドは、Docker Compose によって起動されるプロジェクトの設定を表示させるものです。
+すでに説明しているように、Compose ファイルには長い書式と短い書式が含まれます。
+<code class="language-plaintext highlighter-rouge">ports</code>エントリーがその例です。
+以下に示すのは<code class="language-plaintext highlighter-rouge">ports</code>セクションの構成部分です。</p>
+
+<p>docker-compose.yml が以下であるとします。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
+  web:
+    image: nginx
+    ports:
+      - 80:80
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">$ docker compose config</code>を実行すると、その出力は以下となります。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
+  web:
+    image: nginx
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: 80
+      protocol: tcp
+networks:
+  default:
+    name: workspace_default
+</code></pre></div></div>
+
+<p>上の出力結果は、Docker Compose によって起動されるプロジェクトの設定を、完全に記述して形になります。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -175,6 +217,7 @@
 <ul id="my_toc" class="inline_toc">
   <li><a href="#commands-or-flags-not-yet-implemented" class="nomunge">未実装のコマンドまたはフラグ</a></li>
   <li><a href="#flags-that-will-not-be-implemented" class="nomunge">実装されないフラグ</a></li>
+  <li><a href="#config-command" class="nomunge">config コマンド</a></li>
 </ul>
 
 </div>
