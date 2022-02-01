@@ -1,7 +1,7 @@
-<!-- Page generated 2022-01-29 12:46:04 +0900-->
+<!-- Page generated 2022-02-01 16:35:33 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure registry.json to require sign in | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>サインインを要求する registry.json の設定 | Docker ドキュメント</title>
   <meta name="description" content="Configure registry.json to require sign in" />
   <meta name="keywords" content="authentication, registry.json, configure,">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/configure-sign-in/" />
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Configure registry.json to require sign in"/>
+  <meta name="twitter:title" itemprop="title name" content="サインインを要求する registry.json の設定"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -40,16 +40,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Configure registry.json to require sign in" />
+  <meta property="og:title" content="サインインを要求する registry.json の設定" />
   <meta property="og:description" content="Configure registry.json to require sign in" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-29T12:46:04+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-01T16:35:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/configure-sign-in/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-29T12:46:04+09:00"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Configure registry.json to require sign in","description":"Configure registry.json to require sign in","url":"https://docs.docker.com/docker-hub/configure-sign-in/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-01T16:35:33+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"サインインを要求する registry.json の設定","description":"Configure registry.json to require sign in","url":"https://docs.docker.com/docker-hub/configure-sign-in/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -107,49 +107,50 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Configure registry.json to require sign in</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>The <code class="language-plaintext highlighter-rouge">registry.json</code> file is a configuration file that allows administrators to
-specify the Docker organization the user must belong to, and thereby ensure
-that the organization’s settings are applied to the user’s session. Docker
-Desktop installation requires admin access. In large enterprises where admin
-access is restricted, administrators can create a <code class="language-plaintext highlighter-rouge">registry.json</code> file and
-deploy it to the users’ machines using a device management software as part of
-the Docker Desktop installation process.</p>
+                        <section class="section"><h1>サインインを要求する registry.json の設定</h1><p><code class="language-plaintext highlighter-rouge">registry.json</code>ファイルは、ユーザーが所属するべき Docker 組織を定めるものとして、管理者が設定するファイルです。
+したがって組織に対する設定は、ユーザーセッションに対して適用されます。
+Docker Desktop のインストールには管理者権限を必要とします。
+エンタープライズの規模が大きいために、管理者によるアクセスが制限されてしまうような場合には、管理者が<code class="language-plaintext highlighter-rouge">registry.json</code>を生成する方法をとります。
+このファイルは Docker Desktop のインストールの一部として導入されるデバイス管理ソフトウェアを使って、各ユーザーのマシンにデプロイすることができます。</p>
 
-<p>After you deploy a <code class="language-plaintext highlighter-rouge">registry.json</code> file to a user’s machine, it prompts the user to sign into Docker Desktop. If a user doesn’t sign in, or tries to sign in using a different organization, other than the organization listed in the <code class="language-plaintext highlighter-rouge">registry.json</code> file, they will be denied access to Docker Desktop.
-Deploying a <code class="language-plaintext highlighter-rouge">registry.json</code> file and forcing users to authenticate offers the following benefits:</p>
+<p>ユーザーマシンに<code class="language-plaintext highlighter-rouge">registry.json</code>ファイルをデプロイした後は、Docker Desktop へのサインインが求められます。
+ユーザーがサインインしなかった場合、または<code class="language-plaintext highlighter-rouge">registry.json</code>に指定されている組織とは別の組織を使ってサインインしようとした場合、Docker Desktop へのアクセスは拒否されます。
+<code class="language-plaintext highlighter-rouge">registry.json</code>ファイルをデプロイしてユーザーに対して認証操作を行わせることには、以下のメリットがあります。</p>
 
 <ol>
-  <li>Allows administrators to configure features such as <a href="/docs.docker.jp.onthefly/docker-hub/image-access-management/">Image Access Management</a> which allows team members to:
+  <li><a href="/docs.docker.jp.onthefly/docker-hub/image-access-management/">イメージアクセス管理</a> などにおいて管理者は、チームメンバーに許可する機能を以下のように制限することができます。
     <ul>
-      <li>Only have access to Trusted Content on Docker Hub</li>
-      <li>Pull only from the specified categories of images</li>
+      <li>Docker Hub では信頼されたコンテンツのみへのアクセスとする。</li>
+      <li>指定したカテゴリーのイメージしかプルできないようにする。</li>
     </ul>
   </li>
-  <li>Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see <a href="/docs.docker.jp.onthefly/docker-hub/download-rate-limit/">Download rate limit</a>.</li>
-  <li>Blocks users from accessing Docker Desktop until they are added to a specific organization.</li>
+  <li>認証されたユーザーは匿名ユーザーに比べて、より高いプル制限率が得られます。
+たとえば認証ユーザーの場合、6 時間ごとに 200 プルを行うことができます。
+これが匿名ユーザーの場合は IP アドレスごとに、6 時間内では 100 プルしか行うことができません。
+詳しいことは <a href="/docs.docker.jp.onthefly/docker-hub/download-rate-limit/">ダウンロード率制限</a> を参照してください。</li>
+  <li>指定した組織にユーザーが追加されていない限りは、Docker Desktop へのアクセスを拒否することができます。</li>
 </ol>
 
-<h2 id="create-a-registryjson-file">Create a registry.json file</h2>
+<h2 id="create-a-registryjson-file">registry.json ファイルの生成</h2>
 
-<p>Before you create a <code class="language-plaintext highlighter-rouge">registry.json</code> file, ensure that the user is a member of at least one organization in Docker Hub. If the <code class="language-plaintext highlighter-rouge">registry.json</code> file matches at least one organization the user is a member of, they can sign into Docker Desktop, and then access all their organizations.</p>
+<p><code class="language-plaintext highlighter-rouge">registry.json</code>ファイルを生成するにあたっては、そのユーザーが Docker Hub 内において、少なくとも 1 つの組織のメンバーであることを確認してください。
+<code class="language-plaintext highlighter-rouge">registry.json</code>ファイルの内容が、そのメンバーが属する組織に 1 つでも一致すれば、そのユーザーは Docker Desktop にサインインすることができて、すべての組織へのアクセスが可能になります。</p>
 
-<h3 id="windows">Windows</h3>
+<h3 id="windows">Windows の場合</h3>
 
-<p>On Windows, you must create a file at
-<code class="language-plaintext highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code> with file permissions that ensure
-that the developer using Docker Desktop cannot remove or edit the file (that is,
-only the system administrator can write to the file). The file must be of type
-<code class="language-plaintext highlighter-rouge">JSON</code> and contain the name of the organization in the <code class="language-plaintext highlighter-rouge">allowedOrgs</code> key.</p>
+<p>Windows では<code class="language-plaintext highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>を生成します。
+この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
+このファイルは<code class="language-plaintext highlighter-rouge">JSON</code>形式であり、<code class="language-plaintext highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
 
-<p>To create your <code class="language-plaintext highlighter-rouge">registry.json</code> file on Windows:</p>
+<p>Windows において<code class="language-plaintext highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
 
 <ol>
-  <li>Open Windows Powershell and select Run as Administrator.</li>
-  <li>Type the following command <code class="language-plaintext highlighter-rouge">cd /ProgramData/DockerDesktop/</code></li>
+  <li>Windows Powershell を開いて Run as Administrator を選びます。</li>
+  <li>以下のコマンド<code class="language-plaintext highlighter-rouge">cd /ProgramData/DockerDesktop/</code>を実行します。</li>
   <li>
-    <p>Type <code class="language-plaintext highlighter-rouge">notepad registry.json</code> and enter the name of the Docker Hub
-organization that the user belongs to in the <code class="language-plaintext highlighter-rouge">allowedOrgs</code> key and click
-<strong>Save</strong>. For example:</p>
+    <p><code class="language-plaintext highlighter-rouge">notepad registry.json</code>を実行します。
+そのユーザーが所属する Docker Hub 組織名を<code class="language-plaintext highlighter-rouge">allowedOrgs</code>キーに入力し、<strong>Save</strong>（保存）をクリックします。
+たとえば以下のようにします。</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
      </span><span class="nl">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
@@ -158,21 +159,19 @@ organization that the user belongs to in the <code class="language-plaintext hig
   </li>
 </ol>
 
-<h3 id="mac">Mac</h3>
+<h3 id="mac">Mac の場合</h3>
 
-<p>On macOS, you must create a file at <code class="language-plaintext highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code> with file permissions that ensure that
-the developer using Docker Desktop cannot remove or edit the file (that is, only
-the system administrator can write to the file). The file must be of type <code class="language-plaintext highlighter-rouge">JSON</code>
-and contain the name of the Docker Hub organization names in the <code class="language-plaintext highlighter-rouge">allowedOrgs</code>
-key.</p>
+<p>macOS では<code class="language-plaintext highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>を生成します。
+この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
+このファイルは<code class="language-plaintext highlighter-rouge">JSON</code>形式であり、<code class="language-plaintext highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
 
-<p>To create your <code class="language-plaintext highlighter-rouge">registry.json</code> file on macOS:</p>
+<p>macOS において<code class="language-plaintext highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
 
 <ol>
-  <li>Navigate to VS Code or any text editor of your choice.</li>
+  <li>VS Code または好みのテキストエディターを開きます。</li>
   <li>
-    <p>Enter the name of the Docker Hub organization that the user belongs to in the
-<code class="language-plaintext highlighter-rouge">allowedOrgs</code> key and save it in your Documents. For example:</p>
+    <p>そのユーザーが所属する Docker Hub 組織名を<code class="language-plaintext highlighter-rouge">allowedOrgs</code>キーに入力してドキュメントフォルダに保存します。
+たとえば以下のようにします。</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
      </span><span class="nl">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
@@ -180,26 +179,27 @@ key.</p>
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>Open a new terminal and type the following command:</p>
+    <p>新たに端末画面を開いて、以下のコマンドを実行します。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo mkdir -p /Library/Application\ Support/com.docker.docker
 </span></code></pre></div>    </div>
 
-    <p>If prompted, type your password associated with your local computer.</p>
+    <p>プロンプトが表示されたら、ローカルマシンに関連づいたパスワードを入力します。</p>
   </li>
   <li>
-    <p>Type the following command:</p>
+    <p>以下のコマンドを入力します。</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
 </span></code></pre></div>    </div>
   </li>
 </ol>
 
-<h2 id="verify-the-changes">Verify the changes</h2>
+<h2 id="verify-the-changes">変更の確認</h2>
 
-<p>After you’ve created the <code class="language-plaintext highlighter-rouge">registry.json</code> file and deployed it onto the users’ machines, you can verify whether the changes have taken effect by asking users to start Docker Desktop.</p>
+<p><code class="language-plaintext highlighter-rouge">registry.json</code>ファイルを生成して、各ユーザーマシンに対してデプロイしたら、各ユーザーが Docker Desktop を起動できるかどうかを問い合わせて、変更が適用されたことを確認します。</p>
 
-<p>If the configuration is successful, Docker Desktop prompts the user to authenticate using the organization credentials on start. If the user fails to authenticate, they will see an error message, and they will be denied access to Docker Desktop.</p>
+<p>設定が正しく行われたら、各ユーザーによる Docker Desktop の起動時に、組織情報を使ったユーザー認証が求められます。
+ユーザー認証に失敗した場合は、エラーメッセージが表示されて、Docker Desktop へのアクセスが拒否されます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=authentication">authentication</a>, <a href="/docs.docker.jp.onthefly/search/?q=registry.json">registry.json</a>, <a href="/docs.docker.jp.onthefly/search/?q=configure">configure</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -233,13 +233,13 @@ key.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#create-a-registryjson-file" class="nomunge">Create a registry.json file</a>
+  <li><a href="#create-a-registryjson-file" class="nomunge">registry.json ファイルの生成</a>
     <ul>
-      <li><a href="#windows" class="nomunge">Windows</a></li>
-      <li><a href="#mac" class="nomunge">Mac</a></li>
+      <li><a href="#windows" class="nomunge">Windows の場合</a></li>
+      <li><a href="#mac" class="nomunge">Mac の場合</a></li>
     </ul>
   </li>
-  <li><a href="#verify-the-changes" class="nomunge">Verify the changes</a></li>
+  <li><a href="#verify-the-changes" class="nomunge">変更の確認</a></li>
 </ul>
 
 </div>
