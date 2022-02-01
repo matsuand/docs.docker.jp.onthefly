@@ -11,7 +11,7 @@ title: Download rate limit
 ---
 description: Download rate limit
 keywords: Docker, pull requests, download, limit,
-title: ダウンロードレート制限
+title: ダウンロード率制限
 ---
 @z
 
@@ -19,7 +19,7 @@ title: ダウンロードレート制限
 ## What is the download rate limit on Docker Hub
 @y
 {: #what-is-the-download-rate-limit-on-docker-hub }
-## Docker Hub におけるダウンロードレート制限とは
+## Docker Hub におけるダウンロード率制限とは
 @z
 
 @x
@@ -384,10 +384,10 @@ and other factors, it is in the order of thousands of requests per
 minute. The overall rate limit applies to all users equally
 regardless of account level.
 @y
-Docker Hub ではアプリケーションやインフラストラクチャーを保護するために、ダウンロードレートの総量制限があります。
+Docker Hub ではアプリケーションやインフラストラクチャーを保護するために、ダウンロード率の総量制限があります。
 この制限は Hub に対するリクエストすべてに適用されるものであり、ウェブページ、API、イメージプルなどを含みます。
 制限は IP アドレスごとに行われ、負荷状況などにより時間とともに変化しますが、1 分あたり数千個のリクエスト相当のものです。
-レートの総量制限は、アカウントのレベルに関係なく、全ユーザーに等しく適用されます。
+率の総量制限は、アカウントのレベルに関係なく、全ユーザーに等しく適用されます。
 @z
 
 @x

@@ -7,58 +7,72 @@ description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
 title: Configure Single Sign-on
 ---
-This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 @y
 ---
 description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
-title: Configure Single Sign-on
+title: シングルサインオンの設定
 ---
+@z
+
+@x
 This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
+@y
+この節は、Business プランにおいて Docker SSO（Single Sign-on; シングルサインオン）を必要とする管理者向けのものです。
+Docker SSO は、Docker へのアクセスにおいて IdPs (identity providers; アイデンティティープロバイダー) を使った認証を求めます。
+Docker では今のところ、Auth0 を通じて SAML 2.0 と Azure AD の IdPs をサポートしています。
+SSO は Docker Business サブスクリプション内の組織に対して有効にできます。
+現アカウントを Business サブスクリプションにアップグレードするには、[サブスクリプションのアップグレード](../subscription/upgrade/){:target="blank" rel="noopener" class=""} を参照してください。
 @z
 
 @x
 When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password).
 @y
-When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password).
+SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使った認証が行われます。
+そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。
 @z
 
 @x
 Before enabling SSO in Docker Hub, administrators must work with their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 @y
-Before enabling SSO in Docker Hub, administrators must work with their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
+Docker Hub における SSO を有効にするためには、アイデンティティープロバイダーとの間で Docker Hub において用いる IdP が動作するように、管理者があらかじめ設定しておかなければなりません。
+Docker では ACS（Assertion Consumer Service）URL とエンティティー ID を提供しています。
+管理者はこの情報を用いて、IdP サーバーと Docker Hub 間の接続を構築します。
 @z
 
 @x
 After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
 @y
-After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
+IdP サーバーと Docker Hub 間の接続を構築したら、Docker Hub 内の組織にログインして、SSO 確立プロセスを完了させます。
+詳しい手順は、**Docker Hub における SSO の有効化** の節を参照してください。
 @z
 
 @x
 To enable SSO in Docker Hub, you need the following:
 @y
-To enable SSO in Docker Hub, you need the following:
+Docker Hub において SSO を有効にするには、以下が必要です。
 @z
 
 @x
 * **SAML 2.0**: Entity ID, ACS URL, Single Logout URL and Certificate Download URL
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
 @y
-* **SAML 2.0**: Entity ID, ACS URL, Single Logout URL and Certificate Download URL
-* **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
+* **SAML 2.0** の場合、エンティティー ID, ACS URL, シングルログアウト URL, 証明書ダウンロード URL
+* **Azure AD** の場合、クライアント ID（登録 AD アプリケーションに対する一意な識別子）, クライアントのシークレット（登録 Azure AD アプリケーションへのアクセスを実現するための文字列）, AD ドメインの詳細情報
 @z
 
 @x
 We currently support enabling SSO on a single organization. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
 @y
-We currently support enabling SSO on a single organization. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
+現在のところ SSO の有効化は 1 つの組織についてのみ対応しています。
+組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。
 @z
 
 @x
 ## Prerequisites
 @y
-## Prerequisites
+{: #prerequisites }
+## 前提条件
 @z
 
 @x
@@ -80,7 +94,8 @@ We currently support enabling SSO on a single organization. If you have any user
 @x
 ## Create a Personal Access Token (PAT)
 @y
-## Create a Personal Access Token (PAT)
+{: #create-a-personal-access-token-pat }
+## パーソナルアクセストークン（PAT）の生成
 @z
 
 @x
@@ -94,7 +109,8 @@ In addition, all email addresses should be added to your IdP.
 @x
 ## Configure
 @y
-## Configure
+{: #configure}
+## 設定
 @z
 
 @x
@@ -106,7 +122,8 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 @x
 ### SAML 2.0 IdP configuration
 @y
-### SAML 2.0 IdP configuration
+{: #saml-20-idp-configuration }
+### SAML 2.0 IdP の設定
 @z
 
 @x
@@ -168,7 +185,8 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 @x
 ### Azure AD IdP configuration
 @y
-### Azure AD IdP configuration
+{: #azure-ad-idp-configuration }
+### Azure AD IdP の設定
 @z
 
 @x
@@ -230,7 +248,8 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 @x
 ### Domain control
 @y
-### Domain control
+{: #domain-control }
+### ドメインの制御
 @z
 
 @x
@@ -262,7 +281,8 @@ Click **Add Domain** and specify the corporate domain you’d like to manage wit
 @x
 ### Domain verification
 @y
-### Domain verification
+{: #domain-verification }
+### ドメインの確認
 @z
 
 @x
@@ -320,7 +340,8 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 @x
 ## Test your SSO configuration
 @y
-## Test your SSO configuration
+{: #test-your-sso-configuration }
+## SSO 設定のテスト
 @z
 
 @x
@@ -340,7 +361,8 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 @x
 ## Enforce SSO in Docker Hub
 @y
-## Enforce SSO in Docker Hub
+{: #enforce-sso-in-docker-hub }
+## Docker Hub における強制的な SSO
 @z
 
 @x
@@ -390,7 +412,8 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 @x
 ## Manage users when SSO is enabled
 @y
-## Manage users when SSO is enabled
+{: #manage-users-when-sso-is-enabled }
+## SSO 有効時のユーザー管理
 @z
 
 @x
@@ -434,7 +457,8 @@ To add a guest to your organization in Docker Hub if they aren’t verified thro
 @x
 ## Remove members from the SSO organization
 @y
-## Remove members from the SSO organization
+{: #remove-members-from-the-sso-organization }
+## SSO 組織からのメンバー削除
 @z
 
 @x
@@ -471,6 +495,7 @@ To remove a member from an organization:
 ## FAQs
 To learn more see our [FAQs](faqs.md).
 @y
-## FAQs
+{: #faqs }
+## FAQ
 To learn more see our [FAQs](faqs.md).
 @z

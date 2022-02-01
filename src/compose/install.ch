@@ -348,9 +348,12 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 
 @x
     > To install a different version of Compose, substitute `{{site.compose_version}}`
-    > with the version of Compose you want to use.
+    > with the version of Compose you want to use. For instructions on how to
+    > install Compose `{{site.compose_v2_version}}` on Linux, see [Install
+    > Compose 2.0.0 on Linux](../cli-command#install-on-linux)
 @y
     > 別バージョンの Compose をインストールする場合は、`{{site.compose_version}}`の部分を、目的とするバージョンに置き換えてください。
+    > Linux 上への Compose`{{site.compose_v2_version}}`のインストール手順については、[Linux での Compose 2.0.0 のインストール](../cli-command#install-on-linux) を参照してください。
 @z
 
 @x
@@ -377,11 +380,15 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 @z
 
 @x
-> **Note**: If the command `docker-compose` fails after installation, check your path.
+> **Note**:
+>
+> If the command `docker-compose` fails after installation, check your path.
 > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
 @y
-    > **メモ**: インストールした後に`docker-compose`の実行に失敗する場合は、パスを確認してください。
-    > `/usr/bin`あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
+> **メモ**
+>
+> インストールした後に`docker-compose`の実行に失敗する場合は、パスを確認してください。
+> `/usr/bin`あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
 @z
 
 @x
