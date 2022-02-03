@@ -66,13 +66,13 @@ stores the following metadata in the journal with each message:
 
 @x
 To use the `journald` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
 configuring Docker using `daemon.json`, see
 [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 @y
-デフォルトのログドライバーとして`journald`を設定するには、`daemon.json`ファイル内において、`log-driver` と`log-opt`キーを適切に設定します。
+デフォルトのログドライバーとして`journald`を設定するには、`daemon.json`ファイル内において、`log-driver` と`log-opts`キーを適切に設定します。
 `daemon.json`は Linux ホストの場合は`/etc/docker/`に、また Windows Server の場合は`C:\ProgramData\docker\config\daemon.json`にあります。
 `daemon.json`を用いた Docker の設定方法については [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file) を参照してください。
 @z
