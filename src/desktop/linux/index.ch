@@ -62,7 +62,7 @@ Docker Desktop for Linux をインストールするには以下のようにし�
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Tech Preview Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74134/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script).
@@ -70,7 +70,7 @@ Docker Desktop for Linux をインストールするには以下のようにし�
 1. [Docker リポジトリ](../../engine/install/ubuntu.md#install-using-the-repository) を設定します。
 2. Debian の技術プレビューパッケージをダウンロードしてインストールします。
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74134/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 3. ユーザーがグループ`docker`と`kvm`に所属していることを確認します。
@@ -447,32 +447,34 @@ $ sudo apt remove docker-desktop
  - The Docker CLI login flow has some inconsistencies that we are currently investigating. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either
  `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
 @y
- - The Docker CLI login flow has some inconsistencies that we are currently investigating. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either
- `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
+ - Docker CLI のログインフローには不整合がいくつかあって、現在調査中です。
+   ログインしようとして何か問題が発生したら、`~/.docker/config.json`から`credsStore`プロパティを削除して、Docker Desktop を再起動してください（`systemctl --user restart docker-desktop`を実行するか、Docker Desktop の終了と再起動を行ってください）。
 @z
 
 @x
  - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is currently a work in progress.
 @y
- - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is currently a work in progress.
+ - Docker Desktop はパスワードを base-64 でエンコードされたプレーンテキストとして保存します。
+   `pass`との統合は現在開発中です。
 @z
 
 @x
  - After launching Docker Desktop, you must remove `~/.docker/scan/config.json` for `docker scan` to work.
 @y
- - After launching Docker Desktop, you must remove `~/.docker/scan/config.json` for `docker scan` to work.
+ - Docker Desktop を起動した後、`docker scan`を行うには`~/.docker/scan/config.json`を削除しなければなりません。
 @z
 
 @x
  - Dev Environments are not yet available.
 @y
- - Dev Environments are not yet available.
+ - Dev 環境はまだ利用できません。
 @z
 
 @x
  - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
 @y
- - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
+ - インストールの終盤において、`apt`がダウンロードパッケージのインストールに関するエラーを表示します。
+    このエラーメッセージは無視してください。
 @z
 
 @x
@@ -488,19 +490,20 @@ $ sudo apt remove docker-desktop
 @x
 ## Why Docker Desktop for Linux runs a VM
 @y
-## Why Docker Desktop for Linux runs a VM
+{: #why-docker-desktop-for-linux-runs-a-vm }
+## Docker Desktop for Linux はなぜ VM を起動するのか
 @z
 
 @x
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 @y
-Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
+Docker Desktop for Linux が仮想マシン（Virtual Machine; VM）を実行するのは、以下の理由によります。
 @z
 
 @x
 1. **To ensure  that Docker Desktop provides a consistent experience across platforms**.
 @y
-1. **To ensure  that Docker Desktop provides a consistent experience across platforms**.
+1. **Docker Desktop が多くのプラットフォームにわたって安定した機能を提供するためです**。
 @z
 
 @x
@@ -510,63 +513,75 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
     a VM ensures that the Docker Desktop experience for Linux users will closely
     match that of Windows and macOS.
 @y
-    During research, the most frequently cited reason for users wanting Docker
-    Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
-    experience with feature parity across all major operating systems. Utilizing
-    a VM ensures that the Docker Desktop experience for Linux users will closely
-    match that of Windows and macOS.
+    調査の結果、Docker Desktop for Linux (DD4L) を利用したい理由として、もっとも多く寄せられたものは、多くのメジャーオペレーティングシステムにおいて、安定した同一の機能を実現してほしいというものでした。
+    VM を利用すれば Linux ユーザーが実現する Docker Desktop は、Windows や macOS と限りなく同じものとなります。
 @z
 
 @x
     This need to deliver a consistent experience across all major OSs will become increasingly important as we look towards adding exciting new features, such as Docker Extensions, to Docker Desktop that will benefit users across all tiers.  We’ll provide more details on these at [DockerCon22](https://www.docker.com/dockercon/){: target="_blank" rel="noopener" class="_"}. Watch this space.
 @y
-    This need to deliver a consistent experience across all major OSs will become increasingly important as we look towards adding exciting new features, such as Docker Extensions, to Docker Desktop that will benefit users across all tiers.  We’ll provide more details on these at [DockerCon22](https://www.docker.com/dockercon/){: target="_blank" rel="noopener" class="_"}. Watch this space.
+    このようにあらゆるメジャー OS にわたって一貫した機能を提供することは、ますます重要になっています。
+    Docker Desktop では、Docker Extensions などのような魅力ある新機能の追加を目指しており、どのようなユーザーに対してもメリットとなるはずです。
+    この部分については [DockerCon22](https://www.docker.com/dockercon/){: target="_blank" rel="noopener" class="_"} において詳細を提供しています。
+    そちらへの参加をお願いします。
 @z
 
 @x
 2. **To make use of new kernel features**
 @y
-2. **To make use of new kernel features**
+2. **カーネルの新しい機能を活用するためです**。
 @z
 
 @x
     Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
 @y
-    Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
+    オペレーティングシステムの新機能は利用したくなるものです。
+    カーネルや OS は VM の中で制御することができるので、あらゆるユーザーに即座に公開することができます。
+    マシン OS に LTS バージョンの利用が必須であるユーザーであっても、同じです。
 @z
 
 @x
 3. **To enhance security**
 @y
-3. **To enhance security**
+3. **セキュリティを拡充するためです**。
 @z
 
 @x
     Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
 @y
-    Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
+    コンテナーイメージにぜい弱性があると、ホスト環境にセキュリティリスクをもたらします。
+    既知のぜい弱性を検証していることが保証されていない非公式なイメージというものは、数多く存在します。
+    悪意のあるユーザーが公開リポジトリにイメージをプッシュして、あらゆる方法を駆使して、そのイメージをプルさせて実行させようとします。
+    VM を用いるこの方法では、そういった脅威を軽減できます。
+    VM 環境ではホストにアクセスすることはできないため、マルウェアが root 権限を奪取するには制限があるためです。
 @z
 
 @x
     Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in vulnerabilities like [this](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"}.
 @y
-    Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in vulnerabilities like [this](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"}.
+    rootless Docker を実行しますか？
+    この方法ではたしかに、root ユーザーへのアクセスを表面的に制限して、「最上位」のものがすべて安全に見えるというメリットがあります。
+    ただしその際には、非特権ユーザーが自身の名前空間内で`CAP_SYS_ADMIN`を取得するものであり、本来は非特権ユーザーからの利用を想定していないカーネル API へのアクセスを可能としています。
+    これは [ここ](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"} に示されるようなぜい弱性を生み出すことになります。
 @z
 
 @x
 4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
 @y
-4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
+4. **パフォーマンスへの影響を最小限に抑えながら、機能の同等性とセキュリティの拡充を図るためです**。
 @z
 
 @x
     The VM utilized by DD4L uses `virtiofs`, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
 @y
-    The VM utilized by DD4L uses `virtiofs`, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
+    DD4L が利用する VM では`virtiofs`が用いられます。
+    これは共有ファイルシステムであって、ホスト上にあるディレクトリツリーに対して、仮想マシンがアクセスすることを可能にします。
+    ベンチマークの内部調査では、VM に対してリソース割り当てが適切であれば、virtiofs はネイティブなファイルシステムと変わらないパフォーマンスを実現しています。
 @z
 
 @x
     As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 @y
-    As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+    このことから DD4L では VM に対して割り当てるデフォルトメモリを調整しています。
+    この設定は Docker Desktop の **Settings** > **Resources** タブにある **Memory** スライダーを使えば、調整することができます。
 @z
