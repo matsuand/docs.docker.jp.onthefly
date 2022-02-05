@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-02-05 09:40:28 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose ファイル バージョン 3 リファレンス | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Compose ファイル バージョン 3 リファレンス" />
   <meta property="og:description" content="Compose ファイルリファレンス" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-05T09:40:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-05T09:40:28+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose ファイル バージョン 3 リファレンス","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/compose-file-v3/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose ファイル バージョン 3 リファレンス</h1><p><em class="reading-time">読む時間の目安: 45 分</em></p><h2 id="reference-and-guidelines">リファレンスとガイドライン</h2>
+                        <section class="section"><h1>Compose ファイル バージョン 3 リファレンス</h1><p><em class="reading-time">読む時間の目安: 46 分</em></p><h2 id="reference-and-guidelines">リファレンスとガイドライン</h2>
 
 <p>ここに示す内容は Compose ファイルフォーマット、バージョン 3 です。
 これが最新バージョンです。</p>
@@ -1699,9 +1699,20 @@ Docker クライアントの<code class="language-plaintext highlighter-rouge">-
 <p><a href="#network-configuration-reference">最上位の networks セクション</a> の対応するネットワーク設定においては、<code class="language-plaintext highlighter-rouge">ipam</code>ブロックが必要です。
 そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。</p>
 
+<p>IPv6 を利用したい場合は、まず Docker デーモンが IPv6 に対応するものとして設定されていることを確認します。
+詳細な手順については <a href="/docs.docker.jp.onthefly/config/daemon/ipv6/">IPv6 の有効化</a> を参照してください。
+Compose バージョン 3.x であれば<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>ファイルを編集して、IPv6 のアドレス設定部分を指定します。
+そこでは以下のような内容とします。
+<code class="language-plaintext highlighter-rouge">{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}</code></p>
+
+<p>そして Docker デーモンを再ロードして、docker-compose.yml 内に以下のようにサービス配下の指定を行います。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">sysctls</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">net.ipv6.conf.all.disable_ipv6=0</span>
+</code></pre></div></div>
+
 <blockquote>
-  <p>IPv6 アドレスが必要である場合は、<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#enable_ipv6"><code class="language-plaintext highlighter-rouge">enable_ipv6</code></a> オプションの設定が必要になります。
-この場合は <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#ipv4_address-ipv6_address">Compose ファイルバージョン 2.x </a> を利用しなければなりません。
+  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#enable_ipv6"><code class="language-plaintext highlighter-rouge">enable_ipv6</code></a> オプションは <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#ipv4_address-ipv6_address">Compose ファイルバージョン 2.x</a> でのみ利用可能です。
 <strong>IPv6 オプションは、現時点ではスウォームモード内で動作しません</strong>。</p>
 </blockquote>
 
