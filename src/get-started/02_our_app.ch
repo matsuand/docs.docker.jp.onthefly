@@ -64,7 +64,7 @@ we have created a ZIP file containing the application.
 @z
 
 @x
-1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with
+1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with.
 @y
 1. [アプリ配布をダウンロードします](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}。
    プロジェクト全体をプルして入手することもできます。

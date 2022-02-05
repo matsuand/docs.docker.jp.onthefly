@@ -78,14 +78,14 @@ We currently support enabling SSO on a single organization. If you have any user
 @x
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password during the grace period
+* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
 @y
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password during the grace period
+* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
@@ -99,10 +99,10 @@ We currently support enabling SSO on a single organization. If you have any user
 @z
 
 @x
-Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
+Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
 In addition, all email addresses should be added to your IdP.
 @y
-Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
+Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
 In addition, all email addresses should be added to your IdP.
 @z
 

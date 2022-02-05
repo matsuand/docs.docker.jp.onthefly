@@ -49,22 +49,30 @@ container layer. This means that:
 @z
 
 @x
-Docker has two options for containers to store files in the host machine, so
+Docker has two options for containers to store files on the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
-_bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
-If you're running Docker on Windows you can also use a _named pipe_.
+_bind mounts_. 
 @y
 Docker コンテナーにおけるファイルをホストマシン上に保存する方法は 2 つあります。
 これを行えば、コンテナーが停止した後にもデータを維持していくことができます。
 その 2 つの方法とは **ボリューム** と **バインドマウント** です。
-Linux 上において Docker を稼動していれば、さらに **tmpfs マウント** を用いることもできます。
-Windows 上において Docker を稼動していれば、**名前つきパイプ**（named pipe）を用いることもできます。
 @z
 
 @x
-Keep reading for more information about these two ways of persisting data.
+Docker also supports containers storing files in-memory on the the host machine. Such files are not persisted.
+If you're running Docker on Linux, _tmpfs mount_ is used to store files in the host's system memory.
+If you're running Docker on Windows, _named pipe_ is used to store files in the host's system memory.
 @y
-データを保持するためのこの 2 つの方法について、さらに具体的に読み進めてください。
+Docker ではさらに、ホストマシン上でのインメモリにファイル保存するコンテナーをサポートしています。
+そういったファイルは永続的ではありません。
+Linux 上において Docker を稼動していれば、**tmpfs マウント** を使って、ホストシステムメモリ内にファイル保存することができます。
+Windows 上において Docker を稼動していれば、**名前つきパイプ**（named pipe）を使って、ホストシステムメモリ内にファイル保存することができます。
+@z
+
+@x
+Keep reading for more information about persisting data or taking advantage of in-memory files.
+@y
+データを永続的にする方法、インメモリファイルの活用方法については、この先を読み進めてください。
 @z
 
 @x

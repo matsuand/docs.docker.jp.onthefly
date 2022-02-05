@@ -126,7 +126,7 @@ contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
 @z
 
 @x
-Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
 @y
-Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
 @z

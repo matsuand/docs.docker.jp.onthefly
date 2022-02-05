@@ -3777,12 +3777,40 @@ The corresponding network configuration in the
 @z
 
 @x
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
-> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+If you'd like to use IPv6, you must first ensure that the Docker daemon is configured to support IPv6.  See [Enable IPv6](../../config/daemon/ipv6.md) for detailed instructions. You can then access IPv6 addressing in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+@y
+IPv6 を利用したい場合は、まず Docker デーモンが IPv6 に対応するものとして設定されていることを確認します。
+詳細な手順については [IPv6 の有効化](../../config/daemon/ipv6.md) を参照してください。
+Compose バージョン 3.x であれば`/etc/docker/daemon.json`ファイルを編集して、IPv6 のアドレス設定部分を指定します。
+そこでは以下のような内容とします。
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+@z
+
+@x
+Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
+@y
+そして Docker デーモンを再ロードして、docker-compose.yml 内に以下のようにサービス配下の指定を行います。
+@z
+
+@x
+```yaml
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+@y
+```yaml
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+@z
+
+@x
+> The [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
+> option is only available in a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 @y
-> IPv6 アドレスが必要である場合は、[`enable_ipv6`](compose-file-v2.md#enable_ipv6) オプションの設定が必要になります。
-> この場合は [Compose ファイルバージョン 2.x ](compose-file-v2.md#ipv4_address-ipv6_address) を利用しなければなりません。
+> [`enable_ipv6`](compose-file-v2.md#enable_ipv6) オプションは [Compose ファイルバージョン 2.x](compose-file-v2.md#ipv4_address-ipv6_address) でのみ利用可能です。
 > **IPv6 オプションは、現時点ではスウォームモード内で動作しません**。
 @z
 
