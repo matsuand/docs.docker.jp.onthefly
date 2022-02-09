@@ -114,15 +114,15 @@ Team アカウント向けに新たなサービスアカウントを生成する
 @x
 1. Create a new Docker ID.
 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
-3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
-4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+3. Add the new Docker ID to your [organization](orgs.md).
+4. Add the new Docker ID  to the [team](orgs.md#create-a-team) you created earlier.
 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 @y
 1. 新たな Docker ID を生成します。
 2. 組織内において 1 つの [チーム](orgs.md#create-a-team) を生成します。
    そのチームにおいて、プライベートリポジトリへのアクセス権限を読み込み専用とします。
-3. [組織](orgs.md#working-with-organizations) において、上で生成した Docker ID を追加します。
-4. 上で生成した [チーム](orgs.md#add-a-member-to-a-team) に対して、その Docker ID を追加します。
+3. [組織](orgs.md) において、上で生成した Docker ID を追加します。
+4. 上で生成した [チーム](orgs.md#create-a-team) に対して、その Docker ID を追加します。
 5. そのユーザーアカウントから [パーソナルアカウントトークン (personal access token; PAT)](/access-tokens.md) を生成して、CI 向けにこれを利用します。
 @z
 

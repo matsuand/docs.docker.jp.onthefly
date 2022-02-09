@@ -23,654 +23,619 @@ redirect_from:
 Docker Hub organizations let you create teams so you can give your team access
 to shared image repositories.
 @y
-{% comment %}
-Docker Hub organizations let you create teams so you can give your team access
-to shared image repositories.
-{% endcomment %}
 Docker Hub の組織（organizations）は、チームの生成を行い、チームメンバーがイメージリポジトリを共有アクセスできるようにするものです。
 @z
 
 @x
-- **Organizations** are collections of teams and repositories that can be managed together.
-- **Teams** are groups of Docker Hub users that belong to an organization.
+An **Organization** is a collection of teams and repositories
+that can be managed together. Docker users become members of an organization
+when they are assigned to at least one team in the organization. When you first
+create an organization, you’ll see that you have a team, the **owners** (Admins)
+team, with a single member. An organization owner is someone that is part of the
+owners team. They can create new teams and add
+members to an existing team using their Docker ID or email address and by
+selecting a team the user should be part of. An org owner can also add
+additional org owners to help them manage users, teams, and repositories in the
+organization.
 @y
-{% comment %}
-- **Organizations** are collections of teams and repositories that can be managed together.
-- **Teams** are groups of Docker Hub users that belong to an organization.
-{% endcomment %}
-- **組織**（organizations）とは、チームやリポジトリが集まったものであり、一括して管理できるものを指します。
-- **チーム**（teams）とは、組織に属している Docker Hub ユーザーのグループのことです。
+An **Organization** is a collection of teams and repositories
+that can be managed together. Docker users become members of an organization
+when they are assigned to at least one team in the organization. When you first
+create an organization, you’ll see that you have a team, the **owners** (Admins)
+team, with a single member. An organization owner is someone that is part of the
+owners team. They can create new teams and add
+members to an existing team using their Docker ID or email address and by
+selecting a team the user should be part of. An org owner can also add
+additional org owners to help them manage users, teams, and repositories in the
+organization.
 @z
 
 @x
-> **Note:** in Docker Hub, users cannot belong directly to an organization.
-They belong only to teams within an organization.
+A **Team** is a group of Docker users that belong to an organization. An
+organization can have multiple teams. When you first create an organization,
+you’ll see that you have a team, the **owners** team, with a single member. An
+organization owner can then create new teams and add members to an existing team
+using their Docker ID or email address and by selecting a team the user should be part of.
 @y
-{% comment %}
-> **Note:** in Docker Hub, users cannot belong directly to an organization.
-They belong only to teams within an organization.
-{% endcomment %}
-> **メモ**  Docker Hub におけるユーザーは、組織に直接属するものではありません。
-> ユーザーは、あくまで組織内にあるチームに属するものです。
+A **Team** is a group of Docker users that belong to an organization. An
+organization can have multiple teams. When you first create an organization,
+you’ll see that you have a team, the **owners** team, with a single member. An
+organization owner can then create new teams and add members to an existing team
+using their Docker ID or email address and by selecting a team the user should be part of.
 @z
 
 @x
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7lvSnAqed8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Create an organization
 @y
-{% comment %}
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7lvSnAqed8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-{% endcomment %}
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7lvSnAqed8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@z
-
-@x
-## Working with organizations
-@y
-{% comment %}
-## Working with organizations
-{% endcomment %}
-{: #working-with-organizations }
-## 組織の利用
-@z
-
-@x
-### Create an organization
-@y
-{% comment %}
-### Create an organization
-{% endcomment %}
 {: #create-an-organization }
-### 組織の生成
+## 組織の生成
 @z
 
 @x
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/b0TKcIqa9Po" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+There are multiple ways to create an organization. You can create a brand new
+organization using the **Create Organization** option in Docker Hub, or you can
+convert an existing user account to an organization. The following section
+contains instructions on how to create new organization. For prerequisites and
+detailed instructions on converting an existing user account to an org, see
+[Convert an account into an organization](convert-account.md).
 @y
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/b0TKcIqa9Po" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+There are multiple ways to create an organization. You can create a brand new
+organization using the **Create Organization** option in Docker Hub, or you can
+convert an existing user account to an organization. The following section
+contains instructions on how to create new organization. For prerequisites and
+detailed instructions on converting an existing user account to an org, see
+[Convert an account into an organization](convert-account.md).
 @z
 
 @x
-1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
-Docker Hub.
+To create an organization:
 @y
-{% comment %}
-1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
-Docker Hub.
-{% endcomment %}
-1. Docker Hub の [Organizations](https://cloud.docker.com/orgs) をクリックするところから始めます。
+組織を生成するには以下を行います。
 @z
 
 @x
-2. Click on **Create Organization**.
+1. Sign into [Docker Hub](https://hub.docker.com/){: target="_blank"
+rel="noopener" class="_"} using your [Docker ID](../docker-id/index.md) or your email address.
+2. Select **Organizations**. Click **Create Organization** to create a new organization.
+3. Choose a plan for your organization. See [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener"
+class="_" id="dkr_docs_subscription_btl"} for details on the features offered
+in the Team and Business plan.
+4. Enter a name for your organization. This is the official, unique name for
+your organization in Docker Hub. Note that it is not possible to change the name
+of the organization after you've created it.
 @y
-{% comment %}
-2. Click on **Create Organization**.
-{% endcomment %}
-2. **Create Organization** をクリックします。
+1. Sign into [Docker Hub](https://hub.docker.com/){: target="_blank"
+rel="noopener" class="_"} using your [Docker ID](../docker-id/index.md) or your email address.
+2. Select **Organizations**. Click **Create Organization** to create a new organization.
+3. Choose a plan for your organization. See [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener"
+class="_" id="dkr_docs_subscription_btl"} for details on the features offered
+in the Team and Business plan.
+4. Enter a name for your organization. This is the official, unique name for
+your organization in Docker Hub. Note that it is not possible to change the name
+of the organization after you've created it.
 @z
 
 @x
-3. Provide information about your organization.
+      > The organization name cannot be the same as your Docker ID.
 @y
-{% comment %}
-3. Provide information about your organization.
-{% endcomment %}
-3. 組織に関する情報を入力します。
+      > The organization name cannot be the same as your Docker ID.
 @z
 
 @x
-You've created an organization. You'll see you have a team, the **owners** team
-with a single member (you!).
+5. Enter the name of your company. This is the full name of your company.
+This info is displayed on your organization page, and in the details of any
+public images you publish. You can update the company name anytime by navigating
+to your organization's **Settings** page. Click **Continue to Org size**.
+6. On the Organization Size page, specify the number of users (seats) you'd
+require and click **Continue to payment**.
 @y
-{% comment %}
-You've created an organization. You'll see you have a team, the **owners** team
-with a single member (you!).
-{% endcomment %}
-こうして組織が生成できました。
-1 つのチームができているはずです。
-これは **owners** チームであり、ただ一人のメンバー、つまりあなた自身が含まれています。
+5. Enter the name of your company. This is the full name of your company.
+This info is displayed on your organization page, and in the details of any
+public images you publish. You can update the company name anytime by navigating
+to your organization's **Settings** page. Click **Continue to Org size**.
+6. On the Organization Size page, specify the number of users (seats) you'd
+require and click **Continue to payment**.
 @z
 
 @x
-#### The owners team
+You've now created an organization. Select the newly created organization from
+the Organizations page. You'll now see that you have a team, the **owners** team
+with a single member (you).
 @y
-{% comment %}
-#### The owners team
-{% endcomment %}
+You've now created an organization. Select the newly created organization from
+the Organizations page. You'll now see that you have a team, the **owners** team
+with a single member (you).
+@z
+
+@x
+### View an organization
+@y
+{: #view-an-organization }
+### 組織の参照
+@z
+
+@x
+To view an organization:
+@y
+組織を参照するには以下を行います。
+@z
+
+@x
+1. Log into Docker Hub with a user account that is a member of any team in the
+   organization. You must be part of the **owners** team to access the
+   organization's **Settings** page.
+@y
+1. Log into Docker Hub with a user account that is a member of any team in the
+   organization. You must be part of the **owners** team to access the
+   organization's **Settings** page.
+@z
+
+@x
+      > **Note:**
+      >
+      > You can't _directly_ log into an organization. This is especially
+      > important to note if you create an organization by
+      [converting a user account](convert-account.md), as conversion means you lose the ability to log into that
+      > "account", since it no longer exists. If you don't see the organization,
+      > then you are neither a member or an owner of it. An organization
+      > administrator will need to add you as a member of the organization team.
+@y
+      > **Note:**
+      >
+      > You can't _directly_ log into an organization. This is especially
+      > important to note if you create an organization by
+      [converting a user account](convert-account.md), as conversion means you lose the ability to log into that
+      > "account", since it no longer exists. If you don't see the organization,
+      > then you are neither a member or an owner of it. An organization
+      > administrator will need to add you as a member of the organization team.
+@z
+
+@x
+2. Click **Organizations** in the top navigation bar, then choose your
+   organization from the list.
+@y
+2. Click **Organizations** in the top navigation bar, then choose your
+   organization from the list.
+@z
+
+@x
+      ![View organization details](images/view-org.png){:width="700px"}
+@y
+      ![View organization details](images/view-org.png){:width="700px"}
+@z
+
+@x
+The Organization landing page displays various options that allow you to
+configure your organization.
+@y
+The Organization landing page displays various options that allow you to
+configure your organization.
+@z
+
+@x
+- **Members**: Displays a list of team members. You
+  can invite new members using the **Add Member** option. See [Add team members](#add-team-members) for details.
+@y
+- **Members**: Displays a list of team members. You
+  can invite new members using the **Add Member** option. See [Add team members](#add-team-members) for details.
+@z
+
+@x
+- **Teams**: Displays a list of existing teams and the number of
+  members in each team. See [Create a team](#create-a-team) for details.
+@y
+- **Teams**: Displays a list of existing teams and the number of
+  members in each team. See [Create a team](#create-a-team) for details.
+@z
+
+@x
+- **Repositories**: Displays a list of repositories associated with the
+  organization. See [Repositories](repos.md) for detailed information about
+  working with repositories.
+@y
+- **Repositories**: Displays a list of repositories associated with the
+  organization. See [Repositories](repos.md) for detailed information about
+  working with repositories.
+@z
+
+@x
+- **Activity** Displays the audit log, a chronological list of activities that
+  occur at organization and repository levels. It provides the org owners a
+  report of all their team member activities. See [Audit log](audit-log.md) for
+  details.
+@y
+- **Activity** Displays the audit log, a chronological list of activities that
+  occur at organization and repository levels. It provides the org owners a
+  report of all their team member activities. See [Audit log](audit-log.md) for
+  details.
+@z
+
+@x
+- **Settings**: Displays information about your
+  organization, and allows you to view and change your repository privacy
+  settings, configure org permissions such as
+  [Image Access Management](image-access-management.md) and notification settings. You can
+  also [deactivate](deactivate-account.md#deactivating-an-organization) your
+  organization on this tab.
+@y
+- **Settings**: Displays information about your
+  organization, and allows you to view and change your repository privacy
+  settings, configure org permissions such as
+  [Image Access Management](image-access-management.md) and notification settings. You can
+  also [deactivate](deactivate-account.md#deactivating-an-organization) your
+  organization on this tab.
+@z
+
+@x
+- **Billing**: Displays information about your existing
+[Docker subscription (plan)](../subscription/index.md) and your billing history.
+You can also access your invoices from this tab.
+@y
+- **Billing**: Displays information about your existing
+[Docker subscription (plan)](../subscription/index.md) and your billing history.
+You can also access your invoices from this tab.
+@z
+
+@x
+- **Invitees**: Displays a list of users invited to the organization through
+  their email address. This list only includes email addresses that **do not** have a Docker ID or an account associated with it. Only Org owners can view and manage the Invitees list.
+@y
+- **Invitees**: Displays a list of users invited to the organization through
+  their email address. This list only includes email addresses that **do not** have a Docker ID or an account associated with it. Only Org owners can view and manage the Invitees list.
+@z
+
+@x
+> **Important**
+>
+> If you are on a Team or a Business subscription, every user listed on the
+> **Invitees** tab counts towards a seat, even if they do not have a Docker
+> ID or an account yet.
+{: .important }
+@y
+> **Important**
+>
+> If you are on a Team or a Business subscription, every user listed on the
+> **Invitees** tab counts towards a seat, even if they do not have a Docker
+> ID or an account yet.
+{: .important }
+@z
+
+@x
+## Create a team
+@y
+## Create a team
+@z
+
+@x
+A **Team** is a group of Docker users that belong to an organization. An
+organization can have multiple teams. When you first create an organization,
+you’ll see that you have a team, the **owners** team, with a single member. An
+organization owner can then create new teams and add members to an existing team
+using their Docker ID or email address and by selecting a team the user should be part of.
+@y
+A **Team** is a group of Docker users that belong to an organization. An
+organization can have multiple teams. When you first create an organization,
+you’ll see that you have a team, the **owners** team, with a single member. An
+organization owner can then create new teams and add members to an existing team
+using their Docker ID or email address and by selecting a team the user should be part of.
+@z
+
+@x
+The org owner can add additional org owners to the owners team to help them
+manage users, teams, and repositories in the organization. See [Owners
+team](#the-owners-team) for details.
+@y
+The org owner can add additional org owners to the owners team to help them
+manage users, teams, and repositories in the organization. See [Owners
+team](#the-owners-team) for details.
+@z
+
+@x
+To create a team:
+@y
+To create a team:
+@z
+
+@x
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Open the **Teams** tab and click **Create Team**.
+3. Fill out your team's information and click **Create**.
+@y
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Open the **Teams** tab and click **Create Team**.
+3. Fill out your team's information and click **Create**.
+@z
+
+@x
+### The owners team
+@y
 {: #the-owners-team }
 #### owners チーム
 @z
 
 @x
-The **owners** team is a special team that has full access to all repositories
-in the organization.
+The **owners** team is a special team created by default during the org creation
+process. The owners team has full access to all repositories in the organization.
 @y
-{% comment %}
-The **owners** team is a special team that has full access to all repositories
-in the organization.
-{% endcomment %}
-**owners** チームは特別なチームです。
-組織内にあるリポジトリすべてに対して、フルアクセスを行うことができます。
+The **owners** team is a special team created by default during the org creation
+process. The owners team has full access to all repositories in the organization.
 @z
 
 @x
-Members of this team can:
-- Manage organization settings and billing
-- Create a team and modify the membership of any team
-- Access and modify any repository belonging to the organization
+An organization owner is an administrator who is responsible to manage
+repositories and add team members to the organization. They have full access to
+private repositories, all teams, billing information, and org settings. An org
+owner can also specify [permissions](#permissions-reference) for each team in
+the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
+for
+the organization. When SSO is enabled for your organization, the org owner can
+also manage users. Docker can auto-provision Docker IDs for new end-users or
+users who'd like to have a separate Docker ID for company use through SSO
+enforcement.
 @y
-{% comment %}
-Members of this team can:
-- Manage organization settings and billing
-- Create a team and modify the membership of any team
-- Access and modify any repository belonging to the organization
-{% endcomment %}
-このチームのメンバーは以下のことができます。
-- 組織の設定や支払い方法を管理できます。
-- チームを生成し、チームメンバーの管理を行うことができます。
-- 組織に属しているリポジトリすべてにアクセスし更新することができます。
+An organization owner is an administrator who is responsible to manage
+repositories and add team members to the organization. They have full access to
+private repositories, all teams, billing information, and org settings. An org
+owner can also specify [permissions](#permissions-reference) for each team in
+the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
+for
+the organization. When SSO is enabled for your organization, the org owner can
+also manage users. Docker can auto-provision Docker IDs for new end-users or
+users who'd like to have a separate Docker ID for company use through SSO
+enforcement.
 @z
 
 @x
-### Access an organization
+The org owner can also add additional org owners to help them manage users, teams, and repositories in the organization.
 @y
-{% comment %}
-### Access an organization
-{% endcomment %}
-{: #access-an-organization }
-### 組織へのアクセス
+The org owner can also add additional org owners to help them manage users, teams, and repositories in the organization.
 @z
 
 @x
-You can't _directly_ log into an organization. This is especially important to note if you create an organization by converting a user account, as conversion means you lose the ability to log into that "account", since it no longer exists.
+## Add team members
 @y
-{% comment %}
-You can't _directly_ log into an organization. This is especially important to note if you create an organization by converting a user account, as conversion means you lose the ability to log into that "account", since it no longer exists.
-{% endcomment %}
-組織には**直接**ログインすることはできません。
-特に気をつけておくべきことですが、ユーザーアカウントを変更し組織として作り直した場合です。
-この際の変更を通じて、その「アカウント」ではログインできなくなります。
-もうその「アカウント」が存在しなくなるからです。
+{: #add-team-members }
+## チームメンバーの追加
 @z
 
 @x
-To access an organization:
+Org owners can invite new members to the team using their Docker ID or email
+address. When you invite team members using their email address, we recommend
+that users create a Docker account before accepting the invite to join the
+team. If you are using a Docker Team or a Business subscription, inviting team
+members using their email address counts towards a seat. You can
 @y
-{% comment %}
-To access an organization:
-{% endcomment %}
-組織にアクセスするには以下のようにします。
-@z
-
-@x
-1. Log into Docker Hub with a user account that is a member of any team in the organization.
-@y
-{% comment %}
-1. Log into Docker Hub with a user account that is a member of any team in the organization.
-{% endcomment %}
-1. ユーザーアカウントを使って Docker Hub にログインします。
-   このユーザーアカウントはその組織内のメンバーであれば、どのチームに属していてもかまいません。
-@z
-
-@x
-    > If you want access to organization settings, this account has to be part of the **owners** team.
-@y
-    {% comment %}
-    > If you want access to organization settings, this account has to be part of the **owners** team.
-    {% endcomment %}
-    > 組織の設定を行いたい場合、そのアカウントは **owners** チームに属している必要があります。
-@z
-
-@x
-2. Click **Organizations** in the top navigation bar, then choose your organization from the list.
-@y
-{% comment %}
-2. Click **Organizations** in the top navigation bar, then choose your organization from the list.
-{% endcomment %}
-2. 最上段のナビゲーションバーにある **Organizations** をクリックします。
-   そして一覧の中から目的の組織を選びます。
-@z
-
-@x
-If you don't see the organization, then you are neither a member or an owner of it. An organization administrator will need to add you as a member of the organization team.
-@y
-{% comment %}
-If you don't see the organization, then you are neither a member or an owner of it. An organization administrator will need to add you as a member of the organization team.
-{% endcomment %}
-目的の組織が見つからない場合は、つまりログインしたユーザーアカウントはその組織のメンバーや所有者ではないということです。
-組織の管理者から、組織のメンバーに加えてもらってください。
-@z
-
-@x
-## Working with teams and members
-@y
-{% comment %}
-## Working with teams and members
-{% endcomment %}
-{: #working-with-teams-and-members }
-## チームとメンバーの利用
-@z
-
-@x
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MROKmtmWCVI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@y
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MROKmtmWCVI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@z
-
-@x
-### Create a team
-@y
-{% comment %}
-### Create a team
-{% endcomment %}
-{: #create-a-team }
-### チームの生成
-@z
-
-@x
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/78wbbBoasIc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@y
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/78wbbBoasIc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@z
-
-@x
-1. Go to **Organizations** in Docker Hub, and select your organization.
-@y
-{% comment %}
-1. Go to **Organizations** in Docker Hub, and select your organization.
-{% endcomment %}
-1. Docker Hub の **Organizations** へアクセスし、目的の組織を選びます。
-@z
-
-@x
-2. Open the **Teams** tab and click **Create Team**.
-@y
-{% comment %}
-2. Open the **Teams** tab and click **Create Team**.
-{% endcomment %}
-2. **Teams** タブを開いて **Create Team** をクリックします。
-@z
-
-@x
-3. Fill out your team's information and click **Create**.
-@y
-{% comment %}
-3. Fill out your team's information and click **Create**.
-{% endcomment %}
-3. チーム情報を入力し、**Create** をクリックします。
-@z
-
-@x
-### Add a member to a team
-@y
-{% comment %}
-### Add a member to a team
-{% endcomment %}
-{: #add-a-member-to-a-team }
-### チームへのメンバー追加
-@z
-
-@x
-You can add a member to a team in one of two ways.
-@y
-{% comment %}
-You can add a member to a team in one of two ways.
-{% endcomment %}
-チームに対してメンバーを追加するには以下の 2 つの方法があります。
+Org owners can invite new members to the team using their Docker ID or email
+address. When you invite team members using their email address, we recommend
+that users create a Docker account before accepting the invite to join the
+team. If you are using a Docker Team or a Business subscription, inviting team
+members using their email address counts towards a seat. You can
 @z
 
 @x
 If the user isn't in your organization:
 @y
-{% comment %}
 If the user isn't in your organization:
-{% endcomment %}
-ユーザーが組織に含まれていない場合、
 @z
 
 @x
 1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Click **Add Member**.
+3. Enter the user's Docker ID or email, and select a team from the drop-down list.
+4. Click **Add** to confirm.
 @y
-{% comment %}
 1. Go to **Organizations** in Docker Hub, and select your organization.
-{% endcomment %}
-1. Docker Hub の **Organizations** へアクセスし、目的の組織を選びます。
-@z
-
-@x
 2. Click **Add Member**.
-@y
-{% comment %}
-2. Click **Add Member**.
-{% endcomment %}
-2. **Add Member** をクリックします。
-@z
-
-@x
 3. Enter the user's Docker ID or email, and select a team from the drop-down list.
-@y
-{% comment %}
-3. Enter the user's Docker ID or email, and select a team from the drop-down list.
-{% endcomment %}
-3. 追加するユーザーの Docker ID かメールアドレスを入力して、ドロップダウンリストからチームを選びます。
-@z
-
-@x
 4. Click **Add** to confirm.
-@y
-{% comment %}
-4. Click **Add** to confirm.
-{% endcomment %}
-4. **Add** をクリックして確定します。
 @z
 
 @x
 If the user already belongs to another team in the organization:
 @y
-{% comment %}
 If the user already belongs to another team in the organization:
-{% endcomment %}
-目的のユーザーが、組織内の別のチームにすでに属している場合、
 @z
 
 @x
 1. Open the team's page in Docker Hub: **Organizations** > **_Your Organization_** > **Teams** > **_Your Team Name_**
+2. Click **Add Member**.
+3. Enter the user's Docker ID or email address to add them to the team.
 @y
-{% comment %}
 1. Open the team's page in Docker Hub: **Organizations** > **_Your Organization_** > **Teams** > **_Your Team Name_**
-{% endcomment %}
-1. Docker Hub のチームページを開きます。
-   **Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム＞**
+2. Click **Add Member**.
+3. Enter the user's Docker ID or email address to add them to the team.
 @z
 
 @x
-2. Click **Add user**.
+When org owners add team members, the members receive an email
+informing them that they have been added to the organization as a member of the team.
 @y
-{% comment %}
-2. Click **Add user**.
-{% endcomment %}
-2. **Add user** をクリックします。
+When org owners add team members, the members receive an email
+informing them that they have been added to the organization as a member of the team.
 @z
 
 @x
-3. Enter the user's Docker ID or email to add them to the team.
+> **Note**: You are not automatically added to teams created by your
+> organization.
 @y
-{% comment %}
-3. Enter the user's Docker ID or email to add them to the team.
-{% endcomment %}
-3. 追加するユーザーの Docker ID メールアドレスを入力して、チームへ追加します。
+> **Note**: You are not automatically added to teams created by your
+> organization.
 @z
 
 @x
-      > **Note**: You are not automatically added to teams created by your organization.
+## Configure repository permissions
 @y
-      {% comment %}
-      > **Note**: You are not automatically added to teams created by your organization.
-      {% endcomment %}
-      > **メモ**: 組織から生成したチームへは、操作したユーザーが自動的に追加されるわけではありません。
+## Configure repository permissions
 @z
 
 @x
-### Remove team members
+Organization owners can configure repository permissions on a per-team basis.
+For example, you can specify that all teams within an organization have Read and
+Write access to repositories A and B, whereas only specific teams have Admin
+access. Note that org owners have full administrative access to all repositories within the organization.
 @y
-{% comment %}
-### Remove team members
-{% endcomment %}
+Organization owners can configure repository permissions on a per-team basis.
+For example, you can specify that all teams within an organization have Read and
+Write access to repositories A and B, whereas only specific teams have Admin
+access. Note that org owners have full administrative access to all repositories within the organization.
+@z
+
+@x
+To give a team access to a repository
+@y
+To give a team access to a repository
+@z
+
+@x
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Click on the **Teams** tab and select the team that you'd like to configure  repository access to.
+3. Click on the **Permissions** tab and select a repository from the
+   **Repository** drop-down.
+4. Choose a permission from the **Permissions** drop-down list and click **Add**.
+@y
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Click on the **Teams** tab and select the team that you'd like to configure  repository access to.
+3. Click on the **Permissions** tab and select a repository from the
+   **Repository** drop-down.
+4. Choose a permission from the **Permissions** drop-down list and click **Add**.
+@z
+
+@x
+      ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
+@y
+      ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
+@z
+
+@x
+### View a team's permissions for all repositories
+@y
+### View a team's permissions for all repositories
+@z
+
+@x
+To view a team's permissions across all repositories:
+@y
+To view a team's permissions across all repositories:
+@z
+
+@x
+1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+2. Click on the **Permissions** tab, where you can view the repositories this team can access.
+@y
+1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+2. Click on the **Permissions** tab, where you can view the repositories this team can access.
+@z
+
+@x
+### Permissions reference
+@y
+### Permissions reference
+@z
+
+@x
+Permissions are cumulative. For example, if you have Read & Write permissions,
+you automatically have Read-only permissions:
+@y
+Permissions are cumulative. For example, if you have Read & Write permissions,
+you automatically have Read-only permissions:
+@z
+
+@x
+- `Read-only` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
+- `Read & Write` access allows users to pull, push, and view a repository Docker
+  Hub. In addition, it allows users to view, cancel, retry or trigger builds
+- `Admin` access allows users to Pull, push, view, edit, and delete a
+  repository; edit build settings; update the repository description modify the
+  repositories "Description", "Collaborators" rights, "Public/Private"
+  visibility, and "Delete".
+@y
+- `Read-only` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
+- `Read & Write` access allows users to pull, push, and view a repository Docker
+  Hub. In addition, it allows users to view, cancel, retry or trigger builds
+- `Admin` access allows users to Pull, push, view, edit, and delete a
+  repository; edit build settings; update the repository description modify the
+  repositories "Description", "Collaborators" rights, "Public/Private"
+  visibility, and "Delete".
+@z
+
+@x
+> **Note**:
+>
+> A User who has not yet verified their email address only has
+> `Read-only` access to the repository, regardless of the rights their team
+> membership has given them.
+@y
+> **Note**:
+>
+> A User who has not yet verified their email address only has
+> `Read-only` access to the repository, regardless of the rights their team
+> membership has given them.
+@z
+
+@x
+## Remove team members
+@y
 {: #remove-team-members }
-### チームメンバーの削除
+## チームメンバーの削除
 @z
 
 @x
 To remove a member from all teams in an organization:
 @y
-{% comment %}
 To remove a member from all teams in an organization:
-{% endcomment %}
-組織内のすべてのチームから、メンバー 1 名を削除するには、
 @z
 
 @x
 1. Go to **Organizations** in Docker Hub, and select your organization. The Organizations page lists all team members.
+2. Click the **X** next to a member’s name to remove them from all the teams in the organization.
+3. When prompted, click **Remove** to confirm the removal.
 @y
-{% comment %}
 1. Go to **Organizations** in Docker Hub, and select your organization. The Organizations page lists all team members.
-{% endcomment %}
-1. Docker Hub の **Organizations** にアクセスして、目的の組織を選択します。
-   組織のページにはチームメンバーがすべて一覧表示されています。
-@z
-
-@x
-2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
-@y
-{% comment %}
-2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
-{% endcomment %}
-2. メンバー名の横にある **x** をクリックします。
-   これによって組織内にあるチームのすべてからメンバーが削除されます。
-@z
-
-@x
+2. Click the **X** next to a member’s name to remove them from all the teams in the organization.
 3. When prompted, click **Remove** to confirm the removal.
-@y
-{% comment %}
-3. When prompted, click **Remove** to confirm the removal.
-{% endcomment %}
-3. 確認画面が出たら、**Remove** をクリックして削除を確定しす。
 @z
 
 @x
 To remove a member from a specific team:
 @y
-{% comment %}
 To remove a member from a specific team:
-{% endcomment %}
-1 つのチームからメンバー 1 名を削除するには、
 @z
 
 @x
 1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Click on the **Teams** tab and select the team from the list.
+3. Click the **X** next to the user's name to remove them from the team.
+4. When prompted, click **Remove** to confirm the removal.
 @y
-{% comment %}
 1. Go to **Organizations** in Docker Hub, and select your organization.
-{% endcomment %}
-1. Docker Hub の **Organizations** にアクセスして、目的の組織を選択します。
-@z
-
-@x
 2. Click on the **Teams** tab and select the team from the list.
-@y
-{% comment %}
-2. Click on the **Teams** tab and select the team from the list.
-{% endcomment %}
-2. **Teams** タブをクリックし、一覧から目的のチームを選択します。
-@z
-
-@x
-3. Click the **x** next to the user's name to remove them from the team.
-@y
-{% comment %}
-3. Click the **x** next to the user's name to remove them from the team.
-{% endcomment %}
-3. ユーザー名の横にある **x** をクリックします。
-   これによってチーム内からユーザーが削除されます。
-@z
-
-@x
+3. Click the **X** next to the user's name to remove them from the team.
 4. When prompted, click **Remove** to confirm the removal.
-to confirm the removal.
-@y
-{% comment %}
-4. When prompted, click **Remove** to confirm the removal.
-to confirm the removal.
-{% endcomment %}
-4. 確認画面が出たら、**Remove** をクリックして削除を確定しす。
 @z
 
 @x
-### Give a team access to a repository
+## Videos
 @y
-{% comment %}
-### Give a team access to a repository
-{% endcomment %}
-{: #give-a-team-access-to-a-repository }
-### リポジトリに対するチームアクセスの追加
+{: #videos }
+## ビデオ
 @z
 
 @x
-1. Visit the repository list on Docker Hub by clicking on **Repositories**.
+You can also check out the following videos for information about creating Teams
+and Organizations in Docker Hub.
 @y
-{% comment %}
-1. Visit the repository list on Docker Hub by clicking on **Repositories**.
-{% endcomment %}
-1. Docker Hub 上において **Repositories** をクリックしてリポジトリ一覧を表示します。
+You can also check out the following videos for information about creating Teams
+and Organizations in Docker Hub.
 @z
 
 @x
-2. Select your organization in the namespace dropdown list.
+- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8){: target="_blank" rel="noopener" class="_"}
+- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po){: target="_blank" rel="noopener" class="_"}
+- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI){: target="_blank" rel="noopener" class="_"}
+- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc){: target="_blank" rel="noopener" class="_"}
 @y
-{% comment %}
-2. Select your organization in the namespace dropdown list.
-{% endcomment %}
-2. 名前空間ドロップダウンリストから、目的の組織を選択します。
-@z
-
-@x
-3. Click the repository you'd like to edit.
-@y
-{% comment %}
-3. Click the repository you'd like to edit.
-{% endcomment %}
-3. 編集したいリポジトリをクリックします。
-@z
-
-@x
-      ![Org Repos](images/repos-list2019.png)
-@y
-      {% comment %}
-      ![Org Repos](images/repos-list2019.png)
-      {% endcomment %}
-      ![組織のリポジトリ](images/repos-list2019.png)
-@z
-
-@x
-4. Click the **Permissions** tab.
-@y
-{% comment %}
-4. Click the **Permissions** tab.
-{% endcomment %}
-4. **Permissions** タブをクリックします。
-@z
-
-@x
-5. Select the team, the [permissions level](#permissions-reference), and click **+** to save.
-@y
-{% comment %}
-5. Select the team, the [permissions level](#permissions-reference), and click **+** to save.
-{% endcomment %}
-5. チームと [パーミッションレベル](#permissions-reference) を選択して **+** をクリックし保存します。
-@z
-
-@x
-      ![Add Repo Permissions for Team](images/orgs-repo-perms2019.png)
-@y
-      {% comment %}
-      ![Add Repo Permissions for Team](images/orgs-repo-perms2019.png)
-      {% endcomment %}
-      ![チームに対するリポジトリパーミッションの追加](images/orgs-repo-perms2019.png)
-@z
-
-@x
-### View a team's permissions for all repositories
-@y
-{% comment %}
-### View a team's permissions for all repositories
-{% endcomment %}
-{: #view-a-teams-permissions-for-all-repositories }
-### リポジトリすべてに対するチームパーミッションの確認
-@z
-
-@x
-To view a team's permissions over all repos:
-@y
-{% comment %}
-To view a team's permissions over all repos:
-{% endcomment %}
-リポジトリすべてにわたってのチームのパーミッションを確認するには、以下を行います。
-@z
-
-@x
-1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
-@y
-{% comment %}
-1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
-{% endcomment %}
-1. **Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム名＞** を開きます。
-@z
-
-@x
-2. Click on the **Permissions** tab, where you can view the repositories this team can access.
-@y
-{% comment %}
-2. Click on the **Permissions** tab, where you can view the repositories this team can access.
-{% endcomment %}
-2. **Permissions** タブをクリックして、チームがアクセス可能なリポジトリはどれであるかを確認します。
-@z
-
-@x
-      ![Team Audit Permissions](images/orgs-teams-perms2019.png)
-@y
-      {% comment %}
-      ![Team Audit Permissions](images/orgs-teams-perms2019.png)
-      {% endcomment %}
-      ![チームのパーミッション](images/orgs-teams-perms2019.png)
-@z
-
-@x
-### Permissions reference
-@y
-{% comment %}
-### Permissions reference
-{% endcomment %}
-{: #permissions-reference }
-### パーミッションに関するリファレンス
-@z
-
-@x
-Permissions are cumulative. For example, if you have Write permissions, you
-automatically have Read permissions:
-@y
-{% comment %}
-Permissions are cumulative. For example, if you have Write permissions, you
-automatically have Read permissions:
-{% endcomment %}
-パーミッションは積み上げられるような性質を持っています。
-たとえば書き込みパーミッションがあったとすると、それは自動的に読み込みパーミッションも有していることになります。
-@z
-
-@x
-- `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
-- `Write` access allows users to push to repositories on Docker Hub.
-- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility, and "Delete".
-@y
-{% comment %}
-- `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
-- `Write` access allows users to push to repositories on Docker Hub.
-- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility, and "Delete".
-{% endcomment %}
-- `Read`（読み込み）権限は、公開リポジトリに対する操作と同じように、 プライベートリポジトリの参照、検索、プルを行うことができます。
-- `Write`（書き込み）権限は、Docker Hub 上のリポジトリにプッシュすることができます。
-- `Admin`（管理）権限は、リポジトリに対して "Description"、"Collaborators" の権限、"Public/Private" の別を編集したり、"Delete" を行ったりすることができます。
-@z
-
-@x
-> **Note**: A User who has not yet verified their email address only has
-> `Read` access to the repository, regardless of the rights their team
-> membership has given them.
-@y
-{% comment %}
-> **Note**: A User who has not yet verified their email address only has
-> `Read` access to the repository, regardless of the rights their team
-> membership has given them.
-{% endcomment %}
-> **メモ**: メールアドレスの検証が済んでいないユーザーは、たとえチームメンバーとしての権限が与えられていても、リポジトリに対しては `Read` 権限しか与えられません。
+- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8){: target="_blank" rel="noopener" class="_"}
+- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po){: target="_blank" rel="noopener" class="_"}
+- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI){: target="_blank" rel="noopener" class="_"}
+- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc){: target="_blank" rel="noopener" class="_"}
 @z

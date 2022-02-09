@@ -120,6 +120,18 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 @z
 
 @x
+The following video walks you through the process of configuring SSO.
+@y
+The following video walks you through the process of configuring SSO.
+@z
+
+@x
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QY0j02ggf64" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@y
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QY0j02ggf64" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+@z
+
+@x
 ### SAML 2.0 IdP configuration
 @y
 {: #saml-20-idp-configuration }

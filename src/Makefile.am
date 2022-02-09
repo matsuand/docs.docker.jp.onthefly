@@ -110,7 +110,8 @@ ${publishdir}/_config_ja.yml: $(srcdir)/_config_ja.yml.in $(top_builddir)/config
 .PHONY: build
 build: install
 	@rm -f ${sitedestdir}/index.html
-	(cd $(publishdir) && rbenv exec jekyll build --config $(CONFIG_YML),_config_ja.yml)
+#	(cd $(publishdir) && rbenv exec jekyll build --config $(CONFIG_YML),_config_ja.yml)
+	(cd $(publishdir) && jekyll build --config $(CONFIG_YML),_config_ja.yml)
 
 	@find ${sitedestdir}/{,get-docker/}index.html | xargs \
 	  sed -i -e "s|TEMPTITLE|<p><b>暫定公開中 ${thisdate} (${commitdate} \<a href=\"${dockercommiturl}/${commithash}\"\>docker.github.io@${commithash}\</a\> 対応)</b></p>|"

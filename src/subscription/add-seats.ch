@@ -59,10 +59,10 @@ to add seats to a subscription:
 @z
 
 @x
-6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/orgs.md#add-a-member-to-a-team).
+6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/orgs.md#add-team-members).
 @y
 6. 新たなメンバーを追加するために **Members** タブにアクセスします。
-   詳しくは [チームへのメンバー追加](../docker-hub/orgs.md#add-a-member-to-a-team) を参照してください。
+   詳しくは [チームへのメンバー追加](../docker-hub/orgs.md#add-team-members) を参照してください。
 @z
 
 @x

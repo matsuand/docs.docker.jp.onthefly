@@ -34,8 +34,6 @@ images = \
 	index-terminal.png             \
 	org-activity-tab.png           \
 	org-all-actions.png            \
-	orgs-repo-perms2019.png        \
-	orgs-teams-perms2019.png       \
 	repo-create-details.png        \
 	repo-create-private.png        \
 	repo-image-layers.png          \
@@ -43,8 +41,9 @@ images = \
 	repo-overview.png              \
 	repo-tags-list.png             \
 	repos-create.png               \
-	repos-list2019.png             \
 	slack-notification-updates.png \
+	team-repo-permission.png       \
+	view-org.png                   \
 	vuln-scan-details.png          \
 	vuln-scan-report.png           \
 	webhooks-create.png            \
