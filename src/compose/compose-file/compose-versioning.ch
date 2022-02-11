@@ -265,7 +265,7 @@ Example:
     web:
       build: .
       ports:
-       - "5000:5000"
+       - "8000:5000"
       volumes:
        - .:/code
       links:
@@ -276,7 +276,7 @@ Example:
     web:
       build: .
       ports:
-       - "5000:5000"
+       - "8000:5000"
       volumes:
        - .:/code
       links:
@@ -377,7 +377,7 @@ Simple example:
       web:
         build: .
         ports:
-         - "5000:5000"
+         - "8000:5000"
         volumes:
          - .:/code
       redis:
@@ -388,7 +388,7 @@ Simple example:
       web:
         build: .
         ports:
-         - "5000:5000"
+         - "8000:5000"
         volumes:
          - .:/code
       redis:
@@ -407,7 +407,7 @@ A more extended example, defining volumes and networks:
       web:
         build: .
         ports:
-         - "5000:5000"
+         - "8000:5000"
         volumes:
          - .:/code
         networks:
@@ -433,7 +433,7 @@ A more extended example, defining volumes and networks:
       web:
         build: .
         ports:
-         - "5000:5000"
+         - "8000:5000"
         volumes:
          - .:/code
         networks:

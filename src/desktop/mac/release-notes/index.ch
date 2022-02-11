@@ -59,11 +59,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-## Docker Desktop 4.4.2
-2022-01-13
+## Docker Desktop 4.5.0
+2022-02-10
 @y
-## Docker Desktop 4.4.2
-2022-01-13
+## Docker Desktop 4.5.0
+2022-02-10
 @z
 
 @x
@@ -79,6 +79,82 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- The 'docker version' output now displays the version of Docker Desktop installed on the machine.
+@y
+- Docker Desktop 4.5.0 では Docker メニューの新バージョンを導入しています。
+  これによってユーザーは、あらゆるオペレーティングシステムにわたって共通した操作が実現できます。
+  詳しくは以下のブログ投稿 [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"} を参照してください。
+- 'docker version'による出力において、マシンにインストールされている Docker Desktop のバージョンを表示するようにしました。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+@y
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that caused the VM to become unresponsive during startup when using `osxfs` and when no host directories are shared with the VM.
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
+- Fixed an issue that didn't allow users to stop a Docker Compose application using Docker Dashboard if the application was started in a different version of Docker Compose. For example, if the user started a Docker Compose application in V1 and then switched to Docker Compose V2, attempts to stop the Docker Compose application would fail.
+- Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+- Fixed an issue where the **About Docker Desktop** window wasn't working anymore.
+- Limit the number of CPUs to 8 on Mac M1 to fix the startup problem. Fixes [docker/for-mac#6063](https://github.com/docker/for-mac/issues/6063).
+@y
+- VM が`osxfs`を用いている場合やホストとの間でディレクトリ共有をしていない場合に、VM 起動時に無反応となってしまう問題を修正しました。
+- Linux におけるファイルシステムの監視 (inotify) の制限を、`fs.inotify.max_user_watches=1048576`と`fs.inotify.max_user_instances=8192`を用いて増やすことにしました。
+  [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071) を Fix に。
+- Docker Compose アプリケーションが異なるバージョンの Docker Compose において起動されていた場合に、Docker ダッシュボードからアプリケーションを停止できなくなっていた問題を修正しました。
+  たとえばユーザーが Docker Compose アプリケーションを V1 で起動していて、その後に Docker Compose V2 に切り替えていた場合、Docker Compose アプリケーションを停止しようとしても失敗するものになっていました。
+- Docker Desktop を停止してアプリケーションを起動した後に、誤ってユーザーへのサインインを促していた問題を修正しました。
+- **About Docker Desktop** 画面がもはや動作していない問題を修正しました。
+- Mac M1 における起動時の問題を解消するため、CPU 数を 8 に制限しました。
+  [docker/for-mac#6063](https://github.com/docker/for-mac/issues/6063) を Fix に。
+@z
+
+@x
+## Docker Desktop 4.4.2
+2022-01-13
+@y
+## Docker Desktop 4.4.2
+2022-01-13
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
 @z
 
 @x

@@ -128,20 +128,20 @@ To publish a port for our container, we’ll use the `--publish flag` (`-p` for 
 @z
 
 @x
-We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 5000 to work we can map the host's port 5000 to the container's port 5000:
+We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 5000 to work we can map the host's port 8000 to the container's port 5000:
 @y
 コンテナー内の flask アプリケーションの起動にあたっては公開ポートを指定していませんでした。
 そこで公開ポートはデフォルトの 5000 となります。
-これまでのリクエストをポート 5000 に向けるには、ホストのポート 5000 をコンテナーのポート 5000 に割り当てます。
+これまでのリクエストをポート 5000 に向けるには、ホストのポート 8000 をコンテナーのポート 5000 に割り当てます。
 @z
 
 @x
 ```console
-$ docker run --publish 5000:5000 python-docker
+$ docker run --publish 8000:5000 python-docker
 ```
 @y
 ```console
-$ docker run --publish 5000:5000 python-docker
+$ docker run --publish 8000:5000 python-docker
 ```
 @z
 
@@ -154,21 +154,21 @@ Now, let’s rerun the curl command from above. Remember to open a new terminal.
 
 @x
 ```console
-$ curl localhost:5000
+$ curl localhost:8000
 Hello, Docker!
 ```
 @y
 ```console
-$ curl localhost:5000
+$ curl localhost:8000
 Hello, Docker!
 ```
 @z
 
 @x
-Success! We were able to connect to the application running inside of our container on port 5000. Switch back to the terminal where your container is running and you should see the GET request logged to the console.
+Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the GET request logged to the console.
 @y
 成功しました。
-コンテナー内部で実行されているアプリケーションに対して、ポート 5000 による接続ができました。
+コンテナー内部で実行されているアプリケーションに対して、ポート 8000 による接続ができました。
 コンテナーを実行させたターミナルに戻ってみると、コンソール上に GET リクエストのログが出力されているはずです。
 @z
 
@@ -207,12 +207,12 @@ Docker は先ほどと同じようにコンテナーを起動させますが、�
 
 @x
 ```console
-$ docker run -d -p 5000:5000 python-docker
+$ docker run -d -p 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 @y
 ```console
-$ docker run -d -p 5000:5000 python-docker
+$ docker run -d -p 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 @z
@@ -232,12 +232,12 @@ Again, let’s make sure that our container is running properly. Run the same cu
 
 @x
 ```console
-$ curl localhost:5000
+$ curl localhost:8000
 Hello, Docker!
 ```
 @y
 ```console
-$ curl localhost:5000
+$ curl localhost:8000
 Hello, Docker!
 ```
 @z
@@ -263,13 +263,13 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには`p
 ```console
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 @y
 ```console
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 @z
 
@@ -390,7 +390,7 @@ Now list all the containers again using the `docker ps` command.
 ```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -398,16 +398,16 @@ fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes 
 ```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
 @z
 
 @x
-Notice that the container we just restarted has been started in detached mode and has port 5000 exposed. Also, observe the status of the container is “Up X seconds”. When you restart a container, it starts with the same flags or commands that it was originally started with.
+Notice that the container we just restarted has been started in detached mode and has port 8000 exposed. Also, observe the status of the container is “Up X seconds”. When you restart a container, it starts with the same flags or commands that it was originally started with.
 @y
-上で再起動したコンテナーはデタッチモードで起動され、ポート 5000 が公開されています。
+上で再起動したコンテナーはデタッチモードで起動され、ポート 8000 が公開されています。
 またコンテナーのステータスを見てみると「Up X seconds」（起動後 X 秒）となっています。
 コンテナーを再起動したときには、はじめに起動したときと同じフラグ、同じコマンドによって起動されます。
 @z
@@ -445,7 +445,7 @@ Now that all of our containers are stopped, let’s remove them. When you remove
 ```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -453,7 +453,7 @@ fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes 
 ```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:5000->5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -506,19 +506,19 @@ To name a container, we just need to pass the `--name` flag to the `docker run` 
 
 @x
 ```console
-$ docker run -d -p 5000:5000 --name rest-server python-docker
+$ docker run -d -p 8000:5000 --name rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         "python3 -m flask ru…"   3 seconds ago       Up 3 seconds        0.0.0.0:5000->5000/tcp   rest-server
+1aa5d46418a6        python-docker         "python3 -m flask ru…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->5000/tcp   rest-server
 ```
 @y
 ```console
-$ docker run -d -p 5000:5000 --name rest-server python-docker
+$ docker run -d -p 8000:5000 --name rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         "python3 -m flask ru…"   3 seconds ago       Up 3 seconds        0.0.0.0:5000->5000/tcp   rest-server
+1aa5d46418a6        python-docker         "python3 -m flask ru…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->5000/tcp   rest-server
 ```
 @z
 

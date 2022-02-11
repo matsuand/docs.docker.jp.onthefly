@@ -112,7 +112,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
       - logvolume01:/var/log
@@ -130,7 +130,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
       - logvolume01:/var/log

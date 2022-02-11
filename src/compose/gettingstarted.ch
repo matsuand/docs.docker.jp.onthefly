@@ -288,7 +288,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
   redis:
     image: "redis:alpine"
 ```
@@ -299,7 +299,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
   redis:
     image: "redis:alpine"
 ```
@@ -320,12 +320,12 @@ This Compose file defines two services: `web` and `redis`.
 
 @x
 The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
+It then binds the container and the host machine to the exposed port, `8000`. This example service uses the default port for 
 the Flask web server, `5000`.
 @y
-`web` サービスは、カレントディレクトリ内の `Dockerfile` からビルドされたイメージを利用します。
-そしてコンテナーとホストマシンを、公開用ポート `5000` でつなぎます。
-このサービス例では、Flask ウェブサーバーのデフォルトポートである `5000` を利用するものです。
+`web` サービスは、カレントディレクトリ内の`Dockerfile`からビルドされたイメージを利用します。
+そしてコンテナーとホストマシンを、公開用ポート`8000`でつなぎます。
+このサービス例では、Flask ウェブサーバーのデフォルトポートである`5000`を利用するものです。
 @z
 
 
@@ -413,30 +413,21 @@ image pulled from the Docker Hub registry.
 @z
 
 @x
-2. Enter http://localhost:5000/ in a browser to see the application running.
+2. Enter http://localhost:8000/ in a browser to see the application running.
 @y
-2. ブラウザーで`http://localhost:5000/`を開き、アプリケーションの動作を確認します。
+2. ブラウザーで`http://localhost:8000/`を開き、アプリケーションの動作を確認します。
 @z
 
 @x
    If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
-   Windows, then the web app should now be listening on port 5000 on your
-   Docker daemon host. Point your web browser to http://localhost:5000 to
+   Windows, then the web app should now be listening on port 8000 on your
+   Docker daemon host. Point your web browser to http://localhost:8000 to
    find the `Hello World` message. If this doesn't resolve, you can also try
-   http://127.0.0.1:5000.
+   http://127.0.0.1:8000.
 @y
    Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
-   ブラウザーから http://localhost:5000 にアクセスして、`Hello World`メッセージが表示されることを確認してください。
-   接続できなければ`http://127.0.0.1:5000`も試してください。
-@z
-
-@x
-   If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
-   MACHINE_VM` to get the IP address of your Docker host. Then, open
-   `http://MACHINE_VM_IP:5000` in a browser.
-@y
-   Docker Machine on Mac や Docker Machine on Windows を利用している場合は、`docker-machine ip 仮想マシン名`を実行して Docker ホスト上の IP アドレスを取得します。
-   そしてブラウザーから`http://仮想マシンのIP:5000`を開きます。
+   ブラウザーから http://localhost:8000 にアクセスして、`Hello World`メッセージが表示されることを確認してください。
+   接続できなければ`http://127.0.0.1:8000`も試してください。
 @z
 
 @x
@@ -558,7 +549,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
     environment:
@@ -573,7 +564,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
     environment:
@@ -756,7 +747,7 @@ $ docker-compose ps
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
 composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
 ```
 @y
 ```console
@@ -770,7 +761,7 @@ $ docker-compose ps
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
 composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
 ```
 @z
 

@@ -59,11 +59,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-## Docker Desktop 4.4.4
-2022-01-24
+## Docker Desktop 4.5.0
+2022-02-10
 @y
-## Docker Desktop 4.4.4
-2022-01-24
+## Docker Desktop 4.5.0
+2022-02-10
 @z
 
 @x
@@ -80,17 +80,83 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-### Security
+### New
 @y
-{: #security }
-### セキュリティ
+{: #new }
+### 新機能
 @z
 
 @x
-- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- The 'docker version' output now displays the version of Docker Desktop installed on the machine.
 @y
-- システム内の任意のファイルが移動できてしまう [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) を修正しました。
+- Docker Desktop 4.5.0 では Docker メニューの新バージョンを導入しています。
+  これによってユーザーは、あらゆるオペレーティングシステムにわたって共通した操作が実現できます。
+  詳しくは以下のブログ投稿 [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"} を参照してください。
+- 'docker version'による出力において、マシンにインストールされている Docker Desktop のバージョンを表示するようにしました。
 @z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+@y
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
+- Fixed an issue related to compose app started with version 2, but the dashboard only deals with version 1
+- Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+@y
+- Linux におけるファイルシステムの監視 (inotify) の制限を、`fs.inotify.max_user_watches=1048576`と`fs.inotify.max_user_instances=8192`を用いて増やすことにしました。
+  [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071) を Fix に。
+- ダッシュボードでは Compose バージョン 1 しか取り扱っていないのに、バージョン 2 によって Compose アプリが起動された際の問題を修正しました。
+- Docker Desktop を停止してアプリケーションを起動した後に、誤ってユーザーへのサインインを促していた問題を修正しました。
+@z
+
+@x
+## Docker Desktop 4.4.4
+2022-01-24
+@y
+## Docker Desktop 4.4.4
+2022-01-24
+@z
+
+@x
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
+@y
+> Docker Desktop のダウンロード
+>
+> [Windows 向け](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
+@z
+
+%@x
+%### Security
+%@y
+%{: #security }
+%### セキュリティ
+%@z
+
+%@x
+%- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
+%@y
+%- システム内の任意のファイルが移動できてしまう [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) を修正しました。
+%@z
 
 @x
 ### Bug fixes and minor changes

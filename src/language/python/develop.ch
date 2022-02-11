@@ -436,7 +436,7 @@ $ docker run \
   --rm -d \
   --network mysqlnet \
   --name rest-server \
-  -p 5000:5000 \
+  -p 8000:5000 \
   python-docker-dev
 ```
 @y
@@ -445,7 +445,7 @@ $ docker run \
   --rm -d \
   --network mysqlnet \
   --name rest-server \
-  -p 5000:5000 \
+  -p 8000:5000 \
   python-docker-dev
 ```
 @z
@@ -458,13 +458,13 @@ Let’s test that our application is connected to the database and is able to ad
 
 @x
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 @y
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 @z
 
@@ -519,7 +519,7 @@ services:
   build:
    context: .
   ports:
-  - 5000:5000
+  - 8000:5000
   volumes:
   - ./:/app
 @y
@@ -528,7 +528,7 @@ services:
   build:
    context: .
   ports:
-  - 5000:5000
+  - 8000:5000
   volumes:
   - ./:/app
 @z
@@ -576,9 +576,9 @@ This Compose file is super convenient as we do not have to type all the paramete
 @z
 
 @x
-We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
+We expose port 8000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
 @y
-ポート 5000 を公開することで、コンテナー内部にある開発ウェブサーバーにアクセスできるようにします。
+ポート 8000 を公開することで、コンテナー内部にある開発ウェブサーバーにアクセスできるようにします。
 またローカルにあるソースコードを実行コンテナー内にもマッピングして、テキストエディター上での変更を可能とし、その変更をコンテナー内に反映されるようにします。
 @z
 
@@ -622,13 +622,13 @@ Now let’s test our API endpoint. Open a new terminal then make a GET request t
 
 @x
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 @y
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 @z
 
