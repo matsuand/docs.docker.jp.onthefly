@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-02-11 11:11:10 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Compose をはじめよう | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Compose をはじめよう" />
   <meta property="og:description" content="Docker Compose をはじめよう。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-11T11:11:10+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/gettingstarted/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-11T11:11:10+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Compose をはじめよう","description":"Docker Compose をはじめよう。","url":"https://docs.docker.com/compose/gettingstarted/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -125,12 +125,12 @@ Python や Redis はインストールする必要はありません。
   <li>
     <p>プロジェクト用のディレクトリを生成します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>composetest
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>composetest
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir composetest
+<span class="gp">$</span> <span class="nb">cd </span>composetest
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>プロジェクトディレクトリ内に<code class="language-plaintext highlighter-rouge">app.py</code>というファイルを生成して、以下の記述を書き写してください。</p>
+    <p>プロジェクトディレクトリ内に<code class="highlighter-rouge">app.py</code>というファイルを生成して、以下の記述を書き写してください。</p>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
 
@@ -138,39 +138,39 @@ Python や Redis はインストールする必要はありません。
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-<span class="n">cache</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'redis'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'redis'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">get_hit_count</span><span class="p">():</span>
     <span class="n">retries</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cache</span><span class="p">.</span><span class="n">incr</span><span class="p">(</span><span class="s">'hits'</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">redis</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="nb">ConnectionError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s">'hits'</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">redis</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">retries</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">exc</span>
             <span class="n">retries</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="n">count</span> <span class="o">=</span> <span class="n">get_hit_count</span><span class="p">()</span>
-    <span class="k">return</span> <span class="s">'Hello World! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">'Hello World! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 </code></pre></div>    </div>
 
-    <p>この例において<code class="language-plaintext highlighter-rouge">redis</code>とは、このアプリケーションネットワーク上の redis コンテナーのホスト名です。
-Redis のデフォルトポートとして<code class="language-plaintext highlighter-rouge">6379</code>を利用します。</p>
+    <p>この例において<code class="highlighter-rouge">redis</code>とは、このアプリケーションネットワーク上の redis コンテナーのホスト名です。
+Redis のデフォルトポートとして<code class="highlighter-rouge">6379</code>を利用します。</p>
 
     <blockquote>
       <p>一時的なエラーの取り扱い</p>
 
-      <p><code class="language-plaintext highlighter-rouge">get_hit_count</code>という関数がどのように書かれているかを見てください。
+      <p><code class="highlighter-rouge">get_hit_count</code>という関数がどのように書かれているかを見てください。
 この単純なリトライのループにより、redis サービスが起動していなかったとしても、リクエストを何度でも送信できます。
 アプリケーションが起動する最中に対して、この方法が適していますが、さらにはこのアプリの動作中に redis サービスを再起動する必要が発生した場合も、アプリが柔軟に対応できる方法です。
 クラスターを構成している場合、ノード間でのネットワークの瞬断を制御することもできます。</p>
     </blockquote>
   </li>
   <li>
-    <p>プロジェクト用のディレクトリにもう一つ<code class="language-plaintext highlighter-rouge">requirements.txt</code>という名称のファイルを作成し、次のようにします。</p>
+    <p>プロジェクト用のディレクトリにもう一つ<code class="highlighter-rouge">requirements.txt</code>という名称のファイルを作成し、次のようにします。</p>
 
     <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flask
 redis
@@ -183,7 +183,7 @@ redis
 <p>このステップでは、Docker イメージを構築する Dockerfile を作ります。
 そのイメージには依存するすべてのもの、つまり Python と Python アプリケーションが含まれます。</p>
 
-<p>プロジェクト用のディレクトリ内で <code class="language-plaintext highlighter-rouge">Dockerfile</code> という名称のファイルを作成し、次の内容にします。</p>
+<p>プロジェクト用のディレクトリ内で <code class="highlighter-rouge">Dockerfile</code> という名称のファイルを作成し、次の内容にします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> python:3.7-alpine</span>
@@ -192,7 +192,7 @@ redis
 <span class="k">ENV</span><span class="s"> FLASK_RUN_HOST=0.0.0.0</span>
 <span class="k">RUN </span>apk add <span class="nt">--no-cache</span> gcc musl-dev linux-headers
 <span class="k">COPY</span><span class="s"> requirements.txt requirements.txt</span>
-<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+<span class="k">RUN </span>pip install <span class="nt">-r</span> requirements.txt
 <span class="k">EXPOSE</span><span class="s"> 5000</span>
 <span class="k">COPY</span><span class="s"> . .</span>
 <span class="k">CMD</span><span class="s"> ["flask", "run"]</span>
@@ -202,50 +202,50 @@ redis
 
 <ul>
   <li>Python 3.7 イメージを使って当イメージを構築する。</li>
-  <li>作業用ディレクトリを <code class="language-plaintext highlighter-rouge">/code</code> に指定する。</li>
-  <li><code class="language-plaintext highlighter-rouge">flask</code>コマンドにより用いられる環境変数を設定する。</li>
+  <li>作業用ディレクトリを <code class="highlighter-rouge">/code</code> に指定する。</li>
+  <li><code class="highlighter-rouge">flask</code>コマンドにより用いられる環境変数を設定する。</li>
   <li>gcc や依存パッケージをインストールする。</li>
-  <li><code class="language-plaintext highlighter-rouge">requirements.txt</code>をコピーして Python 依存パッケージをインストールする。</li>
+  <li><code class="highlighter-rouge">requirements.txt</code>をコピーして Python 依存パッケージをインストールする。</li>
   <li>イメージにメタデータを追加して、コンテナーがポート 5000 をリッスンするように記述する。</li>
-  <li>このプロジェクトのカレントディレクトリ<code class="language-plaintext highlighter-rouge">.</code>を、イメージ内のワークディレクトリ<code class="language-plaintext highlighter-rouge">.</code>にコピーする。</li>
-  <li>コンテナーに対するデフォルトのコマンドを <code class="language-plaintext highlighter-rouge">flask run</code> にする。</li>
+  <li>このプロジェクトのカレントディレクトリ<code class="highlighter-rouge">.</code>を、イメージ内のワークディレクトリ<code class="highlighter-rouge">.</code>にコピーする。</li>
+  <li>コンテナーに対するデフォルトのコマンドを <code class="highlighter-rouge">flask run</code> にする。</li>
 </ul>
 
 <p>Dockerfile の書き方の詳細については、<a href="/docs.docker.jp.onthefly/develop/">Docker ユーザーガイド</a>や <a href="/engine/reference/builder/">Dockerfile リファレンス</a> をご覧ください。</p>
 
 <h2 id="step-3-define-services-in-a-compose-file">ステップ 3: Compose ファイル内でのサービス定義</h2>
 
-<p>プロジェクト用のディレクトリ内で<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>という名称のファイルを作成し、次の内容にします。</p>
+<p>プロジェクト用のディレクトリ内で<code class="highlighter-rouge">docker-compose.yml</code>という名称のファイルを作成し、次の内容にします。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
   <span class="na">web</span><span class="pi">:</span>
     <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
     <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">5000:5000"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:5000"</span>
   <span class="na">redis</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">redis:alpine"</span>
 </code></pre></div></div>
 
-<p>この Compose ファイルは <code class="language-plaintext highlighter-rouge">web</code> と <code class="language-plaintext highlighter-rouge">redis</code> という 2 つのサービスを定義します。</p>
+<p>この Compose ファイルは <code class="highlighter-rouge">web</code> と <code class="highlighter-rouge">redis</code> という 2 つのサービスを定義します。</p>
 
 <h3 id="web-service">ウェブサービス</h3>
 
-<p><code class="language-plaintext highlighter-rouge">web</code> サービスは、カレントディレクトリ内の <code class="language-plaintext highlighter-rouge">Dockerfile</code> からビルドされたイメージを利用します。
-そしてコンテナーとホストマシンを、公開用ポート <code class="language-plaintext highlighter-rouge">5000</code> でつなぎます。
-このサービス例では、Flask ウェブサーバーのデフォルトポートである <code class="language-plaintext highlighter-rouge">5000</code> を利用するものです。</p>
+<p><code class="highlighter-rouge">web</code> サービスは、カレントディレクトリ内の<code class="highlighter-rouge">Dockerfile</code>からビルドされたイメージを利用します。
+そしてコンテナーとホストマシンを、公開用ポート<code class="highlighter-rouge">8000</code>でつなぎます。
+このサービス例では、Flask ウェブサーバーのデフォルトポートである<code class="highlighter-rouge">5000</code>を利用するものです。</p>
 
 <h3 id="redis-service">Redis サービス</h3>
 
-<p><code class="language-plaintext highlighter-rouge">redis</code> サービスには Docker Hub レジストリから取得した、公開の <a href="https://registry.hub.docker.com/_/redis/">Redis</a> イメージを利用します。</p>
+<p><code class="highlighter-rouge">redis</code> サービスには Docker Hub レジストリから取得した、公開の <a href="https://registry.hub.docker.com/_/redis/">Redis</a> イメージを利用します。</p>
 
 <h2 id="step-4-build-and-run-your-app-with-compose">ステップ 4: Compose によるアプリケーションの構築と実行</h2>
 
 <ol>
-  <li>プロジェクト用のディレクトリで<code class="language-plaintext highlighter-rouge">docker-compose up</code>によりアプリケーションを起動します。</li>
+  <li>プロジェクト用のディレクトリで<code class="highlighter-rouge">docker-compose up</code>によりアプリケーションを起動します。</li>
 </ol>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>docker-compose up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span> docker-compose up
 <span class="go">
    Creating network "composetest_default" with the default driver
    Creating composetest_web_1 ...
@@ -254,15 +254,15 @@ redis
    Creating composetest_redis_1 ... done
    Attaching to composetest_web_1, composetest_redis_1
    web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-</span><span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span><span class="w"> </span>oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-<span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span><span class="w"> </span>Redis <span class="nv">version</span><span class="o">=</span>4.0.1, <span class="nv">bits</span><span class="o">=</span>64, <span class="nv">commit</span><span class="o">=</span>00000000, <span class="nv">modified</span><span class="o">=</span>0, <span class="nv">pid</span><span class="o">=</span>1, just started
-<span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span><span class="w"> </span>Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+</span><span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span> oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+<span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span> Redis <span class="nv">version</span><span class="o">=</span>4.0.1, <span class="nv">bits</span><span class="o">=</span>64, <span class="nv">commit</span><span class="o">=</span>00000000, <span class="nv">modified</span><span class="o">=</span>0, <span class="nv">pid</span><span class="o">=</span>1, just started
+<span class="gp">   redis_1  | 1:C 17 Aug 22:11:10.480 #</span> Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
 <span class="go">   web_1    |  * Restarting with stat
    redis_1  | 1:M 17 Aug 22:11:10.483 * Running mode=standalone, port=6379.
-</span><span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span><span class="w"> </span>WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is <span class="nb">set </span>to the lower value of 128.
+</span><span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span> WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is <span class="nb">set </span>to the lower value of 128.
 <span class="go">   web_1    |  * Debugger is active!
-</span><span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span><span class="w"> </span>Server initialized
-<span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span><span class="w"> </span>WARNING you have Transparent Huge Pages <span class="o">(</span>THP<span class="o">)</span> support enabled <span class="k">in </span>your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the <span class="nb">command</span> <span class="s1">'echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled'</span> as root, and add it to your /etc/rc.local <span class="k">in </span>order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+</span><span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span> Server initialized
+<span class="gp">   redis_1  | 1:M 17 Aug 22:11:10.483 #</span> WARNING you have Transparent Huge Pages <span class="o">(</span>THP<span class="o">)</span> support enabled <span class="k">in </span>your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the <span class="nb">command</span> <span class="s1">'echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled'</span> as root, and add it to your /etc/rc.local <span class="k">in </span>order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
 <span class="go">   web_1    |  * Debugger PIN: 330-787-903
    redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
 </span></code></pre></div></div>
@@ -272,14 +272,11 @@ redis
 
 <ol>
   <li>
-    <p>ブラウザーで<code class="language-plaintext highlighter-rouge">http://localhost:5000/</code>を開き、アプリケーションの動作を確認します。</p>
+    <p>ブラウザーで<code class="highlighter-rouge">http://localhost:8000/</code>を開き、アプリケーションの動作を確認します。</p>
 
     <p>Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
-ブラウザーから http://localhost:5000 にアクセスして、<code class="language-plaintext highlighter-rouge">Hello World</code>メッセージが表示されることを確認してください。
-接続できなければ<code class="language-plaintext highlighter-rouge">http://127.0.0.1:5000</code>も試してください。</p>
-
-    <p>Docker Machine on Mac や Docker Machine on Windows を利用している場合は、<code class="language-plaintext highlighter-rouge">docker-machine ip 仮想マシン名</code>を実行して Docker ホスト上の IP アドレスを取得します。
-そしてブラウザーから<code class="language-plaintext highlighter-rouge">http://仮想マシンのIP:5000</code>を開きます。</p>
+ブラウザーから http://localhost:8000 にアクセスして、<code class="highlighter-rouge">Hello World</code>メッセージが表示されることを確認してください。
+接続できなければ<code class="highlighter-rouge">http://127.0.0.1:8000</code>も試してください。</p>
 
     <p>ブラウザーには以下のメッセージが表示されます。</p>
 
@@ -299,11 +296,11 @@ redis
     <p><img src="/docs.docker.jp.onthefly/compose/images/quick-hello-world-2.png" alt="ブラウザー上の hello world" /></p>
   </li>
   <li>
-    <p>別の端末画面を開いて<code class="language-plaintext highlighter-rouge">docker image ls</code>を実行し、ローカルのイメージ一覧を表示します。</p>
+    <p>別の端末画面を開いて<code class="highlighter-rouge">docker image ls</code>を実行し、ローカルのイメージ一覧を表示します。</p>
 
-    <p>この時点で一覧表示されるイメージに<code class="language-plaintext highlighter-rouge">redis</code>と<code class="language-plaintext highlighter-rouge">web</code>が含まれます。</p>
+    <p>この時点で一覧表示されるイメージに<code class="highlighter-rouge">redis</code>と<code class="highlighter-rouge">web</code>が含まれます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image <span class="nb">ls</span>
 <span class="go">
 REPOSITORY        TAG           IMAGE ID      CREATED        SIZE
 composetest_web   latest        e2c21aa48cc1  4 minutes ago  93.8MB
@@ -311,25 +308,25 @@ python            3.4-alpine    84e6077c7ab6  7 days ago     82.5MB
 redis             alpine        9d8fa9aa0e5b  3 weeks ago    27.5MB
 </span></code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">docker inspect &lt;tag または id&gt;</code>によってイメージを確認することもできます。</p>
+    <p><code class="highlighter-rouge">docker inspect &lt;tag または id&gt;</code>によってイメージを確認することもできます。</p>
   </li>
   <li>
     <p>アプリケーションを停止させます。
-2 つめに開いた端末画面上のプロジェクトディレクトリにおいて<code class="language-plaintext highlighter-rouge">docker-compose down</code>を実行します。
+2 つめに開いた端末画面上のプロジェクトディレクトリにおいて<code class="highlighter-rouge">docker-compose down</code>を実行します。
 またはアプリを開始したはじめの端末画面上において CTRL+C を入力します。</p>
   </li>
 </ol>
 
 <h2 id="step-5-edit-the-compose-file-to-add-a-bind-mount">ステップ 5: Compose ファイルにバインドマウントを追加</h2>
 
-<p>プロジェクトディレクトリ内にある <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> を編集して、<code class="language-plaintext highlighter-rouge">web</code> サービスへの <a href="/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> を追加します。</p>
+<p>プロジェクトディレクトリ内にある <code class="highlighter-rouge">docker-compose.yml</code> を編集して、<code class="highlighter-rouge">web</code> サービスへの <a href="/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> を追加します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
   <span class="na">web</span><span class="pi">:</span>
     <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
     <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">5000:5000"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:5000"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">.:/code</span>
     <span class="na">environment</span><span class="pi">:</span>
@@ -338,17 +335,17 @@ redis             alpine        9d8fa9aa0e5b  3 weeks ago    27.5MB
     <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">redis:alpine"</span>
 </code></pre></div></div>
 
-<p>新しい <code class="language-plaintext highlighter-rouge">volumes</code> というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある <code class="language-plaintext highlighter-rouge">/code</code> ディレクトリにマウントします。
+<p>新しい <code class="highlighter-rouge">volumes</code> というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある <code class="highlighter-rouge">/code</code> ディレクトリにマウントします。
 こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。
-<code class="language-plaintext highlighter-rouge">environment</code>キーには環境変数<code class="language-plaintext highlighter-rouge">FLASK_ENV</code>を設定しています。
-これは開発モードで<code class="language-plaintext highlighter-rouge">flask run</code>を実行し、コード変更時にリロードするよう指示します。
+<code class="highlighter-rouge">environment</code>キーには環境変数<code class="highlighter-rouge">FLASK_ENV</code>を設定しています。
+これは開発モードで<code class="highlighter-rouge">flask run</code>を実行し、コード変更時にリロードするよう指示します。
 このモードは開発時にのみ用いるようにします。</p>
 
 <h2 id="step-6-re-build-and-run-the-app-with-compose">ステップ 6: Compose によるアプリの再構築と実行</h2>
 
-<p>プロジェクトディレクトリにて <code class="language-plaintext highlighter-rouge">docker-compose up</code> を入力する際に、Compose ファイルが更新されていると、アプリは再構築され実行されます。</p>
+<p>プロジェクトディレクトリにて <code class="highlighter-rouge">docker-compose up</code> を入力する際に、Compose ファイルが更新されていると、アプリは再構築され実行されます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
 <span class="go">
 Creating network "composetest_default" with the default driver
 Creating composetest_web_1 ...
@@ -360,7 +357,7 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 </span><span class="c">...
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">Hello World</code> メッセージをもう一度確認してみます。
+<p><code class="highlighter-rouge">Hello World</code> メッセージをもう一度確認してみます。
 再読み込みをすると、さらにカウンターが増えるはずです。</p>
 
 <blockquote class="important">
@@ -368,9 +365,9 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
   <ul>
     <li>
-      <p>プロジェクトを <code class="language-plaintext highlighter-rouge">Users</code> ディレクトリ（<code class="language-plaintext highlighter-rouge">cd ~</code>）以外に置いている場合、利用している Dockerfile やボリュームのドライブ、ディレクトリは、共有できるようにしておく必要があります。
+      <p>プロジェクトを <code class="highlighter-rouge">Users</code> ディレクトリ（<code class="highlighter-rouge">cd ~</code>）以外に置いている場合、利用している Dockerfile やボリュームのドライブ、ディレクトリは、共有できるようにしておく必要があります。
 実行時に、アプリケーションファイルが見つからない、ボリュームマウントが拒否される、サービスが起動できない、といったランタイムエラーが発生した場合は、ファイルやドライブを共有にすることを試してください。
-<code class="language-plaintext highlighter-rouge">C:\Users</code>（Windows の場合）または <code class="language-plaintext highlighter-rouge">/Users</code>（Mac の場合）ではないディレクトリにあるプロジェクトがある場合は、ボリュームマウントを共有ドライブにする必要があります。
+<code class="highlighter-rouge">C:\Users</code>（Windows の場合）または <code class="highlighter-rouge">/Users</code>（Mac の場合）ではないディレクトリにあるプロジェクトがある場合は、ボリュームマウントを共有ドライブにする必要があります。
 これはまた、<a href="/docs.docker.jp.onthefly/desktop/windows/#switch-between-windows-and-linux-containers">Linux コンテナー</a> を利用する Docker Desktop  for Windows のプロジェクトでも同様です。
 詳しくは Docker for Mac における <a href="/docs.docker.jp.onthefly/desktop/mac/#file-sharing">ファイル共有</a> を参照してください。
 また一般的な利用例に関しては <a href="/docs.docker.jp.onthefly/storage/volumes/">コンテナーでデータ管理</a> を参照してください。</p>
@@ -387,10 +384,10 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 <p>アプリケーションのコードは、ボリュームを利用してコンテナー内にマウントされたため、コードへの変更とその確認はすぐにできます。
 イメージを再構築することは必要なくなりました。</p>
 
-<p><code class="language-plaintext highlighter-rouge">app.py</code>内のメッセージを変更して保存します。
-たとえば<code class="language-plaintext highlighter-rouge">Hello World!</code>メッセージを<code class="language-plaintext highlighter-rouge">Hello from Docker!</code>に変更することにします。</p>
+<p><code class="highlighter-rouge">app.py</code>内のメッセージを変更して保存します。
+たとえば<code class="highlighter-rouge">Hello World!</code>メッセージを<code class="highlighter-rouge">Hello from Docker!</code>に変更することにします。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">'Hello from Docker! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">'Hello from Docker! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>ブラウザーにてアプリを再読み込みします。
@@ -400,40 +397,40 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
 <h2 id="step-8-experiment-with-some-other-commands">ステップ 8: その他のコマンドを試す</h2>
 
-<p>サービスをバックグラウンドで実行したい場合は <code class="language-plaintext highlighter-rouge">docker-compose up</code> に <code class="language-plaintext highlighter-rouge">-d</code> フラグ（”デタッチ”モード用のフラグ）をつけます。
-<code class="language-plaintext highlighter-rouge">docker-compose ps</code> を実行して、現在動いているものを確認します。</p>
+<p>サービスをバックグラウンドで実行したい場合は <code class="highlighter-rouge">docker-compose up</code> に <code class="highlighter-rouge">-d</code> フラグ（”デタッチ”モード用のフラグ）をつけます。
+<code class="highlighter-rouge">docker-compose ps</code> を実行して、現在動いているものを確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up <span class="nt">-d</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up <span class="nt">-d</span>
 <span class="go">
 Starting composetest_redis_1...
 Starting composetest_web_1...
 
-</span><span class="gp">$</span><span class="w"> </span>docker-compose ps
+</span><span class="gp">$</span> docker-compose ps
 <span class="go">
        Name                      Command               State           Ports
 -------------------------------------------------------------------------------------
 composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
-</span><span class="gp">composetest_web_1     flask run                        Up      0.0.0.0:5000-&gt;</span>5000/tcp
+</span><span class="gp">composetest_web_1     flask run                        Up      0.0.0.0:8000-&gt;</span>5000/tcp
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker-compose run</code> コマンドを使えば、サービスに対してのコマンド実行を行うことができます。
-たとえば <code class="language-plaintext highlighter-rouge">web</code> サービス上でどのような環境変数が利用可能であるかは、以下のコマンドを実行します。</p>
+<p><code class="highlighter-rouge">docker-compose run</code> コマンドを使えば、サービスに対してのコマンド実行を行うことができます。
+たとえば <code class="highlighter-rouge">web</code> サービス上でどのような環境変数が利用可能であるかは、以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run web <span class="nb">env</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose run web env
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker-compose --help</code> を実行すれば、その他のコマンドを確認できます。
+<p><code class="highlighter-rouge">docker-compose --help</code> を実行すれば、その他のコマンドを確認できます。
 bash や zsh シェルにおいて <a href="/docs.docker.jp.onthefly/compose/completion/">コマンド補完</a>をインストールしている場合は、利用可能なコマンドを確認することもできます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker-compose up -d</code> により Compose を起動していた場合は、サービスを停止させるために以下のコマンドを実行します。</p>
+<p><code class="highlighter-rouge">docker-compose up -d</code> により Compose を起動していた場合は、サービスを停止させるために以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose stop
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose stop
 </code></pre></div></div>
 
-<p>コンテナーも完全に削除し、すべてを終わらせる場合には <code class="language-plaintext highlighter-rouge">down</code> コマンドを使います。
-<code class="language-plaintext highlighter-rouge">--volumes</code> を指定すれば Redis コンテナーにおいて利用されているデータボリュームも削除することができます。</p>
+<p>コンテナーも完全に削除し、すべてを終わらせる場合には <code class="highlighter-rouge">down</code> コマンドを使います。
+<code class="highlighter-rouge">--volumes</code> を指定すれば Redis コンテナーにおいて利用されているデータボリュームも削除することができます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose down <span class="nt">--volumes</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose down <span class="nt">--volumes</span>
 </code></pre></div></div>
 
 <p>ここまで Compose の基本動作について見てきました。</p>
