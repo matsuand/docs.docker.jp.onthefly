@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-02-12 10:02:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use IPvlan networks | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Use IPvlan networks" />
   <meta property="og:description" content="All about using IPvlan to make your containers appear like physical machines on the network" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-12T10:02:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/ipvlan/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-12T10:02:02+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Use IPvlan networks","description":"All about using IPvlan to make your containers appear like physical machines on the network","url":"https://docs.docker.com/network/ipvlan/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Use IPvlan networks</h1><p><em class="reading-time">読む時間の目安: 27 分</em></p><p>The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
+                        <section class="section"><h1>Use IPvlan networks</h1><p><em class="reading-time">読む時間の目安: 26 分</em></p><p>The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
 The VLAN driver builds on top of that in giving operators complete control of
 layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
@@ -133,14 +133,14 @@ is no need for port mappings in these scenarios.</p>
 <ul>
   <li>The examples on this page are all single host.</li>
   <li>All examples can be performed on a single host running Docker. Any
-example using a sub-interface like <code class="language-plaintext highlighter-rouge">eth0.10</code> can be replaced with <code class="language-plaintext highlighter-rouge">eth0</code> or
-any other valid parent interface on the Docker host. Sub-interfaces with a <code class="language-plaintext highlighter-rouge">.</code>
-are created on the fly. <code class="language-plaintext highlighter-rouge">-o parent</code> interfaces can also be left out of the
-<code class="language-plaintext highlighter-rouge">docker network create</code> all together and the driver will create a <code class="language-plaintext highlighter-rouge">dummy</code>
+example using a sub-interface like <code class="highlighter-rouge">eth0.10</code> can be replaced with <code class="highlighter-rouge">eth0</code> or
+any other valid parent interface on the Docker host. Sub-interfaces with a <code class="highlighter-rouge">.</code>
+are created on the fly. <code class="highlighter-rouge">-o parent</code> interfaces can also be left out of the
+<code class="highlighter-rouge">docker network create</code> all together and the driver will create a <code class="highlighter-rouge">dummy</code>
 interface that will enable local host connectivity to perform the examples.</li>
   <li>Kernel requirements:
     <ul>
-      <li>To check your current kernel version, use <code class="language-plaintext highlighter-rouge">uname -r</code></li>
+      <li>To check your current kernel version, use <code class="highlighter-rouge">uname -r</code></li>
       <li>IPvlan Linux kernel v4.2+ (support for earlier kernels exists but is buggy)</li>
     </ul>
   </li>
@@ -148,43 +148,43 @@ interface that will enable local host connectivity to perform the examples.</li>
 
 <h2 id="ipvlan-l2-mode-example-usage">IPvlan L2 mode example usage</h2>
 
-<p>An example of the IPvlan <code class="language-plaintext highlighter-rouge">L2</code> mode topology is shown in the following image.
-The driver is specified with <code class="language-plaintext highlighter-rouge">-d driver_name</code> option. In this case <code class="language-plaintext highlighter-rouge">-d ipvlan</code>.</p>
+<p>An example of the IPvlan <code class="highlighter-rouge">L2</code> mode topology is shown in the following image.
+The driver is specified with <code class="highlighter-rouge">-d driver_name</code> option. In this case <code class="highlighter-rouge">-d ipvlan</code>.</p>
 
 <p><img src="/docs.docker.jp.onthefly/network/images/ipvlan_l2_simple.png" alt="Simple IPvlan L2 Mode Example" /></p>
 
-<p>The parent interface in the next example <code class="language-plaintext highlighter-rouge">-o parent=eth0</code> is configured as follows:</p>
+<p>The parent interface in the next example <code class="highlighter-rouge">-o parent=eth0</code> is configured as follows:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip addr show eth0
-<span class="gp">3: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ip addr show eth0
+<span class="gp">3: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
 <span class="go">    inet 192.168.1.250/24 brd 192.168.1.255 scope global eth0
 </span></code></pre></div></div>
 
-<p>Use the network from the host’s interface as the <code class="language-plaintext highlighter-rouge">--subnet</code> in the
-<code class="language-plaintext highlighter-rouge">docker network create</code>. The container will be attached to the same network as
-the host interface as set via the <code class="language-plaintext highlighter-rouge">-o parent=</code> option.</p>
+<p>Use the network from the host’s interface as the <code class="highlighter-rouge">--subnet</code> in the
+<code class="highlighter-rouge">docker network create</code>. The container will be attached to the same network as
+the host interface as set via the <code class="highlighter-rouge">-o parent=</code> option.</p>
 
 <p>Create the IPvlan network and run a container attaching to it:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>IPvlan  <span class="o">(</span><span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span> Defaults to L2 mode <span class="k">if </span>not specified<span class="o">)</span>
-<span class="gp">$</span><span class="w"> </span>docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> IPvlan  <span class="o">(</span><span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span> Defaults to L2 mode <span class="k">if </span>not specified<span class="o">)</span>
+<span class="gp">$</span> docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.1.0/24 <span class="se">\</span>
     <span class="nt">--gateway</span><span class="o">=</span>192.168.1.1 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 db_net
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Start a container on the db_net network
-<span class="gp">$</span><span class="w"> </span>docker  run <span class="nt">--net</span><span class="o">=</span>db_net <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> Start a container on the db_net network
+<span class="gp">$</span> docker  run <span class="nt">--net</span><span class="o">=</span>db_net <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>NOTE: the containers can NOT ping the underlying host interfaces as
-<span class="gp">#</span><span class="w"> </span>they are intentionally filtered by Linux <span class="k">for </span>additional isolation.
+</span><span class="gp">#</span> NOTE: the containers can NOT ping the underlying host interfaces as
+<span class="gp">#</span> they are intentionally filtered by Linux <span class="k">for </span>additional isolation.
 </code></pre></div></div>
 
-<p>The default mode for IPvlan is <code class="language-plaintext highlighter-rouge">l2</code>. If <code class="language-plaintext highlighter-rouge">-o ipvlan_mode=</code> are left unspecified,
-the default mode will be used. Similarly, if the <code class="language-plaintext highlighter-rouge">--gateway</code> is left empty, the
+<p>The default mode for IPvlan is <code class="highlighter-rouge">l2</code>. If <code class="highlighter-rouge">-o ipvlan_mode=</code> are left unspecified,
+the default mode will be used. Similarly, if the <code class="highlighter-rouge">--gateway</code> is left empty, the
 first usable address on the network will be set as the gateway. For example, if
-the subnet provided in the network create is <code class="language-plaintext highlighter-rouge">--subnet=192.168.1.0/24</code> then the
-gateway the container receives is <code class="language-plaintext highlighter-rouge">192.168.1.1</code>.</p>
+the subnet provided in the network create is <code class="highlighter-rouge">--subnet=192.168.1.0/24</code> then the
+gateway the container receives is <code class="highlighter-rouge">192.168.1.1</code>.</p>
 
 <p>To help understand how this mode interacts with other hosts, the following
 figure shows the same layer 2 segment between two Docker hosts that applies to
@@ -192,58 +192,58 @@ and IPvlan L2 mode.</p>
 
 <p><img src="/docs.docker.jp.onthefly/network/images/macvlan-bridge-ipvlan-l2.png" alt="Multiple IPvlan Hosts" /></p>
 
-<p>The following will create the exact same network as the network <code class="language-plaintext highlighter-rouge">db_net</code> created
-earlier, with the driver defaults for <code class="language-plaintext highlighter-rouge">--gateway=192.168.1.1</code> and <code class="language-plaintext highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
+<p>The following will create the exact same network as the network <code class="highlighter-rouge">db_net</code> created
+earlier, with the driver defaults for <code class="highlighter-rouge">--gateway=192.168.1.1</code> and <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>IPvlan  <span class="o">(</span><span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span> Defaults to L2 mode <span class="k">if </span>not specified<span class="o">)</span>
-<span class="gp">$</span><span class="w"> </span>docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> IPvlan  <span class="o">(</span><span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span> Defaults to L2 mode <span class="k">if </span>not specified<span class="o">)</span>
+<span class="gp">$</span> docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.1.0/24 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 db_net_ipv
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Start a container with an explicit name <span class="k">in </span>daemon mode
-<span class="gp">$</span><span class="w"> </span>docker  run <span class="nt">--net</span><span class="o">=</span>db_net_ipv <span class="nt">--name</span><span class="o">=</span>ipv1 <span class="nt">-itd</span> alpine /bin/sh
+</span><span class="gp">#</span> Start a container with an explicit name <span class="k">in </span>daemon mode
+<span class="gp">$</span> docker  run <span class="nt">--net</span><span class="o">=</span>db_net_ipv <span class="nt">--name</span><span class="o">=</span>ipv1 <span class="nt">-itd</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Start a second container and ping using the container name
-<span class="gp">#</span><span class="w"> </span>to see the docker included name resolution functionality
-<span class="gp">$</span><span class="w"> </span>docker  run <span class="nt">--net</span><span class="o">=</span>db_net_ipv <span class="nt">--name</span><span class="o">=</span>ipv2 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>ping <span class="nt">-c</span> 4 ipv1
+</span><span class="gp">#</span> Start a second container and ping using the container name
+<span class="gp">#</span> to see the docker included name resolution functionality
+<span class="gp">$</span> docker  run <span class="nt">--net</span><span class="o">=</span>db_net_ipv <span class="nt">--name</span><span class="o">=</span>ipv2 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> ping <span class="nt">-c</span> 4 ipv1
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>NOTE: the containers can NOT ping the underlying host interfaces as
-<span class="gp">#</span><span class="w"> </span>they are intentionally filtered by Linux <span class="k">for </span>additional isolation.
+</span><span class="gp">#</span> NOTE: the containers can NOT ping the underlying host interfaces as
+<span class="gp">#</span> they are intentionally filtered by Linux <span class="k">for </span>additional isolation.
 </code></pre></div></div>
 
-<p>The drivers also support the <code class="language-plaintext highlighter-rouge">--internal</code> flag that will completely isolate
+<p>The drivers also support the <code class="highlighter-rouge">--internal</code> flag that will completely isolate
 containers on a network from any communications external to that network. Since
 network isolation is tightly coupled to the network’s parent interface the result
-of leaving the <code class="language-plaintext highlighter-rouge">-o parent=</code> option off of a <code class="language-plaintext highlighter-rouge">docker network create</code> is the exact
-same as the <code class="language-plaintext highlighter-rouge">--internal</code> option. If the parent interface is not specified or the
-<code class="language-plaintext highlighter-rouge">--internal</code> flag is used, a netlink type <code class="language-plaintext highlighter-rouge">dummy</code> parent interface is created
+of leaving the <code class="highlighter-rouge">-o parent=</code> option off of a <code class="highlighter-rouge">docker network create</code> is the exact
+same as the <code class="highlighter-rouge">--internal</code> option. If the parent interface is not specified or the
+<code class="highlighter-rouge">--internal</code> flag is used, a netlink type <code class="highlighter-rouge">dummy</code> parent interface is created
 for the user and used as the parent interface effectively isolating the network
 completely.</p>
 
-<p>The following two <code class="language-plaintext highlighter-rouge">docker network create</code> examples result in identical networks
+<p>The following two <code class="highlighter-rouge">docker network create</code> examples result in identical networks
 that you can attach container to:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Empty <span class="s1">'-o parent='</span> creates an isolated network
-<span class="gp">$</span><span class="w"> </span>docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Empty <span class="s1">'-o parent='</span> creates an isolated network
+<span class="gp">$</span> docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.10.0/24 isolated1
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Explicit <span class="s1">'--internal'</span> flag is the same:
-<span class="gp">$</span><span class="w"> </span>docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
+</span><span class="gp">#</span> Explicit <span class="s1">'--internal'</span> flag is the same:
+<span class="gp">$</span> docker network  create <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.11.0/24 <span class="nt">--internal</span> isolated2
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Even the <span class="s1">'--subnet='</span> can be left empty and the default
-<span class="gp">#</span><span class="w"> </span>IPAM subnet of 172.18.0.0/16 will be assigned
-<span class="gp">$</span><span class="w"> </span>docker network  create <span class="nt">-d</span> ipvlan isolated3
+</span><span class="gp">#</span> Even the <span class="s1">'--subnet='</span> can be left empty and the default
+<span class="gp">#</span> IPAM subnet of 172.18.0.0/16 will be assigned
+<span class="gp">$</span> docker network  create <span class="nt">-d</span> ipvlan isolated3
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>isolated1 <span class="nt">--name</span><span class="o">=</span>cid1 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>isolated2 <span class="nt">--name</span><span class="o">=</span>cid2 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>isolated3 <span class="nt">--name</span><span class="o">=</span>cid3 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>isolated1 <span class="nt">--name</span><span class="o">=</span>cid1 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>isolated2 <span class="nt">--name</span><span class="o">=</span>cid2 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>isolated3 <span class="nt">--name</span><span class="o">=</span>cid3 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>To attach to any use <span class="sb">`</span>docker <span class="nb">exec</span><span class="sb">`</span> and start a shell
-<span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> cid1 /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> cid2 /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> cid3 /bin/sh
+</span><span class="gp">#</span> To attach to any use <span class="sb">`</span>docker <span class="nb">exec</span><span class="sb">`</span> and start a shell
+<span class="gp">$</span> docker <span class="nb">exec</span> <span class="nt">-it</span> cid1 /bin/sh
+<span class="gp">$</span> docker <span class="nb">exec</span> <span class="nt">-it</span> cid2 /bin/sh
+<span class="gp">$</span> docker <span class="nb">exec</span> <span class="nt">-it</span> cid3 /bin/sh
 </code></pre></div></div>
 
 <h2 id="ipvlan-8021q-trunk-l2-mode-example-usage">IPvlan 802.1q trunk L2 mode example usage</h2>
@@ -268,23 +268,23 @@ in isolating tenant traffic.</p>
 <p><img src="/docs.docker.jp.onthefly/network/images/vlans-deeper-look.png" alt="Docker VLANs in Depth" /></p>
 
 <p>The Linux sub-interface tagged with a VLAN can either already exist or will be
-created when you call a <code class="language-plaintext highlighter-rouge">docker network create</code>. <code class="language-plaintext highlighter-rouge">docker network rm</code> will delete
-the sub-interface. Parent interfaces such as <code class="language-plaintext highlighter-rouge">eth0</code> are not deleted, only
+created when you call a <code class="highlighter-rouge">docker network create</code>. <code class="highlighter-rouge">docker network rm</code> will delete
+the sub-interface. Parent interfaces such as <code class="highlighter-rouge">eth0</code> are not deleted, only
 sub-interfaces with a netlink parent index &gt; 0.</p>
 
 <p>For the driver to add/delete the VLAN sub-interfaces the format needs to be
-<code class="language-plaintext highlighter-rouge">interface_name.vlan_tag</code>. Other sub-interface naming can be used as the
+<code class="highlighter-rouge">interface_name.vlan_tag</code>. Other sub-interface naming can be used as the
 specified parent, but the link will not be deleted automatically when
-<code class="language-plaintext highlighter-rouge">docker network rm</code> is invoked.</p>
+<code class="highlighter-rouge">docker network rm</code> is invoked.</p>
 
 <p>The option to use either existing parent VLAN sub-interfaces or let Docker manage
 them enables the user to either completely manage the Linux interfaces and
 networking or let Docker create and delete the VLAN parent sub-interfaces
-(netlink <code class="language-plaintext highlighter-rouge">ip link</code>) with no effort from the user.</p>
+(netlink <code class="highlighter-rouge">ip link</code>) with no effort from the user.</p>
 
-<p>For example: use <code class="language-plaintext highlighter-rouge">eth0.10</code> to denote a sub-interface of <code class="language-plaintext highlighter-rouge">eth0</code> tagged with the
-VLAN id of <code class="language-plaintext highlighter-rouge">10</code>. The equivalent <code class="language-plaintext highlighter-rouge">ip link</code> command would be
-<code class="language-plaintext highlighter-rouge">ip link add link eth0 name eth0.10 type vlan id 10</code>.</p>
+<p>For example: use <code class="highlighter-rouge">eth0.10</code> to denote a sub-interface of <code class="highlighter-rouge">eth0</code> tagged with the
+VLAN id of <code class="highlighter-rouge">10</code>. The equivalent <code class="highlighter-rouge">ip link</code> command would be
+<code class="highlighter-rouge">ip link add link eth0 name eth0.10 type vlan id 10</code>.</p>
 
 <p>The example creates the VLAN tagged networks and then starts two containers to
 test connectivity between containers. Different VLANs cannot ping one another
@@ -294,40 +294,40 @@ underlying host.</p>
 
 <h3 id="vlan-id-20">VLAN ID 20</h3>
 
-<p>In the first network tagged and isolated by the Docker host, <code class="language-plaintext highlighter-rouge">eth0.20</code> is the
-parent interface tagged with VLAN id <code class="language-plaintext highlighter-rouge">20</code> specified with <code class="language-plaintext highlighter-rouge">-o parent=eth0.20</code>.
+<p>In the first network tagged and isolated by the Docker host, <code class="highlighter-rouge">eth0.20</code> is the
+parent interface tagged with VLAN id <code class="highlighter-rouge">20</code> specified with <code class="highlighter-rouge">-o parent=eth0.20</code>.
 Other naming formats can be used, but the links need to be added and deleted
-manually using <code class="language-plaintext highlighter-rouge">ip link</code> or Linux configuration files. As long as the <code class="language-plaintext highlighter-rouge">-o parent</code>
+manually using <code class="highlighter-rouge">ip link</code> or Linux configuration files. As long as the <code class="highlighter-rouge">-o parent</code>
 exists, anything can be used if it is compliant with Linux netlink.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.20.0/24 <span class="se">\</span>
     <span class="nt">--gateway</span><span class="o">=</span>192.168.20.1 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.20 ipvlan20
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan20 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test1 <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan20 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test2 <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> <span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan20 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test1 <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan20 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test2 <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <h3 id="vlan-id-30">VLAN ID 30</h3>
 
-<p>In the second network, tagged and isolated by the Docker host, <code class="language-plaintext highlighter-rouge">eth0.30</code> is the
-parent interface tagged with VLAN id <code class="language-plaintext highlighter-rouge">30</code> specified with <code class="language-plaintext highlighter-rouge">-o parent=eth0.30</code>. The
-<code class="language-plaintext highlighter-rouge">ipvlan_mode=</code> defaults to l2 mode <code class="language-plaintext highlighter-rouge">ipvlan_mode=l2</code>. It can also be explicitly
+<p>In the second network, tagged and isolated by the Docker host, <code class="highlighter-rouge">eth0.30</code> is the
+parent interface tagged with VLAN id <code class="highlighter-rouge">30</code> specified with <code class="highlighter-rouge">-o parent=eth0.30</code>. The
+<code class="highlighter-rouge">ipvlan_mode=</code> defaults to l2 mode <code class="highlighter-rouge">ipvlan_mode=l2</code>. It can also be explicitly
 set with the same result as shown in the next example.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged.
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged.
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.30.0/24 <span class="se">\</span>
     <span class="nt">--gateway</span><span class="o">=</span>192.168.30.1 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.30 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan30
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan30 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test3 <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan30 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test4 <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> <span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan30 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test3 <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan30 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test4 <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p>The gateway is set inside of the container as the default gateway. That gateway
@@ -339,35 +339,35 @@ would typically be an external router on the network.</p>
 </span></code></pre></div></div>
 
 <p>Example: Multi-Subnet IPvlan L2 Mode starting two containers on the same subnet
-and pinging one another. In order for the <code class="language-plaintext highlighter-rouge">192.168.114.0/24</code> to reach
-<code class="language-plaintext highlighter-rouge">192.168.116.0/24</code> it requires an external router in L2 mode. L3 mode can route
-between subnets that share a common <code class="language-plaintext highlighter-rouge">-o parent=</code>.</p>
+and pinging one another. In order for the <code class="highlighter-rouge">192.168.114.0/24</code> to reach
+<code class="highlighter-rouge">192.168.116.0/24</code> it requires an external router in L2 mode. L3 mode can route
+between subnets that share a common <code class="highlighter-rouge">-o parent=</code>.</p>
 
 <p>Secondary addresses on network routers are common as an address space becomes
 exhausted to add another secondary to an L3 VLAN interface or commonly referred
 to as a “switched virtual interface” (SVI).</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.114.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.116.0/24 <span class="se">\</span>
     <span class="nt">--gateway</span><span class="o">=</span>192.168.114.254  <span class="nt">--gateway</span><span class="o">=</span>192.168.116.254 <span class="se">\</span>
      <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.114 <span class="se">\</span>
      <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan114
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan114 <span class="nt">--ip</span><span class="o">=</span>192.168.114.10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan114 <span class="nt">--ip</span><span class="o">=</span>192.168.114.11 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan114 <span class="nt">--ip</span><span class="o">=</span>192.168.114.10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan114 <span class="nt">--ip</span><span class="o">=</span>192.168.114.11 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p>A key takeaway is, operators have the ability to map their physical network into
 their virtual network for integrating containers into their environment with no
 operational overhauls required. NetOps drops an 802.1q trunk into the
-Docker host. That virtual link would be the <code class="language-plaintext highlighter-rouge">-o parent=</code> passed in the network
-creation. For untagged (non-VLAN) links, it is as simple as <code class="language-plaintext highlighter-rouge">-o parent=eth0</code> or
+Docker host. That virtual link would be the <code class="highlighter-rouge">-o parent=</code> passed in the network
+creation. For untagged (non-VLAN) links, it is as simple as <code class="highlighter-rouge">-o parent=eth0</code> or
 for 802.1q trunks with VLAN IDs each network gets mapped to the corresponding
 VLAN/Subnet from the network.</p>
 
 <p>An example being, NetOps provides VLAN ID and the associated subnets for VLANs
 being passed on the Ethernet link to the Docker host server. Those values are
-plugged into the <code class="language-plaintext highlighter-rouge">docker network create</code> commands when provisioning the
+plugged into the <code class="highlighter-rouge">docker network create</code> commands when provisioning the
 Docker networks. These are persistent configurations that are applied every time
 the Docker engine starts which alleviates having to manage often complex
 configuration files. The network interfaces can also be managed manually by
@@ -378,17 +378,17 @@ are as follows:</p>
 <ul>
   <li>VLAN: 10, Subnet: 172.16.80.0/24, Gateway: 172.16.80.1
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">--subnet=172.16.80.0/24 --gateway=172.16.80.1 -o parent=eth0.10</code></li>
+      <li><code class="highlighter-rouge">--subnet=172.16.80.0/24 --gateway=172.16.80.1 -o parent=eth0.10</code></li>
     </ul>
   </li>
   <li>VLAN: 20, IP subnet: 172.16.50.0/22, Gateway: 172.16.50.1
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20 </code></li>
+      <li><code class="highlighter-rouge">--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20 </code></li>
     </ul>
   </li>
   <li>VLAN: 30, Subnet: 10.1.100.0/16, Gateway: 10.1.100.1
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">--subnet=10.1.100.0/16 --gateway=10.1.100.1 -o parent=eth0.30</code></li>
+      <li><code class="highlighter-rouge">--subnet=10.1.100.0/16 --gateway=10.1.100.1 -o parent=eth0.30</code></li>
     </ul>
   </li>
 </ul>
@@ -424,15 +424,15 @@ mode that reduces a failure domain to a local host only.</p>
   <li>L3 mode needs to be on a separate subnet as the default namespace since it
 requires a netlink route in the default namespace pointing to the IPvlan parent
 interface.</li>
-  <li>The parent interface used in this example is <code class="language-plaintext highlighter-rouge">eth0</code> and it is on the subnet
- <code class="language-plaintext highlighter-rouge">192.168.1.0/24</code>. Notice the <code class="language-plaintext highlighter-rouge">docker network</code> is <strong>not</strong> on the same subnet
-as <code class="language-plaintext highlighter-rouge">eth0</code>.</li>
+  <li>The parent interface used in this example is <code class="highlighter-rouge">eth0</code> and it is on the subnet
+ <code class="highlighter-rouge">192.168.1.0/24</code>. Notice the <code class="highlighter-rouge">docker network</code> is <strong>not</strong> on the same subnet
+as <code class="highlighter-rouge">eth0</code>.</li>
   <li>Unlike IPvlan l2 modes, different subnets/networks can ping one another as
-long as they share the same parent interface <code class="language-plaintext highlighter-rouge">-o parent=</code>.</li>
+long as they share the same parent interface <code class="highlighter-rouge">-o parent=</code>.</li>
 </ul>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="nv">$ </span>ip a show eth0
-<span class="gp">3: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+<span class="gp">3: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
 <span class="go">    link/ether 00:50:56:39:45:2e brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.250/24 brd 192.168.1.255 scope global eth0
 </span></code></pre></div></div>
@@ -440,43 +440,43 @@ long as they share the same parent interface <code class="language-plaintext hig
 <ul>
   <li>A traditional gateway doesn’t mean much to an L3 mode IPvlan interface since
 there is no broadcast traffic allowed. Because of that, the container default
-gateway points to the containers <code class="language-plaintext highlighter-rouge">eth0</code> device. See below for CLI output
-of <code class="language-plaintext highlighter-rouge">ip route</code> or <code class="language-plaintext highlighter-rouge">ip -6 route</code> from inside an L3 container for details.</li>
+gateway points to the containers <code class="highlighter-rouge">eth0</code> device. See below for CLI output
+of <code class="highlighter-rouge">ip route</code> or <code class="highlighter-rouge">ip -6 route</code> from inside an L3 container for details.</li>
 </ul>
 
-<p>The mode ` -o ipvlan_mode=l3<code class="language-plaintext highlighter-rouge"> must be explicitly specified since the default
+<p>The mode ` -o ipvlan_mode=l3<code class="highlighter-rouge"> must be explicitly specified since the default
 IPvlan mode is </code>l2`.</p>
 
 <p>The following example does not specify a parent interface. The network drivers
 will create a dummy type link for the user rather than rejecting the network
 creation and isolating containers from only communicating with one another.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create the IPvlan L3 network
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Create the IPvlan L3 network
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.214.0/24 <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>10.1.214.0/24 <span class="se">\</span>
      <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l3 ipnet210
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Test 192.168.214.0/24 connectivity
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>192.168.214.10 <span class="nt">-itd</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>10.1.214.10 <span class="nt">-itd</span> alpine /bin/sh
+</span><span class="gp">#</span> Test 192.168.214.0/24 connectivity
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>192.168.214.10 <span class="nt">-itd</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>10.1.214.10 <span class="nt">-itd</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Test L3 connectivity from 10.1.214.0/24 to 192.168.212.0/24
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>192.168.214.9 <span class="nt">-it</span> <span class="nt">--rm</span> alpine ping <span class="nt">-c</span> 2 10.1.214.10
+</span><span class="gp">#</span> Test L3 connectivity from 10.1.214.0/24 to 192.168.212.0/24
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>192.168.214.9 <span class="nt">-it</span> <span class="nt">--rm</span> alpine ping <span class="nt">-c</span> 2 10.1.214.10
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Test L3 connectivity from 192.168.212.0/24 to 10.1.214.0/24
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>10.1.214.9 <span class="nt">-it</span> <span class="nt">--rm</span> alpine ping <span class="nt">-c</span> 2 192.168.214.10
+</span><span class="gp">#</span> Test L3 connectivity from 192.168.212.0/24 to 10.1.214.0/24
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet210 <span class="nt">--ip</span><span class="o">=</span>10.1.214.9 <span class="nt">-it</span> <span class="nt">--rm</span> alpine ping <span class="nt">-c</span> 2 192.168.214.10
 <span class="go">
 </span></code></pre></div></div>
 
 <blockquote>
   <p><strong>Note</strong></p>
 
-  <p>Notice that there is no <code class="language-plaintext highlighter-rouge">--gateway=</code> option in the network create. The field
-is ignored if one is specified <code class="language-plaintext highlighter-rouge">l3</code> mode. Take a look at the container routing
+  <p>Notice that there is no <code class="highlighter-rouge">--gateway=</code> option in the network create. The field
+is ignored if one is specified <code class="highlighter-rouge">l3</code> mode. Take a look at the container routing
 table from inside of the container:</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Inside an L3 mode container
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Inside an L3 mode container
 <span class="gp">$</span><span class="nv">$ </span>ip route
 <span class="go"> default dev eth0
   192.168.214.0/24 dev eth0  src 192.168.214.10
@@ -498,26 +498,26 @@ between the two address families.</p>
   </li>
   <li>
     <p>The next example will start with IPv6 only. Start two containers on the same
-VLAN <code class="language-plaintext highlighter-rouge">139</code> and ping one another. Since the IPv4 subnet is not specified, the
+VLAN <code class="highlighter-rouge">139</code> and ping one another. Since the IPv4 subnet is not specified, the
 default IPAM will provision a default IPv4 subnet. That subnet is isolated
-unless the upstream network is explicitly routing it on VLAN <code class="language-plaintext highlighter-rouge">139</code>.</p>
+unless the upstream network is explicitly routing it on VLAN <code class="highlighter-rouge">139</code>.</p>
   </li>
 </ul>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create a v6 network
-<span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc2::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc2::22 <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Create a v6 network
+<span class="gp">$</span> docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
+    <span class="nt">--ipv6</span> <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc2::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc2::22 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.139 v6ipvlan139
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Start a container on the network
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>v6ipvlan139 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> Start a container on the network
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>v6ipvlan139 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p>View the container eth0 interface and v6 routing table:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Inside the IPv6 container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Inside the IPv6 container
 <span class="gp">$</span><span class="nv">$ </span>ip a show eth0
-<span class="gp">75: eth0@if55: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UNKNOWN group default
+<span class="gp">75: eth0@if55: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu 1500 qdisc noqueue state UNKNOWN group default
 <span class="go">    link/ether 00:50:56:2b:29:40 brd ff:ff:ff:ff:ff:ff
     inet 172.18.0.2/16 scope global eth0
        valid_lft forever preferred_lft forever
@@ -534,12 +534,12 @@ default via 2001:db8:abc2::22 dev eth0  metric 1024
 
 <p>Start a second container and ping the first container’s v6 address.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Test L2 connectivity over IPv6
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>v6ipvlan139 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Test L2 connectivity over IPv6
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>v6ipvlan139 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>Inside the second IPv6 container
+</span><span class="gp">#</span> Inside the second IPv6 container
 <span class="gp">$</span><span class="nv">$ </span>ip a show eth0
-<span class="gp">75: eth0@if55: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UNKNOWN group default
+<span class="gp">75: eth0@if55: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu 1500 qdisc noqueue state UNKNOWN group default
 <span class="go">    link/ether 00:50:56:2b:29:40 brd ff:ff:ff:ff:ff:ff
     inet 172.18.0.3/16 scope global eth0
        valid_lft forever preferred_lft forever
@@ -558,12 +558,12 @@ round-trip min/avg/max/stddev = 0.044/0.051/0.058/0.000 ms
 </span></code></pre></div></div>
 
 <p>The next example with setup a dual stack IPv4/IPv6 network with an example
-VLAN ID of <code class="language-plaintext highlighter-rouge">140</code>.</p>
+VLAN ID of <code class="highlighter-rouge">140</code>.</p>
 
 <p>Next create a network with two IPv4 subnets and one IPv6 subnets, all of which
 have explicit gateways:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.140.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.142.0/24 <span class="se">\</span>
     <span class="nt">--gateway</span><span class="o">=</span>192.168.140.1  <span class="nt">--gateway</span><span class="o">=</span>192.168.142.1 <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc9::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc9::22 <span class="se">\</span>
@@ -573,10 +573,10 @@ have explicit gateways:</p>
 
 <p>Start a container and view eth0 and both v4 &amp; v6 routing tables:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan140 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc2::51 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan140 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc2::51 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>ip a show eth0
-<span class="gp">78: eth0@if77: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UNKNOWN group default
+</span><span class="gp">$</span> ip a show eth0
+<span class="gp">78: eth0@if77: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu 1500 qdisc noqueue state UNKNOWN group default
 <span class="go">    link/ether 00:50:56:2b:29:40 brd ff:ff:ff:ff:ff:ff
     inet 192.168.140.2/24 scope global eth0
        valid_lft forever preferred_lft forever
@@ -595,19 +595,19 @@ have explicit gateways:</p>
 default via 2001:db8:abc9::22 dev eth0  metric 1024
 </span></code></pre></div></div>
 
-<p>Start a second container with a specific <code class="language-plaintext highlighter-rouge">--ip4</code> address and ping the first host
+<p>Start a second container with a specific <code class="highlighter-rouge">--ip4</code> address and ping the first host
 using IPv4 packets:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan140 <span class="nt">--ip</span><span class="o">=</span>192.168.140.10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan140 <span class="nt">--ip</span><span class="o">=</span>192.168.140.10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <blockquote>
   <p><strong>Note</strong></p>
 
-  <p>Different subnets on the same parent interface in IPvlan <code class="language-plaintext highlighter-rouge">L2</code> mode cannot ping
+  <p>Different subnets on the same parent interface in IPvlan <code class="highlighter-rouge">L2</code> mode cannot ping
 one another. That requires a router to proxy-arp the requests with a secondary
-subnet. However, IPvlan <code class="language-plaintext highlighter-rouge">L3</code> will route the unicast traffic between disparate
-subnets as long as they share the same <code class="language-plaintext highlighter-rouge">-o parent</code> parent link.</p>
+subnet. However, IPvlan <code class="highlighter-rouge">L3</code> will route the unicast traffic between disparate
+subnets as long as they share the same <code class="highlighter-rouge">-o parent</code> parent link.</p>
 </blockquote>
 
 <h2 id="dual-stack-ipv4-ipv6-ipvlan-l3-mode">Dual stack IPv4 IPv6 IPvlan L3 mode</h2>
@@ -615,20 +615,20 @@ subnets as long as they share the same <code class="language-plaintext highlight
 <p><strong>Example:</strong> IPvlan L3 Mode Dual Stack IPv4/IPv6, Multi-Subnet w/ 802.1q VLAN Tag:118</p>
 
 <p>As in all of the examples, a tagged VLAN interface does not have to be used. The
-sub-interfaces can be swapped with <code class="language-plaintext highlighter-rouge">eth0</code>, <code class="language-plaintext highlighter-rouge">eth1</code>, <code class="language-plaintext highlighter-rouge">bond0</code> or any other valid
-interface on the host other then the <code class="language-plaintext highlighter-rouge">lo</code> loopback.</p>
+sub-interfaces can be swapped with <code class="highlighter-rouge">eth0</code>, <code class="highlighter-rouge">eth1</code>, <code class="highlighter-rouge">bond0</code> or any other valid
+interface on the host other then the <code class="highlighter-rouge">lo</code> loopback.</p>
 
 <p>The primary difference you will see is that L3 mode does not create a default
-route with a next-hop but rather sets a default route pointing to <code class="language-plaintext highlighter-rouge">dev eth</code> only
+route with a next-hop but rather sets a default route pointing to <code class="highlighter-rouge">dev eth</code> only
 since ARP/Broadcasts/Multicast are all filtered by Linux as per the design. Since
 the parent interface is essentially acting as a router, the parent interface IP
 and subnet needs to be different from the container networks. That is the opposite
 of bridge and L2 modes, which need to be on the same subnet (broadcast domain)
 in order to forward broadcast and multicast packets.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Create an IPv6+IPv4 Dual Stack IPvlan L3 network
-<span class="gp">#</span><span class="w"> </span>Gateways <span class="k">for </span>both v4 and v6 are <span class="nb">set </span>to a dev e.g. <span class="s1">'default dev eth0'</span>
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Create an IPv6+IPv4 Dual Stack IPvlan L3 network
+<span class="gp">#</span> Gateways <span class="k">for </span>both v4 and v6 are <span class="nb">set </span>to a dev e.g. <span class="s1">'default dev eth0'</span>
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.110.0/24 <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.112.0/24 <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc6::/64 <span class="se">\</span>
@@ -636,21 +636,21 @@ in order to forward broadcast and multicast packets.</p>
      <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l3 ipnet110
 <span class="go">
 
-</span><span class="gp">#</span><span class="w"> </span>Start a few of containers on the network <span class="o">(</span>ipnet110<span class="o">)</span>
-<span class="gp">#</span><span class="w"> </span><span class="k">in </span>separate terminals and check connectivity
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">#</span><span class="w"> </span>Start a second container specifying the v6 address
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc6::10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">#</span><span class="w"> </span>Start a third specifying the IPv4 address
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip</span><span class="o">=</span>192.168.112.30 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">#</span><span class="w"> </span>Start a 4th specifying both the IPv4 and IPv6 addresses
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc6::50 <span class="nt">--ip</span><span class="o">=</span>192.168.112.50 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> Start a few of containers on the network <span class="o">(</span>ipnet110<span class="o">)</span>
+<span class="gp">#</span> <span class="k">in </span>separate terminals and check connectivity
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">#</span> Start a second container specifying the v6 address
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc6::10 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">#</span> Start a third specifying the IPv4 address
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip</span><span class="o">=</span>192.168.112.30 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">#</span> Start a 4th specifying both the IPv4 and IPv6 addresses
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipnet110 <span class="nt">--ip6</span><span class="o">=</span>2001:db8:abc6::50 <span class="nt">--ip</span><span class="o">=</span>192.168.112.50 <span class="nt">-it</span> <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p>Interface and routing table outputs are as follows:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="nv">$ </span>ip a show eth0
-<span class="gp">63: eth0@if59: &lt;BROADCAST,MULTICAST,NOARP,UP,LOWER_UP&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UNKNOWN group default
+<span class="gp">63: eth0@if59: &lt;BROADCAST,MULTICAST,NOARP,UP,LOWER_UP&gt;</span> mtu 1500 qdisc noqueue state UNKNOWN group default
 <span class="go">    link/ether 00:50:56:2b:29:40 brd ff:ff:ff:ff:ff:ff
     inet 192.168.112.2/24 scope global eth0
        valid_lft forever preferred_lft forever
@@ -659,7 +659,7 @@ in order to forward broadcast and multicast packets.</p>
     inet6 2001:db8:abc6::10/64 scope link nodad
        valid_lft forever preferred_lft forever
 
-</span><span class="gp">#</span><span class="w"> </span>Note the default route is the eth device because ARPs are filtered.
+</span><span class="gp">#</span> Note the default route is the eth device because ARPs are filtered.
 <span class="gp">$</span><span class="nv">$ </span>ip route
 <span class="go">  default dev eth0  scope link
   192.168.112.0/24 dev eth0  proto kernel  scope link  src 192.168.112.2
@@ -673,7 +673,7 @@ default dev eth0  metric 1024
 <blockquote>
   <p><em>Note</em></p>
 
-  <p>There may be a bug when specifying <code class="language-plaintext highlighter-rouge">--ip6=</code> addresses when you delete a
+  <p>There may be a bug when specifying <code class="highlighter-rouge">--ip6=</code> addresses when you delete a
 container with a specified v6 address and then start a new container with the
 same v6 address it throws the following like the address isn’t properly being
 released to the v6 pool. It will fail to unmount the container and be left dead.</p>
@@ -687,52 +687,52 @@ released to the v6 pool. It will fail to unmount the container and be left dead.
 <h3 id="vlan-id-40">VLAN ID 40</h3>
 
 <p>If a user does not want the driver to create the VLAN sub-interface, it needs to
-exist before running <code class="language-plaintext highlighter-rouge">docker network create</code>. If you have sub-interface
-naming that is not <code class="language-plaintext highlighter-rouge">interface.vlan_id</code> it is honored in the <code class="language-plaintext highlighter-rouge">-o parent=</code> option
+exist before running <code class="highlighter-rouge">docker network create</code>. If you have sub-interface
+naming that is not <code class="highlighter-rouge">interface.vlan_id</code> it is honored in the <code class="highlighter-rouge">-o parent=</code> option
 again as long as the interface exists and is up.</p>
 
 <p>Links, when manually created, can be named anything as long as they exist when
 the network is created. Manually created links do not get deleted regardless of
-the name when the network is deleted with <code class="language-plaintext highlighter-rouge">docker network rm</code>.</p>
+the name when the network is deleted with <code class="highlighter-rouge">docker network rm</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>create a new sub-interface tied to dot1q vlan 40
-<span class="gp">$</span><span class="w"> </span>ip <span class="nb">link </span>add <span class="nb">link </span>eth0 name eth0.40 <span class="nb">type </span>vlan <span class="nb">id </span>40
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> create a new sub-interface tied to dot1q vlan 40
+<span class="gp">$</span> ip link add link eth0 name eth0.40 <span class="nb">type </span>vlan id 40
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="nb">enable </span>the new sub-interface
-<span class="gp">$</span><span class="w"> </span>ip <span class="nb">link set </span>eth0.40 up
+</span><span class="gp">#</span> <span class="nb">enable </span>the new sub-interface
+<span class="gp">$</span> ip link <span class="nb">set </span>eth0.40 up
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+</span><span class="gp">#</span> now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
    <span class="nt">--subnet</span><span class="o">=</span>192.168.40.0/24 <span class="se">\</span>
    <span class="nt">--gateway</span><span class="o">=</span>192.168.40.1 <span class="se">\</span>
    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.40 ipvlan40
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test5 <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test6 <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> <span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test5 <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test6 <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p><strong>Example:</strong> VLAN sub-interface manually created with any name:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>create a new sub interface tied to dot1q vlan 40
-<span class="gp">$</span><span class="w"> </span>ip <span class="nb">link </span>add <span class="nb">link </span>eth0 name foo <span class="nb">type </span>vlan <span class="nb">id </span>40
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> create a new sub interface tied to dot1q vlan 40
+<span class="gp">$</span> ip link add link eth0 name foo <span class="nb">type </span>vlan id 40
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="nb">enable </span>the new sub-interface
-<span class="gp">$</span><span class="w"> </span>ip <span class="nb">link set </span>foo up
+</span><span class="gp">#</span> <span class="nb">enable </span>the new sub-interface
+<span class="gp">$</span> ip link <span class="nb">set </span>foo up
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span>now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
-<span class="gp">$</span><span class="w"> </span>docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
+</span><span class="gp">#</span> now add networks and hosts as you would normally by attaching to the master <span class="o">(</span>sub<span class="o">)</span>interface that is tagged
+<span class="gp">$</span> docker network  create  <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.40.0/24 <span class="nt">--gateway</span><span class="o">=</span>192.168.40.1 <span class="se">\</span>
     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>foo ipvlan40
 <span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test5 <span class="nt">--rm</span> alpine /bin/sh
-<span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test6 <span class="nt">--rm</span> alpine /bin/sh
+</span><span class="gp">#</span> <span class="k">in </span>two separate terminals, start a Docker container and the containers can now ping one another.
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test5 <span class="nt">--rm</span> alpine /bin/sh
+<span class="gp">$</span> docker run <span class="nt">--net</span><span class="o">=</span>ipvlan40 <span class="nt">-it</span> <span class="nt">--name</span> ivlan_test6 <span class="nt">--rm</span> alpine /bin/sh
 </code></pre></div></div>
 
 <p>Manually created links can be cleaned up with:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip <span class="nb">link </span>del foo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ip link del foo
 </code></pre></div></div>
 
 <p>As with all of the Libnetwork drivers, they can be mixed and matched, even as
