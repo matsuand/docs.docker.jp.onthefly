@@ -716,6 +716,47 @@ In this preview, Dev Environments support a JSON file which allows you to specif
 @z
 
 @x
+Next, you have to define the dependencies you want to include in your `Dockerfile.devenv`, alongside the following requisites:
+@y
+次に依存関係を含めたい場合は`Dockerfile.devenv`に定義しなければなりません。
+そこでは以下のことが必要になります。
+@z
+
+@x
+While some images or Dockerfiles will include a non-root user, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you were to include the Docker tooling (e.g. `docker` cli, `docker compose`, etc.) in the `Dockerfile.devenv`, you would need the `vscode` user to be included in the `docker` group.
+@y
+イメージや Dockerfile の中には非 root ユーザーを含むものがあるものの、多くのベースイメージや Dockerfile には含まれません。
+幸いにも非 root ユーザーとして`vscode`というものが利用できます。
+`Dockerfile.devenv`内に Docker ツール（たとえば`docker` cli, `docker compose`など）を含めるつもりでいた場合、`vscode`ユーザーは`docker`グループに所属させる必要が出てくるかもしれません。
+@z
+
+@x
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM <your base image>
+
+RUN useradd -s /bin/bash -m vscode \
+ && groupadd docker \
+ && usermod -aG docker vscode
+
+USER vscode
+```
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM <your base image>
+
+RUN useradd -s /bin/bash -m vscode \
+ && groupadd docker \
+ && usermod -aG docker vscode
+
+USER vscode
+```
+@z
+
+@x
 ## Specify a base image
 @y
 {: #specify-a-base-image }

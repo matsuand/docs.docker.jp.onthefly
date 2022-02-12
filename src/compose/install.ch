@@ -380,31 +380,25 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 @z
 
 @x
-> **Note**:
->
-> If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+    > **Note**:
+    >
+    > If the command `docker-compose` fails after installation, check your path.
+    > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+    >
+    > For example:
+    > ```console
+    > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    > ```
 @y
-> **メモ**
->
-> インストールした後に`docker-compose`の実行に失敗する場合は、パスを確認してください。
-> `/usr/bin`あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
-@z
-
-@x
-For example:
-@y
-    たとえば以下のとおりです。
-@z
-
-@x
-```console
-$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
-@y
-```console
-$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
+    > **メモ**
+    >
+    > インストールした後に`docker-compose`の実行に失敗する場合は、パスを確認してください。
+    > `/usr/bin`あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
+    >
+    > たとえば以下のとおりです。
+    > ```console
+    > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    > ```
 @z
 
 @x

@@ -32,9 +32,11 @@ title: Compose V2
 @y
 > 重要
 >
-> The new Compose V2, which supports the `compose` command as part of the Docker CLI, is now available.
+> Docker CLI の一部として`compose`コマンドをサポートした、新たな Compose V2 が利用できるようになりました。
 >
-> Compose V2 integrates compose functions into the Docker platform, continuing to support most of the previous `docker-compose` features and flags. You can test the Compose V2 by simply replacing the dash (`-`) with a space, and by running `docker compose`, instead of `docker-compose`.
+> Compose V2 は Docker プラットフォーム内に compose 機能を統合するものです。
+> これまでの`docker-compose`機能やフラグのほとんどを受け継いでいます。
+> Compose V2 の確認は、単にダッシュ (`-`) を空白に変えるだけであって、`docker-compose`ではなく`docker compose`を実行することで行うことができます。
 {: .important}
 @z
 
@@ -47,6 +49,7 @@ Starting with Docker Desktop 3.4.0, you can run Compose V2 commands without modi
 @x
 ## Context of Docker Compose evolution
 @y
+{: #context-of-docker-compose-evolution }
 ## Context of Docker Compose evolution
 @z
 
@@ -295,11 +298,11 @@ To install Compose Switch automatically, run:
 
 @x
 ```console
-$ curl -fL https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -fL https://raw.githubusercontent.com/docker/compose-switch/master/install_on_linux.sh | sh
 ```
 @y
 ```console
-$ curl -fL https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -fL https://raw.githubusercontent.com/docker/compose-switch/master/install_on_linux.sh | sh
 ```
 @z
 
