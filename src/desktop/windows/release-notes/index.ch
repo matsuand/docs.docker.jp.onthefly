@@ -59,11 +59,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.5.1
+2022-02-15
 @y
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.5.1
+2022-02-15
 @z
 
 @x
@@ -77,6 +77,38 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 >
 > [Windows 向け](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
+- Fixed a crash in the Docker Dashboard which would make the systray menu disappear.
+@y
+- インストールを新たに行うと、バックエンドのデフォルトが WSL 2 ではなく Hyper-V になってしまう不具合を修正しました。
+- Docker ダッシュボードにおいて、システムメニューが非表示となってクラッシュしてしまう問題を修正しました。
+@z
+
+@x
+If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch it back to WSL 2 automatically. If you are running another version of Windows, and you want Docker Desktop to use the WSL 2 backend, you must manually switch by enabling the **Use the WSL 2 based engine** option in the **Settings > General** section.
+Alternatively, you can edit the Docker Desktop settings file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
+@y
+Windows Home 上において Docker Desktop を実行している場合、4.5.1 をインストールすると、自動的に WSL 2 に切り替わります。
+この他の Windows バージョンを利用していて Docker Desktop において WSL 2 バックエンドを利用したい場合は、**Settings > General** セクションにおいて **Use the WSL 2 based engine** オプションを手動で有効にしなければなりません。
+あるいは`%APPDATA%\Docker\settings.json`にある Docker Desktop 設定ファイルを編集して、`wslEngineEnabled`設定を`true`にすることで手動設定することもできます。
+@z
+
+@x
+## Docker Desktop 4.5.0
+2022-02-10
+@y
+## Docker Desktop 4.5.0
+2022-02-10
 @z
 
 @x
@@ -125,6 +157,19 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
   [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071) を Fix に。
 - ダッシュボードでは Compose バージョン 1 しか取り扱っていないのに、バージョン 2 によって Compose アプリが起動された際の問題を修正しました。
 - Docker Desktop を停止してアプリケーションを起動した後に、誤ってユーザーへのサインインを促していた問題を修正しました。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Desktop to use the Hyper-V backend instead of WSL 2. This means, Windows Home users will not be able to start Docker Desktop as WSL 2 is the only supported backend. To work around this issue, you must uninstall 4.5.0 from your machine and then download and install Docker Desktop 4.5.1 or a higher version. Alternatively, you can edit the Docker Desktop settings.json file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
+@y
+Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Desktop to use the Hyper-V backend instead of WSL 2. This means, Windows Home users will not be able to start Docker Desktop as WSL 2 is the only supported backend. To work around this issue, you must uninstall 4.5.0 from your machine and then download and install Docker Desktop 4.5.1 or a higher version. Alternatively, you can edit the Docker Desktop settings.json file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
 @z
 
 @x
