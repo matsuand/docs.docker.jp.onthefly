@@ -1,4 +1,4 @@
-<!-- Page generated 2022-02-03 12:04:47 +0900-->
+<!-- Page generated 2022-02-16 22:11:29 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ダウンロード率制限 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ダウンロード率制限" />
   <meta property="og:description" content="Download rate limit" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-03T12:04:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-16T22:11:29+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/download-rate-limit/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-02-03T12:04:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-16T22:11:29+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ダウンロード率制限","description":"Download rate limit","url":"https://docs.docker.com/docker-hub/download-rate-limit/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,10 +110,14 @@
                         <section class="section"><h1>ダウンロード率制限</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="what-is-the-download-rate-limit-on-docker-hub">Docker Hub におけるダウンロード率制限とは</h2>
 
 <p>Docker Hub 上でプルリクエストを行うユーザーのアカウントタイプに応じて、Docker イメージのダウンロード (「pull」) にはいくつかの制限があります。
-現在あるアカウントタイプの違いについては <a href="https://hub.docker.com/pricing" target="_blank" rel="noopener" class="_">Docker Hub Pricing</a> を参照してください。
-Some images are unlimited through our <a href="https://www.docker.com/blog/expanded-support-for-open-source-software-projects/" target="_blank" rel="noopener" class="_">Open Source</a> and <a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener" class="_">Publisher</a> programs.</p>
+プル率の制限は個々の IP アドレスに基づきます。
+匿名ユーザーの場合、プル率の制限は 1 つの IP アドレスにつき、6 時間ごとに 100 プルに設定されています。
+<a href="#how-do-i-authenticate-pull-requests">認証されている</a> ユーザーの場合は、6 時間ごとに 200 プルです。
+有償の Docker サブスクリプションのユーザーには制限はありません。</p>
 
-<p>Unlimited pulls by IP is also available through our <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">Large Organization</a> plan.</p>
+<p>Some images are unlimited through our <a href="https://www.docker.com/blog/expanded-support-for-open-source-software-projects/" target="_blank" rel="noopener" class="_">Open Source</a> and <a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener" class="_">Publisher</a> programs. Unlimited pulls by IP is also available through our <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">Large Organization</a> plan.</p>
+
+<p>See <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">Docker Pricing</a> and <a href="https://www.docker.com/pricing/resource-consumption-updates" target="_blank" rel="noopener" class="_">Resource Consumption Updates FAQ</a> for details.</p>
 
 <h2 id="definition-of-limits">制限の定義</h2>
 
@@ -123,17 +127,17 @@ Some images are unlimited through our <a href="https://www.docker.com/blog/expan
 認証されていない（匿名）ユーザーは、IP を通じて制限が課せられます。</p>
 
 <ul>
-  <li>プルリクエストとは、Registry マニフェスト URL（<code class="language-plaintext highlighter-rouge">/v2/*/manifests/*</code>）において、最大 2 つの<code class="language-plaintext highlighter-rouge">GET</code>リクエストとして定義されています。</li>
+  <li>プルリクエストとは、Registry マニフェスト URL（<code class="highlighter-rouge">/v2/*/manifests/*</code>）において、最大 2 つの<code class="highlighter-rouge">GET</code>リクエストとして定義されています。</li>
   <li>通常のイメージプルは、単一のマニフェストリクエストを行います。</li>
   <li>マルチアーキテクチャーイメージに対するプルリクエストは、2 つのマニフェストリクエストを行います。</li>
-  <li><code class="language-plaintext highlighter-rouge">HEAD</code>リクエストは数に含めません。</li>
+  <li><code class="highlighter-rouge">HEAD</code>リクエストは数に含めません。</li>
 </ul>
 
 <h2 id="how-do-i-know-my-pull-requests-are-being-limited">How do I know my pull requests are being limited</h2>
 
-<p>When you issue a pull request and you are over the limit for your account type, Docker Hub will return a <code class="language-plaintext highlighter-rouge">429</code> response code with the following body when the manifest is requested:</p>
+<p>When you issue a pull request and you are over the limit for your account type, Docker Hub will return a <code class="highlighter-rouge">429</code> response code with the following body when the manifest is requested:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
 </code></pre></div></div>
 
 <p>You will see this error message in the Docker CLI or in the Docker Engine logs.</p>
@@ -142,25 +146,25 @@ Some images are unlimited through our <a href="https://www.docker.com/blog/expan
 
 <p>Valid manifest API requests to Hub will usually include the following rate limit headers in the response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ratelimit-limit
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ratelimit-limit
 ratelimit-remaining
 </code></pre></div></div>
 
-<p>These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">grep</code>, and <code class="language-plaintext highlighter-rouge">jq</code> installed.</p>
+<p>These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need <code class="highlighter-rouge">curl</code>, <code class="highlighter-rouge">grep</code>, and <code class="highlighter-rouge">jq</code> installed.</p>
 
 <p>To get a token anonymously (if you are pulling anonymously):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span><span class="si">$(</span>curl <span class="s2">"https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:ratelimitpreview/test:pull"</span> | jq <span class="nt">-r</span> .token<span class="si">)</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>curl <span class="s2">"https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:ratelimitpreview/test:pull"</span> | jq <span class="nt">-r</span> .token<span class="k">)</span>
 </code></pre></div></div>
 
 <p>To get a token with a user account (if you are authenticating your pulls) - don’t forget to insert your username and password in the following command:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">--user</span> <span class="s1">'username:password'</span> <span class="s2">"https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:ratelimitpreview/test:pull"</span> | jq <span class="nt">-r</span> .token<span class="si">)</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>curl <span class="nt">--user</span> <span class="s1">'username:password'</span> <span class="s2">"https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:ratelimitpreview/test:pull"</span> | jq <span class="nt">-r</span> .token<span class="k">)</span>
 </code></pre></div></div>
 
 <p>Then to get the headers showing your limits, run the following:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--head</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span> https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--head</span> <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span> https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 </code></pre></div></div>
 
 <p>Which should return headers including these:</p>
@@ -169,7 +173,7 @@ ratelimit-remaining
 ratelimit-remaining: 76;w=21600
 </span></code></pre></div></div>
 
-<p>This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.</p>
+<p>This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pulls remaining.</p>
 
 <blockquote>
   <p>Remember that these headers are best-effort and there will be small variations.</p>
@@ -177,7 +181,7 @@ ratelimit-remaining: 76;w=21600
 
 <h3 id="i-dont-see-any-ratelimit-headers">I don’t see any RateLimit headers</h3>
 
-<p>If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.</p>
+<p>If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a Docker Hub account associated with a Pro, Team, or a Business subscription, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.</p>
 
 <h2 id="im-being-limited-even-though-i-have-a-paid-docker-subscription">I’m being limited even though I have a paid Docker subscription</h2>
 
@@ -197,12 +201,12 @@ ratelimit-remaining: 76;w=21600
 
 <h3 id="docker-engine">Docker Engine</h3>
 
-<p>Docker Engine のスタンドアロン版を利用している場合は、ターミナル画面から<code class="language-plaintext highlighter-rouge">docker login</code>コマンドを実行して Docker Hub の認証を取得します。
+<p>Docker Engine のスタンドアロン版を利用している場合は、ターミナル画面から<code class="highlighter-rouge">docker login</code>コマンドを実行して Docker Hub の認証を取得します。
 このコマンドの使い方については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/login/">docker login</a> を参照してください。</p>
 
 <h3 id="docker-swarm">Docker Swarm</h3>
 
-<p>Docker Swarm を実行している場合、Docker Hub における認証を得るためには<code class="language-plaintext highlighter-rouge">-- with-registry-auth</code>フラグを用いる必要があります。
+<p>Docker Swarm を実行している場合、Docker Hub における認証を得るためには<code class="highlighter-rouge">-- with-registry-auth</code>フラグを用いる必要があります。
 詳しくは <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_create/#create-a-service">docker service create</a> を参照してください。
 Docker Compose ファイルを使ってアプリケーションをデプロイしている場合は <a href="/docs.docker.jp.onthefly/engine/reference/commandline/stack_deploy/">docker stack deploy</a> を参照してください。</p>
 
@@ -240,7 +244,7 @@ Docker Compose ファイルを使ってアプリケーションをデプロイ�
 率の総量制限は、アカウントのレベルに関係なく、全ユーザーに等しく適用されます。</p>
 
 <p>この制限が適用されたかどうかは、エラーコードを見ればわかります。
-総量制限が適用された場合、単純に<code class="language-plaintext highlighter-rouge">429 Too Many Requests</code>レスポンスが返されます。
+総量制限が適用された場合、単純に<code class="highlighter-rouge">429 Too Many Requests</code>レスポンスが返されます。
 プル処理時に発生する制限の場合は、もっと長いエラーメッセージが示され、その中には本ページへのリンクが示されます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=pull requests">pull requests</a>, <a href="/docs.docker.jp.onthefly/search/?q=download">download</a>, <a href="/docs.docker.jp.onthefly/search/?q=limit">limit</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

@@ -24,24 +24,25 @@ title: ダウンロード率制限
 
 @x
 Docker Hub limits the number of Docker image downloads ("pulls")
-based on the account type of the user pulling the image. 
-See the [pricing page](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for current options.
-
+based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it is  200 pulls per 6 hour period. There are no limits for users with a paid Docker subscription.
 @y
 Docker Hub 上でプルリクエストを行うユーザーのアカウントタイプに応じて、Docker イメージのダウンロード (「pull」) にはいくつかの制限があります。
-現在あるアカウントタイプの違いについては [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+プル率の制限は個々の IP アドレスに基づきます。
+匿名ユーザーの場合、プル率の制限は 1 つの IP アドレスにつき、6 時間ごとに 100 プルに設定されています。
+[認証されている](#how-do-i-authenticate-pull-requests) ユーザーの場合は、6 時間ごとに 200 プルです。
+有償の Docker サブスクリプションのユーザーには制限はありません。
 @z
 
 @x
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs. Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
 @y
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs. Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
 @z
 
 @x
-Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
 @y
-Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
 @z
 
 @x
@@ -206,9 +207,9 @@ ratelimit-remaining: 76;w=21600
 @z
 
 @x
-This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pulls remaining.
 @y
-This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pulls remaining.
 @z
 
 @x
@@ -224,9 +225,9 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 @z
 
 @x
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a Docker Hub account associated with a Pro, Team, or a Business subscription, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 @y
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a Docker Hub account associated with a Pro, Team, or a Business subscription, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 @z
 
 @x
@@ -236,9 +237,9 @@ If you do not see these headers, that means pulling that image would not count t
 @z
 
 @x
-To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 @y
-To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 @z
 
 @x
