@@ -82,6 +82,20 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2021-44719](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44719){: target="_blank" rel="noopener" class="_"} where Docker Desktop could be used to access any user file on the host from a container, bypassing the allowed list of shared folders.
+@y
+- [CVE-2021-44719](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44719){: target="_blank" rel="noopener" class="_"} を修正しました。
+  これはコンテナーからホスト上のどのようなユーザーファイルであっても、Docker Desktop を使ってアクセスできるようになっていたもので、共有フォルダーの許可リストを通じて可能になっていました。
+@z
+
+@x
 ### New
 @y
 {: #new }

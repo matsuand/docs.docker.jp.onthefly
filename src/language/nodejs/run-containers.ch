@@ -290,7 +290,7 @@ ce02b3179f0f        node-docker         "docker-entrypoint.s…"   6 minutes ago
 @z
 
 @x
-The `ps` command tells a bunch of stuff about our running containers. We can see the Container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
+The `ps` command tells a bunch of stuff about our running containers. We can see the Container ID, the image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
 @y
 `ps`コマンドは実行中コンテナーに関して、いろいろな情報を表示します。
 その情報とは以下です。

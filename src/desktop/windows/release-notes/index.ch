@@ -80,6 +80,20 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774){: target="_blank" rel="noopener" class="_"} where Docker Desktop allows attackers to move arbitrary files.
+@y
+- [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774){: target="_blank" rel="noopener" class="_"} を修正しました。
+  これは Docker Desktop を通じて、攻撃者が任意のファイルを移動できるものでした。
+@z
+
+@x
 ### Bug fixes and minor changes
 @y
 {: #bug-fixes-and-minor-changes }
