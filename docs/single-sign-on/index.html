@@ -1,4 +1,4 @@
-<!-- Page generated 2022-02-11 11:11:10 +0900-->
+<!-- Page generated 2022-02-23 12:13:37 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>シングルサインオンの設定 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="シングルサインオンの設定" />
   <meta property="og:description" content="Single Sign-on" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-11T11:11:10+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-23T12:13:37+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/single-sign-on/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-02-11T11:11:10+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-23T12:13:37+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"シングルサインオンの設定","description":"Single Sign-on","url":"https://docs.docker.com/single-sign-on/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -114,7 +114,9 @@ SSO は Docker Business サブスクリプション内の組織に対して有�
 現アカウントを Business サブスクリプションにアップグレードするには、<a href="../subscription/upgrade/" target="blank" rel="noopener" class="">サブスクリプションのアップグレード</a> を参照してください。</p>
 
 <p>SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使った認証が行われます。
-そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。</p>
+そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。
+Docker では現在、Service Provider Initiated SSO フローをサポートしています。
+所属ユーザーは SSO 認証プロセスを初期化を通じて Docker Hub や Docker Desktop へサインインすることが必要になります。</p>
 
 <p>Docker Hub における SSO を有効にするためには、アイデンティティープロバイダーとの間で Docker Hub において用いる IdP が動作するように、管理者があらかじめ設定しておかなければなりません。
 Docker では ACS（Assertion Consumer Service）URL とエンティティー ID を提供しています。
@@ -123,14 +125,15 @@ Docker では ACS（Assertion Consumer Service）URL とエンティティー ID
 <p>IdP サーバーと Docker Hub 間の接続を構築したら、Docker Hub 内の組織にログインして、SSO 確立プロセスを完了させます。
 詳しい手順は、<strong>Docker Hub における SSO の有効化</strong> の節を参照してください。</p>
 
-<p>Docker Hub において SSO を有効にするには、以下が必要です。</p>
+<p>Docker Hub において SSO を有効にするには、以下に示すようにプロバイダーから提供される自分のアイデンティティ情報が必要です。</p>
 
 <ul>
-  <li><strong>SAML 2.0</strong> の場合、エンティティー ID, ACS URL, シングルログアウト URL, 証明書ダウンロード URL</li>
+  <li><strong>SAML 2.0</strong> の場合、シングルサインオン URL、X.509 署名証明書</li>
   <li><strong>Azure AD</strong> の場合、クライアント ID（登録 AD アプリケーションに対する一意な識別子）, クライアントのシークレット（登録 Azure AD アプリケーションへのアクセスを実現するための文字列）, AD ドメインの詳細情報</li>
 </ul>
 
 <p>現在のところ SSO の有効化は 1 つの組織についてのみ対応しています。
+ただしシングルログアウトには対応していません。
 組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。</p>
 
 <h2 id="prerequisites">前提条件</h2>
@@ -138,7 +141,7 @@ Docker では ACS（Assertion Consumer Service）URL とエンティティー ID
 <ul>
   <li>You must first notify your company about the new SSO login procedures</li>
   <li>Verify that your org members have Docker Desktop version 4.4.2 installed on their machines</li>
-  <li>New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below</li>
+  <li>New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below</li>
   <li>Confirm that all CI/CD pipelines have replaced their passwords with PATs</li>
   <li>For your service accounts, add your additional domains or enable it in your IdP</li>
   <li>Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub</li>
@@ -152,6 +155,12 @@ In addition, all email addresses should be added to your IdP.</p>
 <h2 id="configure">設定</h2>
 
 <p>To configure SSO, log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> to obtain the <strong>ACS URL</strong> and <strong>Entity IDs</strong> to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> and complete the SSO enablement process.</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>IdP initiated connections are not supported at this time</p>
+</blockquote>
 
 <p>The following video walks you through the process of configuring SSO.</p>
 
@@ -176,17 +185,21 @@ In addition, all email addresses should be added to your IdP.</p>
     <p>Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.</p>
 
     <blockquote>
-      <p><strong>Note:</strong>
-the NameID is your email address and is set as the default.
-For example,         <Subject><NameID>yourname@mycompany.com</NameID>.</Subject>
+      <p><strong>Note:</strong></p>
+
+      <p>the NameID is your email address and is set as the default.
+For example,         <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._</Subject>
 </p>
     </blockquote>
+
+    <p><img src="/docs.docker.jp.onthefly/single-sign-on/images/sso-attribute.png" alt="SSO Attribute" width="500px" /></p>
   </li>
   <li>
     <p>Complete the fields in the <strong>Configuration Settings</strong> section and click <strong>Save</strong>. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.</p>
 
     <p><img src="/docs.docker.jp.onthefly/single-sign-on/images/sso-saml3.png" alt="SSO SAML3" width="500px" /></p>
   </li>
+  <li>Proceed to <strong>add your domain</strong> before you test and enforce SSO.</li>
 </ol>
 
 <h3 id="azure-ad-idp-configuration">Azure AD IdP の設定</h3>
@@ -219,11 +232,12 @@ For example:         <Subject><NameID>yourname@mycompany.com</NameID>.</Subject>
 
     <p><img src="/docs.docker.jp.onthefly/single-sign-on/images/sso-azure3.png" alt="SSO Azure3" width="500px" /></p>
   </li>
+  <li>Proceed to <strong>add your domain</strong> before you test and enforce SSO.</li>
 </ol>
 
 <h3 id="domain-control">ドメインの制御</h3>
 
-<p>Click <strong>Add Domain</strong> and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com.</p>
+<p>Click <strong>Add Domain</strong> and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.</p>
 
 <blockquote>
   <p><strong>Note</strong></p>
