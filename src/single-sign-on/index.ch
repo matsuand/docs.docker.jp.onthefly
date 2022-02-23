@@ -26,10 +26,12 @@ SSO は Docker Business サブスクリプション内の組織に対して有�
 @z
 
 @x
-When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password).
+When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign into Docker Hub or Docker Desktop to initiate the SSO authentication process.
 @y
 SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使った認証が行われます。
 そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。
+Docker では現在、Service Provider Initiated SSO フローをサポートしています。
+所属ユーザーは SSO 認証プロセスを初期化を通じて Docker Hub や Docker Desktop へサインインすることが必要になります。
 @z
 
 @x
@@ -48,23 +50,24 @@ IdP サーバーと Docker Hub 間の接続を構築したら、Docker Hub 内�
 @z
 
 @x
-To enable SSO in Docker Hub, you need the following:
+To enable SSO in Docker Hub, you need the following information from your identity provider:
 @y
-Docker Hub において SSO を有効にするには、以下が必要です。
+Docker Hub において SSO を有効にするには、以下に示すようにプロバイダーから提供される自分のアイデンティティ情報が必要です。
 @z
 
 @x
-* **SAML 2.0**: Entity ID, ACS URL, Single Logout URL and Certificate Download URL
+* **SAML 2.0**: Single Sign-On URL and the X.509 signing certificate
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
 @y
-* **SAML 2.0** の場合、エンティティー ID, ACS URL, シングルログアウト URL, 証明書ダウンロード URL
+* **SAML 2.0** の場合、シングルサインオン URL、X.509 署名証明書
 * **Azure AD** の場合、クライアント ID（登録 AD アプリケーションに対する一意な識別子）, クライアントのシークレット（登録 Azure AD アプリケーションへのアクセスを実現するための文字列）, AD ドメインの詳細情報
 @z
 
 @x
-We currently support enabling SSO on a single organization. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
+We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
 @y
 現在のところ SSO の有効化は 1 つの組織についてのみ対応しています。
+ただしシングルログアウトには対応していません。
 組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。
 @z
 
@@ -78,14 +81,14 @@ We currently support enabling SSO on a single organization. If you have any user
 @x
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below
+* New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
 @y
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below
+* New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
@@ -117,6 +120,16 @@ In addition, all email addresses should be added to your IdP.
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
 @y
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
+@z
+
+@x
+> **Note:**
+>
+> IdP initiated connections are not supported at this time
+@y
+> **メモ**
+>
+> IdP initiated connections are not supported at this time
 @z
 
 @x
@@ -174,12 +187,20 @@ The following video walks you through the process of configuring SSO.
 
 @x
     > **Note:**
+    >
     > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>.
+    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 @y
     > **Note:**
+    >
     > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>.
+    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+@z
+
+@x
+    ![SSO Attribute](images/sso-attribute.png){:width="500px"}
+@y
+    ![SSO Attribute](images/sso-attribute.png){:width="500px"}
 @z
 
 @x
@@ -192,6 +213,12 @@ The following video walks you through the process of configuring SSO.
     ![SSO SAML3](images/sso-saml3.png){:width="500px"}
 @y
     ![SSO SAML3](images/sso-saml3.png){:width="500px"}
+@z
+
+@x
+7. Proceed to **add your domain** before you test and enforce SSO.
+@y
+7. Proceed to **add your domain** before you test and enforce SSO.
 @z
 
 @x
@@ -258,6 +285,12 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
+7. Proceed to **add your domain** before you test and enforce SSO.
+@y
+7. Proceed to **add your domain** before you test and enforce SSO.
+@z
+
+@x
 ### Domain control
 @y
 {: #domain-control }
@@ -265,9 +298,9 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com.
+Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.
 @y
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com.
+Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.
 @z
 
 @x

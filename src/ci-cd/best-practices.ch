@@ -129,10 +129,11 @@ The other change you may want to make is only have your release images go to Doc
 @z
 
 @x
-We know there are a lot more tips and tricks for using Docker in CI, however, we think these are some of the important things, considering the recent Docker Hub rate limit updates.
+We know there are a lot more tips and tricks for using Docker in CI.
+However, we think these are some of the important things, considering the [Docker Hub rate limits](../docker-hub/download-rate-limit.md).
 @y
 CI に対して Docker を利用するためのヒントやコツは、さらにあると考えられます。
-そして最近の Docker Hub ではレート制限があることを考えると、そういったものがテクニックの一部として重要になってきます。
+そして最近の Docker Hub では [ダウンロード率制限](../docker-hub/download-rate-limit.md) があることを考えると、そういったものがテクニックの一部として重要になってきます。
 @z
 
 @x

@@ -10,14 +10,15 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 images = \
-	sso-azure1.png  \
-	sso-azure2.png  \
-	sso-azure3.png  \
-	sso-domain.png  \
-	sso-enforce.png \
-	sso-saml.png    \
-	sso-saml1.png   \
-	sso-saml2.png   \
+	sso-attribute.png \
+	sso-azure1.png    \
+	sso-azure2.png    \
+	sso-azure3.png    \
+	sso-domain.png    \
+	sso-enforce.png   \
+	sso-saml.png      \
+	sso-saml1.png     \
+	sso-saml2.png     \
 	sso-saml3.png
 
 srcs = $(images)
