@@ -258,9 +258,9 @@ The build output is truncated, but you can see that the Maven test runner was su
 @z
 
 @x
-This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when the building the image, and stop the build when they fail.
+This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when building the image, and stop the build when they fail.
 @y
-This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when the building the image, and stop the build when they fail.
+This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when building the image, and stop the build when they fail.
 @z
 
 @x
@@ -462,9 +462,9 @@ CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-
 @z
 
 @x
-We can now update of our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
+We can now update our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
 @y
-We can now update of our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
+We can now update our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
 @z
 
 @x

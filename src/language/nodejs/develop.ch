@@ -77,11 +77,11 @@ MongoDB をダウンロード、インストールして、Mongo データベー
 @z
 
 @x
-Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. For more information, see [Use volumes](../../storage/volumes.md).
 @y
 MongoDB をコンテナーとして実行するにあたって、いくつかボリュームを生成して Docker がデータや設定の保存ができるようにします。
 バインドマウントは利用せず、管理されたボリューム機能を利用します。
-ボリュームに関して本ドキュメントに詳しく説明しています。
+詳しくは [ボリュームの利用](../../storage/volumes.md) を参照してください。
 @z
 
 @x
@@ -246,6 +246,12 @@ $ docker run \
   -e CONNECTIONSTRING=mongodb://mongodb:27017/notes \
   node-docker
 ```
+@z
+
+@x
+The `yoda_notes` at the end of the connection string is the desired name for our database.
+@y
+接続文字列の最後にある`yoda_notes`は、ここでのデータベースに必要となる名前です。
 @z
 
 @x

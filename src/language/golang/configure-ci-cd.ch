@@ -81,6 +81,80 @@ Thus, as long as you have a GitHub repo with a project and a `Dockerfile`, you c
 @z
 
 @x
+## Enable access to Docker Hub
+@y
+## Enable access to Docker Hub
+@z
+
+@x
+The [Docker Hub](https://hub.docker.com/) is a hosted repository service provided by Docker for finding and sharing container images.
+@y
+The [Docker Hub](https://hub.docker.com/) is a hosted repository service provided by Docker for finding and sharing container images.
+@z
+
+@x
+Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.
+@y
+Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.
+@z
+
+@x
+To set up the access to Docker Hub API:
+@y
+To set up the access to Docker Hub API:
+@z
+
+@x
+1. Create a new Personal Access Token (PAT) for Docker Hub. 
+@y
+1. Create a new Personal Access Token (PAT) for Docker Hub. 
+@z
+
+@x
+    * Go to the [Docker Hub Account Settings](https://hub.docker.com/settings/security) and then click **New Access Token**.
+    * Let's call this token `docker-gs-ping-ci`. Input the name and click **Create**.
+    * Copy the token value, we'll need it in a second.
+@y
+    * Go to the [Docker Hub Account Settings](https://hub.docker.com/settings/security) and then click **New Access Token**.
+    * Let's call this token `docker-gs-ping-ci`. Input the name and click **Create**.
+    * Copy the token value, we'll need it in a second.
+@z
+
+@x
+2. Add your Docker ID and PAT as secrets to your GitHub repo.
+@y
+2. Add your Docker ID and PAT as secrets to your GitHub repo.
+@z
+
+@x
+    * Navigate to your GitHub repository and click **Settings** > **Secrets** > **New secret**.
+    * Create a new secret with the name `DOCKER_HUB_USERNAME` and your Docker ID as value.
+    * Create a new secret with the name `DOCKER_HUB_ACCESS_TOKEN` and use the token value from the step (1).
+@y
+    * Navigate to your GitHub repository and click **Settings** > **Secrets** > **New secret**.
+    * Create a new secret with the name `DOCKER_HUB_USERNAME` and your Docker ID as value.
+    * Create a new secret with the name `DOCKER_HUB_ACCESS_TOKEN` and use the token value from the step (1).
+@z
+
+@x
+Your GitHub repository **Secrets** section would look like the following.
+@y
+Your GitHub repository **Secrets** section would look like the following.
+@z
+
+@x
+![GitHub Secrets](../../ci-cd/images/github-secrets.png){:width="500px"}
+@y
+![GitHub Secrets](../../ci-cd/images/github-secrets.png){:width="500px"}
+@z
+
+@x
+Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.
+@y
+Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.
+@z
+
+@x
 ## Set up the CI workflow
 @y
 ## Set up the CI workflow
@@ -319,80 +393,6 @@ Select **Actions** from the navigation bar for your repository. Since we've enab
 Should the run fail, you can click on the failing entry to see the logs and amend the workflow YAML file accordingly.
 @y
 Should the run fail, you can click on the failing entry to see the logs and amend the workflow YAML file accordingly.
-@z
-
-@x
-## Enable access to Docker Hub
-@y
-## Enable access to Docker Hub
-@z
-
-@x
-The [Docker Hub](https://hub.docker.com/) is a hosted repository service provided by Docker for finding and sharing container images.
-@y
-The [Docker Hub](https://hub.docker.com/) is a hosted repository service provided by Docker for finding and sharing container images.
-@z
-
-@x
-Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.
-@y
-Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.
-@z
-
-@x
-To set up the access to Docker Hub API:
-@y
-To set up the access to Docker Hub API:
-@z
-
-@x
-1. Create a new Personal Access Token (PAT) for Docker Hub. 
-@y
-1. Create a new Personal Access Token (PAT) for Docker Hub. 
-@z
-
-@x
-    * Go to the [Docker Hub Account Settings](https://hub.docker.com/settings/security) and then click **New Access Token**.
-    * Let's call this token `docker-gs-ping-ci`. Input the name and click **Create**.
-    * Copy the token value, we'll need it in a second.
-@y
-    * Go to the [Docker Hub Account Settings](https://hub.docker.com/settings/security) and then click **New Access Token**.
-    * Let's call this token `docker-gs-ping-ci`. Input the name and click **Create**.
-    * Copy the token value, we'll need it in a second.
-@z
-
-@x
-2. Add your Docker ID and PAT as secrets to your GitHub repo.
-@y
-2. Add your Docker ID and PAT as secrets to your GitHub repo.
-@z
-
-@x
-    * Navigate to your GitHub repository and click **Settings** > **Secrets** > **New secret**.
-    * Create a new secret with the name `DOCKER_HUB_USERNAME` and your Docker ID as value.
-    * Create a new secret with the name `DOCKER_HUB_ACCESS_TOKEN` and use the token value from the step (1).
-@y
-    * Navigate to your GitHub repository and click **Settings** > **Secrets** > **New secret**.
-    * Create a new secret with the name `DOCKER_HUB_USERNAME` and your Docker ID as value.
-    * Create a new secret with the name `DOCKER_HUB_ACCESS_TOKEN` and use the token value from the step (1).
-@z
-
-@x
-Your GitHub repository **Secrets** section would look like the following.
-@y
-Your GitHub repository **Secrets** section would look like the following.
-@z
-
-@x
-![GitHub Secrets](../../ci-cd/images/github-secrets.png){:width="500px"}
-@y
-![GitHub Secrets](../../ci-cd/images/github-secrets.png){:width="500px"}
-@z
-
-@x
-Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.
-@y
-Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.
 @z
 
 @x

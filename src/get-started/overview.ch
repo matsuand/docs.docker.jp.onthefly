@@ -50,7 +50,7 @@ Docker が採用する方法を最大限利用して、アプリケーション�
 
 @x
 Docker provides the ability to package and run an application in a loosely isolated
-environment called a container. The isolation and security allow you to run many
+environment called a container. The isolation and security allows you to run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you do not need to rely on what is
 currently installed on the host. You can easily share containers while you work,

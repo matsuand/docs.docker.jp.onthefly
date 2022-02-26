@@ -15,16 +15,17 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	api-version-matrix     \
-	cli                    \
-	deploy                 \
-	desktop-license-update \
-	desktop-update         \
-	eula                   \
-	experimental           \
-	experimental-feature   \
-	github-pr              \
-	install-script         \
+	api-version-matrix      \
+	cli                     \
+	configure-registry-json \
+	deploy                  \
+	desktop-license-update  \
+	desktop-update          \
+	eula                    \
+	experimental            \
+	experimental-feature    \
+	github-pr               \
+	install-script          \
 	registry
 htmlbases = \
 	breadcrumbs            \

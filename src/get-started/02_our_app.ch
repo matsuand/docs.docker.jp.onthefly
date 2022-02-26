@@ -124,6 +124,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
    COPY . .
    RUN yarn install --production
    CMD ["node", "src/index.js"]
+   EXPOSE 3000
    ```
 @y
    ```dockerfile
@@ -134,6 +135,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
    COPY . .
    RUN yarn install --production
    CMD ["node", "src/index.js"]
+   EXPOSE 3000
    ```
 @z
 

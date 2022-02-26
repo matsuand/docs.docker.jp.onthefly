@@ -899,6 +899,54 @@ $ docker run -d \
 @z
 
 @x
+## Use a bind mount with compose
+@y
+{: #use-a-bind-mount-with-compose }
+## compose におけるバインドマウントの利用
+@z
+
+@x
+A single Docker Compose service with a bind mount looks like this:
+@y
+バインドマウントを使った一つの Docker Compose サービスは、たとえば以下のようになります。
+@z
+
+@x
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - type: bind
+        source: ./static
+        target: /opt/app/staticvolumes:
+  myapp:
+```
+@y
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - type: bind
+        source: ./static
+        target: /opt/app/staticvolumes:
+  myapp:
+```
+@z
+
+@x
+For more information about using volumes of the `bind` type with Compose, see
+[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+and
+[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
+@y
+Compose とともにボリュームタイプを`bind`にする方法に関しては [ボリュームに対する Compose リファレンス](../compose/compose-file/compose-file-v3.md#volumes) や [ボリューム設定に対する Compose リファレンス](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) を参照してください。
+@z
+
+@x
 ## Next steps
 @y
 {: #next-steps }

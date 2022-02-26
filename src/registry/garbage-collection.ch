@@ -234,18 +234,18 @@ Garbage collection can be run as follows
 @z
 
 @x
-`bin/registry garbage-collect [--dry-run] /path/to/config.yml`
+`bin/registry garbage-collect [--dry-run] [--delete-untagged] /path/to/config.yml`
 @y
-`bin/registry garbage-collect [--dry-run] /path/to/config.yml`
+`bin/registry garbage-collect [--dry-run] [--delete-untagged] /path/to/config.yml`
 @z
 
 @x
 The garbage-collect command accepts a `--dry-run` parameter, which prints the progress
-of the mark and sweep phases without removing any data. Running with a log level of `info`
+of the mark and sweep phases without removing any data. If you need to clean up untagged manifests as well, you can run the command with `--delete-untagged` parameter. Running with a log level of `info`
 gives a clear indication of items eligible for deletion.
 @y
 The garbage-collect command accepts a `--dry-run` parameter, which prints the progress
-of the mark and sweep phases without removing any data. Running with a log level of `info`
+of the mark and sweep phases without removing any data. If you need to clean up untagged manifests as well, you can run the command with `--delete-untagged` parameter. Running with a log level of `info`
 gives a clear indication of items eligible for deletion.
 @z
 

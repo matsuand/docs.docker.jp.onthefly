@@ -136,7 +136,9 @@ Docker Desktop のライセンスに関する詳細は、[Docker Desktop 利用�
 @z
 
 @x
-After you’ve successfully installed and started Docker Desktop, we recommend that you authenticate using the **Sign in/Create ID** option from the Docker menu.
+After you’ve successfully installed and started Docker Desktop, we recommend
+that you authenticate using the **Sign in/Create ID** option from the Docker
+menu.
 @y
 Docker Desktop のインストールを終えてこれを起動したら、Docker メニューの **Sign in/Create ID**（サインイン/ID 生成）を使って、認証を行うことをお勧めします。
 @z
@@ -150,25 +152,45 @@ Authenticated users get a higher pull rate limit compared to anonymous users. Fo
 より詳しい情報は [ダウンロードレート制限](../docker-hub/download-rate-limit.md) を参照してください。
 @z
 
-@x
-Authenticating through Docker Desktop also allows administrators to configure Docker Desktop and set up guardrails using the [Image Access Management](../docker-hub/image-access-management.md) feature to allow team members to:
-@y
-Docker Desktop を通じて認証を行っておくと、管理者が Docker Desktop を設定できるようになります。
-そして [イメージアクセス管理](../docker-hub/image-access-management.md) 機能を利用して、チームメンバーに対して、以下のような操作制限を行うことができます。
-@z
+%@x
+%Authenticating through Docker Desktop also allows administrators to configure Docker Desktop and set up guardrails using the [Image Access Management](../docker-hub/image-access-management.md) feature to allow team members to:
+%@y
+%Docker Desktop を通じて認証を行っておくと、管理者が Docker Desktop を設定できるようになります。
+%そして [イメージアクセス管理](../docker-hub/image-access-management.md) 機能を利用して、チームメンバーに対して、以下のような操作制限を行うことができます。
+%@z
+
+%@x
+%* Only have access to Trusted Content on Docker Hub
+%* Pull only from the specified categories of images
+%@y
+%* Docker Hub 上のトラストコンテントのみにアクセスできるようにします。
+%* 特定カテゴリーのイメージのみプルできるようにします。
+%@z
+
+%@x
+%To authenticate using Docker Desktop, click the **Sign in/Create ID** option on the Docker menu and follow the on-screen instructions.
+%@y
+%Docker Desktop を使って認証を行うには、Docker メニュー内の **Sign in/Create ID**（サインイン/ID 生成）オプションをクリックして、画面説明に従って操作します。
+%@z
 
 @x
-* Only have access to Trusted Content on Docker Hub
-* Pull only from the specified categories of images
+In large enterprises where admin access is restricted, administrators can create
+a `registry.json` file and deploy it to the developers' machines using a device
+management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows
+administrators to set up guardrails using features such as 
+[Image Access Management](../docker-hub/image-access-management.md) which allows team
+members to only have access to Trusted Content on Docker Hub, and pull only from
+the specified categories of images. For more information, see
+[Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
 @y
-* Docker Hub 上のトラストコンテントのみにアクセスできるようにします。
-* 特定カテゴリーのイメージのみプルできるようにします。
-@z
-
-@x
-To authenticate using Docker Desktop, click the **Sign in/Create ID** option on the Docker menu and follow the on-screen instructions.
-@y
-Docker Desktop を使って認証を行うには、Docker メニュー内の **Sign in/Create ID**（サインイン/ID 生成）オプションをクリックして、画面説明に従って操作します。
+In large enterprises where admin access is restricted, administrators can create
+a `registry.json` file and deploy it to the developers' machines using a device
+management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows
+administrators to set up guardrails using features such as 
+[Image Access Management](../docker-hub/image-access-management.md) which allows team
+members to only have access to Trusted Content on Docker Hub, and pull only from
+the specified categories of images. For more information, see
+[Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
 @z
 
 @x

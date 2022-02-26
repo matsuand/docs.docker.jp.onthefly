@@ -228,13 +228,15 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 
 @x
     ```console
-    $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v{{site.compose_v2_version}}/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+    $ mkdir -p $DOCKER_CONFIG/cli-plugins
+    $ curl -SL https://github.com/docker/compose/releases/download/v{{site.compose_v2_version}}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 @y
     ```console
-    $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v{{site.compose_v2_version}}/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+    $ mkdir -p $DOCKER_CONFIG/cli-plugins
+    $ curl -SL https://github.com/docker/compose/releases/download/v{{site.compose_v2_version}}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 @z
 
@@ -252,11 +254,11 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 
 @x
     ```console
-    $ chmod +x ~/.docker/cli-plugins/docker-compose
+    $ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 @y
     ```console
-    $ chmod +x ~/.docker/cli-plugins/docker-compose
+    $ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 @z
 

@@ -1153,10 +1153,10 @@ in the Docker Engine topics.
 
 @x
 You can add your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+in `~/.docker/certs.d/<MyRegistry><Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry><Port>/client.key`. You do not need to push your certificates with `git` commands.
 @y
-クライアント証明書は`~/.docker/certs.d/<MyRegistry>:<Port>/client.cert`と`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`に追加することができます。
+クライアント証明書は`~/.docker/certs.d/<MyRegistry><Port>/client.cert`と`~/.docker/certs.d/<MyRegistry><Port>/client.key`に追加することができます。
 証明書を`git`コマンドを使ってプッシュする必要はありません。
 @z
 

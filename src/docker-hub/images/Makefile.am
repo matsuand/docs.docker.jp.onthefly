@@ -41,6 +41,7 @@ images = \
 	repo-overview.png              \
 	repo-tags-list.png             \
 	repos-create.png               \
+	registry-access-management.png \
 	slack-notification-updates.png \
 	team-repo-permission.png       \
 	view-org.png                   \

@@ -56,7 +56,7 @@ Options:
                               (default: directory name)
   --profile NAME              Specify a profile to enable
   --verbose                   Show more output
-  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --log-level LEVEL           DEPRECATED and not working from 2.0 - Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
   -v, --version               Print version and exit
   -H, --host HOST             Daemon socket to connect to
@@ -123,7 +123,7 @@ Options:
                               (default: directory name)
   --profile NAME              Specify a profile to enable
   --verbose                   Show more output
-  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --log-level LEVEL           DEPRECATED and not working from 2.0 - Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
   -v, --version               Print version and exit
   -H, --host HOST             Daemon socket to connect to
@@ -187,7 +187,7 @@ Docker で使う複数コンテナーアプリケーションを定義して実�
                               (デフォルト: ディレクトリ名)
   --profile NAME              有効にするプロファイルを指定します。
   --verbose                   詳細情報を表示します。
-  --log-level LEVEL           ログレベルを設定します。(DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --log-level LEVEL           廃止予定であり 2.0 以降は動作しません。ログレベルを設定します。(DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   ANSI コントロール文字を表示しません。
   -v, --version               バージョンを表示して終了します。
   -H, --host HOST             接続先のデーモンソケット

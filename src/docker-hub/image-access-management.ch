@@ -70,10 +70,10 @@ To configure Image Access Management permissions, perform the following steps:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com) account as an organization administrator.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization administrator.
 2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org Permissions.
 @y
-1. 組織管理者として [Docker Hub](https://hub.docker.com) アカウントにログインします。
+1. 組織管理者として [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントにログインします。
 2. 組織を選択して、**Organizations**（組織）ページの **Settings**（設定）タブを開き、Org Permissions をクリックします。
 @z
 
@@ -122,10 +122,10 @@ To configure Image Access Management permissions, perform the following steps:
 @z
 
 @x
-### Enforce authentication
+## Enforce authentication
 @y
 {: #enforce-authentication }
-### 強制的な認証
+## 強制的な認証
 @z
 
 @x
@@ -173,172 +173,16 @@ Docker Desktop 4.0 またはそれ以降のリリースをダウンロードし�
 @z
 
 @x
-#### Create a registry json file
+{% include configure-registry-json.md %}
 @y
-{: #create-a-registry-json-file }
-#### レジストリ json ファイルの生成
+{% include configure-registry-json.md %}
 @z
 
 @x
-After you've successfully installed Docker Desktop, create a `registry.json` file on Windows or Mac.
-@y
-Docker Desktop のインストールを正常に終えたら、Windows または Mac において`registry.json`ファイルを生成します。
-@z
-
-@x
-**On Windows**
-@y
-**Windows の場合**
-@z
-
-@x
-Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
-@y
-`C:\ProgramData\DockerDesktop\registry.json`というファイルを生成します。
-そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
-このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
-@z
-
-@x
-To create your `registry.json` file on Windows:
-@y
-Windows において個人用の`registry.json`ファイルを生成するには以下を行います。
-@z
-
-@x
-1. Open Windows Powershell and select Run as Administrator.
-2. Type the following command: `cd /ProgramData/DockerDesktop/`
-3. In Notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
-@y
-1. Windows Powershell を開いて Run as Administrator（管理者として実行）を選択します。
-2. 以下のコマンドを入力します。 `cd /ProgramData/DockerDesktop/`
-3. メモ帳を開いて、`registry.json`を入力し、`allowedOrgs`キー内に必要な分だけ組織名を記述します。
-   そして Save をクリックします。
-@z
-
-@x
-    For example:
-@y
-    たとえば以下のようにします。
-@z
-
-@x
-    ```json
-    {
-    "allowedOrgs": ["mycompany"]
-    }
-    ```
-@y
-    ```json
-    {
-    "allowedOrgs": ["mycompany"]
-    }
-    ```
-@z
-
-@x
-4. Navigate to Powershell and type ```start .```
-@y
-4. Powershell において ```start .``` を入力します。
-@z
-
-@x
-Congratulations! You have just created the registry.json file.
-@y
-おめでとうございます。registry.json ファイルができあがりました。
-@z
-
-@x
-**On macOS**:
-@y
-**macOS の場合**
-@z
-
-@x
-Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
-@y
-`/Library/Application Support/com.docker.docker/registry.json`というファイルを生成します。
-そしてこのファイルのパーミッションとして、Docker Desktop を利用する開発者が、このファイルを削除や編集ができないようにします（つまり管理者だけが、このファイルに書き込みできるようにします）。
-このファイルは JSON 形式であり、`allowedOrgs`キー内に、少なくとも組織名を 1 つ設定していなければなりません。
-Docker Desktop を利用するユーザーは、あらかじめサインインができていて、その組織のうちの 1 つのメンバーであることが必要です。
-@z
-
-@x
-To create your `registry.json` file on macOS:
-@y
-macOS 上において個人用の`registry.json`ファイルを生成するには以下を行います。
-@z
-
-@x
-1. Navigate to VS Code or any text editor of your choice.
-2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
-@y
-1. VS Code か、好みのテキストエディターを開きます。
-2. `allowedOrgs`キー内に必要な分だけ組織名を記述します。
-   そしてファイルを保存します。
-@z
-
-@x
-    For example:
-@y
-    たとえば以下のようにします。
-@z
-
-@x
-    ```json
-    {
-     "allowedOrgs": ["mycompany"]
-    }
-    ```
-@y
-    ```json
-    {
-     "allowedOrgs": ["mycompany"]
-    }
-    ```
-@z
-
-@x
- 3. Open a new terminal and type the following command:
-@y
- 3. 別の端末画面を開いて、以下のコマンドを入力します。
-@z
-
-@x
-    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
-@y
-    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
-@z
-
-@x
-    Note: if prompted, type your password associated with your local computer.
-@y
-    メモ： プロンプトが表示されたら、そのマシンにおけるパスワードを入力してください。
-@z
-
-@x
-4. Type the following command:
-@y
-4. 以下のコマンドを入力します。
-@z
-
-@x
-    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
-@y
-    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
-@z
-
-@x
-Congratulations! You have just created the `registry.json` file.
-@y
-おめでとうございます。 `registry.json`ファイルができあがりました。
-@z
-
-@x
-### Verify the restrictions
+## Verify the restrictions
 @y
 {: #verify-the-restrictions }
-### 制限の確認
+## 制限の確認
 @z
 
 @x

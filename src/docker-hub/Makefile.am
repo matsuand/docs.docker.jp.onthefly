@@ -25,9 +25,11 @@ bases = \
 	image-management        \
 	index                   \
 	official_images         \
+	onboarding-faqs         \
 	orgs                    \
 	release-notes           \
 	repos                   \
+	registry-access-management \
 	service-accounts        \
 	slack_integration       \
 	vulnerability-scanning  \
