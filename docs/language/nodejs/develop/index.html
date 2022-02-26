@@ -1,4 +1,4 @@
-<!-- Page generated 2022-02-03 12:04:47 +0900-->
+<!-- Page generated 2022-02-26 13:40:12 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けコンテナーの利用 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="開発向けコンテナーの利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-03T12:04:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-26T13:40:12+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-02-03T12:04:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-26T13:40:12+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"開発向けコンテナーの利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/nodejs/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -138,26 +138,26 @@
 
 <p>MongoDB をコンテナーとして実行するにあたって、いくつかボリュームを生成して Docker がデータや設定の保存ができるようにします。
 バインドマウントは利用せず、管理されたボリューム機能を利用します。
-ボリュームに関して本ドキュメントに詳しく説明しています。</p>
+詳しくは <a href="/docs.docker.jp.onthefly/storage/volumes/">ボリュームの利用</a> を参照してください。</p>
 
 <p>それではここでボリュームを生成します。
 作り出すボリュームは 1 つは MongoDB のデータ用、そしてもう 1 つは MongoDB の設定用です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume create mongodb
-<span class="gp">$</span><span class="w"> </span>docker volume create mongodb_config
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker volume create mongodb
+<span class="gp">$</span> docker volume create mongodb_config
 </code></pre></div></div>
 
 <p>またここでネットワークを生成して、アプリケーションとデータベースが互いにやりとりできるようにします。
 ネットワークはユーザー定義によるブリッジネットワークであり、DNS 検索サービスが提供されるため、接続文字列を使った設定が利用可能になります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create mongodb
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create mongodb
 </code></pre></div></div>
 
 <p>コンテナーとして MongoDB を実行します。
 そして上で生成したボリュームとネットワークをこれに結びつけます。
 Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mongodb:/data/db <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mongodb:/data/db <span class="se">\</span>
   <span class="nt">-v</span> mongodb_config:/data/configdb <span class="nt">-p</span> 27017:27017 <span class="se">\</span>
   <span class="nt">--network</span> mongodb <span class="se">\</span>
   <span class="nt">--name</span> mongodb <span class="se">\</span>
@@ -165,38 +165,38 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 </code></pre></div></div>
 
 <p>MongoDB が実行できました。
-そこで<code class="language-plaintext highlighter-rouge">server.js</code>を更新して、メモリ上へのデータ保存ではなく MongoDB を利用するように書き換えます。</p>
+そこで<code class="highlighter-rouge">server.js</code>を更新して、メモリ上へのデータ保存ではなく MongoDB を利用するように書き換えます。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-server</span><span class="dl">'</span> <span class="p">)</span>
-<span class="kd">const</span> <span class="nx">mocks</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-mocks</span><span class="dl">'</span> <span class="p">)</span>
-<span class="kd">const</span> <span class="nx">database</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-database</span><span class="dl">'</span> <span class="p">)</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s1">'ronin-server'</span> <span class="p">)</span>
+<span class="kd">const</span> <span class="nx">mocks</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s1">'ronin-mocks'</span> <span class="p">)</span>
+<span class="kd">const</span> <span class="nx">database</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s1">'ronin-database'</span> <span class="p">)</span>
 <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">ronin</span><span class="p">.</span><span class="nx">server</span><span class="p">()</span>
 
 <span class="nx">database</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">CONNECTIONSTRING</span> <span class="p">)</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span> <span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="s1">'/'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span> <span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span> <span class="p">)</span> <span class="p">)</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>ここでは<code class="language-plaintext highlighter-rouge">ronin-database</code>モジュールを追加して、データベースへの接続を行うようにコード変更を行いました。
+<p>ここでは<code class="highlighter-rouge">ronin-database</code>モジュールを追加して、データベースへの接続を行うようにコード変更を行いました。
 メモリ保存フラグは false に設定しています。
 変更を行ったのでイメージを再ビルドする必要があります。</p>
 
-<p>まずは npm を使ってアプリケーションに<code class="language-plaintext highlighter-rouge">ronin-database</code>モジュールを追加します。</p>
+<p>まずは npm を使ってアプリケーションに<code class="highlighter-rouge">ronin-database</code>モジュールを追加します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>npm <span class="nb">install </span>ronin-database
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> npm install ronin-database
 </code></pre></div></div>
 
 <p>そしてイメージをビルドします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>ではコンテナーを実行してみます。
-ただし今回の実行では環境変数<code class="language-plaintext highlighter-rouge">CONNECTIONSTRING</code>の設定が必要です。
+ただし今回の実行では環境変数<code class="highlighter-rouge">CONNECTIONSTRING</code>の設定が必要です。
 つまりデータベースにアクセスする際の接続文字列をアプリケーションに伝える必要があります。
-これを<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて実現します。</p>
+これを<code class="highlighter-rouge">docker run</code>コマンドにおいて実現します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="se">\</span>
   <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--network</span> mongodb <span class="se">\</span>
   <span class="nt">--name</span> rest-server <span class="se">\</span>
@@ -205,9 +205,11 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
   node-docker
 </code></pre></div></div>
 
+<p>接続文字列の最後にある<code class="highlighter-rouge">yoda_notes</code>は、ここでのデータベースに必要となる名前です。</p>
+
 <p>アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/notes <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"name": "this is a note", "text": "this is a note that I wanted to take while I was working on writing a blog post.", "owner": "peter"}'</span>
@@ -215,7 +217,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 
 <p>サービスからは以下のような JSON データが返ってくるはずです。</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="nl">"payload"</span><span class="p">:{</span><span class="nl">"_id"</span><span class="p">:</span><span class="s2">"5efd0a1552cd422b59d4f994"</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"this is a note"</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"this is a note that I wanted to take while I was working on writing a blog post."</span><span class="p">,</span><span class="nl">"owner"</span><span class="p">:</span><span class="s2">"peter"</span><span class="p">,</span><span class="nl">"createDate"</span><span class="p">:</span><span class="s2">"2020-07-01T22:11:33.256Z"</span><span class="p">}}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="s2">"payload"</span><span class="p">:{</span><span class="s2">"_id"</span><span class="p">:</span><span class="s2">"5efd0a1552cd422b59d4f994"</span><span class="p">,</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"this is a note"</span><span class="p">,</span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"this is a note that I wanted to take while I was working on writing a blog post."</span><span class="p">,</span><span class="s2">"owner"</span><span class="p">:</span><span class="s2">"peter"</span><span class="p">,</span><span class="s2">"createDate"</span><span class="p">:</span><span class="s2">"2020-07-01T22:11:33.256Z"</span><span class="p">}}</span><span class="w">
 </span></code></pre></div></div>
 
 <h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発環境</h2>
@@ -223,7 +225,7 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 <p>ここでは Compose ファイルを生成して、1 つのコマンド実行から node-docker と MongoDB を起動できるようにします。
 なお note-docker はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。</p>
 
-<p>IDE あるいはテキストエディターにおいて notes-service を開いて、<code class="language-plaintext highlighter-rouge">docker-compose.dev.yml</code>というファイルを新規生成します。
+<p>IDE あるいはテキストエディターにおいて notes-service を開いて、<code class="highlighter-rouge">docker-compose.dev.yml</code>というファイルを新規生成します。
 そのファイルに以下の記述をコピーおよび貼りつけます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
@@ -255,23 +257,23 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 </code></pre></div></div>
 
 <p>この Compose ファイルは非常に便利なものです。
-<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行にあたって、パラメーターすべてを記述する必要はありません。
+<code class="highlighter-rouge">docker run</code>コマンドの実行にあたって、パラメーターすべてを記述する必要はありません。
 それは Compose ファイル内に宣言という形で行います。</p>
 
-<p>ここでは<code class="language-plaintext highlighter-rouge">port 9229</code>によってポート公開を行います。
+<p>ここでは<code class="highlighter-rouge">port 9229</code>によってポート公開を行います。
 デバッガーを接続できるようにするためです。
 またローカルにあるそーそコードを実行中のコンテナー内にマッピングして、テキストエディターでのソース変更がコンテナー内からも取得可能なようにします。</p>
 
 <p>Compose ファイルを利用する理由となるもう一つ優れているのは、サービス名を使ってサービス設定の解決を行うことができる点です。
-だから接続文字列の中で<code class="language-plaintext highlighter-rouge">“mongo”</code>という名称を用いることができるのです。
+だから接続文字列の中で<code class="highlighter-rouge">“mongo”</code>という名称を用いることができるのです。
 mongo という名称をなぜ用いるかと言えば、Compose ファイル内にて MongoDB サービスに対してそのような名前づけを行ったからです。</p>
 
-<p>アプリケーションをデバッグモードで起動するには<code class="language-plaintext highlighter-rouge">package.json</code>ファイルに記述追加を行う必要があります。
+<p>アプリケーションをデバッグモードで起動するには<code class="highlighter-rouge">package.json</code>ファイルに記述追加を行う必要があります。
 npm に対してアプリケーションをどのように起動するかを指示するためです。</p>
 
-<p><code class="language-plaintext highlighter-rouge">package.json</code>ファイルを開いて、scripts セクションに以下の行を追加します。</p>
+<p><code class="highlighter-rouge">package.json</code>ファイルを開いて、scripts セクションに以下の行を追加します。</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"debug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nodemon --inspect=0.0.0.0:9229 server.js"</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="s2">"debug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nodemon --inspect=0.0.0.0:9229 server.js"</span><span class="w">
 </span></code></pre></div></div>
 
 <p>上からわかるように、ここでは Nodemon を利用します。
@@ -283,10 +285,10 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 
 <p>アプリケーションを起動して、正常に動作していることを確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
-<p>ここでは<code class="language-plaintext highlighter-rouge">--build</code>フラグを指定しました。
+<p>ここでは<code class="highlighter-rouge">--build</code>フラグを指定しました。
 これによって Docker はイメージをコンパイルした上で起動を行います。</p>
 
 <p>正常に処理されれば、以下のような出力が得られるはずです。</p>
@@ -296,12 +298,12 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 <p>では API エンドポイントを確認します。
 以下の curl コマンドを実行してみましょう。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/notes
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/notes
 </code></pre></div></div>
 
 <p>以下のようなレスポンスが返ってくるはずです。</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="nl">"meta"</span><span class="p">:{</span><span class="nl">"total"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"count"</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="nl">"payload"</span><span class="p">:[]}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="s2">"meta"</span><span class="p">:{</span><span class="s2">"total"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">"count"</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s2">"payload"</span><span class="p">:[]}</span><span class="w">
 </span></code></pre></div></div>
 
 <h2 id="connect-a-debugger">デバッガーの接続</h2>
@@ -309,7 +311,7 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 <p>ここでは Chrome ブラウザーに付属するデバッガーを利用することにします。
 マシン上の Chrome を起動して、アドレスバーに以下を入力します。</p>
 
-<p><code class="language-plaintext highlighter-rouge">about:inspect</code></p>
+<p><code class="highlighter-rouge">about:inspect</code></p>
 
 <p>これによって以下の画面が表示されます。</p>
 
@@ -320,12 +322,12 @@ DevTools が開いて、コンテナー内部で稼働する Node.js プロセ�
 
 <p>ソースコードに修正を加えて、ブレークポイント設定を行います。</p>
 
-<p>すでにある<code class="language-plaintext highlighter-rouge">server.use()</code>行の上に以下のコードを追加して、ファイルを保存します。
-以下に示すように、<code class="language-plaintext highlighter-rouge">return</code>文は単独の行であることに注目してください。
+<p>すでにある<code class="highlighter-rouge">server.use()</code>行の上に以下のコードを追加して、ファイルを保存します。
+以下に示すように、<code class="highlighter-rouge">return</code>文は単独の行であることに注目してください。
 こうしておけばわかりやすくブレークポイントを設定することができます。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="dl">'</span><span class="s1">/foo</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-   <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span> <span class="p">})</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="s1">'/foo'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="s2">"foo"</span><span class="p">:</span> <span class="s2">"bar"</span> <span class="p">})</span>
  <span class="p">})</span>
 </code></pre></div></div>
 
@@ -333,10 +335,10 @@ DevTools が開いて、コンテナー内部で稼働する Node.js プロセ�
 
 <p><img src="/docs.docker.jp.onthefly/language/nodejs/images/nodemon.png" alt="nodemon" width="800px" /></p>
 
-<p>Chrome の DevTools 画面に戻り、<code class="language-plaintext highlighter-rouge">return res.json({ "foo": "bar" })</code>がある行にブレークポイントを設定します。
+<p>Chrome の DevTools 画面に戻り、<code class="highlighter-rouge">return res.json({ "foo": "bar" })</code>がある行にブレークポイントを設定します。
 そして以下の curl コマンドを実行してブレークポイントまで実行されるようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/foo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/foo
 </code></pre></div></div>
 
 <p>コード実行がブレークポイント行において停止するので、ふだん利用している際と同じようにしてデバッガーを利用することができます。

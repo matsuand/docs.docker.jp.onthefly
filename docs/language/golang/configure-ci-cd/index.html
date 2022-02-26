@@ -1,4 +1,4 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
+<!-- Page generated 2022-02-26 13:40:12 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アプリケーションにおける CI/CD 設定 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="アプリケーションにおける CI/CD 設定" />
   <meta property="og:description" content="Learn how to set up CI/CD pipeline for your application." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-26T13:40:12+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-26T13:40:12+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"アプリケーションにおける CI/CD 設定","description":"Learn how to set up CI/CD pipeline for your application.","url":"https://docs.docker.com/language/golang/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -137,9 +137,44 @@
 
 <h2 id="choose-a-sample-project">サンプルプロジェクトの選定</h2>
 
-<p>Let’s get started. This guide uses a simple Go project as an example. In fact, it is the same project we got acquainted with in <a href="/docs.docker.jp.onthefly/language/golang/build-images/">Build Images</a> part of this guide. The <a href="https://github.com/olliefr/docker-gs-ping" target="_blank" rel="noopener" class="_">olliefr/docker-gs-ping</a> repository contains the full source code and the <code class="language-plaintext highlighter-rouge">Dockerfile</code>. You can either fork it or to follow along and set up one of your own Go projects in a fashion described in this section.</p>
+<p>Let’s get started. This guide uses a simple Go project as an example. In fact, it is the same project we got acquainted with in <a href="/docs.docker.jp.onthefly/language/golang/build-images/">Build Images</a> part of this guide. The <a href="https://github.com/olliefr/docker-gs-ping" target="_blank" rel="noopener" class="_">olliefr/docker-gs-ping</a> repository contains the full source code and the <code class="highlighter-rouge">Dockerfile</code>. You can either fork it or to follow along and set up one of your own Go projects in a fashion described in this section.</p>
 
-<p>Thus, as long as you have a GitHub repo with a project and a <code class="language-plaintext highlighter-rouge">Dockerfile</code>, you can complete this part of the tutorial.</p>
+<p>Thus, as long as you have a GitHub repo with a project and a <code class="highlighter-rouge">Dockerfile</code>, you can complete this part of the tutorial.</p>
+
+<h2 id="enable-access-to-docker-hub">Enable access to Docker Hub</h2>
+
+<p>The <a href="https://hub.docker.com/">Docker Hub</a> is a hosted repository service provided by Docker for finding and sharing container images.</p>
+
+<p>Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.</p>
+
+<p>To set up the access to Docker Hub API:</p>
+
+<ol>
+  <li>
+    <p>Create a new Personal Access Token (PAT) for Docker Hub.</p>
+
+    <ul>
+      <li>Go to the <a href="https://hub.docker.com/settings/security">Docker Hub Account Settings</a> and then click <strong>New Access Token</strong>.</li>
+      <li>Let’s call this token <code class="highlighter-rouge">docker-gs-ping-ci</code>. Input the name and click <strong>Create</strong>.</li>
+      <li>Copy the token value, we’ll need it in a second.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Add your Docker ID and PAT as secrets to your GitHub repo.</p>
+
+    <ul>
+      <li>Navigate to your GitHub repository and click <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong>.</li>
+      <li>Create a new secret with the name <code class="highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</li>
+      <li>Create a new secret with the name <code class="highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code> and use the token value from the step (1).</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Your GitHub repository <strong>Secrets</strong> section would look like the following.</p>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
+
+<p>Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.</p>
 
 <h2 id="set-up-the-ci-workflow">Set up the CI workflow</h2>
 
@@ -166,7 +201,7 @@
   <span class="na">workflow_dispatch</span><span class="pi">:</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">workflow_dispatch</code> is optional. It enables to run this workflow manually from the Actions tab.</p>
+<p>The <code class="highlighter-rouge">workflow_dispatch</code> is optional. It enables to run this workflow manually from the Actions tab.</p>
 
 <p>Now, we need to specify what we actually want to happen within our workflow. A workflow run is made up of one or more <em>jobs</em> that can run sequentially or in parallel.</p>
 
@@ -190,7 +225,7 @@
 
 <p>Building the binary in step 4 is actually optional. It is a “smoke test”. We don’t want to be building a Docker image and attempting functional testing if our application does not even compile. If we had “unit tests” or some other small tests, we would run them between steps 4 and 5 as well.</p>
 
-<p>The following sequence of <code class="language-plaintext highlighter-rouge">steps</code> achieves the goals we just set.</p>
+<p>The following sequence of <code class="highlighter-rouge">steps</code> achieves the goals we just set.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Go</span>
@@ -217,50 +252,15 @@
         <span class="na">run</span><span class="pi">:</span>  <span class="s">go test -v ./...</span>
 </code></pre></div></div>
 
-<p>As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project’s repo, under the name of <code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code>.</p>
+<p>As is usual with YAML files, be aware of indentation. The complete workflow file for reference is available in the project’s repo, under the name of <code class="highlighter-rouge">.github/workflows/ci.yml</code>.</p>
 
-<p>This should be enough to test our approach to CI. Change the workflow file name from <code class="language-plaintext highlighter-rouge">main.yml</code> to <code class="language-plaintext highlighter-rouge">ci.yml</code> and press <strong>Start commit</strong> button. Fill out the commit details in your preferred style and press <strong>Commit new file</strong>. GitHub Actions are saved as YAML files in <code class="language-plaintext highlighter-rouge">.github/workflows</code> directory and GitHub web interface would do that for us.</p>
+<p>This should be enough to test our approach to CI. Change the workflow file name from <code class="highlighter-rouge">main.yml</code> to <code class="highlighter-rouge">ci.yml</code> and press <strong>Start commit</strong> button. Fill out the commit details in your preferred style and press <strong>Commit new file</strong>. GitHub Actions are saved as YAML files in <code class="highlighter-rouge">.github/workflows</code> directory and GitHub web interface would do that for us.</p>
 
-<p>Select <strong>Actions</strong> from the navigation bar for your repository. Since we’ve enabled <code class="language-plaintext highlighter-rouge">workflow_dispatch</code> option in our Action, GitHub will have started it already. If not, select “CI/CD to Docker Hub” action on the left, and then press <strong>Run workflow</strong> button on the right to start the workflow.</p>
+<p>Select <strong>Actions</strong> from the navigation bar for your repository. Since we’ve enabled <code class="highlighter-rouge">workflow_dispatch</code> option in our Action, GitHub will have started it already. If not, select “CI/CD to Docker Hub” action on the left, and then press <strong>Run workflow</strong> button on the right to start the workflow.</p>
 
 <p><img src="/docs.docker.jp.onthefly/language/golang/images/runworkflow.png" alt="GitHub Secrets" width="500px" /></p>
 
 <p>Should the run fail, you can click on the failing entry to see the logs and amend the workflow YAML file accordingly.</p>
-
-<h2 id="enable-access-to-docker-hub">Enable access to Docker Hub</h2>
-
-<p>The <a href="https://hub.docker.com/">Docker Hub</a> is a hosted repository service provided by Docker for finding and sharing container images.</p>
-
-<p>Before we can publish our Docker image to Docker Hub, we must grant GitHub Actions access to Docker Hub API.</p>
-
-<p>To set up the access to Docker Hub API:</p>
-
-<ol>
-  <li>
-    <p>Create a new Personal Access Token (PAT) for Docker Hub.</p>
-
-    <ul>
-      <li>Go to the <a href="https://hub.docker.com/settings/security">Docker Hub Account Settings</a> and then click <strong>New Access Token</strong>.</li>
-      <li>Let’s call this token <code class="language-plaintext highlighter-rouge">docker-gs-ping-ci</code>. Input the name and click <strong>Create</strong>.</li>
-      <li>Copy the token value, we’ll need it in a second.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Add your Docker ID and PAT as secrets to your GitHub repo.</p>
-
-    <ul>
-      <li>Navigate to your GitHub repository and click <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong>.</li>
-      <li>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</li>
-      <li>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code> and use the token value from the step (1).</li>
-    </ul>
-  </li>
-</ol>
-
-<p>Your GitHub repository <strong>Secrets</strong> section would look like the following.</p>
-
-<p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
-
-<p>Now it will be possible to refer to these two variables from our workflows. This will open up an opportunity to publish our image to Docker Hub.</p>
 
 <h2 id="set-up-the-cd-workflow">Set up the CD workflow</h2>
 
@@ -271,9 +271,9 @@
   <li>The second one is the build and push action.</li>
 </ol>
 
-<p>In this example, let us set the push flag to <code class="language-plaintext highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
+<p>In this example, let us set the push flag to <code class="highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
 
-<p>Now, we can add the steps required. Start a blank new workflow, just as we did before. Let’s give it a file name of <code class="language-plaintext highlighter-rouge">release.yml</code> and amend the template body to match the following.</p>
+<p>Now, we can add the steps required. Start a blank new workflow, just as we did before. Let’s give it a file name of <code class="highlighter-rouge">release.yml</code> and amend the template body to match the following.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Release to Docker Hub</span>
 
@@ -320,23 +320,23 @@
 <p>This workflow is similar to the CI workflow, with the following changes:</p>
 
 <ul>
-  <li>This workflow is only triggered when a git tag of the format <code class="language-plaintext highlighter-rouge">*.*.*</code> is pushed to the repo. The tag meant to be a semantic version, such as <code class="language-plaintext highlighter-rouge">3.5.0</code> or <code class="language-plaintext highlighter-rouge">0.0.1</code>.</li>
+  <li>This workflow is only triggered when a git tag of the format <code class="highlighter-rouge">*.*.*</code> is pushed to the repo. The tag meant to be a semantic version, such as <code class="highlighter-rouge">3.5.0</code> or <code class="highlighter-rouge">0.0.1</code>.</li>
   <li>The very first step is to login into Docker Hub using the two secrets that we had saved in the repository settings previously.</li>
-  <li>The <em>build and push</em> step now has <code class="language-plaintext highlighter-rouge">push: true</code> and since we had logged into Docker Hub this will result in the latest image being published.</li>
+  <li>The <em>build and push</em> step now has <code class="highlighter-rouge">push: true</code> and since we had logged into Docker Hub this will result in the latest image being published.</li>
   <li>The image digest step prints out the image metadata to the log.</li>
 </ul>
 
-<p>Let’s save this workflow and check the <em>Actions</em> page for the repository on GitHub. Unlike the CI workflow, this new workflow cannot be triggered manually - this is how we set it up. So, in order to test it, we have to tag some commit. Let’s tag the <code class="language-plaintext highlighter-rouge">HEAD</code> of the <code class="language-plaintext highlighter-rouge">main</code> branch:</p>
+<p>Let’s save this workflow and check the <em>Actions</em> page for the repository on GitHub. Unlike the CI workflow, this new workflow cannot be triggered manually - this is how we set it up. So, in order to test it, we have to tag some commit. Let’s tag the <code class="highlighter-rouge">HEAD</code> of the <code class="highlighter-rouge">main</code> branch:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git tag <span class="nt">-a</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git tag <span class="nt">-a</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>git push <span class="nt">--tags</span>
+</span><span class="gp">$</span> git push <span class="nt">--tags</span>
 <span class="go">Enumerating objects: 1, done.
 Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 169 bytes | 169.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/olliefr/docker-gs-ping.git
-</span><span class="gp"> * [new tag]         0.0.1 -&gt;</span><span class="w"> </span>0.0.1
+</span><span class="gp"> * [new tag]         0.0.1 -&gt;</span> 0.0.1
 </code></pre></div></div>
 
 <p>This means our tag was successfully pushed to the main repo. If we switch to the GitHub UI, we would see that the workflow has already been triggered:</p>
@@ -349,24 +349,24 @@ To https://github.com/olliefr/docker-gs-ping.git
 
 <p>That’s easy to fix. We follow our own guide and add the secrets to the repository settings. But how do we re-run the workflow? We need to remove the tag and reapply it.</p>
 
-<p>To remove the tag on the <code class="language-plaintext highlighter-rouge">remote</code>:</p>
+<p>To remove the tag on the <code class="highlighter-rouge">remote</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git push origin :refs/tags/0.0.1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git push origin :refs/tags/0.0.1
 <span class="go">To https://github.com/olliefr/docker-gs-ping.git
  - [deleted]         0.0.1
 </span></code></pre></div></div>
 
 <p>And to re-apply it locally and push:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git tag <span class="nt">-fa</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git tag <span class="nt">-fa</span> 0.0.1 <span class="nt">-m</span> <span class="s2">"Test release workflow"</span>
 <span class="go">Updated tag '0.0.1' (was d7d3edc)
-</span><span class="gp">$</span><span class="w"> </span>git push origin <span class="nt">--tags</span>
+</span><span class="gp">$</span> git push origin <span class="nt">--tags</span>
 <span class="go">Enumerating objects: 1, done.
 Counting objects: 100% (1/1), done.
 Writing objects: 100% (1/1), 170 bytes | 170.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/olliefr/docker-gs-ping.git
-</span><span class="gp"> * [new tag]         0.0.1 -&gt;</span><span class="w"> </span>0.0.1
+</span><span class="gp"> * [new tag]         0.0.1 -&gt;</span> 0.0.1
 </code></pre></div></div>
 
 <p>And the workflow is triggered again. This time it completes without issues:</p>
@@ -375,7 +375,7 @@ To https://github.com/olliefr/docker-gs-ping.git
 
 <p>Since the image we’ve just pushed to Docker Hub is public, now it can be pulled by anyone, from anywhere:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull olliefr/docker-gs-ping
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker pull olliefr/docker-gs-ping
 <span class="go">Using default tag: latest
 latest: Pulling from olliefr/docker-gs-ping
 540db60ca938: Already exists
@@ -417,7 +417,7 @@ docker.io/olliefr/docker-gs-ping:latest
           <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
           <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
           <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">${{ runner.os }}-buildx-</span>
+            <span class="no">${{ runner.os }}-buildx-</span>
 </code></pre></div></div>
 
 <p>And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:</p>
@@ -498,8 +498,8 @@ docker.io/olliefr/docker-gs-ping:latest
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#choose-a-sample-project" class="nomunge">サンプルプロジェクトの選定</a></li>
-  <li><a href="#set-up-the-ci-workflow" class="nomunge">Set up the CI workflow</a></li>
   <li><a href="#enable-access-to-docker-hub" class="nomunge">Enable access to Docker Hub</a></li>
+  <li><a href="#set-up-the-ci-workflow" class="nomunge">Set up the CI workflow</a></li>
   <li><a href="#set-up-the-cd-workflow" class="nomunge">Set up the CD workflow</a></li>
   <li><a href="#optimizing-the-workflow" class="nomunge">Optimizing the workflow</a></li>
   <li><a href="#wrap-up" class="nomunge">Wrap up</a></li>
