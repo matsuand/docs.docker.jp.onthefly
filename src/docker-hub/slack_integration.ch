@@ -9,6 +9,7 @@ redirect_from:
 - /docker-cloud/tutorials/slack-integration/
 - /docker-cloud/slack-integration/
 title: Set up Docker Hub notifications in Slack
+sitemap: false
 ---
 @y
 ---
@@ -18,6 +19,7 @@ redirect_from:
 - /docker-cloud/tutorials/slack-integration/
 - /docker-cloud/slack-integration/
 title: Slack における Docker Hub 通知の設定
+sitemap: false
 ---
 @z
 

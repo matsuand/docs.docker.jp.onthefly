@@ -10,6 +10,7 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 images = \
+	delete-sso.png    \
 	sso-attribute.png \
 	sso-azure1.png    \
 	sso-azure2.png    \

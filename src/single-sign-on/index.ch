@@ -544,3 +544,22 @@ To learn more see our [FAQs](faqs.md).
 ## FAQ
 To learn more see our [FAQs](faqs.md).
 @z
+
+@x
+## Deleting SSO
+@y
+{: #deleting-sso }
+## SSO の削除
+@z
+
+@x
+When you disable SSO, you can delete the connection to remove the configuration settings and the added domains. Once you delete this connection, it cannot be undone. Users must authenticate with their Docker ID and password or create a password reset if they do not have one.
+@y
+When you disable SSO, you can delete the connection to remove the configuration settings and the added domains. Once you delete this connection, it cannot be undone. Users must authenticate with their Docker ID and password or create a password reset if they do not have one.
+@z
+
+@x
+![Delete SSO](images/delete-sso.png){:width="500px"}
+@y
+![Delete SSO](images/delete-sso.png){:width="500px"}
+@z

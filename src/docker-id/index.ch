@@ -55,9 +55,10 @@ Docker ID は、提供されている Docker サービスにおける各ユー�
 @z
 
 @x
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters.
+    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you cannot reuse it in the future if you deactivate this account.
 @y
     Docker ID は 4 文字以上、30 文字までで、数字と英小文字のみを用います。
+    一度 Docker ID を生成した後に、このアカウントを無効化した場合には、そのアカウントは再利用できなくなります。
 @z
 
 @x
@@ -67,10 +68,9 @@ Docker ID は、提供されている Docker サービスにおける各ユー�
 @z
 
 @x
-4. Enter a password. Note that the password must be at least 9 characters.
+4. Enter a password that is at least 9 characters.
 @y
-4. パスワードを入力します。
-   なおパスワードは最低 9 文字以上なければなりません。
+4. 最低 9 文字以上のパスワードを入力します。
 @z
 
 @x
@@ -148,15 +148,16 @@ stored in your home directory in `.docker/config.json`. The password is base64-e
 @z
 
 @x
-If you run into trouble with your Docker ID account, know that we are here to help!
+If you run into trouble with your Docker ID account, know that we are here to help! If you want to retrieve or reset your password, [enter your email address](https://id.docker.com/reset-password/){: target="_blank" rel="noopener" class="_"} for additional instructions.
 @y
 Docker ID アカウントについて問題が発生した場合、以下に示すヘルプがあります。
+パスワードの通知やリセットを行いたい場合は [メールアドレスの入力](https://id.docker.com/reset-password/){: target="_blank" rel="noopener" class="_"} を追加で行ってください。
 @z
 
 @x
-The most frequently asked questions regarding Docker ID accounts can be found on our [support troubleshooting FAQ](https://hub.docker.com/support/).
+ The most frequently asked questions regarding Docker ID accounts can be found on our [support troubleshooting FAQ](https://hub.docker.com/support/).
 @y
-Docker ID アカウントに関して、よくたずねられる質問が、[サポート、トラブルシューティング、FAQ](https://hub.docker.com/support/) にあります。
+ Docker ID アカウントに関して、よくたずねられる質問が、[サポート、トラブルシューティング、FAQ](https://hub.docker.com/support/) にあります。
 @z
 
 @x

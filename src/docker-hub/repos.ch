@@ -65,16 +65,33 @@ When creating a new repository:
 * You can choose to put it in your Docker ID namespace, or in any
   [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
 * The repository name needs to be unique in that namespace, can be two
-  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
-  and underscores (`_`).
-* The description can be up to 100 characters and is used in the search result.
-* You can link a GitHub or Bitbucket account now, or choose to do it later in
-  the repository settings.
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`).
 @y
 * リポジトリを Docker ID 名前空間に含めるか、自身が [**所有者**](orgs.md#the-owners-team) となっている [組織](orgs.md) に含めるかを選びます。
 * リポジトリ名は、これが属する名前空間内においてユニークである必要があります。
   文字数は 2 文字以上 255 文字までです。
   利用できる文字は、英小文字、数字、ハイフン（`-`）、アンダースコア（`_`）です。
+@z
+
+@x
+
+  > **Note:**
+  >
+  > You cannot rename a Docker Hub repository once it has been created.
+
+@y
+
+  > **メモ**
+  >
+  > Docker Hub のリポジトリを一度生成した後は、名称変更することはできません。
+
+@z
+
+@x
+* The description can be up to 100 characters and is used in the search result.
+* You can link a GitHub or Bitbucket account now, or choose to do it later in
+  the repository settings.
+@y
 * 内容説明を 100 文字以内で記述できます。
   これは検索を行った際に、結果として表示されます。
 * この場ですぐに GitHub や Bitbucket のアカウントにリンクさせることができます。
@@ -92,6 +109,42 @@ After you hit the **Create** button, you can start using `docker push` to push
 images to this repository.
 @y
 **Create** ボタンをクリックした後は、`docker push` を利用してこのリポジトリに対してイメージをプッシュしていくことができます。
+@z
+
+@x
+## Deleting a repository
+@y
+{: #deleting-a-repository }
+## リポジトリの削除
+@z
+
+@x
+1. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and click **Repositories**.
+@y
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にサインインして **Repositories** をクリックします。
+@z
+
+@x
+2. Select a repository from the list, click **Settings** and then Delete Repository.
+@y
+2. 一覧の中からリポジトリを 1 つ選択して、**Settings** をクリックし Delete Repository を行います。
+@z
+
+@x
+  > **Note:**
+  >
+  > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
+@y
+  > **メモ**
+  >
+  > リポジトリの削除を行うと、そこに含まれていたイメージやビルド設定はすべて失われます。
+  > この操作は取り消すことはできません。
+@z
+
+@x
+3. Enter the name of the repository to confirm the deletion and click **Delete**.
+@y
+3. 確認のためリポジトリ名を入力し、**Delete** をクリックします。
 @z
 
 @x
@@ -203,11 +256,11 @@ You can also make an existing repository private by going to its **Settings** ta
 You get one private repository for free with your Docker Hub user account (not
 usable for organizations you're a member of). If you need more private
 repositories for your user account, upgrade your Docker Hub plan from your
-[Billing Information](https://hub.docker.com/billing/plan) page.
+[Billing Information](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} page.
 @y
 Docker Hub ユーザーアカウントに対して、プライベートリポジトリは無償で 1 つだけ生成することができます。
 （メンバーとして所属している組織からは利用できません。）
-ユーザーアカウントにおいて、これ以上のプライベートリポジトリを必要とする場合は、[有料プランの情報](https://hub.docker.com/billing/plan) ページから Docker Hub プランをアップグレードすることが必要になります。
+ユーザーアカウントにおいて、これ以上のプライベートリポジトリを必要とする場合は、[有料プランの情報](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} ページから Docker Hub プランをアップグレードすることが必要になります。
 @z
 
 @x
@@ -236,12 +289,12 @@ You can designate collaborators and manage their access to a private
 repository from that repository's **Settings** page. You can also toggle the
 repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} plan.
 @y
 プライベートリポジトリでは、協力者（collaborator）を設定して、リポジトリへのアクセスを管理することができます。
 これはリポジトリの **Settings** ページから行います。
 またリポジトリの状態は、利用可能なスロット数があれば、パブリックとプライベートの間で切り替えることもできます。
-スロット数が足りない場合、[Docker Hub](https://hub.docker.com/account/billing-plans/) プランをアップグレードすることができます。
+スロット数が足りない場合、[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} プランをアップグレードすることができます。
 @z
 
 @x

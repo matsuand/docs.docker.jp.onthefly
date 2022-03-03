@@ -86,6 +86,16 @@ organizations.
 @z
 
 @x
+    > **Note**:  If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub] (https://github.com/){: target="_blank" rel="noopener"
+    class="_"}  before linking via Docker Hub.
+@y
+    > **メモ**
+    >
+    > 現在の GitHub アカウントへのリンクを解除して、別の GitHub アカウントへのリンクを行いたい場合は、完全に [GitHub] (https://github.com/){: target="_blank" rel="noopener"
+    class="_"} からログアウトした上で Docker Hub からのリンク操作を行ってください。
+@z
+
+@x
 4. Review the settings for the **Docker Hub Builder** OAuth application.
 @y
 4. **Docker Hub Builder** OAuth アプリケーションに対する設定を確認します。

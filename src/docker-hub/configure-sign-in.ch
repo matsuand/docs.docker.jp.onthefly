@@ -3,13 +3,13 @@
 
 @x
 ---
-description: Configure registry.json to require sign in
+description: Configure registry.json to enforce users to sign into Docker Desktop
 keywords: authentication, registry.json, configure,
-title: Configure registry.json to require sign in
+title: Configure registry.json to enforce sign in
 ---
 @y
 ---
-description: Configure registry.json to require sign in
+description: Configure registry.json to enforce users to sign into Docker Desktop
 keywords: authentication, registry.json, configure,
 title: サインインを要求する registry.json の設定
 ---

@@ -17,8 +17,7 @@ title: GitHub アクションの設定
 
 @x
 This page guides you through the process of setting up a GitHub Action CI/CD
-pipeline with Docker. Before setting up a new pipeline, we recommend that you
-take that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"}
+pipeline with Docker. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"}
 on CI/CD best practices.
 @y
 本ページでは Docker において CI/CD と連携させるための GitHub アクションの設定手順を示します。

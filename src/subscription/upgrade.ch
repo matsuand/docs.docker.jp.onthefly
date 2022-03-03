@@ -166,11 +166,11 @@ To update the billing information for your organization or personal account:
 @x
     > **Note**
     >
-    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section.
+    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section. Invoices are sent to one email address. Please contact your administrator to create a group within your organization that includes all of the email addresses.
 @y
     > **Note**
     >
-    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section.
+    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section. Invoices are sent to one email address. Please contact your administrator to create a group within your organization that includes all of the email addresses.
 @z
 
 @x
