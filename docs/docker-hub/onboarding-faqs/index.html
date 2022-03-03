@@ -1,10 +1,10 @@
 <!-- Page generated 2022-03-03 12:37:21 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>サインインを要求する registry.json の設定 | Docker ドキュメント</title>
-  <meta name="description" content="Configure registry.json to enforce users to sign into Docker Desktop" />
-  <meta name="keywords" content="authentication, registry.json, configure,">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/configure-sign-in/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title> | Docker ドキュメント</title>
+  <meta name="description" content="よくたずねられる質問" />
+  <meta name="keywords" content="onboarding, docker, teams, orgs">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/onboarding-faqs/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="サインインを要求する registry.json の設定"/>
+  <meta name="twitter:title" itemprop="title name" content=""/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -40,16 +40,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="サインインを要求する registry.json の設定" />
-  <meta property="og:description" content="Configure registry.json to enforce users to sign into Docker Desktop" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="よくたずねられる質問" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-03T12:37:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/configure-sign-in/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/onboarding-faqs/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2022-03-03T12:37:21+09:00"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"サインインを要求する registry.json の設定","description":"Configure registry.json to enforce users to sign into Docker Desktop","url":"https://docs.docker.com/docker-hub/configure-sign-in/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"","description":"よくたずねられる質問","url":"https://docs.docker.com/docker-hub/onboarding-faqs/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/orgs/">管理</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/configure-sign-in/">サインインの要求</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/orgs/">管理</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/onboarding-faqs/">オンボーディング FAQ</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -107,103 +107,122 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>サインインを要求する registry.json の設定</h1><p><code class="highlighter-rouge">registry.json</code>ファイルは、ユーザーが所属するべき Docker 組織を定めるものとして、管理者が設定するファイルです。
-したがって組織に対する設定は、ユーザーセッションに対して適用されます。
-Docker Desktop のインストールには管理者権限を必要とします。
-エンタープライズの規模が大きいために、管理者によるアクセスが制限されてしまうような場合には、管理者が<code class="highlighter-rouge">registry.json</code>を生成する方法をとります。
-このファイルは Docker Desktop のインストールの一部として導入されるデバイス管理ソフトウェアを使って、各ユーザーのマシンにデプロイすることができます。</p>
+                        <section class="section"><p><em class="reading-time">読む時間の目安: 4 分</em></p><h3 id="what-is-a-docker-id">Docker ID とは何ですか？</h3>
 
-<p>ユーザーマシンに<code class="highlighter-rouge">registry.json</code>ファイルをデプロイした後は、Docker Desktop へのサインインが求められます。
-ユーザーがサインインしなかった場合、または<code class="highlighter-rouge">registry.json</code>に指定されている組織とは別の組織を使ってサインインしようとした場合、Docker Desktop へのアクセスは拒否されます。
-<code class="highlighter-rouge">registry.json</code>ファイルをデプロイしてユーザーに対して認証操作を行わせることには、以下のメリットがあります。</p>
+<p>Docker ID とは、Docker Hub リポジトリやホストされた Docker サービスにアクセスできるユーザー名のことです。
+Docker ID の生成に必要となるのはメールアドレスだけです。
+Docker ID は 4 ～ 30 の長さの文字列でなければなりません。
+また含めることのできる文字は、数値と英小文字のみです。
+特殊な文字や空白を含めることはできません。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-id/">Docker ID</a> を参照してください。
+管理者から <a href="/docs.docker.jp.onthefly/single-sign-on/">シングルサインオン (SSO)</a> が指定されている場合、新規ユーザーに対して Docker ID が割り振られます。</p>
 
-<ol>
-  <li><a href="/docs.docker.jp.onthefly/docker-hub/image-access-management/">イメージアクセス管理</a> などにおいて管理者は、チームメンバーに許可する機能を以下のように制限することができます。
-    <ul>
-      <li>Docker Hub では信頼されたコンテンツのみへのアクセスとする。</li>
-      <li>指定したカテゴリーのイメージしかプルできないようにする。</li>
-    </ul>
-  </li>
-  <li>認証されたユーザーは匿名ユーザーに比べて、より高いプル制限率が得られます。
-たとえば認証ユーザーの場合、6 時間ごとに 200 プルを行うことができます。
-これが匿名ユーザーの場合は IP アドレスごとに、6 時間内では 100 プルしか行うことができません。
-詳しいことは <a href="/docs.docker.jp.onthefly/docker-hub/download-rate-limit/">ダウンロード率制限</a> を参照してください。</li>
-  <li>指定した組織にユーザーが追加されていない限りは、Docker Desktop へのアクセスを拒否することができます。</li>
-</ol>
+<h3 id="what-if-my-docker-id-is-taken">Docker ID を取得したらどうなりますか？</h3>
 
-<!-- This section is included in topics that contain instructions on how to configure registry.json file to enforce users to sign into Docker Desktop-->
+<p>Docker ID は早いものから順に登録されます。
+ただしユーザー名に US 商標登録が含まれる企業は別です。
+名前空間を商標登録している場合、<a href="https://hub.docker.com/support/contact/" target="_blank" rel="noopener" class="_">Docker Support</a> が Docker ID を適切に提供します。</p>
 
-<h2 id="create-a-registryjson-file">registry.json ファイルの生成</h2>
+<h3 id="whats-an-organization">組織とは何ですか？</h3>
 
-<p>Docker Desktop を正常にインストールを終えたら、<code class="highlighter-rouge">registry.json</code>ファイルを生成します。
-<code class="highlighter-rouge">registry.json</code>ファイルを生成するにあたっては、そのユーザーが Docker Hub 内において、少なくとも 1 つの組織のメンバーであることを確認してください。
-<code class="highlighter-rouge">registry.json</code>ファイルの内容が、そのメンバーが属する組織に 1 つでも一致すれば、そのユーザーは Docker Desktop にサインインすることができて、すべての組織へのアクセスが可能になります。</p>
+<p>Docker ユーザーは、組織内の少なくとも 1 つのチームに割り当てられていれば、その組織のメンバーになります。
+組織を作成すると、1 つのチームを持つことになります。
+そのチームは <strong>Owners</strong> (所有者、管理者) チームです。
+そこに 1 人だけメンバーが含まれます。
+組織の所有者とは所有者チームの誰かのことです。
+組織の所有者であれば、自身の Docker ID かあるいはメールアドレスを使って、新たなチームの生成や既存チームへのメンバー追加が可能になります。
+その際にはユーザーを所属させるチームを選択します。
+組織の所有者は、別の組織所有者を追加できます。
+その追加の所有者に、ユーザー、チーム、組織内リポジトリの管理を委ねることができます。
+<a href="/docs.docker.jp.onthefly/docker-hub/orgs/">詳しくはこちら</a>。</p>
 
-<h3 id="windows">Windows の場合</h3>
+<h3 id="how-many-organizations-can-i-create">組織はいくつ作ることができますか？</h3>
 
-<p>Windows では<code class="highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>組織は複数生成することができます。
+ただし SSO を有効にしていて組織を複数生成している場合は、各組織はそれに関連づいたドメインを持っていなければなりません。</p>
 
-<p>Windows において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<h3 id="whats-a-team">チームとは何ですか？</h3>
 
-<ol>
-  <li>Windows PowerShell を開いて Run as Administrator を選びます。</li>
-  <li>以下のコマンド<code class="highlighter-rouge">cd /ProgramData/DockerDesktop/</code>を実行します。</li>
-  <li>
-    <p><code class="highlighter-rouge">notepad registry.json</code>を実行します。
-その開発者が所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力し、<strong>Save</strong>（保存）をクリックします。
-たとえば以下のようにします。</p>
+<p><strong>チーム</strong> (team) とは、1 つの組織に所属する Docker ユーザーのグループのことです。
+1 つの組織には複数のチームを含めることができます。
+初めて組織を生成した際には、1 つのチームが生成されています。
+それは所有者チームであり、そこにはメンバーが一人だけ含まれています。
+An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. <a href="/docs.docker.jp.onthefly/docker-hub/orgs/#create-a-team">Learn more</a>.</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<h3 id="who-is-an-organization-owner">組織のオーナーは誰ですか？</h3>
 
-<h3 id="mac">Mac の場合</h3>
+<p>An organization owner is an administrator who is responsible to manage
+repositories and add team members to the organization. They have full access to
+private repositories, all teams, billing information, and organization settings.
+An organization owner can also specify <a href="/docs.docker.jp.onthefly/docker-hub/orgs/#configure-repository-permissions">permissions</a> for each team in the
+organization. Only an organization owner can enable SSO for the organization.
+When SSO is enabled for your organization, the organization owner can also
+manage users.</p>
 
-<p>macOS では<code class="highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>Docker can auto-provision Docker IDs for new end-users or users who’d like to
+have a separate Docker ID for company use through SSO enforcement.</p>
 
-<p>macOS において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<p>The organization owner can also add additional owners to help them manage users, teams, and repositories in the organization.</p>
 
-<ol>
-  <li>VS Code または好みのテキストエディターを開きます。</li>
-  <li>
-    <p>そのユーザーが所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力してドキュメントフォルダに保存します。
-たとえば以下のようにします。</p>
+<h3 id="how-do-i-add-an-organization-owner">How do I add an organization owner?</h3>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>新たに端末画面を開いて、以下のコマンドを実行します。</p>
+<p>An existing owner can add additional team members as organization owners. All
+they need to do is select the organization from the
+<a href="https://hub.docker.com/orgs" target="_blank" rel="noopener" class="_">Organizations</a> page in Docker Hub, add the Docker ID/Email of the user, and then
+select the <strong>Owners</strong> team from the drop-down menu. <a href="/docs.docker.jp.onthefly/docker-hub/orgs/#the-owners-team">Learn more</a>.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo mkdir -p /Library/Application\ Support/com.docker.docker
-</span></code></pre></div>    </div>
+<h3 id="do-users-first-need-to-authenticate-with-docker-before-an-owner-can-add-them-to-an-organization">Do users first need to authenticate with Docker before an owner can add them to an organization?</h3>
 
-    <p>プロンプトが表示されたら、ローカルマシンに関連づいたパスワードを入力します。</p>
-  </li>
-  <li>
-    <p>以下のコマンドを入力します。</p>
+<p>No. Organization owners can invite users through email and also choose a team for them to join within the invite.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<h3 id="if-a-user-has-their-personal-email-associated-with-a-user-account-in-docker-hub-do-they-have-to-convert-to-using-the-orgs-domain-before-they-can-be-invited-to-join-an-organization">If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the org’s domain before they can be invited to join an organization?</h3>
 
-<h2 id="verify-the-changes">変更の確認</h2>
+<p>Yes. When SSO is enabled for your organization, each user must sign in with the company’s domain. However, the user can retain their personal credentials and create a new Docker ID associated with their organization’s domain.</p>
 
-<p><code class="highlighter-rouge">registry.json</code>ファイルを生成して、各ユーザーマシンに対してデプロイしたら、各ユーザーが Docker Desktop を起動できるかどうかを問い合わせて、変更が適用されたことを確認します。</p>
+<h3 id="can-i-convert-my-personal-user-account-docker-id-to-an-organization-account">Can I convert my personal user account (Docker ID) to an organization account?</h3>
 
-<p>設定が正しく行われたら、各ユーザーによる Docker Desktop の起動時に、組織情報を使ったユーザー認証が求められます。
-ユーザー認証に失敗した場合は、エラーメッセージが表示されて、Docker Desktop へのアクセスが拒否されます。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=authentication">authentication</a>, <a href="/docs.docker.jp.onthefly/search/?q=registry.json">registry.json</a>, <a href="/docs.docker.jp.onthefly/search/?q=configure">configure</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+<p>Yes. You can convert your user account to an organization account. Once you
+convert a user account into an organization, it is not possible to
+revert it to a personal user account. For prerequisites and instructions, see
+<a href="/docs.docker.jp.onthefly/docker-hub/convert-account/">Convert an account into an organization</a>.</p>
+
+<h3 id="our-users-create-docker-hub-accounts-through-self-service-how-do-we-know-when-the-total-number-of-users-for-the-requested-licenses-has-been-met-is-it-possible-to-add-more-members-to-the-organization-than-the-total-number-of-licenses">Our users create Docker Hub accounts through self-service. How do we know when the total number of users for the requested licenses has been met? Is it possible to add more members to the organization than the total number of licenses?</h3>
+
+<p>Currently, we don’t have a way to notify you. However, if the number of team
+members exceed the number of licenses, you will receive an error informing you
+to contact the administrator due to lack of seats.</p>
+
+<h3 id="how-can-i-merge-organizations-in-docker-hub">How can I merge organizations in Docker Hub?</h3>
+
+<p>Reach out to your Support contact if you need to consolidate organizations.</p>
+
+<h3 id="do-organization-invitees-take-up-seats">Do organization invitees take up seats?</h3>
+
+<p>Yes. A user invited to an organization will take up one of the provisioned
+seats, even if that user hasn’t accepted their invitation yet. Organization
+owners can manage the list of invitees through the <strong>Invitees</strong> tab on the organization settings page in Docker Hub.</p>
+
+<h3 id="do-organization-owners-take-a-seat">Do organization owners take a seat?</h3>
+
+<p>Yes. Organization owners will take up a seat.</p>
+
+<h3 id="if-there-are-two-organizations-and-a-user-belongs-to-both-orgs-do-they-take-up-two-seats">If there are two organizations and a user belongs to both orgs, do they take up two seats?</h3>
+
+<p>Yes. In a scenario where a user belongs to two orgs, they take up one seat in each organization.</p>
+
+<h3 id="is-it-possible-to-set-permissions-for-repositories-within-an-organization">Is it possible to set permissions for repositories within an organization?</h3>
+
+<p>Yes. You can configure repository access on a per-team basis. For example, you
+can specify that all teams within an organization have <strong>Read and Write</strong> access
+to repositories A and B, whereas only specific teams have <strong>Admin</strong> access. Org
+owners have full administrative access to all repositories within the
+organization. <a href="/docs.docker.jp.onthefly/docker-hub/orgs/#configure-repository-permissions">Learn more</a>.</p>
+
+<h3 id="can-i-configure-multiple-sso-identity-providers-idps-to-authenticate-users-to-a-single-org">Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?</h3>
+
+<p>Docker SSO allows only one IdP configuration per organization. For more
+information, see <a href="/docs.docker.jp.onthefly/single-sign-on/">Configure SSO</a> and <a href="/docs.docker.jp.onthefly/single-sign-on/faqs/">SSO FAQs</a>.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=onboarding">onboarding</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=teams">teams</a>, <a href="/docs.docker.jp.onthefly/search/?q=orgs">orgs</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -217,7 +236,7 @@ Docker Desktop のインストールには管理者権限を必要とします�
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/docker-hub/configure-sign-in.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-hub/configure-sign-in.ch](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/configure-sign-in/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/docker-hub/onboarding-faqs.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-hub/onboarding-faqs.ch](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/onboarding-faqs/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -235,15 +254,6 @@ Docker Desktop のインストールには管理者権限を必要とします�
 </li>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
-<ul id="my_toc" class="inline_toc">
-  <li><a href="#create-a-registryjson-file" class="nomunge">registry.json ファイルの生成</a>
-    <ul>
-      <li><a href="#windows" class="nomunge">Windows の場合</a></li>
-      <li><a href="#mac" class="nomunge">Mac の場合</a></li>
-    </ul>
-  </li>
-  <li><a href="#verify-the-changes" class="nomunge">変更の確認</a></li>
-</ul>
 
 </div>
                         </div>
@@ -340,5 +350,5 @@ Docker Desktop のインストールには管理者権限を必要とします�
     </div>
 
     </footer>
-    <script>const pageURL = "/docker-hub/configure-sign-in/";</script></body>
+    <script>const pageURL = "/docker-hub/onboarding-faqs/";</script></body>
 </html>

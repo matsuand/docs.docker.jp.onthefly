@@ -1,10 +1,10 @@
-<!-- Page generated 2022-03-03 12:37:21 +0900-->
+<!-- Page generated 2022-02-26 13:40:12 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>イメージアクセス管理 | Docker ドキュメント</title>
-  <meta name="description" content="Image Access Management" />
-  <meta name="keywords" content="image, access, management">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/image-access-management/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Registry Access Management | Docker ドキュメント</title>
+  <meta name="description" content="レジストリアクセス管理" />
+  <meta name="keywords" content="registry, access, managment">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/docker-hub/registry-access-management/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="イメージアクセス管理"/>
+  <meta name="twitter:title" itemprop="title name" content="Registry Access Management"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -40,16 +40,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="イメージアクセス管理" />
-  <meta property="og:description" content="Image Access Management" />
+  <meta property="og:title" content="Registry Access Management" />
+  <meta property="og:description" content="レジストリアクセス管理" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-26T13:40:12+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/image-access-management/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/registry-access-management/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-03-03T12:37:21+09:00"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"イメージアクセス管理","description":"Image Access Management","url":"https://docs.docker.com/docker-hub/image-access-management/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-02-26T13:40:12+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Registry Access Management","description":"レジストリアクセス管理","url":"https://docs.docker.com/docker-hub/registry-access-management/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -91,13 +91,7 @@
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
     </div>
 </div>
-<div class="row hidden-sm hidden-xs">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/orgs/">管理</a></li><li><a href="/docs.docker.jp.onthefly/docker-hub/image-access-management/">イメージアクセス管理</a></li></ol>
-    </nav>
-</div></div>
+</div>
     </div>
 </nav>
 
@@ -107,80 +101,59 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>イメージアクセス管理</h1><p>イメージアクセス管理（Image Access Management）は、Docker Business サブスクリプションの一部に含まれる新機能です。
-この機能は、各開発者が Docker Hub からどのような種類のイメージ（Docker 公式イメージ、Docker 認証者によるイメージ、コミュニティイメージ）をプルしたのか、それを組織所有者が管理するものです。</p>
+                        <section class="section"><h1>Registry Access Management</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.</p>
 
-<p>たとえば、組織の一員である開発者が、新たにコンテナー化アプリケーションを構築する際に、アプリケーションの一部に、信頼できないコミュニティイメージを含めてしまうことが起こりえます。
-そのようなイメージは、企業に対して悪意を含んだセキュリティリスクとなる可能性があります。
-イメージアクセス管理を利用すると、開発者がアクセスするイメージを、Docker 公式イメージ、Docker 認証者によるイメージ、組織の保有するイメージといった、信頼のおけるイメージだけとなるように、組織所有者が仕向けることができます。
-こうしてセキュリティリスクを回避できます。</p>
+<blockquote class="important">
+  <p><strong>Note</strong></p>
 
-<h2 id="configure-image-access-management-permissions">イメージアクセス管理のパーミッション設定</h2>
+  <p>Registry Access Management is currently offered as a Tech Preview to a closed group of Docker Business customers.</p>
+</blockquote>
 
-<p>以下に示すビデオでは、イメージアクセス管理におけるパーミッションの設定過程を順に示しています。</p>
+<h2 id="configure-registry-access-management-permissions">Configure Registry Access Management permissions</h2>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-
-<p><br /></p>
-
-<h3 id="detailed-instructions">詳細な手順</h3>
-
-<p>イメージアクセス管理におけるパーミッションを設定するには、以下の手順を行います。</p>
+<p>To configure Registry Access Management permissions, perform the following steps:</p>
 
 <ol>
-  <li>組織管理者として <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> アカウントにログインします。</li>
+  <li>Sign into your <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> account as an organization owner.</li>
+  <li>Select an organization, navigate to the <strong>Settings</strong> tab on the <strong>Organizations</strong> page and click <strong>Org Permissions</strong>.</li>
   <li>
-    <p>組織を選択して、<strong>Organizations</strong>（組織）ページの <strong>Settings</strong>（設定）タブを開き、Org Permissions をクリックします。</p>
-
-    <p><img src="/docs.docker.jp.onthefly/docker-hub/images/image-access-management.png" alt="イメージアクセス管理" width="700px" /></p>
-  </li>
-  <li>イメージアクセス管理を有効にして、管理対象としたい以下のようなイメージ種類に対するパーミッションを設定します。
-    <ul>
-      <li><strong>Organization Images</strong>（組織イメージ）＝ イメージアクセス管理が有効なときに、自組織が構築したイメージは常に有効となります。
-このイメージは組織内のメンバーが生成したものであり、公開されたもの、プライベートなものを問いません。</li>
-      <li><strong>Docker Official Images</strong>（Docker 公式イメージ）＝ Docker Hub 上の Docker リポジトリから提供されるイメージです。
-ここには OS リポジトリ、Dockerfile のベストプラクティス、すぐに使えるソリューションが提供されていて、日々セキュリティ更新が行われています。</li>
-      <li><strong>Docker Verified Publisher Images</strong>（Docker 認証者によるイメージ）＝ 認証公開者（Verified Publisher）プログラムの一部である Docker パートナーによって公開されたイメージです。
-開発者の安全性を確保するサプライチェーンに含める、信頼のおけるイメージです。
-これに対するパーミッションとして、<strong>Allowed</strong>（許可）や <strong>Restricted</strong>（限定的）を設定することができます。</li>
-      <li><strong>Community Images</strong>（コミュニティイメージ）＝ イメージアクセス管理が有効である場合に、このイメージは常に無効となります。
-こういったイメージは信頼できないものです。さまざまな Docker Hub ユーザーが提供しているため、セキュリティリスクを引き起こすためです。</li>
-    </ul>
+    <p>Enable Registry Access Management to set the permissions for your registry.</p>
 
     <blockquote>
-      <p><strong>メモ</strong></p>
+      <p><strong>Note</strong></p>
 
-      <p>イメージアクセス管理は、デフォルトでは無効となっています。
-ただし、組織内の<code class="highlighter-rouge">owners</code>チームに属するメンバーは、この設定には関係なく、すべてのイメージにアクセスできます。</p>
+      <p>When enabled, the Docker Hub registry is set by default, however you can also restrict this registry for your developers.</p>
     </blockquote>
   </li>
-  <li><strong>Allowed</strong>（許可）をクリックして、イメージに対するカテゴリー制約を選択します。</li>
-  <li>制約を適用した後、各メンバーは、組織のパーミッションページを編集はできませんが参照することはできます。</li>
+  <li>Click <strong>Add</strong> and enter your registry details in the applicable fields, and click <strong>Create</strong> to add the registry to your list.</li>
+  <li>
+    <p>Verify that the registry appears in your list and click <strong>Save &amp; Apply</strong>.  You can verify that your changes are saved in the Activity tab.</p>
+
+    <blockquote>
+      <p><strong>Note</strong></p>
+
+      <p>Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.  Also, there is no limit on the number of registries you can add. See the <a href="#caveats">Caveats</a> section to learn more about limitations when using this feature.</p>
+    </blockquote>
+  </li>
 </ol>
 
-<h2 id="enforce-authentication">強制的な認証</h2>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/images/registry-access-management.png" alt="Registry Access Management" width="700px" /></p>
 
-<p>組織内の各メンバーが、安全でセキュアな環境のもとでイメージを利用するように仕向けるため、以下の手順を実施して、組織内においては強制的にサインインさせるようにします。
-これは以下のようにします。</p>
+<h2 id="enforce-authentication">Enforce authentication</h2>
+
+<p>To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:</p>
 
 <ol>
-  <li>Docker Desktop の最新版をダウンロードします。そして、</li>
-  <li><code class="highlighter-rouge">registry.json</code>ファイルを生成します。</li>
+  <li>Download the latest version of Docker Desktop, and then</li>
+  <li>Create a <code class="highlighter-rouge">registry.json</code> file.</li>
 </ol>
 
-<p>Docker Desktop 4.0 またはそれ以降のリリースをダウンロードします。</p>
+<p>Download Docker Desktop 4.5 or a later release.</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/desktop/windows/install/">Windows 向けのダウンロードとインストール</a></li>
-  <li><a href="/docs.docker.jp.onthefly/desktop/mac/install/">Mac 向けのダウンロードとインストール</a></li>
+  <li><a href="/desktop/windows/install/">Download and install for Windows</a></li>
+  <li><a href="/desktop/mac/install/">Download and install for Mac</a></li>
 </ul>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>現在のところ Linux 向けの Docker Desktop はありません。
-ログインに際しては Linux ユーザーも、 Mac や Windows ユーザーと同様の制約を持つことになりますが、現在のところ、ログイン時にこれを強制する方法はありません。</p>
-</blockquote>
 
 <!-- This section is included in topics that contain instructions on how to configure registry.json file to enforce users to sign into Docker Desktop-->
 
@@ -248,16 +221,29 @@
   </li>
 </ol>
 
-<h2 id="verify-the-restrictions">制限の確認</h2>
+<h2 id="verify-the-restrictions">Verify the restrictions</h2>
 
-<p>制約設定が正常に行われていることを確認するには、組織メンバーが Docker Desktop にサインインしてから、自分のローカルマシンにイメージをプルします。
-   サインインができない場合には、エラーメッセージが表示されます。</p>
+<p>After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.</p>
 
-<p>イメージアクセス管理を有効にしていると、所属メンバーは、組織用のイメージ、Docker 公式イメージ、認証公開者によるイメージを、それぞれローカルマシンにプルできます。
-   制約設定を無効にすると、メンバーはコミュニティイメージなど、あらゆるイメージをプルできるようになります。</p>
+<p>If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, or authenticates as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/images/image-access-management-error.png" alt="イメージアクセス管理" width="700px" /></p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=image">image</a>, <a href="/docs.docker.jp.onthefly/search/?q=access">access</a>, <a href="/docs.docker.jp.onthefly/search/?q=management">management</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+<h3 id="caveats">Caveats</h3>
+
+<p>There are certain limitations when using Registry Access Management; they are as follows:</p>
+
+<ul>
+  <li>Windows image pulls, and image builds are not restricted</li>
+  <li>Builds such as <code class="highlighter-rouge">docker buildx</code> using a Kubernetes driver are not restricted</li>
+  <li>Builds such as <code class="highlighter-rouge">docker buildx</code> using a custom docker-container driver are not restricted</li>
+  <li>Blocking is DNS-based; you must use a registry’s access control mechanisms to distinguish between “push” and “pull”</li>
+  <li>You must disable HTTP proxy or use a corporate proxy which also blocks the registries</li>
+  <li>WSL 2 requires at least a 5.4 series Linux kernel  (this does not apply to earlier Linux kernel series)</li>
+  <li>Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)</li>
+</ul>
+
+<p>Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system’s <code class="highlighter-rouge">sts</code> file. Blocking these forms of manipulation is outside the remit of Docker Desktop.</p>
+
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="/docs.docker.jp.onthefly/search/?q=access">access</a>, <a href="/docs.docker.jp.onthefly/search/?q=managment">managment</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -271,7 +257,7 @@
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/docker-hub/image-access-management.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-hub/image-access-management.ch](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/image-access-management/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/docker-hub/registry-access-management.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-hub/registry-access-management.ch](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/registry-access-management/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -290,19 +276,19 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#configure-image-access-management-permissions" class="nomunge">イメージアクセス管理のパーミッション設定</a>
-    <ul>
-      <li><a href="#detailed-instructions" class="nomunge">詳細な手順</a></li>
-    </ul>
-  </li>
-  <li><a href="#enforce-authentication" class="nomunge">強制的な認証</a></li>
+  <li><a href="#configure-registry-access-management-permissions" class="nomunge">Configure Registry Access Management permissions</a></li>
+  <li><a href="#enforce-authentication" class="nomunge">Enforce authentication</a></li>
   <li><a href="#create-a-registryjson-file" class="nomunge">registry.json ファイルの生成</a>
     <ul>
       <li><a href="#windows" class="nomunge">Windows の場合</a></li>
       <li><a href="#mac" class="nomunge">Mac の場合</a></li>
     </ul>
   </li>
-  <li><a href="#verify-the-restrictions" class="nomunge">制限の確認</a></li>
+  <li><a href="#verify-the-restrictions" class="nomunge">Verify the restrictions</a>
+    <ul>
+      <li><a href="#caveats" class="nomunge">Caveats</a></li>
+    </ul>
+  </li>
 </ul>
 
 </div>
@@ -400,5 +386,5 @@
     </div>
 
     </footer>
-    <script>const pageURL = "/docker-hub/image-access-management/";</script></body>
+    <script>const pageURL = "/docker-hub/registry-access-management/";</script></body>
 </html>
