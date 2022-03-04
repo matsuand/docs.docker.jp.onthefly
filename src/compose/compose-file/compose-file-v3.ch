@@ -1576,13 +1576,14 @@ services:
 @z
 
 @x
-Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+Specify configuration related to the deployment and running of services. The following  
+sub-options only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
 [docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
-ignored by `docker-compose up` and `docker-compose run`.
+ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 @y
 サービスのデプロイや起動に関する設定を行います。
-この設定が有効になるのは [スウォーム](../../engine/swarm/index.md) に対して [docker stack deploy](../../engine/reference/commandline/stack_deploy.md) コマンドを実行したときであって、`docker-compose up`や`docker-compose run`を実行したときには無視されます。
+以下に示すサブオプションが有効になるのは [スウォーム](../../engine/swarm/index.md) に対して [docker stack deploy](../../engine/reference/commandline/stack_deploy.md) コマンドを実行したときです。
+`resources`は除き、`docker-compose up`や`docker-compose run`を実行したときには無視されます。
 @z
 
 @x
