@@ -1,4 +1,4 @@
-<!-- Page generated 2022-03-03 12:37:21 +0900-->
+<!-- Page generated 2022-03-11 18:17:03 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>シングルサインオンの設定 | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="シングルサインオンの設定" />
   <meta property="og:description" content="Single Sign-on" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-11T18:17:03+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/single-sign-on/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-03-11T18:17:03+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"シングルサインオンの設定","description":"Single Sign-on","url":"https://docs.docker.com/single-sign-on/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>シングルサインオンの設定</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p><p>この節は、Business プランにおいて Docker SSO（Single Sign-on; シングルサインオン）を必要とする管理者向けのものです。
+                        <section class="section"><h1>シングルサインオンの設定</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>この節は、Business プランにおいて Docker SSO（Single Sign-on; シングルサインオン）を必要とする管理者向けのものです。
 Docker SSO は、Docker へのアクセスにおいて IdPs (identity providers; アイデンティティープロバイダー) を使った認証を求めます。
 Docker では今のところ、Auth0 を通じて SAML 2.0 と Azure AD の IdPs をサポートしています。
 SSO は Docker Business サブスクリプション内の組織に対して有効にできます。
@@ -156,10 +156,15 @@ In addition, all email addresses should be added to your IdP.</p>
 
 <p>To configure SSO, log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> to obtain the <strong>ACS URL</strong> and <strong>Entity IDs</strong> to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> and complete the SSO enablement process.</p>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
+<blockquote class="important">
+  <p><strong>重要</strong></p>
 
-  <p>IdP initiated connections are not supported at this time</p>
+  <p>If your IdP setup requires an Entity ID and the ACS URL, you must select the
+<strong>SAML</strong> tab in the <strong>Authentication Method</strong> section. For example, if your
+Azure AD setup uses SAML configuration within Azure AD, you must select
+<strong>SAML</strong>. If you are <a href="https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings" target="_blank" rel="noopener" class="_">configuring Open ID Connect with Azure AD</a> select <strong>Azure AD</strong> as the
+authentication method. Also, IdP initiated connections are not supported at
+this time.</p>
 </blockquote>
 
 <p>The following video walks you through the process of configuring SSO.</p>
@@ -202,7 +207,15 @@ For example,         <Subject><NameID>yourname@mycompany.com</NameID>. We also s
   <li>Proceed to <strong>add your domain</strong> before you test and enforce SSO.</li>
 </ol>
 
-<h3 id="azure-ad-idp-configuration">Azure AD IdP の設定</h3>
+<h3 id="azure-ad-idp-configuration-with-open-id-connect">Open ID Connect を使った Azure AD IdP の設定</h3>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>This section is for users who only want to configure Open ID Connect with
+Azure AD. This connection is a basic OIDC connection, and there are no
+special customizations available when using it.</p>
+</blockquote>
 
 <ol>
   <li>Log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator and navigate to <strong>Organizations</strong> and select the organization that you want to enable SSO on.</li>
@@ -398,7 +411,7 @@ in using their email address.</p>
   <li><a href="#configure" class="nomunge">設定</a>
     <ul>
       <li><a href="#saml-20-idp-configuration" class="nomunge">SAML 2.0 IdP の設定</a></li>
-      <li><a href="#azure-ad-idp-configuration" class="nomunge">Azure AD IdP の設定</a></li>
+      <li><a href="#azure-ad-idp-configuration-with-open-id-connect" class="nomunge">Open ID Connect を使った Azure AD IdP の設定</a></li>
       <li><a href="#domain-control" class="nomunge">ドメインの制御</a></li>
       <li><a href="#domain-verification" class="nomunge">ドメインの確認</a></li>
     </ul>

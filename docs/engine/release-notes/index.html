@@ -1,4 +1,4 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
+<!-- Page generated 2022-03-11 18:17:03 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-11T18:17:03+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-03-11T18:17:03+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -114,60 +114,127 @@
 
   <p>クライアントとコンテナーランタイムは、Docker Engine 18.09 からデーモンとは別パッケージになりました。
 ユーザーがインストールおよびアップデートをする際には、同時に 3 つのパッケージを入手して行い、最新のパッチリリースを合わせるようにします。
-たとえば Ubuntu においては <code class="language-plaintext highlighter-rouge">sudo apt install docker-ce docker-ce-cli containerd.io</code> を実行します。
+たとえば Ubuntu においては <code class="highlighter-rouge">sudo apt install docker-ce docker-ce-cli containerd.io</code> を実行します。
 詳しくは、各ディストリビューションにおけるインストール手順を参照してください。</p>
 </blockquote>
 
 <h1 id="version-2010">Version 20.10</h1>
 
+<h2 id="201013">20.10.13</h2>
+<p>2022-03-10</p>
+
+<p>Docker Engine の本リリースには以下のものが含まれます。
+バグフィックス、パッケージ変更、<code class="highlighter-rouge">docker scan</code>コマンドおよび<code class="highlighter-rouge">docker buildx</code>の更新、Go ランタイムの更新版、<code class="highlighter-rouge">containerd.io</code>ランタイムの更新版です。
+このリリースに合わせて Docker Compose V2 の<code class="highlighter-rouge">.deb</code>および<code class="highlighter-rouge">.rpm</code>パッケージも提供します。
+これは<code class="highlighter-rouge">docker-compose-plugin</code>を使ってインストールすることができます。
+package.</p>
+
+<h3 id="builder">Builder</h3>
+
+<ul>
+  <li>buildx のバンドル版の <a href="https://github.com/docker/buildx/releases/tag/v0.8.0">v0.8.0</a> への更新。</li>
+</ul>
+
+<h3 id="daemon">デーモン</h3>
+
+<ul>
+  <li>コンテナー状態を更新する際の競合問題を解消しました。
+<a href="https://github.com/moby/moby/pull/43166">moby/moby#43166</a></li>
+  <li>デーモンが誤ってファイルロックを行わないように etcd 依存関係を更新しました。
+<a href="https://github.com/moby/moby/pull/43259">moby/moby#43259</a></li>
+  <li>デフォルトの<code class="highlighter-rouge">net.ipv4.ping_group_range</code> sysctl を設定する際のユーザー名前空間の検出を修正しました。
+<a href="https://github.com/moby/moby/pull/43084">moby/moby#43084</a></li>
+</ul>
+
+<h3 id="distribution">ディストリビューション</h3>
+
+<ul>
+  <li>イメージプルの際に接続エラーが発生した場合に、イメージマニフェストのダウンロードをリトライするようにしました。
+<a href="https://github.com/moby/moby/pull/43333">moby/moby#43333</a></li>
+</ul>
+
+<h3 id="documentation">ドキュメント</h3>
+
+<ul>
+  <li>コマンドラインリファレンスと API ドキュメントをいくつも修正しました。</li>
+</ul>
+
+<h3 id="logging">ログ処理</h3>
+
+<ul>
+  <li>コンテナーにおいて “local” ログドライバーを用いることで、大量のログメッセージが生成される際の OOM を回避しました。
+<a href="https://github.com/moby/moby/pull/43165">moby/moby#43165</a></li>
+  <li>fluentd ログドライバーを更新し、潜在的にデーモンをクラッシュさせる不具合を解消しました。
+また<code class="highlighter-rouge">fluentd-async-connect=true</code>の利用時であってリモートサーバーに到達できなかった場合に、コンテナーがハングすることを回避しました。
+<a href="https://github.com/moby/moby/pull/43147">moby/moby#43147</a></li>
+</ul>
+
+<h3 id="packaging">パッケージ</h3>
+
+<ul>
+  <li>Docker Compose V2 に対する<code class="highlighter-rouge">.deb</code>および<code class="highlighter-rouge">.rpm</code>パッケージを提供しました。
+Linux においては<code class="highlighter-rouge">docker-compose-plugin</code>パッケージを使って <a href="https://github.com/docker/compose/releases/tag/v2.3.3">Docker Compose v2.3.3</a> をインストールできます。
+これは Docker CLI において<code class="highlighter-rouge">docker compose</code>サブコマンドを提供するものです。
+Docker Compose プラグインも同時にインストールされます。
+これによって<code class="highlighter-rouge">docker-compose</code> (Docker Compose V1) <a href="https://github.com/docker/docker-ce-packaging/pull/638">docker/docker-ce-packaging#638</a> のとりあえずの実現として、スタンドアロンを実行します。
+<code class="highlighter-rouge">compose-cli-plugin</code>パッケージは、古い版の Docker CLI であっても CLI プラグイン (Docker CLI 18.09 およびそれ以降) を用いることで利用することもできます。</li>
+  <li>近々リリースされる Ubuntu 22.04 “Jammy Jellyfish” LTS リリース <a href="https://github.com/docker/docker-ce-packaging/pull/645">docker/docker-ce-packaging#645</a> に対するパッケージを提供します。
+<a href="https://github.com/docker/containerd-packaging/pull/271">docker/containerd-packaging#271</a></li>
+  <li><code class="highlighter-rouge">docker buildx</code>を <a href="https://github.com/docker/buildx/releases/tag/v0.8.0">v0.8.0</a> に更新しました。</li>
+  <li><code class="highlighter-rouge">docker scan</code> (<code class="highlighter-rouge">docker-scan-plugin</code>) を <a href="https://github.com/docker/scan-cli-plugin/releases/tag/v0.17.0">v0.17.0</a> に更新しました。</li>
+  <li>containerd (<code class="highlighter-rouge">containerd.io</code> パッケージ) を <a href="https://github.com/containerd/containerd/releases/tag/v1.5.10">v1.5.10</a> に更新しました。</li>
+  <li>バンドルされている runc のバージョンを <a href="https://github.com/opencontainers/runc/releases/tag/v1.0.3">v1.0.3</a> にしました。</li>
+  <li>Go 言語ランタイムを Go 1.16.15 に更新しました。</li>
+</ul>
+
 <h2 id="201012">20.10.12</h2>
 <p>2021-12-13</p>
 
 <p>Docker Engine の本リリースでの変更は、パッケージング部分のみです。
-また更新は<code class="language-plaintext highlighter-rouge">docker scan</code>と<code class="language-plaintext highlighter-rouge">docker buildx</code>のコマンドに対して行っています。
-バージョンが v0.11.0 以前の<code class="language-plaintext highlighter-rouge">docker scan</code>は <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">Log4j 2 CVE-2021-44228</a> を検出することはできません。
-本リリースにおいては更新版の<code class="language-plaintext highlighter-rouge">docker scan</code>を提供しています。
+また更新は<code class="highlighter-rouge">docker scan</code>と<code class="highlighter-rouge">docker buildx</code>のコマンドに対して行っています。
+バージョンが v0.11.0 以前の<code class="highlighter-rouge">docker scan</code>は <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">Log4j 2 CVE-2021-44228</a> を検出することはできません。
+本リリースにおいては更新版の<code class="highlighter-rouge">docker scan</code>を提供しています。
 これを使えば、イメージのぜい弱性をスキャンすることができます。</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>Linux 上における<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドは、現在のところ x86 プラットフォームにおいてのみサポートしています。
+  <p>Linux 上における<code class="highlighter-rouge">docker scan</code>コマンドは、現在のところ x86 プラットフォームにおいてのみサポートしています。
 Linux 上におけるそれ以外のハードウェアアーキテクチャーに対しては、まだパッケージ提供は行っていません。</p>
 </blockquote>
 
-<p><code class="language-plaintext highlighter-rouge">docker scan</code>の機能は、個別のパッケージとして提供しています。
+<p><code class="highlighter-rouge">docker scan</code>の機能は、個別のパッケージとして提供しています。
 これはアップデートやインストールの方法によって状況が異なることになります。
 最新版の’docker scan’は自動的には更新されていない場合があります。
-最新の<code class="language-plaintext highlighter-rouge">docker scan</code>に更新するには、以下の手順に従ってください。
-またその手順に従えば、Docker Engine をアップグレードしなくても、<code class="language-plaintext highlighter-rouge">docker scan</code>パッケージのインストールやアップグレードを行うこともできます。</p>
+最新の<code class="highlighter-rouge">docker scan</code>に更新するには、以下の手順に従ってください。
+またその手順に従えば、Docker Engine をアップグレードしなくても、<code class="highlighter-rouge">docker scan</code>パッケージのインストールやアップグレードを行うこともできます。</p>
 
-<p>Ubuntu や Debian のような<code class="language-plaintext highlighter-rouge">.deb</code>をベースとするディストリビューションでは、以下のようにします。</p>
+<p>Ubuntu や Debian のような<code class="highlighter-rouge">.deb</code>をベースとするディストリビューションでは、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install </span>docker-scan-plugin
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> apt-get update <span class="o">&amp;&amp;</span> apt-get install docker-scan-plugin
 </code></pre></div></div>
 
 <p>CentOS や Fedora のような rpm ベースのディストリビューションでは、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>yum <span class="nb">install </span>docker-scan-plugin
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> yum install docker-scan-plugin
 </code></pre></div></div>
 
-<p>アップグレードを行ったら、インストールした<code class="language-plaintext highlighter-rouge">docker scan</code>が最新であるかどうかを確認します。</p>
+<p>アップグレードを行ったら、インストールした<code class="highlighter-rouge">docker scan</code>が最新であるかどうかを確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker scan <span class="nt">--accept-license</span> <span class="nt">--version</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker scan <span class="nt">--accept-license</span> <span class="nt">--version</span>
 <span class="go">Version:    v0.12.0
 Git commit: 1074dd0
 Provider:   Snyk (1.790.0 (standalone))
 </span></code></pre></div></div>
 
 <p><a href="https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/">CVE-2021-44228 に関するブログ投稿</a> を読んでください。
-<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドによって、イメージのぜい弱性がチェックされることを確認してください。</p>
+<code class="highlighter-rouge">docker scan</code>コマンドによって、イメージのぜい弱性がチェックされることを確認してください。</p>
 
 <h3 id="packaging">パッケージ</h3>
 
 <ul>
-  <li>Update <code class="language-plaintext highlighter-rouge">docker scan</code> to <a href="https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0">v0.12.0</a>.</li>
-  <li>Update <code class="language-plaintext highlighter-rouge">docker buildx</code> to <a href="https://github.com/docker/buildx/releases/tag/v0.7.1">v0.7.1</a>.</li>
+  <li>Update <code class="highlighter-rouge">docker scan</code> to <a href="https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0">v0.12.0</a>.</li>
+  <li>Update <code class="highlighter-rouge">docker buildx</code> to <a href="https://github.com/docker/buildx/releases/tag/v0.7.1">v0.7.1</a>.</li>
   <li>Update Golang runtime to Go 1.16.12.</li>
 </ul>
 
@@ -177,8 +244,8 @@ Provider:   Snyk (1.790.0 (standalone))
 <blockquote class="important">
   <p><strong>重要</strong></p>
 
-  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> における <a href="https://github.com/golang/go/issues/40909">net/http 変更</a> に基づいて、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を通じて設定された HTTP プロキシーは、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続には使われなくなりました。
-<code class="language-plaintext highlighter-rouge">https://</code> URL のリクエスト処理に対しては、環境変数<code class="language-plaintext highlighter-rouge">$HTTPS_PROXY</code>も利用していることを確認してください。</p>
+  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> における <a href="https://github.com/golang/go/issues/40909">net/http 変更</a> に基づいて、環境変数<code class="highlighter-rouge">$HTTP_PROXY</code>を通じて設定された HTTP プロキシーは、TLS (<code class="highlighter-rouge">https://</code>) 接続には使われなくなりました。
+<code class="highlighter-rouge">https://</code> URL のリクエスト処理に対しては、環境変数<code class="highlighter-rouge">$HTTPS_PROXY</code>も利用していることを確認してください。</p>
 
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、Docker デーモンがプロキシーサーバーを利用する設定方法について確認してください。</p>
 </blockquote>
@@ -210,28 +277,28 @@ Provider:   Snyk (1.790.0 (standalone))
 <blockquote class="important">
   <p><strong>重要</strong></p>
 
-  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> における <a href="https://github.com/golang/go/issues/40909">net/http 変更</a> に基づいて、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を通じて設定された HTTP プロキシーは、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続には使われなくなりました。
-<code class="language-plaintext highlighter-rouge">https://</code> URL のリクエスト処理に対しては、環境変数<code class="language-plaintext highlighter-rouge">$HTTPS_PROXY</code>も利用していることを確認してください。</p>
+  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> における <a href="https://github.com/golang/go/issues/40909">net/http 変更</a> に基づいて、環境変数<code class="highlighter-rouge">$HTTP_PROXY</code>を通じて設定された HTTP プロキシーは、TLS (<code class="highlighter-rouge">https://</code>) 接続には使われなくなりました。
+<code class="highlighter-rouge">https://</code> URL のリクエスト処理に対しては、環境変数<code class="highlighter-rouge">$HTTPS_PROXY</code>も利用していることを確認してください。</p>
 
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、Docker デーモンがプロキシーサーバーを利用する設定方法について確認してください。</p>
 </blockquote>
 
-<h3 id="builder">Builder</h3>
+<h3 id="builder-1">Builder</h3>
 
 <ul>
-  <li>ARM マシンにおいて BuildKit を利用する場合に、ローカルのイメージキャッシュが見つからないことを利用して、<code class="language-plaintext highlighter-rouge">docker build</code>修正のため、プラットフォームに応じたマッチングロジックを修正しました。
+  <li>ARM マシンにおいて BuildKit を利用する場合に、ローカルのイメージキャッシュが見つからないことを利用して、<code class="highlighter-rouge">docker build</code>修正のため、プラットフォームに応じたマッチングロジックを修正しました。
 <a href="https://github.com/moby/moby/pull/42954">moby/moby#42954</a></li>
 </ul>
 
 <h3 id="runtime">ランタイム</h3>
 
 <ul>
-  <li>Fedora および Ubuntu の最新版においてコンテナー実行をサポートするために、デフォルトの seccomp ポリシー内に<code class="language-plaintext highlighter-rouge">clone3</code>システムコールへの対応を追加しました。
+  <li>Fedora および Ubuntu の最新版においてコンテナー実行をサポートするために、デフォルトの seccomp ポリシー内に<code class="highlighter-rouge">clone3</code>システムコールへの対応を追加しました。
 <a href="https://github.com/moby/moby/pull/42836">moby/moby/#42836</a>.</li>
   <li>Windows: hcsshim ライブラリを修正し、コンテナーレイヤー内においてスパースファイルの扱いに関するバグを修正しました。
 これは Windows における最新の変更において公開されています。
 <a href="https://github.com/moby/moby/pull/42944">moby/moby#42944</a>.</li>
-  <li><code class="language-plaintext highlighter-rouge">docker stop</code>がハングしてしまう状況を修正しました。
+  <li><code class="highlighter-rouge">docker stop</code>がハングしてしまう状況を修正しました。
 <a href="https://github.com/moby/moby/pull/42956">moby/moby#42956</a>.</li>
 </ul>
 
@@ -246,7 +313,7 @@ Provider:   Snyk (1.790.0 (standalone))
 
 <ul>
   <li>Ubuntu 21.10 “Impish Indri” と Fedora 35 向けにパッケージを追加しました。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker scan</code>を v0.9.0 にアップデートしました。</li>
+  <li><code class="highlighter-rouge">docker scan</code>を v0.9.0 にアップデートしました。</li>
   <li>Go 言語ランタイムを Go 1.16.9 にアップデートしました。</li>
 </ul>
 
@@ -259,8 +326,8 @@ Provider:   Snyk (1.790.0 (standalone))
 <blockquote class="important">
   <p><strong>重要</strong></p>
 
-  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
-<code class="language-plaintext highlighter-rouge">https://</code> URL によるリクエストを扱う際には、環境変数<code class="language-plaintext highlighter-rouge">$HTTPS_PROXY</code>の設定も必要になることを忘れないでください。</p>
+  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
+<code class="highlighter-rouge">https://</code> URL によるリクエストを扱う際には、環境変数<code class="highlighter-rouge">$HTTPS_PROXY</code>の設定も必要になることを忘れないでください。</p>
 
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。</p>
 </blockquote>
@@ -277,10 +344,10 @@ Provider:   Snyk (1.790.0 (standalone))
 
 <ul>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089">CVE-2021-41089</a>
-<code class="language-plaintext highlighter-rouge">docker cp</code>の処理時に chroot 内で親ディレクトリを生成するようにしました。
+<code class="highlighter-rouge">docker cp</code>の処理時に chroot 内で親ディレクトリを生成するようにしました。
 これにより、特別に作成されたコンテナーが、ホストのファイルシステムにおける既存ファイルのパーミッションを変更してしまわないようにしました。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091">CVE-2021-41091</a>
-ファイルパーミッションを下げることによって、非特権ユーザーにより、<code class="language-plaintext highlighter-rouge">/var/lib/docker</code>内を検索したり、プログラム実行ができることがないようにしました。</li>
+ファイルパーミッションを下げることによって、非特権ユーザーにより、<code class="highlighter-rouge">/var/lib/docker</code>内を検索したり、プログラム実行ができることがないようにしました。</li>
 </ul>
 
 <h3 id="packaging">パッケージ</h3>
@@ -288,9 +355,9 @@ Provider:   Snyk (1.790.0 (standalone))
 <blockquote>
   <p><strong>既知の問題</strong></p>
 
-  <p>当リリースの static パッケージに含まれる<code class="language-plaintext highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
+  <p>当リリースの static パッケージに含まれる<code class="highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
 したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
-これを解消するためには、<code class="language-plaintext highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="language-plaintext highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
+これを解消するためには、<code class="highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
 詳しくは、この問題に関連する containerd のチケット <a href="https://github.com/containerd/containerd/issues/5824">containerd/containerd#5824</a> を参照してください。</p>
 </blockquote>
 
@@ -308,8 +375,8 @@ Provider:   Snyk (1.790.0 (standalone))
 <blockquote class="important">
   <p><strong>重要</strong></p>
 
-  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="language-plaintext highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="language-plaintext highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
-<code class="language-plaintext highlighter-rouge">https://</code> URL によるリクエストを扱う際には、環境変数<code class="language-plaintext highlighter-rouge">$HTTPS_PROXY</code>の設定も必要になることを忘れないでください。</p>
+  <p><a href="https://golang.org/doc/go1.16#net/http">Go 1.16</a> において <a href="https://github.com/golang/go/issues/40909">net/http changes</a> (net/http の変更) があったため、環境変数<code class="highlighter-rouge">$HTTP_PROXY</code>を使った HTTP プロキシーの設定は、TLS (<code class="highlighter-rouge">https://</code>) 接続においては用いられなくなりました。
+<code class="highlighter-rouge">https://</code> URL によるリクエストを扱う際には、環境変数<code class="highlighter-rouge">$HTTPS_PROXY</code>の設定も必要になることを忘れないでください。</p>
 
   <p><a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP/HTTPS プロキシーの節</a> を参照して、プロキシーサーバーを利用する場合の Docker デーモンの設定方法を確認してください。</p>
 </blockquote>
@@ -323,36 +390,36 @@ RFC 1423 において規定されている従来の PEM 暗号化は、設計の
 暗号化 TLS の秘密鍵に対するサポートは、現在、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
 <a href="https://github.com/docker/cli/pull/3219">docker/cli#3219</a></li>
   <li>Kubernetes のスタックサポートを廃止決定しました。
-Docker CLI の<code class="language-plaintext highlighter-rouge">stack</code>と<code class="language-plaintext highlighter-rouge">context</code>のコマンドにおける Kubernetes サポートは、<a href="https://github.com/docker/compose-on-kubernetes">Compose on Kubernetes</a> が廃止決定されたことに対応して、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
+Docker CLI の<code class="highlighter-rouge">stack</code>と<code class="highlighter-rouge">context</code>のコマンドにおける Kubernetes サポートは、<a href="https://github.com/docker/compose-on-kubernetes">Compose on Kubernetes</a> が廃止決定されたことに対応して、廃止決定 (deprecated) とされ、今後のリリースにおいて削除される予定です。
 <a href="https://github.com/docker/cli/pull/3174">docker/cli#3174</a></li>
 </ul>
 
 <h3 id="client">クライアント</h3>
 
 <ul>
-  <li>Windows における<code class="language-plaintext highlighter-rouge">Invalid standard handle identifier</code>エラーを修正しました。
+  <li>Windows における<code class="highlighter-rouge">Invalid standard handle identifier</code>エラーを修正しました。
 <a href="https://github.com/docker/cli/pull/3132">docker/cli#3132</a></li>
 </ul>
 
 <h3 id="rootless">Rootless</h3>
 
 <ul>
-  <li>SELinux ホストにおける<code class="language-plaintext highlighter-rouge">can't open lock file /run/xtables.lock: Permission denied</code>エラーを回避するようにしました。
+  <li>SELinux ホストにおける<code class="highlighter-rouge">can't open lock file /run/xtables.lock: Permission denied</code>エラーを回避するようにしました。
 <a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
   <li>SELinux の動作中は、パーミッション拒否のエラーを防ぐために overlay2 を無効にしました。
 <a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
-  <li>openSUSE Tumbleweed における<code class="language-plaintext highlighter-rouge">x509: certificate signed by unknown authority</code>エラーを修正しました。
+  <li>openSUSE Tumbleweed における<code class="highlighter-rouge">x509: certificate signed by unknown authority</code>エラーを修正しました。
 <a href="https://github.com/moby/moby/pull/42462">moby/moby#42462</a></li>
 </ul>
 
 <h3 id="runtime">ランタイム</h3>
 
 <ul>
-  <li>シングルアーキテクチャーイメージに対して<code class="language-plaintext highlighter-rouge">--platform</code>オプションを利用する際に、指定のアーキテクチャーに一致しない場合には、警告を表示するようにしました。
+  <li>シングルアーキテクチャーイメージに対して<code class="highlighter-rouge">--platform</code>オプションを利用する際に、指定のアーキテクチャーに一致しない場合には、警告を表示するようにしました。
 <a href="https://github.com/moby/moby/pull/42633">moby/moby#42633</a></li>
-  <li>cgroups v2 の利用時に、<code class="language-plaintext highlighter-rouge">Your kernel does not support swap memory limit</code>という誤った警告表示を修正しました。
+  <li>cgroups v2 の利用時に、<code class="highlighter-rouge">Your kernel does not support swap memory limit</code>という誤った警告表示を修正しました。
 <a href="https://github.com/moby/moby/pull/42479">moby/moby#42479</a></li>
-  <li>Windows: <code class="language-plaintext highlighter-rouge">HcsShutdownComputeSystem</code>が<code class="language-plaintext highlighter-rouge">ERROR_PROC_NOT_FOUND</code>エラーを返した際に、コンテナーが止まっていない状況を修正しました。
+  <li>Windows: <code class="highlighter-rouge">HcsShutdownComputeSystem</code>が<code class="highlighter-rouge">ERROR_PROC_NOT_FOUND</code>エラーを返した際に、コンテナーが止まっていない状況を修正しました。
 <a href="https://github.com/moby/moby/pull/42613">moby/moby#42613</a></li>
 </ul>
 
@@ -370,9 +437,9 @@ Docker CLI の<code class="language-plaintext highlighter-rouge">stack</code>と
 <blockquote>
   <p><strong>既知の問題</strong></p>
 
-  <p>当リリースの static パッケージに含まれる<code class="language-plaintext highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
+  <p>当リリースの static パッケージに含まれる<code class="highlighter-rouge">ctr</code>バイナリは、スタティックリンクが行われていません。
 したがって alpine をベースイメージとする DOcker イメージでは、実行することができません。
-これを解消するためには、<code class="language-plaintext highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="language-plaintext highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
+これを解消するためには、<code class="highlighter-rouge">libc6-compat</code>パッケージをインストールするか、<code class="highlighter-rouge">ctr</code>バイナリの一つ前のバージョンを利用するようにしてください。
 詳しくは、この問題に関連する containerd のチケット <a href="https://github.com/containerd/containerd/issues/5824">containerd/containerd#5824</a> を参照してください。</p>
 </blockquote>
 
@@ -394,15 +461,15 @@ Docker CLI の<code class="language-plaintext highlighter-rouge">stack</code>と
 <ul>
   <li>廃止予定の cgroup に対する警告を除きました。
 <a href="https://github.com/docker/cli/pull/3099">docker/cli#3099</a> 参照。</li>
-  <li>Linux や macOS において、シグナル<code class="language-plaintext highlighter-rouge">SIGURG</code>がコンテナーに送信されないようにしました。
-Go 言語のランタイム (Go 1.14 以降) では、プリエンプティブなシステムコールのサポートを阻止するものとして、<code class="language-plaintext highlighter-rouge">SIGURG</code>シグナルが内部的に呼び出されます。
+  <li>Linux や macOS において、シグナル<code class="highlighter-rouge">SIGURG</code>がコンテナーに送信されないようにしました。
+Go 言語のランタイム (Go 1.14 以降) では、プリエンプティブなシステムコールのサポートを阻止するものとして、<code class="highlighter-rouge">SIGURG</code>シグナルが内部的に呼び出されます。
 Docker CLI がコンテナーにアタッチされる状況では、そういった阻止がコンテナーに対して転送されます。
-これによって Docker CLI が<code class="language-plaintext highlighter-rouge">SIGURG</code>シグナルを無視するような変更につながりました。
+これによって Docker CLI が<code class="highlighter-rouge">SIGURG</code>シグナルを無視するような変更につながりました。
 <a href="https://github.com/docker/cli/pull/3107">docker/cli#3107</a>,
 <a href="https://github.com/moby/moby/pull/42421">moby/moby#42421</a> 参照。</li>
 </ul>
 
-<h3 id="builder-1">Builder</h3>
+<h3 id="builder-2">Builder</h3>
 
 <ul>
   <li>BuildKit をバージョン v0.8.3-3-g244e8cde に更新しました。
@@ -411,14 +478,14 @@ Docker CLI がコンテナーにアタッチされる状況では、そういっ
       <li>Transform relative mountpoints for exec mounts in the executor to work around
 a breaking change in runc v1.0.0-rc94 and up. <a href="https://github.com/moby/buildkit/pull/2137">moby/buildkit#2137</a>.</li>
       <li>Add retry on image push 5xx errors. <a href="https://github.com/moby/buildkit/pull/2043">moby/buildkit#2043</a>.</li>
-      <li><code class="language-plaintext highlighter-rouge">COPY</code>コマンドにワイルドカードをつけてファイル名変更を行った際に、ビルドキャッシュが不正にならないように修正しました。
+      <li><code class="highlighter-rouge">COPY</code>コマンドにワイルドカードをつけてファイル名変更を行った際に、ビルドキャッシュが不正にならないように修正しました。
 この変更によって、そのようなコピーを行った既存のビルドキャッシュは不正なものとなります。
 <a href="https://github.com/moby/buildkit/pull/2018">moby/buildkit#2018</a></li>
       <li>マウントを利用した場合にビルドキャッシュが不正にならないように修正しました。
 <a href="https://github.com/moby/buildkit/pull/2076">moby/buildkit#2076</a></li>
     </ul>
   </li>
-  <li>古いスキーマ 1 イメージを用いていて<code class="language-plaintext highlighter-rouge">FROM</code>イメージがキャッシュされていない場合に、ビルドに失敗する状況を修正しました。
+  <li>古いスキーマ 1 イメージを用いていて<code class="highlighter-rouge">FROM</code>イメージがキャッシュされていない場合に、ビルドに失敗する状況を修正しました。
 <a href="https://github.com/moby/moby/pull/42382">moby/moby#42382</a></li>
 </ul>
 
@@ -439,7 +506,7 @@ user-namespaces enabled <a href="https://github.com/moby/moby/pull/42352">moby/m
 
 <ul>
   <li>Update libnetwork to fix publishing ports on environments with kernel boot
-parameter <code class="language-plaintext highlighter-rouge">ipv6.disable=1</code>, and to fix a deadlock causing internal DNS lookups
+parameter <code class="highlighter-rouge">ipv6.disable=1</code>, and to fix a deadlock causing internal DNS lookups
 to fail <a href="https://github.com/moby/moby/pull/42413">moby/moby#42413</a>.</li>
 </ul>
 
@@ -447,7 +514,7 @@ to fail <a href="https://github.com/moby/moby/pull/42413">moby/moby#42413</a>.</
 
 <ul>
   <li>Update rootlesskit to v0.14.2 to fix a timeout when starting the userland proxy
-with the <code class="language-plaintext highlighter-rouge">slirp4netns</code> port driver <a href="https://github.com/moby/moby/pull/42294">moby/moby#42294</a>.</li>
+with the <code class="highlighter-rouge">slirp4netns</code> port driver <a href="https://github.com/moby/moby/pull/42294">moby/moby#42294</a>.</li>
   <li>Fix “Device or resource busy” errors when running docker-in-docker on a rootless
 daemon <a href="https://github.com/moby/moby/pull/42342">moby/moby#42342</a>.</li>
 </ul>
@@ -460,7 +527,7 @@ daemon <a href="https://github.com/moby/moby/pull/42342">moby/moby#42342</a>.</l
 <a href="https://github.com/docker/containerd-packaging/pull/234">ocker/containerd-packaging#234</a></li>
   <li>Update containerd to v1.4.5, runc v1.0.0-rc94 <a href="https://github.com/moby/moby/pull/42372">moby/moby#42372</a>,
 <a href="https://github.com/moby/moby/pull/42388">moby/moby#42388</a>, <a href="https://github.com/docker/containerd-packaging/pull/232">docker/containerd-packaging#232</a>.</li>
-  <li>Update Docker Scan plugin packages (<code class="language-plaintext highlighter-rouge">docker-scan-plugin</code>) to v0.8 <a href="https://github.com/docker/docker-ce-packaging/pull/545">docker/docker-ce-packaging#545</a>.</li>
+  <li>Update Docker Scan plugin packages (<code class="highlighter-rouge">docker-scan-plugin</code>) to v0.8 <a href="https://github.com/docker/docker-ce-packaging/pull/545">docker/docker-ce-packaging#545</a>.</li>
 </ul>
 
 <h2 id="20106">20.10.6</h2>
@@ -471,11 +538,11 @@ daemon <a href="https://github.com/moby/moby/pull/42342">moby/moby#42342</a>.</l
 <ul>
   <li>Docker CLI において Apple Silicon (darwin/arm64) をサポートしました。
 <a href="https://github.com/docker/cli/pull/3042">docker/cli#3042</a></li>
-  <li>config: pre-v1.7.0 の設定ファイル<code class="language-plaintext highlighter-rouge">~/.dockercfg</code>になっている場合に、書式が古い旨のメッセージを表示します。
+  <li>config: pre-v1.7.0 の設定ファイル<code class="highlighter-rouge">~/.dockercfg</code>になっている場合に、書式が古い旨のメッセージを表示します。
 <a href="https://github.com/docker/cli/pull/3000">docker/cli#3000</a></li>
 </ul>
 
-<h3 id="builder-2">Builder</h3>
+<h3 id="builder-3">Builder</h3>
 
 <ul>
   <li>古いビルダーが Dockerfile オプションのうちサポートされていないものを、何も表示せずにやり過ごす点を修正し、代わりに BuildKit を有効にする方法を示すことにしました。
@@ -515,7 +582,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/docker/docker-ce-packaging/pull/521">docker/docker-ce-packaging#521</a>、
 <a href="https://github.com/docker/docker-ce-packaging/pull/522">docker/docker-ce-packaging#522</a>、
 <a href="https://github.com/docker/docker-ce-packaging/pull/533">docker/docker-ce-packaging#533</a></li>
-  <li>Linux amd64 において<code class="language-plaintext highlighter-rouge">docker-ce-cli</code>の推奨パッケージに<code class="language-plaintext highlighter-rouge">docker-scan-plugin</code>を加え、これを通じて <a href="https://github.com/docker/scan-cli-plugin">Docker スキャン CLI</a> プラグインを提供しました。
+  <li>Linux amd64 において<code class="highlighter-rouge">docker-ce-cli</code>の推奨パッケージに<code class="highlighter-rouge">docker-scan-plugin</code>を加え、これを通じて <a href="https://github.com/docker/scan-cli-plugin">Docker スキャン CLI</a> プラグインを提供しました。
 <a href="https://github.com/docker/docker-ce-packaging/pull/537">docker/docker-ce-packaging#537</a></li>
   <li>arm64 に対して VPNKit バイナリを含めました。
 <a href="https://github.com/moby/moby/pull/42141">moby/moby#42141</a></li>
@@ -558,15 +625,15 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <h3 id="client">クライアント</h3>
 
 <ul>
-  <li><a href="https://github.com/docker/cli/pull/2960">docker/cli#2960</a> を元に戻して<code class="language-plaintext highlighter-rouge">docker start --attach</code>がハングしないようにしました。
-また不適当な<code class="language-plaintext highlighter-rouge">Unsupported signal: &lt;nil&gt;. Discarding</code>というメッセージを削除しました。
+  <li><a href="https://github.com/docker/cli/pull/2960">docker/cli#2960</a> を元に戻して<code class="highlighter-rouge">docker start --attach</code>がハングしないようにしました。
+また不適当な<code class="highlighter-rouge">Unsupported signal: &lt;nil&gt;. Discarding</code>というメッセージを削除しました。
 <a href="https://github.com/docker/cli/pull/2987">docker/cli#2987</a></li>
 </ul>
 
 <h2 id="20104">20.10.4</h2>
 <p>2021-02-26</p>
 
-<h3 id="builder-3">Builder</h3>
+<h3 id="builder-4">Builder</h3>
 
 <ul>
   <li>空のレイヤーがあるインラインキャッシュのインポートにおいて、間違ったキャッシュがマッチしてしまう誤りを修正しました。
@@ -576,12 +643,12 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
       <li>resolver: トークンフェッチ時のキャッシング不備を回避しました。</li>
       <li>fileop: 入力インデックスがキャッシュ不備を起こさないようにチェックサムを修正しました。</li>
       <li>マウント参照に関して出力される参照数の出力不備を修正しました。
-（<code class="language-plaintext highlighter-rouge">invalid mutable ref</code>のエラーを修正しました。）</li>
+（<code class="highlighter-rouge">invalid mutable ref</code>のエラーを修正しました。）</li>
       <li>git: 異なる資格情報を使ってサブモジュールのクローンが可能となるように、メインのリモートアクセスについてのみトークンを設定するようにしました。</li>
     </ul>
   </li>
   <li>プル処理を行った後に /var/lib/docker/buildkit/content/blobs/sha256 にある blob データが確実に削除されるようにしました。
-古い状態を更新するには<code class="language-plaintext highlighter-rouge">builder prune</code>を実行します。
+古い状態を更新するには<code class="highlighter-rouge">builder prune</code>を実行します。
 <a href="https://github.com/moby/moby/pull/42065">moby/moby#42065</a></li>
   <li>同時並行で行ったプル処理の同期に関して、機能退化を修正しました。」
 <a href="https://github.com/moby/moby/pull/42049">moby/moby#42049</a></li>
@@ -592,9 +659,9 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <h3 id="client">クライアント</h3>
 
 <ul>
-  <li>config ファイル不在時に<code class="language-plaintext highlighter-rouge">docker login</code>が panic となるのを修正しました。
+  <li>config ファイル不在時に<code class="highlighter-rouge">docker login</code>が panic となるのを修正しました。
 <a href="https://github.com/docker/cli/pull/2959">docker/cli#2959</a></li>
-  <li><code class="language-plaintext highlighter-rouge">WARNING: Error loading config file: .dockercfg: $HOME is not defined</code>を修正しました。
+  <li><code class="highlighter-rouge">WARNING: Error loading config file: .dockercfg: $HOME is not defined</code>を修正しました。
 <a href="https://github.com/docker/cli/pull/2958">docker/cli#2958</a></li>
 </ul>
 
@@ -624,7 +691,7 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <h3 id="logger">ログ処理</h3>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">labels</code>が設定されていなくても<code class="language-plaintext highlighter-rouge">labels-regex</code>の設定を用いることにしました。
+  <li><code class="highlighter-rouge">labels</code>が設定されていなくても<code class="highlighter-rouge">labels-regex</code>の設定を用いることにしました。
 <a href="https://github.com/moby/moby/pull/42046">moby/moby#42046</a></li>
   <li>長いログメッセージを適切に扱うようにしました。
 これにより non-blocking モードの awslogs において 16 KB 以上のイベントログが分割されないようにしました。
@@ -658,11 +725,11 @@ containerd.io パッケージの更新版は、これまで apt/yum リポジト
 <a href="https://github.com/moby/moby/pull/42060">moby/moby#42060</a></li>
   <li>タスクが停止してしまう可能性を修正しました。
 <a href="https://github.com/moby/moby/pull/42060">moby/moby#42060</a></li>
-  <li>Fix <code class="language-plaintext highlighter-rouge">--update-order</code> and <code class="language-plaintext highlighter-rouge">--rollback-order</code> flags when only <code class="language-plaintext highlighter-rouge">--update-order</code> or <code class="language-plaintext highlighter-rouge">--rollback-order</code> is provided
+  <li>Fix <code class="highlighter-rouge">--update-order</code> and <code class="highlighter-rouge">--rollback-order</code> flags when only <code class="highlighter-rouge">--update-order</code> or <code class="highlighter-rouge">--rollback-order</code> is provided
 <a href="https://github.com/docker/cli/pull/2963">docker/cli#2963</a></li>
-  <li>Fix <code class="language-plaintext highlighter-rouge">docker service rollback</code> returning a non-zero exit code in some situations
+  <li>Fix <code class="highlighter-rouge">docker service rollback</code> returning a non-zero exit code in some situations
 <a href="https://github.com/docker/cli/pull/2964">docker/cli#2964</a></li>
-  <li>Fix inconsistent progress-bar direction on <code class="language-plaintext highlighter-rouge">docker service rollback</code>
+  <li>Fix inconsistent progress-bar direction on <code class="highlighter-rouge">docker service rollback</code>
 <a href="https://github.com/docker/cli/pull/2964">docker/cli#2964</a></li>
 </ul>
 
@@ -697,7 +764,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/41729">moby/moby#41729</a></li>
   <li>overlay2: data-root が 24 バイト長のときにコンテナーのビルドおよび実行ができなくなるオフバイワン（off-by-one）エラーを修正。
 <a href="https://github.com/moby/moby/pull/41830">moby/moby#41830</a></li>
-  <li>systemd: シャットダウン時に<code class="language-plaintext highlighter-rouge">sd_notify STOPPING=1</code>を送信するように。
+  <li>systemd: シャットダウン時に<code class="highlighter-rouge">sd_notify STOPPING=1</code>を送信するように。
 <a href="https://github.com/moby/moby/pull/41832">moby/moby#41832</a></li>
 </ul>
 
@@ -712,7 +779,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h3 id="swarm-3">Swarm</h3>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">replicated-job</code>と<code class="language-plaintext highlighter-rouge">global-job</code>のサービスモードに対するフィルタリングを修正。
+  <li><code class="highlighter-rouge">replicated-job</code>と<code class="highlighter-rouge">global-job</code>のサービスモードに対するフィルタリングを修正。
 <a href="https://github.com/moby/moby/pull/41806">moby/moby#41806</a></li>
 </ul>
 
@@ -726,7 +793,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h2 id="20101">20.10.1</h2>
 <p>2020-12-14</p>
 
-<h3 id="builder-4">Builder</h3>
+<h3 id="builder-5">Builder</h3>
 
 <ul>
   <li>buildkit: <a href="https://github.com/moby/buildkit/releases/tag/v0.8.1">v0.8.1</a> へのアップデート。
@@ -751,33 +818,33 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <p>廃止決定した機能の概要は <a href="/docs.docker.jp.onthefly/engine/deprecated/">廃止となった Engine 機能</a> のページを参照してください。</p>
 
 <ul>
-  <li>ダイジェスト値によるプルをサポートしていない非準拠 レジストリから<code class="language-plaintext highlighter-rouge">docker pull</code>を行った際の警告および廃止機能に関するメッセージ。
+  <li>ダイジェスト値によるプルをサポートしていない非準拠 レジストリから<code class="highlighter-rouge">docker pull</code>を行った際の警告および廃止機能に関するメッセージ。
 <a href="https://github.com/docker/cli/pull/2872">docker/cli#2872</a></li>
   <li>Sterner warnings and deprecation notice for unauthenticated tcp access
 <a href="https://github.com/moby/moby/pull/41285">moby/moby#41285</a></li>
   <li>KernelMemory の廃止決定。
-（<code class="language-plaintext highlighter-rouge">docker run --kernel-memory</code>）
+（<code class="highlighter-rouge">docker run --kernel-memory</code>）
 <a href="https://github.com/moby/moby/pull/41254">moby/moby#41254</a>
 <a href="https://github.com/docker/cli/pull/2652">docker/cli#2652</a></li>
-  <li><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーの廃止決定。
+  <li><code class="highlighter-rouge">aufs</code>ストレージドライバーの廃止決定。
 <a href="https://github.com/docker/cli/pull/1484">docker/cli#1484</a></li>
   <li>外部キーバリューストアを利用したホスト検出とオーバーレイネットワークの廃止決定。
 <a href="https://github.com/moby/moby/pull/40614">moby/moby#40614</a>
 <a href="https://github.com/moby/moby/pull/40510">moby/moby#40510</a></li>
   <li>Dockerfile における古い文法「ENV name value」の廃止決定。
-代わりに<code class="language-plaintext highlighter-rouge">ENV name=value</code>とする。
+代わりに<code class="highlighter-rouge">ENV name=value</code>とする。
 <a href="https://github.com/docker/cli/pull/2743">docker/cli#2743</a></li>
   <li>API v1.41 またはそれ以上において、廃止決定の「filter」パラメーターを削除。
 <a href="https://github.com/moby/moby/pull/40491">moby/moby#40491</a></li>
   <li>Disable distribution manifest v2 schema 1 on push
 <a href="https://github.com/moby/moby/pull/41295">moby/moby#41295</a></li>
-  <li>Remove hack MalformedHostHeaderOverride breaking old docker clients (&lt;= 1.12) in which case, set <code class="language-plaintext highlighter-rouge">DOCKER_API_VERSION</code>
+  <li>Remove hack MalformedHostHeaderOverride breaking old docker clients (&lt;= 1.12) in which case, set <code class="highlighter-rouge">DOCKER_API_VERSION</code>
 <a href="https://github.com/moby/moby/pull/39076">moby/moby#39076</a></li>
   <li>サブコマンド「docker engine」を削除。
 <a href="https://github.com/docker/cli/pull/2207">docker/cli#2207</a></li>
   <li>「dab」ファイルから試験的な「deploy」を削除。
 <a href="https://github.com/docker/cli/pull/2216">docker/cli#2216</a></li>
-  <li>廃止決定した<code class="language-plaintext highlighter-rouge">docker search --automated</code>と<code class="language-plaintext highlighter-rouge">--stars</code>フラグを削除。
+  <li>廃止決定した<code class="highlighter-rouge">docker search --automated</code>と<code class="highlighter-rouge">--stars</code>フラグを削除。
 <a href="https://github.com/docker/cli/pull/2338">docker/cli#2338</a></li>
   <li>No longer allow reserved namespaces in engine labels
 <a href="https://github.com/docker/cli/pull/2326">docker/cli#2326</a></li>
@@ -789,14 +856,14 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>API バージョンの v1.41 へのアップデート。</li>
   <li>メトリックス API に対して「試験的」は不要。
 <a href="https://github.com/moby/moby/pull/40427">moby/moby#40427</a></li>
-  <li><code class="language-plaintext highlighter-rouge">GET /events</code> now returns <code class="language-plaintext highlighter-rouge">prune</code> events after pruning resources have completed <a href="https://github.com/moby/moby/pull/41259">moby/moby#41259</a>
+  <li><code class="highlighter-rouge">GET /events</code> now returns <code class="highlighter-rouge">prune</code> events after pruning resources have completed <a href="https://github.com/moby/moby/pull/41259">moby/moby#41259</a>
     <ul>
-      <li>Prune events are returned for <code class="language-plaintext highlighter-rouge">container</code>, <code class="language-plaintext highlighter-rouge">network</code>, <code class="language-plaintext highlighter-rouge">volume</code>, <code class="language-plaintext highlighter-rouge">image</code>, and <code class="language-plaintext highlighter-rouge">builder</code>, and have a <code class="language-plaintext highlighter-rouge">reclaimed</code> attribute, indicating the amount of space reclaimed (in bytes)</li>
+      <li>Prune events are returned for <code class="highlighter-rouge">container</code>, <code class="highlighter-rouge">network</code>, <code class="highlighter-rouge">volume</code>, <code class="highlighter-rouge">image</code>, and <code class="highlighter-rouge">builder</code>, and have a <code class="highlighter-rouge">reclaimed</code> attribute, indicating the amount of space reclaimed (in bytes)</li>
     </ul>
   </li>
-  <li>Add <code class="language-plaintext highlighter-rouge">one-shot</code> stats option to not prime the stats
+  <li>Add <code class="highlighter-rouge">one-shot</code> stats option to not prime the stats
 <a href="https://github.com/moby/moby/pull/40478">moby/moby#40478</a></li>
-  <li>info API（<code class="language-plaintext highlighter-rouge">/info</code>）に OS バージョンを追加。
+  <li>info API（<code class="highlighter-rouge">/info</code>）に OS バージョンを追加。
 <a href="https://github.com/moby/moby/pull/38349">moby/moby#38349</a></li>
   <li>docker info に DefaultAddressPools を追加。
 <a href="https://github.com/moby/moby/pull/40714">moby/moby#40714</a></li>
@@ -804,12 +871,12 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/39882">moby/moby#39882</a></li>
 </ul>
 
-<h3 id="builder-5">Builder</h3>
+<h3 id="builder-6">Builder</h3>
 
 <ul>
-  <li>buildkit,dockerfile: Support for <code class="language-plaintext highlighter-rouge">RUN --mount</code> options without needing to specify experimental dockerfile <code class="language-plaintext highlighter-rouge">#syntax</code> directive. <a href="https://github.com/moby/buildkit/pull/1717">moby/buildkit#1717</a></li>
-  <li>dockerfile: <code class="language-plaintext highlighter-rouge">ARG</code> command now supports defining multiple build args on the same line similarly to <code class="language-plaintext highlighter-rouge">ENV</code> <a href="https://github.com/moby/buildkit/pull/1692">moby/buildkit#1692</a></li>
-  <li>dockerfile: <code class="language-plaintext highlighter-rouge">--chown</code> flag in <code class="language-plaintext highlighter-rouge">ADD</code> now allows parameter expansion <a href="https://github.com/moby/buildkit/pull/1473">moby/buildkit#1473</a></li>
+  <li>buildkit,dockerfile: Support for <code class="highlighter-rouge">RUN --mount</code> options without needing to specify experimental dockerfile <code class="highlighter-rouge">#syntax</code> directive. <a href="https://github.com/moby/buildkit/pull/1717">moby/buildkit#1717</a></li>
+  <li>dockerfile: <code class="highlighter-rouge">ARG</code> command now supports defining multiple build args on the same line similarly to <code class="highlighter-rouge">ENV</code> <a href="https://github.com/moby/buildkit/pull/1692">moby/buildkit#1692</a></li>
+  <li>dockerfile: <code class="highlighter-rouge">--chown</code> flag in <code class="highlighter-rouge">ADD</code> now allows parameter expansion <a href="https://github.com/moby/buildkit/pull/1473">moby/buildkit#1473</a></li>
   <li>buildkit: Fetching authorization tokens has been moved to client-side (if the client supports it). Passwords do not leak into the build daemon anymore and users can see from build output when credentials or tokens are accessed. <a href="https://github.com/moby/buildkit/pull/1660">moby/buildkit#1660</a></li>
   <li>buildkit: Connection errors while communicating with the registry for push and pull now trigger a retry <a href="https://github.com/moby/buildkit/pull/1791">moby/buildkit#1791</a></li>
   <li>buildkit: Git source now supports token authentication via build secrets <a href="https://github.com/moby/moby/pull/41234">moby/moby#41234</a> <a href="https://github.com/docker/cli/pull/2656">docker/cli#2656</a> <a href="https://github.com/moby/buildkit/pull/1533">moby/buildkit#1533</a></li>
@@ -821,8 +888,8 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>buildkit: Allow better handling client sessions dropping while it is being shared by multiple builds <a href="https://github.com/moby/buildkit/pull/1551">moby/buildkit#1551</a></li>
   <li>buildkit: secrets: allow providing secrets with env <a href="https://github.com/moby/moby/pull/41234">moby/moby#41234</a> <a href="https://github.com/docker/cli/pull/2656">docker/cli#2656</a> <a href="https://github.com/moby/buildkit/pull/1534">moby/buildkit#1534</a>
     <ul>
-      <li>Support <code class="language-plaintext highlighter-rouge">--secret id=foo,env=MY_ENV</code> as an alternative for storing a secret value to a file.</li>
-      <li><code class="language-plaintext highlighter-rouge">--secret id=GIT_AUTH_TOKEN</code> will load env if it exists and the file does not.</li>
+      <li>Support <code class="highlighter-rouge">--secret id=foo,env=MY_ENV</code> as an alternative for storing a secret value to a file.</li>
+      <li><code class="highlighter-rouge">--secret id=GIT_AUTH_TOKEN</code> will load env if it exists and the file does not.</li>
     </ul>
   </li>
   <li>buildkit: Support for mirrors fallbacks, insecure TLS and custom TLS config <a href="https://github.com/moby/moby/pull/40814">moby/moby#40814</a></li>
@@ -849,29 +916,29 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 
 <ul>
   <li>Add swarm jobs support to CLI <a href="https://github.com/docker/cli/pull/2262">docker/cli#2262</a></li>
-  <li>Add <code class="language-plaintext highlighter-rouge">-a/--all-tags</code> to docker push <a href="https://github.com/docker/cli/pull/2220">docker/cli#2220</a></li>
+  <li>Add <code class="highlighter-rouge">-a/--all-tags</code> to docker push <a href="https://github.com/docker/cli/pull/2220">docker/cli#2220</a></li>
   <li>Add support for Kubernetes username/password auth <a href="https://github.com/docker/cli/pull/2308">docker/cli#2308</a></li>
-  <li>Add <code class="language-plaintext highlighter-rouge">--pull=missing|always|never</code> to <code class="language-plaintext highlighter-rouge">run</code> and <code class="language-plaintext highlighter-rouge">create</code> commands <a href="https://github.com/docker/cli/pull/1498">docker/cli#1498</a></li>
-  <li>Add <code class="language-plaintext highlighter-rouge">--env-file</code> flag to <code class="language-plaintext highlighter-rouge">docker exec</code> for parsing environment variables from a file <a href="https://github.com/docker/cli/pull/2602">docker/cli#2602</a></li>
-  <li>Add shorthand <code class="language-plaintext highlighter-rouge">-n</code> for <code class="language-plaintext highlighter-rouge">--tail</code> option <a href="https://github.com/docker/cli/pull/2646">docker/cli#2646</a></li>
+  <li>Add <code class="highlighter-rouge">--pull=missing|always|never</code> to <code class="highlighter-rouge">run</code> and <code class="highlighter-rouge">create</code> commands <a href="https://github.com/docker/cli/pull/1498">docker/cli#1498</a></li>
+  <li>Add <code class="highlighter-rouge">--env-file</code> flag to <code class="highlighter-rouge">docker exec</code> for parsing environment variables from a file <a href="https://github.com/docker/cli/pull/2602">docker/cli#2602</a></li>
+  <li>Add shorthand <code class="highlighter-rouge">-n</code> for <code class="highlighter-rouge">--tail</code> option <a href="https://github.com/docker/cli/pull/2646">docker/cli#2646</a></li>
   <li>Add log-driver and options to service inspect “pretty” format <a href="https://github.com/docker/cli/pull/1950">docker/cli#1950</a></li>
-  <li>docker run: specify cgroup namespace mode with <code class="language-plaintext highlighter-rouge">--cgroupns</code> <a href="https://github.com/docker/cli/pull/2024">docker/cli#2024</a></li>
-  <li><code class="language-plaintext highlighter-rouge">docker manifest rm</code> command to remove manifest list draft from local storage <a href="https://github.com/docker/cli/pull/2449">docker/cli#2449</a></li>
+  <li>docker run: specify cgroup namespace mode with <code class="highlighter-rouge">--cgroupns</code> <a href="https://github.com/docker/cli/pull/2024">docker/cli#2024</a></li>
+  <li><code class="highlighter-rouge">docker manifest rm</code> command to remove manifest list draft from local storage <a href="https://github.com/docker/cli/pull/2449">docker/cli#2449</a></li>
   <li>Add “context” to “docker version” and “docker info” <a href="https://github.com/docker/cli/pull/2500">docker/cli#2500</a></li>
   <li>Propagate platform flag to container create API <a href="https://github.com/docker/cli/pull/2551">docker/cli#2551</a></li>
-  <li>The <code class="language-plaintext highlighter-rouge">docker ps --format</code> flag now has a <code class="language-plaintext highlighter-rouge">.State</code> placeholder to print the container’s state without additional details about uptime and health check <a href="https://github.com/docker/cli/pull/2000">docker/cli#2000</a></li>
+  <li>The <code class="highlighter-rouge">docker ps --format</code> flag now has a <code class="highlighter-rouge">.State</code> placeholder to print the container’s state without additional details about uptime and health check <a href="https://github.com/docker/cli/pull/2000">docker/cli#2000</a></li>
   <li>Add support for docker-compose schema v3.9 <a href="https://github.com/docker/cli/pull/2073">docker/cli#2073</a></li>
-  <li>Add support for docker push <code class="language-plaintext highlighter-rouge">--quiet</code> <a href="https://github.com/docker/cli/pull/2197">docker/cli#2197</a></li>
+  <li>Add support for docker push <code class="highlighter-rouge">--quiet</code> <a href="https://github.com/docker/cli/pull/2197">docker/cli#2197</a></li>
   <li>Hide flags that are not supported by BuildKit, if BuildKit is enabled <a href="https://github.com/docker/cli/pull/2123">docker/cli#2123</a></li>
-  <li>Update flag description for <code class="language-plaintext highlighter-rouge">docker rm -v</code> to clarify the option only removes anonymous (unnamed) volumes <a href="https://github.com/docker/cli/pull/2289">docker/cli#2289</a></li>
+  <li>Update flag description for <code class="highlighter-rouge">docker rm -v</code> to clarify the option only removes anonymous (unnamed) volumes <a href="https://github.com/docker/cli/pull/2289">docker/cli#2289</a></li>
   <li>Improve tasks printing for docker services <a href="https://github.com/docker/cli/pull/2341">docker/cli#2341</a></li>
   <li>docker info: list CLI plugins alphabetically <a href="https://github.com/docker/cli/pull/2236">docker/cli#2236</a></li>
-  <li>Fix order of processing of <code class="language-plaintext highlighter-rouge">--label-add/--label-rm</code>, <code class="language-plaintext highlighter-rouge">--container-label-add/--container-label-rm</code>, and <code class="language-plaintext highlighter-rouge">--env-add/--env-rm</code> flags on <code class="language-plaintext highlighter-rouge">docker service update</code> to allow replacing existing values <a href="https://github.com/docker/cli/pull/2668">docker/cli#2668</a></li>
-  <li>Fix <code class="language-plaintext highlighter-rouge">docker rm --force</code> returning a non-zero exit code if one or more containers did not exist <a href="https://github.com/docker/cli/pull/2678">docker/cli#2678</a></li>
-  <li>Improve memory stats display by using <code class="language-plaintext highlighter-rouge">total_inactive_file</code> instead of <code class="language-plaintext highlighter-rouge">cache</code> <a href="https://github.com/docker/cli/pull/2415">docker/cli#2415</a></li>
+  <li>Fix order of processing of <code class="highlighter-rouge">--label-add/--label-rm</code>, <code class="highlighter-rouge">--container-label-add/--container-label-rm</code>, and <code class="highlighter-rouge">--env-add/--env-rm</code> flags on <code class="highlighter-rouge">docker service update</code> to allow replacing existing values <a href="https://github.com/docker/cli/pull/2668">docker/cli#2668</a></li>
+  <li>Fix <code class="highlighter-rouge">docker rm --force</code> returning a non-zero exit code if one or more containers did not exist <a href="https://github.com/docker/cli/pull/2678">docker/cli#2678</a></li>
+  <li>Improve memory stats display by using <code class="highlighter-rouge">total_inactive_file</code> instead of <code class="highlighter-rouge">cache</code> <a href="https://github.com/docker/cli/pull/2415">docker/cli#2415</a></li>
   <li>Mitigate against YAML files that has excessive aliasing <a href="https://github.com/docker/cli/pull/2117">docker/cli#2117</a></li>
   <li>Allow using advanced syntax when setting a config or secret with only the source field <a href="https://github.com/docker/cli/pull/2243">docker/cli#2243</a></li>
-  <li>Fix reading config files containing <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> auth even if <code class="language-plaintext highlighter-rouge">auth</code> is empty <a href="https://github.com/docker/cli/pull/2122">docker/cli#2122</a></li>
+  <li>Fix reading config files containing <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> auth even if <code class="highlighter-rouge">auth</code> is empty <a href="https://github.com/docker/cli/pull/2122">docker/cli#2122</a></li>
   <li>docker cp: prevent NPE when failing to stat destination <a href="https://github.com/docker/cli/pull/2221">docker/cli#2221</a></li>
   <li>config: preserve ownership and permissions on configfile <a href="https://github.com/docker/cli/pull/2228">docker/cli#2228</a></li>
 </ul>
@@ -879,8 +946,8 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h3 id="logging">ログ処理</h3>
 
 <ul>
-  <li>Support reading <code class="language-plaintext highlighter-rouge">docker logs</code> with all logging drivers (best effort) <a href="https://github.com/moby/moby/pull/40543">moby/moby#40543</a></li>
-  <li>Add <code class="language-plaintext highlighter-rouge">splunk-index-acknowledgment</code> log option to work with Splunk HECs with index acknowledgment enabled <a href="https://github.com/moby/moby/pull/39987">moby/moby#39987</a></li>
+  <li>Support reading <code class="highlighter-rouge">docker logs</code> with all logging drivers (best effort) <a href="https://github.com/moby/moby/pull/40543">moby/moby#40543</a></li>
+  <li>Add <code class="highlighter-rouge">splunk-index-acknowledgment</code> log option to work with Splunk HECs with index acknowledgment enabled <a href="https://github.com/moby/moby/pull/39987">moby/moby#39987</a></li>
   <li>Add partial metadata to journald logs <a href="https://github.com/moby/moby/pull/41407">moby/moby#41407</a></li>
   <li>Reduce allocations for logfile reader <a href="https://github.com/moby/moby/pull/40796">moby/moby#40796</a></li>
   <li>Fluentd: add fluentd-async, fluentd-request-ack, and deprecate fluentd-async-connect <a href="https://github.com/moby/moby/pull/39086">moby/moby#39086</a></li>
@@ -893,17 +960,17 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>cgroup2: use “systemd” cgroup driver by default when available <a href="https://github.com/moby/moby/pull/40846">moby/moby#40846</a></li>
   <li>new storage driver: fuse-overlayfs <a href="https://github.com/moby/moby/pull/40483">moby/moby#40483</a></li>
   <li>Update containerd binary to v1.4.3 <a href="https://github.com/moby/moby/pull/41732">moby/moby#41732</a></li>
-  <li><code class="language-plaintext highlighter-rouge">docker push</code> now defaults to <code class="language-plaintext highlighter-rouge">latest</code> tag instead of all tags <a href="https://github.com/moby/moby/pull/40302">moby/moby#40302</a></li>
+  <li><code class="highlighter-rouge">docker push</code> now defaults to <code class="highlighter-rouge">latest</code> tag instead of all tags <a href="https://github.com/moby/moby/pull/40302">moby/moby#40302</a></li>
   <li>Added ability to change the number of reconnect attempts during connection loss while pulling an image by adding max-download-attempts to the config file <a href="https://github.com/moby/moby/pull/39949">moby/moby#39949</a></li>
-  <li>Add support for containerd v2 shim by using the now default <code class="language-plaintext highlighter-rouge">io.containerd.runc.v2</code> runtime <a href="https://github.com/moby/moby/pull/41182">moby/moby#41182</a></li>
+  <li>Add support for containerd v2 shim by using the now default <code class="highlighter-rouge">io.containerd.runc.v2</code> runtime <a href="https://github.com/moby/moby/pull/41182">moby/moby#41182</a></li>
   <li>cgroup v1: change the default runtime to io.containerd.runc.v2. Requires containerd v1.3.0 or later. v1.3.5 or later is recommended <a href="https://github.com/moby/moby/pull/41210">moby/moby#41210</a></li>
   <li>Start containers in their own cgroup namespaces <a href="https://github.com/moby/moby/pull/38377">moby/moby#38377</a></li>
   <li>Enable DNS Lookups for CIFS Volumes <a href="https://github.com/moby/moby/pull/39250">moby/moby#39250</a></li>
   <li>Use MemAvailable instead of MemFree to estimate actual available memory <a href="https://github.com/moby/moby/pull/39481">moby/moby#39481</a></li>
-  <li>The <code class="language-plaintext highlighter-rouge">--device</code> flag in <code class="language-plaintext highlighter-rouge">docker run</code> will now be honored when the container is started in privileged mode <a href="https://github.com/moby/moby/pull/40291">moby/moby#40291</a></li>
+  <li>The <code class="highlighter-rouge">--device</code> flag in <code class="highlighter-rouge">docker run</code> will now be honored when the container is started in privileged mode <a href="https://github.com/moby/moby/pull/40291">moby/moby#40291</a></li>
   <li>Enforce reserved internal labels <a href="https://github.com/moby/moby/pull/40394">moby/moby#40394</a></li>
   <li>Raise minimum memory limit to 6M, to account for higher memory use by runtimes during container startup <a href="https://github.com/moby/moby/pull/41168">moby/moby#41168</a></li>
-  <li>Add support for <code class="language-plaintext highlighter-rouge">CAP_PERFMON</code>, <code class="language-plaintext highlighter-rouge">CAP_BPF</code>, and <code class="language-plaintext highlighter-rouge">CAP_CHECKPOINT_RESTORE</code> on supported kernels <a href="https://github.com/moby/moby/pull/41460">moby/moby#41460</a></li>
+  <li>Add support for <code class="highlighter-rouge">CAP_PERFMON</code>, <code class="highlighter-rouge">CAP_BPF</code>, and <code class="highlighter-rouge">CAP_CHECKPOINT_RESTORE</code> on supported kernels <a href="https://github.com/moby/moby/pull/41460">moby/moby#41460</a></li>
   <li>vendor runc v1.0.0-rc92 <a href="https://github.com/moby/moby/pull/41344">moby/moby#41344</a> <a href="https://github.com/moby/moby/pull/41317">moby/moby#41317</a></li>
   <li>info: add warnings about missing blkio cgroup support <a href="https://github.com/moby/moby/pull/41083">moby/moby#41083</a></li>
   <li>Accept platform spec on container create <a href="https://github.com/moby/moby/pull/40725">moby/moby#40725</a></li>
@@ -915,7 +982,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul>
   <li>Support host.docker.internal in dockerd on Linux <a href="https://github.com/moby/moby/pull/40007">moby/moby#40007</a></li>
   <li>Include IPv6 address of linked containers in /etc/hosts <a href="https://github.com/moby/moby/pull/39837">moby/moby#39837</a></li>
-  <li><code class="language-plaintext highlighter-rouge">--ip6tables</code> enables IPv6 iptables rules (only if experimental) <a href="https://github.com/moby/moby/pull/41622">moby/moby#41622</a></li>
+  <li><code class="highlighter-rouge">--ip6tables</code> enables IPv6 iptables rules (only if experimental) <a href="https://github.com/moby/moby/pull/41622">moby/moby#41622</a></li>
   <li>Add alias for hostname if hostname != container name <a href="https://github.com/moby/moby/pull/39204">moby/moby#39204</a></li>
   <li>Better selection of DNS server (with systemd) <a href="https://github.com/moby/moby/pull/41022">moby/moby#41022</a></li>
   <li>Add docker interfaces to firewalld docker zone <a href="https://github.com/moby/moby/pull/41189">moby/moby#41189</a> <a href="https://github.com/moby/libnetwork/pull/2548">moby/libnetwork#2548</a>
@@ -926,9 +993,9 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   </li>
   <li>Fix an issue reporting ‘failed to get network during CreateEndpoint’ <a href="https://github.com/moby/moby/pull/41189">moby/moby#41189</a> <a href="https://github.com/moby/libnetwork/pull/2554">moby/libnetwork#2554</a></li>
   <li>Log error instead of disabling IPv6 router advertisement failed <a href="https://github.com/moby/moby/pull/41189">moby/moby#41189</a> <a href="https://github.com/moby/libnetwork/pull/2563">moby/libnetwork#2563</a></li>
-  <li>No longer ignore <code class="language-plaintext highlighter-rouge">--default-address-pool</code> option in certain cases <a href="https://github.com/moby/moby/pull/40711">moby/moby#40711</a></li>
+  <li>No longer ignore <code class="highlighter-rouge">--default-address-pool</code> option in certain cases <a href="https://github.com/moby/moby/pull/40711">moby/moby#40711</a></li>
   <li>Produce an error with invalid address pool <a href="https://github.com/moby/moby/pull/40808">moby/moby#40808</a> <a href="https://github.com/moby/libnetwork/pull/2538">moby/libnetwork#2538</a></li>
-  <li>Fix <code class="language-plaintext highlighter-rouge">DOCKER-USER</code> chain not created when IPTableEnable=false <a href="https://github.com/moby/moby/pull/40808">moby/moby#40808</a> <a href="https://github.com/moby/libnetwork/pull/2471">moby/libnetwork#2471</a></li>
+  <li>Fix <code class="highlighter-rouge">DOCKER-USER</code> chain not created when IPTableEnable=false <a href="https://github.com/moby/moby/pull/40808">moby/moby#40808</a> <a href="https://github.com/moby/libnetwork/pull/2471">moby/libnetwork#2471</a></li>
   <li>Fix panic on startup in systemd environments <a href="https://github.com/moby/moby/pull/40808">moby/moby#40808</a> <a href="https://github.com/moby/libnetwork/pull/2544">moby/libnetwork#2544</a></li>
   <li>Fix issue preventing containers to communicate over macvlan internal network <a href="https://github.com/moby/moby/pull/40596">moby/moby#40596</a> <a href="https://github.com/moby/libnetwork/pull/2407">moby/libnetwork#2407</a></li>
   <li>Fix InhibitIPv4 nil panic <a href="https://github.com/moby/moby/pull/40596">moby/moby#40596</a></li>
@@ -950,7 +1017,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/40759">moby/moby#40759</a></li>
   <li>dockerd-rootless-setuptool.sh 追加。
 <a href="https://github.com/moby/moby/pull/40950">moby/moby#40950</a></li>
-  <li><code class="language-plaintext highlighter-rouge">--exec-opt native.cgroupdriver=systemd</code>のサポート。
+  <li><code class="highlighter-rouge">--exec-opt native.cgroupdriver=systemd</code>のサポート。
 <a href="https://github.com/moby/moby/pull/40486">moby/moby#40486</a></li>
 </ul>
 
@@ -958,7 +1025,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 
 <ul>
   <li>Fix CVE-2019-14271 loading of nsswitch based config inside chroot under Glibc <a href="https://github.com/moby/moby/pull/39612">moby/moby#39612</a></li>
-  <li>seccomp: Whitelist <code class="language-plaintext highlighter-rouge">clock_adjtime</code>. <code class="language-plaintext highlighter-rouge">CAP_SYS_TIME</code> is still required for time adjustment <a href="https://github.com/moby/moby/pull/40929">moby/moby#40929</a></li>
+  <li>seccomp: Whitelist <code class="highlighter-rouge">clock_adjtime</code>. <code class="highlighter-rouge">CAP_SYS_TIME</code> is still required for time adjustment <a href="https://github.com/moby/moby/pull/40929">moby/moby#40929</a></li>
   <li>seccomp: Add openat2 and faccessat2 to default seccomp profile <a href="https://github.com/moby/moby/pull/41353">moby/moby#41353</a></li>
   <li>seccomp: allow ‘rseq’ syscall in default seccomp profile <a href="https://github.com/moby/moby/pull/41158">moby/moby#41158</a></li>
   <li>seccomp: allow syscall membarrier <a href="https://github.com/moby/moby/pull/40731">moby/moby#40731</a></li>
@@ -979,7 +1046,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/41249">moby/moby#41249</a></li>
   <li>Add support for sending down service Running and Desired task counts
 <a href="https://github.com/moby/moby/pull/39231">moby/moby#39231</a></li>
-  <li>service: <code class="language-plaintext highlighter-rouge">--mount type=bind,bind-nonrecursive</code>のサポート。
+  <li>service: <code class="highlighter-rouge">--mount type=bind,bind-nonrecursive</code>のサポート。
 <a href="https://github.com/moby/moby/pull/38788">moby/moby#38788</a></li>
   <li>Support ulimits on Swarm services.
 <a href="https://github.com/moby/moby/pull/41284">moby/moby#41284</a>
@@ -1021,6 +1088,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#201013" class="nomunge">20.10.13</a></li>
       <li><a href="#201012" class="nomunge">20.10.12</a></li>
       <li><a href="#201011" class="nomunge">20.10.11</a></li>
       <li><a href="#201010" class="nomunge">20.10.10</a></li>
