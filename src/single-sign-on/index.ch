@@ -123,13 +123,25 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 @z
 
 @x
-> **Note:**
+> **Important**
 >
-> IdP initiated connections are not supported at this time
+> If your IdP setup requires an Entity ID and the ACS URL, you must select the
+> **SAML** tab in the **Authentication Method** section. For example, if your
+> Azure AD setup uses SAML configuration within Azure AD, you must select
+> **SAML**. If you are [configuring Open ID Connect with Azure AD](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings){: target="_blank" rel="noopener" class="_"} select **Azure AD** as the
+> authentication method. Also, IdP initiated connections are not supported at
+> this time.
+{: .important}
 @y
-> **メモ**
+> **重要**
 >
-> IdP initiated connections are not supported at this time
+> If your IdP setup requires an Entity ID and the ACS URL, you must select the
+> **SAML** tab in the **Authentication Method** section. For example, if your
+> Azure AD setup uses SAML configuration within Azure AD, you must select
+> **SAML**. If you are [configuring Open ID Connect with Azure AD](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings){: target="_blank" rel="noopener" class="_"} select **Azure AD** as the
+> authentication method. Also, IdP initiated connections are not supported at
+> this time.
+{: .important}
 @z
 
 @x
@@ -222,10 +234,24 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-### Azure AD IdP configuration
+### Azure AD IdP configuration with Open ID Connect
 @y
-{: #azure-ad-idp-configuration }
-### Azure AD IdP の設定
+{: #azure-ad-idp-configuration-with-open-id-connect }
+### Open ID Connect を使った Azure AD IdP の設定
+@z
+
+@x
+>**Note:**
+>
+> This section is for users who only want to configure Open ID Connect with
+> Azure AD. This connection is a basic OIDC connection, and there are no
+> special customizations available when using it.
+@y
+>**メモ**
+>
+> This section is for users who only want to configure Open ID Connect with
+> Azure AD. This connection is a basic OIDC connection, and there are no
+> special customizations available when using it.
 @z
 
 @x

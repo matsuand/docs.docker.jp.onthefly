@@ -22,18 +22,18 @@ redirect_from:
 @z
 
 @x
-You can downgrade your Docker subscription anytime. When you downgrade your subscription, changes are applied at the end of your billing cycle.
+You can downgrade your Docker subscription anytime. When you downgrade your subscription, changes are applied immediately, and you will no longer have access to the prior services.
 @y
 Docker サブスクリプションは、いつでもダウングレードすることができます。
-サブスクリプションをダウングレードすると、現在の支払い期間が満了してからダウングレードが適用されます。
+サブスクリプションをダウングレードすると、その変更は即座に反映されて、それまでアクセスできていたサービスには、アクセスできなくなります。
 @z
 
 @x
-For example, if you are currently on a **Docker Team** subscription which is billed on the 8th of every month and you choose to downgrade to **Docker Personal** on the 15th, your plan will be active until 7th of the following month. You will be transferred to Docker Personal on the 8th of the following month.
+For example, if you are currently on a **Docker Business** subscription and want to downgrade to a **Docker Team**, your plan will change immediately. You will no longer have access to your previous service, such as Single Sign-on.
 @y
-たとえば、**Docker Team** サブスクリプションを購入していて支払日が各月の8日であったとし、15日に **Docker Personal** にダウングレードしたとします。
-それまでのプランは翌月の7日までは有効です。
-翌月の8日になったら Docker サブスクリプションに移行します。
+たとえば、**Docker Business** サブスクリプションを購入していて、**Docker Team** へのダウングレードを行いたいとします。
+この場合、プランは即座に変更されます。
+そしてそれまで利用していたサービス、たとえばシングルサインオンなどは、それ以降使えなくなります。
 @z
 
 @x
@@ -52,12 +52,13 @@ The following sections contain instructions on how to downgrade your existing Do
 @x
 >**Note:**
 >
-> - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn’t expired.
+> - It is not possible to offer refunds when you downgrade an annual or monthly subscription that’s already paid for and is still active. After you have downgraded to a free plan, you can choose to reinstate your subscription if it hasn’t expired.
 > - Before you downgrade to a Personal or a Free Team subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal or Free Team. For example, if you have a Docker Team subscription, you may need to reduce the number of team members. For information on what’s included in the subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 >**メモ**
 >
+> - It is not possible to offer refunds when you downgrade an annual or monthly subscription that’s already paid for and is still active. After you have downgraded to a free plan, you can choose to reinstate your subscription if it hasn’t expired.
 > - Docker Personal や無償のチームサブスクリプションをダウングレードするには、プライベートリポジトリをすべて公開リポジトリに変換することが必要です。
 >   そして組織に関する設定を更新して、Docker Personal や無償のチームが機能を利用できるようにすることが必要です。
 >   たとえば Docker チームサブスクリプションに入っていた場合は、チームメンバー数を減らす必要が出てくるかもしれません。
