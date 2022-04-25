@@ -9,8 +9,6 @@ title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
-toc_min: 2
-toc_max: 3
 ---
 @y
 ---
@@ -20,8 +18,6 @@ title: Docker ダッシュボード
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
-toc_min: 2
-toc_max: 3
 ---
 @z
 

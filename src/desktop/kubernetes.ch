@@ -43,41 +43,6 @@ Kubernetes サーバーの有効、無効は、他の開発内容へは影響し
 @z
 
 @x
-## Prerequisites
-@y
-{: #prerequisites }
-## 前提条件
-@z
-
-@x
-The Kubernetes client command `kubectl` is included and configured to connect
-to the local Kubernetes server. If you have already installed `kubectl` and
-pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
-@y
-Kubernetes のクライアントコマンドである`kubectl`は、ローカルの Kubernetes サーバーに接続するように設定され提供されています。
-すでに`kubectl`をインストールしていて、それが`minikube`や GKE クラスターといった別の環境に向けて設定されている場合は、コンテキストを変更して`kubectl`が`docker-desktop`に接続するようにしてください。
-@z
-
-@x
-```console
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-@y
-```console
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-@z
-
-@x
-If you installed `kubectl` using Homebrew, or by some other method, and
-experience conflicts, remove `/usr/local/bin/kubectl`.
-@y
-Homebrew を使って、あるいは別の方法により`kubectl`をインストールした場合で、衝突が発生した場合には`/usr/local/bin/kubectl`を削除してください。
-@z
-
-@x
 ## Enable Kubernetes
 @y
 {: #enable-kubernetes }
@@ -85,20 +50,9 @@ Homebrew を使って、あるいは別の方法により`kubectl`をインス�
 @z
 
 @x
-To enable Kubernetes support and install a standalone instance of Kubernetes
-running as a Docker container, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
+To enable Kubernetes in Docker Desktop, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
 @y
-Kubernetes サポートの有効化と、Docker コンテナーとして起動するスタンドアロン Kubernetes インスタンスのインストールを行うためには、**Preferences** > **Kubernetes** にアクセスして **Enable Kubernetes**（Kubernetes の有効化）をクリックします。
-@z
-
-@x
-By default, Kubernetes containers are hidden from commands like `docker
-service ls`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
-@y
-Kuberntes コンテナーは、デフォルトでは`docker service ls`などのコマンドに表示されません。
-なぜならこのコンテナーは手動で制御することがサポートされていないからです。
-そういった内部コンテナーを参照するには **Show system containers (advanced)**（システムコンテナー参照(高度)）を選んでください。
-普通のユーザーにとってこれを実行する必要ありません。
+Docker Desktop において Kubernetes を有効にするには、**Preferences** > **Kubernetes** を実行して **Enable Kubernetes**（Kubernetes の有効化）をクリックします。
 @z
 
 @x
@@ -112,6 +66,15 @@ Click **Apply & Restart** to save the settings and then click **Install** to con
 ![Enable Kubernetes](images/kube-enable.png){:width="750px"}
 @y
 ![Kubernetes の有効化](images/kube-enable.png){:width="750px"}
+@z
+
+@x
+By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
+@y
+Kuberntes コンテナーは、デフォルトでは`docker ps`などのコマンドに表示されません。
+なぜならこのコンテナーは手動で制御することがサポートされていないからです。
+そういった内部コンテナーを参照するには **Show system containers (advanced)**（システムコンテナー参照(高度)）を選んでください。
+普通のユーザーにとってこれを実行する必要ありません。
 @z
 
 @x
@@ -162,6 +125,34 @@ the `PATH`.
 Kubernetes 統合環境では、Mac の場合は`/usr/local/bin/kubectl`、Windows の場合は`C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe`に Kubernetes CLI コマンドが提供されています。
 このパスは、利用しているシェルの`PATH`変数には含まれていないかもしれません。
 そこでコマンド実行時にはフルパスを指定するか、`PATH`設定に加えることが必要になります。
+@z
+
+@x
+If you have already installed `kubectl` and
+pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
+@y
+If you have already installed `kubectl` and
+pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
+@z
+
+@x
+```console
+$ kubectl config get-contexts
+$ kubectl config use-context docker-desktop
+```
+@y
+```console
+$ kubectl config get-contexts
+$ kubectl config use-context docker-desktop
+```
+@z
+
+@x
+If you installed `kubectl` using Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
+@y
+If you installed `kubectl` using Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
 @z
 
 @x

@@ -249,9 +249,9 @@ $ docker run \
 @z
 
 @x
-The `yoda_notes` at the end of the connection string is the desired name for our database.
+The `notes` at the end of the connection string is the desired name for our database.
 @y
-接続文字列の最後にある`yoda_notes`は、ここでのデータベースに必要となる名前です。
+接続文字列の最後にある`notes`は、ここでのデータベースに必要となる名前です。
 @z
 
 @x

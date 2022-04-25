@@ -403,13 +403,13 @@ Org owners can invite new members to the team using their Docker ID or email
 address. When you invite team members using their email address, we recommend
 that users create a Docker account before accepting the invite to join the
 team. If you are using a Docker Team or a Business subscription, inviting team
-members using their email address counts towards a seat. You can
+members using their email address counts towards a seat.
 @y
 Org owners can invite new members to the team using their Docker ID or email
 address. When you invite team members using their email address, we recommend
 that users create a Docker account before accepting the invite to join the
 team. If you are using a Docker Team or a Business subscription, inviting team
-members using their email address counts towards a seat. You can
+members using their email address counts towards a seat.
 @z
 
 @x

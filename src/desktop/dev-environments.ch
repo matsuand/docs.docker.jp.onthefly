@@ -6,16 +6,12 @@
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
 title: Development Environments Preview
-toc_min: 1
-toc_max: 2
 ---
 @y
 ---
 description: Dev 環境
 keywords: Dev Environments, share, collaborate, local
 title: Dev 環境プレビュー
-toc_min: 1
-toc_max: 2
 ---
 @z
 
@@ -239,13 +235,14 @@ fi
 @z
 
 @x
-1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
-2. Now, click **Create**.
+1. Under Dev Environments, click **Create**. This opens the **Create a Dev Environment** dialog. Click **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** source.
+2. Now, click **Continue**.
 @y
-1. **Create New Environment** (新規環境の生成) をクリックします。
+1. Dev 環境において **Create** をクリックします。
    **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面が開きます。
-   `https://github.com/dockersamples/single-dev-env.git`をコピーして、**Remote Git Repository** タブ内の **Repository URL** 欄に貼り付けます。
-2. そして **Create** (生成) をクリックします。
+   **Get Started** をクリックして `https://github.com/dockersamples/single-dev-env.git` をコピーします。
+   そして **Existing Git repo** ソースにおける **Enter the Git Repository** の欄に追加します。
+2. そして **Continue** をクリックします。
 @z
 
 @x
@@ -444,14 +441,17 @@ Dev 環境は Docker compose を用いたプロジェクトにおいても共有
 @z
 
 @x
-1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
-2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
+1. Under Dev Environments, click **Create**. This opens the **Create a Dev Environment** dialog. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** source.
+2. Click **Continue**. This initializes the project and clones the Git code and builds the Compose application. This:
 @y
-1. **Create** (生成) をクリックして **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面を開きます。
-   `https://github.com/dockersamples/compose-dev-env.git`をコピーして、**Remote** タブ上の **Docker image** 欄に貼り付けます。
-2. **Create** (生成) をクリックします。
+1. Dev 環境において **Create** をクリックします。
+   **Create a Dev Environment** (Dev 環境の生成) ダイアログ画面が開きます。
+   **Get Started** をクリックして `https://github.com/dockersamples/compose-dev-env.git`をコピーします。
+   そして **Existing Git repo** ソースにおける **Enter the Git Repository** の欄に追加します。
+2. **Continue** をクリックします。
    これによりプロジェクトの初期化が行われて、Git コードをクローンし、compose アプリケーションがビルドされます。
    さらに以下が行われます。
+
 @z
 
 @x

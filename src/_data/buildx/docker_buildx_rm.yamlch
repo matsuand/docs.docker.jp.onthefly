@@ -27,24 +27,110 @@ plink: docker_buildx.yaml
 
 @x
 options:
-- option: keep-state
+@y
+options:
+@z
+
+@x
+- option: all-inactive
   value_type: bool
   default_value: "false"
-  description: Keep BuildKit state
-  details_url: '#keep-state'
+  description: Remove all inactive builders
+  details_url: '#all-inactive'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 @y
-options:
+- option: all-inactive
+  value_type: bool
+  default_value: "false"
+  description: Remove all inactive builders
+  details_url: '#all-inactive'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
+  details_url: '#force'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
+  details_url: '#force'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: keep-daemon
+  value_type: bool
+  default_value: "false"
+  description: Keep the buildkitd daemon running
+  details_url: '#keep-daemon'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: keep-daemon
+  value_type: bool
+  default_value: "false"
+  description: Keep the buildkitd daemon running
+  details_url: '#keep-daemon'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
 - option: keep-state
   value_type: bool
   default_value: "false"
   description: Keep BuildKit state
   details_url: '#keep-state'
   deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: keep-state
+  value_type: bool
+  default_value: "false"
+  description: Keep BuildKit state
+  details_url: '#keep-state'
+  deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -58,6 +144,7 @@ inherited_options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -69,6 +156,7 @@ inherited_options:
   description: 設定された builder インスタンスをオーバーライドします。
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -77,9 +165,41 @@ inherited_options:
 
 @x
 examples: |-
-  ### Override the configured builder instance (--builder) {#builder}
 @y
 examples: |-
+@z
+
+@x
+  ### Remove all inactive builders (--all-inactive) {#all-inactive}
+@y
+  ### Remove all inactive builders (--all-inactive) {#all-inactive}
+@z
+
+@x
+  Remove builders that are not in running state.
+@y
+  Remove builders that are not in running state.
+@z
+
+@x
+  ```console
+@y
+  ```console
+@z
+
+@x
+  $ docker buildx rm --all-inactive
+  WARNING! This will remove all builders that are not in running state. Are you sure you want to continue? [y/N] y
+  ```
+@y
+  $ docker buildx rm --all-inactive
+  WARNING! This will remove all builders that are not in running state. Are you sure you want to continue? [y/N] y
+  ```
+@z
+
+@x
+  ### Override the configured builder instance (--builder) {#builder}
+@y
   ### Override the configured builder instance (--builder) {#builder}
 @z
 
@@ -90,6 +210,50 @@ examples: |-
 @z
 
 @x
+  ### Do not prompt for confirmation (--force) {#force}
+@y
+  ### Do not prompt for confirmation (--force) {#force}
+@z
+
+@x
+  Do not prompt for confirmation before removing inactive builders.
+@y
+  Do not prompt for confirmation before removing inactive builders.
+@z
+
+@x
+  ```console
+@y
+  ```console
+@z
+
+@x
+  $ docker buildx rm --all-inactive --force
+  ```
+@y
+  $ docker buildx rm --all-inactive --force
+  ```
+@z
+
+@x
+  ### Keep the buildkitd daemon running (--keep-daemon) {#keep-daemon}
+@y
+  ### Keep the buildkitd daemon running (--keep-daemon) {#keep-daemon}
+@z
+
+@x
+  Keep the buildkitd daemon running after the buildx context is removed. This is useful when you manage buildkitd daemons and buildx contexts independently.
+@y
+  Keep the buildkitd daemon running after the buildx context is removed. This is useful when you manage buildkitd daemons and buildx contexts independently.
+@z
+
+@x
+  Currently, only supported by the [`docker-container` and `kubernetes` drivers](buildx_create.md#driver).
+@y
+  Currently, only supported by the [`docker-container` and `kubernetes` drivers](buildx_create.md#driver).
+@z
+
+@x
   ### Keep BuildKit state (--keep-state) {#keep-state}
 @y
   ### Keep BuildKit state (--keep-state) {#keep-state}
@@ -97,9 +261,13 @@ examples: |-
 
 @x
   Keep BuildKit state, so it can be reused by a new builder with the same name.
-  Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
 @y
   Keep BuildKit state, so it can be reused by a new builder with the same name.
+@z
+
+@x
+  Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
+@y
   Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
 @z
 

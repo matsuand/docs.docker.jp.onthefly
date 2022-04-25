@@ -553,12 +553,12 @@ To install server and client binaries, perform the following steps:
 
 @x
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\dockerd --register-service
+    PS C:\> &$Env:ProgramFiles\Docker\dockerd --register-service
     PS C:\> Start-Service docker
     ```
 @y
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\dockerd --register-service
+    PS C:\> &$Env:ProgramFiles\Docker\dockerd --register-service
     PS C:\> Start-Service docker
     ```
 @z
@@ -572,11 +572,11 @@ To install server and client binaries, perform the following steps:
 
 @x
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+    PS C:\> &$Env:ProgramFiles\Docker\docker run hello-world:nanoserver
     ```
 @y
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+    PS C:\> &$Env:ProgramFiles\Docker\docker run hello-world:nanoserver
     ```
 @z
 

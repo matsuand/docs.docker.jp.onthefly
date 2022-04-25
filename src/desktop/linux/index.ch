@@ -3,27 +3,23 @@
 
 @x
 ---
-description: Docker Desktop for Linux Tech Preview
-keywords: docker, linux, tech preview
-title: Docker Desktop for Linux (Tech Preview)
-toc_min: 1
-toc_max: 2
+description: Docker Desktop for Linux (Beta)
+keywords: docker, Desktop for linux, beta, tech preview
+title: Docker Desktop for Linux (Beta)
 ---
 @y
 ---
-description: Docker Desktop for Linux Tech Preview
-keywords: docker, linux, tech preview
-title: Docker Desktop for Linux (技術プレビュー)
-toc_min: 1
-toc_max: 2
+description: Docker Desktop for Linux (ベータ版)
+keywords: docker, Desktop for linux, beta, tech preview
+title: Docker Desktop for Linux (ベータ版)
 ---
 @z
 
 @x
-Welcome to the Docker Desktop for Linux Tech Preview. This Tech Preview is aimed at early adopters who would like to try an experimental build of Docker Desktop for Linux and provide feedback.
+Welcome to the Docker Desktop for Linux (Beta). The Beta program is aimed at early adopters who would like to try Docker Desktop for Linux and provide feedback.
 @y
-Docker Desktop for Linux 技術プレビューへようこそ。
-この技術プレビューは、Docker Desktop for Linux の試験的ビルドをいち早く試したい方、フィードバックを提供して頂ける方に向けたものです。
+Docker Desktop for Linux（ベータ版）へようこそ。
+このベータ版は、Docker Desktop for Linux をいち早く試したい方、フィードバックを提供して頂ける方に向けたものです。
 @z
 
 @x
@@ -46,10 +42,21 @@ rel="noopener" class="_"} において、2 番めに人気を集めた機能リ�
 @z
 
 @x
-Docker Desktop for Linux is currently available on Ubuntu 21.04, 21.10 and
-Debian distributions.
+Docker Desktop for Linux (Beta) is currently available on Ubuntu 21.04, 21.10
+and Debian distributions.
 @y
-Docker Desktop for Linux は今のところ Ubuntu 21.04, 21.10 および Debian において利用できます。
+Docker Desktop for Linux（ベータ版）は今のところ Ubuntu 21.04, 21.10 および Debian において利用できます。
+@z
+
+@x
+> **Note:**
+>
+> Docker Desktop is not supported in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on Ubuntu or Debian distributions.
+@y
+> **メモ**
+>
+> Docker Desktop は仮想環境がネストする状態をサポートしていません。
+> Docker Desktop for Linux の実行は、ネイティブな Ubuntu または Debian の配布を利用することをお勧めします。
 @z
 
 @x
@@ -60,21 +67,19 @@ Docker Desktop for Linux をインストールするには以下のようにし�
 
 @x
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Tech Preview Debian package:
+2. Download and install the Debian package. If you have previously installed one of the preview releases, we recommend that you run `sudo apt remove docker-desktop`:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/77103/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
-3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script).
 @y
 1. [Docker リポジトリ](../../engine/install/ubuntu.md#install-using-the-repository) を設定します。
-2. Debian の技術プレビューパッケージをダウンロードしてインストールします。
+2. Debian パッケージをダウンロードしてインストールします。
+   これまでにプレビュー版をインストールしている場合は、`sudo apt remove docker-desktop`を実行することをお勧めします。
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/77103/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
-3. ユーザーがグループ`docker`と`kvm`に所属していることを確認します。
-   グループ設定をロードするために、ホストの再起動が必要かもしれません（インストール後のスクリプトでは自動化されています）。
 @z
 
 @x
@@ -85,116 +90,21 @@ Docker Desktop for Linux をインストールするには以下のようにし�
 @z
 
 @x
-  For each user, the post-install script:
+  The post-install script:
 @y
-  インストール後のスクリプトは、各ユーザーに対して以下を行います。
-@z
-
-@x
-   - installs systemd units
-   - configures `desktop-linux` as the default Docker CLI context
-   - installs Compose and the `docker scan` plugins to `~/.docker/cli-plugins`
-   - enables Compose V2 as the default `docker-compose`
-   - adds user to `docker` and `kvm` groups
-@y
-   - systemd ユニットをインストールします。
-   - デフォルトの Docker CLI コンテキストとして`desktop-linux`を設定します。
-   - Compose と`docker scan`プラグインを`~/.docker/cli-plugins`にインストールします。
-   - デフォルトの`docker-compose`として Compose V2 を有効にします。
-   - ユーザーをグループ`docker`と`kvm`に追加します。
-@z
-
-@x
-  In addition, the post-install script:
-@y
-  インストール後のスクリプトは、さらに以下も行います。
+  インストール後のスクリプトは以下を行います。
 @z
 
 @x
   - sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
   - adds a DNS name for Kubernetes to `/etc/hosts`
-  - creates the Docker Desktop file for the application launcher
+  - creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`
+  - installs systemd units for each user
 @y
   - Docker Desktop の実行ファイルに対して、特権ポートを割り当てリソース制限を設定するためのケーパビリティーを設定します。
   - Kubernetes に対する DNS 名を`/etc/hosts`に追加します。
-  - アプリケーション起動のための Docker Desktop ファイルを生成します。
-@z
-
-@x
-## Check the shared memory
-@y
-{: #check-the-shared-memory }
-## 共有メモリの確認
-@z
-
-@x
-Before you run Docker Desktop for Linux, verify whether the shared memory available on the host is **higher** than the memory allocated to the VM. By default, Docker Desktop allocates half of the memory and CPU from the host. The **available shared memory** should be higher than this.
-@y
-Docker Desktop for Linux の実行前には、ホスト上の共有メモリが VM に割り当てているメモリよりも **大きい** ことを確認してください。
-デフォルトにおいて Docker Desktop は、ホスト上のメモリと CPU の半分を割り当てます。
-**利用可能な共有メモリ** はそれよりも大きくなければなりません。
-@z
-
-@x
-```console
-$ df -h /dev/shm
-Filesystem      Size  Used Avail Use% Mounted on
-tmpfs            16G  200M   16G   2% /dev/shm
-```
-@y
-```console
-$ df -h /dev/shm
-Filesystem      Size  Used Avail Use% Mounted on
-tmpfs            16G  200M   16G   2% /dev/shm
-```
-@z
-
-@x
-To set the shared memory size, run:
-@y
-共有メモリサイズを設定するには、以下を実行します。
-@z
-
-@x
-```console
-$ sudo mount -o remount,size=<the-size-you-want-in-GB> /dev/shm
-```
-@y
-```console
-$ sudo mount -o remount,size=<the-size-you-want-in-GB> /dev/shm
-```
-@z
-
-@x
-To ensure this setting persists after a reboot, add the following entry to the `/etc/fstab`:
-@y
-再起動後もその設定が永続的なものとなるように、以下のような項目を`/etc/fstab`に追加します。
-@z
-
-@x
-```console
-none    /dev/shm    tmpfs   defaults,size=<the-size-you-want-in-GB>   0   0
-```
-@y
-```console
-none    /dev/shm    tmpfs   defaults,size=<GB 単位の必要サイズ>   0   0
-```
-@z
-
-@x
-For example:
-@y
-たとえば以下のとおりです。
-@z
-
-@x
-```console
-none    /dev/shm    tmpfs   defaults,size=8G    0   0
-```
-@y
-```console
-none    /dev/shm    tmpfs   defaults,size=8G    0   0
-```
+  - `/usr/bin/docker`から`/usr/local/bin/com.docker.cli`へのリンクを生成します。
+  - 各ユーザー向けに systemd ユニットをインストールします。
 @z
 
 @x
@@ -202,16 +112,6 @@ none    /dev/shm    tmpfs   defaults,size=8G    0   0
 @y
 {: #launch-docker-desktop }
 ## Docker Desktop の起動
-@z
-
-@x
-> **Note:**
->
-> You may need to restart the host to load the group configuration.
-@y
-> **メモ**
->
-> グループ設定をロードするために、ホストの再起動が必要かもしれません。
 @z
 
 @x
@@ -241,37 +141,28 @@ $ systemctl --user start docker-desktop
 @z
 
 @x
-When Docker Desktop starts, it creates a dedicated context that the Docker CLI can use as a target. This is to avoid a clash with a local Docker Engine that may be running on the Linux host and using the default context.
+When Docker Desktop starts, it creates a dedicated context that the Docker CLI
+can use as a target and sets it as the current context in use. This is to avoid
+a clash with a local Docker Engine that may be running on the Linux host and
+using the default context. On shutdown, Docker Desktop resets the current
+context to the previous one.
 @y
-Docker Desktop が起動すると、Docker CLI がターゲットとして利用する専用のコンテキストが生成されます。
+Docker Desktop が起動すると、Docker CLI がターゲットとして利用する専用のコンテキストが生成され、カレントなコンテキストとして利用できる状態になります。
 これは Linux ホスト上にローカルで Docker Engine が起動していて、デフォルトのコンテキストを用いている場合に、それとの衝突を避けるためです。
-@z
-
-@x
-Run the following command to switch to the desktop-linux context.
-@y
-以下のコマンドを実行して desktop-linux コンテキストに切り替えます。
-@z
-
-@x
-```console
- $ docker context use desktop-linux
-```
-@y
-```console
- $ docker context use desktop-linux
-```
+シャットダウンの際に Docker Desktop は現在のコンテキストをリセットして、元のものに戻します。
 @z
 
 @x
 The Docker Desktop installer updates Docker Compose and the Docker CLI binaries
-on the host. It installs Docker Compose V2 as the default Docker Compose. It
-also replaces the default Docker CLI with a new Docker CLI binary that includes
-cloud-integration capabilities.
+on the host. It installs Docker Compose V2 and gives users the choice to
+link it as docker-compose from the Settings panel. Docker Desktop installs
+the new Docker CLI binary that includes cloud-integration capabilities in `/usr/local/bin`
+and creates a symlink to the classic Docker CLi at `/usr/local/bin/com.docker.cli`.
 @y
 Docker Desktop インストーラーは、ホスト上の Docker Compose と Docker CLI バイナリを更新します。
-このときにはデフォルトの Docker Compose として Docker Compose V2 がインストールされます。
-またデフォルトの Docker CLI が、クラウド統合機能を含む新たな Docker CLI バイナリに置き換えられます。
+このときには Docker Compose V2 がインストールされます。
+そしてこれを docker-compose にリンクするかどうかを Settings パネルから選択できるようになっています。
+Docker Desktop のインストールによって、クラウド統合機能を含む新たな Docker CLI バイナリが`/usr/local/bin`にインストールされて、従来の Docker CLI は`/usr/local/bin/com.docker.cli`としてシンボリックリンクが生成されます。。
 @z
 
 @x
@@ -283,11 +174,11 @@ Docker Desktop のインストールを正常終了したら、以下のコマ�
 
 @x
 ```console
-$ docker-compose version
+$ docker compose version
 Docker Compose version v2.2.3
 @y
 ```console
-$ docker-compose version
+$ docker compose version
 Docker Compose version v2.2.3
 @z
 
@@ -364,6 +255,154 @@ $ systemctl --user stop docker-desktop
 @z
 
 @x
+## Credentials management
+@y
+## Credentials management
+@z
+
+@x
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
+Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop displays a warning if you've not initialized `pass`.
+@y
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
+Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop displays a warning if you've not initialized `pass`.
+@z
+
+@x
+You can intialize pass by using a gpg key. To generate a gpg key, run:
+@y
+You can intialize pass by using a gpg key. To generate a gpg key, run:
+@z
+
+@x
+``` console
+$ gpg --generate-key
+...
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Molly
+Email address: molly@example.com
+You selected this USER-ID:
+    "Molly <molly@example.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+...
+pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
+      7865BA9185AFA2C26C5B505669FC4F36530097C2
+uid                      Molly <molly@example.com>
+sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
+```
+@y
+``` console
+$ gpg --generate-key
+...
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Molly
+Email address: molly@example.com
+You selected this USER-ID:
+    "Molly <molly@example.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+...
+pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
+      7865BA9185AFA2C26C5B505669FC4F36530097C2
+uid                      Molly <molly@example.com>
+sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
+```
+@z
+
+@x
+To initialize `pass`, run:
+@y
+To initialize `pass`, run:
+@z
+
+@x
+```console
+molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
+mkdir: created directory '/home/molly/.password-store/'
+Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
+```
+@y
+```console
+molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
+mkdir: created directory '/home/molly/.password-store/'
+Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
+```
+@z
+
+@x
+Once `pass` is initialized, we can sign in on the Docker Dashboard and pull our private images.
+@y
+Once `pass` is initialized, we can sign in on the Docker Dashboard and pull our private images.
+@z
+
+@x
+When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
+@y
+When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
+@z
+
+@x
+```console
+$ docker pull molly/privateimage
+Using default tag: latest
+latest: Pulling from molly/privateimage
+3b9cc81c3203: Pull complete 
+Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
+Status: Downloaded newer image for molly/privateimage:latest
+docker.io/molly/privateimage:latest
+```
+@y
+```console
+$ docker pull molly/privateimage
+Using default tag: latest
+latest: Pulling from molly/privateimage
+3b9cc81c3203: Pull complete 
+Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
+Status: Downloaded newer image for molly/privateimage:latest
+docker.io/molly/privateimage:latest
+```
+@z
+
+@x
+## Feedback
+@y
+{: #feedback }
+## フィードバック
+@z
+
+@x
+Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
+@y
+Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
+@z
+
+@x
+To create and upload a diagnostics bundle with your bug report:
+@y
+バグ報告を行う診断バンドル（diagnostics bundle）を生成して更新するには、以下を行います。
+@z
+
+@x
+1. From the Docker menu, select **Troubleshoot** > **Get support**.
+2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
+3. Make a note of the Diagnostic ID displayed on the Support page. You can send
+   this ID with your bug report to investigate any issues. Wait for a bundle to
+   be generated, once uploaded, it displays a diagnostics ID that can be sent to
+   us for investigation.
+@y
+1. Docker メニューから **Troubleshoot** > **Get support** を選びます。
+2. 診断機能が利用可能であれば **Upload to get a Diagnostic ID** をクリックします。
+3. サポートページ上に表示される Diagnostic ID を書き留めておきます。
+   何かの問題を調査する際には、この ID を含めてバグ報告を送信します。
+   その後にバンドルのアップロードと生成を待つと、診断 ID（diagnostics ID）が表示されるので、調査が必要な場合にはこれを送信します。
+@z
+
+@x
 ## Logs
 @y
 {: #logs }
@@ -371,27 +410,7 @@ $ systemctl --user stop docker-desktop
 @z
 
 @x
-To create and upload a diagnostics bundle:
-@y
-診断バンドル（diagnostics bundle）を生成して更新するには、以下を行います。
-@z
-
-@x
-1. From the Docker menu, select **Troubleshoot** > **Get support**.
-2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
-3. Make a note of the Diagnostic ID displayed on the Support page. You can send this ID with your bug report to investigate any issues.
-**Troubleshoot** > **Get support**. Wait for a bundle to be generated, once uploaded, it displays a diagnostics ID that can be sent to us for investigation.
-@y
-1. Docker メニューから **Troubleshoot** > **Get support** を選びます。
-2. 診断機能が利用可能であれば **Upload to get a Diagnostic ID** をクリックします。
-3. サポートページ上に表示される Diagnostic ID を書き留めておきます。
-   何かの問題を調査する際には、この ID を含めてバグ報告を送信します。
-   **Troubleshoot** > **Get support** によるバンドルのアップロードと生成を待ちます。
-   その後に診断 ID（diagnostics ID）が表示されるので、調査が必要な場合にはこれを送信します。
-@z
-
-@x
-Or, if you prefer to investigate the issue, you can access Docker Desktop logs by running the following command:
+If you prefer to investigate issues yourself, you can access Docker Desktop logs by running the following command:
 @y
 あるいは自分で問題を調査したい場合には、以下のコマンドを実行して Docker Desktop のログにアクセスできます。
 @z
@@ -437,44 +456,39 @@ $ sudo apt remove docker-desktop
 @z
 
 @x
-## Known issues
+For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
+the remaining systemd service files.
 @y
-{: #known-issues }
+For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
+the remaining systemd service files.
+@z
+
+@x
+```console
+$ rm -r $HOME/.docker/desktop
+$ sudo rm /usr/local/bin/com.docker.cli
+$ sudo apt purge docker-desktop
+```
+@y
+```console
+$ rm -r $HOME/.docker/desktop
+$ sudo rm /usr/local/bin/com.docker.cli
+$ sudo apt purge docker-desktop
+```
+@z
+
+@x
+## Known issue
+@y
+{: #known-issue }
 ## 既知の問題
 @z
 
 @x
- - The Docker CLI login flow has some inconsistencies that we are currently investigating. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either
- `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
+At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
 @y
- - Docker CLI のログインフローには不整合がいくつかあって、現在調査中です。
-   ログインしようとして何か問題が発生したら、`~/.docker/config.json`から`credsStore`プロパティを削除して、Docker Desktop を再起動してください（`systemctl --user restart docker-desktop`を実行するか、Docker Desktop の終了と再起動を行ってください）。
-@z
-
-@x
- - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is currently a work in progress.
-@y
- - Docker Desktop はパスワードを base-64 でエンコードされたプレーンテキストとして保存します。
-   `pass`との統合は現在開発中です。
-@z
-
-@x
- - After launching Docker Desktop, you must remove `~/.docker/scan/config.json` for `docker scan` to work.
-@y
- - Docker Desktop を起動した後、`docker scan`を行うには`~/.docker/scan/config.json`を削除しなければなりません。
-@z
-
-@x
- - Dev Environments are not yet available.
-@y
- - Dev 環境はまだ利用できません。
-@z
-
-@x
- - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
-@y
- - インストールの終盤において、`apt`がダウンロードパッケージのインストールに関するエラーを表示します。
-    このエラーメッセージは無視してください。
+インストールの終盤において、`apt`がダウンロードパッケージのインストールに関するエラーを表示します。
+このエラーメッセージは無視してください。
 @z
 
 @x
@@ -485,6 +499,12 @@ $ sudo apt remove docker-desktop
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
+@z
+
+@x
+If you have installed one of the previous releases and reinstall the new package over it (as opposed to removing the old package explicitly), you need to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
+@y
+それまでのリリース版をインストールしていて、（明示的にその古い版を削除することなく）そこに新しいパッケージを再インストールする場合は`~/.config/systemd/user/docker-desktop.service`と`~/.local/share/systemd/user/docker-desktop.service`を削除する必要があります。
 @z
 
 @x
@@ -501,7 +521,7 @@ Docker Desktop for Linux が仮想マシン（Virtual Machine; VM）を実行す
 @z
 
 @x
-1. **To ensure  that Docker Desktop provides a consistent experience across platforms**.
+1. **To ensure that Docker Desktop provides a consistent experience across platforms**.
 @y
 1. **Docker Desktop が多くのプラットフォームにわたって安定した機能を提供するためです**。
 @z

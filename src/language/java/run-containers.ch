@@ -432,7 +432,7 @@ trusting_beaver
 @z
 
 @x
-Now that our container is stopped, let’s remove it. When you remove a container, the process inside the container will be stopped and the metadata for the container will been removed.
+Now that our container is stopped, let’s remove it. When you remove a container, the process inside the container will be stopped and the metadata for the container will be removed.
 @y
 こうしてコンテナーはすべて停止したので削除します。
 コンテナーを削除すると、コンテナー内のプロセスはすでに停止され、コンテナーに対するメタデータも削除されています。

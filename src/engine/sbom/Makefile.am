@@ -1,4 +1,4 @@
-thisdir    = go
+thisdir    = engine/sbom
 origdir    = @abs_origdir@/$(thisdir)
 srcdir     = @srcdir@
 mysrcdir   = $(shell cd $(srcdir) && pwd)
@@ -13,26 +13,10 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	about                \
-	access-tokens        \
-	apple-silicon        \
-	attack-surface       \
-	buildkit             \
-	buildx               \
-	compose-native-build \
-	daemon-access        \
-	deprecated           \
-	experimental         \
-	formatting           \
-	mac-desktop-pause    \
-	rootless             \
-	storage-driver       \
-	tip-scanning         \
-	win-desktop-pause    \
-	wsl2
+	index
 
-ch_mds = $(bases:=.ch)
-tr_mds = $(bases:=.md)
+ch_mds = $(bases:=.ch) # ch means change files
+tr_mds = $(bases:=.md) # tr means translated files
 EXTRA_DIST = $(ch_mds)
 #DISTCLEANFILES = 
 

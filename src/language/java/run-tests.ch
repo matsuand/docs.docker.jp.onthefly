@@ -52,9 +52,9 @@ Testing is an essential part of modern software development. Testing can mean a 
 @z
 
 @x
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. We can use the following Docker command to start the container and run tests:
 @y
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. We can use the following Docker command to start the container and run tests:
 @z
 
 @x
@@ -390,24 +390,34 @@ The build output is truncated for simplicity, but you can see that our tests ran
 @z
 
 @x
-Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change **line 57** to the following.
+Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 @y
-Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change **line 57** to the following.
+Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 @z
 
 @x
-```shell
-55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
-57   assertThat(violation.getMessage()).isEqualTo("must be empty");
-58 }
+```java
+assertThat(violation.getMessage()).isEqualTo("must not be empty");
 ```
 @y
-```shell
-55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
-57   assertThat(violation.getMessage()).isEqualTo("must be empty");
-58 }
+```java
+assertThat(violation.getMessage()).isEqualTo("must not be empty");
+```
+@z
+
+@x
+with the following.
+@y
+with the following.
+@z
+
+@x
+```java
+assertThat(violation.getMessage()).isEqualTo("must be empty");
+```
+@y
+```java
+assertThat(violation.getMessage()).isEqualTo("must be empty");
 ```
 @z
 

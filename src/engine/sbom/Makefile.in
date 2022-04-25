@@ -87,7 +87,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = src/go
+subdir = src/engine/sbom
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/progs.m4 \
 	$(top_srcdir)/configure.ac
@@ -237,33 +237,17 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-thisdir = go
+thisdir = engine/sbom
 origdir = @abs_origdir@/$(thisdir)
 mysrcdir = $(shell cd $(srcdir) && pwd)
 targetdir = @abs_targetdir@/$(thisdir)
 publishdir = @abs_publishdir@/$(thisdir)
 uploaddir = @UPLOADDIR@/$(thisdir)
 bases = \
-	about                \
-	access-tokens        \
-	apple-silicon        \
-	attack-surface       \
-	buildkit             \
-	buildx               \
-	compose-native-build \
-	daemon-access        \
-	deprecated           \
-	experimental         \
-	formatting           \
-	mac-desktop-pause    \
-	rootless             \
-	storage-driver       \
-	tip-scanning         \
-	win-desktop-pause    \
-	wsl2
+	index
 
-ch_mds = $(bases:=.ch)
-tr_mds = $(bases:=.md)
+ch_mds = $(bases:=.ch) # ch means change files
+tr_mds = $(bases:=.md) # tr means translated files
 EXTRA_DIST = $(ch_mds)
 #DISTCLEANFILES = 
 srcs = $(tr_mds)
@@ -280,9 +264,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/go/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/engine/sbom/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/go/Makefile
+	  $(AUTOMAKE) --gnu src/engine/sbom/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \

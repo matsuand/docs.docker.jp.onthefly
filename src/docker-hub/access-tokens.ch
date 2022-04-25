@@ -16,8 +16,7 @@ keywords: docker hub, hub, security, PAT, personal access token
 @z
 
 @x
-Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to 
-access Hub images from the Docker CLI.
+Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
 @y
 Docker Hub では、パスワードに代わるものとして個人用のアクセストークンを利用することができます。
 このトークンを使って Docker CLI から Docker Hub イメージにアクセスできます
@@ -32,8 +31,7 @@ Using personal access tokens provides some advantages over a password:
 @x
 * You can investigate the last usage of the access token and disable or delete
   it if you find any suspicious activity.
-* When using an access token, you can't perform any admin activity on the account,
-  including changing the password. It protects your account if your computer is compromised.
+* When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
 @y
 * アクセストークンの前回利用状況を確認できます。
   したがって何か疑わしい履歴が残っていたら、アクセストークンを無効化したり削除したりすることができます。
@@ -153,51 +151,22 @@ To create your access token:
 @z
 
 @x
-The access permissions are scopes that set restrictions in your
-repositories. For example, for Read & Write permissions, an automation
-pipeline can build an image and then push it to a repository. However, it
-can not delete the repository.
+   The access permissions are scopes that set restrictions in your
+   repositories. For example, for Read & Write permissions, an automation
+   pipeline can build an image and then push it to a repository. However, it
+   can not delete the repository.
 @y
-The access permissions are scopes that set restrictions in your
-repositories. For example, for Read & Write permissions, an automation
-pipeline can build an image and then push it to a repository. However, it
-can not delete the repository.
+   The access permissions are scopes that set restrictions in your
+   repositories. For example, for Read & Write permissions, an automation
+   pipeline can build an image and then push it to a repository. However, it
+   can not delete the repository.
 @z
 
 @x
-5. The table below lists the tokens available in each subscription:
-@y
-5. 以下の表では、各サブスクリプションにおいて利用可能なトークンを示します。
-@z
-
-@x
-    | Feature   | Personal | Pro | Team | Business |
-    | --------------------- | ---- | ----- | ----- |----- |
-    | Personal Access Tokens (read, write, delete scope only)*    |![yes](/images/green-check.svg)| ![yes](/images/green-check.svg) |![yes](/images/green-check.svg) |![yes](/images/green-check.svg)|
-    | Scoped Personal Access Tokens  | |![yes](/images/green-check.svg)|   ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-    | Unlimited Personal Access Tokens   |      |       |  ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-@y
-    | 機能   | Personal | Pro | Team | Business |
-    | --------------------- | ---- | ----- | ----- |----- |
-    | パーソナルアクセストークン (読み込み、書き込み、削除の各スコープのみ)*    |![yes](/images/green-check.svg)| ![yes](/images/green-check.svg) |![yes](/images/green-check.svg) |![yes](/images/green-check.svg)|
-    | スコープつきパーソナルアクセストークン  | |![yes](/images/green-check.svg)|   ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-    | 無制限のパーソナルアクセストークン   |      |       |  ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-@z
-
-@x
-      *You can create 1 access token as part of the Docker Personal subscription, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business subscriptions.
-      For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
-@y
-      * Docker Personal サブスクリプションでは 1 つのアクセストークン生成ができます。
-      Docker Pro では 5 つのトークン、Docker Team や Business では無制限です。
-      詳細については、[Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} を参照してください。
-@z
-
-@x
-6. Copy the token that appears on the screen and save it. You will not be able
+5. Copy the token that appears on the screen and save it. You will not be able
    to retrieve the token once you close this prompt.
 @y
-6. 画面上に表示されるトークンをコピーして保存します。
+5. 画面上に表示されるトークンをコピーして保存します。
    この表示画面を閉じてしまうと、トークンを知ることはできなくなります。
 @z
 

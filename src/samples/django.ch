@@ -189,7 +189,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        volumes:
          - ./data/db:/var/lib/postgresql/data
        environment:
-         - POSTGRES_NAME=postgres
+         - POSTGRES_DB=postgres
          - POSTGRES_USER=postgres
          - POSTGRES_PASSWORD=postgres
      web:
@@ -216,7 +216,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        volumes:
          - ./data/db:/var/lib/postgresql/data
        environment:
-         - POSTGRES_NAME=postgres
+         - POSTGRES_DB=postgres
          - POSTGRES_USER=postgres
          - POSTGRES_PASSWORD=postgres
      web:
@@ -329,6 +329,7 @@ In this step, you create a Django starter project by building the image from the
    $ ls -l
 
    drwxr-xr-x 2 root   root   composeexample
+   drwxr-xr-x 3 root   root   data
    -rw-rw-r-- 1 user   user   docker-compose.yml
    -rw-rw-r-- 1 user   user   Dockerfile
    -rwxr-xr-x 1 root   root   manage.py
@@ -339,6 +340,7 @@ In this step, you create a Django starter project by building the image from the
    $ ls -l
 
    drwxr-xr-x 2 root   root   composeexample
+   drwxr-xr-x 3 root   root   data
    -rw-rw-r-- 1 user   user   docker-compose.yml
    -rw-rw-r-- 1 user   user   Dockerfile
    -rwxr-xr-x 1 root   root   manage.py
@@ -357,12 +359,19 @@ In this step, you create a Django starter project by building the image from the
 @z
 
 @x
+   Do not change the permission of the data folder where Postgres has its file, otherwise Postgres will not be able to start due to permission issues.
+@y
+   Postgres の関連ファイルがあるデータフォルダーに対して、そのパーミッションは変更しないでください。
+   これを行ってしまうと、パーミッションが原因で Postgres が起動できなくなります。
+@z
+
+@x
    ```console
-   $ sudo chown -R $USER:$USER .
+   $ sudo chown -R $USER:$USER composeexample manage.py
    ```
 @y
    ```console
-   $ sudo chown -R $USER:$USER .
+   $ sudo chown -R $USER:$USER composeexample manage.py
    ```
 @z
 

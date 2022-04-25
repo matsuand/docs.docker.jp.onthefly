@@ -252,7 +252,7 @@ To create a repository:
 
 @x
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **Create a Repository** on the Docker Hub welcome page:
+2. Click **Create a Repository** on the Docker Hub welcome page.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 @y
@@ -308,7 +308,7 @@ Docker Hub.
 @z
 
 @x
-2. Sign into the Docker Desktop application using the Docker ID you created in Step 1.
+2. Sign in to the Docker Desktop application using the Docker ID you created in Step 1.
 @y
 2. 手順 1. において生成した Docker ID を用いて、Docker Desktop にサインインします。
 @z

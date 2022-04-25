@@ -6,8 +6,6 @@
 description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop overview
-toc_min: 1
-toc_max: 2
 redirect_from:
 - /desktop/opensource/
 - /docker-for-mac/opensource/
@@ -18,8 +16,6 @@ redirect_from:
 description: Docker Desktop の概要。
 keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop 概要
-toc_min: 1
-toc_max: 2
 redirect_from:
 - /desktop/opensource/
 - /docker-for-mac/opensource/

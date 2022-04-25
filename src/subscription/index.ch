@@ -90,9 +90,9 @@ Docker Personal is the new name for the Docker Free subscription. With its focus
 @z
 
 @x
-Docker Personal includes unlimited public repositories and unlimited collaborators for public repositories at no cost per month.
+Docker Personal includes unlimited public repositories, unlimmited [Scoped Access Tokens](../docker-hub/access-tokens.md), and unlimited collaborators for public repositories at no cost per month.
 @y
-Docker Personal includes unlimited public repositories and unlimited collaborators for public repositories at no cost per month.
+Docker Personal includes unlimited public repositories, unlimmited [Scoped Access Tokens](../docker-hub/access-tokens.md), and unlimited collaborators for public repositories at no cost per month.
 @z
 
 @x
@@ -114,9 +114,9 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 @z
 
 @x
-Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), 5 [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 @y
-Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), 5 [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 @z
 
 @x

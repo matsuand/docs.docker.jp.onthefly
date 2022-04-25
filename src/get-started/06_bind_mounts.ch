@@ -112,9 +112,9 @@ So, let's do it!
 @z
 
 @x
-2. Run the following command. We'll explain what's going on afterwards:
+2. Run the following command from the app directory. We'll explain what's going on afterwards:
 @y
-2. 以下のコマンドを実行します。
+2. アプリケーションディレクトリから以下のコマンドを実行します。
    これがどのようになるのかは後に説明します。
 @z
 
@@ -178,9 +178,9 @@ So, let's do it!
 @z
 
 @x
-3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
+3. You can watch the logs using `docker logs`. You'll know you're ready to go when you see this:
 @y
-3. `docker logs -f <container-id>`を実行すればログ確認ができます。
+3. `docker logs`を実行すればログ確認ができます。
    このログから準備万端であることがわかります。
 @z
 
@@ -254,10 +254,20 @@ So, let's do it!
 
 @x
 6. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
-   using `docker build -t getting-started .`.
+   using:
 @y
 6. 他に変更したい内容があれば、どんどん行ってください。
-   作業が完了したらコンテナーを停止した上で、`docker build -t getting-started .`の実行により新たなイメージをビルドしてください。
+   作業が完了したらコンテナーを停止した上で、以下を実行して新たなイメージをビルドしてください。
+@z
+
+@x
+    ```console
+    $ docker build -t getting-started .
+    ```
+@y
+    ```console
+    $ docker build -t getting-started .
+    ```
 @z
 
 @x

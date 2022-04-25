@@ -10,7 +10,6 @@ redirect_from:
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
 title: Logs and troubleshooting
-toc_max: 2
 ---
 @y
 ---
@@ -21,7 +20,6 @@ redirect_from:
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
 title: ログとトラブルシューティング
-toc_max: 2
 ---
 @z
 
@@ -135,11 +133,11 @@ issue を報告する際には、本ページに示す情報をよく読んで�
 @x
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu.
-2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
 @y
 1. メニューから ![クジラメニュー](images/whale-x.png){: .inline} > **Troubleshoot** を実行します。
-2. Docker Desktop にサインインします。
+2. 任意操作。Docker Desktop にサインインします。
    さらに [Docker アカウント](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} にもサインインしていることを確認してください。
 3. **Get Support** をクリックします。
    ここからアプリ内の **Support**（サポート）ページが開いて、診断情報の収集が始まります。
@@ -242,6 +240,12 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploade
 Diagnostics Bundle: C:\Users\User\AppData\Local\Temp\CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2\20180720152545.zip
 Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploaded)
 ```
+@z
+
+@x
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+@y
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
 @z
 
 @x

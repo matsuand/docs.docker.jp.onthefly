@@ -694,6 +694,18 @@ control whether `/mnt/a` and/or `/tmp/a` would exist.
 @z
 
 @x
+> **Warning:** 
+> 
+> Mount propagation doesn't work with Docker Desktop.
+{: .warning
+@y
+> **警告** 
+> 
+> マウントプロパゲーションは Docker Desktop では動作しません。
+{: .warning }
+@z
+
+@x
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `shared`            | Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount.                                                                         |

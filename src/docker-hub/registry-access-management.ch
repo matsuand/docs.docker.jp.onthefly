@@ -24,12 +24,12 @@ Registry Access Management is a feature available to organizations with a Docker
 @x
 > **Note**
 >
-> Registry Access Management is currently offered as a Tech Preview to a closed group of Docker Business customers.
+> Registry Access Management is currently offered as a closed beta to a closed group of Docker Business customers.
 {: .important}
 @y
 > **Note**
 >
-> Registry Access Management is currently offered as a Tech Preview to a closed group of Docker Business customers.
+> Registry Access Management is currently offered as a closed beta to a closed group of Docker Business customers.
 {: .important}
 @z
 
@@ -47,11 +47,11 @@ To configure Registry Access Management permissions, perform the following steps
 
 @x
 1. Sign into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
-2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Org Permissions**.
+2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
 3. Enable Registry Access Management to set the permissions for your registry.
 @y
 1. Sign into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
-2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Org Permissions**.
+2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
 3. Enable Registry Access Management to set the permissions for your registry.
 @z
 
@@ -164,7 +164,6 @@ Download Docker Desktop 4.5 or a later release.
   * Builds such as `docker buildx` using a Kubernetes driver are not restricted
   * Builds such as `docker buildx` using a custom docker-container driver are not restricted
   * Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
-  * You must disable HTTP proxy or use a corporate proxy which also blocks the registries
   * WSL 2 requires at least a 5.4 series Linux kernel  (this does not apply to earlier Linux kernel series)
  * Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 @y
@@ -172,7 +171,6 @@ Download Docker Desktop 4.5 or a later release.
   * Builds such as `docker buildx` using a Kubernetes driver are not restricted
   * Builds such as `docker buildx` using a custom docker-container driver are not restricted
   * Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
-  * You must disable HTTP proxy or use a corporate proxy which also blocks the registries
   * WSL 2 requires at least a 5.4 series Linux kernel  (this does not apply to earlier Linux kernel series)
  * Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 @z

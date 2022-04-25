@@ -10,7 +10,6 @@ redirect_from:
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 title: Frequently asked questions
-toc_max: 2
 ---
 @y
 ---
@@ -21,7 +20,6 @@ redirect_from:
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 title: よくたずねられる質問（FAQ）
-toc_max: 2
 ---
 @z
 

@@ -158,6 +158,7 @@ AC_CONFIG_FILES([Makefile
 		 src/engine/security/https/Makefile
 		 src/engine/security/trust/Makefile
 		 src/engine/security/trust/images/Makefile
+		 src/engine/sbom/Makefile
 		 src/engine/scan/Makefile
 		 src/engine/swarm/Makefile
 		 src/engine/swarm/how-swarm-mode-works/Makefile

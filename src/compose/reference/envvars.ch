@@ -49,12 +49,12 @@ Docker command-line client. If you're using `docker-machine`, then the `eval "$(
 Sets the project name. This value is prepended along with the service name to
 the container on start up. For example, if your project name is `myapp` and it
 includes two services `db` and `web`, then Compose starts containers named
-`myapp_db_1` and `myapp_web_1` respectively.
+`myapp-db-1` and `myapp-web-1` respectively.
 @y
 プロジェクト名を設定します。
 この値は、コンテナーの起動時にサービス名の先頭につけられます。
 たとえばプロジェクト名が`myapp`であり、2 つのサービス`db`と`web`があるとします。
-Compose がコンテナーを起動したときにつける名前は、それぞれ`myapp_db_1`、`myapp_web_1`です。
+Compose がコンテナーを起動したときにつける名前は、それぞれ`myapp-db-1`、`myapp-web-1`です。
 @z
 
 @x

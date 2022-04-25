@@ -155,51 +155,6 @@ long: |-
 @z
 
 @x
-  It is not possible to copy certain system files such as resources under
-  `/proc`, `/sys`, `/dev`, [tmpfs](run.md#mount-tmpfs---tmpfs), and mounts created by
-  the user in the container. However, you can still copy such files by manually
-  running `tar` in `docker exec`. Both of the following examples do the same thing
-  in different ways (consider `SRC_PATH` and `DEST_PATH` are directories):
-@y
-  システムファイルとして`/proc`、`/sys`、`/dev`、[tmpfs](run.md#mount-tmpfs---tmpfs) 配下にあるリソース類、あるいはユーザーが生成したマウントは、コピーすることはできません。
-  もっとも`docker exec`において`tar`を手動で実行して、そういったファイルをコピーすることはできます。
-  以下に示す 2 つの例は方法が異なりますが、やっていることは同じです。
-  （`SRC_PATH`と`DEST_PATH`はディレクトリであるとします。）
-@z
-
-@x
-  ```console
-  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
-  ```
-@y
-  ```console
-  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
-  ```
-@z
-
-@x
-  ```console
-  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
-  ```
-@y
-  ```console
-  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
-  ```
-@z
-
-@x
-  Using `-` as the `SRC_PATH` streams the contents of `STDIN` as a tar archive.
-  The command extracts the content of the tar to the `DEST_PATH` in container's
-  filesystem. In this case, `DEST_PATH` must specify a directory. Using `-` as
-  the `DEST_PATH` streams the contents of the resource as a tar archive to `STDOUT`.
-@y
-  `SRC_PATH`として`-`を指定すると、`STDIN`からの内容を tar アーカイブとして入力します。
-  このコマンドが tar の内容を、コンテナー内のファイルシステムにある`DEST_PATH`へ抽出します。
-  この場合、`DEST_PATH`はディレクトリを指定していなければなりません。
-  `DEST_PATH`に`-`を指定すると、コピー元の内容を tar アーカイブとして扱い、`STDOUT`に出力します。
-@z
-
-@x
 usage: "docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS]
   SRC_PATH|- CONTAINER:DEST_PATH"
 pname: docker
@@ -259,6 +214,107 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+@z
+
+@x
+examples: |-
+  Copy a local file into container
+@y
+examples: |-
+  Copy a local file into container
+@z
+
+@x
+  ```console
+  $ docker cp ./some_file CONTAINER:/work
+  ```
+@y
+  ```console
+  $ docker cp ./some_file CONTAINER:/work
+  ```
+@z
+
+@x
+  Copy files from container to local path
+@y
+  Copy files from container to local path
+@z
+
+@x
+  ```console
+  $ docker cp CONTAINER:/var/logs/ /tmp/app_logs
+  ```
+@y
+  ```console
+  $ docker cp CONTAINER:/var/logs/ /tmp/app_logs
+  ```
+@z
+
+@x
+  Copy a file from container to stdout. Please note `cp` command produces a tar stream
+@y
+  Copy a file from container to stdout. Please note `cp` command produces a tar stream
+@z
+
+@x
+  ```console
+  $ docker cp CONTAINER:/var/logs/app.log - | tar x -O | grep "ERROR"
+  ```
+@y
+  ```console
+  $ docker cp CONTAINER:/var/logs/app.log - | tar x -O | grep "ERROR"
+  ```
+@z
+
+@x
+  ### Corner cases
+@y
+  ### Corner cases
+@z
+
+@x
+  It is not possible to copy certain system files such as resources under
+  `/proc`, `/sys`, `/dev`, [tmpfs](run.md#mount-tmpfs---tmpfs), and mounts created by
+  the user in the container. However, you can still copy such files by manually
+  running `tar` in `docker exec`. Both of the following examples do the same thing
+  in different ways (consider `SRC_PATH` and `DEST_PATH` are directories):
+@y
+  システムファイルとして`/proc`、`/sys`、`/dev`、[tmpfs](run.md#mount-tmpfs---tmpfs) 配下にあるリソース類、あるいはユーザーが生成したマウントは、コピーすることはできません。
+  もっとも`docker exec`において`tar`を手動で実行して、そういったファイルをコピーすることはできます。
+  以下に示す 2 つの例は方法が異なりますが、やっていることは同じです。
+  （`SRC_PATH`と`DEST_PATH`はディレクトリであるとします。）
+@z
+
+@x
+  ```console
+  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
+  ```
+@y
+  ```console
+  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
+  ```
+@z
+
+@x
+  ```console
+  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
+  ```
+@y
+  ```console
+  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
+  ```
+@z
+
+@x
+  Using `-` as the `SRC_PATH` streams the contents of `STDIN` as a tar archive.
+  The command extracts the content of the tar to the `DEST_PATH` in container's
+  filesystem. In this case, `DEST_PATH` must specify a directory. Using `-` as
+  the `DEST_PATH` streams the contents of the resource as a tar archive to `STDOUT`.
+@y
+  `SRC_PATH`として`-`を指定すると、`STDIN`からの内容を tar アーカイブとして入力します。
+  このコマンドが tar の内容を、コンテナー内のファイルシステムにある`DEST_PATH`へ抽出します。
+  この場合、`DEST_PATH`はディレクトリを指定していなければなりません。
+  `DEST_PATH`に`-`を指定すると、コピー元の内容を tar アーカイブとして扱い、`STDOUT`に出力します。
 @z
 
 @x

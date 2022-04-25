@@ -49,6 +49,7 @@ options:
   description: Build definition file
   details_url: '#file'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -61,6 +62,7 @@ options:
   description: ビルド定義ファイル。
   details_url: '#file'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -73,6 +75,7 @@ options:
   default_value: "false"
   description: Shorthand for `--set=*.output=type=docker`
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -83,6 +86,7 @@ options:
   default_value: "false"
   description: '`--set=*.output=type=docker`の短縮形。'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -94,6 +98,7 @@ options:
   value_type: string
   description: Write build result metadata to the file
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -103,6 +108,7 @@ options:
   value_type: string
   description: ビルド結果のメタデータをファイルに出力します。
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -116,6 +122,7 @@ options:
   description: Do not use cache when building the image
   details_url: '#no-cache'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -127,6 +134,7 @@ options:
   description: イメージビルド時にキャッシュを利用しません。
   details_url: '#no-cache'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -140,6 +148,7 @@ options:
   description: Print the options without building
   details_url: '#print'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -151,6 +160,7 @@ options:
   description: ビルドを行わず、オプションを表示します。
   details_url: '#print'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -165,6 +175,7 @@ options:
     Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
   details_url: '#progress'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -177,6 +188,7 @@ options:
     処理経過の出力タイプを設定します（`auto`, `plain`, `tty`）。コンテナー出力には plain が用いられます。
   details_url: '#progress'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -187,9 +199,10 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: Always attempt to pull a newer version of the image
+  description: Always attempt to pull all referenced images
   details_url: '#pull'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -198,9 +211,10 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: 常に最新イメージのプルを試みます。
+  description: 常に参照イメージのすべてのプルを試みます。
   details_url: '#pull'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -213,6 +227,7 @@ options:
   default_value: "false"
   description: Shorthand for `--set=*.output=type=registry`
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -223,6 +238,7 @@ options:
   default_value: "false"
   description: '`--set=*.output=type=registry`の短縮形。'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -236,6 +252,7 @@ options:
   description: Override target value (e.g., `targetpattern.key=value`)
   details_url: '#set'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -247,6 +264,7 @@ options:
   description: target の値をオーバーライドします（`targetpattern.key=value`）。
   details_url: '#set'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -260,6 +278,7 @@ inherited_options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -271,6 +290,7 @@ inherited_options:
   description: 設定された builder インスタンスをオーバーライドします。
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -458,15 +478,15 @@ examples: |-
 @z
 
 @x
-  $ docker buildx bake "git://github.com/docker/cli#v20.10.11" --print
-  #1 [internal] load git source git://github.com/docker/cli#v20.10.11
+  $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/docker/cli.git#v20.10.11
   #1 0.745 e8f1871b077b64bcb4a13334b7146492773769f7       refs/tags/v20.10.11
-  #1 2.022 From git://github.com/docker/cli
+  #1 2.022 From https://github.com/docker/cli
 @y
-  $ docker buildx bake "git://github.com/docker/cli#v20.10.11" --print
-  #1 [internal] load git source git://github.com/docker/cli#v20.10.11
+  $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/docker/cli.git#v20.10.11
   #1 0.745 e8f1871b077b64bcb4a13334b7146492773769f7       refs/tags/v20.10.11
-  #1 2.022 From git://github.com/docker/cli
+  #1 2.022 From https://github.com/docker/cli
 @z
 
 @x
@@ -482,7 +502,7 @@ examples: |-
     },
     "target": {
       "binary": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
         "args": {
           "BASE_VARIANT": "alpine",
@@ -513,7 +533,7 @@ examples: |-
     },
     "target": {
       "binary": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
         "args": {
           "BASE_VARIANT": "alpine",
@@ -534,9 +554,9 @@ examples: |-
 @z
 
 @x
-  As you can see the context is fixed to `git://github.com/docker/cli` even if
+  As you can see the context is fixed to `https://github.com/docker/cli.git` even if
 @y
-  As you can see the context is fixed to `git://github.com/docker/cli` even if
+  As you can see the context is fixed to `https://github.com/docker/cli.git` even if
 @z
 
 @x
@@ -602,14 +622,14 @@ examples: |-
 @z
 
 @x
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" --print
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" --print
   {
     "target": {
       "default": {
         "context": ".",
         "dockerfile": "Dockerfile",
 @y
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" --print
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" --print
   {
     "target": {
       "default": {
@@ -640,10 +660,10 @@ examples: |-
 @z
 
 @x
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test"
   ...
 @y
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test"
   ...
 @z
 
@@ -678,15 +698,11 @@ examples: |-
 @z
 
 @x
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11" --print
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/tonistiigi/buildx.git#remote-test
 @y
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11" --print
-@z
-
-@x
-  #1 [internal] load git source git://github.com/tonistiigi/buildx#remote-test
-@y
-  #1 [internal] load git source git://github.com/tonistiigi/buildx#remote-test
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/tonistiigi/buildx.git#remote-test
 @z
 
 @x
@@ -695,7 +711,7 @@ examples: |-
   {
     "target": {
       "default": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
 @y
   #1 0.429 577303add004dd7efeb13434d69ea030d35f7888       refs/heads/remote-test
@@ -703,7 +719,7 @@ examples: |-
   {
     "target": {
       "default": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
 @z
 
@@ -728,10 +744,10 @@ examples: |-
 @z
 
 @x
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11"
   ...
 @y
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11"
   ...
 @z
 
@@ -952,12 +968,6 @@ examples: |-
 @z
 
 @x
-  **Examples**
-@y
-  **Examples**
-@z
-
-@x
   ```console
 @y
   ```console
@@ -1064,9 +1074,9 @@ examples: |-
 @z
 
 @x
-  **Example HCL definition**
+  HCL definition example:
 @y
-  **Example HCL definition**
+  HCL definition example:
 @z
 
 @x
@@ -1134,15 +1144,11 @@ examples: |-
 @z
 
 @x
-  `args`, `cache-from`, `cache-to`, `context`, `dockerfile`, `inherits`, `labels`,
+  `args`, `cache-from`, `cache-to`, `context`, `contexts`, `dockerfile`, `inherits`, `labels`,
+  `no-cache`, `no-cache-filter`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
 @y
-  `args`, `cache-from`, `cache-to`, `context`, `dockerfile`, `inherits`, `labels`,
-@z
-
-@x
-  `no-cache`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
-@y
-  `no-cache`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
+  `args`, `cache-from`, `cache-to`, `context`, `contexts`, `dockerfile`, `inherits`, `labels`,
+  `no-cache`, `no-cache-filter`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
 @z
 
 @x
@@ -1399,16 +1405,12 @@ examples: |-
 
 @x
   ```hcl
-@y
-  ```hcl
-@z
-
-@x
   # docker-bake.hcl
   variable "TAG" {
       default = "latest"
   }
 @y
+  ```hcl
   # docker-bake.hcl
   variable "TAG" {
       default = "latest"
@@ -1433,6 +1435,54 @@ examples: |-
 @y
   target "webapp" {
       tags = ["docker.io/username/webapp:${TAG}"]
+  }
+  ```
+@z
+
+@x
+  alternatively, in json format:
+@y
+  alternatively, in json format:
+@z
+
+@x
+  ```json
+  {
+    "variable": {
+      "TAG": {
+        "default": "latest"
+      }
+    }
+    "group": {
+      "default": {
+        "targets": ["webapp"]
+      }
+    },
+    "target": {
+      "webapp": {
+        "tags": ["docker.io/username/webapp:${TAG}"]
+      }
+    }
+  }
+  ```
+@y
+  ```json
+  {
+    "variable": {
+      "TAG": {
+        "default": "latest"
+      }
+    }
+    "group": {
+      "default": {
+        "targets": ["webapp"]
+      }
+    },
+    "target": {
+      "webapp": {
+        "tags": ["docker.io/username/webapp:${TAG}"]
+      }
+    }
   }
   ```
 @z
@@ -2264,6 +2314,178 @@ examples: |-
 @z
 
 @x
+  ### Defining additional build contexts and linking targets
+@y
+  ### Defining additional build contexts and linking targets
+@z
+
+@x
+  In addition to the main `context` key that defines the build context each target can also define additional named contexts with a map defined with key `contexts`. These values map to the `--build-context` flag in the [build command](buildx_build.md#build-context).
+@y
+  In addition to the main `context` key that defines the build context each target can also define additional named contexts with a map defined with key `contexts`. These values map to the `--build-context` flag in the [build command](buildx_build.md#build-context).
+@z
+
+@x
+  Inside the Dockerfile these contexts can be used with the `FROM` instruction or `--from` flag.
+@y
+  Inside the Dockerfile these contexts can be used with the `FROM` instruction or `--from` flag.
+@z
+
+@x
+  The value can be a local source directory, container image (with docker-image:// prefix), Git URL, HTTP URL or a name of another target in the Bake file (with target: prefix).
+@y
+  The value can be a local source directory, container image (with docker-image:// prefix), Git URL, HTTP URL or a name of another target in the Bake file (with target: prefix).
+@z
+
+@x
+  #### Pinning alpine image
+@y
+  #### Pinning alpine image
+@z
+
+@x
+  ```Dockerfile
+  # Dockerfile
+  FROM alpine
+  RUN echo "Hello world"
+  ```
+@y
+  ```Dockerfile
+  # Dockerfile
+  FROM alpine
+  RUN echo "Hello world"
+  ```
+@z
+
+@x
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          alpine = "docker-image://alpine:3.13"
+      }
+  }
+  ```
+@y
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          alpine = "docker-image://alpine:3.13"
+      }
+  }
+  ```
+@z
+
+@x
+  #### Using a secondary source directory
+@y
+  #### Using a secondary source directory
+@z
+
+@x
+  ```Dockerfile
+  # Dockerfile
+
+  FROM scratch AS src
+
+  FROM golang
+  COPY --from=src . .
+  ```
+@y
+  ```Dockerfile
+  # Dockerfile
+
+  FROM scratch AS src
+
+  FROM golang
+  COPY --from=src . .
+  ```
+@z
+
+@x
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          src = "../path/to/source"
+      }
+  }
+  ```
+@y
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          src = "../path/to/source"
+      }
+  }
+  ```
+@z
+
+@x
+  #### Using a result of one target as a base image in another target
+@y
+  #### Using a result of one target as a base image in another target
+@z
+
+@x
+  To use a result of one target as a build context of another, specity the target name with `target:` prefix.
+@y
+  To use a result of one target as a build context of another, specity the target name with `target:` prefix.
+@z
+
+@x
+  ```Dockerfile
+  # Dockerfile
+  FROM baseapp
+  RUN echo "Hello world"
+  ```
+@y
+  ```Dockerfile
+  # Dockerfile
+  FROM baseapp
+  RUN echo "Hello world"
+  ```
+@z
+
+@x
+  ```hcl
+  # docker-bake.hcl
+
+  target "base" {
+      dockerfile = "baseapp.Dockerfile"
+  }
+
+  target "app" {
+      contexts = {
+          baseapp = "target:base"
+      }
+  }
+  ```
+@y
+  ```hcl
+  # docker-bake.hcl
+
+  target "base" {
+      dockerfile = "baseapp.Dockerfile"
+  }
+
+  target "app" {
+      contexts = {
+          baseapp = "target:base"
+      }
+  }
+  ```
+@z
+
+@x
+  Please note that in most cases you should just use a single multi-stage Dockerfile with multiple targets for similar behavior. This case is recommended when you have multiple Dockerfiles that can't be easily merged into one.
+@y
+  Please note that in most cases you should just use a single multi-stage Dockerfile with multiple targets for similar behavior. This case is recommended when you have multiple Dockerfiles that can't be easily merged into one.
+@z
+
+@x
   ### Extension field with Compose
 @y
   ### Extension field with Compose
@@ -2597,14 +2819,10 @@ examples: |-
 
 @x
   `tags`, `cache-from`, `cache-to`, `secret`, `ssh`, `platforms`, `output`,
+  `pull`, `no-cache`, `no-cache-filter`
 @y
   `tags`, `cache-from`, `cache-to`, `secret`, `ssh`, `platforms`, `output`,
-@z
-
-@x
-  `pull`, `no-cache`
-@y
-  `pull`, `no-cache`
+  `pull`, `no-cache`, `no-cache-filter`
 @z
 
 @x

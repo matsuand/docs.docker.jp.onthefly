@@ -261,6 +261,13 @@ Windows コンテナーの利用方法についてお探しの方は以下です
 @z
 
 @x
+### Install interactively
+@y
+{: #install-interactively }
+### 対話的なインストール
+@z
+
+@x
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 @y
 1. **Docker Desktop Installer.exe** をダブルクリックしてインストーラーを起動します。
@@ -278,9 +285,13 @@ Windows コンテナーの利用方法についてお探しの方は以下です
 @z
 
 @x
-2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
+2. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
+
+    If your system only supports one of the two options, you will not be able to select which backend to use.
 @y
-2. Configuration ページにおいてプロンプト画面が表示されたら、**Enable Hyper-V Windows Features** オプションまたは **Install required Windows components for WSL 2** オプションが設定されていることを確認してください。
+2. プロンプト画面が表示されたら、バックエンドでの選択状況に従って Configuration ページにおける **Use WSL 2 instead of Hyper-V** オプションのオンオフが設定されていることを確認してください。
+
+    利用するシステムが 2 つのオプションの 1 つのみをサポートしている場合は、バックエンドにおいて選択することはできません。
 @z
 
 @x
@@ -303,6 +314,91 @@ Log out and log back in for the changes to take effect.
    **administrator**（管理者）として **Computer Management**（コンピューターの管理）を実行し、**Local Users and Groups** > **Groups** > **docker-users** を選びます。
    このグループに対して、右クリックメニューからユーザーを追加します。
    変更を有効にするため、いったんログアウトしてからログインし直します。
+@z
+
+@x
+### Install from the command line
+@y
+{: #install-from-the-command-line }
+### コマンドラインからのインストール
+@z
+
+@x
+After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
+@y
+**Docker Desktop Installer.exe** をダウンロードしたら、端末から以下のコマンドを実行して Docker Desktop をインストールします。
+@z
+
+@x
+```
+"Docker Desktop Installer.exe" install
+```
+@y
+```
+"Docker Desktop Installer.exe" install
+```
+@z
+
+@x
+If you’re using PowerShell you should run it as:
+@y
+PowerShell を利用している場合は以下を実行します。
+@z
+
+@x
+```
+Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+```
+@y
+```
+Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+```
+@z
+
+@x
+If using the Windows Command Prompt:
+@y
+Windows コマンドプロンプトの利用時は以下を実行します。
+@z
+
+@x
+```
+start /w "" "Docker Desktop Installer.exe" install
+```
+@y
+```
+start /w "" "Docker Desktop Installer.exe" install
+```
+@z
+
+@x
+The install command accepts the following flags:
+- `--quiet`: suppresses information output when running the installer
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
+- `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--backend=<backend name>`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
+@y
+install コマンドでは以下のフラグ指定が可能です。
+- `--quiet`: インストーラーの起動時に情報出力を省略します。
+- `--accept-license`: [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} に関して、アプリケーションの初回実行時に同意するのではなく、この場で同意するものとします。
+- `--allowed-org=<org name>`: アプリケーションを実行するにあたって、ユーザーのサインインを要求して、指定した Docker Hub 組織の一員であることを要求します。
+- `--backend=<backend name>`: Docker Desktop において利用するバックエンドを選択します。`hyper-v`または`wsl-2`(デフォルト) のいずれかとします。
+@z
+
+@x
+If your admin account is different to your user account, you must add the user to the **docker-users** group:
+@y
+ユーザーアカウントが管理者アカウントと異なる場合は、ユーザーを **docker-users** グループに追加することが必要です。
+@z
+
+@x
+```
+net localgroup docker-users <user> /add
+```
+@y
+```
+net localgroup docker-users <user> /add
+```
 @z
 
 @x

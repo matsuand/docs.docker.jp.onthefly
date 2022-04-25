@@ -58,6 +58,65 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.14
+2022-03-23
+@y
+## 20.10.14
+2022-03-23
+@z
+
+@x
+This release of Docker Engine updates the default inheritable capabilities for
+containers to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769),
+a new version of the `containerd.io` runtime is also included to address the same
+issue.
+@y
+Docker Engine の本リリースでは、[CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769) において説明されている、コンテナー内のデフォルトの継承機能に関する更新を行っています。
+そして同じく説明されている`containerd.io`ランタイムの最新版も含みます。
+issue.
+@z
+
+@x
+### Daemon
+@y
+{: #daemon }
+### デーモン
+@z
+
+@x
+- Update the default inheritable capabilities.
+@y
+- Update the default inheritable capabilities.
+@z
+
+@x
+### Builder
+@y
+### Builder
+@z
+
+@x
+- Update the default inheritable capabilities for containers used during build.
+@y
+- Update the default inheritable capabilities for containers used during build.
+@z
+
+@x
+### Packaging
+@y
+{: #packaging }
+### パッケージ
+@z
+
+@x
+- Update containerd (`containerd.io` package) to [v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11).
+- Update `docker buildx` to [v0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1).
+@y
+- containerd (`containerd.io`パッケージ) の [v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11) への更新。
+- `docker buildx` の [v0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1) への更新。
+@z
+
+@x
 ## 20.10.13
 2022-03-10
 @y

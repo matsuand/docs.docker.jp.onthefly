@@ -21,8 +21,6 @@ redirect_from:
 - /docker-for-mac/osxfs/
 - /docker-for-mac/osxfs-caching/
 title: Docker Desktop for Mac user manual
-toc_min: 1
-toc_max: 2
 ---
 @y
 ---
@@ -44,8 +42,6 @@ redirect_from:
 - /docker-for-mac/osxfs/
 - /docker-for-mac/osxfs-caching/
 title: Docker Desktop for Mac ユーザーマニュアル
-toc_min: 1
-toc_max: 2
 ---
 @z
 
@@ -400,6 +396,7 @@ Docker Desktop のネットワーク設定により、仮想プライベート�
 @x
 ### Docker Engine
 @y
+{: #docker-engine }
 ### Docker Engine タブ
 @z
 
@@ -424,109 +421,74 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 @z
 
 @x
-### Command Line
+### Experimental Features
 @y
-{: #command-line }
-### Command Line タブ
+{: #experimental-features }
+### 試験的機能タブ
 @z
 
 @x
-On the Command Line page, you can specify whether or not to enable experimental features.
+On the **Experimental Features** page, you can specify whether or not to enable experimental features.
 @y
-Command Line のページでは、試験的機能を有効にするかどうかを設定することができます。
+On the **Experimental Features** page, you can specify whether or not to enable experimental features.
 @z
 
 @x
-{% include experimental.md %}
+Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
 @y
-{% include experimental.md %}
+Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
 @z
 
 @x
-You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+#### Enable the new Apple Virtualization framework
 @y
-Docker Desktop において試験的機能は有効無効を切り替えることができます。
-試験的機能を無効にした場合、Docker Desktop は、その時点で利用可能な通常版の Docker Engine を利用することになります。
+#### Enable the new Apple Virtualization framework
 @z
 
 @x
-You can see whether you are running experimental mode at the command line. If
-`Experimental` is `true`, then Docker is running in experimental mode, as shown
-here. (If `false`, Experimental mode is off.)
+Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
 @y
-試験的機能モードを有効にしているかどうかは、コマンドラインから確認できます。
-以下に示すように、`Experimental`が`true`となっていれば、試験的機能モードが有効です。
-（`false`であれば、試験的機能モードはオフです。）
+Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
 @z
 
 @x
-```console
-$ docker version
+#### Enable VirtioFS
 @y
-```console
-$ docker version
+#### Enable VirtioFS
 @z
 
 @x
-Client: Docker Engine - Community
- Version:           19.03.1
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        74b1e89
- Built:             Thu Jul 25 21:18:17 2019
- OS/Arch:           darwin/amd64
- Experimental:      true
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
 @y
-Client: Docker Engine - Community
- Version:           19.03.1
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        74b1e89
- Built:             Thu Jul 25 21:18:17 2019
- OS/Arch:           darwin/amd64
- Experimental:      true
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       74b1e89
-  Built:            Thu Jul 25 21:17:52 2019
-  OS/Arch:          linux/amd64
-  Experimental:     true
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-```
+To enable virtioFS:
 @y
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       74b1e89
-  Built:            Thu Jul 25 21:17:52 2019
-  OS/Arch:          linux/amd64
-  Experimental:     true
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-```
+To enable virtioFS:
+@z
+
+@x
+1. Verify that you are on the following macOS version:
+   - macOS 12.2 or later (for Apple Silicon)
+   - macOS 12.3 or later (for Intel)
+@y
+1. Verify that you are on the following macOS version:
+   - macOS 12.2 or later (for Apple Silicon)
+   - macOS 12.3 or later (for Intel)
+@z
+
+@x
+2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
+@y
+2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
+@z
+
+@x
+3. Click **Apply & Restart**.
+@y
+3. Click **Apply & Restart**.
 @z
 
 @x
@@ -546,9 +508,21 @@ Kubernetes サポートの有効化と、Docker コンテナーとして起動�
 @z
 
 @x
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+- Select **Show system containers (advanced)** to view internal containers when using Docker commands.
 @y
-Docker Desktop における Kubernetes 統合機能の利用方法については [Kubernetes へのデプロイ](../kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
+- Select **Show system containers (advanced)** to view internal containers when using Docker commands.
+@z
+
+@x
+- Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+@y
+- Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+- Click **Apply & Restart** for your changes to take effect.
+@y
+- Click **Apply & Restart** for your changes to take effect.
 @z
 
 @x
@@ -603,9 +577,9 @@ The **Software Updates** section notifies you of any updates available to Docker
 @z
 
 @x
-Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
 @y
-チェックボックス **Automatically Check for Updates**（アップデートの自動チェック）をオフにすることで、この機能を無効にします。
+チェックボックス **Automatically check for updates**（アップデートの自動チェック）をオフにすることで、この機能を無効にします。
 これを行うと Docker メニューにおける通知が無効になります。
 また Docker ダッシュボード上の通知バッチも表示されなくなります。
 アップデートを手動でチェックするには、Docker メニューの **Check for updates**（アップデートのチェック）オプションを実行します。

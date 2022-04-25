@@ -18,8 +18,6 @@ redirect_from:
 - /winkit/getting-started/
 
 title: Docker Desktop for Windows user manual
-toc_min: 1
-toc_max: 2
 ---
 @y
 ---
@@ -38,8 +36,6 @@ redirect_from:
 - /winkit/getting-started/
 
 title: Docker Desktop for Windows ユーザーマニュアル
-toc_min: 1
-toc_max: 2
 ---
 @z
 
@@ -477,37 +473,6 @@ Docker Desktop のネットワーク設定により、仮想プライベート�
 @z
 
 @x
-**DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
-@y
-**DNS Server**: DNS サーバーに対して、動的および静的な IP アドレスの設定が可能です。
-@z
-
-@x
-> **Note**
->
-> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
-`docker` commands that pull images from Docker Hub that are not already
-downloaded, such as a first time run of `docker run hello-world`. If you
-encounter this, reset the DNS server to use the Google DNS fixed address:
-`8.8.8.8`. For more information, see
-[Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
-@y
-> **メモ**
->
-> Docker Desktop を使って Docker Hub に接続する際に、問題が発生するとの報告があります。
-> これは`docker`コマンドの実行時に発生するものです。
-> Docker Hub からイメージをプルする際に、それまでダウンロードしていないイメージであったとき、たとえば`docker run hello-world`を初めて実行したような場合に発生します。
-> この症状が発生した場合は、DNS サーバーをリセットして Google DNS 固定アドレス`8.8.8.8`を設定してみてください。
-> 詳しくはトラブルシューティングの [ネットワークの問題](troubleshoot.md#networking-issues) を参照してください。
-@z
-
-@x
-Updating these settings requires a reconfiguration and reboot of the Linux VM.
-@y
-ここでの設定を変更したら、Linux VM の再設定と再起動が必要になります。
-@z
-
-@x
 #### WSL Integration
 @y
 {: #wsl-integration }
@@ -522,7 +487,7 @@ WSL 2 モードにおいては、WSL 2 ディストリビューションが Dock
 @z
 
 @x
-By default, the integration will be enabled on your default WSL distribution. 
+By default, the integration will be enabled on your default WSL distribution.
 To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, 
 to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 @y
@@ -532,8 +497,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 @z
 
 @x
-You can also select any additional distributions you would like to enable the WSL 2 
-integration on.
+You can also select any additional distributions you would like to enable the WSL 2 integration on.
 @y
 他に WSL 2 統合環境を有効にしたいディストリビューションがあれば、追加で設定することもできます。
 @z

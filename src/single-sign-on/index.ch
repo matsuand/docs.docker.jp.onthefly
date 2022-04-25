@@ -16,26 +16,26 @@ title: シングルサインオンの設定
 @z
 
 @x
-This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
+This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD authentication methods. You can enable SSO on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 @y
 この節は、Business プランにおいて Docker SSO（Single Sign-on; シングルサインオン）を必要とする管理者向けのものです。
 Docker SSO は、Docker へのアクセスにおいて IdPs (identity providers; アイデンティティープロバイダー) を使った認証を求めます。
-Docker では今のところ、Auth0 を通じて SAML 2.0 と Azure AD の IdPs をサポートしています。
+Docker では今のところ、SAML 2.0 と Azure AD の認証方法をサポートしています。
 SSO は Docker Business サブスクリプション内の組織に対して有効にできます。
 現アカウントを Business サブスクリプションにアップグレードするには、[サブスクリプションのアップグレード](../subscription/upgrade/){:target="blank" rel="noopener" class=""} を参照してください。
 @z
 
 @x
-When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign into Docker Hub or Docker Desktop to initiate the SSO authentication process.
+When SSO is enabled, users are redirected to your provider’s authentication page to log in. They cannot authenticate using their Docker login credentials  (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
 @y
-SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使った認証が行われます。
+SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使ったログインを行います。
 そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。
 Docker では現在、Service Provider Initiated SSO フローをサポートしています。
 所属ユーザーは SSO 認証プロセスを初期化を通じて Docker Hub や Docker Desktop へサインインすることが必要になります。
 @z
 
 @x
-Before enabling SSO in Docker Hub, administrators must work with their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
+Before enabling SSO in Docker Hub, administrators must configure their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 @y
 Docker Hub における SSO を有効にするためには、アイデンティティープロバイダーとの間で Docker Hub において用いる IdP が動作するように、管理者があらかじめ設定しておかなければなりません。
 Docker では ACS（Assertion Consumer Service）URL とエンティティー ID を提供しています。
@@ -43,7 +43,7 @@ Docker では ACS（Assertion Consumer Service）URL とエンティティー ID
 @z
 
 @x
-After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
+After establishing the connection between the IdP server and Docker Hub, administrators log in to the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
 @y
 IdP サーバーと Docker Hub 間の接続を構築したら、Docker Hub 内の組織にログインして、SSO 確立プロセスを完了させます。
 詳しい手順は、**Docker Hub における SSO の有効化** の節を参照してください。
@@ -64,11 +64,12 @@ Docker Hub において SSO を有効にするには、以下に示すように�
 @z
 
 @x
-We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
+We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests. Guests will continue to authenticate through Docker with their Docker login credentials (Docker ID and password).
 @y
 現在のところ SSO の有効化は 1 つの組織についてのみ対応しています。
 ただしシングルログアウトには対応していません。
 組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。
+この Docker ログイン資格情報を利用し、ゲストは Docker を通じて認証が継続します。
 @z
 
 @x
@@ -81,14 +82,14 @@ We currently support enabling SSO on a single organization. However, we do not s
 @x
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below
+* New org members must create a PAT to log in to the CLI, however existing users can currently use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
 @y
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below
+* New org members must create a PAT to log in to the CLI, however existing users can currently use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
@@ -102,10 +103,10 @@ We currently support enabling SSO on a single organization. However, we do not s
 @z
 
 @x
-Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log in to the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
 In addition, all email addresses should be added to your IdP.
 @y
-Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+Before you configure SSO for your organization, new members of your organization must [create an access token](../docker-hub/access-tokens.md) to log in to the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
 In addition, all email addresses should be added to your IdP.
 @z
 
@@ -117,9 +118,9 @@ In addition, all email addresses should be added to your IdP.
 @z
 
 @x
-To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
+To configure SSO, log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
 @y
-To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
+To configure SSO, log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
 @z
 
 @x
@@ -164,11 +165,11 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **SAML 2.0**.
 @y
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **SAML 2.0**.
 @z
@@ -192,9 +193,9 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
+5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 @y
-5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
+5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 @z
 
 @x
@@ -255,11 +256,11 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **Azure AD**.
 @y
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **Azure AD**.
 @z
@@ -283,9 +284,9 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
+5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 @y
-5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
+5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 @z
 
 @x
@@ -324,9 +325,9 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.
+Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 @y
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.
+Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 @z
 
 @x
@@ -416,17 +417,17 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 @z
 
 @x
-After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log into Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.
+After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log in to Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.
 @y
-After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log into Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.
+After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log in to Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.
 @z
 
 @x
-1. Authenticate via email instead of using your Docker ID, and test the login process.
-2. To authenticate via CLI, your users must have a PAT before you enforce SSO for CLI users.
+1. Authenticate through email instead of using your Docker ID, and test the login process.
+2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 @y
-1. Authenticate via email instead of using your Docker ID, and test the login process.
-2. To authenticate via CLI, your users must have a PAT before you enforce SSO for CLI users.
+1. Authenticate through email instead of using your Docker ID, and test the login process.
+2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 @z
 
 @x
@@ -463,14 +464,14 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 >
 > If you want to turn off SSO and revert back to Docker’s built-in
 > authentication, click **Turn OFF Enforcement**. Your members aren’t
-> forced to authenticate through your IdP and can log into Docker using
+> forced to authenticate through your IdP and can log in to Docker using
 > their personal credentials.
 @y
 > **Note:**
 >
 > If you want to turn off SSO and revert back to Docker’s built-in
 > authentication, click **Turn OFF Enforcement**. Your members aren’t
-> forced to authenticate through your IdP and can log into Docker using
+> forced to authenticate through your IdP and can log in to Docker using
 > their personal credentials.
 @z
 
@@ -488,24 +489,20 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 @z
 
 @x
-To add a member to your organization:
-1. Create an account for your members in your IdP.
-2. Add and invite your members to your organization.
+You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 @y
-To add a member to your organization:
-1. Create an account for your members in your IdP.
-2. Add and invite your members to your organization.
+You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 @z
 
 @x
  > **Note:**
  >
- > when the first-time user logs into Docker using their domain email
+ > when the first-time user logs in to Docker using their domain email
  > address, they are then added to your organization.
 @y
  > **Note:**
  >
- > when the first-time user logs into Docker using their domain email
+ > when the first-time user logs in to Docker using their domain email
  > address, they are then added to your organization.
 @z
 
@@ -539,12 +536,12 @@ To remove a member from an organization:
 @z
 
 @x
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
 2. Select the organization from the list. The organization page displays a list of members.
 2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
 3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
 @y
-1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
+1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
 2. Select the organization from the list. The organization page displays a list of members.
 2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
 3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.

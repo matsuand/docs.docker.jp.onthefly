@@ -191,6 +191,13 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
+### Install interactively
+@y
+{: #install-interactively }
+### 対話的なインストール
+@z
+
+@x
 1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
     the Applications folder.
 @y
@@ -256,6 +263,43 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @y
     詳しくは [Docker Desktop ライセンス契約](../../subscription/index.md#docker-desktop-license-agreement) を参照してください。
     また、以下の [ブログ](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}  を読んで、Docker Desktop を利用する各企業において、どのような影響が発生するのかを確認してください。
+@z
+
+@x
+### Install from the command line
+@y
+{: #install-from-the-command-line }
+### コマンドラインからのインストール
+@z
+
+@x
+After downloading `Docker.dmg`, run the following commands in a terminal to install Docker Desktop in the Applications folder:
+@y
+`Docker.dmg`をダウンロードしたら、端末から以下のコマンドを実行して、アプリケーションフォルダー内に Docker Desktop をインストールします。
+@z
+
+@x
+```console
+$ sudo hdiutil attach Docker.dmg
+$ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
+$ sudo hdiutil detach /Volumes/Docker
+```
+@y
+```console
+$ sudo hdiutil attach Docker.dmg
+$ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
+$ sudo hdiutil detach /Volumes/Docker
+```
+@z
+
+@x
+The `install` command accepts the following flags:
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
+- `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+@y
+`install`コマンドでは以下のフラグ指定が可能です。
+- `--accept-license`: [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} に関して、アプリケーションの初回実行時に同意するのではなく、この場で同意するものとします。
+- `--allowed-org=<org name>`: アプリケーションを実行するにあたって、ユーザーのサインインを要求して、指定した Docker Hub 組織の一員であることを要求します。
 @z
 
 @x

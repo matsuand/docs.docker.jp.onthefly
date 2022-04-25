@@ -9,7 +9,6 @@ redirect_from:
 - /docker-for-mac/troubleshoot/
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
-toc_max: 2
 ---
 @y
 ---
@@ -19,7 +18,6 @@ redirect_from:
 - /docker-for-mac/troubleshoot/
 - /mackit/troubleshoot/
 title: ログ機能とトラブルシューティング
-toc_max: 2
 ---
 @z
 
@@ -184,7 +182,7 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
 
 @x
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
-2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
@@ -197,7 +195,7 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
     Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @y
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
-2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
@@ -296,6 +294,12 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
+@z
+
+@x
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+@y
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
 @z
 
 @x

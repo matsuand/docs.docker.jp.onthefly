@@ -1,5 +1,5 @@
 SUBDIRS = api context extend images install reference \
-	release-notes scan security swarm tutorials
+	release-notes sbom scan security swarm tutorials
 
 thisdir    = engine
 origdir    = @abs_origdir@/$(thisdir)

@@ -2620,6 +2620,38 @@ RACK_ENV=development
 @z
 
 @x
+Compose also recognizes inline comments, like in:
+@y
+Compose では以下のようなインラインコメントも認識されます。
+@z
+
+@x
+```
+MY_VAR = value # this is a comment
+```
+@y
+```
+MY_VAR = value # これはコメントです。
+```
+@z
+
+@x
+To avoid interpreting "#" as an inline comment, use the quotation marks:
+@y
+"#" がインラインコメントとして解釈されないようにするには、クォーテーション記号を使います。
+@z
+
+@x
+```
+MY_VAR = "All the # inside are taken as part of the value"
+```
+@y
+```
+MY_VAR = "この中にある # はすべて値の一部として扱われます"
+```
+@z
+
+@x
 > **Note**
 >
 > If your service specifies a [build](#build) option, variables defined in
@@ -4265,8 +4297,8 @@ the service's task containers.
   specified.
 - `mode`: The permissions for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation. For instance, `0444`
-  represents world-readable. The default in Docker 1.13.1 is `0000`, but is
-  be `0444` in newer versions. Secrets cannot be writable because they are mounted
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but it is
+  `0444` in newer versions. Secrets cannot be writable because they are mounted
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this

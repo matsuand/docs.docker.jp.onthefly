@@ -91,10 +91,11 @@ Docker ユーザーは、組織内の少なくとも 1 つのチームに割り�
 @z
 
 @x
-You can create multiple organizations. However, if you’re enabling SSO and have multiple organizations, each organization must have a domain associated with it.
+To begin, you should set up your first organization and contact the Customer Success team at customer-success@docker.com to add the additional organizations. Also, if you are enabling SSO, it is configured based on your domain, not your organization.
 @y
-組織は複数生成することができます。
-ただし SSO を有効にしていて組織を複数生成している場合は、各組織はそれに関連づいたドメインを持っていなければなりません。
+まず初めに 1 つめの組織を作ります。
+そして Customer Success チーム customer-success@docker.com に連絡をして、もう 1 つの組織を追加します。
+なお SSO を有効にしている場合は、組織に対する設定ではなく、ドメインに基づいた設定が行われます。
 @z
 
 @x

@@ -59,11 +59,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 @z
 
 @x
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.7.1
+2022-04-19
 @y
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.7.1
+2022-04-19
 @z
 
 @x
@@ -79,6 +79,314 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+ - Fixed a crash on the Quick Start Guide final screen.
+@y
+ - Fixed a crash on the Quick Start Guide final screen.
+@z
+
+@x
+## Docker Desktop 4.7.0
+2022-04-07
+@y
+## Docker Desktop 4.7.0
+2022-04-07
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77141/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77141/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/77141/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/77141/Docker.dmg)
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769){: target="_blank" rel="noopener" class="_"}
+- Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
+@y
+- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769){: target="_blank" rel="noopener" class="_"}
+- Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- IT Administrators can now install Docker Desktop remotely using the command line. For more information, see [Install Docker Desktop using the command line](../install.md#install-from-the-command-line).
+- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../../../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+@y
+- IT Administrators can now install Docker Desktop remotely using the command line. For more information, see [Install Docker Desktop using the command line](../install.md#install-from-the-command-line).
+- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../../../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
+- [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
+- [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
+- [Go 1.18](https://golang.org/doc/go1.18)
+@y
+- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
+- [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
+- [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
+- [Go 1.18](https://golang.org/doc/go1.18)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+ - Fixed an issue that sometimes caused Docker Desktop to display a blank white screen. Fixes [docker/for-mac#6134](https://github.com/docker/for-mac/issues/6134).
+ - Fixed a bug where the Registry Access Management policy was never refreshed after a failure.
+ - Fixed an issue that caused Docker Desktop to become unresponsive during startup when osxfs is used for file sharing.
+ - Fixed a problem where gettimeofday() performance drops after waking from sleep when using Hyperkit. Fixes [docker/for-mac#3455](https://github.com/docker/for-mac/issues/3455).
+ - Logs and terminals in the UI now respect your OS theme in light and dark mode.
+ - Easily clean up many volumes at once via multi-select checkboxes.
+ - Improved login feedback.
+@y
+ - Fixed an issue that sometimes caused Docker Desktop to display a blank white screen. Fixes [docker/for-mac#6134](https://github.com/docker/for-mac/issues/6134).
+ - Fixed a bug where the Registry Access Management policy was never refreshed after a failure.
+ - Fixed an issue that caused Docker Desktop to become unresponsive during startup when osxfs is used for file sharing.
+ - Fixed a problem where gettimeofday() performance drops after waking from sleep when using Hyperkit. Fixes [docker/for-mac#3455](https://github.com/docker/for-mac/issues/3455).
+ - Logs and terminals in the UI now respect your OS theme in light and dark mode.
+ - Easily clean up many volumes at once via multi-select checkboxes.
+ - Improved login feedback.
+@z
+
+@x
+### Deprecation
+@y
+{: #deprecation }
+### 廃止決定
+@z
+
+@x
+- Deprecate macOS 10.14. For macOS system requirements, see [Docker Desktop for Mac system requirements](../install.md#system-requirements).
+@y
+- Deprecate macOS 10.14. For macOS system requirements, see [Docker Desktop for Mac system requirements](../install.md#system-requirements).
+@z
+
+@x
+## Docker Desktop 4.6.1
+2022-03-22
+@y
+## Docker Desktop 4.6.1
+2022-03-22
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/76265/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/76265/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/76265/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/76265/Docker.dmg)
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+@y
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+@y
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+@z
+
+@x
+## Docker Desktop 4.6.0
+2022-03-14
+@y
+## Docker Desktop 4.6.0
+2022-03-14
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/75818/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/75818/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/75818/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/75818/Docker.dmg)
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+@y
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../index.md#experimental-features).
+- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
+@y
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../index.md#experimental-features).
+- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
+- [Qemu 6.2.0](https://wiki.qemu.org/ChangeLog/6.2)
+@y
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
+- [Qemu 6.2.0](https://wiki.qemu.org/ChangeLog/6.2)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the systray menu not displaying all menu items after starting Docker Desktop. Fixes [docker/for-mac#6192](https://github.com/docker/for-mac/issues/6192).
+- Fixed a regression about Docker Desktop not starting in background anymore. Fixes [docker/for-mac#6167](https://github.com/docker/for-mac/issues/6167).
+- Fixed missing Docker Desktop Dock icon. Fixes [docker/for-mac#6173](https://github.com/docker/for-mac/issues/6173).
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Used speed up block device access when using the experimental `virtualization.framework`. See [benchmarks](https://github.com/docker/roadmap/issues/7#issuecomment-1050626886).
+- Increased default VM memory allocation to half of physical memory (min 2 GB, max 8 GB) for better out-of-the-box performances.
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+@y
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the systray menu not displaying all menu items after starting Docker Desktop. Fixes [docker/for-mac#6192](https://github.com/docker/for-mac/issues/6192).
+- Fixed a regression about Docker Desktop not starting in background anymore. Fixes [docker/for-mac#6167](https://github.com/docker/for-mac/issues/6167).
+- Fixed missing Docker Desktop Dock icon. Fixes [docker/for-mac#6173](https://github.com/docker/for-mac/issues/6173).
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Used speed up block device access when using the experimental `virtualization.framework`. See [benchmarks](https://github.com/docker/roadmap/issues/7#issuecomment-1050626886).
+- Increased default VM memory allocation to half of physical memory (min 2 GB, max 8 GB) for better out-of-the-box performances.
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+@z
+
+@x
+### Known issues
+@y
+### Known issues
+@z
+
+@x
+- After enabling VirtioFS, containers with processes running with different Unix user IDs may experience caching issues. For example if a process running as `root` queries a file and another process running as user `nginx` tries to access the same file immediately, the `nginx` process will get a "Permission Denied" error.
+@y
+- After enabling VirtioFS, containers with processes running with different Unix user IDs may experience caching issues. For example if a process running as `root` queries a file and another process running as user `nginx` tries to access the same file immediately, the `nginx` process will get a "Permission Denied" error.
+@z
+
+@x
+## Docker Desktop 4.5.0
+2022-02-10
+@y
+## Docker Desktop 4.5.0
+2022-02-10
+@z
+
+@x
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/74594/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/74594/Docker.dmg)
+@y
+> Docker Desktop のダウンロード
+>
+> [Intel チップの Mac](https://desktop.docker.com/mac/main/amd64/74594/Docker.dmg) |
+> [Apple チップの Mac](https://desktop.docker.com/mac/main/arm64/74594/Docker.dmg)
 @z
 
 @x

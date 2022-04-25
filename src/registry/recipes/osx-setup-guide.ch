@@ -151,10 +151,10 @@ Copy the registry configuration file in place:
 
 @x
     mkdir /Users/Shared/Registry
-    cp docs/osx/config.yml /Users/Shared/Registry/config.yml
+    cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
 @y
     mkdir /Users/Shared/Registry
-    cp docs/osx/config.yml /Users/Shared/Registry/config.yml
+    cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
 @z
 
 @x
@@ -170,12 +170,12 @@ Copy the Docker registry plist into place:
 @z
 
 @x
-    plutil -lint registry/recipes/osx/com.docker.registry.plist
-    cp registry/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
+    plutil -lint docs/recipes/osx/com.docker.registry.plist
+    cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
     chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
 @y
-    plutil -lint registry/recipes/osx/com.docker.registry.plist
-    cp registry/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
+    plutil -lint docs/recipes/osx/com.docker.registry.plist
+    cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
     chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
 @z
 

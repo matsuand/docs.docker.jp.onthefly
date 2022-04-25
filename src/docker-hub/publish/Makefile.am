@@ -21,6 +21,7 @@ bases = \
 	customer_faq \
 	index \
 	publish \
+	publisher-center-migration \
 	publisher_faq \
 	trustchain
 

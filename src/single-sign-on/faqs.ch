@@ -120,9 +120,9 @@ You can create a test organization. Companies can set up a new five-seat Busines
 @z
 
 @x
-You must provide an email address as an attribute to authenticate via SAML. The ‘Name’ attribute is currently optional.
+You must provide an email address as an attribute to authenticate through SAML. The ‘Name’ attribute is currently optional.
 @y
-You must provide an email address as an attribute to authenticate via SAML. The ‘Name’ attribute is currently optional.
+You must provide an email address as an attribute to authenticate through SAML. The ‘Name’ attribute is currently optional.
 @z
 
 @x
@@ -336,9 +336,9 @@ You can add a bot account to your IDP and create an access token for it to repla
 @z
 
 @x
-Our SSO implementation is already "just in time". Admins don't have to create users’ accounts on Hub, they can just enable it on the IdP and have the users log in via their domain email on Hub.
+Our SSO implementation is already "just in time". Admins don't have to create users’ accounts on Hub, they can just enable it on the IdP and have the users log in through their domain email on Hub.
 @y
-Our SSO implementation is already "just in time". Admins don't have to create users’ accounts on Hub, they can just enable it on the IdP and have the users log in via their domain email on Hub.
+Our SSO implementation is already "just in time". Admins don't have to create users’ accounts on Hub, they can just enable it on the IdP and have the users log in through their domain email on Hub.
 @z
 
 @x
@@ -372,9 +372,9 @@ Yes, generally bot accounts need to be a seat, similar to a regular end user, ha
 @z
 
 @x
-Yes, Azure AD is supported with SSO for Docker Business, both via a direct integration and via SAML.
+Yes, Azure AD is supported with SSO for Docker Business, both through a direct integration and through SAML.
 @y
-Yes, Azure AD is supported with SSO for Docker Business, both via a direct integration and via SAML.
+Yes, Azure AD is supported with SSO for Docker Business, both through a direct integration and through SAML.
 @z
 
 @x
@@ -414,9 +414,9 @@ They can do it one time to add it to a connection. If they ever change idPs and 
 @z
 
 @x
-Adding and verifying Domain is required to enable and enforce SSO. Click Add Domain and specify the email domains that are allowed to authenticate via your server. This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
+Adding and verifying Domain is required to enable and enforce SSO. Click Add Domain and specify the email domains that are allowed to authenticate through your server. This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
 @y
-Adding and verifying Domain is required to enable and enforce SSO. Click Add Domain and specify the email domains that are allowed to authenticate via your server. This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
+Adding and verifying Domain is required to enable and enforce SSO. Click Add Domain and specify the email domains that are allowed to authenticate through your server. This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
 @z
 
 @x
@@ -534,9 +534,9 @@ Before enforcing SSO, you must create PATs for automation systems and CI/CD pipe
 @z
 
 @x
-### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO via Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
+### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO through Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
 @y
-### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO via Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
+### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO through Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
 @z
 
 @x
@@ -570,9 +570,9 @@ Yes, they can choose to not enforce, and users have the option to use either Doc
 @z
 
 @x
-### Q: We have enforced SSO, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login via userid and password. Why is this happening?
+### Q: We have enforced SSO, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login through userid and password. Why is this happening?
 @y
-### Q: We have enforced SSO, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login via userid and password. Why is this happening?
+### Q: We have enforced SSO, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login through userid and password. Why is this happening?
 @z
 
 @x
@@ -610,11 +610,11 @@ However, if you **enforce** SSO:
 @x
 * Service Account domain email addresses must be unaliased and enabled in their IdP
 * Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
-* Those who know the IdP credentials can sign in as that Service Account via SSO on Hub and create or change the personal access token for that service account.
+* Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 @y
 * Service Account domain email addresses must be unaliased and enabled in their IdP
 * Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
-* Those who know the IdP credentials can sign in as that Service Account via SSO on Hub and create or change the personal access token for that service account.
+* Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 @z
 
 @x
@@ -630,9 +630,9 @@ However, if you **enforce** SSO:
 @z
 
 @x
-Users are managed through organizations in Docker Hub. When you configure SSO in Docker, you need to make sure an account exists for each user in your IdP account. When a user signs into Docker for the first time using their domain email address, they will be automatically added to the organization after a successful authentication.
+Users are managed through organizations in Docker Hub. When you configure SSO in Docker, you need to make sure an account exists for each user in your IdP account. When a user signs in to Docker for the first time using their domain email address, they will be automatically added to the organization after a successful authentication.
 @y
-Users are managed through organizations in Docker Hub. When you configure SSO in Docker, you need to make sure an account exists for each user in your IdP account. When a user signs into Docker for the first time using their domain email address, they will be automatically added to the organization after a successful authentication.
+Users are managed through organizations in Docker Hub. When you configure SSO in Docker, you need to make sure an account exists for each user in your IdP account. When a user signs in to Docker for the first time using their domain email address, they will be automatically added to the organization after a successful authentication.
 @z
 
 @x
@@ -642,9 +642,9 @@ Users are managed through organizations in Docker Hub. When you configure SSO in
 @z
 
 @x
-No, you don’t need to manually add users to your organization in Docker Hub. You just need to make sure an account for your users exists in your IdP and then invite them to your organization using the Invite Member option in Docker Hub.
+No, you don’t need to manually add users to your organization in Docker Hub. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 @y
-No, you don’t need to manually add users to your organization in Docker Hub. You just need to make sure an account for your users exists in your IdP and then invite them to your organization using the Invite Member option in Docker Hub.
+No, you don’t need to manually add users to your organization in Docker Hub. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 @z
 
 @x
@@ -654,9 +654,9 @@ When a user signs into Docker for the first time using their domain email addres
 @z
 
 @x
-### Q: Can users in my organization use different email addresses to authenticate via SSO?
+### Q: Can users in my organization use different email addresses to authenticate through SSO?
 @y
-### Q: Can users in my organization use different email addresses to authenticate via SSO?
+### Q: Can users in my organization use different email addresses to authenticate through SSO?
 @z
 
 @x
@@ -798,15 +798,15 @@ Admins in the Owners group in the orgs can invite users through Docker Hub UI, b
 @z
 
 @x
-### Q: If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link via email? For example,   max.mustermann@zeiss.com.
+### Q: If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link through email?
 @y
-### Q: If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link via email? For example,   max.mustermann@zeiss.com.
+### Q: If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link through email?
 @z
 
 @x
-Yes, if the user is added via email address to an org, they will receive an email invite. If invited via docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](https://www.zeiss.com/) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
+Yes, if the user is added through email address to an org, they will receive an email invite. If invited through docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](https://www.zeiss.com/) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
 @y
-Yes, if the user is added via email address to an org, they will receive an email invite. If invited via docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](https://www.zeiss.com/) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
+Yes, if the user is added through email address to an org, they will receive an email invite. If invited through docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](https://www.zeiss.com/) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
 @z
 
 @x

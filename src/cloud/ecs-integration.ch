@@ -31,9 +31,9 @@ toc_max: 2
 @z
 
 @x
-The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
 @y
-Docker Compose CLI は、Amazon EC2 コンテナーサービス（Amazon EC2 Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。
+Docker Compose CLI は、Amazon ECS（Amazon Elastic Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。
 これを使って、クラウドに適したアプリケーションを構築し実行します。
 @z
 

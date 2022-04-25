@@ -14,9 +14,11 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	compose-file-v2 \
-	compose-file-v3 \
+	build              \
+	compose-file-v2    \
+	compose-file-v3    \
 	compose-versioning \
+	deploy             \
 	index
 
 ch_mds = $(bases:=.ch) # ch means change files

@@ -117,7 +117,7 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 @y
@@ -129,7 +129,7 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 @z
@@ -300,7 +300,7 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 @y
@@ -312,7 +312,7 @@ Docker Desktop では Kubernetes をすばやく簡単に設定することが�
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 @z
@@ -535,11 +535,11 @@ Docker Desktop は主に Docker Engine 上において動作します。
 
 @x
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 @y
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 @z
 
@@ -568,12 +568,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @x
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 @y
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 @z
 
@@ -716,11 +716,11 @@ Docker Desktop は主に Docker Engine 上において動作します。
 
 @x
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 @y
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 @z
 
@@ -749,12 +749,12 @@ Docker Desktop は主に Docker Engine 上において動作します。
 @x
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 @y
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 @z
 

@@ -51,6 +51,7 @@ Amazon S3 or S3 compatible services for object storage.
 | `chunksize`  | no | The S3 API requires multipart upload chunks to be at least 5MB. This value should be a number that is larger than 5 * 1024 * 1024.|
 | `rootdirectory`  | no | This is a prefix that is applied to all S3 keys to allow you to segment data in your bucket if necessary. |
 | `storageclass`  | no | The S3 storage class applied to each registry file. The default is `STANDARD`. |
+| `accelerate`  | no | Specifies whether the registry should use S3 Transfer Acceleration. You must enable acceleration endpoint on a bucket before using this option. A boolean value. The default is `false`. |
 @y
 | Parameter     | Required | Description                                                                                                                                                                                                                                                         |
 |:--------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -67,6 +68,7 @@ Amazon S3 or S3 compatible services for object storage.
 | `chunksize`  | no | The S3 API requires multipart upload chunks to be at least 5MB. This value should be a number that is larger than 5 * 1024 * 1024.|
 | `rootdirectory`  | no | This is a prefix that is applied to all S3 keys to allow you to segment data in your bucket if necessary. |
 | `storageclass`  | no | The S3 storage class applied to each registry file. The default is `STANDARD`. |
+| `accelerate`  | no | Specifies whether the registry should use S3 Transfer Acceleration. You must enable acceleration endpoint on a bucket before using this option. A boolean value. The default is `false`. |
 @z
 
 @x
@@ -139,6 +141,12 @@ Amazon S3 or S3 compatible services for object storage.
 `storageclass`: (optional) The storage class applied to each registry file. Defaults to STANDARD. Valid options are STANDARD and REDUCED_REDUNDANCY.
 @y
 `storageclass`: (optional) The storage class applied to each registry file. Defaults to STANDARD. Valid options are STANDARD and REDUCED_REDUNDANCY.
+@z
+
+@x
+`accelerate`: (optional) Whether you would like to use accelerate endpoint for communication with S3. You must enable acceleration on a bucket before using this option. For details on how to enable the accelerate option, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+@y
+`accelerate`: (optional) Whether you would like to use accelerate endpoint for communication with S3. You must enable acceleration on a bucket before using this option. For details on how to enable the accelerate option, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
 @z
 
 @x

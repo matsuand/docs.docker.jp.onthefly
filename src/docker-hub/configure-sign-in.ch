@@ -17,18 +17,14 @@ title: サインインを要求する registry.json の設定
 
 @x
 The `registry.json` file is a configuration file that allows administrators to
-specify the Docker organization the user must belong to, and thereby ensure
-that the organization's settings are applied to the user's session. Docker
-Desktop installation requires admin access. In large enterprises where admin
-access is restricted, administrators can create a `registry.json` file and
-deploy it to the users’ machines using a device management software as part of
-the Docker Desktop installation process.
+specify the Docker organization the user must belong to and ensure that the
+organization’s settings apply to the user’s session. The Docker Desktop installer
+can create this file and deploy it to the users’ machines as part of the installation
+process.
 @y
 `registry.json`ファイルは、ユーザーが所属するべき Docker 組織を定めるものとして、管理者が設定するファイルです。
 したがって組織に対する設定は、ユーザーセッションに対して適用されます。
-Docker Desktop のインストールには管理者権限を必要とします。
-エンタープライズの規模が大きいために、管理者によるアクセスが制限されてしまうような場合には、管理者が`registry.json`を生成する方法をとります。
-このファイルは Docker Desktop のインストールの一部として導入されるデバイス管理ソフトウェアを使って、各ユーザーのマシンにデプロイすることができます。
+Docker Desktop のインストーラーがこのファイルを生成して、インストール処理の一部として各ユーザーマシンにこれをデプロイします。
 @z
 
 @x

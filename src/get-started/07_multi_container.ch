@@ -155,6 +155,34 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
+    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
+@y
+    ARM ベースのチップ、たとえば Macbook M1 Chips / Apple Silicon を利用している場合は、以下のコマンドを実行します。
+@z
+
+@x
+    ```console
+    $ docker run -d \
+        --network todo-app --network-alias mysql \
+        --platform "linux/amd64" \
+        -v todo-mysql-data:/var/lib/mysql \
+        -e MYSQL_ROOT_PASSWORD=secret \
+        -e MYSQL_DATABASE=todos \
+        mysql:5.7
+    ```
+@y
+    ```console
+    $ docker run -d \
+        --network todo-app --network-alias mysql \
+        --platform "linux/amd64" \
+        -v todo-mysql-data:/var/lib/mysql \
+        -e MYSQL_ROOT_PASSWORD=secret \
+        -e MYSQL_DATABASE=todos \
+        mysql:5.7
+    ```
+@z
+
+@x
     If you are using PowerShell then use this command.
 @y
     PowerShell を利用している場合は以下のコマンドとします。
@@ -269,10 +297,26 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-    Hooray! We have our `todos` database and it's ready for us to use!
+Exit the MySQL shell to return to the shell on our machine.
 @y
-    やりました。
-    `todos`データベースは間違いなくありますので、利用していきましょう。
+MySQL シェルを終了して、マシン上のシェルに戻ります。
+@z
+
+@x
+   ```console
+   mysql> exit
+   ```
+@y
+   ```console
+   mysql> exit
+   ```
+@z
+
+@x
+   Hooray! We have our `todos` database and it's ready for us to use!
+@y
+   やりました。
+   `todos`データベースは間違いなくありますので、利用していきましょう。
 @z
 
 @x
