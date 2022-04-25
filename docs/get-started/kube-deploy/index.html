@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Kubernetes へのデプロイ | Docker ドキュメント</title>
   <meta name="description" content="Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Kubernetes へのデプロイ" />
   <meta property="og:description" content="Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/kube-deploy/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Kubernetes へのデプロイ","description":"Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。","url":"https://docs.docker.com/get-started/kube-deploy/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -148,7 +148,7 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
   <li>
     <p>本チュートリアルのオーケストレーション概要の部において、すでに基本的な Kubernetes YAML ファイルを作り出しました。
 そこでこの YAML ファイルをもう少し洗練されたものにして、掲示板アプリの実行と管理を行っていきます。
-<code class="language-plaintext highlighter-rouge">bb.yaml</code>というファイルに以下の内容を記述してください。</p>
+<code class="highlighter-rouge">bb.yaml</code>というファイルに以下の内容を記述してください。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
@@ -156,7 +156,7 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
   <span class="na">name</span><span class="pi">:</span> <span class="s">bb-demo</span>
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">matchLabels</span><span class="pi">:</span>
       <span class="na">bb</span><span class="pi">:</span> <span class="s">web</span>
@@ -179,28 +179,28 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">bb</span><span class="pi">:</span> <span class="s">web</span>
   <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">3000</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">3000</span>
-    <span class="na">nodePort</span><span class="pi">:</span> <span class="m">30001</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">3000</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="s">3000</span>
+    <span class="na">nodePort</span><span class="pi">:</span> <span class="s">30001</span>
 </code></pre></div>    </div>
 
     <p>この Kubernetes YAML ファイルには二つのオブジェクトを定義しています。
-それらは <code class="language-plaintext highlighter-rouge">---</code> で区切られています。</p>
+それらは <code class="highlighter-rouge">---</code> で区切られています。</p>
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">Deployment</code>は、スケール変更可能な同一ポッドのグループを表わします。
-この例では<code class="language-plaintext highlighter-rouge">replica</code>すなわちポッドのコピーを１つだけ用意します。
-そしてこのポッドは、その中に１つだけコンテナーを持ちます（このことは<code class="language-plaintext highlighter-rouge">template:</code>キー配下により示されます）。
-ベースとするイメージは、本チュートリアルの以前の手順にて利用した<code class="language-plaintext highlighter-rouge">bulletinboard:1.0</code>です。</li>
-      <li><code class="language-plaintext highlighter-rouge">NodePort</code>サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 3000 ポートへ接続します。
+      <li><code class="highlighter-rouge">Deployment</code>は、スケール変更可能な同一ポッドのグループを表わします。
+この例では<code class="highlighter-rouge">replica</code>すなわちポッドのコピーを１つだけ用意します。
+そしてこのポッドは、その中に１つだけコンテナーを持ちます（このことは<code class="highlighter-rouge">template:</code>キー配下により示されます）。
+ベースとするイメージは、本チュートリアルの以前の手順にて利用した<code class="highlighter-rouge">bulletinboard:1.0</code>です。</li>
+      <li><code class="highlighter-rouge">NodePort</code>サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 3000 ポートへ接続します。
 こうしてネットワーク上から掲示板アプリへアクセスできるようになります。</li>
     </ul>
 
     <p>また Kubernetes YAML は、はじめのうちは長く複雑に見えがちですが、たいていは同一パターンを持っています。</p>
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">apiVersion</code>、オブジェクトを扱うための Kubernetes API を表わします。</li>
-      <li><code class="language-plaintext highlighter-rouge">kind</code>は、このオブジェクトがどういう種類のものかを表わします。</li>
-      <li><code class="language-plaintext highlighter-rouge">metadata</code>は、たとえば name などの情報をオブジェクトに適用します。</li>
-      <li><code class="language-plaintext highlighter-rouge">spec</code>は、オブジェクトに対するパラメーターや設定項目を指定します。</li>
+      <li><code class="highlighter-rouge">apiVersion</code>、オブジェクトを扱うための Kubernetes API を表わします。</li>
+      <li><code class="highlighter-rouge">kind</code>は、このオブジェクトがどういう種類のものかを表わします。</li>
+      <li><code class="highlighter-rouge">metadata</code>は、たとえば name などの情報をオブジェクトに適用します。</li>
+      <li><code class="highlighter-rouge">spec</code>は、オブジェクトに対するパラメーターや設定項目を指定します。</li>
     </ul>
   </li>
 </ol>
@@ -209,9 +209,9 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
 
 <ol>
   <li>
-    <p>端末にて <code class="language-plaintext highlighter-rouge">bb.yaml</code> を生成したディレクトリに移動し、Kubernetes にアプリケーションをデプロイします。</p>
+    <p>端末にて <code class="highlighter-rouge">bb.yaml</code> を生成したディレクトリに移動し、Kubernetes にアプリケーションをデプロイします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> bb.yaml
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> kubectl apply <span class="nt">-f</span> bb.yaml
 </code></pre></div>    </div>
 
     <p>以下のような出力が得られます。
@@ -224,7 +224,7 @@ service/bb-entrypoint created
   <li>
     <p>デプロイ結果の一覧を表示して、正常にすべてが動作していることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get deployments
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> kubectl get deployments
 </code></pre></div>    </div>
 
     <p>すべて正常であれば、以下のようにデプロイ結果が一覧表示されます。</p>
@@ -236,25 +236,25 @@ bb-demo   1/1     1            1           40s
     <p>YAML ファイル内に指定したポッドの個々が、すべて起動していることがわかります。
 同様にサービスに対しても確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl get services
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> kubectl get services
 <span class="go">
 NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-</span><span class="gp">bb-entrypoint   NodePort    10.106.145.116   &lt;none&gt;</span><span class="w">        </span>3000:30001/TCP   53s
-<span class="gp">kubernetes      ClusterIP   10.96.0.1        &lt;none&gt;</span><span class="w">        </span>443/TCP          138d
+</span><span class="gp">bb-entrypoint   NodePort    10.106.145.116   &lt;none&gt;</span>        3000:30001/TCP   53s
+<span class="gp">kubernetes      ClusterIP   10.96.0.1        &lt;none&gt;</span>        443/TCP          138d
 </code></pre></div>    </div>
 
-    <p>デフォルトの<code class="language-plaintext highlighter-rouge">kubernetes</code>サービスに加えて<code class="language-plaintext highlighter-rouge">bb-entrypoint</code>サービスが表示されます。
+    <p>デフォルトの<code class="highlighter-rouge">kubernetes</code>サービスに加えて<code class="highlighter-rouge">bb-entrypoint</code>サービスが表示されます。
 このサービスはトラフィックをポート 30001/TCP から受け付けます。</p>
   </li>
   <li>
-    <p>ブラウザーを開いて<code class="language-plaintext highlighter-rouge">localhost:30001</code>にアクセスし掲示板アプリを開きます。
+    <p>ブラウザーを開いて<code class="highlighter-rouge">localhost:30001</code>にアクセスし掲示板アプリを開きます。
 ここでも掲示板アプリを見ることができます。
 これはクイックスタートチュートリアルの <a href="/docs.docker.jp.onthefly/get-started/02_our_app/">2 部</a> において、スタンドアロンなコンテナー上に起動させたアプリと同一のものです。</p>
   </li>
   <li>
     <p>結果を確認できたらアプリケーションを削除します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> bb.yaml
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> kubectl delete <span class="nt">-f</span> bb.yaml
 </code></pre></div>    </div>
   </li>
 </ol>

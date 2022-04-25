@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker セキュリティ（重要性低い） | Docker ドキュメント</title>
   <meta name="description" content="Review of security vulnerabilities Docker mitigated" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker セキュリティ（重要性低い）" />
   <meta property="og:description" content="Review of security vulnerabilities Docker mitigated" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/non-events/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker セキュリティ（重要性低い）","description":"Review of security vulnerabilities Docker mitigated","url":"https://docs.docker.com/engine/security/non-events/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a>本番環境でのアプリ運用</a></li><li><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/">コンテナーの設定</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/non-events/">Docker セキュリティ（重要性低い）</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/non-events/">Docker セキュリティ（重要性低い）</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -111,7 +111,7 @@
 <p>このページではセキュリティぜい弱性一覧を示します。
 Docker においては、バグに対する軽減対応がなされています。
 もっとも Docker コンテナーにおいて起動するプロセスでは、たとえバグ修正されなくても、元からぜい弱性があるとは言えません。
-ここではコンテナーの起動にあたって、ケーパビリティーは追加せず、あるいは <code class="language-plaintext highlighter-rouge">--privileged</code> としては起動していないことを前提とします。</p>
+ここではコンテナーの起動にあたって、ケーパビリティーは追加せず、あるいは <code class="highlighter-rouge">--privileged</code> としては起動していないことを前提とします。</p>
 
 <p>以下は、バグ一覧とはとても言えないものです。
 むしろこれは、ほんのわずかなバグの例にすぎず、セキュリティレビューやぜい弱性の公開を行うに至ったことから、バグとして気づいたものでしかありません。
@@ -136,39 +136,39 @@ Docker においては、バグに対する軽減対応がなされています�
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3134">CVE-2016-3134</a>,
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3135">3135</a>, など:
 非特権ユーザーによる名前空間が導入されたことにより、非特権ユーザーでもアクセス可能な場所への攻撃が大幅に増えることになりました。
-<code class="language-plaintext highlighter-rouge">mount()</code> のように従来なら root 権限でしかアクセスできなかったシステムコールが、非特権ユーザーであっても正当にアクセスできるようになってしまったからです。
+<code class="highlighter-rouge">mount()</code> のように従来なら root 権限でしかアクセスできなかったシステムコールが、非特権ユーザーであっても正当にアクセスできるようになってしまったからです。
 ここにあげた CVE はすべて、ユーザー名前空間の導入にともなうセキュリティぜい弱性の例です。
 Docker ではコンテナーの設定時にユーザー名前空間を利用します。
 しかしデフォルトの seccomp プロファイルを通じて、コンテナー内のプロセスにおいては、ネスト化した名前空間の生成ができなくなっており、そのぜい弱性は悪用できなくなっています。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0181">CVE-2014-0181</a>,
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3339">CVE-2015-3339</a>:
 これは setuid バイナリを必要とするバグです。
-Docker ではコンテナー内において、<code class="language-plaintext highlighter-rouge">NO_NEW_PRIVS</code> プロセスフラグとその他の仕組みによって setuid バイナリを無効にします。</li>
+Docker ではコンテナー内において、<code class="highlighter-rouge">NO_NEW_PRIVS</code> プロセスフラグとその他の仕組みによって setuid バイナリを無効にします。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4699">CVE-2014-4699</a>:
-<code class="language-plaintext highlighter-rouge">ptrace()</code> にあるバグであり、権限昇格を許してしまうものです。
-Docker では、AppArmor、seccomp、そして <code class="language-plaintext highlighter-rouge">CAP_PTRACE</code> の削除により、コンテナー内での <code class="language-plaintext highlighter-rouge">ptrace()</code> を無効にしています。
+<code class="highlighter-rouge">ptrace()</code> にあるバグであり、権限昇格を許してしまうものです。
+Docker では、AppArmor、seccomp、そして <code class="highlighter-rouge">CAP_PTRACE</code> の削除により、コンテナー内での <code class="highlighter-rouge">ptrace()</code> を無効にしています。
 ここでは三重の防御が行われているわけです。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9529">CVE-2014-9529</a>:
-巧妙に仕掛けられた <code class="language-plaintext highlighter-rouge">keyctl()</code> 呼び出しを繰り返すことによって、カーネル DoS 攻撃やメモリ破壊を行います。
-Docker では seccomp を利用して、コンテナー内部での <code class="language-plaintext highlighter-rouge">keyctl()</code> を無効にしています。</li>
+巧妙に仕掛けられた <code class="highlighter-rouge">keyctl()</code> 呼び出しを繰り返すことによって、カーネル DoS 攻撃やメモリ破壊を行います。
+Docker では seccomp を利用して、コンテナー内部での <code class="highlighter-rouge">keyctl()</code> を無効にしています。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3214">CVE-2015-3214</a>,
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4036">4036</a>:
 仮想ドライバーによく見られるバグであり、ゲスト OS のユーザーがホスト OS 上のコードを実行できてしまうものです。
 これを悪用するには、ゲスト内の仮想デバイスにアクセスする必要があります。
-Docker では <code class="language-plaintext highlighter-rouge">--privileged</code> の指定がない場合は、そういったデバイスへの直接アクセスを隠蔽します。
+Docker では <code class="highlighter-rouge">--privileged</code> の指定がない場合は、そういったデバイスへの直接アクセスを隠蔽します。
 ここがおもしろいところで、このケースが、VM よりもコンテナーの方が「より安全」と言えるかもしれない点です。
 つまりコンテナーよりも VM の方が「より安全」とされる常識に反している例です。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0728">CVE-2016-0728</a>:
-巧妙な <code class="language-plaintext highlighter-rouge">keyctl()</code> 呼び出しによる開放メモリへの use-after-free 攻撃により、権限昇格を可能とします。
-Docker ではデフォルトの seccomp プロファイルの利用により、コンテナー内部での <code class="language-plaintext highlighter-rouge">keyctl()</code> を無効にしています。</li>
+巧妙な <code class="highlighter-rouge">keyctl()</code> 呼び出しによる開放メモリへの use-after-free 攻撃により、権限昇格を可能とします。
+Docker ではデフォルトの seccomp プロファイルの利用により、コンテナー内部での <code class="highlighter-rouge">keyctl()</code> を無効にしています。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2383">CVE-2016-2383</a>:
 eBPF におけるバグであり、seccomp フィルターのようなものを表現するために利用される特殊なカーネル内 DSL が、カーネルメモリの任意の読み込みを可能にします。
-システムコール <code class="language-plaintext highlighter-rouge">bpf()</code> は、Docker コンテナー内部においては（皮肉なことに）seccomp を使ってブロックされます。</li>
+システムコール <code class="highlighter-rouge">bpf()</code> は、Docker コンテナー内部においては（皮肉なことに）seccomp を使ってブロックされます。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3134">CVE-2016-3134</a>,
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4997">4997</a>,
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4998">4998</a>:
-setsockopt の <code class="language-plaintext highlighter-rouge">IPT_SO_SET_REPLACE</code>、<code class="language-plaintext highlighter-rouge">ARPT_SO_SET_REPLACE</code>、<code class="language-plaintext highlighter-rouge">ARPT_SO_SET_REPLACE</code> を利用することで、メモリ破壊、ローカル権限昇格を可能にしてしまうバグです。
-これらの引数は <code class="language-plaintext highlighter-rouge">CAP_NET_ADMIN</code> によってブロックでき、Docker ではデフォルトで許可していません。</li>
+setsockopt の <code class="highlighter-rouge">IPT_SO_SET_REPLACE</code>、<code class="highlighter-rouge">ARPT_SO_SET_REPLACE</code>、<code class="highlighter-rouge">ARPT_SO_SET_REPLACE</code> を利用することで、メモリ破壊、ローカル権限昇格を可能にしてしまうバグです。
+これらの引数は <code class="highlighter-rouge">CAP_NET_ADMIN</code> によってブロックでき、Docker ではデフォルトで許可していません。</li>
 </ul>
 
 <p>バグ（対応 <strong>なし</strong>）</p>
@@ -178,13 +178,13 @@ setsockopt の <code class="language-plaintext highlighter-rouge">IPT_SO_SET_REP
 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5157">5157</a>:
 カーネルのノンマスカブル割り込み処理におけるバグであり、権限昇格を可能にします。
 Docker コンテナー内での悪用が可能です。
-現時点においてシステムコール <code class="language-plaintext highlighter-rouge">modify_ldt()</code> が seccomp を使ってもブロックできないためです。</li>
+現時点においてシステムコール <code class="highlighter-rouge">modify_ldt()</code> が seccomp を使ってもブロックできないためです。</li>
   <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195">CVE-2016-5195</a>:
 Linux カーネルのメモリサブシステムがコピーオンライト（copy-on-write; COW）を扱う際に、競合状態が発生し、プライベートな読み込み専用メモリのマッピングが破損してしまうことがわかりました。
 この際にローカルの非特権ユーザーが、読み込み専用メモリへの書き込み権限を有してしまうことが起こります。
 これは 「Dirty COW」とも呼ばれます。
 <strong>部分的なバグ軽減:</strong> オペレーティングシステムの中には、このぜい弱性を軽減できているものがあります。
-そこでは seccomp の <code class="language-plaintext highlighter-rouge">ptrace</code> に対するフィルタリングと、<code class="language-plaintext highlighter-rouge">/proc/self/mem</code> が読み込み専用であることを利用して対処しています。</li>
+そこでは seccomp の <code class="highlighter-rouge">ptrace</code> に対するフィルタリングと、<code class="highlighter-rouge">/proc/self/mem</code> が読み込み専用であることを利用して対処しています。</li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Docker documentation">Docker documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=security non-events">security non-events</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

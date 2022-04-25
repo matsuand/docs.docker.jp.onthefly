@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーのネットワーク設定 | Docker ドキュメント</title>
   <meta name="description" content="Docker コンテナーのネットワーク設定方法" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテナーのネットワーク設定" />
   <meta property="og:description" content="Docker コンテナーのネットワーク設定方法" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コンテナーのネットワーク設定","description":"Docker コンテナーのネットワーク設定方法","url":"https://docs.docker.com/engine/tutorials/networkingcontainers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -101,21 +101,21 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナーのネットワーク設定</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>ユーザーガイドに従って作業を進めてきたら、単純なアプリケーションはビルドし実行できているはずです。
+                        <section class="section"><h1>コンテナーのネットワーク設定</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>ユーザーガイドに従って作業を進めてきたら、単純なアプリケーションはビルドし実行できているはずです。
 また自分の Docker イメージもビルドできているでしょう。
 ここではそのコンテナーに対するネットワーク設定方法について説明します。</p>
 
 <h2 id="launch-a-container-on-the-default-network">デフォルトネットワークによるコンテナーの起動</h2>
 
 <p>Docker では <strong>ネットワークドライバー</strong> を用いて、コンテナーのネットワーク設定を行う機能がサポートされています。
-デフォルトで提供されているネットワークドライバーは 2 つ、つまり<code class="language-plaintext highlighter-rouge">bridge</code>ドライバーと<code class="language-plaintext highlighter-rouge">overlay</code>ドライバーです。
+デフォルトで提供されているネットワークドライバーは 2 つ、つまり<code class="highlighter-rouge">bridge</code>ドライバーと<code class="highlighter-rouge">overlay</code>ドライバーです。
 ネットワークドライバーはプラグインとして記述することが可能であり、独自のドライバーを生成することができます。
 ただしこれは高度な作業になります。</p>
 
 <p>Docker Engine をインストールしたときには、自動的に 3 つのデフォルトネットワークが生成されます。
 その一覧は以下のようにして見ることができます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
 
 NETWORK ID          NAME                DRIVER
 18a2866682b8        none                null
@@ -123,11 +123,11 @@ c288470c46f6        host                host
 7b369448dccb        bridge              bridge
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">bridge</code>という名前のネットワークは特別なものです。
+<p><code class="highlighter-rouge">bridge</code>という名前のネットワークは特別なものです。
 ネットワークに関しての指定を行わなければ、Docker は常にこのネットワーク内にコンテナーを起動します。
 このことを試してみます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -itd --name=networktest ubuntu
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -itd --name=networktest ubuntu
 
 74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 </code></pre></div></div>
@@ -136,7 +136,7 @@ c288470c46f6        host                host
 
 <p>ネットワークを調べてみれば、コンテナーの IP アドレスは簡単に分かります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect bridge
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network inspect bridge
 <span class="go">
 [
     {
@@ -183,10 +183,10 @@ c288470c46f6        host                host
 あるいはコンテナー ID を用いることもできます。
 以下の例では、名前を用いるのが簡単なので、名前を指定します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network disconnect bridge networktest
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network disconnect bridge networktest
 </code></pre></div></div>
 
-<p>ネットワークからコンテナーを切り離すことはできますが、ビルトインの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワークを削除することはできません。
+<p>ネットワークからコンテナーを切り離すことはできますが、ビルトインの<code class="highlighter-rouge">bridge</code>ネットワークを削除することはできません。
 他のコンテナーや他のネットワークから、目的のコンテナーを独立させるようなネットワークとすることは、よく行うことです。
 そこで Docker について十分に経験を積んだ方は、独自のネットワークを生成してください。</p>
 
@@ -197,15 +197,15 @@ c288470c46f6        host                host
 オーバーレイネットワークは複数ホストを含めることが可能であり、より高度な手段です。
 以下の例ではブリッジネットワークを生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create -d bridge my_bridge
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create -d bridge my_bridge
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">-d</code>フラグは、新たなネットワークに対して<code class="language-plaintext highlighter-rouge">bridge</code>ドライバーを利用することを指示するものです。
+<p><code class="highlighter-rouge">-d</code>フラグは、新たなネットワークに対して<code class="highlighter-rouge">bridge</code>ドライバーを利用することを指示するものです。
 このフラグは省略することができます。
-<code class="language-plaintext highlighter-rouge">bridge</code>がこのフラグのデフォルト値であるからです。
+<code class="highlighter-rouge">bridge</code>がこのフラグのデフォルト値であるからです。
 次にマシン上のネットワークの一覧を確認します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
 
 NETWORK ID          NAME                DRIVER
 7b369448dccb        bridge              bridge
@@ -216,7 +216,7 @@ c288470c46f6        host                host
 
 <p>ネットワークを調べてみると、中には何も入っていません。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network inspect my_bridge
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network inspect my_bridge
 
 [
     {
@@ -246,16 +246,16 @@ c288470c46f6        host                host
 ネットワークとは元々の意味からすれば、コンテナーを完全に独立して取り扱うものです。
 ネットワークへのコンテナー追加は、コンテナーを起動するときに行うことができます。</p>
 
-<p>PostgreSQL データベースを実行するコンテナーを起動させ、その際に<code class="language-plaintext highlighter-rouge">--net=my_bridge</code>フラグを与えます。
+<p>PostgreSQL データベースを実行するコンテナーを起動させ、その際に<code class="highlighter-rouge">--net=my_bridge</code>フラグを与えます。
 こうして指定したネットワークに接続されます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --net=my_bridge --name db training/postgres
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --net=my_bridge --name db training/postgres
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">my_bridge</code>を調べてみると、コンテナーが接続されているのがわかります。
+<p><code class="highlighter-rouge">my_bridge</code>を調べてみると、コンテナーが接続されているのがわかります。
 逆にコンテナーを調べてみると、どこに接続しているかもわかります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  db
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  db
 
 
 {"my_bridge":{"NetworkID":"7d86d31b1478e7cca9ebed7e73aa0fdeec46c5ca29497431d3007d2d9e15ed99",
@@ -265,33 +265,33 @@ c288470c46f6        host                host
 <p>そこで次に、おなじみのウェブアプリケーションを起動してみます。
 ここではネットワークを指定しません。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name web training/webapp python app.py
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name web training/webapp python app.py
 </code></pre></div></div>
 
 <p><img src="/docs.docker.jp.onthefly/engine/tutorials/bridge2.png" alt="bridge2" /></p>
 
-<p><code class="language-plaintext highlighter-rouge">web</code>アプリケーションはどのネットワーク上にあるでしょう？
+<p><code class="highlighter-rouge">web</code>アプリケーションはどのネットワーク上にあるでしょう？
 アプリケーションを調べてみてください。
-これはデフォルトの<code class="language-plaintext highlighter-rouge">bridge</code>ネットワーク上に稼動しています。</p>
+これはデフォルトの<code class="highlighter-rouge">bridge</code>ネットワーク上に稼動しています。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  web
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  web
 
 
 {"bridge":{"NetworkID":"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
 "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.17.0.1","IPAddress":"10.0.0.2","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 </code></pre></div></div>
 
-<p>そこで<code class="language-plaintext highlighter-rouge">web</code>の IP アドレスを取得します。</p>
+<p>そこで<code class="highlighter-rouge">web</code>の IP アドレスを取得します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
 
 
 172.17.0.2
 </code></pre></div></div>
 
-<p>稼動している<code class="language-plaintext highlighter-rouge">db</code>コンテナーに対してシェルを開きます。</p>
+<p>稼動している<code class="highlighter-rouge">db</code>コンテナーに対してシェルを開きます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
 
 root@a205f0dd33b2:/# ping 172.17.0.2
 ping 172.17.0.2
@@ -301,26 +301,26 @@ PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
 44 packets transmitted, 0 received, 100% packet loss, time 43185ms
 </code></pre></div></div>
 
-<p>少ししたら、<code class="language-plaintext highlighter-rouge">CTRL-C</code>により<code class="language-plaintext highlighter-rouge">ping</code>を終了させます。
+<p>少ししたら、<code class="highlighter-rouge">CTRL-C</code>により<code class="highlighter-rouge">ping</code>を終了させます。
 ping は失敗しているのがわかります。
 これは 2 つのコンテナーが別々のネットワーク上で動作しているからです。
 これを修正します。
-まずは<code class="language-plaintext highlighter-rouge">exit</code>コマンドを実行して、コンテナーへのアクセスを閉じます。</p>
+まずは<code class="highlighter-rouge">exit</code>コマンドを実行して、コンテナーへのアクセスを閉じます。</p>
 
 <p>Docker のネットワーク機能では、複数のネットワークを必要に応じて 1 つのコンテナーに割り当てることができます。
 すでに稼動済のコンテナーであっても割り当てられます。
-次は稼動している<code class="language-plaintext highlighter-rouge">web</code>アプリを<code class="language-plaintext highlighter-rouge">my_bridge</code>に割り当てます。</p>
+次は稼動している<code class="highlighter-rouge">web</code>アプリを<code class="highlighter-rouge">my_bridge</code>に割り当てます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network connect my_bridge web
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network connect my_bridge web
 </code></pre></div></div>
 
 <p><img src="/docs.docker.jp.onthefly/engine/tutorials/bridge3.png" alt="bridge3" /></p>
 
-<p>もう一度、稼動している<code class="language-plaintext highlighter-rouge">db</code>コンテナーに対してシェルを開きます。
+<p>もう一度、稼動している<code class="highlighter-rouge">db</code>コンテナーに対してシェルを開きます。
 そして ping コマンドを入力してみます。
-今回は IP アドレスではなく、コンテナー名<code class="language-plaintext highlighter-rouge">web</code>を用います。</p>
+今回は IP アドレスではなく、コンテナー名<code class="highlighter-rouge">web</code>を用います。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
 
 root@a205f0dd33b2:/# ping web
 PING web (10.0.0.2) 56(84) bytes of data.
@@ -333,8 +333,8 @@ PING web (10.0.0.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.060/0.073/0.095/0.018 ms
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">ping</code>の結果から、別の IP アドレスに接続しているのがわかります。
-<code class="language-plaintext highlighter-rouge">my_bridge</code>上にあるアドレスは、<code class="language-plaintext highlighter-rouge">bridge</code>ネットワーク上のアドレスとは異なっているわけです。</p>
+<p><code class="highlighter-rouge">ping</code>の結果から、別の IP アドレスに接続しているのがわかります。
+<code class="highlighter-rouge">my_bridge</code>上にあるアドレスは、<code class="highlighter-rouge">bridge</code>ネットワーク上のアドレスとは異なっているわけです。</p>
 
 <h2 id="次のステップ">次のステップ</h2>
 

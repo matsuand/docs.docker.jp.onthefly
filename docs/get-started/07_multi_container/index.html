@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチコンテナーアプリケーション | Docker ドキュメント</title>
   <meta name="description" content="Using more than one container in our application" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="マルチコンテナーアプリケーション" />
   <meta property="og:description" content="Using more than one container in our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"マルチコンテナーアプリケーション","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -156,7 +156,7 @@
   <li>
     <p>ネットワークを生成します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker network create todo-app
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker network create todo-app
 </code></pre></div>    </div>
   </li>
   <li>
@@ -164,8 +164,19 @@
 同時に環境変数をいくつか定義して、データベースの初期化に利用します。
 （<a href="https://hub.docker.com/_/mysql/">MySQL Docker Hub 一覧</a> の「Environment Variables」の節を参照してください。）</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-d</span> <span class="se">\</span>
      <span class="nt">--network</span> todo-app <span class="nt">--network-alias</span> mysql <span class="se">\</span>
+     <span class="nt">-v</span> todo-mysql-data:/var/lib/mysql <span class="se">\</span>
+     <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
+     <span class="nt">-e</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\</span>
+     mysql:5.7
+</code></pre></div>    </div>
+
+    <p>ARM ベースのチップ、たとえば Macbook M1 Chips / Apple Silicon を利用している場合は、以下のコマンドを実行します。</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-d</span> <span class="se">\</span>
+     <span class="nt">--network</span> todo-app <span class="nt">--network-alias</span> mysql <span class="se">\</span>
+     <span class="nt">--platform</span> <span class="s2">"linux/amd64"</span> <span class="se">\</span>
      <span class="nt">-v</span> todo-mysql-data:/var/lib/mysql <span class="se">\</span>
      <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
      <span class="nt">-e</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\</span>
@@ -174,36 +185,36 @@
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
-</span><span class="w">     </span><span class="nx">mysql:5.7</span><span class="w">
-</span></code></pre></div>    </div>
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">PS</span><span class="o">&gt;</span> docker run -d <span class="se">`</span>
+     --network todo-app --network-alias mysql <span class="se">`</span>
+     -v todo-mysql-data:/var/lib/mysql <span class="se">`</span>
+     -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">`</span>
+     -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">`</span>
+     mysql:5.7
+</code></pre></div>    </div>
 
-    <p>ここで<code class="language-plaintext highlighter-rouge">--network-alias</code>フラグというものを利用しています。
+    <p>ここで<code class="highlighter-rouge">--network-alias</code>フラグというものを利用しています。
  これについてはすぐに説明します。</p>
 
     <blockquote>
       <p><strong>ヒント</strong></p>
 
-      <p>上ではボリューム名として<code class="language-plaintext highlighter-rouge">todo-mysql-data</code>を指定し<code class="language-plaintext highlighter-rouge">/var/lib/mysql</code>にマウントしました。
+      <p>上ではボリューム名として<code class="highlighter-rouge">todo-mysql-data</code>を指定し<code class="highlighter-rouge">/var/lib/mysql</code>にマウントしました。
 このディレクトリは MySQL がデータを保存する場所です。
-だからといって<code class="language-plaintext highlighter-rouge">docker volume create</code>コマンドは実行していません。
+だからといって<code class="highlighter-rouge">docker volume create</code>コマンドは実行していません。
 Docker が名前つきボリュームが指定されたことを認識して、これを自動的に生成してくれます。</p>
     </blockquote>
   </li>
   <li>
     <p>データベースが起動され実行していることを確認するため、データベースに接続して接続確認を行います。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-u</span> root <span class="nt">-p</span>
 </code></pre></div>    </div>
 
     <p>パスワードプロンプトが表示されたら <strong>secret</strong> と入力します。
- MySQL シェルにおいてデータベース一覧を表示し、<code class="language-plaintext highlighter-rouge">todos</code>データベースがあることを確認します。</p>
+ MySQL シェルにおいてデータベース一覧を表示し、<code class="highlighter-rouge">todos</code>データベースがあることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span><span class="w"> </span>SHOW DATABASES<span class="p">;</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span> SHOW DATABASES<span class="p">;</span>
 </code></pre></div>    </div>
 
     <p>出力は以下のようになるはずです。</p>
@@ -219,9 +230,13 @@ Docker が名前つきボリュームが指定されたことを認識して、�
  +--------------------+
  5 rows in set (0.00 sec)
 </code></pre></div>    </div>
+    <p>MySQL シェルを終了して、マシン上のシェルに戻ります。</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">mysql&gt;</span> <span class="nb">exit</span>
+</code></pre></div>    </div>
 
     <p>やりました。
- <code class="language-plaintext highlighter-rouge">todos</code>データベースは間違いなくありますので、利用していきましょう。</p>
+<code class="highlighter-rouge">todos</code>データベースは間違いなくありますので、利用していきましょう。</p>
   </li>
 </ol>
 
@@ -239,15 +254,15 @@ Docker が名前つきボリュームが指定されたことを認識して、�
     <p>nicolaka/netshoot というイメージを使ったコンテナーを新たに起動します。
 ネットワークは同一のものに接続するようにします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--network</span> todo-app nicolaka/netshoot
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-it</span> <span class="nt">--network</span> todo-app nicolaka/netshoot
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>コンテナー内部にて<code class="language-plaintext highlighter-rouge">dig</code>コマンドを実行することにします。
+    <p>コンテナー内部にて<code class="highlighter-rouge">dig</code>コマンドを実行することにします。
 これは便利な DNS ツールです。
-ホスト名<code class="language-plaintext highlighter-rouge">mysql</code>に対する IP アドレスを探し出してみます。</p>
+ホスト名<code class="highlighter-rouge">mysql</code>に対する IP アドレスを探し出してみます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>dig mysql
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> dig mysql
 </code></pre></div>    </div>
 
     <p>そうすると以下のような出力となります...</p>
@@ -270,12 +285,12 @@ Docker が名前つきボリュームが指定されたことを認識して、�
  ;; MSG SIZE  rcvd: 44
 </code></pre></div>    </div>
 
-    <p>「ANSWER SECTION」において、<code class="language-plaintext highlighter-rouge">mysql</code>における<code class="language-plaintext highlighter-rouge">A</code>という 1 つのレコードが<code class="language-plaintext highlighter-rouge">172.23.0.2</code>を持っているのがわかります（この IP アドレスはお手元では、まず間違いなく別の値になっているはずです）。
- <code class="language-plaintext highlighter-rouge">mysql</code>というのは、普通は適正なホスト名ではないので、Docker はこの名前から IP アドレスを解決しています。
- この IP アドレスはこのコンテナーのものであって、ネットワークエイリアスを持っていたからです（前の手順において<code class="language-plaintext highlighter-rouge">--network-alias</code>フラグを用いたことを思い出してください）。</p>
+    <p>「ANSWER SECTION」において、<code class="highlighter-rouge">mysql</code>における<code class="highlighter-rouge">A</code>という 1 つのレコードが<code class="highlighter-rouge">172.23.0.2</code>を持っているのがわかります（この IP アドレスはお手元では、まず間違いなく別の値になっているはずです）。
+ <code class="highlighter-rouge">mysql</code>というのは、普通は適正なホスト名ではないので、Docker はこの名前から IP アドレスを解決しています。
+ この IP アドレスはこのコンテナーのものであって、ネットワークエイリアスを持っていたからです（前の手順において<code class="highlighter-rouge">--network-alias</code>フラグを用いたことを思い出してください）。</p>
 
     <p>これはどういうことでしょう...
- アプリとしては単にホスト名<code class="language-plaintext highlighter-rouge">mysql</code>に接続できて、データベースとやりとりができさえすればよいのです。
+ アプリとしては単にホスト名<code class="highlighter-rouge">mysql</code>に接続できて、データベースとやりとりができさえすればよいのです。
  こんな簡単にできるなんて。</p>
   </li>
 </ol>
@@ -286,10 +301,10 @@ Docker が名前つきボリュームが指定されたことを認識して、�
 それは以下のようなものです。</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">MYSQL_HOST</code> - 実行している MySQL サーバーのホスト名。</li>
-  <li><code class="language-plaintext highlighter-rouge">MYSQL_USER</code> - 接続に利用するユーザー名。</li>
-  <li><code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD</code> - 接続に利用するパスワード。</li>
-  <li><code class="language-plaintext highlighter-rouge">MYSQL_DB</code> - 接続後の利用データベース。</li>
+  <li><code class="highlighter-rouge">MYSQL_HOST</code> - 実行している MySQL サーバーのホスト名。</li>
+  <li><code class="highlighter-rouge">MYSQL_USER</code> - 接続に利用するユーザー名。</li>
+  <li><code class="highlighter-rouge">MYSQL_PASSWORD</code> - 接続に利用するパスワード。</li>
+  <li><code class="highlighter-rouge">MYSQL_DB</code> - 接続後の利用データベース。</li>
 </ul>
 
 <blockquote>
@@ -301,9 +316,9 @@ Docker の前セキュリティリーダー Diogo Monica 氏が <a href="https:/
 
   <p>コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
 たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
-多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に<code class="language-plaintext highlighter-rouge">_FILE</code>をつけて、変数を含んだファイルを指し示しているものがあります。</p>
+多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に<code class="highlighter-rouge">_FILE</code>をつけて、変数を含んだファイルを指し示しているものがあります。</p>
 
-  <p>たとえば<code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code>という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
+  <p>たとえば<code class="highlighter-rouge">MYSQL_PASSWORD_FILE</code>という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
 Docker はそういった変数の受け渡しをサポートする機能はありません。
 この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。</p>
 </blockquote>
@@ -311,16 +326,16 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
 <p>ここまで説明してきましたので、開発向けコンテナーを起動させましょう。</p>
 
 <ol>
-  <li><strong>メモ</strong>: MySQL バージョン 8.0 およびそれ以降では、<code class="language-plaintext highlighter-rouge">mysql</code>では以下のコマンドが含まれていることを確認してください。
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span><span class="w"> </span>ALTER USER <span class="s1">'root'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'secret'</span><span class="p">;</span>
-<span class="gp"> mysql&gt;</span><span class="w"> </span>flush privileges<span class="p">;</span>
+  <li><strong>メモ</strong>: MySQL バージョン 8.0 およびそれ以降では、<code class="highlighter-rouge">mysql</code>では以下のコマンドが含まれていることを確認してください。
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span> ALTER USER <span class="s1">'root'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'secret'</span><span class="p">;</span>
+<span class="gp"> mysql&gt;</span> flush privileges<span class="p">;</span>
 </code></pre></div>    </div>
   </li>
   <li>
     <p>上で説明した環境変数をそれぞれ設定して、コンテナーへの接続を通じてネットワークにアクセスします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
-   <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/app"</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
+   <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app"</span> <span class="se">\</span>
    <span class="nt">--network</span> todo-app <span class="se">\</span>
    <span class="nt">-e</span> <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">\</span>
    <span class="nt">-e</span> <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\</span>
@@ -332,21 +347,21 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
 
     <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
-</span><span class="w">   </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
-   --network todo-app </span><span class="se">`</span><span class="s2">
-   -e MYSQL_HOST=mysql </span><span class="se">`</span><span class="s2">
-   -e MYSQL_USER=root </span><span class="se">`</span><span class="s2">
-   -e MYSQL_PASSWORD=secret </span><span class="se">`</span><span class="s2">
-   -e MYSQL_DB=todos </span><span class="se">`</span><span class="s2">
-   node:12-alpine </span><span class="se">`</span><span class="s2">
-   sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
-</span></code></pre></div>    </div>
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">PS</span><span class="o">&gt;</span> docker run -dp 3000:3000 <span class="se">`</span>
+   -w /app -v <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app"</span> <span class="se">`</span>
+   --network todo-app <span class="se">`</span>
+   -e <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">`</span>
+   -e <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">`</span>
+   -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret <span class="se">`</span>
+   -e <span class="nv">MYSQL_DB</span><span class="o">=</span>todos <span class="se">`</span>
+   node:12-alpine <span class="se">`</span>
+   sh -c <span class="s2">"yarn install &amp;&amp; yarn run dev"</span>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>コンテナーのログ（<code class="language-plaintext highlighter-rouge">docker logs &lt;container-id&gt;</code>）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。</p>
+    <p>コンテナーのログ（<code class="highlighter-rouge">docker logs &lt;container-id&gt;</code>）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>nodemon src/index.js
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> nodemon src/index.js
 <span class="go"> [nodemon] 1.19.2
  [nodemon] to restart at any time, enter `rs`
  [nodemon] watching dir(s): *.*
@@ -362,12 +377,12 @@ Docker はそういった変数の受け渡しをサポートする機能はあ�
     <p>MySQL データベースに接続してみて、間違いなくアイテムがデータベースに書き込まれたことを確認します。
 パスワードは <strong>secret</strong> です。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-p</span> todos
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-p</span> todos
 </code></pre></div>    </div>
 
     <p>そして MySQL シェルから以下を実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span><span class="w"> </span><span class="k">select</span> <span class="k">*</span> from todo_items<span class="p">;</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> mysql&gt;</span> <span class="k">select</span> <span class="k">*</span> from todo_items<span class="p">;</span>
 <span class="go"> +--------------------------------------+--------------------+-----------+
  | id                                   | name               | completed |
  +--------------------------------------+--------------------+-----------+

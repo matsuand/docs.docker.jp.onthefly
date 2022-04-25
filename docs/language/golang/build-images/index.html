@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Go image | Docker ドキュメント</title>
   <meta name="description" content="Learn how to build your first Docker image by writing a Dockerfile" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Build your Go image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Build your Go image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/golang/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -147,9 +147,9 @@ file system objects required.</p>
 HTTP server that has only three features:</p>
 
 <ul>
-  <li>It responds with a text message containing a heart symbol (“&lt;3”) on requests to <code class="language-plaintext highlighter-rouge">/</code>.</li>
-  <li>It responds with <code class="language-plaintext highlighter-rouge">{"Status" : "OK"}</code> JSON to the health check request on requests to <code class="language-plaintext highlighter-rouge">/ping</code>.</li>
-  <li>The port it listens on is configurable using the environment variable <code class="language-plaintext highlighter-rouge">HTTP_PORT</code>. The default value is <code class="language-plaintext highlighter-rouge">8080</code>.</li>
+  <li>It responds with a text message containing a heart symbol (“&lt;3”) on requests to <code class="highlighter-rouge">/</code>.</li>
+  <li>It responds with <code class="highlighter-rouge">{"Status" : "OK"}</code> JSON to the health check request on requests to <code class="highlighter-rouge">/ping</code>.</li>
+  <li>The port it listens on is configurable using the environment variable <code class="highlighter-rouge">HTTP_PORT</code>. The default value is <code class="highlighter-rouge">8080</code>.</li>
 </ul>
 
 <p>Thus, it somewhat mimics enough basic properties of a REST microservice to be
@@ -160,45 +160,45 @@ GitHub repository. Please feel free to clone or fork it.</p>
 
 <p>For our present study, we clone it to our local machine:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone https://github.com/olliefr/docker-gs-ping
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git clone https://github.com/olliefr/docker-gs-ping
 </code></pre></div></div>
 
-<p>The application’s <code class="language-plaintext highlighter-rouge">main.go</code> file is fairly straightforward, if you are familiar
+<p>The application’s <code class="highlighter-rouge">main.go</code> file is fairly straightforward, if you are familiar
 with Go:</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
 
-<span class="k">import</span> <span class="p">(</span>
-	<span class="s">"net/http"</span>
-	<span class="s">"os"</span>
+</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+	</span><span class="s">"net/http"</span><span class="x">
+	</span><span class="s">"os"</span><span class="x">
 
-	<span class="s">"github.com/labstack/echo/v4"</span>
-	<span class="s">"github.com/labstack/echo/v4/middleware"</span>
-<span class="p">)</span>
+	</span><span class="s">"github.com/labstack/echo/v4"</span><span class="x">
+	</span><span class="s">"github.com/labstack/echo/v4/middleware"</span><span class="x">
+</span><span class="p">)</span><span class="x">
 
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 
-	<span class="n">e</span> <span class="o">:=</span> <span class="n">echo</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+	</span><span class="n">e</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">echo</span><span class="o">.</span><span class="n">New</span><span class="p">()</span><span class="x">
 
-	<span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Logger</span><span class="p">())</span>
-	<span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Recover</span><span class="p">())</span>
+	</span><span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Logger</span><span class="p">())</span><span class="x">
+	</span><span class="n">e</span><span class="o">.</span><span class="n">Use</span><span class="p">(</span><span class="n">middleware</span><span class="o">.</span><span class="n">Recover</span><span class="p">())</span><span class="x">
 
-	<span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="s">"Hello, Docker! &lt;3"</span><span class="p">)</span>
-	<span class="p">})</span>
+	</span><span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">c</span><span class="x"> </span><span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="k">return</span><span class="x"> </span><span class="n">c</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span><span class="x"> </span><span class="s">"Hello, Docker! &lt;3"</span><span class="p">)</span><span class="x">
+	</span><span class="p">})</span><span class="x">
 
-	<span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/ping"</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">c</span> <span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="k">struct</span><span class="p">{</span> <span class="n">Status</span> <span class="kt">string</span> <span class="p">}{</span><span class="n">Status</span><span class="o">:</span> <span class="s">"OK"</span><span class="p">})</span>
-	<span class="p">})</span>
+	</span><span class="n">e</span><span class="o">.</span><span class="n">GET</span><span class="p">(</span><span class="s">"/ping"</span><span class="p">,</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">c</span><span class="x"> </span><span class="n">echo</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="k">return</span><span class="x"> </span><span class="n">c</span><span class="o">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span><span class="x"> </span><span class="k">struct</span><span class="p">{</span><span class="x"> </span><span class="n">Status</span><span class="x"> </span><span class="kt">string</span><span class="x"> </span><span class="p">}{</span><span class="n">Status</span><span class="o">:</span><span class="x"> </span><span class="s">"OK"</span><span class="p">})</span><span class="x">
+	</span><span class="p">})</span><span class="x">
 
-	<span class="n">httpPort</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"HTTP_PORT"</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">httpPort</span> <span class="o">==</span> <span class="s">""</span> <span class="p">{</span>
-		<span class="n">httpPort</span> <span class="o">=</span> <span class="s">"8080"</span>
-	<span class="p">}</span>
+	</span><span class="n">httpPort</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"HTTP_PORT"</span><span class="p">)</span><span class="x">
+	</span><span class="k">if</span><span class="x"> </span><span class="n">httpPort</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="s">""</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">httpPort</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">"8080"</span><span class="x">
+	</span><span class="p">}</span><span class="x">
 
-	<span class="n">e</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">Start</span><span class="p">(</span><span class="s">":"</span> <span class="o">+</span> <span class="n">httpPort</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></div></div>
+	</span><span class="n">e</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">Start</span><span class="p">(</span><span class="s">":"</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">httpPort</span><span class="p">))</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
 
 <h2 id="smoke-test-the-application">Smoke test the application</h2>
 
@@ -206,13 +206,13 @@ with Go:</p>
 terminal and navigate to the directory into which you cloned the project’s repo.
 From now on, we’ll refer to this directory as the <strong>project directory</strong>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>go run main.go
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> go run main.go
 </code></pre></div></div>
 
 <p>This should compile and start the server as a foreground application, outputting
 the banner, as illustrated in the next figure.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ____    __
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \
 /___/\__/_//_/\___/ v4.2.2
@@ -224,10 +224,10 @@ ____________________________________O/_______
 </code></pre></div></div>
 
 <p>Let’s run a quick <em>smoke test</em> on the application. <strong>In a new terminal</strong>, run a
-request using <code class="language-plaintext highlighter-rouge">curl</code>. Alternatively, you can use your favourite web browser as
+request using <code class="highlighter-rouge">curl</code>. Alternatively, you can use your favourite web browser as
 well.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8080/
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl http://localhost:8080/
 <span class="go">Hello, Docker! &lt;3
 </span></code></pre></div></div>
 
@@ -240,27 +240,27 @@ to “dockerizing” it.</p>
 <h2 id="create-a-dockerfile-for-the-application">Create a Dockerfile for the application</h2>
 
 <p>Dockerfile とは、 Docker イメージを取得する命令を含んだテキストファイルのことです。
-Docker に対して<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
+Docker に対して<code class="highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
 
 <p>ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
-プロジェクトのルートディレクトリに<code class="language-plaintext highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
+プロジェクトのルートディレクトリに<code class="highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
 
 <blockquote>
   <p><strong>Dockerfile の名前を何にするか</strong></p>
 
-  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="language-plaintext highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
-このデフォルトファイル名を用いておけば、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
+  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
+このデフォルトファイル名を用いておけば、<code class="highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
 
   <p>プロジェクトによっては、特定の目的のため、Dockerfile に別名を与える場合があります。
-普通行われる慣例としては、<code class="language-plaintext highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
-このような Dockerfile は、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="language-plaintext highlighter-rouge">--file</code>オプション (その短縮形<code class="language-plaintext highlighter-rouge">-f</code>) を用いて指定します。
-<code class="language-plaintext highlighter-rouge">--file</code>オプションの利用方法については、<code class="language-plaintext highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
+普通行われる慣例としては、<code class="highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
+このような Dockerfile は、<code class="highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="highlighter-rouge">--file</code>オプション (その短縮形<code class="highlighter-rouge">-f</code>) を用いて指定します。
+<code class="highlighter-rouge">--file</code>オプションの利用方法については、<code class="highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
 
-  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="language-plaintext highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
+  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
 本ガイドに示すほとんどの例においては、この名前を用いています。</p>
 </blockquote>
 
-<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="language-plaintext highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
+<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
 これは <strong>任意の記述</strong> ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
 また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
 <a href="/docs.docker.jp.onthefly/engine/reference/builder/#parser-directives">パーサーディレクティブ</a> は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。</p>
@@ -268,7 +268,7 @@ Docker に対して<code class="language-plaintext highlighter-rouge">docker bui
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
+<p><code class="highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
 こうしておくと、常に文法バージョン 1 の最新リリース版を指し示すことになります。
 BuildKit は、ビルド処理の前に文法に更新がないかを自動的にチェックし、最新バージョンが用いられていることを確認します。</p>
 
@@ -286,7 +286,7 @@ and packages to compile and run a Go application. You can think of this in the
 same way you would think about class inheritance in object oriented programming
 or functional composition in functional programming.</p>
 
-<p>When we have used that <code class="language-plaintext highlighter-rouge">FROM</code> command, we told Docker to include in our image all the functionality from the <code class="language-plaintext highlighter-rouge">golang:1.16-alpine</code> image. All of our consequent commands would build on top of that “base” image.</p>
+<p>When we have used that <code class="highlighter-rouge">FROM</code> command, we told Docker to include in our image all the functionality from the <code class="highlighter-rouge">golang:1.16-alpine</code> image. All of our consequent commands would build on top of that “base” image.</p>
 
 <blockquote>
   <p><strong>Note</strong></p>
@@ -306,23 +306,23 @@ based on this directory.</p>
 <p>Usually the very first thing you do once you’ve downloaded a project written in
 Go is to install the modules necessary to compile it.</p>
 
-<p>But before we can run <code class="language-plaintext highlighter-rouge">go mod download</code> inside our image, we need to get our
-<code class="language-plaintext highlighter-rouge">go.mod</code> and <code class="language-plaintext highlighter-rouge">go.sum</code> files copied into it. We use the <code class="language-plaintext highlighter-rouge">COPY</code> command to do this.</p>
+<p>But before we can run <code class="highlighter-rouge">go mod download</code> inside our image, we need to get our
+<code class="highlighter-rouge">go.mod</code> and <code class="highlighter-rouge">go.sum</code> files copied into it. We use the <code class="highlighter-rouge">COPY</code> command to do this.</p>
 
-<p>In its simplest form, the <code class="language-plaintext highlighter-rouge">COPY</code> command takes two parameters. The first
+<p>In its simplest form, the <code class="highlighter-rouge">COPY</code> command takes two parameters. The first
 parameter tells Docker what files you want to copy into the image. The last
 parameter tells Docker where you want that file to be copied to.</p>
 
-<p>We’ll copy the <code class="language-plaintext highlighter-rouge">go.mod</code> and <code class="language-plaintext highlighter-rouge">go.sum</code> file into our project directory <code class="language-plaintext highlighter-rouge">/app</code> which,
-owing to our use of <code class="language-plaintext highlighter-rouge">WORKDIR</code>, is the current directory (<code class="language-plaintext highlighter-rouge">.</code>) inside the image.</p>
+<p>We’ll copy the <code class="highlighter-rouge">go.mod</code> and <code class="highlighter-rouge">go.sum</code> file into our project directory <code class="highlighter-rouge">/app</code> which,
+owing to our use of <code class="highlighter-rouge">WORKDIR</code>, is the current directory (<code class="highlighter-rouge">.</code>) inside the image.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> go.mod ./</span>
 <span class="k">COPY</span><span class="s"> go.sum ./</span>
 </code></pre></div></div>
 
 <p>Now that we have the module files inside the Docker image that we are building,
-we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">go mod download</code> there as
-well. This works exactly the same as if we were running <code class="language-plaintext highlighter-rouge">go</code> locally on our
+we can use the <code class="highlighter-rouge">RUN</code> command to execute the command <code class="highlighter-rouge">go mod download</code> there as
+well. This works exactly the same as if we were running <code class="highlighter-rouge">go</code> locally on our
 machine, but this time these Go modules will be installed into a directory
 inside the image.</p>
 
@@ -330,27 +330,27 @@ inside the image.</p>
 </code></pre></div></div>
 
 <p>At this point, we have an image that is based on Go environment version 1.16
-(or a later minor version, since we had specified <code class="language-plaintext highlighter-rouge">1.16</code> as our tag in the
-<code class="language-plaintext highlighter-rouge">FROM</code> command) and we have installed our dependencies.</p>
+(or a later minor version, since we had specified <code class="highlighter-rouge">1.16</code> as our tag in the
+<code class="highlighter-rouge">FROM</code> command) and we have installed our dependencies.</p>
 
 <p>The next thing we need to do is to copy our source code into the image. We’ll
-use the <code class="language-plaintext highlighter-rouge">COPY</code> command just like we did with our module files before.</p>
+use the <code class="highlighter-rouge">COPY</code> command just like we did with our module files before.</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> *.go ./</span>
 </code></pre></div></div>
 
-<p>This <code class="language-plaintext highlighter-rouge">COPY</code> command uses a wildcard to copy all files with <code class="language-plaintext highlighter-rouge">.go</code> extension
-located in the current directory on the host (the directory where the <code class="language-plaintext highlighter-rouge">Dockerfile</code>
+<p>This <code class="highlighter-rouge">COPY</code> command uses a wildcard to copy all files with <code class="highlighter-rouge">.go</code> extension
+located in the current directory on the host (the directory where the <code class="highlighter-rouge">Dockerfile</code>
 is located) into the current directory inside the image.</p>
 
 <p>Now, we would like to compile our application. To that end, we use the familiar
-<code class="language-plaintext highlighter-rouge">RUN</code> command:</p>
+<code class="highlighter-rouge">RUN</code> command:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>go build <span class="nt">-o</span> /docker-gs-ping
 </code></pre></div></div>
 
 <p>This should be familiar. The result of that command will be a static application
-binary named <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> and located in the root of the filesystem of the
+binary named <code class="highlighter-rouge">docker-gs-ping</code> and located in the root of the filesystem of the
 image that we are building. We could have put the binary into any other place we
 desire inside that image, the root directory has no special meaning in this
 regard. It’s just convenient to use it to keep the file paths short for improved
@@ -359,12 +359,12 @@ readability.</p>
 <p>Now, all that is left to do is to tell Docker what command to execute when our
 image is used to start a container.</p>
 
-<p>We do this with the <code class="language-plaintext highlighter-rouge">CMD</code> command:</p>
+<p>We do this with the <code class="highlighter-rouge">CMD</code> command:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "/docker-gs-ping" ]</span>
 </code></pre></div></div>
 
-<p>Here’s the complete <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
+<p>Here’s the complete <code class="highlighter-rouge">Dockerfile</code>:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 
@@ -385,10 +385,10 @@ image is used to start a container.</p>
 <span class="k">CMD</span><span class="s"> [ "/docker-gs-ping" ]</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">Dockerfile</code> may also contain <em>comments</em>. They always begin with a <code class="language-plaintext highlighter-rouge">#</code> symbol,
+<p>The <code class="highlighter-rouge">Dockerfile</code> may also contain <em>comments</em>. They always begin with a <code class="highlighter-rouge">#</code> symbol,
 and must be at the beginning of a line. Comments are there for your convenience
-to allow documenting your <code class="language-plaintext highlighter-rouge">Dockerfile</code>. Dockerfile <em>directives</em>, such as the
-<code class="language-plaintext highlighter-rouge">syntax</code> directive we added, must always be at the very top of the <code class="language-plaintext highlighter-rouge">Dockerfile</code>,
+to allow documenting your <code class="highlighter-rouge">Dockerfile</code>. Dockerfile <em>directives</em>, such as the
+<code class="highlighter-rouge">syntax</code> directive we added, must always be at the very top of the <code class="highlighter-rouge">Dockerfile</code>,
 so when adding comments, make sure they are after those directives:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
@@ -410,46 +410,46 @@ so when adding comments, make sure they are after those directives:</p>
 
 <h2 id="build-the-image">Build the image</h2>
 
-<p>Now that we’ve created our <code class="language-plaintext highlighter-rouge">Dockerfile</code>, let’s build an image from it. The
-<code class="language-plaintext highlighter-rouge">docker build</code> command creates Docker images from the <code class="language-plaintext highlighter-rouge">Dockerfile</code> and a “context”.
+<p>Now that we’ve created our <code class="highlighter-rouge">Dockerfile</code>, let’s build an image from it. The
+<code class="highlighter-rouge">docker build</code> command creates Docker images from the <code class="highlighter-rouge">Dockerfile</code> and a “context”.
 A build <em>context</em> is the set of files located in the specified path or URL. The
 Docker build process can access any of the files located in the context.</p>
 
-<p>The build command optionally takes a <code class="language-plaintext highlighter-rouge">--tag</code> flag. This flag is used to label
+<p>The build command optionally takes a <code class="highlighter-rouge">--tag</code> flag. This flag is used to label
 the image with a string value, which is easy for humans to read and recognise.
-If you do not pass a <code class="language-plaintext highlighter-rouge">--tag</code>, Docker will use <code class="language-plaintext highlighter-rouge">latest</code> as the default value.</p>
+If you do not pass a <code class="highlighter-rouge">--tag</code>, Docker will use <code class="highlighter-rouge">latest</code> as the default value.</p>
 
 <p>Let’s build our first Docker image!</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> docker-gs-ping <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> docker-gs-ping <span class="nb">.</span>
 <span class="go">
 [+] Building 3.6s (12/12) FINISHED
-</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile                                      0.1s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 38B                                                       0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                         0.1s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B                                                           0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/golang:1.16-alpine                     3.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>1/7] FROM docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> resolve docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context                                                         0.1s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 114B                                                         0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>2/7] WORKDIR /app                                                             0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>3/7] COPY go.mod <span class="nb">.</span>                                                            0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>4/7] COPY go.sum <span class="nb">.</span>                                                            0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>5/7] RUN go mod download                                                      0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>6/7] COPY <span class="k">*</span>.go <span class="nb">.</span>                                                              0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>7/7] RUN go build <span class="nt">-o</span> /docker-gs-ping                                          0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span>exporting to image                                                                    0.1s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers                                                                   0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:336a3f164d0f079f2e42cd1d38f24ab9110d47d481f1db7f2a0b0d2859ec  0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/library/docker-gs-ping                                         0.0s
+</span><span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                      0.1s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 38B                                                       0.0s
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                         0.1s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 2B                                                           0.0s
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/golang:1.16-alpine                     3.0s
+<span class="gp"> =&gt;</span> <span class="o">[</span>1/7] FROM docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> resolve docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build context                                                         0.1s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 114B                                                         0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>2/7] WORKDIR /app                                                             0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>3/7] COPY go.mod <span class="nb">.</span>                                                            0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>4/7] COPY go.sum <span class="nb">.</span>                                                            0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>5/7] RUN go mod download                                                      0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>6/7] COPY <span class="k">*</span>.go <span class="nb">.</span>                                                              0.0s
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>7/7] RUN go build <span class="nt">-o</span> /docker-gs-ping                                          0.0s
+<span class="gp"> =&gt;</span> exporting to image                                                                    0.1s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> exporting layers                                                                   0.0s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> writing image sha256:336a3f164d0f079f2e42cd1d38f24ab9110d47d481f1db7f2a0b0d2859ec  0.0s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/docker-gs-ping                                         0.0s
 <span class="go">
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 </span></code></pre></div></div>
 
 <p>Your exact output will vary, but provided there aren’t any errors, you should
-see the <code class="language-plaintext highlighter-rouge">FINISHED</code> line in the build output. This means Docker has successfully
-built our image and assigned a <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> tag to it.</p>
+see the <code class="highlighter-rouge">FINISHED</code> line in the build output. This means Docker has successfully
+built our image and assigned a <code class="highlighter-rouge">docker-gs-ping</code> tag to it.</p>
 
 <h2 id="view-local-images">View local images</h2>
 
@@ -458,17 +458,17 @@ is to use the CLI and the other is to use <a href="/docs.docker.jp.onthefly/desk
 Since we are currently working in the terminal, let’s take a look at listing
 images with the CLI.</p>
 
-<p>To list images, run the <code class="language-plaintext highlighter-rouge">docker image ls</code>command (or the <code class="language-plaintext highlighter-rouge">docker images</code> shorthand):</p>
+<p>To list images, run the <code class="highlighter-rouge">docker image ls</code>command (or the <code class="highlighter-rouge">docker images</code> shorthand):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image <span class="nb">ls</span>
 <span class="go">
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   39 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 </span></code></pre></div></div>
 
-<p>Your exact output may vary, but you should see <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> image with the
-<code class="language-plaintext highlighter-rouge">latest</code> tag.</p>
+<p>Your exact output may vary, but you should see <code class="highlighter-rouge">docker-gs-ping</code> image with the
+<code class="highlighter-rouge">latest</code> tag.</p>
 
 <h2 id="tag-images">Tag images</h2>
 
@@ -482,23 +482,23 @@ points to a combination of these artifacts. You can have multiple tags for the
 image and, in fact, most images have multiple tags. Let’s create a second tag
 for the image we had built and take a look at its layers.</p>
 
-<p>Use the <code class="language-plaintext highlighter-rouge">docker image tag</code> (or <code class="language-plaintext highlighter-rouge">docker tag</code> shorthand) command to create a new
+<p>Use the <code class="highlighter-rouge">docker image tag</code> (or <code class="highlighter-rouge">docker tag</code> shorthand) command to create a new
 tag for our image. This command takes two arguments; the first argument is the
 “source” image, and the second is the new tag to create. The following command
-creates a new <code class="language-plaintext highlighter-rouge">docker-gs-ping:v1.0</code> tag for the <code class="language-plaintext highlighter-rouge">docker-gs-ping:latest</code> we built
+creates a new <code class="highlighter-rouge">docker-gs-ping:v1.0</code> tag for the <code class="highlighter-rouge">docker-gs-ping:latest</code> we built
 above:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image tag docker-gs-ping:latest docker-gs-ping:v1.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image tag docker-gs-ping:latest docker-gs-ping:v1.0
 </code></pre></div></div>
 
-<p>The Docker <code class="language-plaintext highlighter-rouge">tag</code> command creates a new tag for the image. It does not create a
+<p>The Docker <code class="highlighter-rouge">tag</code> command creates a new tag for the image. It does not create a
 new image. The tag points to the same image and is just another way to reference
 the image.</p>
 
-<p>Now run the <code class="language-plaintext highlighter-rouge">docker image ls</code> command again to see the updated list of local
+<p>Now run the <code class="highlighter-rouge">docker image ls</code> command again to see the updated list of local
 images:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image <span class="nb">ls</span>
 <span class="go">
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   43 minutes ago   540MB
@@ -506,34 +506,34 @@ docker-gs-ping   v1.0      336a3f164d0f   43 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 </span></code></pre></div></div>
 
-<p>You can see that we have two images that start with <code class="language-plaintext highlighter-rouge">docker-gs-ping</code>. We know
-they are the same image because if you look at the <code class="language-plaintext highlighter-rouge">IMAGE ID</code> column, you can
+<p>You can see that we have two images that start with <code class="highlighter-rouge">docker-gs-ping</code>. We know
+they are the same image because if you look at the <code class="highlighter-rouge">IMAGE ID</code> column, you can
 see that the values are the same for the two images. This value is a unique
 identifier Docker uses internally to identify the image.</p>
 
 <p>Let’s remove the tag that we had just created. To do this, we’ll use the
-<code class="language-plaintext highlighter-rouge">docker image rm</code> command, or the shorthand <code class="language-plaintext highlighter-rouge">docker rmi</code> (which stands for
+<code class="highlighter-rouge">docker image rm</code> command, or the shorthand <code class="highlighter-rouge">docker rmi</code> (which stands for
 “remove image”):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">rm </span>docker-gs-ping:v1.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image rm docker-gs-ping:v1.0
 <span class="go">Untagged: docker-gs-ping:v1.0
 </span></code></pre></div></div>
 
 <p>Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image <span class="nb">ls</span>
 <span class="go">
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   45 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
 </span></code></pre></div></div>
 
-<p>The tag <code class="language-plaintext highlighter-rouge">v1.0</code> has been removed but we still have the <code class="language-plaintext highlighter-rouge">docker-gs-ping:latest</code>
+<p>The tag <code class="highlighter-rouge">v1.0</code> has been removed but we still have the <code class="highlighter-rouge">docker-gs-ping:latest</code>
 tag available on our machine, so the image is there.</p>
 
 <h2 id="multi-stage-builds">Multi-stage builds</h2>
 
-<p>You may have noticed that our <code class="language-plaintext highlighter-rouge">docker-gs-ping</code> image stands at 540MB, which you
+<p>You may have noticed that our <code class="highlighter-rouge">docker-gs-ping</code> image stands at 540MB, which you
 may think is a lot. You may also be wondering whether our dockerized application
 still needs the full suite of Go tools, including the compiler, after the
 application binary had been compiled.</p>
@@ -545,7 +545,7 @@ The main idea is that we use one image to produce some artefacts, which are then
 placed into another, much smaller image, containing only the parts necessary for
 running the artefacts that we’d built.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">Dockerfile.multistage</code> in the sample application’s repo has the following
+<p>The <code class="highlighter-rouge">Dockerfile.multistage</code> in the sample application’s repo has the following
 content:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
@@ -582,17 +582,17 @@ content:</p>
 </code></pre></div></div>
 
 <p>Since we have two dockerfiles now, we have to tell Docker that we want to build
-using our new Dockerfile. We also tag the new image with <code class="language-plaintext highlighter-rouge">multistage</code> but this
+using our new Dockerfile. We also tag the new image with <code class="highlighter-rouge">multistage</code> but this
 word has no special meaning, we only do so that we could compare this new image
-to the one we’ve built previously, that is the one we tagged with <code class="language-plaintext highlighter-rouge">latest</code>:</p>
+to the one we’ve built previously, that is the one we tagged with <code class="highlighter-rouge">latest</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> docker-gs-ping:multistage <span class="nt">-f</span> Dockerfile.multistage <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">-t</span> docker-gs-ping:multistage <span class="nt">-f</span> Dockerfile.multistage <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>Comparing the sizes of <code class="language-plaintext highlighter-rouge">docker-gs-ping:multistage</code> and <code class="language-plaintext highlighter-rouge">docker-gs-ping:latest</code>
+<p>Comparing the sizes of <code class="highlighter-rouge">docker-gs-ping:multistage</code> and <code class="highlighter-rouge">docker-gs-ping:latest</code>
 we see an order-of-magnitude difference!</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image <span class="nb">ls</span>
 <span class="go">
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
 docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
@@ -611,7 +611,7 @@ leave it at that.</p>
 <h2 id="next-steps">Next steps</h2>
 
 <p>In this module, we took a look at setting up our example Go application that we
-will use for much of the rest of the tutorial. We also created a <code class="language-plaintext highlighter-rouge">Dockerfile</code>
+will use for much of the rest of the tutorial. We also created a <code class="highlighter-rouge">Dockerfile</code>
 that we used to build our Docker image. Then, we took a look at tagging our
 images and removing images and tags. In the next module, we’ll take a look at
 how to:</p>

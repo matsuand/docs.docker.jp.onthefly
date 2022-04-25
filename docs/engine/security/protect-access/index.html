@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker デーモンソケットの保護 | Docker ドキュメント</title>
   <meta name="description" content="SSH や HTTPS により Docker を設定し実行します。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker デーモンソケットの保護" />
   <meta property="og:description" content="SSH や HTTPS により Docker を設定し実行します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/protect-access/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker デーモンソケットの保護","description":"SSH や HTTPS により Docker を設定し実行します。","url":"https://docs.docker.com/engine/security/protect-access/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a>本番環境でのアプリ運用</a></li><li><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/">コンテナーの設定</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/protect-access/">Docker デーモンソケットの保護</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/protect-access/">Docker デーモンソケットの保護</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker デーモンソケットの保護</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
+                        <section class="section"><h1>Docker デーモンソケットの保護</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
 SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできます。</p>
 
 <h2 id="use-ssh-to-protect-the-docker-daemon-socket">SSH を用いた Docker デーモンソケットの保護</h2>
@@ -115,14 +115,14 @@ SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできま�
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>説明に用いる<code class="language-plaintext highlighter-rouge">USERNAME</code>は、リモートマシン上において Docker ソケットにアクセスする権限を持っていなければなりません。
+  <p>説明に用いる<code class="highlighter-rouge">USERNAME</code>は、リモートマシン上において Docker ソケットにアクセスする権限を持っていなければなりません。
 root ではないユーザーにより Docker ソケットへアクセスする方法に関しては <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">root ユーザー以外で Docker を管理する</a> を参照してください。</p>
 </blockquote>
 
-<p>以下の例では <a href="/docs.docker.jp.onthefly/engine/context/working-with-contexts/"><code class="language-plaintext highlighter-rouge">docker context</code></a> を生成し、リモートホスト<code class="language-plaintext highlighter-rouge">host1.example.com</code>上の<code class="language-plaintext highlighter-rouge">dockerd</code>デーモンに対して SSH を使って接続します。
-その際にはリモートホスト上のユーザー<code class="language-plaintext highlighter-rouge">docker-user</code>によりアクセスします。</p>
+<p>以下の例では <a href="/docs.docker.jp.onthefly/engine/context/working-with-contexts/"><code class="highlighter-rouge">docker context</code></a> を生成し、リモートホスト<code class="highlighter-rouge">host1.example.com</code>上の<code class="highlighter-rouge">dockerd</code>デーモンに対して SSH を使って接続します。
+その際にはリモートホスト上のユーザー<code class="highlighter-rouge">docker-user</code>によりアクセスします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker context create <span class="se">\</span>
     <span class="nt">--docker</span> <span class="nv">host</span><span class="o">=</span>ssh://docker-user@host1.example.com <span class="se">\</span>
     <span class="nt">--description</span><span class="o">=</span><span class="s2">"Remote engine"</span> <span class="se">\</span>
     my-remote-engine
@@ -131,45 +131,45 @@ my-remote-engine
 Successfully created context "my-remote-engine"
 </span></code></pre></div></div>
 
-<p>コンテキストを生成したら、<code class="language-plaintext highlighter-rouge">docker context use</code>を実行して<code class="language-plaintext highlighter-rouge">docker</code> CLI がこれを用いるようにします。
+<p>コンテキストを生成したら、<code class="highlighter-rouge">docker context use</code>を実行して<code class="highlighter-rouge">docker</code> CLI がこれを用いるようにします。
 そしてリモートエンジンにアクセスします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context use my-remote-engine
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker context use my-remote-engine
 <span class="go">my-remote-engine
 Current context is now "my-remote-engine"
 
-</span><span class="gp">$</span><span class="w"> </span>docker info
-<span class="gp">&lt;リモートエンジンに関する情報の出力&gt;</span><span class="w">
-</span></code></pre></div></div>
+</span><span class="gp">$</span> docker info
+<span class="gp">&lt;リモートエンジンに関する情報の出力&gt;</span>
+</code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">default</code>コンテキストを用いると、デフォルトの（ローカルの）デーモンに切り替わります。</p>
+<p><code class="highlighter-rouge">default</code>コンテキストを用いると、デフォルトの（ローカルの）デーモンに切り替わります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context use default
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker context use default
 <span class="go">default
 Current context is now "default"
 </span></code></pre></div></div>
 
-<p>あるいは環境変数<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>を用いることで、<code class="language-plaintext highlighter-rouge">docker</code> CLI によりリモートホストへの SSH 接続設定を一時的に切り替えることもできます。
+<p>あるいは環境変数<code class="highlighter-rouge">DOCKER_HOST</code>を用いることで、<code class="highlighter-rouge">docker</code> CLI によりリモートホストへの SSH 接続設定を一時的に切り替えることもできます。
 この場合はコンテキストを生成する必要がなく、接続切り替えを簡単にできるので便利です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>ssh://docker-user@host1.example.com
-<span class="gp">$</span><span class="w"> </span>docker info
-<span class="gp">&lt;リモートエンジンに関する情報の出力&gt;</span><span class="w">
-</span></code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>ssh://docker-user@host1.example.com
+<span class="gp">$</span> docker info
+<span class="gp">&lt;リモートエンジンに関する情報の出力&gt;</span>
+</code></pre></div></div>
 
 <h3 id="ssh-tips">SSH に関するヒント</h3>
 
-<p>SSH の利用を最大限活用するには、以下のようにして<code class="language-plaintext highlighter-rouge">~/.ssh/config</code>を設定します。
-これは、何度も呼び出される<code class="language-plaintext highlighter-rouge">docker</code> CLI コマンドに対して、SSH 接続を再利用するものです。</p>
+<p>SSH の利用を最大限活用するには、以下のようにして<code class="highlighter-rouge">~/.ssh/config</code>を設定します。
+これは、何度も呼び出される<code class="highlighter-rouge">docker</code> CLI コマンドに対して、SSH 接続を再利用するものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ControlMaster     auto
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ControlMaster     auto
 ControlPath       ~/.ssh/control-%C
 ControlPersist    yes
 </code></pre></div></div>
 
 <h2 id="use-tls-https-to-protect-the-docker-daemon-socket">TLS (HTTPS) を使った Docker デーモンソケットの保護</h2>
 
-<p>Docker がネットワークから接続される際に SSH でなく HTTP を用いて安全性を確保するには、<code class="language-plaintext highlighter-rouge">tlsverify</code>フラグを指定して TLS（HTTPS）を有効にし、<code class="language-plaintext highlighter-rouge">tlscacert</code>フラグを使って信頼された CA 証明書を指定します。</p>
+<p>Docker がネットワークから接続される際に SSH でなく HTTP を用いて安全性を確保するには、<code class="highlighter-rouge">tlsverify</code>フラグを指定して TLS（HTTPS）を有効にし、<code class="highlighter-rouge">tlscacert</code>フラグを使って信頼された CA 証明書を指定します。</p>
 
 <p>デーモンモードにおいては、CA によって署名された証明書を用いて認証されたクライアントからのみ、接続を許可します。
 クライアントモードでは、その CA によって署名された証明書を利用するサーバーに対してのみ、接続を可能にします。</p>
@@ -185,12 +185,12 @@ ControlPersist    yes
 
 <blockquote>
   <p><strong>メモ</strong>:
-以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
+以下に示す例において<code class="highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
 <p>まず <strong>Docker デーモンが起動するホストマシン</strong> において、CA 秘密鍵と公開鍵を生成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-aes256</span> <span class="nt">-out</span> ca-key.pem 4096
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> openssl genrsa <span class="nt">-aes256</span> <span class="nt">-out</span> ca-key.pem 4096
 <span class="go">Generating RSA private key, 4096 bit long modulus
 ..............................................................................++
 ........++
@@ -198,7 +198,7 @@ e is 65537 (0x10001)
 Enter pass phrase for ca-key.pem:
 Verifying - Enter pass phrase for ca-key.pem:
 
-</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-new</span> <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-key</span> ca-key.pem <span class="nt">-sha256</span> <span class="nt">-out</span> ca.pem
+</span><span class="gp">$</span> openssl req <span class="nt">-new</span> <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-key</span> ca-key.pem <span class="nt">-sha256</span> <span class="nt">-out</span> ca.pem
 <span class="go">Enter pass phrase for ca-key.pem:
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
@@ -222,34 +222,34 @@ Organizational Unit Name (eg, section) []:Sales
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
+  <p>以下に示す例において<code class="highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> server-key.pem 4096
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> openssl genrsa <span class="nt">-out</span> server-key.pem 4096
 <span class="go">Generating RSA private key, 4096 bit long modulus
 .....................................................................++
 .................................................................................................++
 e is 65537 (0x10001)
 
-</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-subj</span> <span class="s2">"/CN=</span><span class="nv">$HOST</span><span class="s2">"</span> <span class="nt">-sha256</span> <span class="nt">-new</span> <span class="nt">-key</span> server-key.pem <span class="nt">-out</span> server.csr
+</span><span class="gp">$</span> openssl req <span class="nt">-subj</span> <span class="s2">"/CN=</span><span class="nv">$HOST</span><span class="s2">"</span> <span class="nt">-sha256</span> <span class="nt">-new</span> <span class="nt">-key</span> server-key.pem <span class="nt">-out</span> server.csr
 </code></pre></div></div>
 
 <p>次に公開鍵を CA を使って署名します。</p>
 
 <p>TLS 接続は DNS 名だけでなく IP アドレスを使っても行われるため、証明書の生成時には IP アドレスが必要になります。
-たとえば<code class="language-plaintext highlighter-rouge">10.10.10.20</code>と<code class="language-plaintext highlighter-rouge">127.0.0.1</code>を使って接続を許可するには、以下のようにします。</p>
+たとえば<code class="highlighter-rouge">10.10.10.20</code>と<code class="highlighter-rouge">127.0.0.1</code>を使って接続を許可するには、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo </span>subjectAltName <span class="o">=</span> DNS:<span class="nv">$HOST</span>,IP:10.10.10.20,IP:127.0.0.1 <span class="o">&gt;&gt;</span> extfile.cnf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">echo </span>subjectAltName <span class="o">=</span> DNS:<span class="nv">$HOST</span>,IP:10.10.10.20,IP:127.0.0.1 <span class="o">&gt;&gt;</span> extfile.cnf
 </code></pre></div></div>
 
 <p>Docker デーモンの拡張属性は、サーバー認証に対してのみ利用するものとして設定します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = serverAuth &gt;&gt; extfile.cnf
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = serverAuth &gt;&gt; extfile.cnf
 </code></pre></div></div>
 
 <p>そこで署名された証明書を生成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> server.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> server.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
   <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> server-cert.pem <span class="nt">-extfile</span> extfile.cnf
 <span class="go">Signature ok
 subject=/CN=your.host.com
@@ -266,23 +266,23 @@ Enter pass phrase for ca-key.pem:
   <p><strong>メモ</strong>: ここから続く手順を簡単にするために、以下の手順は Docker デーモンが稼動するホストマシン上で行ってもかまいません。</p>
 </blockquote>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> key.pem 4096
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> openssl genrsa <span class="nt">-out</span> key.pem 4096
 <span class="go">Generating RSA private key, 4096 bit long modulus
 .........................................................++
 ................++
 e is 65537 (0x10001)
 
-</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-subj</span> <span class="s1">'/CN=client'</span> <span class="nt">-new</span> <span class="nt">-key</span> key.pem <span class="nt">-out</span> client.csr
+</span><span class="gp">$</span> openssl req <span class="nt">-subj</span> <span class="s1">'/CN=client'</span> <span class="nt">-new</span> <span class="nt">-key</span> key.pem <span class="nt">-out</span> client.csr
 </code></pre></div></div>
 
 <p>生成した鍵をクライアント認証用とするために、新たな拡張設定ファイルを生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = clientAuth &gt; extfile-client.cnf
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = clientAuth &gt; extfile-client.cnf
 </code></pre></div></div>
 
 <p>そこで署名された証明書を生成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> client.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> client.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
   <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> cert.pem <span class="nt">-extfile</span> extfile-client.cnf
 <span class="go">Signature ok
 subject=/CN=client
@@ -290,28 +290,28 @@ Getting CA Private Key
 Enter pass phrase for ca-key.pem:
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">cert.pem</code>と<code class="language-plaintext highlighter-rouge">server-cert.pem</code>を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。</p>
+<p><code class="highlighter-rouge">cert.pem</code>と<code class="highlighter-rouge">server-cert.pem</code>を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-v</span> client.csr server.csr extfile.cnf extfile-client.cnf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> rm <span class="nt">-v</span> client.csr server.csr extfile.cnf extfile-client.cnf
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">umask</code>をデフォルトの 022 のまま使ってしまうと、秘密鍵は <strong>誰もが読み込み可能</strong> となり、また所有者とグループが書き込み可能となってしまいます。</p>
+<p><code class="highlighter-rouge">umask</code>をデフォルトの 022 のまま使ってしまうと、秘密鍵は <strong>誰もが読み込み可能</strong> となり、また所有者とグループが書き込み可能となってしまいます。</p>
 
 <p>秘密鍵を保護し、予期しない被害を受けないために、書き込み権限は削除してください。
 読み込み権限は所有者のみとするように、以下のようにしてファイルモードの変更を行います。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> <span class="nt">-v</span> 0400 ca-key.pem key.pem server-key.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> chmod <span class="nt">-v</span> 0400 ca-key.pem key.pem server-key.pem
 </code></pre></div></div>
 
 <p>証明書は誰でも読み込めるようにするのでもかまいません。
 ただし書き込み権限は、被害を避ける意味で削除するようにしてください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> <span class="nt">-v</span> 0444 ca.pem server-cert.pem cert.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> chmod <span class="nt">-v</span> 0444 ca.pem server-cert.pem cert.pem
 </code></pre></div></div>
 
 <p>このようにして Docker デーモンが接続を受け入れるクライアントは、CA に信頼された証明書を利用するクライアントのみとすることができました。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd <span class="se">\</span>
     <span class="nt">--tlsverify</span> <span class="se">\</span>
     <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="se">\</span>
     <span class="nt">--tlscert</span><span class="o">=</span>server-cert.pem <span class="se">\</span>
@@ -331,10 +331,10 @@ Enter pass phrase for ca-key.pem:
 
 <blockquote>
   <p><strong>メモ</strong>:
-以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
+以下に示す例において<code class="highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nt">--tlsverify</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker <span class="nt">--tlsverify</span> <span class="se">\</span>
     <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="se">\</span>
     <span class="nt">--tlscert</span><span class="o">=</span>cert.pem <span class="se">\</span>
     <span class="nt">--tlskey</span><span class="o">=</span>key.pem <span class="se">\</span>
@@ -349,26 +349,26 @@ Enter pass phrase for ca-key.pem:
 
 <blockquote class="warning">
   <p><strong>警告</strong>
-上の例に示したように、証明書認証操作を行う際の<code class="language-plaintext highlighter-rouge">docker</code>クライアント実行において<code class="language-plaintext highlighter-rouge">sudo</code>を使ったり<code class="language-plaintext highlighter-rouge">docker</code>グループに属していたりする必要はありません。
+上の例に示したように、証明書認証操作を行う際の<code class="highlighter-rouge">docker</code>クライアント実行において<code class="highlighter-rouge">sudo</code>を使ったり<code class="highlighter-rouge">docker</code>グループに属していたりする必要はありません。
 つまり鍵を使うのであれば、Docker デーモンに対して指示を出すのは、デーモンホストのマシンに root 権限を持っていれば誰でもよいということです。
 したがってこの鍵データは root パスワードと同じように、しっかりと管理してください。</p>
 </blockquote>
 
 <h3 id="secure-by-default">セキュアな接続のデフォルト設定</h3>
 
-<p>Docker クライアント接続を、デフォルトで安全なものとしたい場合は、ホームディレクトリ内の<code class="language-plaintext highlighter-rouge">.docker</code>ディレクトリに、各ファイルを移動させます。
-これに合わせて<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>と<code class="language-plaintext highlighter-rouge">DOCKER_TLS_VERIFY</code>の変数も設定します
-（これはコマンド実行時に<code class="language-plaintext highlighter-rouge">-H=tcp://$HOST:2376</code>と<code class="language-plaintext highlighter-rouge">--tlsverify</code>を指定しない代わりとして行うものです）。</p>
+<p>Docker クライアント接続を、デフォルトで安全なものとしたい場合は、ホームディレクトリ内の<code class="highlighter-rouge">.docker</code>ディレクトリに、各ファイルを移動させます。
+これに合わせて<code class="highlighter-rouge">DOCKER_HOST</code>と<code class="highlighter-rouge">DOCKER_TLS_VERIFY</code>の変数も設定します
+（これはコマンド実行時に<code class="highlighter-rouge">-H=tcp://$HOST:2376</code>と<code class="highlighter-rouge">--tlsverify</code>を指定しない代わりとして行うものです）。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-pv</span> ~/.docker
-<span class="gp">$</span><span class="w"> </span><span class="nb">cp</span> <span class="nt">-v</span> <span class="o">{</span>ca,cert,key<span class="o">}</span>.pem ~/.docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir <span class="nt">-pv</span> ~/.docker
+<span class="gp">$</span> cp <span class="nt">-v</span> <span class="o">{</span>ca,cert,key<span class="o">}</span>.pem ~/.docker
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>tcp://<span class="nv">$HOST</span>:2376 <span class="nv">DOCKER_TLS_VERIFY</span><span class="o">=</span>1
+</span><span class="gp">$</span> <span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>tcp://<span class="nv">$HOST</span>:2376 <span class="nv">DOCKER_TLS_VERIFY</span><span class="o">=</span>1
 </code></pre></div></div>
 
 <p>Docker はデフォルトで安全な接続を行うようになります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps
 </code></pre></div></div>
 
 <h3 id="other-modes">その他のモード</h3>
@@ -378,32 +378,32 @@ Enter pass phrase for ca-key.pem:
 <h4 id="daemon-modes">デーモンモード</h4>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">tlsverify</code>、<code class="language-plaintext highlighter-rouge">tlscacert</code>、<code class="language-plaintext highlighter-rouge">tlscert</code>、<code class="language-plaintext highlighter-rouge">tlskey</code>の各設定は、クライアント認証を行います。</li>
-  <li><code class="language-plaintext highlighter-rouge">tls</code>、<code class="language-plaintext highlighter-rouge">tlscert</code>、<code class="language-plaintext highlighter-rouge">tlskey</code>はクライアント認証を行いません。</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code>の各設定は、クライアント認証を行います。</li>
+  <li><code class="highlighter-rouge">tls</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code>はクライアント認証を行いません。</li>
 </ul>
 
 <h4 id="client-modes">クライアントモード</h4>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">tls</code>は、公開またはデフォルトの CA プールに基づくサーバーを認証します。</li>
-  <li><code class="language-plaintext highlighter-rouge">tlsverify</code>、<code class="language-plaintext highlighter-rouge">tlscacert</code>は、指定された CA に基づくサーバーを認証します。</li>
-  <li><code class="language-plaintext highlighter-rouge">tls</code>、<code class="language-plaintext highlighter-rouge">tlscert</code><code class="language-plaintext highlighter-rouge">、</code>tlskey`は、クライアント証明書を使って認証します。指定の CA に基づたサーバー認証は行いません。</li>
-  <li><code class="language-plaintext highlighter-rouge">tlsverify</code>、<code class="language-plaintext highlighter-rouge">tlscacert</code>、<code class="language-plaintext highlighter-rouge">tlscert</code>、<code class="language-plaintext highlighter-rouge">tlskey</code>は、クライアント証明書を使って認証します。
+  <li><code class="highlighter-rouge">tls</code>は、公開またはデフォルトの CA プールに基づくサーバーを認証します。</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code>は、指定された CA に基づくサーバーを認証します。</li>
+  <li><code class="highlighter-rouge">tls</code>、<code class="highlighter-rouge">tlscert</code><code class="highlighter-rouge">、</code>tlskey`は、クライアント証明書を使って認証します。指定の CA に基づたサーバー認証は行いません。</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code>は、クライアント証明書を使って認証します。
 そして指定の CA に基づいたサーバー認証を行います。</li>
 </ul>
 
-<p>クライアントに証明書があればクライアントはそれを送信するので、鍵データは<code class="language-plaintext highlighter-rouge">~/.docker/{ca,cert,key}.pem</code>に配置しておくことが必要です。
-あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数<code class="language-plaintext highlighter-rouge">DOCKER_CERT_PATH</code>にそのディレクトリを指定します。</p>
+<p>クライアントに証明書があればクライアントはそれを送信するので、鍵データは<code class="highlighter-rouge">~/.docker/{ca,cert,key}.pem</code>に配置しておくことが必要です。
+あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数<code class="highlighter-rouge">DOCKER_CERT_PATH</code>にそのディレクトリを指定します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CERT_PATH</span><span class="o">=</span>~/.docker/zone1/
-<span class="gp">$</span><span class="w"> </span>docker <span class="nt">--tlsverify</span> ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">DOCKER_CERT_PATH</span><span class="o">=</span>~/.docker/zone1/
+<span class="gp">$</span> docker <span class="nt">--tlsverify</span> ps
 </code></pre></div></div>
 
-<h4 id="connecting-to-the-secure-docker-port-using-curl"><code class="language-plaintext highlighter-rouge">curl</code>を用いたセキュアな Docker ポートへの接続</h4>
+<h4 id="connecting-to-the-secure-docker-port-using-curl"><code class="highlighter-rouge">curl</code>を用いたセキュアな Docker ポートへの接続</h4>
 
-<p><code class="language-plaintext highlighter-rouge">curl</code>を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。</p>
+<p><code class="highlighter-rouge">curl</code>を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl https://<span class="nv">$HOST</span>:2376/images/json <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl https://<span class="nv">$HOST</span>:2376/images/json <span class="se">\</span>
   <span class="nt">--cert</span> ~/.docker/cert.pem <span class="se">\</span>
   <span class="nt">--key</span> ~/.docker/key.pem <span class="se">\</span>
   <span class="nt">--cacert</span> ~/.docker/ca.pem

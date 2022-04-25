@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure CI/CD for your application | Docker ドキュメント</title>
   <meta name="description" content="Learn how to Configure CI/CD for your application" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Configure CI/CD for your application" />
   <meta property="og:description" content="Learn how to Configure CI/CD for your application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Configure CI/CD for your application","description":"Learn how to Configure CI/CD for your application","url":"https://docs.docker.com/language/java/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -141,7 +141,7 @@
     <p>Add your Docker ID as a secret to GitHub. Navigate to your GitHub repository and click <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong>.</p>
   </li>
   <li>
-    <p>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</p>
+    <p>Create a new secret with the name <code class="highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</p>
   </li>
   <li>
     <p>Create a new Personal Access Token (PAT). To create a new token, go to <a href="https://hub.docker.com/settings/security">Docker Hub Settings</a> and then click <strong>New Access Token</strong>.</p>
@@ -152,7 +152,7 @@
     <p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-access-token.png" alt="New access token" width="500px" /></p>
   </li>
   <li>
-    <p>Now, add this Personal Access Token (PAT) as a second secret into the GitHub secrets UI with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code>.</p>
+    <p>Now, add this Personal Access Token (PAT) as a second secret into the GitHub secrets UI with the name <code class="highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code>.</p>
 
     <p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
   </li>
@@ -167,7 +167,7 @@
   <li>The second one is the build and push action.</li>
 </ol>
 
-<p>In this example, let us set the push flag to <code class="language-plaintext highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
+<p>In this example, let us set the push flag to <code class="highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
 
 <p>To set up the workflow:</p>
 
@@ -196,7 +196,7 @@
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
 </code></pre></div></div>
 
-<p>Now, we can add the steps required. The first one checks-out our repository under <code class="language-plaintext highlighter-rouge">$GITHUB_WORKSPACE</code>, so our workflow can access it. The second is to use our PAT and username to log into Docker Hub. The third is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup</p>
+<p>Now, we can add the steps required. The first one checks-out our repository under <code class="highlighter-rouge">$GITHUB_WORKSPACE</code>, so our workflow can access it. The second is to use our PAT and username to log into Docker Hub. The third is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
 
@@ -248,7 +248,7 @@
           <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
           <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
           <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">${{ runner.os }}-buildx-</span>
+            <span class="no">${{ runner.os }}-buildx-</span>
 </code></pre></div></div>
 
 <p>And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:</p>
@@ -299,10 +299,10 @@ Using the cache we set up earlier for it to store to and to retrieve</p>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">v*.*.*"</span>
 </code></pre></div></div>
 
-<p>This ensures that the main CI will only trigger if we tag our commits with <code class="language-plaintext highlighter-rouge">V.n.n.n.</code> Let’s test this. For example, run the following command:</p>
+<p>This ensures that the main CI will only trigger if we tag our commits with <code class="highlighter-rouge">V.n.n.n.</code> Let’s test this. For example, run the following command:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git tag <span class="nt">-a</span> v1.0.2
-<span class="gp">$</span><span class="w"> </span>git push origin v1.0.2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git tag <span class="nt">-a</span> v1.0.2
+<span class="gp">$</span> git push origin v1.0.2
 </code></pre></div></div>
 
 <p>Now, go to GitHub and check your Actions</p>
@@ -327,7 +327,7 @@ Next, change your Docker Hub login to a GitHub container registry login:</p>
           <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
-<p>To authenticate against the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a>, use the <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a> for the best security and experience.</p>
+<p>To authenticate against the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a>, use the <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="highlighter-rouge">GITHUB_TOKEN</code></a> for the best security and experience.</p>
 
 <p>You may need to <a href="https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio">manage write and read access of GitHub Actions</a> for repositories in the container settings.</p>
 
@@ -345,31 +345,31 @@ Remember to change how the image is tagged. The following example keeps ‘lates
 
 <p>Now, let’s take a look at the Dockerfile and see how we can optimize it to work in development, as well as get smaller images to run containers in production. As this is the last step in the file, it will be used by default to build the image when you run a docker build without specifying the target:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> java-docker <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> java-docker <span class="nb">.</span>
 <span class="go">docker build --tag java-docker .
 
 [+] Building 1.2s (15/15) FINISHED
-</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 37B
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/openjdk:11-jre-slim
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/openjdk:16-alpine3.13
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 11.48kB
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>production 1/2] FROM docker.io/library/openjdk:11-jre-slim@sha256:85795599f4c765182c414a1eb4e272841e18e2f267ce5010ea6a266f7f26e7f6
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>base 1/6] FROM docker.io/library/openjdk:16-alpine3.13@sha256:49d822f4fa4deb5f9d0201ffeec9f4d113bcb4e7e49bd6bc063d3ba93aacbcae
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>base 2/6] WORKDIR /app
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>base 3/6] COPY .mvn/ .mvn
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>base 4/6] COPY mvnw pom.xml ./
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>base 5/6] RUN ./mvnw dependency:go-offline
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>base 6/6] COPY src ./src
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>build 1/1] RUN ./mvnw package
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>production 2/2] COPY <span class="nt">--from</span><span class="o">=</span>build /app/target/spring-petclinic-<span class="k">*</span>.jar /spring-petclinic.jar
-<span class="gp"> =&gt;</span><span class="w"> </span>exporting to image
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:c17469b9e2f30537060f48bbe5d9d22003dd35edef7092348824a2438101ab3a
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/library/java-docker
+</span><span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 37B
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load .dockerignore
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/openjdk:11-jre-slim
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/openjdk:16-alpine3.13
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build context
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 11.48kB
+<span class="gp"> =&gt;</span> <span class="o">[</span>production 1/2] FROM docker.io/library/openjdk:11-jre-slim@sha256:85795599f4c765182c414a1eb4e272841e18e2f267ce5010ea6a266f7f26e7f6
+<span class="gp"> =&gt;</span> <span class="o">[</span>base 1/6] FROM docker.io/library/openjdk:16-alpine3.13@sha256:49d822f4fa4deb5f9d0201ffeec9f4d113bcb4e7e49bd6bc063d3ba93aacbcae
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>base 2/6] WORKDIR /app
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>base 3/6] COPY .mvn/ .mvn
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>base 4/6] COPY mvnw pom.xml ./
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>base 5/6] RUN ./mvnw dependency:go-offline
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>base 6/6] COPY src ./src
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>build 1/1] RUN ./mvnw package
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>production 2/2] COPY <span class="nt">--from</span><span class="o">=</span>build /app/target/spring-petclinic-<span class="k">*</span>.jar /spring-petclinic.jar
+<span class="gp"> =&gt;</span> exporting to image
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> exporting layers
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> writing image sha256:c17469b9e2f30537060f48bbe5d9d22003dd35edef7092348824a2438101ab3a
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/java-docker
 </code></pre></div></div>
 
 <p>The second interesting point is that this step doesn’t take the base target or a JDK image as reference. Instead, it uses a Java Runtime Environment image.
@@ -387,9 +387,9 @@ Note that you don’t need a large image with all the development dependencies t
 
 <p>The production image built in this way only contains a runtime environment with the final application archive, just what you need to start your Spring Pet Clinic application.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> java-docker:jdk <span class="nb">.</span> <span class="nt">--target</span> development
-<span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> java-docker:jre <span class="nb">.</span>
-<span class="gp">$</span><span class="w">  </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> java-docker:jdk <span class="nb">.</span> <span class="nt">--target</span> development
+<span class="gp">$</span> docker build <span class="nt">--tag</span> java-docker:jre <span class="nb">.</span>
+<span class="gp">$</span>  docker images
 <span class="go">REPOSITORY       TAG        IMAGE ID         CREATED        SIZE
 java-docker      jre        c17469b9e2f3     3 hours ago    270MB
 java-docker      jdk        4c15436d8ab7     5 hours ago    567MB

@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker デーモンの設定とトラブルシュート | Docker ドキュメント</title>
   <meta name="description" content="Docker デーモンの設定とトラブルシュート" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker デーモンの設定とトラブルシュート" />
   <meta property="og:description" content="Docker デーモンの設定とトラブルシュート" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker デーモンの設定とトラブルシュート","description":"Docker デーモンの設定とトラブルシュート","url":"https://docs.docker.com/config/daemon/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker デーモンの設定とトラブルシュート</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>Docker を正常にインストールし Docker を起動すると、<code class="language-plaintext highlighter-rouge">dockerd</code>というデーモンがデフォルト設定により起動します。
+                        <section class="section"><h1>Docker デーモンの設定とトラブルシュート</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Docker を正常にインストールし Docker を起動すると、<code class="highlighter-rouge">dockerd</code>というデーモンがデフォルト設定により起動します。
 ここではその設定のカスタマイズ方法、デーモンの手動起動、問題発生時のトラブルシュートやデバッグについて示します。</p>
 
 <h2 id="start-the-daemon-using-operating-system-utilities">OS ユーティリティーによるデーモンの起動</h2>
@@ -121,19 +121,19 @@
 
 <h2 id="start-the-daemon-manually">デーモンの手動起動</h2>
 
-<p>Docker デーモンをシステムユーティリティーによって管理することが望ましくない場合、あるいは何かをすぐにテストしたいといった場合、<code class="language-plaintext highlighter-rouge">dockerd</code>コマンドを利用してデーモンを手動起動することができます。
-このときには<code class="language-plaintext highlighter-rouge">sudo</code>を必要とするかもしれませんが、そこはオペレーティングシステムでの設定によります。</p>
+<p>Docker デーモンをシステムユーティリティーによって管理することが望ましくない場合、あるいは何かをすぐにテストしたいといった場合、<code class="highlighter-rouge">dockerd</code>コマンドを利用してデーモンを手動起動することができます。
+このときには<code class="highlighter-rouge">sudo</code>を必要とするかもしれませんが、そこはオペレーティングシステムでの設定によります。</p>
 
 <p>この方法によって Docker を起動した場合、Docker はフォアグラウンド実行され、出力ログは端末に直接出力されます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd
 <span class="go">
 INFO[0000] +job init_networkdriver()
 INFO[0000] +job serveapi(unix:///var/run/docker.sock)
 INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
 </span></code></pre></div></div>
 
-<p>手動で起動させた Docker を停止するには、端末上で<code class="language-plaintext highlighter-rouge">Ctrl+C</code>を入力します。</p>
+<p>手動で起動させた Docker を停止するには、端末上で<code class="highlighter-rouge">Ctrl+C</code>を入力します。</p>
 
 <h2 id="configure-the-docker-daemon">デーモンの設定</h2>
 
@@ -142,27 +142,27 @@ INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
 <ul>
   <li>JSON 形式の設定ファイルを利用します。
 設定をすべて一箇所にとりまとめられるので、この方法が推奨されます。</li>
-  <li><code class="language-plaintext highlighter-rouge">dockerd</code>起動時のフラグを利用します。</li>
+  <li><code class="highlighter-rouge">dockerd</code>起動時のフラグを利用します。</li>
 </ul>
 
 <p>同じオプションをフラグと JSON ファイルの両方に指定しない限り、フラグと JSON ファイルによる指定を併用することができます。
 もし両方に指定してしまった場合、Docker デーモンは起動せず、エラーメッセージが出力されます。</p>
 
-<p>JSON ファイルを使って Docker デーモンを設定する場合、Linux であればその設定ファイルを<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>に、また Windows であれば<code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code>にファイルを生成します。
+<p>JSON ファイルを使って Docker デーモンを設定する場合、Linux であればその設定ファイルを<code class="highlighter-rouge">/etc/docker/daemon.json</code>に、また Windows であれば<code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code>にファイルを生成します。
 MacOS の場合は、タスクバー上の Docker アイコンをクリックして Preferences &gt; Daemon &gt; Advanced を実行して設定します。</p>
 
 <p>設定ファイルは以下のようにします。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"debug"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tls"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tlscert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/docker/server.pem"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tlskey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/docker/serverkey.pem"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tcp://192.168.59.3:2376"</span><span class="p">]</span><span class="w">
+  </span><span class="s2">"debug"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tls"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tlscert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/docker/server.pem"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tlskey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/docker/serverkey.pem"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tcp://192.168.59.3:2376"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>この設定によってデーモンを起動すると、デバッグモードとなり TLS を利用し、<code class="language-plaintext highlighter-rouge">192.168.59.3</code>の<code class="language-plaintext highlighter-rouge">2376</code>ポートへのトラフィックを待ち受けるものとなります。
+<p>この設定によってデーモンを起動すると、デバッグモードとなり TLS を利用し、<code class="highlighter-rouge">192.168.59.3</code>の<code class="highlighter-rouge">2376</code>ポートへのトラフィックを待ち受けるものとなります。
 どのような設定オプションが利用可能であるかは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">dockerd リファレンスドキュメント</a> を参照してください。</p>
 
 <p>また Docker デーモンを手動で起動し、その際にフラグを使って設定することもできます。
@@ -170,7 +170,7 @@ MacOS の場合は、タスクバー上の Docker アイコンをクリックし
 
 <p>以下の例は Docker デーモンを手動で起動する方法であり、先ほどと同じ設定を行うものです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd <span class="nt">--debug</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd <span class="nt">--debug</span> <span class="se">\</span>
   <span class="nt">--tls</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
   <span class="nt">--tlscert</span><span class="o">=</span>/var/docker/server.pem <span class="se">\</span>
   <span class="nt">--tlskey</span><span class="o">=</span>/var/docker/serverkey.pem <span class="se">\</span>
@@ -179,7 +179,7 @@ MacOS の場合は、タスクバー上の Docker アイコンをクリックし
 
 <p>どのような設定オプションが利用可能であるかは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/">dockerd リファレンスドキュメント</a> を参照するるか、あるいは以下を実行してみてください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd <span class="nt">--help</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd <span class="nt">--help</span>
 </code></pre></div></div>
 
 <p>Docker ドキュメントでは、設定オプションを数多く取り扱っています。
@@ -200,11 +200,11 @@ MacOS の場合は、タスクバー上の Docker アイコンをクリックし
 <p>このディレクトリはデフォルトでは以下のものです。</p>
 
 <ul>
-  <li>Linux では <code class="language-plaintext highlighter-rouge">/var/lib/docker</code></li>
-  <li>Windows では <code class="language-plaintext highlighter-rouge">C:\ProgramData\docker</code></li>
+  <li>Linux では <code class="highlighter-rouge">/var/lib/docker</code></li>
+  <li>Windows では <code class="highlighter-rouge">C:\ProgramData\docker</code></li>
 </ul>
 
-<p>設定オプションの<code class="language-plaintext highlighter-rouge">data-root</code>というものを使えば、Docker デーモンが利用するディレクトリを別のところに変更することもできます。</p>
+<p>設定オプションの<code class="highlighter-rouge">data-root</code>というものを使えば、Docker デーモンが利用するディレクトリを別のところに変更することもできます。</p>
 
 <p>Docker デーモンの状態はこのディレクトリ内に保持されるので、デーモンごとに専用のディレクトリを利用することが必要です。
 2 つあるデーモンが、たとえば NFS 共有による同一のディレクトリをともに利用していると、解決困難なエラーに出会うことになりかねません。</p>
@@ -213,18 +213,18 @@ MacOS の場合は、タスクバー上の Docker アイコンをクリックし
 
 <p>デーモンのデバッグ機能を有効にすれば、デーモン実行時の様子を見たり、トラブル解決に役立てたりすることができます。
 デーモンが完全に応答しなくなった場合は、全スレッドに対して <a href="#force-a-stack-trace-to-be-logged">スタックトレースの強制出力</a> が可能です。
-これは Docker デーモンに対して<code class="language-plaintext highlighter-rouge">SIGUSR</code>シグナルを送信すれば、デーモンログに出力されます。</p>
+これは Docker デーモンに対して<code class="highlighter-rouge">SIGUSR</code>シグナルを送信すれば、デーモンログに出力されます。</p>
 
-<h3 id="troubleshoot-conflicts-between-the-daemonjson-and-startup-scripts"><code class="language-plaintext highlighter-rouge">daemon.json</code>と起動スクリプトの競合を解決する</h3>
+<h3 id="troubleshoot-conflicts-between-the-daemonjson-and-startup-scripts"><code class="highlighter-rouge">daemon.json</code>と起動スクリプトの競合を解決する</h3>
 
-<p><code class="language-plaintext highlighter-rouge">daemon.json</code>ファイル利用時であって、同じオプションを<code class="language-plaintext highlighter-rouge">dockerd</code>コマンドに対して手動で指定した場合、あるいは起動スクリプト実行をした場合、そのオプションが競合してしまい、以下のようなエラーが出力されてデーモン起動は失敗します。</p>
+<p><code class="highlighter-rouge">daemon.json</code>ファイル利用時であって、同じオプションを<code class="highlighter-rouge">dockerd</code>コマンドに対して手動で指定した場合、あるいは起動スクリプト実行をした場合、そのオプションが競合してしまい、以下のようなエラーが出力されてデーモン起動は失敗します。</p>
 
 <pre><code class="language-none">unable to configure the Docker daemon with file /etc/docker/daemon.json:
 the following directives are specified both as a flag and in the configuration
 file: hosts: (from flag: [unix:///var/run/docker.sock], from file: [tcp://127.0.0.1:2376])
 </code></pre>
 
-<p>上のようなエラーが出力され、デーモンの手動起動時にフラグ設定を行っているなら、そのフラグを正しくするか、あるいは<code class="language-plaintext highlighter-rouge">daemon.json</code>内から競合しているフラグを削除します。</p>
+<p>上のようなエラーが出力され、デーモンの手動起動時にフラグ設定を行っているなら、そのフラグを正しくするか、あるいは<code class="highlighter-rouge">daemon.json</code>内から競合しているフラグを削除します。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
@@ -238,31 +238,31 @@ file: hosts: (from flag: [unix:///var/run/docker.sock], from file: [tcp://127.0.
 
 <p>競合が発生してもわかりにくい例として、よくあるのが、デーモンのアドレスをデフォルトとは異なるものにした場合です。
 Docker はデフォルトでソケットを待ち受けます。
-Debian や Ubuntu は<code class="language-plaintext highlighter-rouge">systemd</code>を利用しているので、<code class="language-plaintext highlighter-rouge">dockerd</code>の起動時には必ず、ホスト指定に<code class="language-plaintext highlighter-rouge">-H</code>フラグを用います。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルに<code class="language-plaintext highlighter-rouge">host</code>項目を指定した場合、設定の競合が発生して（上で示したメッセージが出力され）Docker の起動は失敗します。</p>
+Debian や Ubuntu は<code class="highlighter-rouge">systemd</code>を利用しているので、<code class="highlighter-rouge">dockerd</code>の起動時には必ず、ホスト指定に<code class="highlighter-rouge">-H</code>フラグを用います。
+<code class="highlighter-rouge">daemon.json</code>ファイルに<code class="highlighter-rouge">host</code>項目を指定した場合、設定の競合が発生して（上で示したメッセージが出力され）Docker の起動は失敗します。</p>
 
-<p>この問題をとりあえず回避するには<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d/docker.conf</code>というファイルを生成し、内容を以下のようにします。
-これはデフォルトにおいて、デーモン起動時に用いられる<code class="language-plaintext highlighter-rouge">-H</code>引数を取り除くものです。</p>
+<p>この問題をとりあえず回避するには<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/docker.conf</code>というファイルを生成し、内容を以下のようにします。
+これはデフォルトにおいて、デーモン起動時に用いられる<code class="highlighter-rouge">-H</code>引数を取り除くものです。</p>
 
 <pre><code class="language-none">[Service]
 ExecStart=
 ExecStart=/usr/bin/dockerd
 </code></pre>
 
-<p>Docker に関して<code class="language-plaintext highlighter-rouge">systemd</code>の設定を見直す必要が、他にも出てくるかもしれません。
+<p>Docker に関して<code class="highlighter-rouge">systemd</code>の設定を見直す必要が、他にも出てくるかもしれません。
 たとえば <a href="/docs.docker.jp.onthefly/config/daemon/systemd/#httphttps-proxy">HTTP または HTTPS プロキシーの設定</a> を行う必要がある場合です。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-このオプションを上のように設定したにもかかわらず、<code class="language-plaintext highlighter-rouge">daemon.json</code>の<code class="language-plaintext highlighter-rouge">hosts</code>設定や、Docker 手動起動時の<code class="language-plaintext highlighter-rouge">-H</code>フラグを用いなかった場合には、Docker の起動は失敗します。</p>
+このオプションを上のように設定したにもかかわらず、<code class="highlighter-rouge">daemon.json</code>の<code class="highlighter-rouge">hosts</code>設定や、Docker 手動起動時の<code class="highlighter-rouge">-H</code>フラグを用いなかった場合には、Docker の起動は失敗します。</p>
 </blockquote>
 
-<p>Docker を起動しようとする前には<code class="language-plaintext highlighter-rouge">sudo systemctl daemon-reload</code>を実行してください。
-Docker が正常に起動したら、これ以降はソケットを待ち受けるのでなく、<code class="language-plaintext highlighter-rouge">daemon.json</code>の<code class="language-plaintext highlighter-rouge">hosts</code>キーに指定された IP アドレスからのトラフィックを待ち受けることになります。</p>
+<p>Docker を起動しようとする前には<code class="highlighter-rouge">sudo systemctl daemon-reload</code>を実行してください。
+Docker が正常に起動したら、これ以降はソケットを待ち受けるのでなく、<code class="highlighter-rouge">daemon.json</code>の<code class="highlighter-rouge">hosts</code>キーに指定された IP アドレスからのトラフィックを待ち受けることになります。</p>
 
 <blockquote class="important">
   <p><strong>重要</strong>:
-<code class="language-plaintext highlighter-rouge">daemon.json</code>において<code class="language-plaintext highlighter-rouge">hosts</code>の設定を行う方法は、Docker Desktop for Windows や Docker Desktop for Mac ではサポートされていません。</p>
+<code class="highlighter-rouge">daemon.json</code>において<code class="highlighter-rouge">hosts</code>の設定を行う方法は、Docker Desktop for Windows や Docker Desktop for Mac ではサポートされていません。</p>
 </blockquote>
 
 <h3 id="out-of-memory-exceptions-oome">Out Of Memory Exceptions (OOME)</h3>
@@ -288,23 +288,23 @@ Docker が正常に起動したら、これ以降はソケットを待ち受け�
   <tbody>
     <tr>
       <td style="text-align: left">Linux</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">journalctl -xu docker.service</code>を実行。 (または<code class="language-plaintext highlighter-rouge">/var/log/syslog</code>、<code class="language-plaintext highlighter-rouge">/var/log/messages</code>の参照。Linux ディストリビューションにより異なる。)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">journalctl -xu docker.service</code>を実行。 (または<code class="highlighter-rouge">/var/log/syslog</code>、<code class="highlighter-rouge">/var/log/messages</code>の参照。Linux ディストリビューションにより異なる。)</td>
     </tr>
     <tr>
-      <td style="text-align: left">macOS (<code class="language-plaintext highlighter-rouge">dockerd</code> logs)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log</code></td>
+      <td style="text-align: left">macOS (<code class="highlighter-rouge">dockerd</code> logs)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">macOS (<code class="language-plaintext highlighter-rouge">containerd</code> logs)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">~/Library/Containers/com.docker.docker/Data/log/vm/containerd.log</code></td>
+      <td style="text-align: left">macOS (<code class="highlighter-rouge">containerd</code> logs)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">~/Library/Containers/com.docker.docker/Data/log/vm/containerd.log</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">Windows (WSL2) (<code class="language-plaintext highlighter-rouge">dockerd</code> logs)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">AppData\Roaming\Docker\log\vm\dockerd.log</code></td>
+      <td style="text-align: left">Windows (WSL2) (<code class="highlighter-rouge">dockerd</code> logs)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">AppData\Roaming\Docker\log\vm\dockerd.log</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">Windows (WSL2) (<code class="language-plaintext highlighter-rouge">containerd</code> logs)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">AppData\Roaming\Docker\log\vm\containerd.log</code></td>
+      <td style="text-align: left">Windows (WSL2) (<code class="highlighter-rouge">containerd</code> logs)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">AppData\Roaming\Docker\log\vm\containerd.log</code></td>
     </tr>
     <tr>
       <td style="text-align: left">Windows (Windows containers)</td>
@@ -313,11 +313,11 @@ Docker が正常に起動したら、これ以降はソケットを待ち受け�
   </tbody>
 </table>
 
-<p>macOS 上において<code class="language-plaintext highlighter-rouge">dockerd</code>ログを参照するには、端末画面を開いて<code class="language-plaintext highlighter-rouge">tail</code>コマンドを使います。
-その際には<code class="language-plaintext highlighter-rouge">-f</code>フラグをつけることで、ログを追うことができます。
-ログの表示は、<code class="language-plaintext highlighter-rouge">CTRL+c</code>を入力してコマンドを中止させるまで続きます。</p>
+<p>macOS 上において<code class="highlighter-rouge">dockerd</code>ログを参照するには、端末画面を開いて<code class="highlighter-rouge">tail</code>コマンドを使います。
+その際には<code class="highlighter-rouge">-f</code>フラグをつけることで、ログを追うことができます。
+ログの表示は、<code class="highlighter-rouge">CTRL+c</code>を入力してコマンドを中止させるまで続きます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">tail</span> <span class="nt">-f</span> ~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> tail <span class="nt">-f</span> ~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log
 <span class="go">2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.497642089Z" level=debug msg="attach: stdout: begin"
 2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.497714291Z" level=debug msg="attach: stderr: begin"
 2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.499798390Z" level=debug msg="Calling POST /v1.41/containers/35fc5ec0ffe1ad492d0a4fbf51fd6286a087b89d4dd66367fa3b7aec70b46a40/wait?condition=removed"
@@ -331,13 +331,13 @@ Docker が正常に起動したら、これ以降はソケットを待ち受け�
 <h3 id="enable-debugging">デバッグの有効化</h3>
 
 <p>デバッグを有効にするには 2 通りあります。
-お勧めの方法は<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルにおいて<code class="language-plaintext highlighter-rouge">debug</code>キーを<code class="language-plaintext highlighter-rouge">true</code>にすることです。
+お勧めの方法は<code class="highlighter-rouge">daemon.json</code>ファイルにおいて<code class="highlighter-rouge">debug</code>キーを<code class="highlighter-rouge">true</code>にすることです。
 この方法はどの Docker プラットフォームでも動作します。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを編集します。
-その場所は通常<code class="language-plaintext highlighter-rouge">/etc/docker/</code>にあります。
+    <p><code class="highlighter-rouge">daemon.json</code>ファイルを編集します。
+その場所は通常<code class="highlighter-rouge">/etc/docker/</code>にあります。
 存在しなければ、ここで生成します。
 macOS や Windows の場合、このファイルを直接編集はしません。
 そのかわり <strong>Preferences</strong> / <strong>Daemon</strong> / <strong>Advanced</strong> を実行してください。</p>
@@ -346,39 +346,39 @@ macOS や Windows の場合、このファイルを直接編集はしません�
     <p>ファイルが空であれば以下の記述を追加します。</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"debug"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="s2">"debug"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
-    <p>このファイルにすでに JSON 記述が行われていた場合は<code class="language-plaintext highlighter-rouge">"debug": true</code>というキー項目のみを追加します。
+    <p>このファイルにすでに JSON 記述が行われていた場合は<code class="highlighter-rouge">"debug": true</code>というキー項目のみを追加します。
 閉じブラケット直前の最終行として追加する場合には、行末にカンマは不要ですが、そうでなければカンマを忘れないでください。
-また<code class="language-plaintext highlighter-rouge">log-level</code>を設定する場合には、その値を<code class="language-plaintext highlighter-rouge">info</code>か<code class="language-plaintext highlighter-rouge">debug</code>にしてください。
-<code class="language-plaintext highlighter-rouge">info</code>がデフォルト値であり、設定可能な値は<code class="language-plaintext highlighter-rouge">debug</code>、<code class="language-plaintext highlighter-rouge">info</code>、<code class="language-plaintext highlighter-rouge">warn</code>、<code class="language-plaintext highlighter-rouge">error</code>、<code class="language-plaintext highlighter-rouge">fatal</code>のいずれかです。</p>
+また<code class="highlighter-rouge">log-level</code>を設定する場合には、その値を<code class="highlighter-rouge">info</code>か<code class="highlighter-rouge">debug</code>にしてください。
+<code class="highlighter-rouge">info</code>がデフォルト値であり、設定可能な値は<code class="highlighter-rouge">debug</code>、<code class="highlighter-rouge">info</code>、<code class="highlighter-rouge">warn</code>、<code class="highlighter-rouge">error</code>、<code class="highlighter-rouge">fatal</code>のいずれかです。</p>
   </li>
   <li>
-    <p>この設定を再読み込みさせるために、デーモンに対して<code class="language-plaintext highlighter-rouge">HUP</code>シグナルを送信します。
+    <p>この設定を再読み込みさせるために、デーモンに対して<code class="highlighter-rouge">HUP</code>シグナルを送信します。
 Linux ホストの場合は以下のコマンドを実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo kill</span> <span class="nt">-SIGHUP</span> <span class="si">$(</span>pidof dockerd<span class="si">)</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo kill</span> <span class="nt">-SIGHUP</span> <span class="k">$(</span>pidof dockerd<span class="k">)</span>
 </code></pre></div>    </div>
 
     <p>Windows ホストの場合は Docker を再起動します。</p>
   </li>
 </ol>
 
-<p>上のような方法ではなく、デバッグフラグ<code class="language-plaintext highlighter-rouge">-D</code>を手動で利用すれば Docker デーモンの停止と再起動を行うことができます。
+<p>上のような方法ではなく、デバッグフラグ<code class="highlighter-rouge">-D</code>を手動で利用すれば Docker デーモンの停止と再起動を行うことができます。
 ただしこれを行うと、ホストの初期起動スクリプトが生成するものとは異なる環境において Docker が再起動してしまうことがあります。
 この場合、デバッグ作業は難しくなります。</p>
 
 <h3 id="force-a-stack-trace-to-be-logged">スタックトレースの強制ログ出力</h3>
 
-<p>デーモンが反応しなくなった場合には、フルスタックトレースをログ出力させるために、デーモンに対して<code class="language-plaintext highlighter-rouge">SIGUSR1</code>シグナルを送信します。</p>
+<p>デーモンが反応しなくなった場合には、フルスタックトレースをログ出力させるために、デーモンに対して<code class="highlighter-rouge">SIGUSR1</code>シグナルを送信します。</p>
 
 <ul>
   <li>
     <p><strong>Linux の場合</strong></p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo kill</span> <span class="nt">-SIGUSR1</span> <span class="si">$(</span>pidof dockerd<span class="si">)</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo kill</span> <span class="nt">-SIGUSR1</span> <span class="k">$(</span>pidof dockerd<span class="k">)</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -386,16 +386,16 @@ Linux ホストの場合は以下のコマンドを実行します。</p>
 
     <p><a href="https://github.com/moby/docker-signal">docker-signal</a> をダウンロード。</p>
 
-    <p><code class="language-plaintext highlighter-rouge">Get-Process dockerd</code>により dockerd のプロセス ID を取得。</p>
+    <p><code class="highlighter-rouge">Get-Process dockerd</code>により dockerd のプロセス ID を取得。</p>
 
-    <p><code class="language-plaintext highlighter-rouge">--pid=&lt;デーモンのプロセス ID&gt;</code>フラグを使ってモジュールを実行。</p>
+    <p><code class="highlighter-rouge">--pid=&lt;デーモンのプロセス ID&gt;</code>フラグを使ってモジュールを実行。</p>
   </li>
 </ul>
 
 <p>これによりスタックトレースがログに出力されますが、デーモンは停止されません。
 デーモンログにスタックトレースが出力されているか、あるいはスタックトレースをファイル出力されていれば、そのファイルへのパスが示されています。</p>
 
-<p>デーモンが<code class="language-plaintext highlighter-rouge">SIGUSR1</code>シグナルを処理した後は、スタックトレースをログ出力した上で、動作を続行します。
+<p>デーモンが<code class="highlighter-rouge">SIGUSR1</code>シグナルを処理した後は、スタックトレースをログ出力した上で、動作を続行します。
 スタックトレースからは、デーモン内部で処理されていた Go 言語のゴルーチン（goroutine）やスレッドの状態を確認することができます。</p>
 
 <h3 id="view-stack-traces">スタックトレースの確認</h3>
@@ -403,8 +403,8 @@ Linux ホストの場合は以下のコマンドを実行します。</p>
 <p>Docker デーモンログは、以下に示すような方法により確認することができます。</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">systemctl</code>を利用している Linux システム上にて<code class="language-plaintext highlighter-rouge">journalctl -u docker.service</code>を実行します。</li>
-  <li>古い Linux の場合は<code class="language-plaintext highlighter-rouge">/var/log/messages</code>、<code class="language-plaintext highlighter-rouge">/var/log/daemon.log</code>、<code class="language-plaintext highlighter-rouge">/var/log/docker.log</code>を確認します。</li>
+  <li><code class="highlighter-rouge">systemctl</code>を利用している Linux システム上にて<code class="highlighter-rouge">journalctl -u docker.service</code>を実行します。</li>
+  <li>古い Linux の場合は<code class="highlighter-rouge">/var/log/messages</code>、<code class="highlighter-rouge">/var/log/daemon.log</code>、<code class="highlighter-rouge">/var/log/docker.log</code>を確認します。</li>
 </ul>
 
 <blockquote>
@@ -426,13 +426,13 @@ Linux ホストの場合は以下のコマンドを実行します。</p>
 
 <h2 id="check-whether-docker-is-running">Docker の起動確認</h2>
 
-<p>オペレーティングシステムを問わず Docker が動いているかどうかを確認するには<code class="language-plaintext highlighter-rouge">docker info</code>コマンドを実行します。</p>
+<p>オペレーティングシステムを問わず Docker が動いているかどうかを確認するには<code class="highlighter-rouge">docker info</code>コマンドを実行します。</p>
 
 <p>あるいはオペレーティングシステムが提供するユーティリティーを用いることもできます。
-たとえば<code class="language-plaintext highlighter-rouge">sudo systemctl is-active docker</code>、<code class="language-plaintext highlighter-rouge">sudo status docker</code>、<code class="language-plaintext highlighter-rouge">sudo service docker status</code>などです。
+たとえば<code class="highlighter-rouge">sudo systemctl is-active docker</code>、<code class="highlighter-rouge">sudo status docker</code>、<code class="highlighter-rouge">sudo service docker status</code>などです。
 また Windows の場合は、サービス状態を確認するユーティリティーを利用します。</p>
 
-<p>また<code class="language-plaintext highlighter-rouge">ps</code>や<code class="language-plaintext highlighter-rouge">top</code>コマンドを使えば、<code class="language-plaintext highlighter-rouge">dockerd</code>プロセス内のプロセス一覧を確認することができます。</p>
+<p>また<code class="highlighter-rouge">ps</code>や<code class="highlighter-rouge">top</code>コマンドを使えば、<code class="highlighter-rouge">dockerd</code>プロセス内のプロセス一覧を確認することができます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=daemon">daemon</a>, <a href="/docs.docker.jp.onthefly/search/?q=configuration">configuration</a>, <a href="/docs.docker.jp.onthefly/search/?q=troubleshooting">troubleshooting</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

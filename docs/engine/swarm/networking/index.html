@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Manage swarm service networks | Docker ドキュメント</title>
   <meta name="description" content="Use swarm mode overlay networking features" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Manage swarm service networks" />
   <meta property="og:description" content="Use swarm mode overlay networking features" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/networking/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Manage swarm service networks","description":"Use swarm mode overlay networking features","url":"https://docs.docker.com/engine/swarm/networking/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -127,28 +127,28 @@ For more details about swarm networking in general, see the
 participating in the swarm. You can create overlay networks, in the same way
 as user-defined networks for standalone containers. You can attach a service
 to one or more existing overlay networks as well, to enable service-to-service
-communication. Overlay networks are Docker networks that use the <code class="language-plaintext highlighter-rouge">overlay</code>
+communication. Overlay networks are Docker networks that use the <code class="highlighter-rouge">overlay</code>
 network driver.</p>
   </li>
   <li>
     <p>The <strong>ingress network</strong> is a special overlay network that facilitates
 load balancing among a service’s nodes. When any swarm node receives a
 request on a published port, it hands that request off to a module called
-<code class="language-plaintext highlighter-rouge">IPVS</code>. <code class="language-plaintext highlighter-rouge">IPVS</code> keeps track of all the IP addresses participating in that
+<code class="highlighter-rouge">IPVS</code>. <code class="highlighter-rouge">IPVS</code> keeps track of all the IP addresses participating in that
 service, selects one of them, and routes the request to it, over the
-<code class="language-plaintext highlighter-rouge">ingress</code> network.</p>
+<code class="highlighter-rouge">ingress</code> network.</p>
 
-    <p>The <code class="language-plaintext highlighter-rouge">ingress</code> network is created automatically when you initialize or join a
+    <p>The <code class="highlighter-rouge">ingress</code> network is created automatically when you initialize or join a
 swarm. Most users do not need to customize its configuration, but Docker allows
 you to do so.</p>
   </li>
   <li>
     <p>The <strong>docker_gwbridge</strong> is a bridge network that connects the overlay
-networks (including the <code class="language-plaintext highlighter-rouge">ingress</code> network) to an individual Docker daemon’s
+networks (including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker daemon’s
 physical network. By default, each container a service is running is connected
-to its local Docker daemon host’s <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> network.</p>
+to its local Docker daemon host’s <code class="highlighter-rouge">docker_gwbridge</code> network.</p>
 
-    <p>The <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> network is created automatically when you initialize or
+    <p>The <code class="highlighter-rouge">docker_gwbridge</code> network is created automatically when you initialize or
 join a swarm. Most users do not need to customize its configuration, but
 Docker allows you to do so.</p>
   </li>
@@ -160,28 +160,28 @@ Docker allows you to do so.</p>
 each other over the following ports:</p>
 
 <ul>
-  <li>Port <code class="language-plaintext highlighter-rouge">7946</code> TCP/UDP for container network discovery.</li>
-  <li>Port <code class="language-plaintext highlighter-rouge">4789</code> UDP for the container overlay network.</li>
+  <li>Port <code class="highlighter-rouge">7946</code> TCP/UDP for container network discovery.</li>
+  <li>Port <code class="highlighter-rouge">4789</code> UDP for the container overlay network.</li>
 </ul>
 
 <h2 id="create-an-overlay-network">Create an overlay network</h2>
 
-<p>To create an overlay network, specify the <code class="language-plaintext highlighter-rouge">overlay</code> driver when using the
-<code class="language-plaintext highlighter-rouge">docker network create</code> command:</p>
+<p>To create an overlay network, specify the <code class="highlighter-rouge">overlay</code> driver when using the
+<code class="highlighter-rouge">docker network create</code> command:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
   my-network
 </code></pre></div></div>
 
 <p>The above command doesn’t specify any custom options, so Docker assigns a
 subnet and uses default options. You can see information about the network using
-<code class="language-plaintext highlighter-rouge">docker network inspect</code>.</p>
+<code class="highlighter-rouge">docker network inspect</code>.</p>
 
 <p>When no containers are connected to the overlay network, its configuration is
 not very exciting:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect my-network
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network inspect my-network
 <span class="go">[
     {
         "Name": "my-network",
@@ -207,17 +207,17 @@ not very exciting:</p>
 ]
 </span></code></pre></div></div>
 
-<p>In the above output, notice that the driver is <code class="language-plaintext highlighter-rouge">overlay</code> and that the scope is
-<code class="language-plaintext highlighter-rouge">swarm</code>, rather than <code class="language-plaintext highlighter-rouge">local</code>, <code class="language-plaintext highlighter-rouge">host</code>, or <code class="language-plaintext highlighter-rouge">global</code> scopes you might see in
+<p>In the above output, notice that the driver is <code class="highlighter-rouge">overlay</code> and that the scope is
+<code class="highlighter-rouge">swarm</code>, rather than <code class="highlighter-rouge">local</code>, <code class="highlighter-rouge">host</code>, or <code class="highlighter-rouge">global</code> scopes you might see in
 other types of Docker networks. This scope indicates that only hosts which are
 participating in the swarm can access this network.</p>
 
 <p>The network’s subnet and gateway are dynamically configured when a service
 connects to the network for the first time. The following example shows
-the same network as above, but with three containers of a <code class="language-plaintext highlighter-rouge">redis</code> service
+the same network as above, but with three containers of a <code class="highlighter-rouge">redis</code> service
 connected to it.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network inspect my-network
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network inspect my-network
 <span class="go">[
     {
         "Name": "my-network",
@@ -280,17 +280,17 @@ connected to it.</p>
 
 <p>There may be situations where you don’t want to use the default configuration
 for an overlay network. For a full list of configurable options, run the
-command <code class="language-plaintext highlighter-rouge">docker network create --help</code>. The following are some of the most
+command <code class="highlighter-rouge">docker network create --help</code>. The following are some of the most
 common options to change.</p>
 
 <h4 id="configure-the-subnet-and-gateway">Configure the subnet and gateway</h4>
 
 <p>By default, the network’s subnet and gateway are configured automatically when
 the first service is connected to the network. You can configure these when
-creating a network using the <code class="language-plaintext highlighter-rouge">--subnet</code> and <code class="language-plaintext highlighter-rouge">--gateway</code> flags. The following
+creating a network using the <code class="highlighter-rouge">--subnet</code> and <code class="highlighter-rouge">--gateway</code> flags. The following
 example extends the previous one by configuring the subnet and gateway.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
   <span class="nt">--subnet</span> 10.0.9.0/24 <span class="se">\</span>
   <span class="nt">--gateway</span> 10.0.9.99 <span class="se">\</span>
@@ -299,29 +299,29 @@ example extends the previous one by configuring the subnet and gateway.</p>
 
 <h5 id="using-custom-default-address-pools">Using custom default address pools</h5>
 
-<p>To customize subnet allocation for your Swarm networks, you can <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/">optionally configure them</a> during <code class="language-plaintext highlighter-rouge">swarm init</code>.</p>
+<p>To customize subnet allocation for your Swarm networks, you can <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/">optionally configure them</a> during <code class="highlighter-rouge">swarm init</code>.</p>
 
 <p>For example, the following command is used when initializing Swarm:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--default-addr-pool</span> 10.20.0.0/16 <span class="nt">--default-addr-pool-mask-length</span> 26
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker swarm init <span class="nt">--default-addr-pool</span> 10.20.0.0/16 <span class="nt">--default-addr-pool-mask-length</span> 26
 </code></pre></div></div>
 
-<p>Whenever a user creates a network, but does not use the <code class="language-plaintext highlighter-rouge">--subnet</code> command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm.</p>
+<p>Whenever a user creates a network, but does not use the <code class="highlighter-rouge">--subnet</code> command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm.</p>
 
 <p>Multiple pools can be configured if discontiguous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.</p>
 
-<p>The default mask length can be configured and is the same for all networks. It is set to <code class="language-plaintext highlighter-rouge">/24</code> by default. To change the default subnet mask length, use the <code class="language-plaintext highlighter-rouge">--default-addr-pool-mask-length</code> command line option.</p>
+<p>The default mask length can be configured and is the same for all networks. It is set to <code class="highlighter-rouge">/24</code> by default. To change the default subnet mask length, use the <code class="highlighter-rouge">--default-addr-pool-mask-length</code> command line option.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Default address pools can only be configured on <code class="language-plaintext highlighter-rouge">swarm init</code> and cannot be altered after cluster creation.</p>
+  <p><strong>Note</strong>: Default address pools can only be configured on <code class="highlighter-rouge">swarm init</code> and cannot be altered after cluster creation.</p>
 </blockquote>
 
 <h5 id="overlay-network-size-limitations">Overlay network size limitations</h5>
 
-<p>Docker recommends creating overlay networks with <code class="language-plaintext highlighter-rouge">/24</code> blocks. The <code class="language-plaintext highlighter-rouge">/24</code> overlay network blocks, which limits the network to 256 IP addresses.</p>
+<p>Docker recommends creating overlay networks with <code class="highlighter-rouge">/24</code> blocks. The <code class="highlighter-rouge">/24</code> overlay network blocks, which limits the network to 256 IP addresses.</p>
 
 <p>This recommendation addresses <a href="https://github.com/moby/moby/issues/30820">limitations with swarm mode</a>.
-If you need more than 256 IP addresses, do not increase the IP block size. You can either use <code class="language-plaintext highlighter-rouge">dnsrr</code>
+If you need more than 256 IP addresses, do not increase the IP block size. You can either use <code class="highlighter-rouge">dnsrr</code>
 endpoint mode with an external load balancer, or use multiple smaller overlay networks. See
 <a href="#configure-service-discovery">Configure service discovery</a> or more information about different endpoint modes.</p>
 
@@ -332,17 +332,17 @@ For more details about the encryption mechanisms, see the
 <a href="/docs.docker.jp.onthefly/network/overlay/">Docker swarm mode overlay network security model</a>.</p>
 
 <p>Application data among swarm nodes is not encrypted by default. To encrypt this
-traffic on a given overlay network, use the <code class="language-plaintext highlighter-rouge">--opt encrypted</code> flag on <code class="language-plaintext highlighter-rouge">docker
+traffic on a given overlay network, use the <code class="highlighter-rouge">--opt encrypted</code> flag on <code class="highlighter-rouge">docker
 network create</code>. This enables IPSEC encryption at the level of the vxlan. This
 encryption imposes a non-negligible performance penalty, so you should test this
 option before using it in production.</p>
 
 <h2 id="attach-a-service-to-an-overlay-network">Attach a service to an overlay network</h2>
 
-<p>To attach a service to an existing overlay network, pass the <code class="language-plaintext highlighter-rouge">--network</code> flag to
-<code class="language-plaintext highlighter-rouge">docker service create</code>, or the <code class="language-plaintext highlighter-rouge">--network-add</code> flag to <code class="language-plaintext highlighter-rouge">docker service update</code>.</p>
+<p>To attach a service to an existing overlay network, pass the <code class="highlighter-rouge">--network</code> flag to
+<code class="highlighter-rouge">docker service create</code>, or the <code class="highlighter-rouge">--network-add</code> flag to <code class="highlighter-rouge">docker service update</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 3 <span class="se">\</span>
   <span class="nt">--name</span> my-web <span class="se">\</span>
   <span class="nt">--network</span> my-network <span class="se">\</span>
@@ -352,11 +352,11 @@ option before using it in production.</p>
 <p>Service containers connected to an overlay network can communicate with
 each other across it.</p>
 
-<p>To see which networks a service is connected to, use <code class="language-plaintext highlighter-rouge">docker service ls</code> to find
-the name of the service, then <code class="language-plaintext highlighter-rouge">docker service ps &lt;service-name&gt;</code> to list the
+<p>To see which networks a service is connected to, use <code class="highlighter-rouge">docker service ls</code> to find
+the name of the service, then <code class="highlighter-rouge">docker service ps &lt;service-name&gt;</code> to list the
 networks. Alternately, to see which services’ containers are connected to a
-network, use <code class="language-plaintext highlighter-rouge">docker network inspect &lt;network-name&gt;</code>. You can run these commands
-from any swarm node which is joined to the swarm and is in a <code class="language-plaintext highlighter-rouge">running</code> state.</p>
+network, use <code class="highlighter-rouge">docker network inspect &lt;network-name&gt;</code>. You can run these commands
+from any swarm node which is joined to the swarm and is in a <code class="highlighter-rouge">running</code> state.</p>
 
 <h3 id="configure-service-discovery">Configure service discovery</h3>
 
@@ -390,39 +390,39 @@ addresses, and the client connects directly to one of these.</p>
 
     <p>DNS round-robin is useful in cases where you want to use your own load
 balancer, such as HAProxy. To configure a service to use DNSRR, use the flag
-<code class="language-plaintext highlighter-rouge">--endpoint-mode dnsrr</code> when creating a new service or updating an existing
+<code class="highlighter-rouge">--endpoint-mode dnsrr</code> when creating a new service or updating an existing
 one.</p>
   </li>
 </ul>
 
 <h2 id="customize-the-ingress-network">Customize the ingress network</h2>
 
-<p>Most users never need to configure the <code class="language-plaintext highlighter-rouge">ingress</code> network, but Docker allows you
+<p>Most users never need to configure the <code class="highlighter-rouge">ingress</code> network, but Docker allows you
 to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
 other low-level network settings such as the MTU.</p>
 
-<p>Customizing the <code class="language-plaintext highlighter-rouge">ingress</code> network involves removing and recreating it. This is
+<p>Customizing the <code class="highlighter-rouge">ingress</code> network involves removing and recreating it. This is
 usually done before you create any services in the swarm. If you have existing
 services which publish ports, those services need to be removed before you can
-remove the <code class="language-plaintext highlighter-rouge">ingress</code> network.</p>
+remove the <code class="highlighter-rouge">ingress</code> network.</p>
 
-<p>During the time that no <code class="language-plaintext highlighter-rouge">ingress</code> network exists, existing services which do not
+<p>During the time that no <code class="highlighter-rouge">ingress</code> network exists, existing services which do not
 publish ports continue to function but are not load-balanced. This affects
 services which publish ports, such as a WordPress service which publishes port
 80.</p>
 
 <ol>
   <li>
-    <p>Inspect the <code class="language-plaintext highlighter-rouge">ingress</code> network using <code class="language-plaintext highlighter-rouge">docker network inspect ingress</code>, and
+    <p>Inspect the <code class="highlighter-rouge">ingress</code> network using <code class="highlighter-rouge">docker network inspect ingress</code>, and
 remove any services whose containers are connected to it. These are services
 that publish ports, such as a WordPress service which publishes port 80. If
 all such services are not stopped, the next step fails.</p>
   </li>
   <li>
-    <p>Remove the existing <code class="language-plaintext highlighter-rouge">ingress</code> network:</p>
+    <p>Remove the existing <code class="highlighter-rouge">ingress</code> network:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>ingress
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network rm ingress
 <span class="go">
 WARNING! Before removing the routing-mesh network, make sure all the nodes
 in your swarm run the same docker engine version. Otherwise, removal may not
@@ -432,22 +432,22 @@ Are you sure you want to continue? [y/N]
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a new overlay network using the <code class="language-plaintext highlighter-rouge">--ingress</code> flag, along  with the
+    <p>Create a new overlay network using the <code class="highlighter-rouge">--ingress</code> flag, along  with the
 custom options you want to set. This example sets the MTU to 1200, sets
-the subnet to <code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>, and sets the gateway to <code class="language-plaintext highlighter-rouge">10.11.0.2</code>.</p>
+the subnet to <code class="highlighter-rouge">10.11.0.0/16</code>, and sets the gateway to <code class="highlighter-rouge">10.11.0.2</code>.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
   <span class="nt">--ingress</span> <span class="se">\</span>
   <span class="nt">--subnet</span><span class="o">=</span>10.11.0.0/16 <span class="se">\</span>
   <span class="nt">--gateway</span><span class="o">=</span>10.11.0.2 <span class="se">\</span>
-  <span class="nt">--opt</span> com.docker.network.mtu<span class="o">=</span>1200 <span class="se">\</span>
+  <span class="nt">--opt</span> com.docker.network.driver.mtu<span class="o">=</span>1200 <span class="se">\</span>
   my-ingress
 </code></pre></div>    </div>
 
     <blockquote>
-      <p><strong>Note</strong>: You can name your <code class="language-plaintext highlighter-rouge">ingress</code> network something other than
-<code class="language-plaintext highlighter-rouge">ingress</code>, but you can only have one. An attempt to create a second one
+      <p><strong>Note</strong>: You can name your <code class="highlighter-rouge">ingress</code> network something other than
+<code class="highlighter-rouge">ingress</code>, but you can only have one. An attempt to create a second one
 fails.</p>
     </blockquote>
   </li>
@@ -458,35 +458,35 @@ fails.</p>
 
 <h2 id="customize-the-docker_gwbridge">Customize the docker_gwbridge</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks
-(including the <code class="language-plaintext highlighter-rouge">ingress</code> network) to an individual Docker daemon’s physical
+<p>The <code class="highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks
+(including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker daemon’s physical
 network. Docker creates it automatically when you initialize a swarm or join a
 Docker host to a swarm, but it is not a Docker device. It exists in the kernel
 of the Docker host. If you need to customize its settings, you must do so before
 joining the Docker host to the swarm, or after temporarily removing the host
 from the swarm.</p>
 
-<p>You need to have the <code class="language-plaintext highlighter-rouge">brctl</code> application installed on your operating system in
-order to delete an existing bridge. The package name is <code class="language-plaintext highlighter-rouge">bridge-utils</code>.</p>
+<p>You need to have the <code class="highlighter-rouge">brctl</code> application installed on your operating system in
+order to delete an existing bridge. The package name is <code class="highlighter-rouge">bridge-utils</code>.</p>
 
 <ol>
   <li>
     <p>Stop Docker.</p>
   </li>
   <li>
-    <p>Use the <code class="language-plaintext highlighter-rouge">brctl show docker_gwbridge</code> command to check whether a bridge
-device exists called <code class="language-plaintext highlighter-rouge">docker_gwbridge</code>. If so, remove it using
-<code class="language-plaintext highlighter-rouge">brctl delbr docker_gwbridge</code>.</p>
+    <p>Use the <code class="highlighter-rouge">brctl show docker_gwbridge</code> command to check whether a bridge
+device exists called <code class="highlighter-rouge">docker_gwbridge</code>. If so, remove it using
+<code class="highlighter-rouge">brctl delbr docker_gwbridge</code>.</p>
   </li>
   <li>
     <p>Start Docker. Do not join or initialize the swarm.</p>
   </li>
   <li>
-    <p>Create or re-create the <code class="language-plaintext highlighter-rouge">docker_gwbridge</code> bridge with your custom settings.
-This example uses the subnet <code class="language-plaintext highlighter-rouge">10.11.0.0/16</code>. For a full list of customizable
+    <p>Create or re-create the <code class="highlighter-rouge">docker_gwbridge</code> bridge with your custom settings.
+This example uses the subnet <code class="highlighter-rouge">10.11.0.0/16</code>. For a full list of customizable
 options, see <a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_create/#bridge-driver-options">Bridge driver options</a>.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="se">\</span>
 <span class="nt">--subnet</span> 10.11.0.0/16 <span class="se">\</span>
 <span class="nt">--opt</span> com.docker.network.bridge.name<span class="o">=</span>docker_gwbridge <span class="se">\</span>
 <span class="nt">--opt</span> com.docker.network.bridge.enable_icc<span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
@@ -506,26 +506,26 @@ and management traffic for maintaining the swarm itself and data traffic to and
 from the service containers.</p>
 
 <p>You can separate this traffic by passing
-the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> flag when initializing or joining the swarm. If there are
-multiple interfaces, <code class="language-plaintext highlighter-rouge">--advertise-addr</code> must be specified explicitly, and
-<code class="language-plaintext highlighter-rouge">--data-path-addr</code> defaults to <code class="language-plaintext highlighter-rouge">--advertise-addr</code> if not specified. Traffic about
+the <code class="highlighter-rouge">--data-path-addr</code> flag when initializing or joining the swarm. If there are
+multiple interfaces, <code class="highlighter-rouge">--advertise-addr</code> must be specified explicitly, and
+<code class="highlighter-rouge">--data-path-addr</code> defaults to <code class="highlighter-rouge">--advertise-addr</code> if not specified. Traffic about
 joining, leaving, and managing the swarm is sent over the
-<code class="language-plaintext highlighter-rouge">--advertise-addr</code> interface, and traffic among a service’s containers is sent
-sent over the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> interface. These flags can take an IP address or
-a network device name, such as <code class="language-plaintext highlighter-rouge">eth0</code>.</p>
+<code class="highlighter-rouge">--advertise-addr</code> interface, and traffic among a service’s containers is sent
+sent over the <code class="highlighter-rouge">--data-path-addr</code> interface. These flags can take an IP address or
+a network device name, such as <code class="highlighter-rouge">eth0</code>.</p>
 
-<p>This example initializes a swarm with a separate <code class="language-plaintext highlighter-rouge">--data-path-addr</code>. It assumes
+<p>This example initializes a swarm with a separate <code class="highlighter-rouge">--data-path-addr</code>. It assumes
 that your Docker host has two different network interfaces: 10.0.0.1 should be
 used for control and management traffic and 192.168.0.1 should be used for
 traffic relating to services.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm init <span class="nt">--advertise-addr</span> 10.0.0.1 <span class="nt">--data-path-addr</span> 192.168.0.1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker swarm init <span class="nt">--advertise-addr</span> 10.0.0.1 <span class="nt">--data-path-addr</span> 192.168.0.1
 </code></pre></div></div>
 
-<p>This example joins the swarm managed by host <code class="language-plaintext highlighter-rouge">192.168.99.100:2377</code> and sets the
-<code class="language-plaintext highlighter-rouge">--advertise-addr</code> flag to <code class="language-plaintext highlighter-rouge">eth0</code> and the <code class="language-plaintext highlighter-rouge">--data-path-addr</code> flag to <code class="language-plaintext highlighter-rouge">eth1</code>.</p>
+<p>This example joins the swarm managed by host <code class="highlighter-rouge">192.168.99.100:2377</code> and sets the
+<code class="highlighter-rouge">--advertise-addr</code> flag to <code class="highlighter-rouge">eth0</code> and the <code class="highlighter-rouge">--data-path-addr</code> flag to <code class="highlighter-rouge">eth1</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm <span class="nb">join</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker swarm join <span class="se">\</span>
   <span class="nt">--token</span> SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c <span class="se">\</span>
   <span class="nt">--advertise-addr</span> eth0 <span class="se">\</span>
   <span class="nt">--data-path-addr</span> eth1 <span class="se">\</span>

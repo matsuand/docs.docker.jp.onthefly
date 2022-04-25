@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>サービスへのローリングアップデートの適用 | Docker ドキュメント</title>
   <meta name="description" content="Apply rolling updates to a service on the swarm" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="サービスへのローリングアップデートの適用" />
   <meta property="og:description" content="Apply rolling updates to a service on the swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"サービスへのローリングアップデートの適用","description":"Apply rolling updates to a service on the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,14 +109,14 @@
   <li>
     <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
 接続先はマネージャーノードを起動したマシンです。
-たとえばこのチュートリアルでは<code class="language-plaintext highlighter-rouge">manager1</code>というマシンを利用します。</p>
+たとえばこのチュートリアルでは<code class="highlighter-rouge">manager1</code>というマシンを利用します。</p>
   </li>
   <li>
     <p>Regis タグを Swarm にデプロイします。
 そして Swarm に対して、アップデートの待機時間（update delay）を 10 秒に設定します。
 なお以下の例は、古い方の Redis タグを使っています。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 3 <span class="se">\</span>
   <span class="nt">--name</span> redis <span class="se">\</span>
   <span class="nt">--update-delay</span> 10s <span class="se">\</span>
@@ -127,22 +127,22 @@
 
     <p>上のコマンドにより、サービスデプロイ時のローリングアップデートポリシーを設定したことになります。</p>
 
-    <p><code class="language-plaintext highlighter-rouge">--update-delay</code>フラグは、サービスの 1 つあるいは複数のタスクに対して、アップデートの待機時間を設定するものです。
-数値を<code class="language-plaintext highlighter-rouge">T</code>として、<code class="language-plaintext highlighter-rouge">Ts</code>は秒、<code class="language-plaintext highlighter-rouge">Tm</code>は分、<code class="language-plaintext highlighter-rouge">Th</code>は時間を表現します。
-そこでたとえば<code class="language-plaintext highlighter-rouge">10m30s</code>は 10 分 30 秒の遅延を表現します。</p>
+    <p><code class="highlighter-rouge">--update-delay</code>フラグは、サービスの 1 つあるいは複数のタスクに対して、アップデートの待機時間を設定するものです。
+数値を<code class="highlighter-rouge">T</code>として、<code class="highlighter-rouge">Ts</code>は秒、<code class="highlighter-rouge">Tm</code>は分、<code class="highlighter-rouge">Th</code>は時間を表現します。
+そこでたとえば<code class="highlighter-rouge">10m30s</code>は 10 分 30 秒の遅延を表現します。</p>
 
     <p>デフォルトにおいてスケジューラーは、一度に 1 つのタスクをアップデートします。
-<code class="language-plaintext highlighter-rouge">--update-parallelism</code>フラグを指定すれば、スケジューラーが同時にアップデート可能なサービスタスクの最大数を設定することができます。</p>
+<code class="highlighter-rouge">--update-parallelism</code>フラグを指定すれば、スケジューラーが同時にアップデート可能なサービスタスクの最大数を設定することができます。</p>
 
-    <p>ある 1 つのタスクに対するアップデート処理の結果として<code class="language-plaintext highlighter-rouge">RUNNING</code>という状態が返ってきたとします。
+    <p>ある 1 つのタスクに対するアップデート処理の結果として<code class="highlighter-rouge">RUNNING</code>という状態が返ってきたとします。
 デフォルトでスケジューラーは、その場合、別のタスクを処理するようにし、最終的にタスクすべてのアップデートが完了するようにスケジュールされます。
-アップデートのどういうタイミングであっても、タスクが<code class="language-plaintext highlighter-rouge">FAILED</code>を返してきたら、スケジューラーはアップデート処理を中断します。
-この動きに対しては、<code class="language-plaintext highlighter-rouge">docker service create</code>や<code class="language-plaintext highlighter-rouge">docker service update</code>における<code class="language-plaintext highlighter-rouge">--update-failure-action</code>フラグを使って制御することができます。</p>
+アップデートのどういうタイミングであっても、タスクが<code class="highlighter-rouge">FAILED</code>を返してきたら、スケジューラーはアップデート処理を中断します。
+この動きに対しては、<code class="highlighter-rouge">docker service create</code>や<code class="highlighter-rouge">docker service update</code>における<code class="highlighter-rouge">--update-failure-action</code>フラグを使って制御することができます。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">redis</code>サービスを確認します。</p>
+    <p><code class="highlighter-rouge">redis</code>サービスを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service inspect <span class="nt">--pretty</span> redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service inspect <span class="nt">--pretty</span> redis
 <span class="go">
 ID:             0u6a4s31ybk7yw2wyvtikmu50
 Name:           redis
@@ -160,10 +160,10 @@ Endpoint Mode:  vip
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">redis</code>に対するコンテナーイメージのアップデータを行います。
-Swarm マネージャーは<code class="language-plaintext highlighter-rouge">UpdateConfig</code>ポリシーに従って、ノードへのアップデートを適用します。</p>
+    <p><code class="highlighter-rouge">redis</code>に対するコンテナーイメージのアップデータを行います。
+Swarm マネージャーは<code class="highlighter-rouge">UpdateConfig</code>ポリシーに従って、ノードへのアップデートを適用します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update <span class="nt">--image</span> redis:3.0.7 redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service update <span class="nt">--image</span> redis:3.0.7 redis
 <span class="go">redis
 </span></code></pre></div>    </div>
 
@@ -173,14 +173,14 @@ Swarm マネージャーは<code class="language-plaintext highlighter-rouge">Up
       <li>最初のタスクを停止します。</li>
       <li>停止したタスクに対してアップデートをスケジュールします。</li>
       <li>アップデート対象のタスクに対してコンテナーを起動します。</li>
-      <li>1 つのタスクに対するアップデートにおいて <code class="language-plaintext highlighter-rouge">RUNNING</code> が返ってきたら、指定された待機時間だけ待って、次のタスクの処理を開始します。</li>
-      <li>アップデート中にタスクが<code class="language-plaintext highlighter-rouge">FAILED</code>を返したら、アップデートを中断します。</li>
+      <li>1 つのタスクに対するアップデートにおいて <code class="highlighter-rouge">RUNNING</code> が返ってきたら、指定された待機時間だけ待って、次のタスクの処理を開始します。</li>
+      <li>アップデート中にタスクが<code class="highlighter-rouge">FAILED</code>を返したら、アップデートを中断します。</li>
     </ul>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service inspect --pretty redis</code>を実行して、新たなイメージが思ったとおりの状態になっていることを確認します。</p>
+    <p><code class="highlighter-rouge">docker service inspect --pretty redis</code>を実行して、新たなイメージが思ったとおりの状態になっていることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service inspect <span class="nt">--pretty</span> redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service inspect <span class="nt">--pretty</span> redis
 <span class="go">
 ID:             0u6a4s31ybk7yw2wyvtikmu50
 Name:           redis
@@ -197,9 +197,9 @@ Resources:
 Endpoint Mode:  vip
 </span></code></pre></div>    </div>
 
-    <p>処理失敗によりアップデートが中断していたら<code class="language-plaintext highlighter-rouge">service inspect</code>の結果は以下のようになります。</p>
+    <p>処理失敗によりアップデートが中断していたら<code class="highlighter-rouge">service inspect</code>の結果は以下のようになります。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service inspect <span class="nt">--pretty</span> redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service inspect <span class="nt">--pretty</span> redis
 <span class="go">
 ID:             0u6a4s31ybk7yw2wyvtikmu50
 Name:           redis
@@ -211,18 +211,18 @@ Update status:
 ...snip...
 </span></code></pre></div>    </div>
 
-    <p>中断しているアップデートを再び開始するには、<code class="language-plaintext highlighter-rouge">docker service update &lt;サービスID&gt;</code>を実行します。
+    <p>中断しているアップデートを再び開始するには、<code class="highlighter-rouge">docker service update &lt;サービスID&gt;</code>を実行します。
 たとえば以下のとおりです。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service update redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service update redis
 </code></pre></div>    </div>
 
-    <p>特定のアップデータ失敗が続くようであれば、これを解消するために、<code class="language-plaintext highlighter-rouge">docker service update</code>に何らかのフラグを指定して、サービスを再設定する必要があるかもしれません。</p>
+    <p>特定のアップデータ失敗が続くようであれば、これを解消するために、<code class="highlighter-rouge">docker service update</code>に何らかのフラグを指定して、サービスを再設定する必要があるかもしれません。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker service ps &lt;サービスID&gt;</code>を実行して、ローリングアップデートの状況を確認します。</p>
+    <p><code class="highlighter-rouge">docker service ps &lt;サービスID&gt;</code>を実行して、ローリングアップデートの状況を確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service ps redis
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service ps redis
 <span class="go">
 NAME                                   IMAGE        NODE       DESIRED STATE  CURRENT STATE            ERROR
 redis.1.dos1zffgeofhagnve8w864fco      redis:3.0.7  worker1    Running        Running 37 seconds
@@ -233,7 +233,7 @@ redis.3.egiuiqpzrdbxks3wxgn8qib1g      redis:3.0.7  worker1    Running        Ru
  \_ redis.3.ctzktfddb2tepkr45qcmqln04  redis:3.0.6  mmanager1  Shutdown       Shutdown 2 minutes ago
 </span></code></pre></div>    </div>
 
-    <p>Swarm が全タスクに対するアップデートを終えていない状態であれば、<code class="language-plaintext highlighter-rouge">redis:3.0.6</code>を実行しているものがあり、また <code class="language-plaintext highlighter-rouge">redis:3.0.7</code>を実行しているものもありました。
+    <p>Swarm が全タスクに対するアップデートを終えていない状態であれば、<code class="highlighter-rouge">redis:3.0.6</code>を実行しているものがあり、また <code class="highlighter-rouge">redis:3.0.7</code>を実行しているものもありました。
 上の結果からは、ローリングアップデート処理を終えた状態であることがわかります。</p>
   </li>
 </ol>

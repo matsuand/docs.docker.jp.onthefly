@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーまたはサービスのログ確認 | Docker ドキュメント</title>
   <meta name="description" content="How to write to and view a container&#39;s logs" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテナーまたはサービスのログ確認" />
   <meta property="og:description" content="How to write to and view a container&#39;s logs" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コンテナーまたはサービスのログ確認","description":"How to write to and view a container's logs","url":"https://docs.docker.com/config/containers/logging/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,37 +107,37 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナーまたはサービスのログ確認</h1><p><code class="language-plaintext highlighter-rouge">docker logs</code>は実行中のコンテナーが出力するログ情報を確認するコマンドです。
-<code class="language-plaintext highlighter-rouge">docker service logs</code>コマンドは、1 つのサービスに参加しているコンテナーすべてのログ情報を確認します。
+                        <section class="section"><h1>コンテナーまたはサービスのログ確認</h1><p><code class="highlighter-rouge">docker logs</code>は実行中のコンテナーが出力するログ情報を確認するコマンドです。
+<code class="highlighter-rouge">docker service logs</code>コマンドは、1 つのサービスに参加しているコンテナーすべてのログ情報を確認します。
 出力されるログ情報およびその出力書式は、ほぼコンテナーのエンドポイントコマンドにより定まります。</p>
 
-<p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">docker logs</code>や<code class="language-plaintext highlighter-rouge">docker service logs</code>は、端末画面にて対話的にコマンドを入力した際、そのコマンドが出力するものと同じような情報を得ることができます。
+<p>デフォルトにおいて<code class="highlighter-rouge">docker logs</code>や<code class="highlighter-rouge">docker service logs</code>は、端末画面にて対話的にコマンドを入力した際、そのコマンドが出力するものと同じような情報を得ることができます。
 UNIX や Linux コマンドは普通、3 つの I/O ストリームを実行時に開きます。
-それは<code class="language-plaintext highlighter-rouge">STDIN</code>、<code class="language-plaintext highlighter-rouge">STDOUT</code>、<code class="language-plaintext highlighter-rouge">STDERR</code>です。
-<code class="language-plaintext highlighter-rouge">STDIN</code>はコマンドの入力ストリームです。
+それは<code class="highlighter-rouge">STDIN</code>、<code class="highlighter-rouge">STDOUT</code>、<code class="highlighter-rouge">STDERR</code>です。
+<code class="highlighter-rouge">STDIN</code>はコマンドの入力ストリームです。
 これはキーボードから入力されるか、あるいは他のコマンドからの入力の場合もあります。
-<code class="language-plaintext highlighter-rouge">STDOUT</code>はコマンドの標準出力です。
-そして<code class="language-plaintext highlighter-rouge">STDERR</code>は通常、エラーメッセージを出力するために用いられます。
-デフォルトで<code class="language-plaintext highlighter-rouge">docker logs</code>は、コマンドの<code class="language-plaintext highlighter-rouge">STDOUT</code>と<code class="language-plaintext highlighter-rouge">STDERR</code>を表示します。
+<code class="highlighter-rouge">STDOUT</code>はコマンドの標準出力です。
+そして<code class="highlighter-rouge">STDERR</code>は通常、エラーメッセージを出力するために用いられます。
+デフォルトで<code class="highlighter-rouge">docker logs</code>は、コマンドの<code class="highlighter-rouge">STDOUT</code>と<code class="highlighter-rouge">STDERR</code>を表示します。
 I/O と Linux に関しての詳細は <a href="https://tldp.org/LDP/abs/html/io-redirection.html">Linux Documentation Project における I/O リダイレクション</a> を参照してください。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker logs</code>の出力だけでは不十分なことがあります。
+<p><code class="highlighter-rouge">docker logs</code>の出力だけでは不十分なことがあります。
 その場合は別の手順が必要になります。</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/config/containers/logging/configure/">ログドライバー</a> を利用するにあたって、そのドライバーのログ出力先が、ファイル、外部ホスト、データベース、別のログバックエンドであって、<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">“デュアルログ”</a> が無効になっている場合、<code class="language-plaintext highlighter-rouge">docker logs</code>の出力は不十分なものになる場合があります。</li>
-  <li>実行するイメージが、ウェブサーバーやデータベースのような非対話的なプロセスである場合、ログは<code class="language-plaintext highlighter-rouge">STDOUT</code>や<code class="language-plaintext highlighter-rouge">STDERR</code>にではなく、ログファイルに対して出力されるかもしれません。</li>
+  <li><a href="/docs.docker.jp.onthefly/config/containers/logging/configure/">ログドライバー</a> を利用するにあたって、そのドライバーのログ出力先が、ファイル、外部ホスト、データベース、別のログバックエンドであって、<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">“デュアルログ”</a> が無効になっている場合、<code class="highlighter-rouge">docker logs</code>の出力は不十分なものになる場合があります。</li>
+  <li>実行するイメージが、ウェブサーバーやデータベースのような非対話的なプロセスである場合、ログは<code class="highlighter-rouge">STDOUT</code>や<code class="highlighter-rouge">STDERR</code>にではなく、ログファイルに対して出力されるかもしれません。</li>
 </ul>
 
-<p>上の 1 点めに該当する場合、ログ出力が他の方法で処理されているため、<code class="language-plaintext highlighter-rouge">docker logs</code>は利用しないようにすることが考えられます。
-2 点めの場合、<code class="language-plaintext highlighter-rouge">nginx</code>の公式イメージではその解決がなされていて、公式の Apache イメージ<code class="language-plaintext highlighter-rouge">httpd</code>では、また別の解決方法をとっています。</p>
+<p>上の 1 点めに該当する場合、ログ出力が他の方法で処理されているため、<code class="highlighter-rouge">docker logs</code>は利用しないようにすることが考えられます。
+2 点めの場合、<code class="highlighter-rouge">nginx</code>の公式イメージではその解決がなされていて、公式の Apache イメージ<code class="highlighter-rouge">httpd</code>では、また別の解決方法をとっています。</p>
 
-<p><code class="language-plaintext highlighter-rouge">nginx</code>の公式イメージでは、<code class="language-plaintext highlighter-rouge">/var/log/nginx/access.log</code>から<code class="language-plaintext highlighter-rouge">/dev/stdout</code>へのシンボリックリンクを生成しています。
-同じく<code class="language-plaintext highlighter-rouge">/var/log/nginx/error.log</code>は<code class="language-plaintext highlighter-rouge">/dev/stderr</code>へのリンクとしています。
+<p><code class="highlighter-rouge">nginx</code>の公式イメージでは、<code class="highlighter-rouge">/var/log/nginx/access.log</code>から<code class="highlighter-rouge">/dev/stdout</code>へのシンボリックリンクを生成しています。
+同じく<code class="highlighter-rouge">/var/log/nginx/error.log</code>は<code class="highlighter-rouge">/dev/stderr</code>へのリンクとしています。
 ログファイルをこのように設定し、ログ内容に合わせた特別デバイスへの出力を行っています。
 詳しくは <a href="https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23">Dockerfile</a> を参照してください。</p>
 
-<p>公式イメージ<code class="language-plaintext highlighter-rouge">httpd</code>では、<code class="language-plaintext highlighter-rouge">httpd</code>アプリケーション設定を変更して、標準出力を直接<code class="language-plaintext highlighter-rouge">/proc/self/fd/1</code>（すなわち<code class="language-plaintext highlighter-rouge">STDOUT</code>）に、またエラーを<code class="language-plaintext highlighter-rouge">/proc/self/fd/2</code>（すなわち<code class="language-plaintext highlighter-rouge">STDERR</code>）にそれぞれ出力するようにしています。
+<p>公式イメージ<code class="highlighter-rouge">httpd</code>では、<code class="highlighter-rouge">httpd</code>アプリケーション設定を変更して、標準出力を直接<code class="highlighter-rouge">/proc/self/fd/1</code>（すなわち<code class="highlighter-rouge">STDOUT</code>）に、またエラーを<code class="highlighter-rouge">/proc/self/fd/2</code>（すなわち<code class="highlighter-rouge">STDERR</code>）にそれぞれ出力するようにしています。
 詳しくは <a href="https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75">Dockerfile</a> を参照してください。</p>
 
 <h2 id="next-steps">次のステップ</h2>

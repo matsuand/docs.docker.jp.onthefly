@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Write a graph driver plugin | Docker ドキュメント</title>
   <meta name="description" content="How to manage image and container filesystems with external plugins" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Write a graph driver plugin" />
   <meta property="og:description" content="How to manage image and container filesystems with external plugins" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_graphdriver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Write a graph driver plugin","description":"How to manage image and container filesystems with external plugins","url":"https://docs.docker.com/engine/extend/plugins_graphdriver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -131,7 +131,7 @@ built-in storage drivers, such as aufs/overlay/devicemapper/btrfs.</p>
 before using the plugin. See the following example for the correct ordering
 of steps.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker plugin install cpuguy83/docker-overlay2-graphdriver-plugin # this command also enables the driver
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker plugin install cpuguy83/docker-overlay2-graphdriver-plugin # this command also enables the driver
 &lt;output suppressed&gt;
 $ pkill dockerd
 $ dockerd --experimental -s cpuguy83/docker-overlay2-graphdriver-plugin
@@ -144,17 +144,17 @@ on the underlying plugin protocol.</p>
 
 <h2 id="graph-driver-plugin-protocol">Graph Driver plugin protocol</h2>
 
-<p>If a plugin registers itself as a <code class="language-plaintext highlighter-rouge">GraphDriver</code> when activated, then it is
+<p>If a plugin registers itself as a <code class="highlighter-rouge">GraphDriver</code> when activated, then it is
 expected to provide the rootfs for containers as well as image layer storage.</p>
 
 <h3 id="graphdriverinit">/GraphDriver.Init</h3>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Home"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/graph/home/path"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"UIDMaps"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"GIDMaps"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="s2">"Home"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/graph/home/path"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="s2">"UIDMaps"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="s2">"GIDMaps"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -164,15 +164,15 @@ or honor them.</p>
 
 <p>The request also includes a list of UID and GID mappings, structed as follows:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"HostID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="s2">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"HostID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -189,7 +189,7 @@ this request, the engine will use default values for all capabilities.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ReproducesExactDiffs"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ReproducesExactDiffs"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -204,20 +204,20 @@ of reproducing exactly equivalent diffs for read-only filesystem layers.</li>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"StorageOpt"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"StorageOpt"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Create a new, empty, read-only filesystem layer with the specified
-<code class="language-plaintext highlighter-rouge">ID</code>, <code class="language-plaintext highlighter-rouge">Parent</code> and <code class="language-plaintext highlighter-rouge">MountLabel</code>. If <code class="language-plaintext highlighter-rouge">Parent</code> is an empty string, there is no
-parent layer. <code class="language-plaintext highlighter-rouge">StorageOpt</code> is map of strings which indicate storage options.</p>
+<code class="highlighter-rouge">ID</code>, <code class="highlighter-rouge">Parent</code> and <code class="highlighter-rouge">MountLabel</code>. If <code class="highlighter-rouge">Parent</code> is an empty string, there is no
+parent layer. <code class="highlighter-rouge">StorageOpt</code> is map of strings which indicate storage options.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -227,28 +227,28 @@ parent layer. <code class="language-plaintext highlighter-rouge">StorageOpt</cod
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"StorageOpt"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"StorageOpt"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Similar to <code class="language-plaintext highlighter-rouge">/GraphDriver.Create</code> but creates a read-write filesystem layer.</p>
+<p>Similar to <code class="highlighter-rouge">/GraphDriver.Create</code> but creates a read-write filesystem layer.</p>
 
 <h3 id="graphdriverremove">/GraphDriver.Remove</h3>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Remove the filesystem layer with this given <code class="language-plaintext highlighter-rouge">ID</code>.</p>
+<p>Remove the filesystem layer with this given <code class="highlighter-rouge">ID</code>.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -258,17 +258,17 @@ parent layer. <code class="language-plaintext highlighter-rouge">StorageOpt</cod
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"MountLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Get the mountpoint for the layered filesystem referred to by the given <code class="language-plaintext highlighter-rouge">ID</code>.</p>
+<p>Get the mountpoint for the layered filesystem referred to by the given <code class="highlighter-rouge">ID</code>.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/mygraph/46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/mygraph/46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -279,16 +279,16 @@ Respond with a non-empty string error if an error occurred.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Release the system resources for the specified <code class="language-plaintext highlighter-rouge">ID</code>, such as unmounting the
+<p>Release the system resources for the specified <code class="highlighter-rouge">ID</code>, such as unmounting the
 filesystem layer.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -298,20 +298,20 @@ filesystem layer.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Determine if a filesystem layer with the specified <code class="language-plaintext highlighter-rouge">ID</code> exists.</p>
+<p>Determine if a filesystem layer with the specified <code class="highlighter-rouge">ID</code> exists.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="s2">"Exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Respond with a boolean for whether or not the filesystem layer with the specified
-<code class="language-plaintext highlighter-rouge">ID</code> exists.</p>
+<code class="highlighter-rouge">ID</code> exists.</p>
 
 <h3 id="graphdriverstatus">/GraphDriver.Status</h3>
 
@@ -323,7 +323,7 @@ filesystem layer.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="p">[[]]</span><span class="w">
+  </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="p">[[]]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -334,17 +334,17 @@ information.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Get low-level diagnostic information about the layered filesystem with the
-with the specified <code class="language-plaintext highlighter-rouge">ID</code></p>
+with the specified <code class="highlighter-rouge">ID</code></p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -363,7 +363,7 @@ unmounting all the layered file systems.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -373,16 +373,16 @@ unmounting all the layered file systems.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Get an archive of the changes between the filesystem layers specified by the <code class="language-plaintext highlighter-rouge">ID</code>
-and <code class="language-plaintext highlighter-rouge">Parent</code>. <code class="language-plaintext highlighter-rouge">Parent</code> may be an empty string, in which case there is no parent.</p>
+<p>Get an archive of the changes between the filesystem layers specified by the <code class="highlighter-rouge">ID</code>
+and <code class="highlighter-rouge">Parent</code>. <code class="highlighter-rouge">Parent</code> may be an empty string, in which case there is no parent.</p>
 
 <p><strong>Response</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 {{ TAR STREAM }}
 
 </code></pre></div></div>
@@ -391,28 +391,28 @@ and <code class="language-plaintext highlighter-rouge">Parent</code>. <code clas
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Get a list of changes between the filesystem layers specified by the <code class="language-plaintext highlighter-rouge">ID</code> and
-<code class="language-plaintext highlighter-rouge">Parent</code>. If <code class="language-plaintext highlighter-rouge">Parent</code> is an empty string, there is no parent.</p>
+<p>Get a list of changes between the filesystem layers specified by the <code class="highlighter-rouge">ID</code> and
+<code class="highlighter-rouge">Parent</code>. If <code class="highlighter-rouge">Parent</code> is an empty string, there is no parent.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[{}],</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Changes"</span><span class="p">:</span><span class="w"> </span><span class="p">[{}],</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Respond with a list of changes. The structure of a change is:</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"Path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/some/path"</span><span class="err">,</span><span class="w">
-  </span><span class="nl">"Kind"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="err">,</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="s2">"Path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/some/path"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Kind"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Where the <code class="language-plaintext highlighter-rouge">Path</code> is the filesystem path within the layered filesystem that is
-changed and <code class="language-plaintext highlighter-rouge">Kind</code> is an integer specifying the type of change that occurred:</p>
+<p>Where the <code class="highlighter-rouge">Path</code> is the filesystem path within the layered filesystem that is
+changed and <code class="highlighter-rouge">Kind</code> is an integer specifying the type of change that occurred:</p>
 
 <ul>
   <li>0 - Modified</li>
@@ -425,25 +425,25 @@ changed and <code class="language-plaintext highlighter-rouge">Kind</code> is an
 <h3 id="graphdriverapplydiff">/GraphDriver.ApplyDiff</h3>
 
 <p><strong>Request</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 {{ TAR STREAM }}
 
 </code></pre></div></div>
 
-<p>Extract the changeset from the given diff into the layer with the specified <code class="language-plaintext highlighter-rouge">ID</code>
-and <code class="language-plaintext highlighter-rouge">Parent</code></p>
+<p>Extract the changeset from the given diff into the layer with the specified <code class="highlighter-rouge">ID</code>
+and <code class="highlighter-rouge">Parent</code></p>
 
 <p><strong>Query Parameters</strong>:</p>
 
 <ul>
-  <li>id (required)- the <code class="language-plaintext highlighter-rouge">ID</code> of the new filesystem layer to extract the diff to</li>
-  <li>parent (required)- the <code class="language-plaintext highlighter-rouge">Parent</code> of the given <code class="language-plaintext highlighter-rouge">ID</code></li>
+  <li>id (required)- the <code class="highlighter-rouge">ID</code> of the new filesystem layer to extract the diff to</li>
+  <li>parent (required)- the <code class="highlighter-rouge">Parent</code> of the given <code class="highlighter-rouge">ID</code></li>
 </ul>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">512366</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">512366</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -454,21 +454,21 @@ Respond with a non-empty string error if an error occurred.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
+  </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46fe8644f2572fd1e505364f7581e0c9dbc7f14640bd1fb6ce97714fb6fc5187"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2cd9c322cb78a55e8212aa3ea8425a4180236d7106938ec921d0935a4b8ca142"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Calculate the changes between the specified <code class="language-plaintext highlighter-rouge">ID</code></p>
+<p>Calculate the changes between the specified <code class="highlighter-rouge">ID</code></p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">512366</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="mi">512366</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Respond with the size changes between the specified <code class="language-plaintext highlighter-rouge">ID</code> and <code class="language-plaintext highlighter-rouge">Parent</code>
+<p>Respond with the size changes between the specified <code class="highlighter-rouge">ID</code> and <code class="highlighter-rouge">Parent</code>
 Respond with a non-empty string error if an error occurred.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Examples">Examples</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=storage">storage</a>, <a href="/docs.docker.jp.onthefly/search/?q=image">image</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=data">data</a>, <a href="/docs.docker.jp.onthefly/search/?q=graph">graph</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugin">plugin</a>, <a href="/docs.docker.jp.onthefly/search/?q=api">api</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

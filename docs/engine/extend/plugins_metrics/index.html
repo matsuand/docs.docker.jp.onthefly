@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker metrics collector plugins | Docker ドキュメント</title>
   <meta name="description" content="Metrics plugins." />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker metrics collector plugins" />
   <meta property="og:description" content="Metrics plugins." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_metrics/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker metrics collector plugins","description":"Metrics plugins.","url":"https://docs.docker.com/engine/extend/plugins_metrics/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -124,21 +124,21 @@ in a future version.</p>
 
 <h2 id="creating-a-metrics-plugin">Creating a metrics plugin</h2>
 
-<p>You must currently set <code class="language-plaintext highlighter-rouge">PropagatedMount</code> in the plugin <code class="language-plaintext highlighter-rouge">config.json</code> to
-<code class="language-plaintext highlighter-rouge">/run/docker</code>. This allows the plugin to receive updated mounts
+<p>You must currently set <code class="highlighter-rouge">PropagatedMount</code> in the plugin <code class="highlighter-rouge">config.json</code> to
+<code class="highlighter-rouge">/run/docker</code>. This allows the plugin to receive updated mounts
 (the bind-mounted socket) from Docker after the plugin is already configured.</p>
 
 <h2 id="metricscollector-protocol">MetricsCollector protocol</h2>
 
-<p>Metrics plugins must register as implementing the<code class="language-plaintext highlighter-rouge">MetricsCollector</code> interface
-in <code class="language-plaintext highlighter-rouge">config.json</code>.</p>
+<p>Metrics plugins must register as implementing the<code class="highlighter-rouge">MetricsCollector</code> interface
+in <code class="highlighter-rouge">config.json</code>.</p>
 
-<p>On Unix platforms, the socket is located at <code class="language-plaintext highlighter-rouge">/run/docker/metrics.sock</code> in the
+<p>On Unix platforms, the socket is located at <code class="highlighter-rouge">/run/docker/metrics.sock</code> in the
 plugin’s rootfs.</p>
 
-<p><code class="language-plaintext highlighter-rouge">MetricsCollector</code> must implement two endpoints:</p>
+<p><code class="highlighter-rouge">MetricsCollector</code> must implement two endpoints:</p>
 
-<h3 id="metricscollectorstartmetrics"><code class="language-plaintext highlighter-rouge">MetricsCollector.StartMetrics</code></h3>
+<h3 id="metricscollectorstartmetrics"><code class="highlighter-rouge">MetricsCollector.StartMetrics</code></h3>
 
 <p>Signals to the plugin that the metrics socket is now available for scraping</p>
 
@@ -150,15 +150,15 @@ plugin’s rootfs.</p>
 
 <p><strong>Response</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+	</span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>If an error occurred during this request, add an error message to the <code class="language-plaintext highlighter-rouge">Err</code> field
-in the response. If no error then you can either send an empty response (<code class="language-plaintext highlighter-rouge">{}</code>)
-or an empty value for the <code class="language-plaintext highlighter-rouge">Err</code> field. Errors will only be logged.</p>
+<p>If an error occurred during this request, add an error message to the <code class="highlighter-rouge">Err</code> field
+in the response. If no error then you can either send an empty response (<code class="highlighter-rouge">{}</code>)
+or an empty value for the <code class="highlighter-rouge">Err</code> field. Errors will only be logged.</p>
 
-<h3 id="metricscollectorstopmetrics"><code class="language-plaintext highlighter-rouge">MetricsCollector.StopMetrics</code></h3>
+<h3 id="metricscollectorstopmetrics"><code class="highlighter-rouge">MetricsCollector.StopMetrics</code></h3>
 
 <p>Signals to the plugin that the metrics socket is no longer available.
 This may happen when the daemon is shutting down.</p>
@@ -171,13 +171,13 @@ This may happen when the daemon is shutting down.</p>
 
 <p><strong>Response</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+	</span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>If an error occurred during this request, add an error message to the <code class="language-plaintext highlighter-rouge">Err</code> field
-in the response. If no error then you can either send an empty response (<code class="language-plaintext highlighter-rouge">{}</code>)
-or an empty value for the <code class="language-plaintext highlighter-rouge">Err</code> field. Errors will only be logged.</p>
+<p>If an error occurred during this request, add an error message to the <code class="highlighter-rouge">Err</code> field
+in the response. If no error then you can either send an empty response (<code class="highlighter-rouge">{}</code>)
+or an empty value for the <code class="highlighter-rouge">Err</code> field. Errors will only be logged.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Examples">Examples</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugins">plugins</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=user guide">user guide</a>, <a href="/docs.docker.jp.onthefly/search/?q=metrics">metrics</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS integration architecture | Docker ドキュメント</title>
   <meta name="description" content="Mapping of Docker compose entities to Amazon constructs" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ECS integration architecture" />
   <meta property="og:description" content="Mapping of Docker compose entities to Amazon constructs" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-architecture/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ECS integration architecture","description":"Mapping of Docker compose entities to Amazon constructs","url":"https://docs.docker.com/cloud/ecs-architecture/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,7 +116,7 @@ This document describes the mapping between compose application model and AWS co
 
 <p>This diagram shows compose model and on same line AWS components that get created as equivalent resources</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+----------+                                +-------------+                              +-------------------+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+----------+                                +-------------+                              +-------------------+
 | Project  |  . . . . . . . . . . . . . .   | Cluster     |    . . . . . . .             | LoadBalancer      |
 +-+--------+                                +-------------+                              +-------------------+
   |
@@ -162,27 +162,27 @@ This document describes the mapping between compose application model and AWS co
       +------------+                        +---------------+
 </code></pre></div></div>
 
-<p>Each compose application service is mapped to an ECS <code class="language-plaintext highlighter-rouge">Service</code>. A <code class="language-plaintext highlighter-rouge">TaksDefinition</code> is created according to compose definition.
-Actual mapping is constrained by both Cloud platform and Fargate limitations. Such a <code class="language-plaintext highlighter-rouge">TaskDefinition</code> is set with a single container,
+<p>Each compose application service is mapped to an ECS <code class="highlighter-rouge">Service</code>. A <code class="highlighter-rouge">TaksDefinition</code> is created according to compose definition.
+Actual mapping is constrained by both Cloud platform and Fargate limitations. Such a <code class="highlighter-rouge">TaskDefinition</code> is set with a single container,
 according to the compose model which doesn’t offer a syntax to support sidecar containers.</p>
 
-<p>An IAM Role is created and configured as <code class="language-plaintext highlighter-rouge">TaskRole</code> to grant service access to additional AWS resources when required. For this
-purpose, user can set <code class="language-plaintext highlighter-rouge">x-aws-policies</code> or define a fine grained <code class="language-plaintext highlighter-rouge">x-aws-role</code> IAM role document.</p>
+<p>An IAM Role is created and configured as <code class="highlighter-rouge">TaskRole</code> to grant service access to additional AWS resources when required. For this
+purpose, user can set <code class="highlighter-rouge">x-aws-policies</code> or define a fine grained <code class="highlighter-rouge">x-aws-role</code> IAM role document.</p>
 
-<p>Service’s ports get mapped into security group’s <code class="language-plaintext highlighter-rouge">IngressRule</code>s and load balancer <code class="language-plaintext highlighter-rouge">Listener</code>s.
-Compose application whith HTTP services only (using ports 80/443 or <code class="language-plaintext highlighter-rouge">x-aws-protocol</code> set to <code class="language-plaintext highlighter-rouge">http</code>) get an Application Load Balancer
+<p>Service’s ports get mapped into security group’s <code class="highlighter-rouge">IngressRule</code>s and load balancer <code class="highlighter-rouge">Listener</code>s.
+Compose application whith HTTP services only (using ports 80/443 or <code class="highlighter-rouge">x-aws-protocol</code> set to <code class="highlighter-rouge">http</code>) get an Application Load Balancer
 created, otherwise a Network Load Balancer is used.</p>
 
-<p>A <code class="language-plaintext highlighter-rouge">TargetGroup</code> is created per service to dispatch traffic by load balancer to the matching containers</p>
+<p>A <code class="highlighter-rouge">TargetGroup</code> is created per service to dispatch traffic by load balancer to the matching containers</p>
 
-<p>Secrets bound to a service get translated into an <code class="language-plaintext highlighter-rouge">InitContainer</code> added to the service’s <code class="language-plaintext highlighter-rouge">TaskDefinition</code>. This init container is
-responsible to create a <code class="language-plaintext highlighter-rouge">/run/secrets</code> file for secret to match docker secret model and make application code portable.
-A <code class="language-plaintext highlighter-rouge">TaskExecutionRole</code> is also created per service, and is updated to grant access to bound secrets.</p>
+<p>Secrets bound to a service get translated into an <code class="highlighter-rouge">InitContainer</code> added to the service’s <code class="highlighter-rouge">TaskDefinition</code>. This init container is
+responsible to create a <code class="highlighter-rouge">/run/secrets</code> file for secret to match docker secret model and make application code portable.
+A <code class="highlighter-rouge">TaskExecutionRole</code> is also created per service, and is updated to grant access to bound secrets.</p>
 
-<p>Services using a GPU (<code class="language-plaintext highlighter-rouge">DeviceRequest</code>) get the <code class="language-plaintext highlighter-rouge">Cluster</code> extended with an EC2 <code class="language-plaintext highlighter-rouge">CapacityProvider</code>, using an <code class="language-plaintext highlighter-rouge">AutoscalingGroup</code> to manage
-EC2 resources allocation based on a <code class="language-plaintext highlighter-rouge">LaunchConfiguration</code>. The latter uses ECS recommended AMI and machine type for GPU.</p>
+<p>Services using a GPU (<code class="highlighter-rouge">DeviceRequest</code>) get the <code class="highlighter-rouge">Cluster</code> extended with an EC2 <code class="highlighter-rouge">CapacityProvider</code>, using an <code class="highlighter-rouge">AutoscalingGroup</code> to manage
+EC2 resources allocation based on a <code class="highlighter-rouge">LaunchConfiguration</code>. The latter uses ECS recommended AMI and machine type for GPU.</p>
 
-<p>Service to declare <code class="language-plaintext highlighter-rouge">deploy.x-aws-autoscaling</code> get a <code class="language-plaintext highlighter-rouge">ScalingPolicy</code> created targeting specified the configured CPU usage metric</p>
+<p>Service to declare <code class="highlighter-rouge">deploy.x-aws-autoscaling</code> get a <code class="highlighter-rouge">ScalingPolicy</code> created targeting specified the configured CPU usage metric</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Amazon">Amazon</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=architecture">architecture</a>, <a href="/docs.docker.jp.onthefly/search/?q=mapping">mapping</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

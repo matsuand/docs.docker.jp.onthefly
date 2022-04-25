@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチステージビルドの利用 | Docker ドキュメント</title>
   <meta name="description" content="マルチステージイメージを使って、イメージサイズを小さく維持する。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="マルチステージビルドの利用" />
   <meta property="og:description" content="マルチステージイメージを使って、イメージサイズを小さく維持する。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"マルチステージビルドの利用","description":"マルチステージイメージを使って、イメージサイズを小さく維持する。","url":"https://docs.docker.com/develop/develop-images/multistage-build/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -129,9 +129,9 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 これは「開発パターン」（builder pattern）と呼ばれてきました。
 ただこの 2 つの Dockerfile を保守していくことは、目指すものではありません。</p>
 
-<p>以下に示すのは<code class="language-plaintext highlighter-rouge">Dockerfile.build</code>と<code class="language-plaintext highlighter-rouge">Dockerfile</code>を用いる例であり、上述の開発パターンにこだわったやり方です。</p>
+<p>以下に示すのは<code class="highlighter-rouge">Dockerfile.build</code>と<code class="highlighter-rouge">Dockerfile</code>を用いる例であり、上述の開発パターンにこだわったやり方です。</p>
 
-<p><strong><code class="language-plaintext highlighter-rouge">Dockerfile.build</code></strong>:</p>
+<p><strong><code class="highlighter-rouge">Dockerfile.build</code></strong>:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> golang:1.16</span>
@@ -141,12 +141,12 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 </span>  <span class="o">&amp;&amp;</span> <span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux go build <span class="nt">-a</span> <span class="nt">-installsuffix</span> cgo <span class="nt">-o</span> app .
 </code></pre></div></div>
 
-<p>上の例を見てわかるように、本来 2 つある<code class="language-plaintext highlighter-rouge">RUN</code>コマンドを Bash の<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>オペレーターによって連結しています。
+<p>上の例を見てわかるように、本来 2 つある<code class="highlighter-rouge">RUN</code>コマンドを Bash の<code class="highlighter-rouge">&amp;&amp;</code>オペレーターによって連結しています。
 これを行うことで、イメージ内に不要なレイヤーが生成されることを防いでいます。
 ただこれでは間違いを起こしやすく、保守もやりづらくなります。
-別のコマンドを挿入するのは簡単なことなので、<code class="language-plaintext highlighter-rouge">\</code>文字を使って行を分割するようなことは止めにして、以下のようにします。</p>
+別のコマンドを挿入するのは簡単なことなので、<code class="highlighter-rouge">\</code>文字を使って行を分割するようなことは止めにして、以下のようにします。</p>
 
-<p><strong><code class="language-plaintext highlighter-rouge">Dockerfile</code></strong>:</p>
+<p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> alpine:latest</span>
@@ -156,7 +156,7 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 <span class="k">CMD</span><span class="s"> ["./app"]</span>
 </code></pre></div></div>
 
-<p><strong><code class="language-plaintext highlighter-rouge">build.sh</code></strong>:</p>
+<p><strong><code class="highlighter-rouge">build.sh</code></strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 <span class="nb">echo </span>Building alexellis2/href-counter:build
@@ -165,30 +165,30 @@ docker build <span class="nt">--build-arg</span> <span class="nv">https_proxy</s
     <span class="nt">-t</span> alexellis2/href-counter:build <span class="nb">.</span> <span class="nt">-f</span> Dockerfile.build
 
 docker container create <span class="nt">--name</span> extract alexellis2/href-counter:build
-docker container <span class="nb">cp </span>extract:/go/src/github.com/alexellis/href-counter/app ./app
-docker container <span class="nb">rm</span> <span class="nt">-f</span> extract
+docker container cp extract:/go/src/github.com/alexellis/href-counter/app ./app
+docker container rm <span class="nt">-f</span> extract
 
 <span class="nb">echo </span>Building alexellis2/href-counter:latest
 
 docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
-<span class="nb">rm</span> ./app
+rm ./app
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">build.sh</code>スクリプトを実行すると、1 つめのイメージがビルドされます。
+<p><code class="highlighter-rouge">build.sh</code>スクリプトを実行すると、1 つめのイメージがビルドされます。
 そこからコンテナーを生成してイメージ内容をコピーし、2 つめのイメージがビルドされます。
-2 つのイメージは、それなりの容量をとるものであり、ローカルディスク上に<code class="language-plaintext highlighter-rouge">app</code>の生成物も残ったままです。</p>
+2 つのイメージは、それなりの容量をとるものであり、ローカルディスク上に<code class="highlighter-rouge">app</code>の生成物も残ったままです。</p>
 
 <p>マルチステージビルドは、広範囲にわたってこのような状況を簡略化します。</p>
 
 <h2 id="use-multi-stage-builds">マルチステージビルドの利用</h2>
 
-<p>マルチステージビルドを行うには、Dockerfile 内に<code class="language-plaintext highlighter-rouge">FROM</code>行を複数記述します。
-各<code class="language-plaintext highlighter-rouge">FROM</code>命令のベースイメージは、それぞれに異なるものとなり、各命令から新しいビルドステージが開始されます。
+<p>マルチステージビルドを行うには、Dockerfile 内に<code class="highlighter-rouge">FROM</code>行を複数記述します。
+各<code class="highlighter-rouge">FROM</code>命令のベースイメージは、それぞれに異なるものとなり、各命令から新しいビルドステージが開始されます。
 イメージ内に生成された内容を選び出して、一方から他方にコピーすることができます。
 そして最終イメージに含めたくない内容は、放っておくことができます。
 こういったことがどのようにして動作するのかを見るために、前節で示した Dockerfile をマルチステージビルドを使ったものに変更してみます。</p>
 
-<p><strong><code class="language-plaintext highlighter-rouge">Dockerfile</code></strong>:</p>
+<p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> golang:1.16</span>
@@ -206,9 +206,9 @@ docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> alexe
 
 <p>Dockerfile はただ 1 つ用意するだけです。
 またビルドスクリプトも個別に用意するわけではありません。
-単に<code class="language-plaintext highlighter-rouge">docker build</code>を実行するだけです。</p>
+単に<code class="highlighter-rouge">docker build</code>を実行するだけです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>最終結果として、以前と変わらずに本番環境向けの小さなイメージができあがりました。
@@ -217,18 +217,18 @@ docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> alexe
 さらに生成した内容をローカルシステムに抽出することも一切不要です。</p>
 
 <p>どうやってこれが動いているのでしょう？
-2 つめの<code class="language-plaintext highlighter-rouge">FROM</code>命令は、<code class="language-plaintext highlighter-rouge">alpine:latest</code>をベースイメージとして新たなビルドステージを開始しています。
-そして<code class="language-plaintext highlighter-rouge">COPY --from=0</code>という行では、直前のステージで作り出された生成内容を、単純に新たなステージにコピーしています。
+2 つめの<code class="highlighter-rouge">FROM</code>命令は、<code class="highlighter-rouge">alpine:latest</code>をベースイメージとして新たなビルドステージを開始しています。
+そして<code class="highlighter-rouge">COPY --from=0</code>という行では、直前のステージで作り出された生成内容を、単純に新たなステージにコピーしています。
 Go 言語の SDK やその他の中間生成物は取り残されていて、最終的なイメージには保存されていません。</p>
 
 <h2 id="name-your-build-stages">ビルドステージの命名</h2>
 
 <p>デフォルトではステージに名前はつきません。
 そこでステージを参照するには、ステージを表わす整数値を用います。
-この整数値は、最初の<code class="language-plaintext highlighter-rouge">FROM</code>命令を 0 として順次割り振られるものです。
-ただし<code class="language-plaintext highlighter-rouge">FROM</code>命令に<code class="language-plaintext highlighter-rouge">AS &lt;NAME&gt;</code>の構文を加えれば、ステージに名前をつけることができます。
-以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、<code class="language-plaintext highlighter-rouge">COPY</code>命令においてその名前を利用します。
-これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、<code class="language-plaintext highlighter-rouge">COPY</code>は確実に動作するということです。</p>
+この整数値は、最初の<code class="highlighter-rouge">FROM</code>命令を 0 として順次割り振られるものです。
+ただし<code class="highlighter-rouge">FROM</code>命令に<code class="highlighter-rouge">AS &lt;NAME&gt;</code>の構文を加えれば、ステージに名前をつけることができます。
+以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、<code class="highlighter-rouge">COPY</code>命令においてその名前を利用します。
+これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、<code class="highlighter-rouge">COPY</code>は確実に動作するということです。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> golang:1.16 AS builder</span>
@@ -248,23 +248,23 @@ Go 言語の SDK やその他の中間生成物は取り残されていて、最
 
 <p>イメージをビルドする際に、Dockerfile 内に含まれるビルドステージをすべてビルドしなければならない、というわけではありません。
 ビルド対象とするステージは指定することができます。
-以下のコマンドは、前述の<code class="language-plaintext highlighter-rouge">Dockerfile</code>を利用しつつ、<code class="language-plaintext highlighter-rouge">builder</code>と名付けたステージのみビルドするものです。</p>
+以下のコマンドは、前述の<code class="highlighter-rouge">Dockerfile</code>を利用しつつ、<code class="highlighter-rouge">builder</code>と名付けたステージのみビルドするものです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--target</span> builder <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--target</span> builder <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
 </code></pre></div></div>
 
 <p>この機能が役立つ例として以下があります。</p>
 
 <ul>
   <li>特定のビルドステージをデバッグすることができます。</li>
-  <li><code class="language-plaintext highlighter-rouge">debug</code>ステージでは、デバッグシンボルやデバッグツールを最大限利用し、<code class="language-plaintext highlighter-rouge">production</code>ステージはスリムなものにすることができます。</li>
-  <li><code class="language-plaintext highlighter-rouge">testing</code>ステージでは、アプリに用いるテストデータを投入し、本番環境向けの別のステージビルドでは、本物のデータを利用できます。</li>
+  <li><code class="highlighter-rouge">debug</code>ステージでは、デバッグシンボルやデバッグツールを最大限利用し、<code class="highlighter-rouge">production</code>ステージはスリムなものにすることができます。</li>
+  <li><code class="highlighter-rouge">testing</code>ステージでは、アプリに用いるテストデータを投入し、本番環境向けの別のステージビルドでは、本物のデータを利用できます。</li>
 </ul>
 
 <h2 id="use-an-external-image-as-a-stage">外部イメージの「ステージ」としての利用</h2>
 
 <p>マルチステージビルドの利用にあたって、ステージのコピーは Dockerfile 内での直前のステージだけに限定されるものではありません。
-<code class="language-plaintext highlighter-rouge">COPY --from</code>命令では別のイメージからコピーすることができます。
+<code class="highlighter-rouge">COPY --from</code>命令では別のイメージからコピーすることができます。
 その際にはローカルや Docker レジストリ上のイメージ名、タグ名、あるいはタグ ID を指定します。
 Docker クライアントは必要なときにはイメージを取得します。
 そしてそこから構築内容をコピーします。
@@ -276,7 +276,7 @@ Docker クライアントは必要なときにはイメージを取得します�
 <h2 id="use-a-previous-stage-as-a-new-stage">前のステージを新たなステージとして利用</h2>
 
 <p>前にビルドしたステージを参照して用いることができます。
-それには<code class="language-plaintext highlighter-rouge">FROM</code>ディレクティブを用いて、たとえば以下のようにします。</p>
+それには<code class="highlighter-rouge">FROM</code>ディレクティブを用いて、たとえば以下のようにします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> alpine:latest AS builder</span>

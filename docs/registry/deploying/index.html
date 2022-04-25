@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Registry サーバーのデプロイ | Docker ドキュメント</title>
   <meta name="description" content="Explains how to deploy a registry" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Registry サーバーのデプロイ" />
   <meta property="og:description" content="Explains how to deploy a registry" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/deploying/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Registry サーバーのデプロイ","description":"Explains how to deploy a registry","url":"https://docs.docker.com/registry/deploying/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Registry サーバーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 17 分</em></p><!-- This text will be included in the Docker Registry docs -->
+                        <section class="section"><h1>Registry サーバーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p><!-- This text will be included in the Docker Registry docs -->
 
 <blockquote class="important">
 
@@ -118,7 +118,7 @@ Docker Hub はホスト提供込みの Registry であり、さまざまな機�
 </blockquote>
 
 <p>Registry をデプロイするには、まずホスト上に Docker をインストールする必要があります。
-Registry は<code class="language-plaintext highlighter-rouge">registry</code>イメージのインスタンスの 1 つであり、Docker の内部において稼動します。</p>
+Registry は<code class="highlighter-rouge">registry</code>イメージのインスタンスの 1 つであり、Docker の内部において稼動します。</p>
 
 <p>このトピックでは Registry のデプロイと設定方法に関する基本的な情報を示します。
 設定オプションの全一覧については <a href="/docs.docker.jp.onthefly/registry/configuration/">設定リファレンス</a> を参照してください。</p>
@@ -129,7 +129,7 @@ Registry は<code class="language-plaintext highlighter-rouge">registry</code>�
 
 <p>以下のようなコマンドを実行して Registry コンテナーを起動します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 <span class="nt">--restart</span><span class="o">=</span>always <span class="nt">--name</span> registry registry:2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 <span class="nt">--restart</span><span class="o">=</span>always <span class="nt">--name</span> registry registry:2
 </code></pre></div></div>
 
 <p>Registry がこうして利用できるようになります。</p>
@@ -145,64 +145,64 @@ Registry は<code class="language-plaintext highlighter-rouge">registry</code>�
 <h2 id="copy-an-image-from-docker-hub-to-your-registry">Docker Hub から Registry へのイメージコピー</h2>
 
 <p>イメージは Docker Hub からプルして、それを Registry にプッシュすることができます。
-以下の例では Docker Hub から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>イメージをプルして、そこに<code class="language-plaintext highlighter-rouge">my-ubuntu</code>というタグをつけ直します。
+以下の例では Docker Hub から<code class="highlighter-rouge">ubuntu:16.04</code>イメージをプルして、そこに<code class="highlighter-rouge">my-ubuntu</code>というタグをつけ直します。
 そしてローカルな Registry にプッシュします。
-その後にローカル上から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>と<code class="language-plaintext highlighter-rouge">my-ubuntu</code>のイメージを削除した上で、ローカル Registry から<code class="language-plaintext highlighter-rouge">my-ubuntu</code>イメージをプルします。</p>
+その後にローカル上から<code class="highlighter-rouge">ubuntu:16.04</code>と<code class="highlighter-rouge">my-ubuntu</code>のイメージを削除した上で、ローカル Registry から<code class="highlighter-rouge">my-ubuntu</code>イメージをプルします。</p>
 
 <ol>
   <li>
-    <p>Docker Hub から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>イメージをプルします。</p>
+    <p>Docker Hub から<code class="highlighter-rouge">ubuntu:16.04</code>イメージをプルします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu:16.04
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker pull ubuntu:16.04
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>イメージに<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>というタグをつけます。
+    <p>イメージに<code class="highlighter-rouge">localhost:5000/my-ubuntu</code>というタグをつけます。
 このようにすることで、既存のイメージに追加のタグがつけられます。
 タグ名のはじめにあるのがホスト名とポート番号です。
 Docker はプッシュ処理時に、その名前部分を Registry の場所として解釈します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker tag ubuntu:16.04 localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">localhost:5000</code>として起動しているローカルの Registry にイメージをプッシュします。</p>
+    <p><code class="highlighter-rouge">localhost:5000</code>として起動しているローカルの Registry にイメージをプッシュします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker push localhost:5000/my-ubuntu
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker push localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ローカルにキャッシュされている<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>と<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージを削除します。
+    <p>ローカルにキャッシュされている<code class="highlighter-rouge">ubuntu:16.04</code>と<code class="highlighter-rouge">localhost:5000/my-ubuntu</code>イメージを削除します。
 この後には、ローカル Registry からイメージをプルしてみることができます。
-Registry からは<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージは削除されません。</p>
+Registry からは<code class="highlighter-rouge">localhost:5000/my-ubuntu</code>イメージは削除されません。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image remove ubuntu:16.04
-<span class="gp">$</span><span class="w"> </span>docker image remove localhost:5000/my-ubuntu
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image remove ubuntu:16.04
+<span class="gp">$</span> docker image remove localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ローカルの Registry から<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージをプルします。</p>
+    <p>ローカルの Registry から<code class="highlighter-rouge">localhost:5000/my-ubuntu</code>イメージをプルします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull localhost:5000/my-ubuntu
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker pull localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h2 id="stop-a-local-registry">ローカル Registry の停止</h2>
 
-<p>Registry を停止するには、コンテナーの場合と同じように<code class="language-plaintext highlighter-rouge">docker container stop</code>コマンドを実行します。</p>
+<p>Registry を停止するには、コンテナーの場合と同じように<code class="highlighter-rouge">docker container stop</code>コマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop registry
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop registry
 </code></pre></div></div>
 
-<p>コンテナーを削除するには<code class="language-plaintext highlighter-rouge">docker container rm</code>を実行します。</p>
+<p>コンテナーを削除するには<code class="highlighter-rouge">docker container rm</code>を実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop registry <span class="o">&amp;&amp;</span> docker container <span class="nb">rm</span> <span class="nt">-v</span> registry
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop registry <span class="o">&amp;&amp;</span> docker container rm <span class="nt">-v</span> registry
 </code></pre></div></div>
 
 <h2 id="basic-configuration">基本的な設定</h2>
 
-<p>コンテナーを設定するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行時に、追加のまたは修正のオプションを指定します。</p>
+<p>コンテナーを設定するには、<code class="highlighter-rouge">docker run</code>コマンドの実行時に、追加のまたは修正のオプションを指定します。</p>
 
 <p>以下の節では、Registry 設定に関する基本的なガイドラインを示します。
 詳しくは <a href="/docs.docker.jp.onthefly/registry/configuration/">Registry 設定リファレンス</a> を参照してください。</p>
@@ -210,9 +210,9 @@ Registry からは<code class="language-plaintext highlighter-rouge">localhost:5
 <h3 id="start-the-registry-automatically">Registry の自動起動</h3>
 
 <p>常用するインフラストラクチャーの一部として Registry を利用したい場合には、Docker の再起動時あるいは Registry 終了時に、Registry を自動的に再起動することが必要になります。
-以下の例では<code class="language-plaintext highlighter-rouge">--restart always</code>フラグを用いて、Registry に対して再起動ポリシーを設定します。</p>
+以下の例では<code class="highlighter-rouge">--restart always</code>フラグを用いて、Registry に対して再起動ポリシーを設定します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
   <span class="nt">--restart</span><span class="o">=</span>always <span class="se">\</span>
   <span class="nt">--name</span> registry <span class="se">\</span>
@@ -222,20 +222,20 @@ Registry からは<code class="language-plaintext highlighter-rouge">localhost:5
 <h3 id="customize-the-published-port">公開ポートの変更</h3>
 
 <p>すでにポート 5000 を利用している場合、またはローカル Registry を各作業向けに切り分けて複数起動したい場合は、Registry のポート設定を変更します。
-以下の例では Registry をポート 5001 で起動し、同時にその名称を<code class="language-plaintext highlighter-rouge">registry-test</code>とします。
-ここで<code class="language-plaintext highlighter-rouge">-p</code>フラグの値の 1 つめはホストのポートであり、2 つめはコンテナー内のポートです。
-コンテナーの内部にて Registry は、ポート<code class="language-plaintext highlighter-rouge">5000</code>を利用するのがデフォルトです。</p>
+以下の例では Registry をポート 5001 で起動し、同時にその名称を<code class="highlighter-rouge">registry-test</code>とします。
+ここで<code class="highlighter-rouge">-p</code>フラグの値の 1 つめはホストのポートであり、2 つめはコンテナー内のポートです。
+コンテナーの内部にて Registry は、ポート<code class="highlighter-rouge">5000</code>を利用するのがデフォルトです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5001:5000 <span class="se">\</span>
   <span class="nt">--name</span> registry-test <span class="se">\</span>
   registry:2
 </code></pre></div></div>
 
-<p>コンテナーの内部にて Registry が待ち受けるポートは、環境変数<code class="language-plaintext highlighter-rouge">REGISTRY_HTTP_ADDR</code>を使って変更することができます。
+<p>コンテナーの内部にて Registry が待ち受けるポートは、環境変数<code class="highlighter-rouge">REGISTRY_HTTP_ADDR</code>を使って変更することができます。
 以下のコマンドは、コンテナーの内部にて Registry はポート 5001 を待ち受けるようになります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_ADDR</span><span class="o">=</span>0.0.0.0:5001 <span class="se">\</span>
   <span class="nt">-p</span> 5001:5001 <span class="se">\</span>
   <span class="nt">--name</span> registry-test <span class="se">\</span>
@@ -252,9 +252,9 @@ location on your host filesystem, such as if you have an SSD or SAN mounted into
 a particular directory, you might decide to use a bind mount instead. A bind mount
 is more dependent on the filesystem layout of the Docker host, but more performant
 in many situations. The following example bind-mounts the host directory
-<code class="language-plaintext highlighter-rouge">/mnt/registry</code> into the registry container at <code class="language-plaintext highlighter-rouge">/var/lib/registry/</code>.</p>
+<code class="highlighter-rouge">/mnt/registry</code> into the registry container at <code class="highlighter-rouge">/var/lib/registry/</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
   <span class="nt">--restart</span><span class="o">=</span>always <span class="se">\</span>
   <span class="nt">--name</span> registry <span class="se">\</span>
@@ -272,7 +272,7 @@ bucket, Google Cloud Platform, or on another storage back-end by using
 
 <h2 id="run-an-externally-accessible-registry">Run an externally-accessible registry</h2>
 
-<p>Running a registry only accessible on <code class="language-plaintext highlighter-rouge">localhost</code> has limited usefulness. In
+<p>Running a registry only accessible on <code class="highlighter-rouge">localhost</code> has limited usefulness. In
 order to make your registry accessible to external hosts, you must first secure
 it using TLS.</p>
 
@@ -284,7 +284,7 @@ service</a> below.</p>
 <p>These examples assume the following:</p>
 
 <ul>
-  <li>Your registry URL is <code class="language-plaintext highlighter-rouge">https://myregistry.domain.com/</code>.</li>
+  <li>Your registry URL is <code class="highlighter-rouge">https://myregistry.domain.com/</code>.</li>
   <li>Your DNS, routing, and firewall settings allow access to the registry’s host
 on port 443.</li>
   <li>You have already obtained a certificate from a certificate authority (CA).</li>
@@ -295,31 +295,31 @@ on port 443.</li>
 
 <ol>
   <li>
-    <p>Create a <code class="language-plaintext highlighter-rouge">certs</code> directory.</p>
+    <p>Create a <code class="highlighter-rouge">certs</code> directory.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> certs
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir <span class="nt">-p</span> certs
 </code></pre></div>    </div>
 
-    <p>Copy the <code class="language-plaintext highlighter-rouge">.crt</code> and <code class="language-plaintext highlighter-rouge">.key</code> files from the CA into the <code class="language-plaintext highlighter-rouge">certs</code> directory.
-The following steps assume that the files are named <code class="language-plaintext highlighter-rouge">domain.crt</code> and
-<code class="language-plaintext highlighter-rouge">domain.key</code>.</p>
+    <p>Copy the <code class="highlighter-rouge">.crt</code> and <code class="highlighter-rouge">.key</code> files from the CA into the <code class="highlighter-rouge">certs</code> directory.
+The following steps assume that the files are named <code class="highlighter-rouge">domain.crt</code> and
+<code class="highlighter-rouge">domain.key</code>.</p>
   </li>
   <li>
     <p>Stop the registry if it is currently running.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop registry
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop registry
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Restart the registry, directing it to use the TLS certificate. This command
-bind-mounts the <code class="language-plaintext highlighter-rouge">certs/</code> directory into the container at <code class="language-plaintext highlighter-rouge">/certs/</code>, and sets
-environment variables that tell the container where to find the <code class="language-plaintext highlighter-rouge">domain.crt</code>
-and <code class="language-plaintext highlighter-rouge">domain.key</code> file. The registry runs on port 443, the default HTTPS port.</p>
+bind-mounts the <code class="highlighter-rouge">certs/</code> directory into the container at <code class="highlighter-rouge">/certs/</code>, and sets
+environment variables that tell the container where to find the <code class="highlighter-rouge">domain.crt</code>
+and <code class="highlighter-rouge">domain.key</code> file. The registry runs on port 443, the default HTTPS port.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--restart</span><span class="o">=</span>always <span class="se">\</span>
   <span class="nt">--name</span> registry <span class="se">\</span>
-  <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">"</span>/certs:/certs <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/certs:/certs <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_ADDR</span><span class="o">=</span>0.0.0.0:443 <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="o">=</span>/certs/domain.crt <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_TLS_KEY</span><span class="o">=</span>/certs/domain.key <span class="se">\</span>
@@ -331,10 +331,10 @@ and <code class="language-plaintext highlighter-rouge">domain.key</code> file. T
     <p>Docker clients can now pull from and push to your registry using its
 external address. The following commands demonstrate this:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu:16.04
-<span class="gp">$</span><span class="w"> </span>docker tag ubuntu:16.04 myregistry.domain.com/my-ubuntu
-<span class="gp">$</span><span class="w"> </span>docker push myregistry.domain.com/my-ubuntu
-<span class="gp">$</span><span class="w"> </span>docker pull myregistry.domain.com/my-ubuntu
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker pull ubuntu:16.04
+<span class="gp">$</span> docker tag ubuntu:16.04 myregistry.domain.com/my-ubuntu
+<span class="gp">$</span> docker push myregistry.domain.com/my-ubuntu
+<span class="gp">$</span> docker pull myregistry.domain.com/my-ubuntu
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -343,12 +343,12 @@ external address. The following commands demonstrate this:</p>
 
 <p>A certificate issuer may supply you with an <em>intermediate</em> certificate. In this
 case, you must concatenate your certificate with the intermediate certificate to
-form a <em>certificate bundle</em>. You can do this using the <code class="language-plaintext highlighter-rouge">cat</code> command:</p>
+form a <em>certificate bundle</em>. You can do this using the <code class="highlighter-rouge">cat</code> command:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">cat domain.crt intermediate-certificates.pem &gt;</span><span class="w"> </span>certs/domain.crt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">cat domain.crt intermediate-certificates.pem &gt;</span> certs/domain.crt
 </code></pre></div></div>
 
-<p>You can use the certificate bundle just as you use the <code class="language-plaintext highlighter-rouge">domain.crt</code> file in
+<p>You can use the certificate bundle just as you use the <code class="highlighter-rouge">domain.crt</code> file in
 the previous example.</p>
 
 <h3 id="support-for-lets-encrypt">Support for Let’s Encrypt</h3>
@@ -399,29 +399,29 @@ TLS certificates as in the previous examples.</p>
 
 <p>First, save the TLS certificate and key as secrets:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker secret create domain.crt certs/domain.crt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker secret create domain.crt certs/domain.crt
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>docker secret create domain.key certs/domain.key
+</span><span class="gp">$</span> docker secret create domain.key certs/domain.key
 </code></pre></div></div>
 
 <p>Next, add a label to the node where you want to run the registry.
-To get the node’s name, use <code class="language-plaintext highlighter-rouge">docker node ls</code>. Substitute your node’s name for
-<code class="language-plaintext highlighter-rouge">node1</code> below.</p>
+To get the node’s name, use <code class="highlighter-rouge">docker node ls</code>. Substitute your node’s name for
+<code class="highlighter-rouge">node1</code> below.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker node update <span class="nt">--label-add</span> <span class="nv">registry</span><span class="o">=</span><span class="nb">true </span>node1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker node update <span class="nt">--label-add</span> <span class="nv">registry</span><span class="o">=</span><span class="nb">true </span>node1
 </code></pre></div></div>
 
 <p>Next, create the service, granting it access to the two secrets and constraining
-it to only run on nodes with the label <code class="language-plaintext highlighter-rouge">registry=true</code>. Besides the constraint,
+it to only run on nodes with the label <code class="highlighter-rouge">registry=true</code>. Besides the constraint,
 you are also specifying that only a single replica should run at a time. The
-example bind-mounts <code class="language-plaintext highlighter-rouge">/mnt/registry</code> on the swarm node to <code class="language-plaintext highlighter-rouge">/var/lib/registry/</code>
+example bind-mounts <code class="highlighter-rouge">/mnt/registry</code> on the swarm node to <code class="highlighter-rouge">/var/lib/registry/</code>
 within the container. Bind mounts rely on the pre-existing source directory,
-so be sure <code class="language-plaintext highlighter-rouge">/mnt/registry</code> exists on <code class="language-plaintext highlighter-rouge">node1</code>. You might need to create it before
-running the following <code class="language-plaintext highlighter-rouge">docker service create</code> command.</p>
+so be sure <code class="highlighter-rouge">/mnt/registry</code> exists on <code class="highlighter-rouge">node1</code>. You might need to create it before
+running the following <code class="highlighter-rouge">docker service create</code> command.</p>
 
-<p>By default, secrets are mounted into a service at <code class="language-plaintext highlighter-rouge">/run/secrets/&lt;secret-name&gt;</code>.</p>
+<p>By default, secrets are mounted into a service at <code class="highlighter-rouge">/run/secrets/&lt;secret-name&gt;</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service create <span class="se">\</span>
   <span class="nt">--name</span> registry <span class="se">\</span>
   <span class="nt">--secret</span> domain.crt <span class="se">\</span>
   <span class="nt">--secret</span> domain.key <span class="se">\</span>
@@ -468,19 +468,19 @@ more requests are directed to the backend.</p>
 <h3 id="importantrequired-http-headers">Important/Required HTTP-Headers</h3>
 
 <p>Getting the headers correct is very important. For all responses to any
-request under the “/v2/” url space, the <code class="language-plaintext highlighter-rouge">Docker-Distribution-API-Version</code>
+request under the “/v2/” url space, the <code class="highlighter-rouge">Docker-Distribution-API-Version</code>
 header should be set to the value “registry/2.0”, even for a 4xx response.
 This header allows the docker engine to quickly resolve authentication realms
 and fallback to version 1 registries, if necessary. Confirming this is setup
 correctly can help avoid problems with fallback.</p>
 
 <p>In the same train of thought, you must make sure you are properly sending the
-<code class="language-plaintext highlighter-rouge">X-Forwarded-Proto</code>, <code class="language-plaintext highlighter-rouge">X-Forwarded-For</code>, and <code class="language-plaintext highlighter-rouge">Host</code> headers to their “client-side”
+<code class="highlighter-rouge">X-Forwarded-Proto</code>, <code class="highlighter-rouge">X-Forwarded-For</code>, and <code class="highlighter-rouge">Host</code> headers to their “client-side”
 values. Failure to do so usually makes the registry issue redirects to internal
 hostnames or downgrading from https to http.</p>
 
 <p>A properly secured registry should return 401 when the “/v2/” endpoint is hit
-without credentials. The response should include a <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code>
+without credentials. The response should include a <code class="highlighter-rouge">WWW-Authenticate</code>
 challenge, providing guidance on how to authenticate, such as with basic auth
 or a token service. If the load balancer has health checks, it is recommended
 to configure it to consider a 401 response as healthy and any other as down.
@@ -488,7 +488,7 @@ This secures your registry by ensuring that configuration problems with
 authentication don’t accidentally expose an unprotected registry. If you’re
 using a less sophisticated load balancer, such as Amazon’s Elastic Load
 Balancer, that doesn’t allow one to change the healthy response code, health
-checks can be directed at “/”, which always returns a <code class="language-plaintext highlighter-rouge">200 OK</code> response.</p>
+checks can be directed at “/”, which always returns a <code class="highlighter-rouge">200 OK</code> response.</p>
 
 <h2 id="restricting-access">Restricting access</h2>
 
@@ -499,7 +499,7 @@ implement access restrictions.</p>
 
 <p>The simplest way to achieve access restriction is through basic authentication
 (this is very similar to other web servers’ basic authentication mechanism).
-This example uses native basic authentication using <code class="language-plaintext highlighter-rouge">htpasswd</code> to store the
+This example uses native basic authentication using <code class="highlighter-rouge">htpasswd</code> to store the
 secrets.</p>
 
 <blockquote class="warning">
@@ -512,38 +512,38 @@ authentication to work.</p>
 
 <ol>
   <li>
-    <p>Create a password file with one entry for the user <code class="language-plaintext highlighter-rouge">testuser</code>, with password
-<code class="language-plaintext highlighter-rouge">testpassword</code>:</p>
+    <p>Create a password file with one entry for the user <code class="highlighter-rouge">testuser</code>, with password
+<code class="highlighter-rouge">testpassword</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>auth
-<span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir auth
+<span class="gp">$</span> docker run <span class="se">\</span>
   <span class="nt">--entrypoint</span> htpasswd <span class="se">\</span>
   httpd:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/htpasswd
 </code></pre></div>    </div>
 
     <p>On Windows, make sure the output file is correctly encoded:</p>
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--rm</span><span class="w"> </span><span class="nt">--entrypoint</span><span class="w"> </span><span class="nx">htpasswd</span><span class="w"> </span><span class="nx">httpd:2</span><span class="w"> </span><span class="nt">-Bbn</span><span class="w"> </span><span class="nx">testuser</span><span class="w"> </span><span class="nx">testpassword</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">Set-Content</span><span class="w"> </span><span class="nt">-Encoding</span><span class="w"> </span><span class="nx">ASCII</span><span class="w"> </span><span class="nx">auth/htpasswd</span><span class="w">
-</span></code></pre></div>    </div>
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm --entrypoint htpasswd httpd:2 -Bbn testuser testpassword | <span class="nb">Set-Content</span> -Encoding ASCII auth/htpasswd
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Stop the registry.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop registry
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop registry
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Start the registry with basic authentication.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
   <span class="nt">--restart</span><span class="o">=</span>always <span class="se">\</span>
   <span class="nt">--name</span> registry <span class="se">\</span>
-  <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">"</span>/auth:/auth <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/auth:/auth <span class="se">\</span>
   <span class="nt">-e</span> <span class="s2">"REGISTRY_AUTH=htpasswd"</span> <span class="se">\</span>
   <span class="nt">-e</span> <span class="s2">"REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"</span> <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_AUTH_HTPASSWD_PATH</span><span class="o">=</span>/auth/htpasswd <span class="se">\</span>
-  <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">"</span>/certs:/certs <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/certs:/certs <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="o">=</span>/certs/domain.crt <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">REGISTRY_HTTP_TLS_KEY</span><span class="o">=</span>/certs/domain.key <span class="se">\</span>
   registry:2
@@ -556,7 +556,7 @@ These commands fail.</p>
   <li>
     <p>Log in to the registry.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker login myregistrydomain.com:5000
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker login myregistrydomain.com:5000
 </code></pre></div>    </div>
 
     <p>Provide the username and password from the first step.</p>
@@ -590,8 +590,8 @@ leverage a third-party implementation.</p>
 <h2 id="deploy-your-registry-using-a-compose-file">Deploy your registry using a Compose file</h2>
 
 <p>If your registry invocation is advanced, it may be easier to use a Docker
-compose file to deploy it, rather than relying on a specific <code class="language-plaintext highlighter-rouge">docker run</code>
-invocation. Use the following example <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> as a template.</p>
+compose file to deploy it, rather than relying on a specific <code class="highlighter-rouge">docker run</code>
+invocation. Use the following example <code class="highlighter-rouge">docker-compose.yml</code> as a template.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">registry</span><span class="pi">:</span>
   <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
@@ -610,13 +610,13 @@ invocation. Use the following example <code class="language-plaintext highlighte
     <span class="pi">-</span> <span class="s">/path/auth:/auth</span>
 </code></pre></div></div>
 
-<p class="warning">Replace <code class="language-plaintext highlighter-rouge">/path</code> with the directory which contains the <code class="language-plaintext highlighter-rouge">certs/</code> and <code class="language-plaintext highlighter-rouge">auth/</code>
+<p class="warning">Replace <code class="highlighter-rouge">/path</code> with the directory which contains the <code class="highlighter-rouge">certs/</code> and <code class="highlighter-rouge">auth/</code>
 directories.</p>
 
 <p>Start your registry by issuing the following command in the directory containing
-the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file:</p>
+the <code class="highlighter-rouge">docker-compose.yml</code> file:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up <span class="nt">-d</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up <span class="nt">-d</span>
 </code></pre></div></div>
 
 <h2 id="considerations-for-air-gapped-registries">隔離されたデータセンターでの配慮</h2>
@@ -628,7 +628,7 @@ following:</p>
 <ul>
   <li>
     <p>You may need to build your local registry’s data volume on a connected
-host where you can run <code class="language-plaintext highlighter-rouge">docker pull</code> to get any images which are available
+host where you can run <code class="highlighter-rouge">docker pull</code> to get any images which are available
 remotely, and then migrate the registry’s data volume to the air-gapped
 network.</p>
   </li>
@@ -648,12 +648,12 @@ use for non-distributable layers.</p>
 
     <ol>
       <li>
-        <p>Edit the <code class="language-plaintext highlighter-rouge">daemon.json</code> file, which is located in <code class="language-plaintext highlighter-rouge">/etc/docker/</code> on Linux
-hosts and <code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> on Windows Server.
+        <p>Edit the <code class="highlighter-rouge">daemon.json</code> file, which is located in <code class="highlighter-rouge">/etc/docker/</code> on Linux
+hosts and <code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> on Windows Server.
 Assuming the file was previously empty, add the following contents:</p>
 
         <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"allow-nondistributable-artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myregistrydomain.com:5000"</span><span class="p">]</span><span class="w">
+  </span><span class="s2">"allow-nondistributable-artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myregistrydomain.com:5000"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>        </div>
 

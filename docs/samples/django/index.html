@@ -1,5 +1,5 @@
-<!-- Page generated 2022-02-26 13:40:12 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Django | Docker ドキュメント</title>
   <meta name="description" content="Django を使って Docker Compose をはじめる。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Django" />
   <meta property="og:description" content="Django を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-26T13:40:12+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/django/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-02-26T13:40:12+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Django","description":"Django を使って Docker Compose をはじめる。","url":"https://docs.docker.com/samples/django/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -185,7 +185,7 @@ psycopg2&gt;=2.8
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">./data/db:/var/lib/postgresql/data</span>
     <span class="na">environment</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">POSTGRES_NAME=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_DB=postgres</span>
       <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
       <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=postgres</span>
   <span class="na">web</span><span class="pi">:</span>
@@ -245,6 +245,7 @@ psycopg2&gt;=2.8
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">ls</span> <span class="nt">-l</span>
 <span class="go">
 drwxr-xr-x 2 root   root   composeexample
+drwxr-xr-x 3 root   root   data
 -rw-rw-r-- 1 user   user   docker-compose.yml
 -rw-rw-r-- 1 user   user   Dockerfile
 -rwxr-xr-x 1 root   root   manage.py
@@ -255,7 +256,10 @@ drwxr-xr-x 2 root   root   composeexample
 これはコンテナーが root ユーザーで実行されるからです。
 生成されたファイルの所有者を以下のようにして変更します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
+    <p>Postgres の関連ファイルがあるデータフォルダーに対して、そのパーミッションは変更しないでください。
+これを行ってしまうと、パーミッションが原因で Postgres が起動できなくなります。</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> composeexample manage.py
 </code></pre></div>    </div>
 
     <p>Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、<code class="highlighter-rouge">django-admin</code>が作り出したファイルも含めて、すべて持っています。

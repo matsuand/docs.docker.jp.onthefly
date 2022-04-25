@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Macvlan ネットワークのチュートリアル | Docker ドキュメント</title>
   <meta name="description" content="Tutorials for networking using a macvlan bridge network and 802.1q trunk bridge network" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Macvlan ネットワークのチュートリアル" />
   <meta property="og:description" content="Tutorials for networking using a macvlan bridge network and 802.1q trunk bridge network" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Macvlan ネットワークのチュートリアル","description":"Tutorials for networking using a macvlan bridge network and 802.1q trunk bridge network","url":"https://docs.docker.com/network/network-tutorial-macvlan/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,25 +107,25 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Macvlan ネットワークのチュートリアル</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>ここに示すチュートリアルは、<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークに接続するスタンドアロンコンテナーのネットワークを扱います。
+                        <section class="section"><h1>Macvlan ネットワークのチュートリアル</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>ここに示すチュートリアルは、<code class="highlighter-rouge">macvlan</code>ネットワークに接続するスタンドアロンコンテナーのネットワークを扱います。
 この種類のネットワークでは、Docker ホストは IP アドレスにおいて、複数の MAC アドレスへのリクエストを受けつけます。
 そしてそのリクエストを適切なコンテナーにルーティングします。
 これ以外のネットワークに関しては、<a href="/docs.docker.jp.onthefly/network/">ネットワーク概要</a> を参照してください。</p>
 
 <h2 id="goal">目指すこと</h2>
 
-<p>本チュートリアルの目標は、ブリッジネットワークである<code class="language-plaintext highlighter-rouge">macvlan</code>を設定し、そこにコンテナーをアタッチすることです。
-その後に 802.1q によってトランク設定された<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークを設定し、そこにコンテナーをアタッチします。</p>
+<p>本チュートリアルの目標は、ブリッジネットワークである<code class="highlighter-rouge">macvlan</code>を設定し、そこにコンテナーをアタッチすることです。
+その後に 802.1q によってトランク設定された<code class="highlighter-rouge">macvlan</code>ネットワークを設定し、そこにコンテナーをアタッチします。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <ul>
   <li>
-    <p>クラウドプロバイダーでは、ほとんどが<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークをブロックします。
+    <p>クラウドプロバイダーでは、ほとんどが<code class="highlighter-rouge">macvlan</code>ネットワークをブロックします。
 したがってネットワーク機器からは、物理アクセスが必要となる場合があります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">macvlan</code>用のネットワークドライバーは Linux ホスト上でのみ動作します。
+    <p><code class="highlighter-rouge">macvlan</code>用のネットワークドライバーは Linux ホスト上でのみ動作します。
 一方、Docker Desktop for Mac、Docker Desktop for Windows、Docker EE for Windows Server ではサポートされていません。</p>
   </li>
   <li>
@@ -133,38 +133,38 @@
 4.0 またはそれ以降が推奨されます。</p>
   </li>
   <li>
-    <p>本例において、イーサネットインターフェースは<code class="language-plaintext highlighter-rouge">eth0</code>であるとします。
+    <p>本例において、イーサネットインターフェースは<code class="highlighter-rouge">eth0</code>であるとします。
 利用するデバイス名が異なる場合は、その名前を用いてください。</p>
   </li>
 </ul>
 
 <h2 id="bridge-example">ブリッジ例</h2>
 
-<p>この単純なブリッジ例では、トラフィックは<code class="language-plaintext highlighter-rouge">eth0</code>を通じて送受信されます。
+<p>この単純なブリッジ例では、トラフィックは<code class="highlighter-rouge">eth0</code>を通じて送受信されます。
 そして Docker はコンテナーへのトラフィックを、MAC アドレスを使ってルーティングします。
 ネットワーク上のデバイスにとって、コンテナーは物理的にネットワークにアタッチされたものとして見えます。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">my-macvlan-net</code>という名前の<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークを生成します。
-<code class="language-plaintext highlighter-rouge">subnet</code>、<code class="language-plaintext highlighter-rouge">gateway</code>、<code class="language-plaintext highlighter-rouge">parent</code>の値は、利用環境に合わせて修正してください。</p>
+    <p><code class="highlighter-rouge">my-macvlan-net</code>という名前の<code class="highlighter-rouge">macvlan</code>ネットワークを生成します。
+<code class="highlighter-rouge">subnet</code>、<code class="highlighter-rouge">gateway</code>、<code class="highlighter-rouge">parent</code>の値は、利用環境に合わせて修正してください。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
   <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
   <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
   <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 <span class="se">\</span>
   my-macvlan-net
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">docker network ls</code>や<code class="language-plaintext highlighter-rouge">docker network inspect my-macvlan-net</code>を実行すれば、ネットワークが確認でき、それが<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークであることがわかります。</p>
+    <p><code class="highlighter-rouge">docker network ls</code>や<code class="highlighter-rouge">docker network inspect my-macvlan-net</code>を実行すれば、ネットワークが確認でき、それが<code class="highlighter-rouge">macvlan</code>ネットワークであることがわかります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを起動し<code class="language-plaintext highlighter-rouge">my-macvlan-net</code>ネットワークにアタッチします。
-<code class="language-plaintext highlighter-rouge">-dit</code>フラグは、コンテナーをバックグラウンドで起動します。
+    <p><code class="highlighter-rouge">alpine</code>コンテナーを起動し<code class="highlighter-rouge">my-macvlan-net</code>ネットワークにアタッチします。
+<code class="highlighter-rouge">-dit</code>フラグは、コンテナーをバックグラウンドで起動します。
 そしてコンテナーへのアクセスを可能とします。
-<code class="language-plaintext highlighter-rouge">--rm</code>フラグは、コンテナーが停止されたときに削除するためのものです。</p>
+<code class="highlighter-rouge">--rm</code>フラグは、コンテナーが停止されたときに削除するためのものです。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-dit</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-dit</span> <span class="se">\</span>
   <span class="nt">--network</span> my-macvlan-net <span class="se">\</span>
   <span class="nt">--name</span> my-macvlan-alpine <span class="se">\</span>
   alpine:latest <span class="se">\</span>
@@ -172,8 +172,8 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">my-macvlan-alpine</code>コンテナーを確認します。
-<code class="language-plaintext highlighter-rouge">Networks</code>キーの中に<code class="language-plaintext highlighter-rouge">MacAddress</code>キーがあるのがわかります。</p>
+    <p><code class="highlighter-rouge">my-macvlan-alpine</code>コンテナーを確認します。
+<code class="highlighter-rouge">Networks</code>キーの中に<code class="highlighter-rouge">MacAddress</code>キーがあるのがわかります。</p>
 
     <pre><code class="language-none">$ docker container inspect my-macvlan-alpine
 
@@ -202,62 +202,62 @@
   </li>
   <li>
     <p>コンテナーからネットワークインターフェースがどのように見えているかを確認します。
-以下のように<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを何回か実行します。</p>
+以下のように<code class="highlighter-rouge">docker exec</code>コマンドを何回か実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec </span>my-macvlan-alpine ip addr show eth0
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker <span class="nb">exec </span>my-macvlan-alpine ip addr show eth0
 <span class="go">
-</span><span class="gp">9: eth0@tunl0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UP
+</span><span class="gp">9: eth0@tunl0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span> mtu 1500 qdisc noqueue state UP
 <span class="go">link/ether 02:42:ac:10:56:02 brd ff:ff:ff:ff:ff:ff
 inet 172.16.86.2/24 brd 172.16.86.255 scope global eth0
    valid_lft forever preferred_lft forever
 </span></code></pre></div>    </div>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec </span>my-macvlan-alpine ip route
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker <span class="nb">exec </span>my-macvlan-alpine ip route
 <span class="go">
 default via 172.16.86.1 dev eth0
 172.16.86.0/24 dev eth0 scope link  src 172.16.86.2
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>コンテナーを停止します（<code class="language-plaintext highlighter-rouge">--rm</code>フラグを用いていたため Docker はコンテナーを削除します）。
+    <p>コンテナーを停止します（<code class="highlighter-rouge">--rm</code>フラグを用いていたため Docker はコンテナーを削除します）。
 そしてネットワークを停止します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop my-macvlan-alpine
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop my-macvlan-alpine
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>my-macvlan-net
+</span><span class="gp">$</span> docker network rm my-macvlan-net
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h2 id="8021q-トランク設定によるブリッジ例">802.1q トランク設定によるブリッジ例</h2>
 
-<p>802.1q トランク設定によるブリッジ例では、<code class="language-plaintext highlighter-rouge">eth0</code>のサブインターフェース（<code class="language-plaintext highlighter-rouge">eth0.10</code>）を通じてトラフィックがやりとりされます。
+<p>802.1q トランク設定によるブリッジ例では、<code class="highlighter-rouge">eth0</code>のサブインターフェース（<code class="highlighter-rouge">eth0.10</code>）を通じてトラフィックがやりとりされます。
 そして Docker はコンテナーへのトラフィックを、MAC アドレスを使ってルーティングします。
 ネットワーク上のデバイスにとって、コンテナーは物理的にネットワークにアタッチされたものとして見えます。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">my-8021q-macvlan-net</code>という名前の<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークを生成します。
-<code class="language-plaintext highlighter-rouge">subnet</code>、<code class="language-plaintext highlighter-rouge">gateway</code>、<code class="language-plaintext highlighter-rouge">parent</code>の値は、利用環境に合わせて修正してください。</p>
+    <p><code class="highlighter-rouge">my-8021q-macvlan-net</code>という名前の<code class="highlighter-rouge">macvlan</code>ネットワークを生成します。
+<code class="highlighter-rouge">subnet</code>、<code class="highlighter-rouge">gateway</code>、<code class="highlighter-rouge">parent</code>の値は、利用環境に合わせて修正してください。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
   <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
   <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
   <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.10 <span class="se">\</span>
   my-8021q-macvlan-net
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">docker network ls</code>や<code class="language-plaintext highlighter-rouge">docker network inspect my-macvlan-net</code>を実行すれば、ネットワークが確認でき、それが<code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークであることがわかります。
-また親として<code class="language-plaintext highlighter-rouge">eth0.10</code>があることもわかります。
-Docker ホスト上で<code class="language-plaintext highlighter-rouge">ip addr show</code>を実行すると、インターフェース<code class="language-plaintext highlighter-rouge">eth0.10</code>が存在し、別の IP アドレスを持つことが確認できます。</p>
+    <p><code class="highlighter-rouge">docker network ls</code>や<code class="highlighter-rouge">docker network inspect my-macvlan-net</code>を実行すれば、ネットワークが確認でき、それが<code class="highlighter-rouge">macvlan</code>ネットワークであることがわかります。
+また親として<code class="highlighter-rouge">eth0.10</code>があることもわかります。
+Docker ホスト上で<code class="highlighter-rouge">ip addr show</code>を実行すると、インターフェース<code class="highlighter-rouge">eth0.10</code>が存在し、別の IP アドレスを持つことが確認できます。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを起動し<code class="language-plaintext highlighter-rouge">my-8021q-macvlan-net</code>ネットワークにアタッチします。
-<code class="language-plaintext highlighter-rouge">-dit</code>フラグは、コンテナーをバックグラウンドで起動します。
+    <p><code class="highlighter-rouge">alpine</code>コンテナーを起動し<code class="highlighter-rouge">my-8021q-macvlan-net</code>ネットワークにアタッチします。
+<code class="highlighter-rouge">-dit</code>フラグは、コンテナーをバックグラウンドで起動します。
 そしてコンテナーへのアクセスを可能とします。
-<code class="language-plaintext highlighter-rouge">--rm</code>フラグは、コンテナーが停止されたときに削除するためのものです。</p>
+<code class="highlighter-rouge">--rm</code>フラグは、コンテナーが停止されたときに削除するためのものです。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-itd</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-itd</span> <span class="se">\</span>
   <span class="nt">--network</span> my-8021q-macvlan-net <span class="se">\</span>
   <span class="nt">--name</span> my-second-macvlan-alpine <span class="se">\</span>
   alpine:latest <span class="se">\</span>
@@ -265,8 +265,8 @@ Docker ホスト上で<code class="language-plaintext highlighter-rouge">ip addr
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">my-second-macvlan-alpine</code>コンテナーを確認します。
-<code class="language-plaintext highlighter-rouge">Networks</code>キーの中に<code class="language-plaintext highlighter-rouge">MacAddress</code>キーがあるのがわかります。</p>
+    <p><code class="highlighter-rouge">my-second-macvlan-alpine</code>コンテナーを確認します。
+<code class="highlighter-rouge">Networks</code>キーの中に<code class="highlighter-rouge">MacAddress</code>キーがあるのがわかります。</p>
 
     <pre><code class="language-none">$ docker container inspect my-second-macvlan-alpine
 
@@ -295,36 +295,36 @@ Docker ホスト上で<code class="language-plaintext highlighter-rouge">ip addr
   </li>
   <li>
     <p>コンテナーからネットワークインターフェースがどのように見えているかを確認します。
-以下のように<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを何回か実行します。</p>
+以下のように<code class="highlighter-rouge">docker exec</code>コマンドを何回か実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec </span>my-second-macvlan-alpine ip addr show eth0
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker <span class="nb">exec </span>my-second-macvlan-alpine ip addr show eth0
 <span class="go">
-</span><span class="gp">11: eth0@if10: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span><span class="w"> </span>mtu 1500 qdisc noqueue state UP
+</span><span class="gp">11: eth0@if10: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt;</span> mtu 1500 qdisc noqueue state UP
 <span class="go">link/ether 02:42:ac:10:56:02 brd ff:ff:ff:ff:ff:ff
 inet 172.16.86.2/24 brd 172.16.86.255 scope global eth0
    valid_lft forever preferred_lft forever
 </span></code></pre></div>    </div>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">exec </span>my-second-macvlan-alpine ip route
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker <span class="nb">exec </span>my-second-macvlan-alpine ip route
 <span class="go">
 default via 172.16.86.1 dev eth0
 172.16.86.0/24 dev eth0 scope link  src 172.16.86.2
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>コンテナーを停止します（<code class="language-plaintext highlighter-rouge">--rm</code>フラグを用いていたため Docker はコンテナーを削除します）。
+    <p>コンテナーを停止します（<code class="highlighter-rouge">--rm</code>フラグを用いていたため Docker はコンテナーを削除します）。
 そしてネットワークを停止します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container stop my-second-macvlan-alpine
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container stop my-second-macvlan-alpine
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span>docker network <span class="nb">rm </span>my-8021q-macvlan-net
+</span><span class="gp">$</span> docker network rm my-8021q-macvlan-net
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h2 id="other-networking-tutorials">その他のネットワークチュートリアル</h2>
 
-<p><code class="language-plaintext highlighter-rouge">macvlan</code>ネットワークのチュートリアルをここに終えました。
+<p><code class="highlighter-rouge">macvlan</code>ネットワークのチュートリアルをここに終えました。
 以下に示すような別のネットワークチュートリアルも見てください。</p>
 
 <ul>

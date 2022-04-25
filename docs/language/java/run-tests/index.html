@@ -1,5 +1,5 @@
-<!-- Page generated 2022-03-03 12:37:21 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run your tests | Docker ドキュメント</title>
   <meta name="description" content="How to build and run your Tests" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Run your tests" />
   <meta property="og:description" content="How to build and run your Tests" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Run your tests","description":"How to build and run your Tests","url":"https://docs.docker.com/language/java/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Run your tests</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Run your tests</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/java/build-images/">イメージのビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/java/run-containers/">コンテナーとしてイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/java/develop/">コンテナーの開発利用</a></li>
@@ -126,7 +126,7 @@
 
 <h2 id="refactor-dockerfile-to-run-tests">Refactor Dockerfile to run tests</h2>
 
-<p>The <strong>Spring Pet Clinic</strong> source code has already tests defined in the test directory <code class="highlighter-rouge">src/test/java/org/springframework/samples/petclinic</code>. You just need to update the JaCoCo version in your <code class="highlighter-rouge">pom.xml</code> to ensure your tests work with JDK v15 or higher with <code class="highlighter-rouge">&lt;jacoco.version&gt;0.8.6&lt;/jacoco.version&gt;</code>, so we can use the following Docker command to start the container and run tests:</p>
+<p>The <strong>Spring Pet Clinic</strong> source code has already tests defined in the test directory <code class="highlighter-rouge">src/test/java/org/springframework/samples/petclinic</code>. We can use the following Docker command to start the container and run tests:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> springboot-test java-docker ./mvnw <span class="nb">test</span>
 <span class="c">...
@@ -253,12 +253,14 @@
 
 <p>The build output is truncated for simplicity, but you can see that our tests ran succesfully and passed. Let’s break one of the tests and observe the output when our tests fail.</p>
 
-<p>Open the <code class="highlighter-rouge">src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java</code> file and change <strong>line 57</strong> to the following.</p>
+<p>Open the <code class="highlighter-rouge">src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java</code> file and change the assertion</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>55   ConstraintViolation&lt;Person&gt; violation <span class="o">=</span> constraintViolations.iterator<span class="o">()</span>.next<span class="o">()</span><span class="p">;</span>
-56   assertThat<span class="o">(</span>violation.getPropertyPath<span class="o">()</span>.toString<span class="o">())</span>.isEqualTo<span class="o">(</span><span class="s2">"firstName"</span><span class="o">)</span><span class="p">;</span>
-57   assertThat<span class="o">(</span>violation.getMessage<span class="o">())</span>.isEqualTo<span class="o">(</span><span class="s2">"must be empty"</span><span class="o">)</span><span class="p">;</span>
-58 <span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assertThat</span><span class="o">(</span><span class="n">violation</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"must not be empty"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>with the following.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assertThat</span><span class="o">(</span><span class="n">violation</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"must be empty"</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>Now, run the <code class="highlighter-rouge">docker build</code> command from above and observe that the build fails and the failing testing information is printed to the console.</p>

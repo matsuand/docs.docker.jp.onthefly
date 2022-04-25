@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Engine API v1.18 | Docker ドキュメント</title>
   <meta name="description" content="API Documentation for Docker" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Engine API v1.18" />
   <meta property="og:description" content="API Documentation for Docker" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.18/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Engine API v1.18","description":"API Documentation for Docker","url":"https://docs.docker.com/engine/api/v1.18/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Engine API v1.18</h1><p><em class="reading-time">読む時間の目安: 42 分</em></p><!-- This file is maintained within the moby/moby GitHub
+                        <section class="section"><h1>Engine API v1.18</h1><p><em class="reading-time">読む時間の目安: 40 分</em></p><!-- This file is maintained within the moby/moby GitHub
      repository at https://github.com/moby/moby/. Make all
      pull requests against that repo. If you see this file in
      another repository, consider it read-only there, as it will
@@ -119,18 +119,18 @@
 <h2 id="1-brief-introduction">1. Brief introduction</h2>
 
 <ul>
-  <li>The daemon listens on <code class="language-plaintext highlighter-rouge">unix:///var/run/docker.sock</code> but you can
+  <li>The daemon listens on <code class="highlighter-rouge">unix:///var/run/docker.sock</code> but you can
 <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#bind-docker-to-another-host-port-or-a-unix-socket">Bind Docker to another host/port or a Unix socket</a>.</li>
-  <li>The API tends to be REST, but for some complex commands, like <code class="language-plaintext highlighter-rouge">attach</code>
-or <code class="language-plaintext highlighter-rouge">pull</code>, the HTTP connection is hijacked to transport <code class="language-plaintext highlighter-rouge">stdout</code>,
-<code class="language-plaintext highlighter-rouge">stdin</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</li>
-  <li>A <code class="language-plaintext highlighter-rouge">Content-Length</code> header should be present in <code class="language-plaintext highlighter-rouge">POST</code> requests to endpoints
+  <li>The API tends to be REST, but for some complex commands, like <code class="highlighter-rouge">attach</code>
+or <code class="highlighter-rouge">pull</code>, the HTTP connection is hijacked to transport <code class="highlighter-rouge">stdout</code>,
+<code class="highlighter-rouge">stdin</code> and <code class="highlighter-rouge">stderr</code>.</li>
+  <li>A <code class="highlighter-rouge">Content-Length</code> header should be present in <code class="highlighter-rouge">POST</code> requests to endpoints
 that expect a body.</li>
   <li>To lock to a specific version of the API, you prefix the URL with the version
-of the API to use. For example, <code class="language-plaintext highlighter-rouge">/v1.18/info</code>. If no version is included in
+of the API to use. For example, <code class="highlighter-rouge">/v1.18/info</code>. If no version is included in
 the URL, the maximum supported API version is used.</li>
   <li>If the API version specified in the URL is not supported by the daemon, a HTTP
-<code class="language-plaintext highlighter-rouge">400 Bad Request</code> error message is returned.</li>
+<code class="highlighter-rouge">400 Bad Request</code> error message is returned.</li>
 </ul>
 
 <h2 id="2-endpoints">2. Endpoints</h2>
@@ -139,18 +139,18 @@ the URL, the maximum supported API version is used.</li>
 
 <h4 id="list-containers">List containers</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/json</code></p>
+<p><code class="highlighter-rouge">GET /containers/json</code></p>
 
 <p>List containers</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/json?all=1&amp;before=8dfafdbc3a40&amp;size=1 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/json?all=1&amp;before=8dfafdbc3a40&amp;size=1 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -214,7 +214,7 @@ Content-Type: application/json
 <ul>
   <li><strong>all</strong> – 1/True/true or 0/False/false, Show all containers.
     Only running containers are shown by default (i.e., this defaults to false)</li>
-  <li><strong>limit</strong> – Show <code class="language-plaintext highlighter-rouge">limit</code> last created
+  <li><strong>limit</strong> – Show <code class="highlighter-rouge">limit</code> last created
     containers, include non-running ones.</li>
   <li><strong>since</strong> – Show only containers created since Id, include
     non-running ones.</li>
@@ -222,21 +222,21 @@ Content-Type: application/json
     non-running ones.</li>
   <li><strong>size</strong> – 1/True/true or 0/False/false, Show the containers
     sizes</li>
-  <li><strong>filters</strong> - a JSON encoded value of the filters (a <code class="language-plaintext highlighter-rouge">map[string][]string</code>) to process on the containers list. Available filters:</li>
-  <li><code class="language-plaintext highlighter-rouge">exited=&lt;int&gt;</code>; -- containers with exit code of  <code class="language-plaintext highlighter-rouge">&lt;int&gt;</code> ;</li>
+  <li><strong>filters</strong> - a JSON encoded value of the filters (a <code class="highlighter-rouge">map[string][]string</code>) to process on the containers list. Available filters:</li>
+  <li><code class="highlighter-rouge">exited=&lt;int&gt;</code>; -- containers with exit code of  <code class="highlighter-rouge">&lt;int&gt;</code> ;</li>
   <li>
     <table>
       <tbody>
         <tr>
-          <td><code class="language-plaintext highlighter-rouge">status=</code>(<code class="language-plaintext highlighter-rouge">restarting</code></td>
-          <td><code class="language-plaintext highlighter-rouge">running</code></td>
-          <td><code class="language-plaintext highlighter-rouge">paused</code></td>
-          <td><code class="language-plaintext highlighter-rouge">exited</code>)</td>
+          <td><code class="highlighter-rouge">status=</code>(<code class="highlighter-rouge">restarting</code></td>
+          <td><code class="highlighter-rouge">running</code></td>
+          <td><code class="highlighter-rouge">paused</code></td>
+          <td><code class="highlighter-rouge">exited</code>)</td>
         </tr>
       </tbody>
     </table>
   </li>
-  <li><code class="language-plaintext highlighter-rouge">label=key</code> or <code class="language-plaintext highlighter-rouge">label="key=value"</code> of a container label</li>
+  <li><code class="highlighter-rouge">label=key</code> or <code class="highlighter-rouge">label="key=value"</code> of a container label</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -249,13 +249,13 @@ Content-Type: application/json
 
 <h4 id="create-a-container">Create a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/create</code></p>
+<p><code class="highlighter-rouge">POST /containers/create</code></p>
 
 <p>Create a container</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/create HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/create HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -324,7 +324,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 201 Created
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 201 Created
   Content-Type: application/json
 
   {
@@ -341,14 +341,14 @@ Content-Length: 12345
   <li><strong>Domainname</strong> - A string value containing the domain name to use
   for the container.</li>
   <li><strong>User</strong> - A string value specifying the user inside the container.</li>
-  <li><strong>AttachStdin</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stdin</code>.</li>
-  <li><strong>AttachStdout</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stdout</code>.</li>
-  <li><strong>AttachStderr</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stderr</code>.</li>
-  <li><strong>Tty</strong> - Boolean value, Attach standard streams to a <code class="language-plaintext highlighter-rouge">tty</code>, including <code class="language-plaintext highlighter-rouge">stdin</code> if it is not closed.</li>
-  <li><strong>OpenStdin</strong> - Boolean value, opens <code class="language-plaintext highlighter-rouge">stdin</code>,</li>
-  <li><strong>StdinOnce</strong> - Boolean value, close <code class="language-plaintext highlighter-rouge">stdin</code> after the 1 attached client disconnects.</li>
-  <li><strong>Env</strong> - A list of environment variables in the form of <code class="language-plaintext highlighter-rouge">["VAR=value", ...]</code></li>
-  <li><strong>Labels</strong> - Adds a map of labels to a container. To specify a map: <code class="language-plaintext highlighter-rouge">{"key":"value", ... }</code></li>
+  <li><strong>AttachStdin</strong> - Boolean value, attaches to <code class="highlighter-rouge">stdin</code>.</li>
+  <li><strong>AttachStdout</strong> - Boolean value, attaches to <code class="highlighter-rouge">stdout</code>.</li>
+  <li><strong>AttachStderr</strong> - Boolean value, attaches to <code class="highlighter-rouge">stderr</code>.</li>
+  <li><strong>Tty</strong> - Boolean value, Attach standard streams to a <code class="highlighter-rouge">tty</code>, including <code class="highlighter-rouge">stdin</code> if it is not closed.</li>
+  <li><strong>OpenStdin</strong> - Boolean value, opens <code class="highlighter-rouge">stdin</code>,</li>
+  <li><strong>StdinOnce</strong> - Boolean value, close <code class="highlighter-rouge">stdin</code> after the 1 attached client disconnects.</li>
+  <li><strong>Env</strong> - A list of environment variables in the form of <code class="highlighter-rouge">["VAR=value", ...]</code></li>
+  <li><strong>Labels</strong> - Adds a map of labels to a container. To specify a map: <code class="highlighter-rouge">{"key":"value", ... }</code></li>
   <li><strong>Cmd</strong> - Command to run specified as a string or an array of strings.</li>
   <li><strong>Entrypoint</strong> - Set the entry point for the container as a string or an array
   of strings.</li>
@@ -360,36 +360,36 @@ Content-Length: 12345
   <li><strong>NetworkDisabled</strong> - Boolean value, when true disables networking for the
   container</li>
   <li><strong>ExposedPorts</strong> - An object mapping ports to an empty object in the form of:
-  <code class="language-plaintext highlighter-rouge">"ExposedPorts": { "&lt;port&gt;/&lt;tcp|udp&gt;: {}" }</code></li>
+  <code class="highlighter-rouge">"ExposedPorts": { "&lt;port&gt;/&lt;tcp|udp&gt;: {}" }</code></li>
   <li><strong>HostConfig</strong>
     <ul>
       <li><strong>Binds</strong> – A list of bind mounts for this container. Each item is a string in one of these forms:
         <ul>
-          <li><code class="language-plaintext highlighter-rouge">host-src:container-dest</code> to bind-mount a host path into the
-container. Both <code class="language-plaintext highlighter-rouge">host-src</code>, and <code class="language-plaintext highlighter-rouge">container-dest</code> must be an
+          <li><code class="highlighter-rouge">host-src:container-dest</code> to bind-mount a host path into the
+container. Both <code class="highlighter-rouge">host-src</code>, and <code class="highlighter-rouge">container-dest</code> must be an
 <em>absolute</em> path.</li>
-          <li><code class="language-plaintext highlighter-rouge">host-src:container-dest:ro</code> to make the bind mount read-only
-inside the container. Both <code class="language-plaintext highlighter-rouge">host-src</code>, and <code class="language-plaintext highlighter-rouge">container-dest</code> must be
+          <li><code class="highlighter-rouge">host-src:container-dest:ro</code> to make the bind mount read-only
+inside the container. Both <code class="highlighter-rouge">host-src</code>, and <code class="highlighter-rouge">container-dest</code> must be
 an <em>absolute</em> path.</li>
         </ul>
       </li>
       <li><strong>Links</strong> - A list of links for the container. Each link entry should be
-  in the form of <code class="language-plaintext highlighter-rouge">container_name:alias</code>.</li>
+  in the form of <code class="highlighter-rouge">container_name:alias</code>.</li>
       <li><strong>LxcConf</strong> - LXC specific configurations. These configurations only
-  work when using the <code class="language-plaintext highlighter-rouge">lxc</code> execution driver.</li>
+  work when using the <code class="highlighter-rouge">lxc</code> execution driver.</li>
       <li><strong>Memory</strong> - Memory limit in bytes.</li>
-      <li><strong>MemorySwap</strong> - Total memory limit (memory + swap); set <code class="language-plaintext highlighter-rouge">-1</code> to enable unlimited swap.
-  You must use this with <code class="language-plaintext highlighter-rouge">memory</code> and make the swap value larger than <code class="language-plaintext highlighter-rouge">memory</code>.</li>
+      <li><strong>MemorySwap</strong> - Total memory limit (memory + swap); set <code class="highlighter-rouge">-1</code> to enable unlimited swap.
+  You must use this with <code class="highlighter-rouge">memory</code> and make the swap value larger than <code class="highlighter-rouge">memory</code>.</li>
       <li><strong>CpuShares</strong> - An integer value containing the container’s CPU Shares
   (ie. the relative weight vs other containers).</li>
-      <li><strong>CpusetCpus</strong> - String value containing the <code class="language-plaintext highlighter-rouge">cgroups CpusetCpus</code> to use.</li>
+      <li><strong>CpusetCpus</strong> - String value containing the <code class="highlighter-rouge">cgroups CpusetCpus</code> to use.</li>
       <li><strong>PidMode</strong> - Set the PID (Process) Namespace mode for the container;
-  <code class="language-plaintext highlighter-rouge">"container:&lt;name|id&gt;"</code>: joins another container’s PID namespace
-  <code class="language-plaintext highlighter-rouge">"host"</code>: use the host’s PID namespace inside the container</li>
+  <code class="highlighter-rouge">"container:&lt;name|id&gt;"</code>: joins another container’s PID namespace
+  <code class="highlighter-rouge">"host"</code>: use the host’s PID namespace inside the container</li>
       <li><strong>PortBindings</strong> - A map of exposed container ports and the host port they
   should map to. A JSON object in the form
-  <code class="language-plaintext highlighter-rouge">{ &lt;port&gt;/&lt;protocol&gt;: [{ "HostPort": "&lt;port&gt;" }] }</code>
-  Take note that <code class="language-plaintext highlighter-rouge">port</code> is specified as a string and not an integer value.</li>
+  <code class="highlighter-rouge">{ &lt;port&gt;/&lt;protocol&gt;: [{ "HostPort": "&lt;port&gt;" }] }</code>
+  Take note that <code class="highlighter-rouge">port</code> is specified as a string and not an integer value.</li>
       <li>
         <p><strong>PublishAllPorts</strong> - Allocates an ephemeral host port for all of a container’s
   exposed ports. Specified as a boolean value.</p>
@@ -398,7 +398,7 @@ an <em>absolute</em> path.</li>
   The allocated port might be changed when restarting the container.</p>
 
         <p>The port is selected from the ephemeral port range that depends on the kernel.
-  For example, on Linux the range is defined by <code class="language-plaintext highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>.</p>
+  For example, on Linux the range is defined by <code class="highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>.</p>
       </li>
       <li><strong>Privileged</strong> - Gives the container full access to the host. Specified as
   a boolean value.</li>
@@ -407,34 +407,34 @@ an <em>absolute</em> path.</li>
       <li><strong>Dns</strong> - A list of DNS servers for the container to use.</li>
       <li><strong>DnsSearch</strong> - A list of DNS search domains</li>
       <li><strong>ExtraHosts</strong> - A list of hostnames/IP mappings to add to the
-container’s <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file. Specified in the form <code class="language-plaintext highlighter-rouge">["hostname:IP"]</code>.</li>
+container’s <code class="highlighter-rouge">/etc/hosts</code> file. Specified in the form <code class="highlighter-rouge">["hostname:IP"]</code>.</li>
       <li><strong>VolumesFrom</strong> - A list of volumes to inherit from another container.
-  Specified in the form <code class="language-plaintext highlighter-rouge">&lt;container name&gt;[:&lt;ro|rw&gt;]</code></li>
+  Specified in the form <code class="highlighter-rouge">&lt;container name&gt;[:&lt;ro|rw&gt;]</code></li>
       <li><strong>CapAdd</strong> - A list of kernel capabilities to add to the container.</li>
       <li><strong>Capdrop</strong> - A list of kernel capabilities to drop from the container.</li>
       <li><strong>RestartPolicy</strong> – The behavior to apply when the container exits.  The
-    value is an object with a <code class="language-plaintext highlighter-rouge">Name</code> property of either <code class="language-plaintext highlighter-rouge">"always"</code> to
-    always restart or <code class="language-plaintext highlighter-rouge">"on-failure"</code> to restart only when the container
-    exit code is non-zero.  If <code class="language-plaintext highlighter-rouge">on-failure</code> is used, <code class="language-plaintext highlighter-rouge">MaximumRetryCount</code>
+    value is an object with a <code class="highlighter-rouge">Name</code> property of either <code class="highlighter-rouge">"always"</code> to
+    always restart or <code class="highlighter-rouge">"on-failure"</code> to restart only when the container
+    exit code is non-zero.  If <code class="highlighter-rouge">on-failure</code> is used, <code class="highlighter-rouge">MaximumRetryCount</code>
     controls the number of times to retry before giving up.
     The default is not to restart. (optional)
     An ever increasing delay (double the previous delay, starting at 100mS)
     is added before each restart to prevent flooding the server.</li>
       <li><strong>NetworkMode</strong> - Sets the networking mode for the container. Supported
-  values are: <code class="language-plaintext highlighter-rouge">bridge</code>, <code class="language-plaintext highlighter-rouge">host</code>, <code class="language-plaintext highlighter-rouge">none</code>, and <code class="language-plaintext highlighter-rouge">container:&lt;name|id&gt;</code></li>
+  values are: <code class="highlighter-rouge">bridge</code>, <code class="highlighter-rouge">host</code>, <code class="highlighter-rouge">none</code>, and <code class="highlighter-rouge">container:&lt;name|id&gt;</code></li>
       <li><strong>Devices</strong> - A list of devices to add to the container specified as a JSON object in the
   form
-  <code class="language-plaintext highlighter-rouge">{ "PathOnHost": "/dev/deviceName", "PathInContainer": "/dev/deviceName", "CgroupPermissions": "mrw"}</code></li>
+  <code class="highlighter-rouge">{ "PathOnHost": "/dev/deviceName", "PathInContainer": "/dev/deviceName", "CgroupPermissions": "mrw"}</code></li>
       <li><strong>Ulimits</strong> - A list of ulimits to set in the container, specified as
-  <code class="language-plaintext highlighter-rouge">{ "Name": &lt;name&gt;, "Soft": &lt;soft limit&gt;, "Hard": &lt;hard limit&gt; }</code>, for example:
-  <code class="language-plaintext highlighter-rouge">Ulimits: { "Name": "nofile", "Soft": 1024, "Hard": 2048 }</code></li>
+  <code class="highlighter-rouge">{ "Name": &lt;name&gt;, "Soft": &lt;soft limit&gt;, "Hard": &lt;hard limit&gt; }</code>, for example:
+  <code class="highlighter-rouge">Ulimits: { "Name": "nofile", "Soft": 1024, "Hard": 2048 }</code></li>
       <li><strong>SecurityOpt</strong>: A list of string values to customize labels for MLS
 systems, such as SELinux.</li>
       <li><strong>LogConfig</strong> - Log configuration for the container, specified as a JSON object in the form
-  <code class="language-plaintext highlighter-rouge">{ "Type": "&lt;driver_name&gt;", "Config": {"key1": "val1"}}</code>.
-  Available types: <code class="language-plaintext highlighter-rouge">json-file</code>, <code class="language-plaintext highlighter-rouge">syslog</code>, <code class="language-plaintext highlighter-rouge">journald</code>, <code class="language-plaintext highlighter-rouge">none</code>.
-  <code class="language-plaintext highlighter-rouge">json-file</code> logging driver.</li>
-      <li><strong>CgroupParent</strong> - Path to <code class="language-plaintext highlighter-rouge">cgroups</code> under which the container’s <code class="language-plaintext highlighter-rouge">cgroup</code> is created. If the path is not absolute, the path is considered to be relative to the <code class="language-plaintext highlighter-rouge">cgroups</code> path of the init process. Cgroups are created if they do not already exist.</li>
+  <code class="highlighter-rouge">{ "Type": "&lt;driver_name&gt;", "Config": {"key1": "val1"}}</code>.
+  Available types: <code class="highlighter-rouge">json-file</code>, <code class="highlighter-rouge">syslog</code>, <code class="highlighter-rouge">journald</code>, <code class="highlighter-rouge">none</code>.
+  <code class="highlighter-rouge">json-file</code> logging driver.</li>
+      <li><strong>CgroupParent</strong> - Path to <code class="highlighter-rouge">cgroups</code> under which the container’s <code class="highlighter-rouge">cgroup</code> is created. If the path is not absolute, the path is considered to be relative to the <code class="highlighter-rouge">cgroups</code> path of the init process. Cgroups are created if they do not already exist.</li>
     </ul>
   </li>
 </ul>
@@ -443,7 +443,7 @@ systems, such as SELinux.</li>
 
 <ul>
   <li><strong>name</strong> – Assign the specified name to the container. Must
-match <code class="language-plaintext highlighter-rouge">/?[a-zA-Z0-9_-]+</code>.</li>
+match <code class="highlighter-rouge">/?[a-zA-Z0-9_-]+</code>.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -459,18 +459,18 @@ match <code class="language-plaintext highlighter-rouge">/?[a-zA-Z0-9_-]+</code>
 
 <h4 id="inspect-a-container">Inspect a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/json</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/json</code></p>
 
-<p>Return low-level information on the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Return low-level information on the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  GET /v1.18/containers/4fa6e0f0c678/json HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  GET /v1.18/containers/4fa6e0f0c678/json HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -596,20 +596,20 @@ Content-Type: application/json
 
 <h4 id="list-processes-running-inside-a-container">List processes running inside a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/top</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/top</code></p>
 
-<p>List processes running inside the container <code class="language-plaintext highlighter-rouge">id</code>. On Unix systems this
-is done by running the <code class="language-plaintext highlighter-rouge">ps</code> command. This endpoint is not
+<p>List processes running inside the container <code class="highlighter-rouge">id</code>. On Unix systems this
+is done by running the <code class="highlighter-rouge">ps</code> command. This endpoint is not
 supported on Windows.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/top HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/top HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -629,12 +629,12 @@ Content-Type: application/json
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/top?ps_args=aux HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/top?ps_args=aux HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -655,7 +655,7 @@ Content-Type: application/json
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>ps_args</strong> – <code class="language-plaintext highlighter-rouge">ps</code> arguments to use (e.g., <code class="language-plaintext highlighter-rouge">aux</code>), defaults to <code class="language-plaintext highlighter-rouge">-ef</code></li>
+  <li><strong>ps_args</strong> – <code class="highlighter-rouge">ps</code> arguments to use (e.g., <code class="highlighter-rouge">aux</code>), defaults to <code class="highlighter-rouge">-ef</code></li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -668,23 +668,23 @@ Content-Type: application/json
 
 <h4 id="get-container-logs">Get container logs</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/logs</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/logs</code></p>
 
-<p>Get <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code> logs from the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Get <code class="highlighter-rouge">stdout</code> and <code class="highlighter-rouge">stderr</code> logs from the container <code class="highlighter-rouge">id</code></p>
 
 <blockquote>
   <p><strong>Note</strong>:
-This endpoint works only for containers with the <code class="language-plaintext highlighter-rouge">json-file</code> or <code class="language-plaintext highlighter-rouge">journald</code> logging drivers.</p>
+This endpoint works only for containers with the <code class="highlighter-rouge">json-file</code> or <code class="highlighter-rouge">journald</code> logging drivers.</p>
 </blockquote>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GET /v1.18/containers/4fa6e0f0c678/logs?stderr=1&amp;stdout=1&amp;timestamps=1&amp;follow=1&amp;tail=10 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> GET /v1.18/containers/4fa6e0f0c678/logs?stderr=1&amp;stdout=1&amp;timestamps=1&amp;follow=1&amp;tail=10 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> HTTP/1.1 101 UPGRADED
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> HTTP/1.1 101 UPGRADED
  Content-Type: application/vnd.docker.raw-stream
  Connection: Upgrade
  Upgrade: tcp
@@ -696,12 +696,12 @@ This endpoint works only for containers with the <code class="language-plaintext
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>follow</strong> – 1/True/true or 0/False/false, return stream. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stdout</strong> – 1/True/true or 0/False/false, show <code class="language-plaintext highlighter-rouge">stdout</code> log. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stderr</strong> – 1/True/true or 0/False/false, show <code class="language-plaintext highlighter-rouge">stderr</code> log. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li><strong>follow</strong> – 1/True/true or 0/False/false, return stream. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stdout</strong> – 1/True/true or 0/False/false, show <code class="highlighter-rouge">stdout</code> log. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stderr</strong> – 1/True/true or 0/False/false, show <code class="highlighter-rouge">stderr</code> log. Default <code class="highlighter-rouge">false</code>.</li>
   <li><strong>timestamps</strong> – 1/True/true or 0/False/false, print timestamps for
-    every log line. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>tail</strong> – Output specified number of lines at the end of logs: <code class="language-plaintext highlighter-rouge">all</code> or <code class="language-plaintext highlighter-rouge">&lt;number&gt;</code>. Default all.</li>
+    every log line. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>tail</strong> – Output specified number of lines at the end of logs: <code class="highlighter-rouge">all</code> or <code class="highlighter-rouge">&lt;number&gt;</code>. Default all.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -715,18 +715,18 @@ This endpoint works only for containers with the <code class="language-plaintext
 
 <h4 id="inspect-changes-on-a-containers-filesystem">Inspect changes on a container’s filesystem</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/changes</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/changes</code></p>
 
-<p>Inspect changes on container <code class="language-plaintext highlighter-rouge">id</code>’s filesystem</p>
+<p>Inspect changes on container <code class="highlighter-rouge">id</code>’s filesystem</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/changes HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/changes HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -745,12 +745,12 @@ Content-Type: application/json
 ]
 </code></pre></div></div>
 
-<p>Values for <code class="language-plaintext highlighter-rouge">Kind</code>:</p>
+<p>Values for <code class="highlighter-rouge">Kind</code>:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">0</code>: Modify</li>
-  <li><code class="language-plaintext highlighter-rouge">1</code>: Add</li>
-  <li><code class="language-plaintext highlighter-rouge">2</code>: Delete</li>
+  <li><code class="highlighter-rouge">0</code>: Modify</li>
+  <li><code class="highlighter-rouge">1</code>: Add</li>
+  <li><code class="highlighter-rouge">2</code>: Delete</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -763,18 +763,18 @@ Content-Type: application/json
 
 <h4 id="export-a-container">Export a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/export</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/export</code></p>
 
-<p>Export the contents of container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Export the contents of container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/export HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/4fa6e0f0c678/export HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/octet-stream
 
 
@@ -791,18 +791,18 @@ Content-Type: application/octet-stream
 
 <h4 id="get-container-stats-based-on-resource-usage">Get container stats based on resource usage</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/stats</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/stats</code></p>
 
 <p>This endpoint returns a live stream of a container’s resource usage statistics.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/redis1/stats HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/redis1/stats HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 200 OK
   Content-Type: application/json
 
   {
@@ -883,18 +883,18 @@ Content-Type: application/octet-stream
 
 <h4 id="resize-a-container-tty">Resize a container TTY</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/resize?h=&lt;height&gt;&amp;w=&lt;width&gt;</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/resize?h=&lt;height&gt;&amp;w=&lt;width&gt;</code></p>
 
-<p>Resize the TTY for container with  <code class="language-plaintext highlighter-rouge">id</code>. You must restart the container for the resize to take effect.</p>
+<p>Resize the TTY for container with  <code class="highlighter-rouge">id</code>. You must restart the container for the resize to take effect.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  POST /v1.18/containers/4fa6e0f0c678/resize?h=40&amp;w=80 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  POST /v1.18/containers/4fa6e0f0c678/resize?h=40&amp;w=80 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  HTTP/1.1 200 OK
   Content-Length: 0
   Content-Type: text/plain; charset=utf-8
 </code></pre></div></div>
@@ -902,7 +902,7 @@ Content-Type: application/octet-stream
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>h</strong> – height of <code class="language-plaintext highlighter-rouge">tty</code> session</li>
+  <li><strong>h</strong> – height of <code class="highlighter-rouge">tty</code> session</li>
   <li><strong>w</strong> – width</li>
 </ul>
 
@@ -916,24 +916,24 @@ Content-Type: application/octet-stream
 
 <h4 id="start-a-container">Start a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/start</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/start</code></p>
 
-<p>Start the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Start the container <code class="highlighter-rouge">id</code></p>
 
 <blockquote>
   <p><strong>Note</strong>:
-For backwards compatibility, this endpoint accepts a <code class="language-plaintext highlighter-rouge">HostConfig</code> as JSON-encoded request body.
+For backwards compatibility, this endpoint accepts a <code class="highlighter-rouge">HostConfig</code> as JSON-encoded request body.
 See <a href="#create-a-container">create a container</a> for details.</p>
 </blockquote>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/start HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/start HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Status codes</strong>:</p>
@@ -947,18 +947,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="stop-a-container">Stop a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/stop</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/stop</code></p>
 
-<p>Stop the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Stop the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/stop?t=5 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/stop?t=5 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
@@ -978,18 +978,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="restart-a-container">Restart a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/restart</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/restart</code></p>
 
-<p>Restart the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Restart the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/restart?t=5 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/restart?t=5 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1008,25 +1008,25 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="kill-a-container">Kill a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/kill</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/kill</code></p>
 
-<p>Kill the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Kill the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/kill HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/kill HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>signal</strong> - Signal to send to the container: integer or string like <code class="language-plaintext highlighter-rouge">SIGINT</code>.
-    When not set, <code class="language-plaintext highlighter-rouge">SIGKILL</code> is assumed and the call waits for the container to exit.</li>
+  <li><strong>signal</strong> - Signal to send to the container: integer or string like <code class="highlighter-rouge">SIGINT</code>.
+    When not set, <code class="highlighter-rouge">SIGKILL</code> is assumed and the call waits for the container to exit.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -1039,18 +1039,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="rename-a-container">Rename a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/rename</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/rename</code></p>
 
-<p>Rename the container <code class="language-plaintext highlighter-rouge">id</code> to a <code class="language-plaintext highlighter-rouge">new_name</code></p>
+<p>Rename the container <code class="highlighter-rouge">id</code> to a <code class="highlighter-rouge">new_name</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/rename?name=new_name HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/rename?name=new_name HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1070,18 +1070,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="pause-a-container">Pause a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/pause</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/pause</code></p>
 
-<p>Pause the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Pause the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/pause HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/pause HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Status codes</strong>:</p>
@@ -1094,18 +1094,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="unpause-a-container">Unpause a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/unpause</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/unpause</code></p>
 
-<p>Unpause the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Unpause the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/unpause HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/unpause HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Status codes</strong>:</p>
@@ -1118,18 +1118,18 @@ See <a href="#create-a-container">create a container</a> for details.</p>
 
 <h4 id="attach-to-a-container">Attach to a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/attach</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/attach</code></p>
 
-<p>Attach to the container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Attach to the container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/16253994b7c4/attach?logs=1&amp;stream=0&amp;stdout=1 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/16253994b7c4/attach?logs=1&amp;stream=0&amp;stdout=1 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 101 UPGRADED
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 101 UPGRADED
 Content-Type: application/vnd.docker.raw-stream
 Connection: Upgrade
 Upgrade: tcp
@@ -1141,15 +1141,15 @@ Upgrade: tcp
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code class="highlighter-rouge">false</code>.</li>
   <li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
-    Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach
-    to <code class="language-plaintext highlighter-rouge">stdin</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">logs=true</code>, return
-    <code class="language-plaintext highlighter-rouge">stdout</code> log, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach to <code class="language-plaintext highlighter-rouge">stdout</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">logs=true</code>, return
-    <code class="language-plaintext highlighter-rouge">stderr</code> log, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach to <code class="language-plaintext highlighter-rouge">stderr</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">stream=true</code>, attach
+    to <code class="highlighter-rouge">stdin</code>. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">logs=true</code>, return
+    <code class="highlighter-rouge">stdout</code> log, if <code class="highlighter-rouge">stream=true</code>, attach to <code class="highlighter-rouge">stdout</code>. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">logs=true</code>, return
+    <code class="highlighter-rouge">stderr</code> log, if <code class="highlighter-rouge">stream=true</code>, attach to <code class="highlighter-rouge">stderr</code>. Default <code class="highlighter-rouge">false</code>.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -1165,35 +1165,35 @@ Upgrade: tcp
 <p><strong>Stream details</strong>:</p>
 
 <p>When using the TTY setting is enabled in
-<a href="#create-a-container"><code class="language-plaintext highlighter-rouge">POST /containers/create</code>
+<a href="#create-a-container"><code class="highlighter-rouge">POST /containers/create</code>
 </a>,
-the stream is the raw data from the process PTY and client’s <code class="language-plaintext highlighter-rouge">stdin</code>.
+the stream is the raw data from the process PTY and client’s <code class="highlighter-rouge">stdin</code>.
 When the TTY is disabled, then the stream is multiplexed to separate
-<code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</p>
+<code class="highlighter-rouge">stdout</code> and <code class="highlighter-rouge">stderr</code>.</p>
 
 <p>The format is a <strong>Header</strong> and a <strong>Payload</strong> (frame).</p>
 
 <p><strong>HEADER</strong></p>
 
-<p>The header contains the information which the stream writes (<code class="language-plaintext highlighter-rouge">stdout</code> or
-<code class="language-plaintext highlighter-rouge">stderr</code>). It also contains the size of the associated frame encoded in the
-last four bytes (<code class="language-plaintext highlighter-rouge">uint32</code>).</p>
+<p>The header contains the information which the stream writes (<code class="highlighter-rouge">stdout</code> or
+<code class="highlighter-rouge">stderr</code>). It also contains the size of the associated frame encoded in the
+last four bytes (<code class="highlighter-rouge">uint32</code>).</p>
 
 <p>It is encoded on the first eight bytes like this:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4}
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">STREAM_TYPE</code> can be:</p>
+<p><code class="highlighter-rouge">STREAM_TYPE</code> can be:</p>
 
 <ul>
-  <li>0: <code class="language-plaintext highlighter-rouge">stdin</code> (is written on <code class="language-plaintext highlighter-rouge">stdout</code>)</li>
-  <li>1: <code class="language-plaintext highlighter-rouge">stdout</code></li>
-  <li>2: <code class="language-plaintext highlighter-rouge">stderr</code></li>
+  <li>0: <code class="highlighter-rouge">stdin</code> (is written on <code class="highlighter-rouge">stdout</code>)</li>
+  <li>1: <code class="highlighter-rouge">stdout</code></li>
+  <li>2: <code class="highlighter-rouge">stderr</code></li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">SIZE1, SIZE2, SIZE3, SIZE4</code> are the four bytes of
-the <code class="language-plaintext highlighter-rouge">uint32</code> size encoded as big endian.</p>
+<p><code class="highlighter-rouge">SIZE1, SIZE2, SIZE3, SIZE4</code> are the four bytes of
+the <code class="highlighter-rouge">uint32</code> size encoded as big endian.</p>
 
 <p><strong>PAYLOAD</strong></p>
 
@@ -1203,7 +1203,7 @@ the <code class="language-plaintext highlighter-rouge">uint32</code> size encode
 
 <p>The simplest way to implement the Attach protocol is the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.  Read eight bytes.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.  Read eight bytes.
 2.  Choose `stdout` or `stderr` depending on the first byte.
 3.  Extract the frame size from the last four bytes.
 4.  Read the extracted size and output it on the correct output.
@@ -1212,34 +1212,34 @@ the <code class="language-plaintext highlighter-rouge">uint32</code> size encode
 
 <h4 id="attach-to-a-container-websocket">Attach to a container (websocket)</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /containers/(id or name)/attach/ws</code></p>
+<p><code class="highlighter-rouge">GET /containers/(id or name)/attach/ws</code></p>
 
-<p>Attach to the container <code class="language-plaintext highlighter-rouge">id</code> via websocket</p>
+<p>Attach to the container <code class="highlighter-rouge">id</code> via websocket</p>
 
 <p>Implements websocket protocol handshake according to <a href="http://tools.ietf.org/html/rfc6455">RFC 6455</a></p>
 
 <p><strong>Example request</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/e90e34656806/attach/ws?logs=0&amp;stream=1&amp;stdin=1&amp;stdout=1&amp;stderr=1 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/containers/e90e34656806/attach/ws?logs=0&amp;stream=1&amp;stdin=1&amp;stdout=1&amp;stderr=1 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{ STREAM }}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{ STREAM }}
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+  <li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default <code class="highlighter-rouge">false</code>.</li>
   <li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
-    Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach
-    to <code class="language-plaintext highlighter-rouge">stdin</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">logs=true</code>, return
-    <code class="language-plaintext highlighter-rouge">stdout</code> log, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach to <code class="language-plaintext highlighter-rouge">stdout</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
-  <li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code class="language-plaintext highlighter-rouge">logs=true</code>, return
-    <code class="language-plaintext highlighter-rouge">stderr</code> log, if <code class="language-plaintext highlighter-rouge">stream=true</code>, attach to <code class="language-plaintext highlighter-rouge">stderr</code>. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stdin</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">stream=true</code>, attach
+    to <code class="highlighter-rouge">stdin</code>. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stdout</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">logs=true</code>, return
+    <code class="highlighter-rouge">stdout</code> log, if <code class="highlighter-rouge">stream=true</code>, attach to <code class="highlighter-rouge">stdout</code>. Default <code class="highlighter-rouge">false</code>.</li>
+  <li><strong>stderr</strong> – 1/True/true or 0/False/false, if <code class="highlighter-rouge">logs=true</code>, return
+    <code class="highlighter-rouge">stderr</code> log, if <code class="highlighter-rouge">stream=true</code>, attach to <code class="highlighter-rouge">stderr</code>. Default <code class="highlighter-rouge">false</code>.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -1253,18 +1253,18 @@ the <code class="language-plaintext highlighter-rouge">uint32</code> size encode
 
 <h4 id="wait-a-container">Wait a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/wait</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/wait</code></p>
 
-<p>Block until container <code class="language-plaintext highlighter-rouge">id</code> stops, then returns the exit code</p>
+<p>Block until container <code class="highlighter-rouge">id</code> stops, then returns the exit code</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/16253994b7c4/wait HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/16253994b7c4/wait HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"StatusCode": 0}
@@ -1280,29 +1280,29 @@ Content-Type: application/json
 
 <h4 id="remove-a-container">Remove a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">DELETE /containers/(id or name)</code></p>
+<p><code class="highlighter-rouge">DELETE /containers/(id or name)</code></p>
 
-<p>Remove the container <code class="language-plaintext highlighter-rouge">id</code> from the filesystem</p>
+<p>Remove the container <code class="highlighter-rouge">id</code> from the filesystem</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE /v1.18/containers/16253994b7c4?v=1 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE /v1.18/containers/16253994b7c4?v=1 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 204 No Content
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
   <li><strong>v</strong> – 1/True/true or 0/False/false, Remove the volumes
-    associated to the container. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    associated to the container. Default <code class="highlighter-rouge">false</code>.</li>
   <li><strong>force</strong> - 1/True/true or 0/False/false, Kill then remove the container.
-    Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    Default <code class="highlighter-rouge">false</code>.</li>
   <li><strong>link</strong> - 1/True/true or 0/False/false, Remove the specified
-    link associated to the container. Default <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    link associated to the container. Default <code class="highlighter-rouge">false</code>.</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -1317,13 +1317,13 @@ Content-Type: application/json
 
 <h4 id="copy-files-or-folders-from-a-container">Copy files or folders from a container</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/copy</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/copy</code></p>
 
-<p>Copy files or folders of container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Copy files or folders of container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/4fa6e0f0c678/copy HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/4fa6e0f0c678/copy HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -1334,7 +1334,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/x-tar
 
 
@@ -1353,16 +1353,16 @@ Content-Type: application/x-tar
 
 <h4 id="list-images">List Images</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/json</code></p>
+<p><code class="highlighter-rouge">GET /images/json</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/json?all=0 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/json?all=0 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -1393,12 +1393,12 @@ Content-Type: application/json
 
 <p><strong>Example request, with digest information</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/json?digests=1 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/json?digests=1 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response, with digest information</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -1419,18 +1419,18 @@ Content-Type: application/json
 ]
 </code></pre></div></div>
 
-<p>The response shows a single image <code class="language-plaintext highlighter-rouge">Id</code> associated with two repositories
-(<code class="language-plaintext highlighter-rouge">RepoTags</code>): <code class="language-plaintext highlighter-rouge">localhost:5000/test/busybox</code>: and <code class="language-plaintext highlighter-rouge">playdate</code>. A caller can use
-either of the <code class="language-plaintext highlighter-rouge">RepoTags</code> values <code class="language-plaintext highlighter-rouge">localhost:5000/test/busybox:latest</code> or
-<code class="language-plaintext highlighter-rouge">playdate:latest</code> to reference the image.</p>
+<p>The response shows a single image <code class="highlighter-rouge">Id</code> associated with two repositories
+(<code class="highlighter-rouge">RepoTags</code>): <code class="highlighter-rouge">localhost:5000/test/busybox</code>: and <code class="highlighter-rouge">playdate</code>. A caller can use
+either of the <code class="highlighter-rouge">RepoTags</code> values <code class="highlighter-rouge">localhost:5000/test/busybox:latest</code> or
+<code class="highlighter-rouge">playdate:latest</code> to reference the image.</p>
 
-<p>You can also use <code class="language-plaintext highlighter-rouge">RepoDigests</code> values to reference an image. In this response,
+<p>You can also use <code class="highlighter-rouge">RepoDigests</code> values to reference an image. In this response,
 the array has only one reference and that is to the
-<code class="language-plaintext highlighter-rouge">localhost:5000/test/busybox</code> repository; the <code class="language-plaintext highlighter-rouge">playdate</code> repository has no
+<code class="highlighter-rouge">localhost:5000/test/busybox</code> repository; the <code class="highlighter-rouge">playdate</code> repository has no
 digest. You can reference this digest using the value:
-<code class="language-plaintext highlighter-rouge">localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d...</code></p>
+<code class="highlighter-rouge">localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d...</code></p>
 
-<p>See the <code class="language-plaintext highlighter-rouge">docker run</code> and <code class="language-plaintext highlighter-rouge">docker build</code> commands for examples of digest and tag
+<p>See the <code class="highlighter-rouge">docker run</code> and <code class="highlighter-rouge">docker build</code> commands for examples of digest and tag
 references on the command line.</p>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1438,20 +1438,20 @@ references on the command line.</p>
 <ul>
   <li><strong>all</strong> – 1/True/true or 0/False/false, default false</li>
   <li><strong>filters</strong> – a JSON encoded value of the filters (a map[string][]string) to process on the images list. Available filters:</li>
-  <li><code class="language-plaintext highlighter-rouge">dangling=true</code></li>
-  <li><code class="language-plaintext highlighter-rouge">label=key</code> or <code class="language-plaintext highlighter-rouge">label="key=value"</code> of an image label</li>
+  <li><code class="highlighter-rouge">dangling=true</code></li>
+  <li><code class="highlighter-rouge">label=key</code> or <code class="highlighter-rouge">label="key=value"</code> of an image label</li>
   <li><strong>filter</strong> - only return images with the specified name</li>
 </ul>
 
 <h4 id="build-image-from-a-dockerfile">Build image from a Dockerfile</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /build</code></p>
+<p><code class="highlighter-rouge">POST /build</code></p>
 
 <p>Build an image from a Dockerfile</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/build HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/build HTTP/1.1
 Content-Type: application/x-tar
 
 
@@ -1460,7 +1460,7 @@ Content-Type: application/x-tar
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"stream": "Step 1/5..."}
@@ -1468,19 +1468,19 @@ Content-Type: application/json
 {"error": "Error...", "errorDetail": {"code": 123, "message": "Error..."}}
 </code></pre></div></div>
 
-<p>The input stream must be a <code class="language-plaintext highlighter-rouge">tar</code> archive compressed with one of the
-following algorithms: <code class="language-plaintext highlighter-rouge">identity</code> (no compression), <code class="language-plaintext highlighter-rouge">gzip</code>, <code class="language-plaintext highlighter-rouge">bzip2</code>, <code class="language-plaintext highlighter-rouge">xz</code>.</p>
+<p>The input stream must be a <code class="highlighter-rouge">tar</code> archive compressed with one of the
+following algorithms: <code class="highlighter-rouge">identity</code> (no compression), <code class="highlighter-rouge">gzip</code>, <code class="highlighter-rouge">bzip2</code>, <code class="highlighter-rouge">xz</code>.</p>
 
 <p>The archive must include a build instructions file, typically called
-<code class="language-plaintext highlighter-rouge">Dockerfile</code> at the archive’s root. The <code class="language-plaintext highlighter-rouge">dockerfile</code> parameter may be
+<code class="highlighter-rouge">Dockerfile</code> at the archive’s root. The <code class="highlighter-rouge">dockerfile</code> parameter may be
 used to specify a different build instructions file. To do this, its value must be
 the path to the alternate build instructions file to use.</p>
 
 <p>The archive may include any number of other files,
-which are accessible in the build context (See the <a href="/docs.docker.jp.onthefly/engine/reference/builder/#add"><em>ADD build
+which are accessible in the build context (See the <a href="../reference/builder.md#add"><em>ADD build
 command</em></a>).</p>
 
-<p>The Docker daemon performs a preliminary validation of the <code class="language-plaintext highlighter-rouge">Dockerfile</code> before
+<p>The Docker daemon performs a preliminary validation of the <code class="highlighter-rouge">Dockerfile</code> before
 starting the build, and returns an error if the syntax is incorrect. After that,
 each instruction is run one-by-one until the ID of the new image is output.</p>
 
@@ -1491,27 +1491,27 @@ or being killed.</p>
 
 <ul>
   <li><strong>dockerfile</strong> - Path within the build context to the Dockerfile. This is
-    ignored if <code class="language-plaintext highlighter-rouge">remote</code> is specified and points to an individual filename.</li>
-  <li><strong>t</strong> – A name and optional tag to apply to the image in the <code class="language-plaintext highlighter-rouge">name:tag</code> format.
-    If you omit the <code class="language-plaintext highlighter-rouge">tag</code> the default <code class="language-plaintext highlighter-rouge">latest</code> value is assumed.</li>
+    ignored if <code class="highlighter-rouge">remote</code> is specified and points to an individual filename.</li>
+  <li><strong>t</strong> – A name and optional tag to apply to the image in the <code class="highlighter-rouge">name:tag</code> format.
+    If you omit the <code class="highlighter-rouge">tag</code> the default <code class="highlighter-rouge">latest</code> value is assumed.</li>
   <li><strong>remote</strong> – A Git repository URI or HTTP/HTTPS context URI. If the
     URI points to a single text file, the file’s contents are placed into
-    a file called <code class="language-plaintext highlighter-rouge">Dockerfile</code> and the image is built from that file.</li>
+    a file called <code class="highlighter-rouge">Dockerfile</code> and the image is built from that file.</li>
   <li><strong>q</strong> – Suppress verbose build output.</li>
   <li><strong>nocache</strong> – Do not use the cache when building the image.</li>
   <li><strong>pull</strong> - Attempt to pull the image even if an older image exists locally.</li>
   <li><strong>rm</strong> - Remove intermediate containers after a successful build (default behavior).</li>
-  <li><strong>forcerm</strong> - Always remove intermediate containers (includes <code class="language-plaintext highlighter-rouge">rm</code>).</li>
+  <li><strong>forcerm</strong> - Always remove intermediate containers (includes <code class="highlighter-rouge">rm</code>).</li>
   <li><strong>memory</strong> - Set memory limit for build.</li>
-  <li><strong>memswap</strong> - Total memory (memory + swap), <code class="language-plaintext highlighter-rouge">-1</code> to enable unlimited swap.</li>
+  <li><strong>memswap</strong> - Total memory (memory + swap), <code class="highlighter-rouge">-1</code> to enable unlimited swap.</li>
   <li><strong>cpushares</strong> - CPU shares (relative weight).</li>
-  <li><strong>cpusetcpus</strong> - CPUs in which to allow execution (e.g., <code class="language-plaintext highlighter-rouge">0-3</code>, <code class="language-plaintext highlighter-rouge">0,1</code>).</li>
+  <li><strong>cpusetcpus</strong> - CPUs in which to allow execution (e.g., <code class="highlighter-rouge">0-3</code>, <code class="highlighter-rouge">0,1</code>).</li>
 </ul>
 
 <p><strong>Request Headers</strong>:</p>
 
 <ul>
-  <li><strong>Content-type</strong> – Set to <code class="language-plaintext highlighter-rouge">"application/x-tar"</code>.</li>
+  <li><strong>Content-type</strong> – Set to <code class="highlighter-rouge">"application/x-tar"</code>.</li>
   <li><strong>X-Registry-Config</strong> – base64-encoded ConfigFile object</li>
 </ul>
 
@@ -1524,18 +1524,18 @@ or being killed.</p>
 
 <h4 id="create-an-image">Create an image</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /images/create</code></p>
+<p><code class="highlighter-rouge">POST /images/create</code></p>
 
 <p>Create an image either by pulling it from the registry or by importing it</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/create?fromImage=busybox&amp;tag=latest HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/create?fromImage=busybox&amp;tag=latest HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"status": "Pulling..."}
@@ -1545,7 +1545,7 @@ Content-Type: application/json
 </code></pre></div></div>
 
 <p>When using this endpoint to pull an image from the registry, the
-<code class="language-plaintext highlighter-rouge">X-Registry-Auth</code> header can be used to include
+<code class="highlighter-rouge">X-Registry-Auth</code> header can be used to include
 a base64-encoded AuthConfig object.</p>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1553,7 +1553,7 @@ a base64-encoded AuthConfig object.</p>
 <ul>
   <li><strong>fromImage</strong> – Name of the image to pull.</li>
   <li><strong>fromSrc</strong> – Source to import.  The value may be a URL from which the image
-    can be retrieved or <code class="language-plaintext highlighter-rouge">-</code> to read the image from the request body.</li>
+    can be retrieved or <code class="highlighter-rouge">-</code> to read the image from the request body.</li>
   <li><strong>repo</strong> – Repository name.</li>
   <li><strong>tag</strong> – Tag. If empty when pulling an image, this causes all tags
     for the given image to be pulled.</li>
@@ -1575,18 +1575,18 @@ a base64-encoded AuthConfig object.</p>
 
 <h4 id="inspect-an-image">Inspect an image</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/(name)/json</code></p>
+<p><code class="highlighter-rouge">GET /images/(name)/json</code></p>
 
-<p>Return low-level information on the image <code class="language-plaintext highlighter-rouge">name</code></p>
+<p>Return low-level information on the image <code class="highlighter-rouge">name</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/json HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/json HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -1630,18 +1630,18 @@ Content-Type: application/json
 
 <h4 id="get-the-history-of-an-image">Get the history of an image</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/(name)/history</code></p>
+<p><code class="highlighter-rouge">GET /images/(name)/history</code></p>
 
-<p>Return the history of the image <code class="language-plaintext highlighter-rouge">name</code></p>
+<p>Return the history of the image <code class="highlighter-rouge">name</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/history HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/history HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -1668,18 +1668,18 @@ Content-Type: application/json
 
 <h4 id="push-an-image-on-the-registry">Push an image on the registry</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /images/(name)/push</code></p>
+<p><code class="highlighter-rouge">POST /images/(name)/push</code></p>
 
-<p>Push the image <code class="language-plaintext highlighter-rouge">name</code> on the registry</p>
+<p>Push the image <code class="highlighter-rouge">name</code> on the registry</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/test/push HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/test/push HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"status": "Pushing..."}
@@ -1689,12 +1689,12 @@ Content-Type: application/json
 </code></pre></div></div>
 
 <p>If you wish to push an image on to a private registry, that image must already have a tag
-into a repository which references that registry <code class="language-plaintext highlighter-rouge">hostname</code> and <code class="language-plaintext highlighter-rouge">port</code>.  This repository name should
+into a repository which references that registry <code class="highlighter-rouge">hostname</code> and <code class="highlighter-rouge">port</code>.  This repository name should
 then be used in the URL. This duplicates the command line’s flow.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/registry.acme.com:5000/test/push HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/registry.acme.com:5000/test/push HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1719,18 +1719,18 @@ then be used in the URL. This duplicates the command line’s flow.</p>
 
 <h4 id="tag-an-image-into-a-repository">Tag an image into a repository</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /images/(name)/tag</code></p>
+<p><code class="highlighter-rouge">POST /images/(name)/tag</code></p>
 
-<p>Tag the image <code class="language-plaintext highlighter-rouge">name</code> into a repository</p>
+<p>Tag the image <code class="highlighter-rouge">name</code> into a repository</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/test/tag?repo=myrepo&amp;force=0&amp;tag=v42 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/test/tag?repo=myrepo&amp;force=0&amp;tag=v42 HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
@@ -1753,18 +1753,18 @@ then be used in the URL. This duplicates the command line’s flow.</p>
 
 <h4 id="remove-an-image">Remove an image</h4>
 
-<p><code class="language-plaintext highlighter-rouge">DELETE /images/(name)</code></p>
+<p><code class="highlighter-rouge">DELETE /images/(name)</code></p>
 
-<p>Remove the image <code class="language-plaintext highlighter-rouge">name</code> from the filesystem</p>
+<p>Remove the image <code class="highlighter-rouge">name</code> from the filesystem</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE /v1.18/images/test HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE /v1.18/images/test HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-type: application/json
 
 [
@@ -1792,7 +1792,7 @@ Content-type: application/json
 
 <h4 id="search-images">Search images</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/search</code></p>
+<p><code class="highlighter-rouge">GET /images/search</code></p>
 
 <p>Search for an image on <a href="https://hub.docker.com">Docker Hub</a>.</p>
 
@@ -1804,12 +1804,12 @@ sent by the registry server to the docker daemon’s request.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/search?term=sshd HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/search?term=sshd HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 [
@@ -1855,13 +1855,13 @@ Content-Type: application/json
 
 <h4 id="check-auth-configuration">Check auth configuration</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /auth</code></p>
+<p><code class="highlighter-rouge">POST /auth</code></p>
 
 <p>Get the default username and email</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/auth HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/auth HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -1875,7 +1875,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 </code></pre></div></div>
 
 <p><strong>Status codes</strong>:</p>
@@ -1888,18 +1888,18 @@ Content-Length: 12345
 
 <h4 id="display-system-wide-information">Display system-wide information</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /info</code></p>
+<p><code class="highlighter-rouge">GET /info</code></p>
 
 <p>Display system-wide information</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/info HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/info HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -1957,18 +1957,18 @@ Content-Type: application/json
 
 <h4 id="show-the-docker-version-information">Show the docker version information</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /version</code></p>
+<p><code class="highlighter-rouge">GET /version</code></p>
 
 <p>Show the docker version information</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/version HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/version HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -1991,18 +1991,18 @@ Content-Type: application/json
 
 <h4 id="ping-the-docker-server">Ping the docker server</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /_ping</code></p>
+<p><code class="highlighter-rouge">GET /_ping</code></p>
 
 <p>Ping the docker server</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/_ping HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/_ping HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: text/plain
 
 OK
@@ -2017,13 +2017,13 @@ OK
 
 <h4 id="create-a-new-image-from-a-containers-changes">Create a new image from a container’s changes</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /commit</code></p>
+<p><code class="highlighter-rouge">POST /commit</code></p>
 
 <p>Create a new image from a container’s changes</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/commit?container=44c004db4b17&amp;comment=message&amp;repo=myrepo HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/commit?container=44c004db4b17&amp;comment=message&amp;repo=myrepo HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -2055,7 +2055,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
 Content-Type: application/json
 
 {"Id": "596069db4bf5"}
@@ -2088,28 +2088,28 @@ Content-Type: application/json
 
 <h4 id="monitor-dockers-events">Monitor Docker’s events</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /events</code></p>
+<p><code class="highlighter-rouge">GET /events</code></p>
 
 <p>Get container events from docker, in real time via streaming.</p>
 
 <p>Docker containers report the following events:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create, destroy, die, exec_create, exec_start, export, kill, oom, pause, restart, start, stop, unpause
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create, destroy, die, exec_create, exec_start, export, kill, oom, pause, restart, start, stop, unpause
 </code></pre></div></div>
 
 <p>Docker images report the following events:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>untag, delete
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>untag, delete
 </code></pre></div></div>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/events?since=1374067924
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/events?since=1374067924
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"status": "create", "id": "dfdf82bd3881","from": "ubuntu:latest", "time":1374067924}
@@ -2124,9 +2124,9 @@ Content-Type: application/json
   <li><strong>since</strong> – Timestamp. Show all events created since timestamp and then stream</li>
   <li><strong>until</strong> – Timestamp. Show events created until given timestamp and stop streaming</li>
   <li><strong>filters</strong> – A json encoded value of the filters (a map[string][]string) to process on the event list. Available filters:</li>
-  <li><code class="language-plaintext highlighter-rouge">container=&lt;string&gt;</code>; -- container to filter</li>
-  <li><code class="language-plaintext highlighter-rouge">event=&lt;string&gt;</code>; -- event to filter</li>
-  <li><code class="language-plaintext highlighter-rouge">image=&lt;string&gt;</code>; -- image to filter</li>
+  <li><code class="highlighter-rouge">container=&lt;string&gt;</code>; -- container to filter</li>
+  <li><code class="highlighter-rouge">event=&lt;string&gt;</code>; -- event to filter</li>
+  <li><code class="highlighter-rouge">image=&lt;string&gt;</code>; -- image to filter</li>
 </ul>
 
 <p><strong>Status codes</strong>:</p>
@@ -2138,13 +2138,13 @@ Content-Type: application/json
 
 <h4 id="get-a-tarball-containing-all-images-in-a-repository">Get a tarball containing all images in a repository</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/(name)/get</code></p>
+<p><code class="highlighter-rouge">GET /images/(name)/get</code></p>
 
 <p>Get a tarball containing all images and metadata for the repository specified
-by <code class="language-plaintext highlighter-rouge">name</code>.</p>
+by <code class="highlighter-rouge">name</code>.</p>
 
-<p>If <code class="language-plaintext highlighter-rouge">name</code> is a specific name and tag (e.g. ubuntu:latest), then only that image
-(and its parents) are returned. If <code class="language-plaintext highlighter-rouge">name</code> is an image ID, similarly only that
+<p>If <code class="highlighter-rouge">name</code> is a specific name and tag (e.g. ubuntu:latest), then only that image
+(and its parents) are returned. If <code class="highlighter-rouge">name</code> is an image ID, similarly only that
 image (and its parents) are returned, but with the exclusion of the
 ‘repositories’ file in the tarball, as there were no image names referenced.</p>
 
@@ -2152,12 +2152,12 @@ image (and its parents) are returned, but with the exclusion of the
 
 <p><strong>Example request</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/get
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/ubuntu/get
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/x-tar
 
 Binary data stream
@@ -2172,12 +2172,12 @@ Binary data stream
 
 <h4 id="get-a-tarball-containing-all-images">Get a tarball containing all images</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /images/get</code></p>
+<p><code class="highlighter-rouge">GET /images/get</code></p>
 
 <p>Get a tarball containing all images and metadata for one or more repositories.</p>
 
-<p>For each value of the <code class="language-plaintext highlighter-rouge">names</code> parameter: if it is a specific name and tag (e.g.
-<code class="language-plaintext highlighter-rouge">ubuntu:latest</code>), then only that image (and its parents) are returned; if it is
+<p>For each value of the <code class="highlighter-rouge">names</code> parameter: if it is a specific name and tag (e.g.
+<code class="highlighter-rouge">ubuntu:latest</code>), then only that image (and its parents) are returned; if it is
 an image ID, similarly only that image (and its parents) are returned and there
 would be no names referenced in the ‘repositories’ file for this image ID.</p>
 
@@ -2185,12 +2185,12 @@ would be no names referenced in the ‘repositories’ file for this image ID.</
 
 <p><strong>Example request</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/get?names=myname%2Fmyapp%3Alatest&amp;names=busybox
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/images/get?names=myname%2Fmyapp%3Alatest&amp;names=busybox
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/x-tar
 
 Binary data stream
@@ -2205,14 +2205,14 @@ Binary data stream
 
 <h4 id="load-a-tarball-with-a-set-of-images-and-tags-into-docker">Load a tarball with a set of images and tags into docker</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /images/load</code></p>
+<p><code class="highlighter-rouge">POST /images/load</code></p>
 
 <p>Load a set of images and tags into a Docker repository.
 See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
 
 <p><strong>Example request</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/load
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/images/load
 Content-Type: application/x-tar
 Content-Length: 12345
 
@@ -2221,7 +2221,7 @@ Tarball in body
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 </code></pre></div></div>
 
 <p><strong>Status codes</strong>:</p>
@@ -2237,31 +2237,31 @@ Tarball in body
 each containing these files:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">VERSION</code>: currently <code class="language-plaintext highlighter-rouge">1.0</code> - the file format version</li>
-  <li><code class="language-plaintext highlighter-rouge">json</code>: detailed layer information, similar to <code class="language-plaintext highlighter-rouge">docker inspect layer_id</code></li>
-  <li><code class="language-plaintext highlighter-rouge">layer.tar</code>: A tarfile containing the filesystem changes in this layer</li>
+  <li><code class="highlighter-rouge">VERSION</code>: currently <code class="highlighter-rouge">1.0</code> - the file format version</li>
+  <li><code class="highlighter-rouge">json</code>: detailed layer information, similar to <code class="highlighter-rouge">docker inspect layer_id</code></li>
+  <li><code class="highlighter-rouge">layer.tar</code>: A tarfile containing the filesystem changes in this layer</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">layer.tar</code> file contains <code class="language-plaintext highlighter-rouge">aufs</code> style <code class="language-plaintext highlighter-rouge">.wh..wh.aufs</code> files and directories
+<p>The <code class="highlighter-rouge">layer.tar</code> file contains <code class="highlighter-rouge">aufs</code> style <code class="highlighter-rouge">.wh..wh.aufs</code> files and directories
 for storing attribute changes and deletions.</p>
 
-<p>If the tarball defines a repository, the tarball should also include a <code class="language-plaintext highlighter-rouge">repositories</code> file at
+<p>If the tarball defines a repository, the tarball should also include a <code class="highlighter-rouge">repositories</code> file at
 the root that contains a list of repository and tag names mapped to layer IDs.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"hello-world":
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"hello-world":
     {"latest": "565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1"}
 }
 </code></pre></div></div>
 
 <h4 id="exec-create">Exec Create</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/exec</code></p>
+<p><code class="highlighter-rouge">POST /containers/(id or name)/exec</code></p>
 
-<p>Sets up an exec instance in a running container <code class="language-plaintext highlighter-rouge">id</code></p>
+<p>Sets up an exec instance in a running container <code class="highlighter-rouge">id</code></p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/exec HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/containers/e90e34656806/exec HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -2276,7 +2276,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
@@ -2288,9 +2288,9 @@ Content-Type: application/json
 <p><strong>JSON parameters</strong>:</p>
 
 <ul>
-  <li><strong>AttachStdin</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stdin</code> of the <code class="language-plaintext highlighter-rouge">exec</code> command.</li>
-  <li><strong>AttachStdout</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stdout</code> of the <code class="language-plaintext highlighter-rouge">exec</code> command.</li>
-  <li><strong>AttachStderr</strong> - Boolean value, attaches to <code class="language-plaintext highlighter-rouge">stderr</code> of the <code class="language-plaintext highlighter-rouge">exec</code> command.</li>
+  <li><strong>AttachStdin</strong> - Boolean value, attaches to <code class="highlighter-rouge">stdin</code> of the <code class="highlighter-rouge">exec</code> command.</li>
+  <li><strong>AttachStdout</strong> - Boolean value, attaches to <code class="highlighter-rouge">stdout</code> of the <code class="highlighter-rouge">exec</code> command.</li>
+  <li><strong>AttachStderr</strong> - Boolean value, attaches to <code class="highlighter-rouge">stderr</code> of the <code class="highlighter-rouge">exec</code> command.</li>
   <li><strong>Tty</strong> - Boolean value to allocate a pseudo-TTY.</li>
   <li><strong>Cmd</strong> - Command to run specified as a string or an array of strings.</li>
 </ul>
@@ -2304,15 +2304,15 @@ Content-Type: application/json
 
 <h4 id="exec-start">Exec Start</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /exec/(id)/start</code></p>
+<p><code class="highlighter-rouge">POST /exec/(id)/start</code></p>
 
-<p>Starts a previously set up <code class="language-plaintext highlighter-rouge">exec</code> instance <code class="language-plaintext highlighter-rouge">id</code>. If <code class="language-plaintext highlighter-rouge">detach</code> is true, this API
-returns after starting the <code class="language-plaintext highlighter-rouge">exec</code> command. Otherwise, this API sets up an
-interactive session with the <code class="language-plaintext highlighter-rouge">exec</code> command.</p>
+<p>Starts a previously set up <code class="highlighter-rouge">exec</code> instance <code class="highlighter-rouge">id</code>. If <code class="highlighter-rouge">detach</code> is true, this API
+returns after starting the <code class="highlighter-rouge">exec</code> command. Otherwise, this API sets up an
+interactive session with the <code class="highlighter-rouge">exec</code> command.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/exec/e90e34656806/start HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/exec/e90e34656806/start HTTP/1.1
 Content-Type: application/json
 Content-Length: 12345
 
@@ -2324,7 +2324,7 @@ Content-Length: 12345
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/vnd.docker.raw-stream
 
 
@@ -2334,7 +2334,7 @@ Content-Type: application/vnd.docker.raw-stream
 <p><strong>JSON parameters</strong>:</p>
 
 <ul>
-  <li><strong>Detach</strong> - Detach from the <code class="language-plaintext highlighter-rouge">exec</code> command.</li>
+  <li><strong>Detach</strong> - Detach from the <code class="highlighter-rouge">exec</code> command.</li>
   <li><strong>Tty</strong> - Boolean value to allocate a pseudo-TTY.</li>
 </ul>
 
@@ -2347,31 +2347,31 @@ Content-Type: application/vnd.docker.raw-stream
 
 <p><strong>Stream details</strong>:</p>
 
-<p>Similar to the stream behavior of <code class="language-plaintext highlighter-rouge">POST /containers/(id or name)/attach</code> API</p>
+<p>Similar to the stream behavior of <code class="highlighter-rouge">POST /containers/(id or name)/attach</code> API</p>
 
 <h4 id="exec-resize">Exec Resize</h4>
 
-<p><code class="language-plaintext highlighter-rouge">POST /exec/(id)/resize</code></p>
+<p><code class="highlighter-rouge">POST /exec/(id)/resize</code></p>
 
-<p>Resizes the <code class="language-plaintext highlighter-rouge">tty</code> session used by the <code class="language-plaintext highlighter-rouge">exec</code> command <code class="language-plaintext highlighter-rouge">id</code>.  The unit is number of characters.
-This API is valid only if <code class="language-plaintext highlighter-rouge">tty</code> was specified as part of creating and starting the <code class="language-plaintext highlighter-rouge">exec</code> command.</p>
+<p>Resizes the <code class="highlighter-rouge">tty</code> session used by the <code class="highlighter-rouge">exec</code> command <code class="highlighter-rouge">id</code>.  The unit is number of characters.
+This API is valid only if <code class="highlighter-rouge">tty</code> was specified as part of creating and starting the <code class="highlighter-rouge">exec</code> command.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/exec/e90e34656806/resize?h=40&amp;w=80 HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /v1.18/exec/e90e34656806/resize?h=40&amp;w=80 HTTP/1.1
 Content-Type: text/plain
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 201 Created
 Content-Type: text/plain
 </code></pre></div></div>
 
 <p><strong>Query parameters</strong>:</p>
 
 <ul>
-  <li><strong>h</strong> – height of <code class="language-plaintext highlighter-rouge">tty</code> session</li>
+  <li><strong>h</strong> – height of <code class="highlighter-rouge">tty</code> session</li>
   <li><strong>w</strong> – width</li>
 </ul>
 
@@ -2384,18 +2384,18 @@ Content-Type: text/plain
 
 <h4 id="exec-inspect">Exec Inspect</h4>
 
-<p><code class="language-plaintext highlighter-rouge">GET /exec/(id)/json</code></p>
+<p><code class="highlighter-rouge">GET /exec/(id)/json</code></p>
 
-<p>Return low-level information about the <code class="language-plaintext highlighter-rouge">exec</code> command <code class="language-plaintext highlighter-rouge">id</code>.</p>
+<p>Return low-level information about the <code class="highlighter-rouge">exec</code> command <code class="highlighter-rouge">id</code>.</p>
 
 <p><strong>Example request</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/exec/11fb006128e8ceb3942e7c58d77750f24210e35f879dd204ac975c184b820b39/json HTTP/1.1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /v1.18/exec/11fb006128e8ceb3942e7c58d77750f24210e35f879dd204ac975c184b820b39/json HTTP/1.1
 </code></pre></div></div>
 
 <p><strong>Example response</strong>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: plain/text
 
 {
@@ -2493,9 +2493,9 @@ Content-Type: plain/text
 
 <h2 id="3-going-further">3. Going further</h2>
 
-<h3 id="31-inside-docker-run">3.1 Inside <code class="language-plaintext highlighter-rouge">docker run</code></h3>
+<h3 id="31-inside-docker-run">3.1 Inside <code class="highlighter-rouge">docker run</code></h3>
 
-<p>As an example, the <code class="language-plaintext highlighter-rouge">docker run</code> command line makes the following API calls:</p>
+<p>As an example, the <code class="highlighter-rouge">docker run</code> command line makes the following API calls:</p>
 
 <ul>
   <li>
@@ -2512,25 +2512,25 @@ Content-Type: plain/text
   </li>
   <li>If you are not in detached mode:</li>
   <li>
-    <p>Attach to the container, using <code class="language-plaintext highlighter-rouge">logs=1</code> (to have <code class="language-plaintext highlighter-rouge">stdout</code> and
-    <code class="language-plaintext highlighter-rouge">stderr</code> from the container’s start) and <code class="language-plaintext highlighter-rouge">stream=1</code></p>
+    <p>Attach to the container, using <code class="highlighter-rouge">logs=1</code> (to have <code class="highlighter-rouge">stdout</code> and
+    <code class="highlighter-rouge">stderr</code> from the container’s start) and <code class="highlighter-rouge">stream=1</code></p>
   </li>
-  <li>If in detached mode or only <code class="language-plaintext highlighter-rouge">stdin</code> is attached, display the container’s id.</li>
+  <li>If in detached mode or only <code class="highlighter-rouge">stdin</code> is attached, display the container’s id.</li>
 </ul>
 
 <h3 id="32-hijacking">3.2 Hijacking</h3>
 
-<p>In this version of the API, <code class="language-plaintext highlighter-rouge">/attach</code>, uses hijacking to transport <code class="language-plaintext highlighter-rouge">stdin</code>,
-<code class="language-plaintext highlighter-rouge">stdout</code>, and <code class="language-plaintext highlighter-rouge">stderr</code> on the same socket.</p>
+<p>In this version of the API, <code class="highlighter-rouge">/attach</code>, uses hijacking to transport <code class="highlighter-rouge">stdin</code>,
+<code class="highlighter-rouge">stdout</code>, and <code class="highlighter-rouge">stderr</code> on the same socket.</p>
 
 <p>To hint potential proxies about connection hijacking, Docker client sends
 connection upgrade headers similarly to websocket.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Upgrade: tcp
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Upgrade: tcp
 Connection: Upgrade
 </code></pre></div></div>
 
-<p>When Docker daemon detects the <code class="language-plaintext highlighter-rouge">Upgrade</code> header, it switches its status code
+<p>When Docker daemon detects the <code class="highlighter-rouge">Upgrade</code> header, it switches its status code
 from <strong>200 OK</strong> to <strong>101 UPGRADED</strong> and resends the same headers.</p>
 
 <p>This might change in the future.</p>
@@ -2538,10 +2538,10 @@ from <strong>200 OK</strong> to <strong>101 UPGRADED</strong> and resends the sa
 <h3 id="33-cors-requests">3.3 CORS Requests</h3>
 
 <p>To set cross origin requests to the Engine API please give values to
-<code class="language-plaintext highlighter-rouge">--api-cors-header</code> when running Docker in daemon mode. Set * (asterisk) allows all,
+<code class="highlighter-rouge">--api-cors-header</code> when running Docker in daemon mode. Set * (asterisk) allows all,
 default or blank means CORS disabled</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker -d -H="192.168.1.9:2375" --api-cors-header="http://foo.bar"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker -d -H="192.168.1.9:2375" --api-cors-header="http://foo.bar"
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=API">API</a>, <a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=rcli">rcli</a>, <a href="/docs.docker.jp.onthefly/search/?q=REST">REST</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

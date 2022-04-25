@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Volume plugin for Amazon EBS | Docker ドキュメント</title>
   <meta name="description" content="Volume plugin for Amazon EBS" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Volume plugin for Amazon EBS" />
   <meta property="og:description" content="Volume plugin for Amazon EBS" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/EBS_volume/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Volume plugin for Amazon EBS","description":"Volume plugin for Amazon EBS","url":"https://docs.docker.com/engine/extend/EBS_volume/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -133,7 +133,7 @@ ENTRYPOINT ["rexray"]
 CMD ["--help"]
 </code></pre>
 
-<p>To build it you can run <code class="language-plaintext highlighter-rouge">image=$(cat Dockerfile | docker build -q -)</code> and <code class="language-plaintext highlighter-rouge">$image</code>
+<p>To build it you can run <code class="highlighter-rouge">image=$(cat Dockerfile | docker build -q -)</code> and <code class="highlighter-rouge">$image</code>
 will reference the containerized rexray image.</p>
 
 <h2 id="2-extract-rootfs">2. Extract rootfs</h2>
@@ -144,95 +144,95 @@ will reference the containerized rexray image.</p>
 <span class="nv">$ </span> <span class="c"># save the rootfs to a tar archive</span>
 <span class="nv">$ </span>docker <span class="nb">export</span> <span class="nt">-o</span> <span class="nv">$TMPDIR</span>/rexray.tar rexray
 <span class="nv">$ </span> <span class="c"># extract rootfs from tar archive to a rootfs folder</span>
-<span class="nv">$ </span><span class="o">(</span> <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$TMPDIR</span>/rootfs<span class="p">;</span> <span class="nb">cd</span> <span class="nv">$TMPDIR</span>/rootfs<span class="p">;</span> <span class="nb">tar </span>xf ../rexray.tar <span class="o">)</span>
+<span class="nv">$ </span><span class="o">(</span> mkdir <span class="nt">-p</span> <span class="nv">$TMPDIR</span>/rootfs<span class="p">;</span> <span class="nb">cd</span> <span class="nv">$TMPDIR</span>/rootfs<span class="p">;</span> <span class="nb">tar </span>xf ../rexray.tar <span class="o">)</span>
 </code></pre></div></div>
 
 <h2 id="3-add-plugin-configuration">3. Add plugin configuration</h2>
 
-<p>We have to put the following JSON to <code class="language-plaintext highlighter-rouge">$TMPDIR/config.json</code>:</p>
+<p>We have to put the following JSON to <code class="highlighter-rouge">$TMPDIR/config.json</code>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-      </span><span class="nl">"Args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"Args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A proof-of-concept EBS plugin (using rexray) for Docker"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"Documentation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tiborvass/rexray-plugin"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"Entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A proof-of-concept EBS plugin (using rexray) for Docker"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Documentation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tiborvass/rexray-plugin"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"/usr/bin/rexray"</span><span class="p">,</span><span class="w"> </span><span class="s2">"service"</span><span class="p">,</span><span class="w"> </span><span class="s2">"start"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-f"</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"Env"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Env"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REXRAY_SERVICE"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REXRAY_SERVICE"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"value"</span><span class="w">
           </span><span class="p">],</span><span class="w">
-          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ebs"</span><span class="w">
+          </span><span class="s2">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ebs"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EBS_ACCESSKEY"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EBS_ACCESSKEY"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"value"</span><span class="w">
           </span><span class="p">],</span><span class="w">
-          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="s2">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EBS_SECRETKEY"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EBS_SECRETKEY"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Settable"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"value"</span><span class="w">
           </span><span class="p">],</span><span class="w">
-          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="s2">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"Interface"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"Socket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rexray.sock"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Interface"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Socket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rexray.sock"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"docker.volumedriver/1.0"</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"Linux"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"AllowAllDevices"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CAP_SYS_ADMIN"</span><span class="p">],</span><span class="w">
-        </span><span class="nl">"Devices"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="s2">"Linux"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"AllowAllDevices"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CAP_SYS_ADMIN"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Devices"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"Mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/dev"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/dev"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bind"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"rbind"</span><span class="p">]</span><span class="w">
+          </span><span class="s2">"Source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/dev"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/dev"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bind"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"rbind"</span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"Network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host"</span><span class="w">
+      </span><span class="s2">"Network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"PropagatedMount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/lib/libstorage/volumes"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-      </span><span class="nl">"WorkDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="s2">"PropagatedMount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/lib/libstorage/volumes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="s2">"WorkDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Please note a couple of points:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">PropagatedMount</code> is needed so that the docker daemon can see mounts done by the
+  <li><code class="highlighter-rouge">PropagatedMount</code> is needed so that the docker daemon can see mounts done by the
 rexray plugin from within the container, otherwise the docker daemon is not able
 to mount a docker volume.</li>
   <li>The rexray plugin needs dynamic access to host devices. For that reason, we
-have to give it access to all devices under <code class="language-plaintext highlighter-rouge">/dev</code> and set <code class="language-plaintext highlighter-rouge">AllowAllDevices</code> to
+have to give it access to all devices under <code class="highlighter-rouge">/dev</code> and set <code class="highlighter-rouge">AllowAllDevices</code> to
 true for proper access.</li>
-  <li>The user of this simple plugin can change only 3 settings: <code class="language-plaintext highlighter-rouge">REXRAY_SERVICE</code>,
-<code class="language-plaintext highlighter-rouge">EBS_ACCESSKEY</code> and <code class="language-plaintext highlighter-rouge">EBS_SECRETKEY</code>. This is because of the reduced scope of this
+  <li>The user of this simple plugin can change only 3 settings: <code class="highlighter-rouge">REXRAY_SERVICE</code>,
+<code class="highlighter-rouge">EBS_ACCESSKEY</code> and <code class="highlighter-rouge">EBS_SECRETKEY</code>. This is because of the reduced scope of this
 plugin. Ideally other rexray parameters could also be set.</li>
 </ul>
 
 <h2 id="4-create-plugin">4. Create plugin</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker plugin create tiborvass/rexray-plugin "$TMPDIR"</code> will create the plugin.</p>
+<p><code class="highlighter-rouge">docker plugin create tiborvass/rexray-plugin "$TMPDIR"</code> will create the plugin.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">ls
 </span>ID                  NAME                             DESCRIPTION                         ENABLED
@@ -254,10 +254,10 @@ bye
 
 <h2 id="6-push-plugin">6. Push plugin</h2>
 
-<p>First, ensure you are logged in with <code class="language-plaintext highlighter-rouge">docker login</code>. Then you can run:
-<code class="language-plaintext highlighter-rouge">docker plugin push tiborvass/rexray-plugin</code> to push it like a regular docker
+<p>First, ensure you are logged in with <code class="highlighter-rouge">docker login</code>. Then you can run:
+<code class="highlighter-rouge">docker plugin push tiborvass/rexray-plugin</code> to push it like a regular docker
 image to a registry, to make it available for others to install via
-<code class="language-plaintext highlighter-rouge">docker plugin install tiborvass/rexray-plugin EBS_ACCESSKEY=$AWS_ACCESSKEY EBS_SECRETKEY=$AWS_SECRETKEY</code>.</p>
+<code class="highlighter-rouge">docker plugin install tiborvass/rexray-plugin EBS_ACCESSKEY=$AWS_ACCESSKEY EBS_SECRETKEY=$AWS_SECRETKEY</code>.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=API">API</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugins">plugins</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=developer">developer</a>, <a href="/docs.docker.jp.onthefly/search/?q=amazon">amazon</a>, <a href="/docs.docker.jp.onthefly/search/?q=ebs">ebs</a>, <a href="/docs.docker.jp.onthefly/search/?q=rexray">rexray</a>, <a href="/docs.docker.jp.onthefly/search/?q=volume">volume</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

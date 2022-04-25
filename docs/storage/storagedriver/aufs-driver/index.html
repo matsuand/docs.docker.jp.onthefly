@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>AUFS ストレージドライバーの利用 | Docker ドキュメント</title>
   <meta name="description" content="AUFS ドライバーの最適な利用について学びます。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="AUFS ストレージドライバーの利用" />
   <meta property="og:description" content="AUFS ドライバーの最適な利用について学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"AUFS ストレージドライバーの利用","description":"AUFS ドライバーの最適な利用について学びます。","url":"https://docs.docker.com/storage/storagedriver/aufs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -108,12 +108,12 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section"><h1>AUFS ストレージドライバーの利用</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p><p>AUFS とは <strong>ユニオンファイルシステム</strong>（union filesystem）の一種です。
-The <code class="language-plaintext highlighter-rouge">aufs</code> storage driver was previously the default
+The <code class="highlighter-rouge">aufs</code> storage driver was previously the default
 storage driver used for managing images and layers on Docker for Ubuntu, and for
 Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
 and you use Docker Engine - Community, consider using the newer
 <a href="/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/" target="_blank" rel="noopener" class="_">overlay2</a>, which has
-potential performance advantages over the <code class="language-plaintext highlighter-rouge">aufs</code> storage driver.</p>
+potential performance advantages over the <code class="highlighter-rouge">aufs</code> storage driver.</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -129,13 +129,13 @@ potential performance advantages over the <code class="language-plaintext highli
 Stretch.</li>
   <li>For Docker EE, AUFS is supported on Ubuntu.</li>
   <li>If you use Ubuntu, you need to add the AUFS module to the kernel. If you do
-not install these packages, you need to use  <code class="language-plaintext highlighter-rouge">overlay2</code>.</li>
-  <li>AUFS cannot use the following backing filesystems: <code class="language-plaintext highlighter-rouge">aufs</code>, <code class="language-plaintext highlighter-rouge">btrfs</code>, or
-<code class="language-plaintext highlighter-rouge">ecryptfs</code>. This means that the filesystem which contains
-<code class="language-plaintext highlighter-rouge">/var/lib/docker/aufs</code> cannot be one of these filesystem types.</li>
+not install these packages, you need to use  <code class="highlighter-rouge">overlay2</code>.</li>
+  <li>AUFS cannot use the following backing filesystems: <code class="highlighter-rouge">aufs</code>, <code class="highlighter-rouge">btrfs</code>, or
+<code class="highlighter-rouge">ecryptfs</code>. This means that the filesystem which contains
+<code class="highlighter-rouge">/var/lib/docker/aufs</code> cannot be one of these filesystem types.</li>
 </ul>
 
-<h2 id="configure-docker-with-the-aufs-storage-driver"><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーの設定</h2>
+<h2 id="configure-docker-with-the-aufs-storage-driver"><code class="highlighter-rouge">aufs</code>ストレージドライバーの設定</h2>
 
 <p>Docker の起動時に AUFS ドライバーがカーネルにロードされていて、その他のス。トレージドライバーの設定がされていなければ、Docker はデフォルトでこの AUFS ドライバーを利用します。</p>
 
@@ -143,7 +143,7 @@ not install these packages, you need to use  <code class="language-plaintext hig
   <li>
     <p>以下のコマンドを実行して、利用するカーネルが AUFS に対応していることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>aufs /proc/filesystems
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">grep </span>aufs /proc/filesystems
 <span class="go">
 nodev   aufs
 </span></code></pre></div>    </div>
@@ -151,27 +151,27 @@ nodev   aufs
   <li>
     <p>Docker がどのストレージドライバーを利用しているかを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker info
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker info
 <span class="go">
-</span><span class="gp">&lt;truncated output&gt;</span><span class="w">
-</span><span class="go">Storage Driver: aufs
+</span><span class="gp">&lt;truncated output&gt;</span>
+<span class="go">Storage Driver: aufs
  Root Dir: /var/lib/docker/aufs
  Backing Filesystem: extfs
  Dirs: 0
  Dirperm1 Supported: true
-</span><span class="gp">&lt;truncated output&gt;</span><span class="w">
-</span></code></pre></div>    </div>
+</span><span class="gp">&lt;truncated output&gt;</span>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>If you are using a different storage driver, either AUFS is not included in
 the kernel (in which case a different default driver is used) or that
 Docker has been explicitly configured to use a different driver. Check
-<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> or the output of <code class="language-plaintext highlighter-rouge">ps auxw | grep dockerd</code> to see
-if Docker has been started with the <code class="language-plaintext highlighter-rouge">--storage-driver</code> flag.</p>
+<code class="highlighter-rouge">/etc/docker/daemon.json</code> or the output of <code class="highlighter-rouge">ps auxw | grep dockerd</code> to see
+if Docker has been started with the <code class="highlighter-rouge">--storage-driver</code> flag.</p>
   </li>
 </ol>
 
-<h2 id="how-the-aufs-storage-driver-works"><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーはどのように動作するか</h2>
+<h2 id="how-the-aufs-storage-driver-works"><code class="highlighter-rouge">aufs</code>ストレージドライバーはどのように動作するか</h2>
 
 <p>AUFS is a <em>union filesystem</em>, which means that it layers multiple directories on
 a single Linux host and presents them as a single directory. These directories
@@ -179,12 +179,12 @@ are called <em>branches</em> in AUFS terminology, and <em>layers</em> in Docker 
 
 <p>The unification process is referred to as a <em>union mount</em>.</p>
 
-<p>The diagram below shows a Docker container based on the <code class="language-plaintext highlighter-rouge">ubuntu:latest</code> image.</p>
+<p>The diagram below shows a Docker container based on the <code class="highlighter-rouge">ubuntu:latest</code> image.</p>
 
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/aufs_layers.jpg" alt="Ubuntu コンテナーのレイヤー" /></p>
 
 <p>Each image layer, and the container layer, are represented on the Docker host as
-subdirectories within <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. The union mount provides the unified
+subdirectories within <code class="highlighter-rouge">/var/lib/docker/</code>. The union mount provides the unified
 view of all layers. The directory names do not directly correspond to the IDs
 of the layers themselves.</p>
 
@@ -193,10 +193,10 @@ minimize overhead.</p>
 
 <h3 id="example-image-and-container-on-disk-constructs">イメージとコンテナーのディスク上の構成例</h3>
 
-<p>The following <code class="language-plaintext highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
+<p>The following <code class="highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
 image comprising five layers.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker pull ubuntu
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker pull ubuntu
 <span class="go">
 Using default tag: latest
 latest: Pulling from library/ubuntu
@@ -213,37 +213,37 @@ Status: Downloaded newer image for ubuntu:latest
 
 <blockquote>
   <p><strong>Warning</strong>: Do not directly manipulate any files or directories within
-<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
+<code class="highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
 <p>All of the information about the image and container layers is stored in
-subdirectories of <code class="language-plaintext highlighter-rouge">/var/lib/docker/aufs/</code>.</p>
+subdirectories of <code class="highlighter-rouge">/var/lib/docker/aufs/</code>.</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">diff/</code>: the <strong>contents</strong> of each layer, each stored in a separate
+  <li><code class="highlighter-rouge">diff/</code>: the <strong>contents</strong> of each layer, each stored in a separate
 subdirectory</li>
-  <li><code class="language-plaintext highlighter-rouge">layers/</code>: metadata about how image layers are stacked. This directory
+  <li><code class="highlighter-rouge">layers/</code>: metadata about how image layers are stacked. This directory
 contains one file for each image or container layer on the Docker host. Each
 file contains the IDs of all the layers below it in the stack (its parents).</li>
-  <li><code class="language-plaintext highlighter-rouge">mnt/</code>: Mount points, one per image or container layer, which are used to
+  <li><code class="highlighter-rouge">mnt/</code>: Mount points, one per image or container layer, which are used to
 assemble and mount the unified filesystem for a container. For images, which
 are read-only, these directories are always empty.</li>
 </ul>
 
 <h4 id="the-container-layer">The container layer</h4>
 
-<p>If a container is running, the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/aufs/</code> change in the
+<p>If a container is running, the contents of <code class="highlighter-rouge">/var/lib/docker/aufs/</code> change in the
 following ways:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">diff/</code>: Differences introduced in the writable container layer, such as new
+  <li><code class="highlighter-rouge">diff/</code>: Differences introduced in the writable container layer, such as new
  or modified files.</li>
-  <li><code class="language-plaintext highlighter-rouge">layers/</code>: Metadata about the writable container layer’s parent layers.</li>
-  <li><code class="language-plaintext highlighter-rouge">mnt/</code>: A mount point for each running container’s unified filesystem, exactly
+  <li><code class="highlighter-rouge">layers/</code>: Metadata about the writable container layer’s parent layers.</li>
+  <li><code class="highlighter-rouge">mnt/</code>: A mount point for each running container’s unified filesystem, exactly
 as it appears from within the container.</li>
 </ul>
 
-<h2 id="how-container-reads-and-writes-work-with-aufs">How container reads and writes work with <code class="language-plaintext highlighter-rouge">aufs</code></h2>
+<h2 id="how-container-reads-and-writes-work-with-aufs">How container reads and writes work with <code class="highlighter-rouge">aufs</code></h2>
 
 <h3 id="reading-files">Reading files</h3>
 
@@ -279,8 +279,8 @@ layers.</p>
 <ul>
   <li>
     <p><strong>Writing to a file for the first time</strong>: The first time a container writes
-to an existing file, that file does not exist in the container (<code class="language-plaintext highlighter-rouge">upperdir</code>).
-The <code class="language-plaintext highlighter-rouge">aufs</code> driver performs a <em>copy_up</em> operation to copy the file from the
+to an existing file, that file does not exist in the container (<code class="highlighter-rouge">upperdir</code>).
+The <code class="highlighter-rouge">aufs</code> driver performs a <em>copy_up</em> operation to copy the file from the
 image layer where it exists to the writable container layer. The container
 then writes the changes to the new copy of the file in the container layer.</p>
 
@@ -312,11 +312,11 @@ even though it still exists in the image layer.</p>
     </ul>
   </li>
   <li>
-    <p><strong>Renaming directories</strong>: Calling <code class="language-plaintext highlighter-rouge">rename(2)</code> for a directory is not fully
-supported on AUFS. It returns <code class="language-plaintext highlighter-rouge">EXDEV</code> (“cross-device link not permitted”),
+    <p><strong>Renaming directories</strong>: Calling <code class="highlighter-rouge">rename(2)</code> for a directory is not fully
+supported on AUFS. It returns <code class="highlighter-rouge">EXDEV</code> (“cross-device link not permitted”),
 even when both of the source and the destination path are on a same AUFS
 layer, unless the directory has no children. Your application needs to be
-designed to handle <code class="language-plaintext highlighter-rouge">EXDEV</code> and fall back to a “copy and unlink” strategy.</p>
+designed to handle <code class="highlighter-rouge">EXDEV</code> and fall back to a “copy and unlink” strategy.</p>
   </li>
 </ul>
 
@@ -326,7 +326,7 @@ designed to handle <code class="language-plaintext highlighter-rouge">EXDEV</cod
 
 <ul>
   <li>
-    <p>The AUFS storage driver is less performant than the <code class="language-plaintext highlighter-rouge">overlay2</code> driver, but is
+    <p>The AUFS storage driver is less performant than the <code class="highlighter-rouge">overlay2</code> driver, but is
 a good choice for PaaS and other similar use-cases where container density is
 important. This is because AUFS efficiently shares images between multiple
 running containers, enabling fast container start times and minimal use of

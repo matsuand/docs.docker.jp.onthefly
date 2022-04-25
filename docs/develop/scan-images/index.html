@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>イメージスキャンのベストプラクティス | Docker ドキュメント</title>
   <meta name="description" content="Scan images best practices guide" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="イメージスキャンのベストプラクティス" />
   <meta property="og:description" content="Scan images best practices guide" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/scan-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"イメージスキャンのベストプラクティス","description":"Scan images best practices guide","url":"https://docs.docker.com/develop/scan-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -142,18 +142,18 @@
 <blockquote class="important">
   <p><strong>Log4j 2 CVE-2021-44228</strong></p>
 
-  <p><code class="language-plaintext highlighter-rouge">docker scan</code>のバージョン<code class="language-plaintext highlighter-rouge">v0.11.0</code>よりも前の版においては <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener" class="_">Log4j 2
+  <p><code class="highlighter-rouge">docker scan</code>のバージョン<code class="highlighter-rouge">v0.11.0</code>よりも前の版においては <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" target="_blank" rel="noopener" class="_">Log4j 2
 CVE-2021-44228</a> の検出ができません。
 この問題に対処するには、Docker Desktop のインストールをバージョン 4.3.1 かそれ以降にしてください。
 詳しくは <a href="../../engine/scan#scan-images-for-log4j-2-cve">Log4j 2 CVE に対処したスキャンイメージ</a> を参照してください。</p>
 </blockquote>
 
 <p>Docker Hub に対してイメージをプッシュすれば、スキャンを自動実行することができます。
-イメージのスキャンは Docker Hub を通じてだけでなく、CLI から<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドを使うことでも実現できます。</p>
+イメージのスキャンは Docker Hub を通じてだけでなく、CLI から<code class="highlighter-rouge">docker scan</code>コマンドを使うことでも実現できます。</p>
 
 <h3 id="scan-using-the-cli">CLI を使ったスキャン</h3>
 
-<p>イメージのビルドを終えて Docker Hub へのプッシュを行う前に、<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドを実行します。
+<p>イメージのビルドを終えて Docker Hub へのプッシュを行う前に、<code class="highlighter-rouge">docker scan</code>コマンドを実行します。
 CLI を使ってイメージスキャンを行う詳細については <a href="/docs.docker.jp.onthefly/engine/scan/">docker scan</a> を参照してください。</p>
 
 <p><img src="/docs.docker.jp.onthefly/develop/scan-images/images/docker-scan-cli.png" alt="Docker スキャン CL" width="700px" /></p>
@@ -223,8 +223,8 @@ Docker ではさらに <a href="/docs.docker.jp.onthefly/docker-hub/publish/">�
 <p>マルチステージビルドは、Dockerfile を最適化して、読みやすく保守しやすくする目的で設計されています。
 マルチステージビルドでは複数のイメージを利用して、特定のイメージから必要な成果のみを選択してコピーすることができます。</p>
 
-<p>Dockerfile には、複数の<code class="language-plaintext highlighter-rouge">FROM</code>命令を記述します。
-その<code class="language-plaintext highlighter-rouge">FROM</code>命令に対しては、それぞれ異なるベースイメージの指定が可能です。
+<p>Dockerfile には、複数の<code class="highlighter-rouge">FROM</code>命令を記述します。
+その<code class="highlighter-rouge">FROM</code>命令に対しては、それぞれ異なるベースイメージの指定が可能です。
 1 つのステージから別のステージへ、作り出した内容を選び出してコピーできるので、最終イメージに不要なものは使い捨てにできます。
 そうすれば、最終イメージをコンパクトにすることができます。</p>
 
@@ -247,16 +247,16 @@ Dockerfile には一連の命令が記述されていて、イメージ生成を
 たとえば、以下のような命令を含む Dockerfile では、再ビルドを行うたびに、潜在的に別バイナリを用いることになります。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
-<span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python
+<span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> python
 </code></pre></div></div>
 
 <p>Docker イメージは定期的に再ビルドすることを推奨します。
 公開されている既知の脆弱性を回避するためです。
-再ビルドの際には<code class="language-plaintext highlighter-rouge">--no-cache</code>オプションを用いることで、キャッシュ利用を行わず、最新のダウンロードを利用できるようになります。</p>
+再ビルドの際には<code class="highlighter-rouge">--no-cache</code>オプションを用いることで、キャッシュ利用を行わず、最新のダウンロードを利用できるようになります。</p>
 
 <p>たとえば以下です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> myImage:myTag myPath/
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> myImage:myTag myPath/
 </code></pre></div></div>
 
 <p>イメージ再ビルドの際には、以下のベストプラクティスを考えてください。</p>

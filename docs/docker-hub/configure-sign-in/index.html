@@ -1,5 +1,5 @@
-<!-- Page generated 2022-03-03 12:37:21 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>サインインを要求する registry.json の設定 | Docker ドキュメント</title>
   <meta name="description" content="Configure registry.json to enforce users to sign into Docker Desktop" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="サインインを要求する registry.json の設定" />
   <meta property="og:description" content="Configure registry.json to enforce users to sign into Docker Desktop" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/configure-sign-in/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-03-03T12:37:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"サインインを要求する registry.json の設定","description":"Configure registry.json to enforce users to sign into Docker Desktop","url":"https://docs.docker.com/docker-hub/configure-sign-in/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,9 +109,7 @@
                     <main class="col-content content">
                         <section class="section"><h1>サインインを要求する registry.json の設定</h1><p><code class="highlighter-rouge">registry.json</code>ファイルは、ユーザーが所属するべき Docker 組織を定めるものとして、管理者が設定するファイルです。
 したがって組織に対する設定は、ユーザーセッションに対して適用されます。
-Docker Desktop のインストールには管理者権限を必要とします。
-エンタープライズの規模が大きいために、管理者によるアクセスが制限されてしまうような場合には、管理者が<code class="highlighter-rouge">registry.json</code>を生成する方法をとります。
-このファイルは Docker Desktop のインストールの一部として導入されるデバイス管理ソフトウェアを使って、各ユーザーのマシンにデプロイすることができます。</p>
+Docker Desktop のインストーラーがこのファイルを生成して、インストール処理の一部として各ユーザーマシンにこれをデプロイします。</p>
 
 <p>ユーザーマシンに<code class="highlighter-rouge">registry.json</code>ファイルをデプロイした後は、Docker Desktop へのサインインが求められます。
 ユーザーがサインインしなかった場合、または<code class="highlighter-rouge">registry.json</code>に指定されている組織とは別の組織を使ってサインインしようとした場合、Docker Desktop へのアクセスは拒否されます。
@@ -135,67 +133,62 @@ Docker Desktop のインストールには管理者権限を必要とします�
 
 <h2 id="create-a-registryjson-file">registry.json ファイルの生成</h2>
 
-<p>Docker Desktop を正常にインストールを終えたら、<code class="highlighter-rouge">registry.json</code>ファイルを生成します。
-<code class="highlighter-rouge">registry.json</code>ファイルを生成するにあたっては、そのユーザーが Docker Hub 内において、少なくとも 1 つの組織のメンバーであることを確認してください。
-<code class="highlighter-rouge">registry.json</code>ファイルの内容が、そのメンバーが属する組織に 1 つでも一致すれば、そのユーザーは Docker Desktop にサインインすることができて、すべての組織へのアクセスが可能になります。</p>
+<p><code class="highlighter-rouge">registry.json</code>ファイルを生成する際に、開発担当者は Docker Hub 上の少なくとも 1 つの組織のメンバーであることを確認します。<code class="highlighter-rouge">registry.json</code>ファイルが、開発者の属する少なくとも 1 つの組織と一致した場合、Docker Desktop へのサインインが可能となり、その組織すべてにアクセスができます。</p>
 
 <h3 id="windows">Windows の場合</h3>
 
-<p>Windows では<code class="highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>Windows では、端末上から以下のコマンドを実行して Docker Desktop をインストールします。</p>
 
-<p>Windows において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> <span class="s2">"Docker Desktop Installer.exe"</span> install
+</code></pre></div></div>
 
-<ol>
-  <li>Windows PowerShell を開いて Run as Administrator を選びます。</li>
-  <li>以下のコマンド<code class="highlighter-rouge">cd /ProgramData/DockerDesktop/</code>を実行します。</li>
-  <li>
-    <p><code class="highlighter-rouge">notepad registry.json</code>を実行します。
-その開発者が所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力し、<strong>Save</strong>（保存）をクリックします。
-たとえば以下のようにします。</p>
+<p>PowerShell の利用時は以下を実行します。</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">PS&gt;</span> Start-Process <span class="s1">'.\win\build\Docker Desktop Installer.exe'</span> <span class="nt">-Wait</span> install
+</code></pre></div></div>
+
+<p>Windows コマンドプロンプトの場合は以下とします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> start /w <span class="s2">""</span> <span class="s2">"Docker Desktop Installer.exe"</span> install
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">install</code>コマンドには以下のフラグ指定ができます。</p>
+
+<p><code class="highlighter-rouge">--allowed-org=&lt;org name&gt;</code></p>
+
+<p>This requires the user to sign in and be part of the specified Docker Hub organization
+when running the application. For example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> <span class="s2">"Docker Desktop Installer.exe"</span> install <span class="nt">--allowed-org</span><span class="o">=</span>acmeinc
+</code></pre></div></div>
+
+<p>This creates the <code class="highlighter-rouge">registry.json</code> file at <code class="highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>
+and includes the organization information the user belongs to. Make sure this file
+can’t be edited by the individual developer, only by the administrator.</p>
 
 <h3 id="mac">Mac の場合</h3>
 
-<p>macOS では<code class="highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>After downloading <code class="highlighter-rouge">Docker.dmg</code>, run the following commands in a terminal to install
+Docker Desktop in the Applications folder:</p>
 
-<p>macOS において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>hdiutil attach Docker.dmg
+<span class="gp">$</span> <span class="nb">sudo</span> /Volumes/Docker/Docker.app/Contents/MacOS/install
+<span class="gp">$</span> <span class="nb">sudo </span>hdiutil detach /Volumes/Docker
+</code></pre></div></div>
 
-<ol>
-  <li>VS Code または好みのテキストエディターを開きます。</li>
-  <li>
-    <p>そのユーザーが所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力してドキュメントフォルダに保存します。
-たとえば以下のようにします。</p>
+<p>The <code class="highlighter-rouge">install</code> command accepts the following flags:</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>新たに端末画面を開いて、以下のコマンドを実行します。</p>
+<p><code class="highlighter-rouge">--allowed-org=&lt;org name&gt;</code></p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo mkdir -p /Library/Application\ Support/com.docker.docker
-</span></code></pre></div>    </div>
+<p>This requires the user to sign in and be part of the specified Docker Hub
+organization when running the application. For example:</p>
 
-    <p>プロンプトが表示されたら、ローカルマシンに関連づいたパスワードを入力します。</p>
-  </li>
-  <li>
-    <p>以下のコマンドを入力します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>hdiutil attach Docker.dmg <span class="nt">--allowed-org</span><span class="o">=</span>acmeinc
+</code></pre></div></div>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<p>This creates the <code class="highlighter-rouge">registry.json</code> file at <code class="highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>
+and includes the organization information the user belongs to. Make sure this file
+can’t be edited by the individual developer, only by the administrator.</p>
 
 <h2 id="verify-the-changes">変更の確認</h2>
 

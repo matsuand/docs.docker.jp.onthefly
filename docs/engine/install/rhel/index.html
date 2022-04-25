@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Install Docker Engine on RHEL | Docker ドキュメント</title>
   <meta name="description" content="Instructions for installing Docker Engine on RHEL" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Install Docker Engine on RHEL" />
   <meta property="og:description" content="Instructions for installing Docker Engine on RHEL" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/rhel/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Install Docker Engine on RHEL","description":"Instructions for installing Docker Engine on RHEL","url":"https://docs.docker.com/engine/install/rhel/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -126,15 +126,15 @@ on RHEL. Refer to the <a href="/docs.docker.jp.onthefly/engine/install/centos/">
 <p>To install Docker Engine, you need a maintained version of RHEL 7 or 8 on s390x (IBM Z).
 Archived versions aren’t supported or tested.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver is recommended.</p>
+<p>The <code class="highlighter-rouge">overlay2</code> storage driver is recommended.</p>
 
 <h3 id="uninstall-old-versions">Uninstall old versions</h3>
 
-<p>Older versions of Docker were called <code class="language-plaintext highlighter-rouge">docker</code> or <code class="language-plaintext highlighter-rouge">docker-engine</code>. If these are
+<p>Older versions of Docker were called <code class="highlighter-rouge">docker</code> or <code class="highlighter-rouge">docker-engine</code>. If these are
 installed, uninstall them, along with associated dependencies. Also uninstall
-<code class="language-plaintext highlighter-rouge">Podman</code> and the associated dependencies if installed already.</p>
+<code class="highlighter-rouge">Podman</code> and the associated dependencies if installed already.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum remove docker <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum remove docker <span class="se">\</span>
                   docker-client <span class="se">\</span>
                   docker-client-latest <span class="se">\</span>
                   docker-common <span class="se">\</span>
@@ -146,10 +146,10 @@ installed, uninstall them, along with associated dependencies. Also uninstall
                   runc
 </code></pre></div></div>
 
-<p>It’s OK if <code class="language-plaintext highlighter-rouge">yum</code> reports that none of these packages are installed.</p>
+<p>It’s OK if <code class="highlighter-rouge">yum</code> reports that none of these packages are installed.</p>
 
-<p>The contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called <code class="language-plaintext highlighter-rouge">docker-ce</code>.</p>
+<p>The contents of <code class="highlighter-rouge">/var/lib/docker/</code>, including images, containers, volumes, and
+networks, are preserved. The Docker Engine package is now called <code class="highlighter-rouge">docker-ce</code>.</p>
 
 <h2 id="installation-methods">Installation methods</h2>
 
@@ -182,12 +182,12 @@ from the repository.</p>
 
 <h4 id="set-up-the-repository">Set up the repository</h4>
 
-<p>Install the <code class="language-plaintext highlighter-rouge">yum-utils</code> package (which provides the <code class="language-plaintext highlighter-rouge">yum-config-manager</code>
+<p>Install the <code class="highlighter-rouge">yum-utils</code> package (which provides the <code class="highlighter-rouge">yum-config-manager</code>
 utility) and set up the <strong>stable</strong> repository.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> yum-utils
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum install <span class="nt">-y</span> yum-utils
 <span class="go">
-</span><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum-config-manager <span class="se">\</span>
+</span><span class="gp">$</span> <span class="nb">sudo </span>yum-config-manager <span class="se">\</span>
     <span class="nt">--add-repo</span> <span class="se">\</span>
     https://download.docker.com/linux/rhel/docker-ce.repo
 </code></pre></div></div>
@@ -195,23 +195,23 @@ utility) and set up the <strong>stable</strong> repository.</p>
 <blockquote>
   <p><strong>Optional</strong>: Enable the <strong>nightly</strong> or <strong>test</strong> repositories.</p>
 
-  <p>These repositories are included in the <code class="language-plaintext highlighter-rouge">docker.repo</code> file above but are disabled
+  <p>These repositories are included in the <code class="highlighter-rouge">docker.repo</code> file above but are disabled
 by default. You can enable them alongside the stable repository.  The following
 command enables the <strong>nightly</strong> repository.</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> docker-ce-nightly
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> docker-ce-nightly
 </code></pre></div>  </div>
 
   <p>To enable the <strong>test</strong> channel, run the following command:</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> docker-ce-test
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> docker-ce-test
 </code></pre></div>  </div>
 
   <p>You can disable the <strong>nightly</strong> or <strong>test</strong> repository by running the
-<code class="language-plaintext highlighter-rouge">yum-config-manager</code> command with the <code class="language-plaintext highlighter-rouge">--disable</code> flag. To re-enable it, use
-the <code class="language-plaintext highlighter-rouge">--enable</code> flag. The following command disables the <strong>nightly</strong> repository.</p>
+<code class="highlighter-rouge">yum-config-manager</code> command with the <code class="highlighter-rouge">--disable</code> flag. To re-enable it, use
+the <code class="highlighter-rouge">--enable</code> flag. The following command disables the <strong>nightly</strong> repository.</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--disable</span> docker-ce-nightly
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum-config-manager <span class="nt">--disable</span> docker-ce-nightly
 </code></pre></div>  </div>
 
   <p><a href="/docs.docker.jp.onthefly/engine/install/">Learn about <strong>nightly</strong> and <strong>test</strong> channels</a>.</p>
@@ -223,23 +223,23 @@ the <code class="language-plaintext highlighter-rouge">--enable</code> flag. The
   <li>
     <p>Install the <em>latest version</em> of Docker Engine and containerd, or go to the next step to install a specific version:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum <span class="nb">install </span>docker-ce docker-ce-cli containerd.io
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum install docker-ce docker-ce-cli containerd.io
 </code></pre></div>    </div>
 
     <p>If prompted to accept the GPG key, verify that the fingerprint matches
-<code class="language-plaintext highlighter-rouge">060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</code>, and if so, accept it.</p>
+<code class="highlighter-rouge">060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</code>, and if so, accept it.</p>
 
     <blockquote>
       <p>Got multiple Docker repositories?</p>
 
       <p>If you have multiple Docker repositories enabled, installing
-or updating without specifying a version in the <code class="language-plaintext highlighter-rouge">yum install</code> or
-<code class="language-plaintext highlighter-rouge">yum update</code> command always installs the highest possible version,
+or updating without specifying a version in the <code class="highlighter-rouge">yum install</code> or
+<code class="highlighter-rouge">yum update</code> command always installs the highest possible version,
 which may not be appropriate for your stability needs.</p>
     </blockquote>
 
     <p>This command installs Docker, but it doesn’t start Docker. It also creates a
-<code class="language-plaintext highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
+<code class="highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
   </li>
   <li>
     <p>To install a <em>specific version</em> of Docker Engine, list the available versions
@@ -248,7 +248,7 @@ in the repo, then select and install:</p>
     <p>a. List and sort the versions available in your repo. This example sorts
    results by version number, highest to lowest, and is truncated:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>yum list docker-ce <span class="nt">--showduplicates</span> | <span class="nb">sort</span> <span class="nt">-r</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> yum list docker-ce <span class="nt">--showduplicates</span> | sort <span class="nt">-r</span>
 <span class="go">
 docker-ce.s390x                3:20.10.8-3.el8                 docker-ce-stable
 docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
@@ -256,30 +256,30 @@ docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
 </span></code></pre></div>    </div>
 
     <p>The list returned depends on which repositories are enabled, and is specific
-to your version of RHEL (indicated by the <code class="language-plaintext highlighter-rouge">.el8</code> suffix in this example).</p>
+to your version of RHEL (indicated by the <code class="highlighter-rouge">.el8</code> suffix in this example).</p>
 
     <p>b. Install a specific version by its fully qualified package name, which is
-   the package name (<code class="language-plaintext highlighter-rouge">docker-ce</code>) plus the version string (2nd column)
-   starting at the first colon (<code class="language-plaintext highlighter-rouge">:</code>), up to the first hyphen, separated by
-   a hyphen (<code class="language-plaintext highlighter-rouge">-</code>). For example, <code class="language-plaintext highlighter-rouge">docker-ce-20.10.7</code>.</p>
+   the package name (<code class="highlighter-rouge">docker-ce</code>) plus the version string (2nd column)
+   starting at the first colon (<code class="highlighter-rouge">:</code>), up to the first hyphen, separated by
+   a hyphen (<code class="highlighter-rouge">-</code>). For example, <code class="highlighter-rouge">docker-ce-20.10.7</code>.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum <span class="nb">install </span>docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum install docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io
 </code></pre></div>    </div>
 
     <p>This command installs Docker, but it doesn’t start Docker. It also creates a
-<code class="language-plaintext highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
+<code class="highlighter-rouge">docker</code> group, however, it doesn’t add any users to the group by default.</p>
   </li>
   <li>
     <p>Start Docker.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl start docker
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that Docker Engine is installed correctly by running the <code class="language-plaintext highlighter-rouge">hello-world</code>
+    <p>Verify that Docker Engine is installed correctly by running the <code class="highlighter-rouge">hello-world</code>
 image.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run hello-world
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>docker run hello-world
 </code></pre></div>    </div>
 
     <p>This command downloads a test image and runs it in a container. When the
@@ -287,7 +287,7 @@ container runs, it prints a message and exits.</p>
   </li>
 </ol>
 
-<p>This installs and runs Docker Engine. Use <code class="language-plaintext highlighter-rouge">sudo</code> to run Docker
+<p>This installs and runs Docker Engine. Use <code class="highlighter-rouge">sudo</code> to run Docker
 commands. Continue to <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/">Linux postinstall</a> to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.</p>
@@ -300,20 +300,20 @@ choosing the new version you want to install.</p>
 <h3 id="install-from-a-package">Install from a package</h3>
 
 <p>If you cannot use Docker’s repository to install Docker, you can download the
-<code class="language-plaintext highlighter-rouge">.rpm</code> file for your release and install it manually. You need to download
+<code class="highlighter-rouge">.rpm</code> file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.</p>
 
 <ol>
   <li>
     <p>Go to <a href="https://download.docker.com/linux/rhel/" target="_blank" rel="noopener" class="_">https://download.docker.com/linux/rhel/</a>
-and choose your version of RHEL. Then browse to <code class="language-plaintext highlighter-rouge">s390x/stable/Packages/</code>
-and download the <code class="language-plaintext highlighter-rouge">.rpm</code> file for the Docker version you want to install.</p>
+and choose your version of RHEL. Then browse to <code class="highlighter-rouge">s390x/stable/Packages/</code>
+and download the <code class="highlighter-rouge">.rpm</code> file for the Docker version you want to install.</p>
 
     <blockquote>
       <p><strong>Note</strong></p>
 
       <p>To install a <strong>nightly</strong> or <strong>test</strong> (pre-release) package,
-change the word <code class="language-plaintext highlighter-rouge">stable</code> in the above URL to <code class="language-plaintext highlighter-rouge">nightly</code> or <code class="language-plaintext highlighter-rouge">test</code>.
+change the word <code class="highlighter-rouge">stable</code> in the above URL to <code class="highlighter-rouge">nightly</code> or <code class="highlighter-rouge">test</code>.
 <a href="/docs.docker.jp.onthefly/engine/install/">Learn about <strong>nightly</strong> and <strong>test</strong> channels</a>.</p>
     </blockquote>
   </li>
@@ -321,23 +321,23 @@ change the word <code class="language-plaintext highlighter-rouge">stable</code>
     <p>Install Docker Engine, changing the path below to the path where you downloaded
 the Docker package.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum <span class="nb">install</span> /path/to/package.rpm
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum install /path/to/package.rpm
 </code></pre></div>    </div>
 
-    <p>Docker is installed but not started. The <code class="language-plaintext highlighter-rouge">docker</code> group is created, but no
+    <p>Docker is installed but not started. The <code class="highlighter-rouge">docker</code> group is created, but no
 users are added to the group.</p>
   </li>
   <li>
     <p>Start Docker.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl start docker
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that Docker Engine is installed correctly by running the <code class="language-plaintext highlighter-rouge">hello-world</code>
+    <p>Verify that Docker Engine is installed correctly by running the <code class="highlighter-rouge">hello-world</code>
 image.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run hello-world
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>docker run hello-world
 </code></pre></div>    </div>
 
     <p>This command downloads a test image and runs it in a container. When the
@@ -345,7 +345,7 @@ container runs, it prints a message and exits.</p>
   </li>
 </ol>
 
-<p>This installs and runs Docker Engine. Use <code class="language-plaintext highlighter-rouge">sudo</code> to run Docker commands.
+<p>This installs and runs Docker Engine. Use <code class="highlighter-rouge">sudo</code> to run Docker commands.
 Continue to <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/">Post-installation steps for Linux</a> to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.</p>
@@ -353,8 +353,8 @@ steps.</p>
 <h4 id="upgrade-docker-engine-1">Upgrade Docker Engine</h4>
 
 <p>To upgrade Docker Engine, download the newer package file and repeat the
-<a href="#install-from-a-package">installation procedure</a>, using <code class="language-plaintext highlighter-rouge">yum -y upgrade</code>
-instead of <code class="language-plaintext highlighter-rouge">yum -y install</code>, and point to the new file.</p>
+<a href="#install-from-a-package">installation procedure</a>, using <code class="highlighter-rouge">yum -y upgrade</code>
+instead of <code class="highlighter-rouge">yum -y install</code>, and point to the new file.</p>
 
 <!-- This file is included in Docker Engine - Community or EE installation docs for Linux. -->
 
@@ -364,13 +364,13 @@ instead of <code class="language-plaintext highlighter-rouge">yum -y install</co
 これは Docker を開発マシンに対話形式をとらずにすばやくインストールするものです。
 このスクリプトを本番環境において利用することはお勧めしませんが、環境に適したプロビジョニングを行うサンプルとして活用することはできます。
 また <a href="#install-using-the-repository">リポジトリを利用したインストール</a> における作業手順に従うことで、パッケージリポジトリを利用したインストール手順を身につけることができます。
-このスクリプトのソースコードはオープンソースであり、<a href="https://github.com/docker/docker-install" target="_blank" rel="noopener" class="_">GitHub 上の<code class="language-plaintext highlighter-rouge">docker-install</code>リポジトリ</a> から入手可能です。</p>
+このスクリプトのソースコードはオープンソースであり、<a href="https://github.com/docker/docker-install" target="_blank" rel="noopener" class="_">GitHub 上の<code class="highlighter-rouge">docker-install</code>リポジトリ</a> から入手可能です。</p>
 
 <p class="warning">インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してからローカル実行してください。
 インストールにあたっては、この便利スクリプトの潜在的リスクや制限について、よく理解してください。</p>
 
 <ul>
-  <li>スクリプトを実行するには<code class="language-plaintext highlighter-rouge">root</code>権限か<code class="language-plaintext highlighter-rouge">sudo</code>が必要です。</li>
+  <li>スクリプトを実行するには<code class="highlighter-rouge">root</code>権限か<code class="highlighter-rouge">sudo</code>が必要です。</li>
   <li>スクリプトは自動的に情報取得を行い、利用している Linux ディストリビューション、そのバージョン、そしてパッケージ管理システムの設定を行います。
 なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。</li>
   <li>スクリプトは依存パッケージや推奨パッケージをすべてインストールします。
@@ -388,32 +388,32 @@ instead of <code class="language-plaintext highlighter-rouge">yum -y install</co
 <blockquote>
   <p>ヒント：  スクリプト実行前のインストールステップ確認</p>
 
-  <p>本スクリプトの実行にあたって<code class="language-plaintext highlighter-rouge">DRY_RUN=1</code>オプションを指定すると、このスクリプトのインストールステップを確認することができます。</p>
+  <p>本スクリプトの実行にあたって<code class="highlighter-rouge">DRY_RUN=1</code>オプションを指定すると、このスクリプトのインストールステップを確認することができます。</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
-<span class="gp">$</span><span class="w"> </span><span class="nv">DRY_RUN</span><span class="o">=</span>1 sh ./get-docker.sh
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
+<span class="gp">$</span> <span class="nv">DRY_RUN</span><span class="o">=</span>1 sh ./get-docker.sh
 </code></pre></div>  </div>
 </blockquote>
 
 <p>以下は、このスクリプトを <a href="https://get.docker.com/">get.docker.com</a> からダウンロードして実行することで、Linux 上に最新安定版をインストールする例です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
-<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh get-docker.sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
+<span class="gp">$</span> <span class="nb">sudo </span>sh get-docker.sh
 <span class="go">Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
 </span><span class="c">&lt;...&gt;
 </span></code></pre></div></div>
 
 <p>上により Docker がインストールされます。
 Debian ベースのディストリビューションでは Docker が自動的に開始されます。
-CentOS、Fedora、RHEL、SLES といった<code class="language-plaintext highlighter-rouge">RPM</code>ベースの場合は手動での実行が必要となるため、<code class="language-plaintext highlighter-rouge">systemctl</code>か<code class="language-plaintext highlighter-rouge">service</code>のいずれか適当なものを実行します。
+CentOS、Fedora、RHEL、SLES といった<code class="highlighter-rouge">RPM</code>ベースの場合は手動での実行が必要となるため、<code class="highlighter-rouge">systemctl</code>か<code class="highlighter-rouge">service</code>のいずれか適当なものを実行します。
 上の出力メッセージに示されているように、デフォルトでは非 root ユーザーによる Docker コマンド実行はできません。</p>
 
 <blockquote>
   <p><strong>非特権ユーザーでの Docker 利用、rootless モードでのインストール？</strong></p>
 
-  <p>このインストールスクリプトでは、Docker をインストールして利用するために<code class="language-plaintext highlighter-rouge">root</code>あるいは<code class="language-plaintext highlighter-rouge">sudo</code>を用いた権限が必要です。
+  <p>このインストールスクリプトでは、Docker をインストールして利用するために<code class="highlighter-rouge">root</code>あるいは<code class="highlighter-rouge">sudo</code>を用いた権限が必要です。
 非 root ユーザーに Docker の利用を許可する場合は、<a href="/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">Linux インストール後の作業</a> を参照してください。
-Docker は<code class="language-plaintext highlighter-rouge">root</code>権限がなくてもインストールできます。
+Docker は<code class="highlighter-rouge">root</code>権限がなくてもインストールできます。
 つまり rootless モードにより実行することができます。
 rootless モードにより Docker を実行する手順については <a href="/docs.docker.jp.onthefly/engine/security/rootless/">root ユーザー以外による Docker デーモン起動（rootless モード）</a> を参照してください。</p>
 </blockquote>
@@ -422,15 +422,15 @@ rootless モードにより Docker を実行する手順については <a href=
 
 <p>Docker ではこの便利スクリプトを <a href="https://test.docker.com/">test.docker.com</a> からも提供しています。
 これを使って Linux 上にプレリリース版の Docker をインストールできます。
-このスクリプトは<code class="language-plaintext highlighter-rouge">get.docker.com</code>から入手するものと同等ですが、パッケージリポジトリ内の「テスト」チャネルから、パッケージマネージャーがインストールするものとして設定されています。
+このスクリプトは<code class="highlighter-rouge">get.docker.com</code>から入手するものと同等ですが、パッケージリポジトリ内の「テスト」チャネルから、パッケージマネージャーがインストールするものとして設定されています。
 このスクリプトには Docker の安定版とプレリリース版（ベータ版、リリース候補版）が含まれています。
 このスクリプトを利用すれば、新規リリース機能をいち早く利用できます。
 またそういった機能が安定版として提供されるよりも前に、テスト環境において評価することができます。</p>
 
 <p>Linux への Docker 最新版のインストールを「テスト」チャネルから行うには、以下を実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://test.docker.com <span class="nt">-o</span> test-docker.sh
-<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh test-docker.sh
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://test.docker.com <span class="nt">-o</span> test-docker.sh
+<span class="gp">$</span> <span class="nb">sudo </span>sh test-docker.sh
 <span class="c">&lt;...&gt;
 </span></code></pre></div></div>
 
@@ -446,7 +446,7 @@ rootless モードにより Docker を実行する手順については <a href=
   <li>
     <p>Uninstall the Docker Engine, CLI, and Containerd packages:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>yum remove docker-ce docker-ce-cli containerd.io
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>yum remove docker-ce docker-ce-cli containerd.io
 </code></pre></div>    </div>
   </li>
   <li>
@@ -454,8 +454,8 @@ rootless モードにより Docker を実行する手順については <a href=
 are not automatically removed. To delete all images, containers, and
 volumes:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker
-<span class="gp">$</span><span class="w"> </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/containerd
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>rm <span class="nt">-rf</span> /var/lib/docker
+<span class="gp">$</span> <span class="nb">sudo </span>rm <span class="nt">-rf</span> /var/lib/containerd
 </code></pre></div>    </div>
   </li>
 </ol>

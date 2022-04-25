@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における GPU アクセスの有効化 | Docker ドキュメント</title>
   <meta name="description" content="Compose における GPU サポート。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Compose における GPU アクセスの有効化" />
   <meta property="og:description" content="Compose における GPU サポート。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/gpu-support/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose における GPU アクセスの有効化","description":"Compose における GPU サポート。","url":"https://docs.docker.com/compose/gpu-support/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -111,9 +111,9 @@
 その実現には <a href="/docs.docker.jp.onthefly/config/containers/resource_constraints/#gpu">前提条件</a> があるため、まだ実施していない場合は実施しておいてください。</p>
 
 <p>これ以降の節に示す利用例においては、Docker Compose を用いて GPU デバイスに接続するサービスコンテナーの構築方法に焦点を当てています。
-コマンドは<code class="language-plaintext highlighter-rouge">docker-compose</code>と<code class="language-plaintext highlighter-rouge">docker compose</code>のどちらでも利用できます。</p>
+コマンドは<code class="highlighter-rouge">docker-compose</code>と<code class="highlighter-rouge">docker compose</code>のどちらでも利用できます。</p>
 
-<h3 id="use-of-service-runtime-property-from-compose-v23-format-legacy">Compose v2.3 フォーマットにおけるサービス<code class="language-plaintext highlighter-rouge">runtime</code>プロパティの利用（過去の手法）</h3>
+<h3 id="use-of-service-runtime-property-from-compose-v23-format-legacy">Compose v2.3 フォーマットにおけるサービス<code class="highlighter-rouge">runtime</code>プロパティの利用（過去の手法）</h3>
 
 <p>Docker Compose v1.27.0 以降では、Compose Specification スキーマを利用するものとなりました。
 これは 2.x と 3.x の両バージョンにおけるプロパティをすべて組み合わせたものです。
@@ -135,31 +135,31 @@
 
 <ul>
   <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#capabilities" target="_blank" rel="noopener" class="_">capabilities</a> - 値として文字列リストを指定します。
-（たとえば<code class="language-plaintext highlighter-rouge">capabilities: [gpu]</code>）
+（たとえば<code class="highlighter-rouge">capabilities: [gpu]</code>）
 Compose ファイル内でこのフィールドの設定が必須です。
 これを行わないと、サービスデプロイ時にエラーが発生します。</li>
-  <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#count" target="_blank" rel="noopener" class="_">count</a> - 値として整数値か、あるいは<code class="language-plaintext highlighter-rouge">all</code>を指定します。
+  <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#count" target="_blank" rel="noopener" class="_">count</a> - 値として整数値か、あるいは<code class="highlighter-rouge">all</code>を指定します。
 予約を行う GPU デバイスの数を表します。
 （ホストにはそれだけの数の GPU が存在しているものとします。）</li>
   <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#device_ids" target="_blank" rel="noopener" class="_">device_ids</a> - 値として文字列リストを指定します。
 ホスト上での GPU デバイス ID を表します。
-この ID 値は、ホスト上において<code class="language-plaintext highlighter-rouge">nvidia-smi</code>を実行した出力結果から確認することができます。</li>
+この ID 値は、ホスト上において<code class="highlighter-rouge">nvidia-smi</code>を実行した出力結果から確認することができます。</li>
   <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#driver" target="_blank" rel="noopener" class="_">driver</a> - 値として文字列を指定します。
-（たとえば<code class="language-plaintext highlighter-rouge">driver: 'nvidia'</code>）</li>
+（たとえば<code class="highlighter-rouge">driver: 'nvidia'</code>）</li>
   <li><a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#options" target="_blank" rel="noopener" class="_">options</a> - ドライバーに固有のオプションをキーバリューペアで指定します。</li>
 </ul>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>フィールド<code class="language-plaintext highlighter-rouge">capabilities</code>は必ず設定しなければなりません。
+  <p>フィールド<code class="highlighter-rouge">capabilities</code>は必ず設定しなければなりません。
 これを行わないと、サービスデプロイ時にエラーが発生します。</p>
 
-  <p>フィールド<code class="language-plaintext highlighter-rouge">count</code>と<code class="language-plaintext highlighter-rouge">device_ids</code>は排他的なものです。
+  <p>フィールド<code class="highlighter-rouge">count</code>と<code class="highlighter-rouge">device_ids</code>は排他的なものです。
 一度に定義できるのは 1 つだけです。</p>
 </blockquote>
 
-<p>上のプロパティに関する詳細については <a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices" target="_blank" rel="noopener" class="_">Compose Specification</a> の<code class="language-plaintext highlighter-rouge">deploy</code>の節を参照してください。</p>
+<p>上のプロパティに関する詳細については <a href="https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices" target="_blank" rel="noopener" class="_">Compose Specification</a> の<code class="highlighter-rouge">deploy</code>の節を参照してください。</p>
 
 <p>以下に示す Compose ファイルは、GPU デバイスを 1 つ利用してサービスを起動する利用例です。</p>
 
@@ -172,13 +172,13 @@ Compose ファイル内でこのフィールドの設定が必須です。
         <span class="na">reservations</span><span class="pi">:</span>
           <span class="na">devices</span><span class="pi">:</span>
             <span class="pi">-</span> <span class="na">driver</span><span class="pi">:</span> <span class="s">nvidia</span>
-              <span class="na">count</span><span class="pi">:</span> <span class="m">1</span>
+              <span class="na">count</span><span class="pi">:</span> <span class="s">1</span>
               <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <p>Docker Compose によってこれを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
 <span class="go">Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1
@@ -205,7 +205,7 @@ gpu_test_1 exited with code 0
 
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">count</code>または<code class="language-plaintext highlighter-rouge">device_ids</code>が設定されていない場合は、デフォルトとしてホスト上にある GPU すべてが利用されることになります。</p>
+<p><code class="highlighter-rouge">count</code>または<code class="highlighter-rouge">device_ids</code>が設定されていない場合は、デフォルトとしてホスト上にある GPU すべてが利用されることになります。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
   <span class="na">test</span><span class="pi">:</span>
@@ -218,23 +218,23 @@ gpu_test_1 exited with code 0
             <span class="pi">-</span> <span class="na">capabilities</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">gpu</span><span class="pi">]</span>
 </code></pre></div></div>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
 <span class="go">Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1
 test_1  | I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
 </span><span class="c">.....
 </span><span class="go">test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
-</span><span class="gp">Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -&gt;</span><span class="w"> </span>physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus <span class="nb">id</span>: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
+</span><span class="gp">Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -&gt;</span> physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
 <span class="go">test_1  | /device:GPU:0
 gpu_test_1 exited with code 0
 </span></code></pre></div></div>
 
-<p>GPU を複数持つホストにおいては、<code class="language-plaintext highlighter-rouge">device_ids</code>フィールドを使って対象とする GPU デバイスを指定できます。
-またサービスコンテナーに割り当てる GPU デバイス数を<code class="language-plaintext highlighter-rouge">count</code>により制限することができます。
-<code class="language-plaintext highlighter-rouge">count</code>の設定値がホスト上の実際の GPU 数を超えている場合、デプロイ時にエラーが発生します。</p>
+<p>GPU を複数持つホストにおいては、<code class="highlighter-rouge">device_ids</code>フィールドを使って対象とする GPU デバイスを指定できます。
+またサービスコンテナーに割り当てる GPU デバイス数を<code class="highlighter-rouge">count</code>により制限することができます。
+<code class="highlighter-rouge">count</code>の設定値がホスト上の実際の GPU 数を超えている場合、デプロイ時にエラーが発生します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> nvidia-smi
 <span class="go">+-----------------------------------------------------------------------------+
 | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |
 |-------------------------------+----------------------+----------------------+
@@ -278,9 +278,9 @@ gpu_test_1 exited with code 0
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose up
 ...
-Created TensorFlow device <span class="o">(</span>/device:GPU:0 with 13970 MB memory -&gt; physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus <span class="nb">id</span>: 0000:00:1b.0, compute capability: 7.5<span class="o">)</span>
+Created TensorFlow device <span class="o">(</span>/device:GPU:0 with 13970 MB memory -&gt; physical GPU <span class="o">(</span>device: 0, name: Tesla T4, pci bus id: 0000:00:1b.0, compute capability: 7.5<span class="o">)</span>
 ...
-Created TensorFlow device <span class="o">(</span>/device:GPU:1 with 13970 MB memory<span class="o">)</span> -&gt; physical GPU <span class="o">(</span>device: 1, name: Tesla T4, pci bus <span class="nb">id</span>: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
+Created TensorFlow device <span class="o">(</span>/device:GPU:1 with 13970 MB memory<span class="o">)</span> -&gt; physical GPU <span class="o">(</span>device: 1, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5<span class="o">)</span>
 ...
 gpu_test_1 exited with code 0
 </code></pre></div></div>

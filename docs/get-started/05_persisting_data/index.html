@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>DB へのデータ保存 | Docker ドキュメント</title>
   <meta name="description" content="アプリケーションにおける DB データを保存します。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="DB へのデータ保存" />
   <meta property="og:description" content="アプリケーションにおける DB データを保存します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/05_persisting_data/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"DB へのデータ保存","description":"アプリケーションにおける DB データを保存します。","url":"https://docs.docker.com/get-started/05_persisting_data/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -125,51 +125,51 @@
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">ubuntu</code>コンテナーを起動させます。
-その際には、1 から 10000 までの間の乱数を発生させて、<code class="language-plaintext highlighter-rouge">/data.txt</code>というファイルに書き込みます。</p>
+    <p><code class="highlighter-rouge">ubuntu</code>コンテナーを起動させます。
+その際には、1 から 10000 までの間の乱数を発生させて、<code class="highlighter-rouge">/data.txt</code>というファイルに書き込みます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-d</span> ubuntu bash <span class="nt">-c</span> <span class="s2">"shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null"</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-d</span> ubuntu bash <span class="nt">-c</span> <span class="s2">"shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null"</span>
 </code></pre></div>    </div>
 
-    <p>このコマンドがよくわからない方のために説明しておくと、上では Bash シェルを起動させて 2 つのコマンドを実行させています（だから<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>を使っています）。
- 前半のコマンドは 1 つの乱数を発生させて<code class="language-plaintext highlighter-rouge">/data.txt</code>に出力しています。
+    <p>このコマンドがよくわからない方のために説明しておくと、上では Bash シェルを起動させて 2 つのコマンドを実行させています（だから<code class="highlighter-rouge">&amp;&amp;</code>を使っています）。
+ 前半のコマンドは 1 つの乱数を発生させて<code class="highlighter-rouge">/data.txt</code>に出力しています。
  そして後半のコマンドでは、単純にこのファイルを見ることによってこのコンテナーを実行し続けます。</p>
   </li>
   <li>
-    <p>コンテナー内で<code class="language-plaintext highlighter-rouge">exec</code>を実行し、その結果を確認します。
-これを行うにはダッシュボードを開いて、<code class="language-plaintext highlighter-rouge">ubuntu</code>イメージを起動させているコンテナーの 1 つめの動作をクリックします。</p>
+    <p>コンテナー内で<code class="highlighter-rouge">exec</code>を実行し、その結果を確認します。
+これを行うにはダッシュボードを開いて、<code class="highlighter-rouge">ubuntu</code>イメージを起動させているコンテナーの 1 つめの動作をクリックします。</p>
 
     <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-open-cli-ubuntu.png" alt="ダッシュボードでの ubuntu コンテナーに対する CLI オープン" /></p>
 
     <p>ターミナルを見れば Ubuntu コンテナー内にシェルが実行されたことがわかります。
- そこで以下のコマンドを実行して<code class="language-plaintext highlighter-rouge">/data.txt</code>ファイルの中身を確認します。
+ そこで以下のコマンドを実行して<code class="highlighter-rouge">/data.txt</code>ファイルの中身を確認します。
  その後はこのターミナルを再び閉じてください。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span><span class="nb">cat</span> /data.txt
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> <span class="nb">cat</span> /data.txt
 </code></pre></div>    </div>
 
-    <p>コマンドラインを選ぶ場合は<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを実行して同じことを行います。
- その場合は（<code class="language-plaintext highlighter-rouge">docker ps</code>を実行して）コンテナー ID を得る必要があります。
+    <p>コマンドラインを選ぶ場合は<code class="highlighter-rouge">docker exec</code>コマンドを実行して同じことを行います。
+ その場合は（<code class="highlighter-rouge">docker ps</code>を実行して）コンテナー ID を得る必要があります。
  そしてファイル内容を以下のようにして確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker <span class="nb">exec</span> &lt;container-id&gt; <span class="nb">cat</span> /data.txt
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker <span class="nb">exec</span> &lt;container-id&gt; <span class="nb">cat</span> /data.txt
 </code></pre></div>    </div>
 
     <p>乱数が書き込まれているはずです。</p>
   </li>
   <li>
-    <p>そこで（同一イメージから）別の<code class="language-plaintext highlighter-rouge">ubuntu</code>コンテナーを起動させます。
+    <p>そこで（同一イメージから）別の<code class="highlighter-rouge">ubuntu</code>コンテナーを起動させます。
 このコンテナーに同じファイルを持っていないかどうかを見てみます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-it</span> ubuntu <span class="nb">ls</span> /
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-it</span> ubuntu <span class="nb">ls</span> /
 </code></pre></div>    </div>
 
     <p>見てください。
- たしかに<code class="language-plaintext highlighter-rouge">data.txt</code>ファイルはありません。
+ たしかに<code class="highlighter-rouge">data.txt</code>ファイルはありません。
  こうなった理由は、ファイルの書き込みが 1 つめのコンテナーのスクラッチスペースにしか行われていないからです。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker rm -f &lt;コンテナーID&gt;</code>コマンドを実行して 1 つめのコンテナーを削除します。</p>
+    <p><code class="highlighter-rouge">docker rm -f &lt;コンテナーID&gt;</code>コマンドを実行して 1 つめのコンテナーを削除します。</p>
   </li>
 </ol>
 
@@ -188,7 +188,7 @@
 
 <h2 id="persist-the-todo-data">Todo データの保存</h2>
 
-<p>Todo アプリはデフォルトで各種データを、コンテナーのファイルシステムの<code class="language-plaintext highlighter-rouge">/etc/todos/todo.db</code>にある <a href="https://www.sqlite.org/index.html" target="_blank" rel="noopener" class="_">SQLite データベース</a> に保存します。
+<p>Todo アプリはデフォルトで各種データを、コンテナーのファイルシステムの<code class="highlighter-rouge">/etc/todos/todo.db</code>にある <a href="https://www.sqlite.org/index.html" target="_blank" rel="noopener" class="_">SQLite データベース</a> に保存します。
 SQLite がよくわからなくても心配無用です。
 これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイルに保存するものです。
 大規模アプリケーションに対して利用するのは適切ではありませんが、ちょっとしたデモであれば十分に動作します。
@@ -198,7 +198,7 @@ SQLite がよくわからなくても心配無用です。
 したがって最後に更新されたものを、その次にも使い続けられます。
 ボリュームを生成して、データを保存するディレクトリに割り当てます（通常これを「マウンティングする」と言い表します）。
 こうすればデータを失うことなく保存できます。
-今の場合、コンテナーから<code class="language-plaintext highlighter-rouge">todo.db</code>ファイルへの書き込みを行っているので、ボリュームを通じてホスト上にデータが保持されることになります。</p>
+今の場合、コンテナーから<code class="highlighter-rouge">todo.db</code>ファイルへの書き込みを行っているので、ボリュームを通じてホスト上にデータが保持されることになります。</p>
 
 <p>先ほど言ったように、これから扱うのは <strong>名前つきボリューム</strong> です。
 名前つきボリュームとは、単純にデータが入った 1 つのバケツだと思ってください。
@@ -207,22 +207,22 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker volume create</code>コマンドを実行してボリュームを生成します。</p>
+    <p><code class="highlighter-rouge">docker volume create</code>コマンドを実行してボリュームを生成します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker volume create todo-db
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker volume create todo-db
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ダッシュボード上から再度 Todo アプリコンテナーを停止させ削除します（あるいは<code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します）。
+    <p>ダッシュボード上から再度 Todo アプリコンテナーを停止させ削除します（あるいは<code class="highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します）。
 なぜならデータ保存を行うボリュームを利用しない状態で、アプリコンテナーがまだ実行しているからです。</p>
   </li>
   <li>
     <p>Todo アプリコンテナーを起動します。
-ただし今回は<code class="language-plaintext highlighter-rouge">-v</code>フラグを使ってボリュームマウントの指定を行います。
-名前つきボリュームを利用し、これを<code class="language-plaintext highlighter-rouge">/etc/todos</code>にマウントします。
+ただし今回は<code class="highlighter-rouge">-v</code>フラグを使ってボリュームマウントの指定を行います。
+名前つきボリュームを利用し、これを<code class="highlighter-rouge">/etc/todos</code>にマウントします。
 これによってそのパス上に生成されるファイルをすべてアクセスできるようにします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 <span class="nt">-v</span> todo-db:/etc/todos getting-started
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">-dp</span> 3000:3000 <span class="nt">-v</span> todo-db:/etc/todos getting-started
 </code></pre></div>    </div>
   </li>
   <li>
@@ -232,7 +232,7 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
   </li>
   <li>
     <p>Todo アプリを実現するコンテナーを停止して削除します。
-それにはダッシュボードを利用するか、あるいは<code class="language-plaintext highlighter-rouge">docker ps</code>によって ID を得た上で<code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します。</p>
+それにはダッシュボードを利用するか、あるいは<code class="highlighter-rouge">docker ps</code>によって ID を得た上で<code class="highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します。</p>
   </li>
   <li>
     <p>新たなコンテナーを起動します。
@@ -262,9 +262,9 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 
 <p>多くの方からよくたずねられる質問があります。
 「名前つきボリュームを利用したときに Docker は <strong>実際には</strong> どこにデータを保存するのですか。」
-これを知りたいなら<code class="language-plaintext highlighter-rouge">docker volume inspect</code>コマンドを実行してみてください。</p>
+これを知りたいなら<code class="highlighter-rouge">docker volume inspect</code>コマンドを実行してみてください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume inspect todo-db
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker volume inspect todo-db
 <span class="go">[
     {
         "CreatedAt": "2019-09-26T02:18:36Z",
@@ -278,7 +278,7 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 ]
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">Mountpoint</code>というのが、データが保存されるディスク上の本当の保存場所です。
+<p><code class="highlighter-rouge">Mountpoint</code>というのが、データが保存されるディスク上の本当の保存場所です。
 たいていのマシンにおいては、この場所に対してホストからアクセスするにはルート権限が必要です。
 ともあれそういう場所にあるということです。</p>
 

@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker frequently asked questions (FAQ) | Docker ドキュメント</title>
   <meta name="description" content="Most frequently asked questions." />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker frequently asked questions (FAQ)" />
   <meta property="og:description" content="Most frequently asked questions." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/faq/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker frequently asked questions (FAQ)","description":"Most frequently asked questions.","url":"https://docs.docker.com/engine/faq/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -134,7 +134,7 @@ offers a high-level tool with several powerful functionalities:</p>
   <li>
     <p><em>Application-centric.</em> Docker is optimized for the deployment of
  applications, as opposed to machines. This is reflected in its API, user
- interface, design philosophy and documentation. By contrast, the <code class="language-plaintext highlighter-rouge">lxc</code> helper
+ interface, design philosophy and documentation. By contrast, the <code class="highlighter-rouge">lxc</code> helper
  scripts focus on containers as lightweight machines - basically servers that
  boot faster and need less RAM. We think there’s more to containers than just
  that.</p>
@@ -143,8 +143,8 @@ offers a high-level tool with several powerful functionalities:</p>
     <p><em>Automatic build.</em> Docker includes <a href="/engine/reference/builder/"><em>a tool for developers to automatically
  assemble a container from their source
  code</em></a>, with full control over application
- dependencies, build tools, packaging etc. They are free to use <code class="language-plaintext highlighter-rouge">make</code>, <code class="language-plaintext highlighter-rouge">maven</code>,
- <code class="language-plaintext highlighter-rouge">chef</code>, <code class="language-plaintext highlighter-rouge">puppet</code>, <code class="language-plaintext highlighter-rouge">salt,</code> Debian packages, RPMs, source tarballs, or any
+ dependencies, build tools, packaging etc. They are free to use <code class="highlighter-rouge">make</code>, <code class="highlighter-rouge">maven</code>,
+ <code class="highlighter-rouge">chef</code>, <code class="highlighter-rouge">puppet</code>, <code class="highlighter-rouge">salt,</code> Debian packages, RPMs, source tarballs, or any
  combination of the above, regardless of the configuration of the machines.</p>
   </li>
   <li>
@@ -153,7 +153,7 @@ offers a high-level tool with several powerful functionalities:</p>
  versions, rolling back etc. The history also includes how a container was
  assembled and by whom, so you get full traceability from the production server
  all the way back to the upstream developer. Docker also implements incremental
- uploads and downloads, similar to <code class="language-plaintext highlighter-rouge">git pull</code>, so new versions of a container
+ uploads and downloads, similar to <code class="highlighter-rouge">git pull</code>, so new versions of a container
  can be transferred by only sending diffs.</p>
   </li>
   <li>
@@ -259,40 +259,40 @@ Downloading and installing an “all-in-one” .deb or .rpm sounds great at firs
 except if you have no way to figure out that it contains a copy of the OpenSSL
 library vulnerable to the <a href="https://heartbleed.com" target="_blank" rel="noopener" class="_">Heartbleed</a> bug.</p>
 
-<h3 id="why-is-debian_frontendnoninteractive-discouraged-in-dockerfiles">Why is <code class="language-plaintext highlighter-rouge">DEBIAN_FRONTEND=noninteractive</code> discouraged in Dockerfiles?</h3>
+<h3 id="why-is-debian_frontendnoninteractive-discouraged-in-dockerfiles">Why is <code class="highlighter-rouge">DEBIAN_FRONTEND=noninteractive</code> discouraged in Dockerfiles?</h3>
 
 <p>When building Docker images on Debian and Ubuntu you may have seen errors like:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unable to initialize frontend: Dialog
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unable to initialize frontend: Dialog
 </code></pre></div></div>
 
 <p>These errors don’t stop the image from being built but inform you that the
 installation process tried to open a dialog box, but couldn’t. Generally,
 these errors are safe to ignore.</p>
 
-<p>Some people circumvent these errors by changing the <code class="language-plaintext highlighter-rouge">DEBIAN_FRONTEND</code>
+<p>Some people circumvent these errors by changing the <code class="highlighter-rouge">DEBIAN_FRONTEND</code>
 environment variable inside the Dockerfile using:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV DEBIAN_FRONTEND=noninteractive
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV DEBIAN_FRONTEND=noninteractive
 </code></pre></div></div>
 
 <p>This prevents the installer from opening dialog boxes during installation which
 stops the errors.</p>
 
 <p>While this may sound like a good idea, it <em>may</em> have side effects. The
-<code class="language-plaintext highlighter-rouge">DEBIAN_FRONTEND</code> environment variable is inherited by all images and
+<code class="highlighter-rouge">DEBIAN_FRONTEND</code> environment variable is inherited by all images and
 containers built from your image, effectively changing their behavior. People
 using those images run into problems when installing software
 interactively, because installers do not show any dialog boxes.</p>
 
-<p>Because of this, and because setting <code class="language-plaintext highlighter-rouge">DEBIAN_FRONTEND</code> to <code class="language-plaintext highlighter-rouge">noninteractive</code> is
+<p>Because of this, and because setting <code class="highlighter-rouge">DEBIAN_FRONTEND</code> to <code class="highlighter-rouge">noninteractive</code> is
 mainly a ‘cosmetic’ change, we <em>discourage</em> changing it.</p>
 
 <p>If you <em>really</em> need to change its setting, make sure to change it back to its
 <a href="https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args" target="_blank" rel="noopener" class="_">default value</a>
 afterwards.</p>
 
-<h3 id="why-do-i-get-connection-reset-by-peer-when-making-a-request-to-a-service-running-in-a-container">Why do I get <code class="language-plaintext highlighter-rouge">Connection reset by peer</code> when making a request to a service running in a container?</h3>
+<h3 id="why-do-i-get-connection-reset-by-peer-when-making-a-request-to-a-service-running-in-a-container">Why do I get <code class="highlighter-rouge">Connection reset by peer</code> when making a request to a service running in a container?</h3>
 
 <p>Typically, this message is returned if the service is already bound to your
 localhost. As a result, requests coming to the container from outside are
@@ -300,17 +300,17 @@ dropped. To correct this problem, change the service’s configuration on your
 localhost so that the service accepts requests from all IPs.  If you aren’t sure
 how to do this, check the documentation for your OS.</p>
 
-<h3 id="why-do-i-get-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host-when-using-docker-machine">Why do I get <code class="language-plaintext highlighter-rouge">Cannot connect to the Docker daemon. Is the docker daemon running on this host?</code> when using docker-machine?</h3>
+<h3 id="why-do-i-get-cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host-when-using-docker-machine">Why do I get <code class="highlighter-rouge">Cannot connect to the Docker daemon. Is the docker daemon running on this host?</code> when using docker-machine?</h3>
 
 <p>This error points out that the docker client cannot connect to the virtual
 machine. This means that either the virtual machine that works underneath
-<code class="language-plaintext highlighter-rouge">docker-machine</code> is not running or that the client doesn’t correctly point at
+<code class="highlighter-rouge">docker-machine</code> is not running or that the client doesn’t correctly point at
 it.</p>
 
-<p>To verify that the docker machine is running you can use the <code class="language-plaintext highlighter-rouge">docker-machine ls</code>
-command and start it with <code class="language-plaintext highlighter-rouge">docker-machine start</code> if needed.</p>
+<p>To verify that the docker machine is running you can use the <code class="highlighter-rouge">docker-machine ls</code>
+command and start it with <code class="highlighter-rouge">docker-machine start</code> if needed.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
 NAME             ACTIVE   DRIVER       STATE     URL   SWARM                   DOCKER    ERRORS
 default          -        virtualbox   Stopped                                 Unknown
 
@@ -318,9 +318,9 @@ $ docker-machine start default
 </code></pre></div></div>
 
 <p>You need to tell Docker to talk to that machine. You can do this with the
-<code class="language-plaintext highlighter-rouge">docker-machine env</code> command. For example,</p>
+<code class="highlighter-rouge">docker-machine env</code> command. For example,</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ eval "$(docker-machine env default)"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ eval "$(docker-machine env default)"
 $ docker ps
 </code></pre></div></div>
 

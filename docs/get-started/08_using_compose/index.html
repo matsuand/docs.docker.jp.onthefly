@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Compose の利用 | Docker ドキュメント</title>
   <meta name="description" content="アプリケーションにおいて Compose を使ってラクラク開発しよう。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Compose の利用" />
   <meta property="og:description" content="アプリケーションにおいて Compose を使ってラクラク開発しよう。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/08_using_compose/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Compose の利用","description":"アプリケーションにおいて Compose を使ってラクラク開発しよう。","url":"https://docs.docker.com/get-started/08_using_compose/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -126,14 +126,14 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 
 <p>インストール後は以下のコマンドを実行すれば、バージョン情報を確認できます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose version
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose version
 </code></pre></div></div>
 
 <h2 id="create-the-compose-file">Compose ファイルの生成</h2>
 
 <ol>
   <li>
-    <p>アプリプロジェクトのルートディレクトリに<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>という名前のファイルを生成します。</p>
+    <p>アプリプロジェクトのルートディレクトリに<code class="highlighter-rouge">docker-compose.yml</code>という名前のファイルを生成します。</p>
   </li>
   <li>
     <p>Compose ファイルではまずスキーマバージョンの定義から書き始めます。
@@ -160,8 +160,8 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 <p>思い出してください。
 以下のコマンドはアプリコンテナーの定義を以前行ったものです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
-  <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/app"</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
+  <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app"</span> <span class="se">\</span>
   <span class="nt">--network</span> todo-app <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\</span>
@@ -173,16 +173,16 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 
 <p>PowerShell を利用している場合は以下のコマンドでした。</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
-  --network todo-app </span><span class="se">`</span><span class="s2">
-  -e MYSQL_HOST=mysql </span><span class="se">`</span><span class="s2">
-  -e MYSQL_USER=root </span><span class="se">`</span><span class="s2">
-  -e MYSQL_PASSWORD=secret </span><span class="se">`</span><span class="s2">
-  -e MYSQL_DB=todos </span><span class="se">`</span><span class="s2">
-  node:12-alpine </span><span class="se">`</span><span class="s2">
-  sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
-</span></code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">PS</span><span class="o">&gt;</span> docker run -dp 3000:3000 <span class="se">`</span>
+  -w /app -v <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app"</span> <span class="se">`</span>
+  --network todo-app <span class="se">`</span>
+  -e <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">`</span>
+  -e <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">`</span>
+  -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret <span class="se">`</span>
+  -e <span class="nv">MYSQL_DB</span><span class="o">=</span>todos <span class="se">`</span>
+  node:12-alpine <span class="se">`</span>
+  sh -c <span class="s2">"yarn install &amp;&amp; yarn run dev"</span>
+</code></pre></div></div>
 
 <ol>
   <li>
@@ -198,7 +198,7 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">image</code>定義のすぐ近くに<code class="language-plaintext highlighter-rouge">command</code>があるのが普通です。
+    <p><code class="highlighter-rouge">image</code>定義のすぐ近くに<code class="highlighter-rouge">command</code>があるのが普通です。
 ただし記述順はどちらを先にしてもかまいません。
 そこでさらにこの先に進みます。</p>
 
@@ -211,8 +211,8 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">-p 3000:3000</code>というコマンド部分を作ります。
-サービスに対する<code class="language-plaintext highlighter-rouge">ports</code>を定義するものです。
+    <p><code class="highlighter-rouge">-p 3000:3000</code>というコマンド部分を作ります。
+サービスに対する<code class="highlighter-rouge">ports</code>を定義するものです。
 ここでは <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#short-syntax-1">短い文法</a> で記述することにします。
 もちろん <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#long-syntax-1">長い文法</a> で記述することもできます。</p>
 
@@ -227,8 +227,8 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>次はワーキングディレクトリ（<code class="language-plaintext highlighter-rouge">-w /app</code>）とボリュームマッピング（<code class="language-plaintext highlighter-rouge">-v "$(pwd):/app"</code>）です。
-それぞれ<code class="language-plaintext highlighter-rouge">working_dir</code>と<code class="language-plaintext highlighter-rouge">volumes</code>の定義を行います。
+    <p>次はワーキングディレクトリ（<code class="highlighter-rouge">-w /app</code>）とボリュームマッピング（<code class="highlighter-rouge">-v "$(pwd):/app"</code>）です。
+それぞれ<code class="highlighter-rouge">working_dir</code>と<code class="highlighter-rouge">volumes</code>の定義を行います。
 ボリュームにも <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#short-syntax-3">短い文法</a> と <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#long-syntax-3">長い文法</a> があります。</p>
 
     <p>Docker Compose におけるボリューム定義の利点は、カレントディレクトリからの相対パスを利用できることです。</p>
@@ -248,7 +248,7 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
   </li>
   <li>
     <p>最後に環境変数設定を行います。
-これには<code class="language-plaintext highlighter-rouge">environment</code>キーを用います。</p>
+これには<code class="highlighter-rouge">environment</code>キーを用います。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
 
@@ -275,7 +275,7 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 <p>そこでいよいよ MySQL サービスの定義です。
 コンテナーにおいてかつて利用したコマンドは以下のものでした。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--network</span> todo-app <span class="nt">--network-alias</span> mysql <span class="se">\</span>
   <span class="nt">-v</span> todo-mysql-data:/var/lib/mysql <span class="se">\</span>
   <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
@@ -285,17 +285,17 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 
 <p>PowerShell を利用している場合は以下のコマンドでした。</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">PS</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
-</span><span class="w">  </span><span class="nx">mysql:5.7</span><span class="w">
-</span></code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">PS</span><span class="o">&gt;</span> docker run -d <span class="se">`</span>
+  --network todo-app --network-alias mysql <span class="se">`</span>
+  -v todo-mysql-data:/var/lib/mysql <span class="se">`</span>
+  -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">`</span>
+  -e <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">`</span>
+  mysql:5.7
+</code></pre></div></div>
 
 <ol>
   <li>
-    <p>新たなサービスを定義して、これを<code class="language-plaintext highlighter-rouge">mysql</code>と名づけます。
+    <p>新たなサービスを定義して、これを<code class="highlighter-rouge">mysql</code>と名づけます。
 これによって自動的にネットワークエイリアスが作られます。
 そしてこれまでと同様に利用イメージを指定します。</p>
 
@@ -310,9 +310,9 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
   </li>
   <li>
     <p>次はボリュームマッピングの定義です。
-<code class="language-plaintext highlighter-rouge">docker run</code>を実行してコンテナーを起動したときは、名前つきボリュームが自動生成されていました。
+<code class="highlighter-rouge">docker run</code>を実行してコンテナーを起動したときは、名前つきボリュームが自動生成されていました。
 しかし Compose を使って起動するときには、そのようにはなりません。
-まずボリュームの定義は、最上位項目として<code class="language-plaintext highlighter-rouge">volumes:</code>というセクションを設けて、サービス定義の中のマウントポイントをここに指定します。
+まずボリュームの定義は、最上位項目として<code class="highlighter-rouge">volumes:</code>というセクションを設けて、サービス定義の中のマウントポイントをここに指定します。
 単純にボリューム名だけを指定すれば、デフォルトのオプションが用いられるようになります。
 ただしここには <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#volume-configuration-reference">数多くのオプションが利用可能</a> です。</p>
 
@@ -352,7 +352,7 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
   </li>
 </ol>
 
-<p>ここまでに完成した<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>は以下のようになります。</p>
+<p>ここまでに完成した<code class="highlighter-rouge">docker-compose.yml</code>は以下のようになります。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
 
@@ -385,17 +385,17 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 
 <h2 id="run-the-application-stack">アプリケーションの起動</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルができたので実行してみましょう。</p>
+<p><code class="highlighter-rouge">docker-compose.yml</code>ファイルができたので実行してみましょう。</p>
 
 <ol>
   <li>
-    <p>アプリや DB のコンテナーが他に起動していないことをまず確認します（<code class="language-plaintext highlighter-rouge">docker ps</code>や<code class="language-plaintext highlighter-rouge">docker rm -f &lt;ids&gt;</code>）。</p>
+    <p>アプリや DB のコンテナーが他に起動していないことをまず確認します（<code class="highlighter-rouge">docker ps</code>や<code class="highlighter-rouge">docker rm -f &lt;ids&gt;</code>）。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker-compose up</code>コマンドを実行してアプリケーション全体を起動します。
-すべてをバックグラウンド実行とするため<code class="language-plaintext highlighter-rouge">-d</code>フラグをつけます。</p>
+    <p><code class="highlighter-rouge">docker-compose up</code>コマンドを実行してアプリケーション全体を起動します。
+すべてをバックグラウンド実行とするため<code class="highlighter-rouge">-d</code>フラグをつけます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>docker-compose up <span class="nt">-d</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker-compose up <span class="nt">-d</span>
 </code></pre></div>    </div>
 
     <p>実行すると以下のような出力が得られます。</p>
@@ -411,10 +411,10 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
  （だからこそ Compose ファイル内ではネットワーク定義を行わなかったのです。）</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker-compose logs -f</code>コマンドを実行してログを確認してみます。
+    <p><code class="highlighter-rouge">docker-compose logs -f</code>コマンドを実行してログを確認してみます。
 どちらのサービスのログも 1 つにまとめれてログ表示されています。
 これは処理タイミングに問題があった場合に、監視を行うのが大変便利になります。
-<code class="language-plaintext highlighter-rouge">-f</code>フラグはログ出力を「継続する」ものです。
+<code class="highlighter-rouge">-f</code>フラグはログ出力を「継続する」ものです。
 つまりログ発生するたびに順次出力が得られます。</p>
 
     <p>コマンドをすでに実行済みであると、以下のような出力となるはずです。</p>
@@ -427,7 +427,7 @@ Linux マシンを利用している方は <a href="/docs.docker.jp.onthefly/com
 
     <p>ログの各行にはサービス名が（よく色づけされて）表示されます。
  これによってメッセージを読み分けることができます。
- 特定サービスのログを確認したい場合は、ログコマンドの最後にサービス名をつける方法もあります（たとえば<code class="language-plaintext highlighter-rouge">docker-compose logs -f app</code>）。</p>
+ 特定サービスのログを確認したい場合は、ログコマンドの最後にサービス名をつける方法もあります（たとえば<code class="highlighter-rouge">docker-compose logs -f app</code>）。</p>
 
     <blockquote>
       <p><strong>ヒント： DB 準備を待ったアプリ起動</strong></p>
@@ -449,20 +449,20 @@ Node ベースのプロジェクトでは <a href="https://github.com/dwmkerr/wa
 
 <p>Docker ダッシュボードを見てみると、グループ名として <strong>app</strong> があります。
 これが Docker Compose における「プロジェクト名」であり、コンテナーをとりまとめるために利用されます。
-このプロジェクト名はデフォルトでは、単純に<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルが存在しているディレクトリ名になります。</p>
+このプロジェクト名はデフォルトでは、単純に<code class="highlighter-rouge">docker-compose.yml</code>ファイルが存在しているディレクトリ名になります。</p>
 
 <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-app-project-collapsed.png" alt="Docker ダッシュボード上の app プロジェクト" /></p>
 
 <p>app を展開して詳細表示すると、Compose ファイル内で定義した 2 つのコンテナーが表示されます。
 そこにつけられている名前にはルールがあります。
-それぞれ<code class="language-plaintext highlighter-rouge">&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>というパターンを持っています。
+それぞれ<code class="highlighter-rouge">&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>というパターンを持っています。
 ですからどのコンテナーがアプリであり、どれが MySQL データベースであるかは一目瞭然です。</p>
 
 <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-app-project-expanded.png" alt="Docker ダッシュボード上の app プロジェクトを展開" /></p>
 
 <h2 id="tear-it-all-down">すべての削除</h2>
 
-<p>すべてが不要になったら、単純に<code class="language-plaintext highlighter-rouge">docker-compose down</code>コマンドを実行します。
+<p>すべてが不要になったら、単純に<code class="highlighter-rouge">docker-compose down</code>コマンドを実行します。
 あるいは Docker ダッシュボード上であれば、trash can（ゴミ箱）アイコンをクリックします。
 コンテナーが停止してネットワークは削除されます。</p>
 
@@ -471,12 +471,12 @@ Node ベースのプロジェクトでは <a href="https://github.com/dwmkerr/wa
 
   <p>ボリュームの削除</p>
 
-  <p>Compose ファイル内で定めた名前つきボリュームは、<code class="language-plaintext highlighter-rouge">docker-compose down</code>を実行してもデフォルトでは削除 <strong>されません</strong>。
-ボリュームも削除したいなら<code class="language-plaintext highlighter-rouge">--volumes</code>フラグをつける必要があります。
+  <p>Compose ファイル内で定めた名前つきボリュームは、<code class="highlighter-rouge">docker-compose down</code>を実行してもデフォルトでは削除 <strong>されません</strong>。
+ボリュームも削除したいなら<code class="highlighter-rouge">--volumes</code>フラグをつける必要があります。
 Docker ダッシュボードではアプリを削除してもボリュームは削除 <strong>されません</strong>。</p>
 </blockquote>
 
-<p>すべてを削除したら、今度は別のプロジェクトに切り替えて<code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行します。
+<p>すべてを削除したら、今度は別のプロジェクトに切り替えて<code class="highlighter-rouge">docker-compose up</code>を実行します。
 ここからは新たなプロジェクトの開発者です。
 何ともはや簡単なこと。</p>
 

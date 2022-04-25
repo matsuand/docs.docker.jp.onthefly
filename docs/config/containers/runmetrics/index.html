@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-17 20:33:33 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ランタイムメトリックス | Docker ドキュメント</title>
   <meta name="description" content="Measure the behavior of running containers" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ランタイムメトリックス" />
   <meta property="og:description" content="Measure the behavior of running containers" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-17T20:33:33+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/runmetrics/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-17T20:33:33+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ランタイムメトリックス","description":"Measure the behavior of running containers","url":"https://docs.docker.com/config/containers/runmetrics/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,21 +107,21 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ランタイムメトリックス</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><h2 id="docker-stats">docker stats</h2>
+                        <section class="section"><h1>ランタイムメトリックス</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><h2 id="docker-stats">docker stats</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker stats</code>コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。
+<p><code class="highlighter-rouge">docker stats</code>コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。
 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。</p>
 
-<p>以下は<code class="language-plaintext highlighter-rouge">docker stats</code>コマンドの出力例です。</p>
+<p>以下は<code class="highlighter-rouge">docker stats</code>コマンドの出力例です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stats redis1 redis2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stats redis1 redis2
 <span class="go">
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O
 redis1              0.07%               796 KB / 64 MB        1.21%               788 B / 648 B       3.568 MB / 512 KB
 redis2              0.07%               2.746 MB / 64 MB      4.29%               1.266 KB / 648 B    12.4 MB / 0 B
 </span></code></pre></div></div>
 
-<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/stats/">docker stats</a> のリファレンスページでは、より詳細に<code class="language-plaintext highlighter-rouge">docker stats</code>コマンドについて説明しています。</p>
+<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/stats/">docker stats</a> のリファレンスページでは、より詳細に<code class="highlighter-rouge">docker stats</code>コマンドについて説明しています。</p>
 
 <h2 id="control-groups">コントロールグループ</h2>
 
@@ -131,23 +131,23 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 これは「純粋な」LXC コンテナーに関連しており、Docker のコンテナーにも関連します。</p>
 
 <p>コントロールグループは擬似ファイルシステムを通じて提供されます。
-最近のディストリビューションでは、このファイルシステムは<code class="language-plaintext highlighter-rouge">/sys/fs/cgroup</code>にあります。
+最近のディストリビューションでは、このファイルシステムは<code class="highlighter-rouge">/sys/fs/cgroup</code>にあります。
 このディレクトリの下には devices、freezer、blkio などのサブディレクトリが複数あります。
 これらのサブディレクトリが、独特の cgroup 階層を構成しています。</p>
 
-<p>かつてのシステムでは、コントロールグループが<code class="language-plaintext highlighter-rouge">/cgroup</code>にマウントされていて、わかりやすい階層構造にはなっていませんでした。
+<p>かつてのシステムでは、コントロールグループが<code class="highlighter-rouge">/cgroup</code>にマウントされていて、わかりやすい階層構造にはなっていませんでした。
 その場合、サブディレクトリそのものを確認していくのではなく、サブディレクトリ内にある数多くのファイルを見渡して、そのディレクトリが既存のコンテナーに対応するものであろう、と確認していくしかありません。</p>
 
 <p>コントロールグループがどこにマウントされているかを確認するには、以下を実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>cgroup /proc/mounts
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">grep </span>cgroup /proc/mounts
 </code></pre></div></div>
 
 <h3 id="enumerate-cgroups">cgroups の確認</h3>
 
 <p>The file layout of cgroups is significantly different between v1 and v2.</p>
 
-<p>If <code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> is present on your system, you are using v2,
+<p>If <code class="highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> is present on your system, you are using v2,
 otherwise you are using v1.
 Refer to the subsection that corresponds to your cgroup version.</p>
 
@@ -159,33 +159,33 @@ Refer to the subsection that corresponds to your cgroup version.</p>
 </ul>
 
 <h4 id="cgroup-v1">cgroup v1</h4>
-<p><code class="language-plaintext highlighter-rouge">/proc/cgroups</code>を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが含まれているのがわかります。</p>
+<p><code class="highlighter-rouge">/proc/cgroups</code>を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが含まれているのがわかります。</p>
 
-<p>また<code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/cgroup</code>を確認してみれば、1 つのプロセスがどのコントロールグループに属しているかがわかります。
+<p>また<code class="highlighter-rouge">/proc/&lt;pid&gt;/cgroup</code>を確認してみれば、1 つのプロセスがどのコントロールグループに属しているかがわかります。
 そのときのコントロールグループは、階層構造のルートとなるマウントポイントからの相対パスで表わされます。
-<code class="language-plaintext highlighter-rouge">/</code>が表示されていれば、そのプロセスにはグループが割り当てられていません。
-一方<code class="language-plaintext highlighter-rouge">/lxc/pumpkin</code>といった表示になっていれば、そのプロセスは<code class="language-plaintext highlighter-rouge">pumpkin</code>という名のコンテナーのメンバーであることがわかります。</p>
+<code class="highlighter-rouge">/</code>が表示されていれば、そのプロセスにはグループが割り当てられていません。
+一方<code class="highlighter-rouge">/lxc/pumpkin</code>といった表示になっていれば、そのプロセスは<code class="highlighter-rouge">pumpkin</code>という名のコンテナーのメンバーであることがわかります。</p>
 
 <h4 id="cgroup-v2">cgroup v2</h4>
 
-<p>On cgroup v2 hosts, the content of <code class="language-plaintext highlighter-rouge">/proc/cgroups</code> isn’t meaningful.
-See <code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> to the available controllers.</p>
+<p>On cgroup v2 hosts, the content of <code class="highlighter-rouge">/proc/cgroups</code> isn’t meaningful.
+See <code class="highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> to the available controllers.</p>
 
 <h3 id="changing-cgroup-version">Changing cgroup version</h3>
 
 <p>Changing cgroup version requires rebooting the entire system.</p>
 
-<p>On systemd-based systems, cgroup v2 can be enabled by adding <code class="language-plaintext highlighter-rouge">systemd.unified_cgroup_hierarchy=1</code>
+<p>On systemd-based systems, cgroup v2 can be enabled by adding <code class="highlighter-rouge">systemd.unified_cgroup_hierarchy=1</code>
 to the kernel cmdline.
-To revert the cgroup version to v1, you need to set <code class="language-plaintext highlighter-rouge">systemd.unified_cgroup_hierarchy=0</code> instead.</p>
+To revert the cgroup version to v1, you need to set <code class="highlighter-rouge">systemd.unified_cgroup_hierarchy=0</code> instead.</p>
 
-<p>If <code class="language-plaintext highlighter-rouge">grubby</code> command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:</p>
+<p>If <code class="highlighter-rouge">grubby</code> command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>grubby <span class="nt">--update-kernel</span><span class="o">=</span>ALL <span class="nt">--args</span><span class="o">=</span><span class="s2">"systemd.unified_cgroup_hierarchy=1"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>grubby <span class="nt">--update-kernel</span><span class="o">=</span>ALL <span class="nt">--args</span><span class="o">=</span><span class="s2">"systemd.unified_cgroup_hierarchy=1"</span>
 </code></pre></div></div>
 
-<p>If <code class="language-plaintext highlighter-rouge">grubby</code> command is not available, edit the <code class="language-plaintext highlighter-rouge">GRUB_CMDLINE_LINUX</code> line in <code class="language-plaintext highlighter-rouge">/etc/default/grub</code>
-and run <code class="language-plaintext highlighter-rouge">sudo update-grub</code>.</p>
+<p>If <code class="highlighter-rouge">grubby</code> command is not available, edit the <code class="highlighter-rouge">GRUB_CMDLINE_LINUX</code> line in <code class="highlighter-rouge">/etc/default/grub</code>
+and run <code class="highlighter-rouge">sudo update-grub</code>.</p>
 
 <h3 id="running-docker-on-cgroup-v2">Running Docker on cgroup v2</h3>
 
@@ -199,27 +199,27 @@ Running Docker on cgroup v2 also requires the following conditions to be satisfi
 
 <p>Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:</p>
 <ul>
-  <li>The default cgroup driver (<code class="language-plaintext highlighter-rouge">dockerd --exec-opt native.cgroupdriver</code>) is “systemd” on v2, “cgroupfs” on v1.</li>
-  <li>The default cgroup namespace mode (<code class="language-plaintext highlighter-rouge">docker run --cgroupns</code>) is “private” on v2, “host” on v1.</li>
-  <li>The <code class="language-plaintext highlighter-rouge">docker run</code> flags <code class="language-plaintext highlighter-rouge">--oom-kill-disable</code> and <code class="language-plaintext highlighter-rouge">--kernel-memory</code> are discarded on v2.</li>
+  <li>The default cgroup driver (<code class="highlighter-rouge">dockerd --exec-opt native.cgroupdriver</code>) is “systemd” on v2, “cgroupfs” on v1.</li>
+  <li>The default cgroup namespace mode (<code class="highlighter-rouge">docker run --cgroupns</code>) is “private” on v2, “host” on v1.</li>
+  <li>The <code class="highlighter-rouge">docker run</code> flags <code class="highlighter-rouge">--oom-kill-disable</code> and <code class="highlighter-rouge">--kernel-memory</code> are discarded on v2.</li>
 </ul>
 
 <h3 id="find-the-cgroup-for-a-given-container">特定コンテナーに対応する cgroup の検索</h3>
 
 <p>各コンテナーでは、各階層内に 1 つの cgroup が生成されます。
 かつてのシステムにおいて、ユーザーランドツール LXC の古い版を利用している場合、cgroup 名はそのままコンテナー名になっています。
-より新しい LXC ツールでの cgroup 名は<code class="language-plaintext highlighter-rouge">lxc/&lt;コンテナー名&gt;</code>となります。</p>
+より新しい LXC ツールでの cgroup 名は<code class="highlighter-rouge">lxc/&lt;コンテナー名&gt;</code>となります。</p>
 
 <p>cgroup を利用する Docker コンテナーにおいて、コンテナー名は、コンテナーの完全 ID か、あるいは長めの ID となります。
-<code class="language-plaintext highlighter-rouge">docker ps</code>によってコンテナーが ae836c95b4c3 のように示されていたら、長めの ID はたとえば<code class="language-plaintext highlighter-rouge">ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79</code>のようなものになります。
-これは<code class="language-plaintext highlighter-rouge">docker inspect</code>を用いるか、あるいは<code class="language-plaintext highlighter-rouge">docker ps --no-trunc</code>とすれば確認することができます。</p>
+<code class="highlighter-rouge">docker ps</code>によってコンテナーが ae836c95b4c3 のように示されていたら、長めの ID はたとえば<code class="highlighter-rouge">ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79</code>のようなものになります。
+これは<code class="highlighter-rouge">docker inspect</code>を用いるか、あるいは<code class="highlighter-rouge">docker ps --no-trunc</code>とすれば確認することができます。</p>
 
 <p>Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、以下のパスを見ます。</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code>、cgroup v1、<code class="language-plaintext highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
-  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/memory/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v1、<code class="language-plaintext highlighter-rouge">systemd</code>ドライバー利用時。</li>
-  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/docker/&lt;longid/&gt;</code>、cgroup v2、<code class="language-plaintext highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
-  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v2、<code class="language-plaintext highlighter-rouge">systemd</code>ドライバー利用時。</li>
+  <li><code class="highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code>、cgroup v1、<code class="highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
+  <li><code class="highlighter-rouge">/sys/fs/cgroup/memory/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v1、<code class="highlighter-rouge">systemd</code>ドライバー利用時。</li>
+  <li><code class="highlighter-rouge">/sys/fs/cgroup/docker/&lt;longid/&gt;</code>、cgroup v2、<code class="highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
+  <li><code class="highlighter-rouge">/sys/fs/cgroup/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v2、<code class="highlighter-rouge">systemd</code>ドライバー利用時。</li>
 </ul>
 
 <h3 id="metrics-from-cgroups-memory-cpu-block-io">cgroups の各メトリックス、メモリ、CPU、ブロック I/O</h3>
@@ -233,18 +233,18 @@ For further information about cgroup v2, refer to <a href="https://www.kernel.or
 
 <p>各サブシステム（メモリ、CPU、ブロック I/O）に対しては、擬似ファイルシステムが存在し、そこに統計情報が含まれます。</p>
 
-<h4 id="memory-metrics-memorystat">メモリメトリックス: <code class="language-plaintext highlighter-rouge">memory.stat</code></h4>
+<h4 id="memory-metrics-memorystat">メモリメトリックス: <code class="highlighter-rouge">memory.stat</code></h4>
 
 <p>メモリメトリックスは cgroup の「memory」にあります。
 メモリコントロールグループには多少のオーバーヘッドがあります。
 ホスト上のメモリ利用量をきめ細かく算出しているためです。
 したがって各種ディストリビューションの多くでは、デフォルトでこれを無効にしています。
-これを有効にする方法は、一般的にはカーネルのコマンドラインパラメーター<code class="language-plaintext highlighter-rouge">cgroup_enable=memory swapaccount=1</code>といったものを追加するだけです。</p>
+これを有効にする方法は、一般的にはカーネルのコマンドラインパラメーター<code class="highlighter-rouge">cgroup_enable=memory swapaccount=1</code>といったものを追加するだけです。</p>
 
-<p>メトリックスは擬似ファイルシステム<code class="language-plaintext highlighter-rouge">memory.stat</code>内にあります。
+<p>メトリックスは擬似ファイルシステム<code class="highlighter-rouge">memory.stat</code>内にあります。
 これは以下のように表わされます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cache 11492564992
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cache 11492564992
 rss 1930993664
 mapped_file 306728960
 pgpgin 406632648
@@ -274,14 +274,14 @@ total_active_file 4489052160
 total_unevictable 32768
 </code></pre></div></div>
 
-<p>前半部分（<code class="language-plaintext highlighter-rouge">total_</code>が先頭につくものを除く）は cgroup 内のプロセスに対応する統計情報であり、サブ crgoup は除くものです。
-後半部分（<code class="language-plaintext highlighter-rouge">total_</code>が先頭につくもの）は同様ですが、ただしサブ cgroup を含むものです。</p>
+<p>前半部分（<code class="highlighter-rouge">total_</code>が先頭につくものを除く）は cgroup 内のプロセスに対応する統計情報であり、サブ crgoup は除くものです。
+後半部分（<code class="highlighter-rouge">total_</code>が先頭につくもの）は同様ですが、ただしサブ cgroup を含むものです。</p>
 
 <p>メトリックスの中には「メーター」つまり増減を繰り返す値表記になっているものがあります。
-たとえば<code class="language-plaintext highlighter-rouge">swap</code>は、cgroup のメンバーによって利用されるスワップ容量の合計です。
+たとえば<code class="highlighter-rouge">swap</code>は、cgroup のメンバーによって利用されるスワップ容量の合計です。
 この他に「カウンター」となっているもの、つまり数値がカウントアップされていくものがあります。
 これは特定のイベントがどれだけ発生したかを表わします。
-たとえば<code class="language-plaintext highlighter-rouge">pgfault</code>は cgroup の生成以降に、どれだけページフォールトが発生したかを表わします。</p>
+たとえば<code class="highlighter-rouge">pgfault</code>は cgroup の生成以降に、どれだけページフォールトが発生したかを表わします。</p>
 
 <style>table tr > td:first-child { white-space: nowrap;}</style>
 
@@ -295,7 +295,7 @@ total_unevictable 32768
   <tbody>
     <tr>
       <td><strong>cache</strong></td>
-      <td>このコントロールグループのプロセスによるメモリ使用量です。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの <code class="language-plaintext highlighter-rouge">open</code>、<code class="language-plaintext highlighter-rouge">read</code>、<code class="language-plaintext highlighter-rouge">write</code>）利用時に発生し、（<code class="language-plaintext highlighter-rouge">mmap</code>を用いた）マップファイルの場合も同様です。<code class="language-plaintext highlighter-rouge">tmpfs</code>によるメモリ使用もここに含まれますが、理由は明らかではありません。</td>
+      <td>このコントロールグループのプロセスによるメモリ使用量です。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの <code class="highlighter-rouge">open</code>、<code class="highlighter-rouge">read</code>、<code class="highlighter-rouge">write</code>）利用時に発生し、（<code class="highlighter-rouge">mmap</code>を用いた）マップファイルの場合も同様です。<code class="highlighter-rouge">tmpfs</code>によるメモリ使用もここに含まれますが、理由は明らかではありません。</td>
     </tr>
     <tr>
       <td><strong>rss</strong></td>
@@ -307,7 +307,7 @@ total_unevictable 32768
     </tr>
     <tr>
       <td><strong>pgfault</strong>, <strong>pgmajfault</strong></td>
-      <td>cgroup のプロセスにおいて発生した「ページフォールト」、「メジャーフォールト」の回数を表わします。ページフォールトは、プロセスがアクセスした仮想メモリスペースの一部が、存在していないかアクセス拒否された場合に発生します。存在しないというのは、そのプロセスにバグがあり、不正なアドレスにアクセスしようとしたことを表わします（<code class="language-plaintext highlighter-rouge">SIGSEGV</code>シグナルが送信され、<code class="language-plaintext highlighter-rouge">Segmentation fault</code>といういつものメッセージを受けたとたんに、プロセスが停止されます）。アクセス拒否されるのは、スワップしたメモリ領域、あるいはマップファイルに対応するメモリ領域を読み込もうとしたときに発生します。この場合、カーネルがディスクからページを読み込み、CPU のメモリアクセスを成功させます。またコピーオンライトメモリ領域へプロセスが書き込みを行う場合にも発生することがあります。同様にカーネルがプロセスの切り替え（preemption）を行ってからメモリページを複製し、ページ内のプロセス自体のコピーに対して書き込み処理を復元します。「メジャーフォールト」はカーネルがディスクからデータを読み込む必要がある際に発生します。既存ページを複製する場合や空のページを割り当てる場合は、通常の（つまり「マイナー」の）フォールトになります。</td>
+      <td>cgroup のプロセスにおいて発生した「ページフォールト」、「メジャーフォールト」の回数を表わします。ページフォールトは、プロセスがアクセスした仮想メモリスペースの一部が、存在していないかアクセス拒否された場合に発生します。存在しないというのは、そのプロセスにバグがあり、不正なアドレスにアクセスしようとしたことを表わします（<code class="highlighter-rouge">SIGSEGV</code>シグナルが送信され、<code class="highlighter-rouge">Segmentation fault</code>といういつものメッセージを受けたとたんに、プロセスが停止されます）。アクセス拒否されるのは、スワップしたメモリ領域、あるいはマップファイルに対応するメモリ領域を読み込もうとしたときに発生します。この場合、カーネルがディスクからページを読み込み、CPU のメモリアクセスを成功させます。またコピーオンライトメモリ領域へプロセスが書き込みを行う場合にも発生することがあります。同様にカーネルがプロセスの切り替え（preemption）を行ってからメモリページを複製し、ページ内のプロセス自体のコピーに対して書き込み処理を復元します。「メジャーフォールト」はカーネルがディスクからデータを読み込む必要がある際に発生します。既存ページを複製する場合や空のページを割り当てる場合は、通常の（つまり「マイナー」の）フォールトになります。</td>
     </tr>
     <tr>
       <td><strong>swap</strong></td>
@@ -315,7 +315,7 @@ total_unevictable 32768
     </tr>
     <tr>
       <td><strong>active_anon</strong>、<strong>inactive_anon</strong></td>
-      <td>カーネルによって <strong>アクティブ</strong> か <strong>非アクティブ</strong> のいずれかに特定される <strong>匿名</strong> メモリの使用量です。「匿名」 メモリとは、ディスクページにひもづいて <strong>いない</strong> メモリのことです。別の表現でいえば、上で示した rss カウンターと同等のものです。正確な rss カウンターの定義式は、<strong>active_anon</strong> ＋ <strong>inactive_anon</strong> － <strong>tmpfs</strong> です。（このコントロールグループによってマウントされている<code class="language-plaintext highlighter-rouge">tmpfs</code>ファイルシステムが利用するメモリ使用量のことです。）では “アクティブ” と “非アクティブ” の違いは？  ページは初めは “アクティブ” です。一定間隔でカーネルがメモリを走査し、一部に “非アクティブ” というタグをつけます。再度アクセスが行われると、すぐに “アクティブ” というタグにつけかえられます。カーネルがほぼメモリ不足に陥って、ディスクへのスワップが必要になると、カーネルは “非アクティブ” ページをスワップします。</td>
+      <td>カーネルによって <strong>アクティブ</strong> か <strong>非アクティブ</strong> のいずれかに特定される <strong>匿名</strong> メモリの使用量です。「匿名」 メモリとは、ディスクページにひもづいて <strong>いない</strong> メモリのことです。別の表現でいえば、上で示した rss カウンターと同等のものです。正確な rss カウンターの定義式は、<strong>active_anon</strong> ＋ <strong>inactive_anon</strong> － <strong>tmpfs</strong> です。（このコントロールグループによってマウントされている<code class="highlighter-rouge">tmpfs</code>ファイルシステムが利用するメモリ使用量のことです。）では “アクティブ” と “非アクティブ” の違いは？  ページは初めは “アクティブ” です。一定間隔でカーネルがメモリを走査し、一部に “非アクティブ” というタグをつけます。再度アクセスが行われると、すぐに “アクティブ” というタグにつけかえられます。カーネルがほぼメモリ不足に陥って、ディスクへのスワップが必要になると、カーネルは “非アクティブ” ページをスワップします。</td>
     </tr>
     <tr>
       <td><strong>active_file</strong>, <strong>inactive_file</strong></td>
@@ -323,7 +323,7 @@ total_unevictable 32768
     </tr>
     <tr>
       <td><strong>unevictable</strong></td>
-      <td>取り出し要求ができないメモリ容量のことです。一般には<code class="language-plaintext highlighter-rouge">mlock</code>によって「ロックされた」メモリとされます。暗号フレームワークにおいて利用されることがあり、秘密鍵や機密情報がディスクにスワップされないようにするものです。</td>
+      <td>取り出し要求ができないメモリ容量のことです。一般には<code class="highlighter-rouge">mlock</code>によって「ロックされた」メモリとされます。暗号フレームワークにおいて利用されることがあり、秘密鍵や機密情報がディスクにスワップされないようにするものです。</td>
     </tr>
     <tr>
       <td><strong>memory_limit</strong>, <strong>memsw_limit</strong></td>
@@ -340,30 +340,30 @@ total_unevictable 32768
 そうすると他方の cgroup におけるメモリ使用量が増大してしまうことになります。
 両者のメモリページに対する使用コストは、もう共有されていないからです。</p>
 
-<h3 id="cpu-metrics-cpuacctstat">CPU メトリックス: <code class="language-plaintext highlighter-rouge">cpuacct.stat</code></h3>
+<h3 id="cpu-metrics-cpuacctstat">CPU メトリックス: <code class="highlighter-rouge">cpuacct.stat</code></h3>
 
 <p>これまでメモリメトリックスについて説明してきました。
 これ以外のものは比較的簡単です。
-CPU メトリックスは<code class="language-plaintext highlighter-rouge">cpuacct</code>コントローラー内にあります。</p>
+CPU メトリックスは<code class="highlighter-rouge">cpuacct</code>コントローラー内にあります。</p>
 
-<p>各コンテナーに対応して擬似ファイル<code class="language-plaintext highlighter-rouge">cpuacct.stat</code>があり、コンテナープロセスの CPU 使用時間が積算されています。
-そしてこれが<code class="language-plaintext highlighter-rouge">user</code>時間と<code class="language-plaintext highlighter-rouge">system</code>時間に割り振られています。
+<p>各コンテナーに対応して擬似ファイル<code class="highlighter-rouge">cpuacct.stat</code>があり、コンテナープロセスの CPU 使用時間が積算されています。
+そしてこれが<code class="highlighter-rouge">user</code>時間と<code class="highlighter-rouge">system</code>時間に割り振られています。
 両者の違いは以下のとおりです。</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">user</code>時間は、プロセスが CPU を直接制御して、プロセスコードを実行している時間のことです。</li>
-  <li><code class="language-plaintext highlighter-rouge">system</code>時間は、カーネルがプロセスのためにシステムコールを実行している時間のことです。</li>
+  <li><code class="highlighter-rouge">user</code>時間は、プロセスが CPU を直接制御して、プロセスコードを実行している時間のことです。</li>
+  <li><code class="highlighter-rouge">system</code>時間は、カーネルがプロセスのためにシステムコールを実行している時間のことです。</li>
 </ul>
 
 <p>この時間は 1/100 秒の tick という周期で表わされます。
 別名「user jiffies」ともいいます。
-1 秒には<code class="language-plaintext highlighter-rouge">USER_HZ</code>分の「<strong>jiffies</strong>」があり、x86 システムでは<code class="language-plaintext highlighter-rouge">USER_HZ</code>は 100 です。
+1 秒には<code class="highlighter-rouge">USER_HZ</code>分の「<strong>jiffies</strong>」があり、x86 システムでは<code class="highlighter-rouge">USER_HZ</code>は 100 です。
 これまでの経緯として、これは 1 秒に割り当てられるスケジューラー「ticks」の数です。
 ただしそれ以上に頻繁にスケジューリングされることや、<a href="https://lwn.net/Articles/549580/">tickless kernels</a> があり、これらは ticks 数は関係がなくなります。</p>
 
 <h4 id="block-io-metrics">ブロック I/O メトリックス</h4>
 
-<p>ブロック I/O は<code class="language-plaintext highlighter-rouge">blkio</code>コントローラーにおいて計算されます。
+<p>ブロック I/O は<code class="highlighter-rouge">blkio</code>コントローラーにおいて計算されます。
 さまざまなメトリックスが、さまざまなファイルにわたって保持されています。
 より詳細は、カーネルドキュメント内にある <a href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt">blkio-controller</a> ファイルに記述されていますが、以下では最も関連のあるものを簡潔に示します。</p>
 
@@ -402,9 +402,9 @@ CPU メトリックスは<code class="language-plaintext highlighter-rouge">cpua
 カーネルは、プロセスグループとの間で送受信されるパケットやバイトに関して、メトリックスを収集します。
 ただこのメトリックスはあまり役に立つものではありません。
 欲しいのはインターフェースごとのメトリックスであるはずです。
-（なぜならメトリックスでは<code class="language-plaintext highlighter-rouge">lo</code>インターフェースに発生するトラフィックはカウントされません。）
+（なぜならメトリックスでは<code class="highlighter-rouge">lo</code>インターフェースに発生するトラフィックはカウントされません。）
 もっとも 1 つの cgroup は、複数のネットワーク名前空間に属することができるため、そのメトリックスを計算することは、より難しくなります。
-複数のネットワーク名前空間になるということは、<code class="language-plaintext highlighter-rouge">lo</code>インターフェースが複数あるということであり、場合によっては複数の<code class="language-plaintext highlighter-rouge">eth0</code>インターフェースを持つこともあります。
+複数のネットワーク名前空間になるということは、<code class="highlighter-rouge">lo</code>インターフェースが複数あるということであり、場合によっては複数の<code class="highlighter-rouge">eth0</code>インターフェースを持つこともあります。
 コントロールグループを用いてネットワークメトリックスを簡単に集めることができないのは、こういった理由によります。</p>
 
 <p>そのかわり、ネットワークメトリックスは別の情報から収集することができます。</p>
@@ -415,82 +415,82 @@ CPU メトリックスは<code class="language-plaintext highlighter-rouge">cpua
 
 <p>たとえばウェブサーバー上におけるアウトバウンド HTTP トラフィックを計算するルールを設定することができます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-I</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">--sport</span> 80
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> iptables <span class="nt">-I</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">--sport</span> 80
 </code></pre></div></div>
 
-<p>ここでは<code class="language-plaintext highlighter-rouge">-j</code>フラグや<code class="language-plaintext highlighter-rouge">-g</code>フラグは用いません。
+<p>ここでは<code class="highlighter-rouge">-j</code>フラグや<code class="highlighter-rouge">-g</code>フラグは用いません。
 このルールがパケットをカウントし、後続のルールの処理を行います。</p>
 
 <p>このカウンター値は以下のようにして確認できます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>iptables <span class="nt">-nxvL</span> OUTPUT
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> iptables <span class="nt">-nxvL</span> OUTPUT
 </code></pre></div></div>
 
-<p>技術的なことだけで言えば<code class="language-plaintext highlighter-rouge">-n</code>は必要ありません。
+<p>技術的なことだけで言えば<code class="highlighter-rouge">-n</code>は必要ありません。
 DNS の逆引きを避けるためのものですが、ここでの作業ではおそらく不要です。</p>
 
 <p>カウンターにはパケット数とバイト数があります。
-このトラフィックのようなメトリックスを設定したい場合は、<code class="language-plaintext highlighter-rouge">for</code>ループを実行して、コンテナー IP アドレスに対して 2 つの<code class="language-plaintext highlighter-rouge">iptables</code>ルールを<code class="language-plaintext highlighter-rouge">FORWARD</code>チェーンに追加します（1 方向に対して 1 つ）。
+このトラフィックのようなメトリックスを設定したい場合は、<code class="highlighter-rouge">for</code>ループを実行して、コンテナー IP アドレスに対して 2 つの<code class="highlighter-rouge">iptables</code>ルールを<code class="highlighter-rouge">FORWARD</code>チェーンに追加します（1 方向に対して 1 つ）。
 これにより NAT 層を通過するトラフィックのみ計測されます。
 ユーザーランドプロキシーを通過するトラフィックを計測する場合も、ルールを追加する必要があります。</p>
 
 <p>これを行ったら、カウンターを定期的に確認することになります。
-<code class="language-plaintext highlighter-rouge">collectd</code>を使ってみるのであれば、iptables のカウンター情報を自動的に収集してくれる <a href="https://collectd.org/wiki/index.php/Table_of_Plugins">便利なプラグイン</a> があります。</p>
+<code class="highlighter-rouge">collectd</code>を使ってみるのであれば、iptables のカウンター情報を自動的に収集してくれる <a href="https://collectd.org/wiki/index.php/Table_of_Plugins">便利なプラグイン</a> があります。</p>
 
 <h4 id="interface-level-counters">インターフェースレベルのカウンター</h4>
 
 <p>各コンテナーには仮想イーサネットインターフェースがあるので、このインターフェースの TX および RX カウンターを直接確認したいかもしれません。
-各コンテナーは、ホスト上の仮想イーサネットインターフェースに関連づけられていて、その名称は<code class="language-plaintext highlighter-rouge">vethKk8Zqi</code>などとなっています。
+各コンテナーは、ホスト上の仮想イーサネットインターフェースに関連づけられていて、その名称は<code class="highlighter-rouge">vethKk8Zqi</code>などとなっています。
 もっともどのコンテナーに対して、どのインターフェースが対応しているかを判別するのは、残念ながら困難です。</p>
 
 <p>今のところ、メトリックスを確認する一番の方法は、<strong>そのコンテナー内部から</strong> 確認することです。
 これを実現する方法は、<strong>ip netns を巧みに</strong> 利用します。
 これを使えば、コンテナーのネットワーク名前空間内に、ホスト環境からモジュールを実行させることができます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">ip-netns exec</code>コマンドはどのようなネットワーク名前空間内においても、（ホスト内に存在する）プログラムなら何でも実行することができ、プロセスからその状況を確認することができます。
+<p><code class="highlighter-rouge">ip-netns exec</code>コマンドはどのようなネットワーク名前空間内においても、（ホスト内に存在する）プログラムなら何でも実行することができ、プロセスからその状況を確認することができます。
 つまりコンテナーのネットワーク名前空間内に、ホストから入ることができるということです。
 ただしコンテナーからは、ホストや別のコンテナーにはアクセスできません。
 サブコンテナーであれば、互いに通信することができます。</p>
 
 <p>このコマンドの正確な書式は以下のとおりです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec</span> &lt;nsname&gt; &lt;command...&gt;
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ip netns <span class="nb">exec</span> &lt;nsname&gt; &lt;command...&gt;
 </code></pre></div></div>
 
 <p>たとえば以下のように実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec </span>mycontainer netstat <span class="nt">-i</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ip netns <span class="nb">exec </span>mycontainer netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">ip netns</code>コマンドは、名前空間の擬似ファイルからコンテナー「mycontainer」を探します。
-各プロセスは 1 つのネットワーク名前空間、1 つの PID 名前空間、1 つの<code class="language-plaintext highlighter-rouge">mnt</code>名前空間、といったものに属します。
-これらの名前空間は<code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/ns/</code>の下に実現されます。
-たとえば PID が 42 であるネットワーク名前空間は、擬似ファイル<code class="language-plaintext highlighter-rouge">/proc/42/ns/net</code>として実現されます。</p>
+<p><code class="highlighter-rouge">ip netns</code>コマンドは、名前空間の擬似ファイルからコンテナー「mycontainer」を探します。
+各プロセスは 1 つのネットワーク名前空間、1 つの PID 名前空間、1 つの<code class="highlighter-rouge">mnt</code>名前空間、といったものに属します。
+これらの名前空間は<code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/</code>の下に実現されます。
+たとえば PID が 42 であるネットワーク名前空間は、擬似ファイル<code class="highlighter-rouge">/proc/42/ns/net</code>として実現されます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">ip netns exec mycontainer ...</code>が実行されるとき、<code class="language-plaintext highlighter-rouge">/var/run/netns/mycontainer</code>が擬似ファイルの 1 つであるとみなされます。
+<p><code class="highlighter-rouge">ip netns exec mycontainer ...</code>が実行されるとき、<code class="highlighter-rouge">/var/run/netns/mycontainer</code>が擬似ファイルの 1 つであるとみなされます。
 （シンボリックリンクが張られています。）</p>
 
 <p>言い換えると、コンテナーのネットワーク名前空間内にてコマンドを実行するためには、以下のことが必要になります。</p>
 
 <ul>
   <li>調査したい対象のコンテナー内部に動作している、いずれかのプロセスの PID を調べます。</li>
-  <li><code class="language-plaintext highlighter-rouge">/var/run/netns/&lt;somename&gt;</code>から<code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code>へのシンボリックリンクを生成します。</li>
-  <li><code class="language-plaintext highlighter-rouge">ip netns exec &lt;somename&gt; ....</code>を実行します。</li>
+  <li><code class="highlighter-rouge">/var/run/netns/&lt;somename&gt;</code>から<code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code>へのシンボリックリンクを生成します。</li>
+  <li><code class="highlighter-rouge">ip netns exec &lt;somename&gt; ....</code>を実行します。</li>
 </ul>
 
 <p>ネットワーク使用量の計測を行おうとしているコンテナー内部において、実行されているプロセスがどの cgroup に属しているかを探し出すには <a href="#enumerate-cgroups">cgroups の確認</a> を参照してください。
-その方法に従って、<code class="language-plaintext highlighter-rouge">tasks</code>という名前の擬似ファイルを調べます。
+その方法に従って、<code class="highlighter-rouge">tasks</code>という名前の擬似ファイルを調べます。
 その擬似ファイル内には cgroup 内の（つまりコンテナー内の） PID がすべて示されています。
 そのうちの 1 つを取り出して扱います。</p>
 
-<p>環境変数<code class="language-plaintext highlighter-rouge">$CID</code>にはコンテナーの「短めの ID」が設定されているとします。
+<p>環境変数<code class="highlighter-rouge">$CID</code>にはコンテナーの「短めの ID」が設定されているとします。
 これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">TASKS</span><span class="o">=</span>/sys/fs/cgroup/devices/docker/<span class="nv">$CID</span><span class="k">*</span>/tasks
-<span class="gp">$</span><span class="w"> </span><span class="nv">PID</span><span class="o">=</span><span class="si">$(</span><span class="nb">head</span> <span class="nt">-n</span> 1 <span class="nv">$TASKS</span><span class="si">)</span>
-<span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> /var/run/netns
-<span class="gp">$</span><span class="w"> </span><span class="nb">ln</span> <span class="nt">-sf</span> /proc/<span class="nv">$PID</span>/ns/net /var/run/netns/<span class="nv">$CID</span>
-<span class="gp">$</span><span class="w"> </span>ip netns <span class="nb">exec</span> <span class="nv">$CID</span> netstat <span class="nt">-i</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">TASKS</span><span class="o">=</span>/sys/fs/cgroup/devices/docker/<span class="nv">$CID</span><span class="k">*</span>/tasks
+<span class="gp">$</span> <span class="nv">PID</span><span class="o">=</span><span class="k">$(</span>head <span class="nt">-n</span> 1 <span class="nv">$TASKS</span><span class="k">)</span>
+<span class="gp">$</span> mkdir <span class="nt">-p</span> /var/run/netns
+<span class="gp">$</span> ln <span class="nt">-sf</span> /proc/<span class="nv">$PID</span>/ns/net /var/run/netns/<span class="nv">$CID</span>
+<span class="gp">$</span> ip netns <span class="nb">exec</span> <span class="nv">$CID</span> netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
 <h2 id="tips-for-high-performance-metric-collection">詳細なメトリックスを収集するためのヒント</h2>
@@ -500,10 +500,10 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
 
 <p>1 つのプロセスを作り出してメトリックスを収集する方法をここに示します。
 メトリックスを収集するプログラムを C 言語（あるいは低レベルシステムコールを実行できる言語）で記述する必要があります。
-利用するのは特別なシステムコール<code class="language-plaintext highlighter-rouge">setns()</code>です。
+利用するのは特別なシステムコール<code class="highlighter-rouge">setns()</code>です。
 これはその時点でのプロセスを、任意の名前空間に参加させることができます。
 そこでは、その名前空間に応じた擬似ファイルへのファイルディスクリプターをオープンしておくことが必要とされます。
-（擬似ファイルは<code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code>にあることを思い出してください。）</p>
+（擬似ファイルは<code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code>にあることを思い出してください。）</p>
 
 <p>ただしこれは本当のことではありません。
 ファイルディスクリプターはオープンのままにしないでください。
@@ -517,10 +517,10 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
 <p>リアルタイムにメトリックスを収集する、ということに気づかない方もいます。
 しかしコンテナーがそこにあれば、CPU、メモリなどをどれだけ利用しているかを知りたくなります。</p>
 
-<p>Docker は<code class="language-plaintext highlighter-rouge">lxc-start</code>によって処理を行うため、リアルタイムなメトリックス収集は困難です。
-<code class="language-plaintext highlighter-rouge">lxc-start</code>が自身の処理の後に、まわりをきれいにしてしまうためです。
+<p>Docker は<code class="highlighter-rouge">lxc-start</code>によって処理を行うため、リアルタイムなメトリックス収集は困難です。
+<code class="highlighter-rouge">lxc-start</code>が自身の処理の後に、まわりをきれいにしてしまうためです。
 メトリックスの収集は、一定間隔をおいて取得するのが、より簡単な方法と言えます。
-<code class="language-plaintext highlighter-rouge">collectd</code>にある LXC プラグインは、この方法により動作しています。</p>
+<code class="highlighter-rouge">collectd</code>にある LXC プラグインは、この方法により動作しています。</p>
 
 <p>コンテナーを停止してから情報収集する方がよいのであれば、以下の方法をとります。</p>
 
@@ -529,14 +529,14 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
 情報収集のプロセスは、定期的にそのタスクファイルを読み込み、そのプロセス自体が、コントロールグループ内で残っている最後のプロセスであるかどうかを確認します。
 （前節に示したように、ネットワーク統計情報も収集したい場合は、そのプロセスを適切なネットワーク名前空間に移動することも必要になります。）</p>
 
-<p>コンテナーが終了するときに、<code class="language-plaintext highlighter-rouge">lxc-start</code>はコントロールグループを削除しようとします。
+<p>コンテナーが終了するときに、<code class="highlighter-rouge">lxc-start</code>はコントロールグループを削除しようとします。
 削除に失敗しますが、これはコントロールグループがまだ利用されているからです。
 でも問題ありません。
 情報収集用のプロセスはこのとき、コントロールグループ内にはただ 1 つのプロセスしか残っていないことが検出できるはずです。
 このときこそ、メトリックスをすべて収集するタイミングとなります。</p>
 
 <p>最後にそのプロセスを root コントロールグループに戻して、コンテナーのコントロールグループを削除します。
-コントロールグループの削除は、単にそのディレクトリを<code class="language-plaintext highlighter-rouge">rmdir</code>で削除するだけです。
+コントロールグループの削除は、単にそのディレクトリを<code class="highlighter-rouge">rmdir</code>で削除するだけです。
 ディレクトリ内にファイルが残っているのに、ディレクトリを削除するというのは、やってはいけないことのように思えます。
 しかしこれは擬似ファイルシステムです。
 普通の取り扱いをする必要のないものです。

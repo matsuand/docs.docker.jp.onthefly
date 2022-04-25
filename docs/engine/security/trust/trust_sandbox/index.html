@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストのサンドボックスで遊ぶ | Docker ドキュメント</title>
   <meta name="description" content="Play in a trust sandbox" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテントトラストのサンドボックスで遊ぶ" />
   <meta property="og:description" content="Play in a trust sandbox" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コンテントトラストのサンドボックスで遊ぶ","description":"Play in a trust sandbox","url":"https://docs.docker.com/engine/security/trust/trust_sandbox/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -91,7 +91,13 @@
         <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
     </div>
 </div>
-</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/trust/">信頼できるイメージの利用</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">コンテントトラストのサンドボックスで遊ぶ</a></li></ol>
+    </nav>
+</div></div>
     </div>
 </nav>
 
@@ -133,7 +139,7 @@ Docker Compose をインストールするには <a href="/docs.docker.jp.onthef
   <tbody>
     <tr>
       <td>trustsandbox</td>
-      <td>Docker Engine の最新版と設定済み証明書が含まれているコンテナー。これがサンドボックスであり、<code class="language-plaintext highlighter-rouge">docker</code>クライアントを使ってトラスト操作を試行するものです。</td>
+      <td>Docker Engine の最新版と設定済み証明書が含まれているコンテナー。これがサンドボックスであり、<code class="highlighter-rouge">docker</code>クライアントを使ってトラスト操作を試行するものです。</td>
     </tr>
     <tr>
       <td>レジストリサーバー</td>
@@ -151,43 +157,43 @@ Docker Hub を主に利用しているのであれば、上のコンポーネン
 Docker Hub にはすべてビルドされ含まれています。
 しかしサンドボックスの場合は、本番環境に似せたものを自分でビルドして利用します。</p>
 
-<p><code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナーでは、Docker Hub ではなく、ローカルのレジストリサーバーとやりとりをします。
+<p><code class="highlighter-rouge">trustsandbox</code>コンテナーでは、Docker Hub ではなく、ローカルのレジストリサーバーとやりとりをします。
 日々使っているイメージリポジトリは、ここでは利用しないということです。
 サンドボックスで遊んでいる間は、イメージリポジトリは保護されます。</p>
 
 <p>サンドボックスで遊ぶ際には、ルート鍵とリポジトリ鍵も生成します。
-サンドボックスでは、<code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナー内部に、鍵データやファイルは何でも保存できるように設定されています。
+サンドボックスでは、<code class="highlighter-rouge">trustsandbox</code>コンテナー内部に、鍵データやファイルは何でも保存できるように設定されています。
 サンドボックス内で生成する鍵は、お遊び用なので、コンテナーを削除するときに同時に削除します。</p>
 
-<p><code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナーにおいては docker-in-docker イメージを使います。
+<p><code class="highlighter-rouge">trustsandbox</code>コンテナーにおいては docker-in-docker イメージを使います。
 したがって、本物の Docker デーモンとの間でイメージをプッシュ、プルすることはなく、キャッシュを汚すことはありません。
 イメージは、このコンテナーにアタッチされた匿名ボリュームに保存します。
 そしてコンテナーを削除したときに同時に削除します。</p>
 
 <h2 id="build-the-sandbox">サンドボックスのビルド</h2>
 
-<p>この節では Docker Compose を使って<code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナー、Notary サーバー、レジストリサーバーを設定してリンクさせる方法を説明します。</p>
+<p>この節では Docker Compose を使って<code class="highlighter-rouge">trustsandbox</code>コンテナー、Notary サーバー、レジストリサーバーを設定してリンクさせる方法を説明します。</p>
 
 <ol>
   <li>
-    <p>新たなディレクトリ<code class="language-plaintext highlighter-rouge">trustsandbox</code>を生成してそこに移動します。</p>
+    <p>新たなディレクトリ<code class="highlighter-rouge">trustsandbox</code>を生成してそこに移動します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ mkdir trustsandbox
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ mkdir trustsandbox
  $ cd trustsandbox
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>好みのエディターを使って<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>というファイルを生成します。
+    <p>好みのエディターを使って<code class="highlighter-rouge">docker-compose.yml</code>というファイルを生成します。
 たとえば vim を利用します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ touch docker-compose.yml
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ touch docker-compose.yml
  $ vim docker-compose.yml
 </code></pre></div>    </div>
   </li>
   <li>
     <p>ファイルに以下の内容を追加します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> version: "2"
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> version: "2"
  services:
    notaryserver:
      image: dockersecurity/notary_autobuilds:server-v0.5.1
@@ -231,7 +237,7 @@ Docker Hub にはすべてビルドされ含まれています。
   <li>
     <p>ローカルシステム上においてコンテナーを起動します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker-compose up -d
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker-compose up -d
 </code></pre></div>    </div>
 
     <p>初回起動の際には docker-in-docker、Notary サーバー、レジストリの各イメージが Docker Hub からダウンロードされます。</p>
@@ -240,22 +246,22 @@ Docker Hub にはすべてビルドされ含まれています。
 
 <h2 id="サンドボックスで遊ぶ">サンドボックスで遊ぶ</h2>
 
-<p>設定がすべてできたので、<code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナー内に入って、Docker コンテントトラストの試しに使ってみます。
-ホストマシンから<code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナー内のシェルにアクセスします。</p>
+<p>設定がすべてできたので、<code class="highlighter-rouge">trustsandbox</code>コンテナー内に入って、Docker コンテントトラストの試しに使ってみます。
+ホストマシンから<code class="highlighter-rouge">trustsandbox</code>コンテナー内のシェルにアクセスします。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it trustsandbox sh
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it trustsandbox sh
 / #
 </code></pre></div></div>
 
 <h3 id="test-some-trust-operations">コンテントトラストの操作実行</h3>
 
-<p><code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナー内から、イメージをプルしてみます。</p>
+<p><code class="highlighter-rouge">trustsandbox</code>コンテナー内から、イメージをプルしてみます。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker</code>イメージをダウンロードします。</p>
+    <p><code class="highlighter-rouge">docker</code>イメージをダウンロードします。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull docker/trusttest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull docker/trusttest
  docker pull docker/trusttest
  Using default tag: latest
  latest: Pulling from docker/trusttest
@@ -269,19 +275,19 @@ Docker Hub にはすべてビルドされ含まれています。
   <li>
     <p>サンドボックスレジストリにそのイメージをプッシュするために、タグづけを行ないます。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
 </code></pre></div>    </div>
   </li>
   <li>
     <p>コンテントトラストを有効にします。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # export DOCKER_CONTENT_TRUST=1
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # export DOCKER_CONTENT_TRUST=1
 </code></pre></div>    </div>
   </li>
   <li>
     <p>コンテントトラストサーバーを指定します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
 </code></pre></div>    </div>
 
     <p>この手順は、サンドボックスが独自のサーバーを利用しているために必要となるものです。
@@ -290,18 +296,18 @@ Docker Hub にはすべてビルドされ含まれています。
   <li>
     <p>テストイメージをプルします。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull sandboxregistry:5000/test/trusttest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull sandboxregistry:5000/test/trusttest
  Using default tag: latest
  Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest: notaryserver:4443 does not have trust data for sandboxregistry:5000/test/trusttest
 </code></pre></div>    </div>
 
     <p>エラーになりました。
-   そのコンテントがまだ<code class="language-plaintext highlighter-rouge">notaryserver</code>には存在していないからです。</p>
+   そのコンテントがまだ<code class="highlighter-rouge">notaryserver</code>には存在していないからです。</p>
   </li>
   <li>
     <p>イメージをプッシュして、信頼された（trusted）イメージとしてサインします。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker push sandboxregistry:5000/test/trusttest:latest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker push sandboxregistry:5000/test/trusttest:latest
  The push refers to a repository [sandboxregistry:5000/test/trusttest]
  5f70bf18a086: Pushed
  c22f7bc058a9: Pushed
@@ -329,7 +335,7 @@ Docker Hub にはすべてビルドされ含まれています。
   <li>
     <p>プッシュしたばかりのイメージをプルしてみます。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull sandboxregistry:5000/test/trusttest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> / # docker pull sandboxregistry:5000/test/trusttest
  Using default tag: latest
  Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
  sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926: Pulling from test/trusttest
@@ -343,24 +349,24 @@ Docker Hub にはすべてビルドされ含まれています。
 <h3 id="test-with-malicious-images">悪意あるイメージの確認</h3>
 
 <p>コンテントトラストが有効な状態において、壊れているデータをプルしようとしたら、どうなるでしょう。
-この節においては<code class="language-plaintext highlighter-rouge">sandboxregistry</code>にアクセスしてデータを改ざんし、その後にプルを試してみます。</p>
+この節においては<code class="highlighter-rouge">sandboxregistry</code>にアクセスしてデータを改ざんし、その後にプルを試してみます。</p>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">trustsandbox</code>コンテナーとシェルアクセスをそのまま実行しておきます。</p>
+    <p><code class="highlighter-rouge">trustsandbox</code>コンテナーとシェルアクセスをそのまま実行しておきます。</p>
   </li>
   <li>
     <p>ホストから対話を行うための端末画面を新たに開きます。
-そして<code class="language-plaintext highlighter-rouge">sandboxregistry</code>コンテナー内のシェルにアクセスします。</p>
+そして<code class="highlighter-rouge">sandboxregistry</code>コンテナー内のシェルにアクセスします。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it sandboxregistry bash
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it sandboxregistry bash
 root@65084fc6f047:/#
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>プッシュした<code class="language-plaintext highlighter-rouge">test/trusttest</code>イメージのレイヤー一覧を表示します。</p>
+    <p>プッシュした<code class="highlighter-rouge">test/trusttest</code>イメージのレイヤー一覧を表示します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@65084fc6f047:/#</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@65084fc6f047:/#</span> <span class="nb">ls</span> <span class="nt">-l</span> /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
 <span class="go">total 12
 drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
 drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
@@ -371,22 +377,22 @@ drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67e
     <p>このレイヤーの 1 つであるレジストリサーバーの保存ディレクトリに移動します。
 （これは別ディレクトリにあります。）</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">trusttest</code>レイヤーに悪意のあるデータを追加します。</p>
+    <p><code class="highlighter-rouge">trusttest</code>レイヤーに悪意のあるデータを追加します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@65084fc6f047:/# echo "Malicious data" &gt; data
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@65084fc6f047:/# echo "Malicious data" &gt; data
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">trustsandbox</code>端末画面に戻ります。</p>
+    <p><code class="highlighter-rouge">trustsandbox</code>端末画面に戻ります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">trusttest</code>イメージの一覧を表示します。</p>
+    <p><code class="highlighter-rouge">trusttest</code>イメージの一覧を表示します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker image ls | grep trusttest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker image ls | grep trusttest
 REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
 docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
 sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
@@ -394,9 +400,9 @@ sandboxregistry:5000/test/trusttest   &lt;none&gt;              cc7629d1331a    
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ローカルのキャッシュから<code class="language-plaintext highlighter-rouge">trusttest:latest</code>イメージを削除します。</p>
+    <p>ローカルのキャッシュから<code class="highlighter-rouge">trusttest:latest</code>イメージを削除します。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker image rm -f cc7629d1331a
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker image rm -f cc7629d1331a
 Untagged: docker/trusttest:latest
 Untagged: sandboxregistry:5000/test/trusttest:latest
 Untagged: sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
@@ -413,7 +419,7 @@ Deleted: sha256:c22f7bc058a9a8ffeb32989b5d3338787e73855bf224af7aa162823da015d44c
     <p>イメージを再びプルします。
 キャッシュが存在しないため、レジストリからイメージがダウンロードされます。</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker pull sandboxregistry:5000/test/trusttest
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ # docker pull sandboxregistry:5000/test/trusttest
 Using default tag: latest
 Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
 sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e: Pulling from test/trusttest
@@ -439,7 +445,7 @@ Docker に対してセキュリティに問題があることがわかったら�
 <p>十分確認ができたら、起動したサービス、生成された匿名ボリュームなど一切を削除します。
 Docker Compose ファイルを生成したディレクトリに入って、以下のコマンドを実行します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ docker-compose down -v
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ docker-compose down -v
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=trust">trust</a>, <a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=root">root</a>, <a href="/docs.docker.jp.onthefly/search/?q=keys">keys</a>, <a href="/docs.docker.jp.onthefly/search/?q=repository">repository</a>, <a href="/docs.docker.jp.onthefly/search/?q=sandbox">sandbox</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

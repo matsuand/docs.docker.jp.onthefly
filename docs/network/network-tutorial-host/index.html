@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ホストネットワークのチュートリアル | Docker ドキュメント</title>
   <meta name="description" content="Tutorials for networking using the host network, disabling network isolation" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ホストネットワークのチュートリアル" />
   <meta property="og:description" content="Tutorials for networking using the host network, disabling network isolation" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-host/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ホストネットワークのチュートリアル","description":"Tutorials for networking using the host network, disabling network isolation","url":"https://docs.docker.com/network/network-tutorial-host/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -113,19 +113,19 @@ Docker ホストのネットワークに直接割り当てられ、ネットワ�
 
 <h2 id="goal">目指すこと</h2>
 
-<p>本チュートリアルの目標は、<code class="language-plaintext highlighter-rouge">nginx</code>コンテナーを起動させ、Docker ホスト上のポート 80 に直接割り当てることです。
-ネットワークの観点からは<code class="language-plaintext highlighter-rouge">nginx</code>のプロセスが、コンテナー内でなく Docker ホスト上で直接稼動している場合と同じレベルの分離が実現されていると言えます。
-ただしこれ以外の点、つまりストレージ、プロセス名前空間、ユーザー名前空間などから見ると、<code class="language-plaintext highlighter-rouge">nginx</code>のプロセスはホストから分離されています。</p>
+<p>本チュートリアルの目標は、<code class="highlighter-rouge">nginx</code>コンテナーを起動させ、Docker ホスト上のポート 80 に直接割り当てることです。
+ネットワークの観点からは<code class="highlighter-rouge">nginx</code>のプロセスが、コンテナー内でなく Docker ホスト上で直接稼動している場合と同じレベルの分離が実現されていると言えます。
+ただしこれ以外の点、つまりストレージ、プロセス名前空間、ユーザー名前空間などから見ると、<code class="highlighter-rouge">nginx</code>のプロセスはホストから分離されています。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <ul>
   <li>
     <p>以下の手順においては、Docker ホスト上のポート 80 が利用できることが必要です。
-Nginx が別のポートを利用できるようにするには <a href="https://hub.docker.com/_/nginx/"><code class="language-plaintext highlighter-rouge">nginx</code>イメージのドキュメント</a> を参照してください。</p>
+Nginx が別のポートを利用できるようにするには <a href="https://hub.docker.com/_/nginx/"><code class="highlighter-rouge">nginx</code>イメージのドキュメント</a> を参照してください。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">host</code>ネットワークドライバーは Linux ホスト上においてのみ動作します。
+    <p><code class="highlighter-rouge">host</code>ネットワークドライバーは Linux ホスト上においてのみ動作します。
 一方、Docker Desktop for Mac、Docker Desktop for Windows、Docker EE for Windows Server ではサポートされていません。</p>
   </li>
 </ul>
@@ -135,10 +135,10 @@ Nginx が別のポートを利用できるようにするには <a href="https:/
 <ol>
   <li>
     <p>コンテナーを生成し、デタッチモードで起動します。
-<code class="language-plaintext highlighter-rouge">--rm</code>オプションは、コンテナーが終了または停止したときにコンテナーを削除するものです。
-<code class="language-plaintext highlighter-rouge">-d</code>フラグは、コンテナーをデタッチモード（バックグラウンド）で起動します。</p>
+<code class="highlighter-rouge">--rm</code>オプションは、コンテナーが終了または停止したときにコンテナーを削除するものです。
+<code class="highlighter-rouge">-d</code>フラグは、コンテナーをデタッチモード（バックグラウンド）で起動します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">--network</span> host <span class="nt">--name</span> my_nginx nginx
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">--network</span> host <span class="nt">--name</span> my_nginx nginx
 </code></pre></div>    </div>
   </li>
   <li>
@@ -152,22 +152,22 @@ Nginx が別のポートを利用できるようにするには <a href="https:/
         <p>ネットワークインターフェースをすべて確認します。
 そして新しいインターフェースは生成されていないことを確認します。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ip addr show
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ip addr show
 </code></pre></div>        </div>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">netstat</code>コマンドを使って、どのプロセスがポート 80 に割り当てられているかを確認します。
-実行にあたっては<code class="language-plaintext highlighter-rouge">sudo</code>が必要です。
+        <p><code class="highlighter-rouge">netstat</code>コマンドを使って、どのプロセスがポート 80 に割り当てられているかを確認します。
+実行にあたっては<code class="highlighter-rouge">sudo</code>が必要です。
 プロセスが Docker デーモンユーザーの所有になっているからであり、これを用いないとプロセス名やプロセス ID を確認することができません。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>netstat <span class="nt">-tulpn</span> | <span class="nb">grep</span> :80
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>netstat <span class="nt">-tulpn</span> | <span class="nb">grep</span> :80
 </code></pre></div>        </div>
       </li>
     </ul>
   </li>
   <li>
     <p>コンテナーを停止します。
-<code class="language-plaintext highlighter-rouge">--rm</code>オプションを指定して起動しているので、コンテナーは自動的に削除されます。</p>
+<code class="highlighter-rouge">--rm</code>オプションを指定して起動しているので、コンテナーは自動的に削除されます。</p>
 
     <pre><code class="language-basn">docker container stop my_nginx
 </code></pre>

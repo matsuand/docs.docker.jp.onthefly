@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose でのプロファイル利用 | Docker ドキュメント</title>
   <meta name="description" content="" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Compose でのプロファイル利用" />
   <meta property="og:description" content="" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/profiles/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose でのプロファイル利用","description":null,"url":"https://docs.docker.com/compose/profiles/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -113,11 +113,11 @@
 割り当てを行わなかった場合、そのサービスは <strong>常に</strong> 起動します。
 一方割り当てを行った場合は、そのプロファイルがアクティブになった場合にのみサービスが起動します。</p>
 
-<p>こういった機能があると、たとえばデバッグ時や開発タスク作業時といった特定の状況下においてのみ起動する追加のサービスを、同一の<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイル内に定義して実現することができます。</p>
+<p>こういった機能があると、たとえばデバッグ時や開発タスク作業時といった特定の状況下においてのみ起動する追加のサービスを、同一の<code class="highlighter-rouge">docker-compose.yml</code>ファイル内に定義して実現することができます。</p>
 
 <h2 id="assigning-profiles-to-services">サービスへのプロファイルの割り当て</h2>
 
-<p>サービスに対しては <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#profiles"><code class="language-plaintext highlighter-rouge">profiles</code>属性</a> を通じてプロファイルを関連づけることができます。
+<p>サービスに対しては <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#profiles"><code class="highlighter-rouge">profiles</code>属性</a> を通じてプロファイルを関連づけることができます。
 この属性にはプロファイル名の配列を指定します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
@@ -140,34 +140,34 @@
     <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
 </code></pre></div></div>
 
-<p>ここでサービス<code class="language-plaintext highlighter-rouge">frontend</code>と<code class="language-plaintext highlighter-rouge">phpmyadmin</code>に対しては、それぞれ<code class="language-plaintext highlighter-rouge">frontend</code>と<code class="language-plaintext highlighter-rouge">debug</code>というプロファイルを割り当てています。
+<p>ここでサービス<code class="highlighter-rouge">frontend</code>と<code class="highlighter-rouge">phpmyadmin</code>に対しては、それぞれ<code class="highlighter-rouge">frontend</code>と<code class="highlighter-rouge">debug</code>というプロファイルを割り当てています。
 したがって個々のプロファイルが有効になっている場合にのみ、そのサービスが起動するものとなります。</p>
 
-<p><code class="language-plaintext highlighter-rouge">profiles</code>属性が指定されていないサービスは <strong>常に</strong> 有効になります。
-つまり上の例においては<code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行すると、<code class="language-plaintext highlighter-rouge">backend</code>と<code class="language-plaintext highlighter-rouge">db</code>だけは必ず起動します。</p>
+<p><code class="highlighter-rouge">profiles</code>属性が指定されていないサービスは <strong>常に</strong> 有効になります。
+つまり上の例においては<code class="highlighter-rouge">docker-compose up</code>を実行すると、<code class="highlighter-rouge">backend</code>と<code class="highlighter-rouge">db</code>だけは必ず起動します。</p>
 
-<p>プロファイルに対する適切な名称は、正規表現<code class="language-plaintext highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>に従います。</p>
+<p>プロファイルに対する適切な名称は、正規表現<code class="highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>に従います。</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>アプリケーションにおいて中心的となるサービスに対しては、<code class="language-plaintext highlighter-rouge">profiles</code>を指定するべきではありません。
+  <p>アプリケーションにおいて中心的となるサービスに対しては、<code class="highlighter-rouge">profiles</code>を指定するべきではありません。
 指定しなければ、そのサービスは常に有効であり、自動的に起動されます。</p>
 </blockquote>
 
 <h2 id="enabling-profiles">プロファイルの有効化</h2>
 
-<p>プロファイルを有効にするには、<a href="/docs.docker.jp.onthefly/compose/reference/">コマンドラインオプション</a><code class="language-plaintext highlighter-rouge">--profile</code>を指定するか、あるいは <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_profiles">環境変数<code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code></a>を利用します。</p>
+<p>プロファイルを有効にするには、<a href="/docs.docker.jp.onthefly/compose/reference/">コマンドラインオプション</a><code class="highlighter-rouge">--profile</code>を指定するか、あるいは <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_profiles">環境変数<code class="highlighter-rouge">COMPOSE_PROFILES</code></a>を利用します。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">--profile</span> debug up
 <span class="nv">$ COMPOSE_PROFILES</span><span class="o">=</span>debug docker-compose up
 </code></pre></div></div>
 
-<p>上のコマンド 2 つは、いずれもプロファイル<code class="language-plaintext highlighter-rouge">debug</code>を有効にしてアプリケーションを起動します。
-前述の<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルを利用している場合、これは<code class="language-plaintext highlighter-rouge">backend</code>、<code class="language-plaintext highlighter-rouge">db</code>、<code class="language-plaintext highlighter-rouge">phpmyadmin</code>の各サービスが起動することになります。</p>
+<p>上のコマンド 2 つは、いずれもプロファイル<code class="highlighter-rouge">debug</code>を有効にしてアプリケーションを起動します。
+前述の<code class="highlighter-rouge">docker-compose.yml</code>ファイルを利用している場合、これは<code class="highlighter-rouge">backend</code>、<code class="highlighter-rouge">db</code>、<code class="highlighter-rouge">phpmyadmin</code>の各サービスが起動することになります。</p>
 
 <p>プロファイルは複数指定することができます。
-その場合は<code class="language-plaintext highlighter-rouge">--profile</code>フラグを複数指定するか、あるいは環境変数<code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code>に対してカンマ区切りのリストを指定します。</p>
+その場合は<code class="highlighter-rouge">--profile</code>フラグを複数指定するか、あるいは環境変数<code class="highlighter-rouge">COMPOSE_PROFILES</code>に対してカンマ区切りのリストを指定します。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">--profile</span> frontend <span class="nt">--profile</span> debug up
 <span class="nv">$ COMPOSE_PROFILES</span><span class="o">=</span>frontend,debug docker-compose up
@@ -175,7 +175,7 @@
 
 <h2 id="auto-enabling-profiles-and-dependency-resolution">プロファイルの自動有効化と依存関係の解決</h2>
 
-<p><code class="language-plaintext highlighter-rouge">profiles</code>が割り当てられているサービスに対して、コマンドラインからの明示的なプロファイル指定が行われた場合、そのプロファイルは自動的に有効になるため、手動で有効にするような操作は必要ありません。
+<p><code class="highlighter-rouge">profiles</code>が割り当てられているサービスに対して、コマンドラインからの明示的なプロファイル指定が行われた場合、そのプロファイルは自動的に有効になるため、手動で有効にするような操作は必要ありません。
 手動操作が必要になるのは、一時的なサービスやデバッグツールを利用するような場合です。
 ここでは例として以下の設定を行います。</p>
 
@@ -205,9 +205,9 @@
 </code></pre></div></div>
 
 <p>ただしここで注意しておくことがあります。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>が有効化するプロファイルは、コマンドライン上から指定されたサービスに対するもののみです。
+<code class="highlighter-rouge">docker-compose</code>が有効化するプロファイルは、コマンドライン上から指定されたサービスに対するもののみです。
 そこに依存するものに対しては有効化を行いません。
-したがって指定された<code class="language-plaintext highlighter-rouge">depends_on</code>サービスに関連するサービスは、すべて共通のプロファイルに関連づいているか、常に有効化されるか（<code class="language-plaintext highlighter-rouge">profiles</code>を省略するか）、該当するプロファイルを明示的に有効化するといったことが必要になります。</p>
+したがって指定された<code class="highlighter-rouge">depends_on</code>サービスに関連するサービスは、すべて共通のプロファイルに関連づいているか、常に有効化されるか（<code class="highlighter-rouge">profiles</code>を省略するか）、該当するプロファイルを明示的に有効化するといったことが必要になります。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -242,16 +242,16 @@
 <span class="nv">$ </span>docker-compose up phpmyadmin
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">phpmyadmin</code>を指定して実行すれば、割り当てられているプロファイルつまり<code class="language-plaintext highlighter-rouge">debug</code>は自動的に有効になります。
-しかし<code class="language-plaintext highlighter-rouge">db</code>に割り当てられているプロファイルつまり<code class="language-plaintext highlighter-rouge">dev</code>までは自動的に有効にはしません。
-これを正しくするには、<code class="language-plaintext highlighter-rouge">db</code>サービスに対しても<code class="language-plaintext highlighter-rouge">debug</code>プロファイルを追加しなければなりません。</p>
+<p><code class="highlighter-rouge">phpmyadmin</code>を指定して実行すれば、割り当てられているプロファイルつまり<code class="highlighter-rouge">debug</code>は自動的に有効になります。
+しかし<code class="highlighter-rouge">db</code>に割り当てられているプロファイルつまり<code class="highlighter-rouge">dev</code>までは自動的に有効にはしません。
+これを正しくするには、<code class="highlighter-rouge">db</code>サービスに対しても<code class="highlighter-rouge">debug</code>プロファイルを追加しなければなりません。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">db</span><span class="pi">:</span>
   <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
   <span class="na">profiles</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">debug"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">dev"</span><span class="pi">]</span>
 </code></pre></div></div>
 
-<p>または<code class="language-plaintext highlighter-rouge">db</code>のプロファイルを明示的に有効化する方法とします。</p>
+<p>または<code class="highlighter-rouge">db</code>のプロファイルを明示的に有効化する方法とします。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># phpmyadmin指定に際してプロファイル"debug"を有効にします。</span>
 <span class="nv">$ </span>docker-compose <span class="nt">--profile</span> dev up phpmyadmin

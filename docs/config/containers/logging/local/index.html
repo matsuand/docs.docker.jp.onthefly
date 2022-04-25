@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Local File ログドライバー | Docker ドキュメント</title>
   <meta name="description" content="local ログドライバーの利用方法について説明します。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Local File ログドライバー" />
   <meta property="og:description" content="local ログドライバーの利用方法について説明します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/local/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Local File ログドライバー","description":"local ログドライバーの利用方法について説明します。","url":"https://docs.docker.com/config/containers/logging/local/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -101,10 +101,10 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Local File ログドライバー</h1><p><code class="language-plaintext highlighter-rouge">local</code>ログドライバーは、コンテナーの標準出力、標準エラー出力を取り込んで、内部ストレージへの書き込みを行います。
+                        <section class="section"><h1>Local File ログドライバー</h1><p><code class="highlighter-rouge">local</code>ログドライバーは、コンテナーの標準出力、標準エラー出力を取り込んで、内部ストレージへの書き込みを行います。
 この内部ストレージは、性能やディスク利用が最適化されているものです。</p>
 
-<p>デフォルトで<code class="language-plaintext highlighter-rouge">local</code>ドライバーは、1 つのコンテナーあたり 100MB のログメッセージ容量を確保します。
+<p>デフォルトで<code class="highlighter-rouge">local</code>ドライバーは、1 つのコンテナーあたり 100MB のログメッセージ容量を確保します。
 そして自動的に圧縮を行って、ディスク利用量を軽減します。
 100 MB というデフォルト容量は、デフォルトサイズが 20 MB のファイルを、デフォルトで 5 つ用意するところからきています。
 （5 つのファイルはログローテーションを行うためです。）</p>
@@ -112,23 +112,23 @@
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p><code class="language-plaintext highlighter-rouge">local</code>ログドライバーは、ファイルベースのストレージを利用します。
+  <p><code class="highlighter-rouge">local</code>ログドライバーは、ファイルベースのストレージを利用します。
 そのファイルフォーマットやストレージのメカニズムは、Docker デーモンがアクセスする目的で設計されています。
 したがって外部ツールが利用するものではないため、その実装は将来のリリースにおいて変更になる場合があります。</p>
 </blockquote>
 
 <h2 id="usage">利用方法</h2>
 
-<p>デフォルトログドライバーとして<code class="language-plaintext highlighter-rouge">local</code>ドライバーを利用するには、<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイル内において<code class="language-plaintext highlighter-rouge">log-driver</code>と<code class="language-plaintext highlighter-rouge">log-opt</code>キーを適切に設定します。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルは Linux ホストの場合は<code class="language-plaintext highlighter-rouge">/etc/docker/</code>、Windows Server の場合は<code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code>にあります。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>を利用して Docker を設定する方法については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> を参照してください。</p>
+<p>デフォルトログドライバーとして<code class="highlighter-rouge">local</code>ドライバーを利用するには、<code class="highlighter-rouge">daemon.json</code>ファイル内において<code class="highlighter-rouge">log-driver</code>と<code class="highlighter-rouge">log-opt</code>キーを適切に設定します。
+<code class="highlighter-rouge">daemon.json</code>ファイルは Linux ホストの場合は<code class="highlighter-rouge">/etc/docker/</code>、Windows Server の場合は<code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code>にあります。
+<code class="highlighter-rouge">daemon.json</code>を利用して Docker を設定する方法については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> を参照してください。</p>
 
-<p>以下の例では、ログドライバーに<code class="language-plaintext highlighter-rouge">local</code>を設定し、<code class="language-plaintext highlighter-rouge">max-size</code>オプションを利用しています。</p>
+<p>以下の例では、ログドライバーに<code class="highlighter-rouge">local</code>を設定し、<code class="highlighter-rouge">max-size</code>オプションを利用しています。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"log-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"max-size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10m"</span><span class="w">
+  </span><span class="s2">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"log-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"max-size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10m"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
@@ -136,16 +136,16 @@
 <p>コンテナーの設定を新たにしたら、その変更を有効にするために Docker を再起動してください。
 すでに起動しているコンテナーは、新たなログ設定を利用しません。</p>
 
-<p>特定のコンテナーにのみログドライバーを設定するには、<code class="language-plaintext highlighter-rouge">docker container create</code>や<code class="language-plaintext highlighter-rouge">docker run</code>に対して<code class="language-plaintext highlighter-rouge">--log-driver</code>フラグを指定して実行します。</p>
+<p>特定のコンテナーにのみログドライバーを設定するには、<code class="highlighter-rouge">docker container create</code>や<code class="highlighter-rouge">docker run</code>に対して<code class="highlighter-rouge">--log-driver</code>フラグを指定して実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="se">\</span>
       <span class="nt">--log-driver</span> <span class="nb">local</span> <span class="nt">--log-opt</span> max-size<span class="o">=</span>10m <span class="se">\</span>
       alpine <span class="nb">echo </span>hello world
 </code></pre></div></div>
 
 <h3 id="options">オプション</h3>
 
-<p><code class="language-plaintext highlighter-rouge">local</code>ログドライバーでは、以下のオプションがサポートされます。</p>
+<p><code class="highlighter-rouge">local</code>ログドライバーでは、以下のオプションがサポートされます。</p>
 
 <table>
   <thead>
@@ -157,28 +157,28 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">max-size</code></td>
-      <td style="text-align: left">ログファイルが切り替わるまでの最大サイズ。正の整数と単位（<code class="language-plaintext highlighter-rouge">k</code>、<code class="language-plaintext highlighter-rouge">m</code>、<code class="language-plaintext highlighter-rouge">g</code>）を記述します。デフォルトは 20m です。</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt max-size=10m</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">max-size</code></td>
+      <td style="text-align: left">ログファイルが切り替わるまでの最大サイズ。正の整数と単位（<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">m</code>、<code class="highlighter-rouge">g</code>）を記述します。デフォルトは 20m です。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--log-opt max-size=10m</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">max-file</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">max-file</code></td>
       <td style="text-align: left">許容するログファイルの最大数。ログファイルが切り替わることでファイル最大数を越えた場合、最も古いファイルが削除されます。正の整数を指定します。デフォルトは 5 です。</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt max-file=3</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">--log-opt max-file=3</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">compress</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">compress</code></td>
       <td style="text-align: left">ローテートするログファイルの圧縮の有無を指定します。デフォルトは有効です。</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt compress=false</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">--log-opt compress=false</code></td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="examples">利用例</h3>
 
-<p>以下の例は<code class="language-plaintext highlighter-rouge">alpine</code>コンテナーを起動して、ログファイルを最大 3 つ利用し、その個々について 10 MB を越えないように設定します。</p>
+<p>以下の例は<code class="highlighter-rouge">alpine</code>コンテナーを起動して、ログファイルを最大 3 つ利用し、その個々について 10 MB を越えないように設定します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--log-driver</span> <span class="nb">local</span> <span class="nt">--log-opt</span> max-size<span class="o">=</span>10m <span class="nt">--log-opt</span> max-file<span class="o">=</span>3 alpine ash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--log-driver</span> <span class="nb">local</span> <span class="nt">--log-opt</span> max-size<span class="o">=</span>10m <span class="nt">--log-opt</span> max-file<span class="o">=</span>3 alpine ash
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=logging">logging</a>, <a href="/docs.docker.jp.onthefly/search/?q=driver">driver</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

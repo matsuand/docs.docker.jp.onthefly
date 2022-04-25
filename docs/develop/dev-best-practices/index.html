@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker 開発のベストプラクティス | Docker ドキュメント</title>
   <meta name="description" content="Docker アプリケーションの開発をより簡単に進めるための経験則を示します。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker 開発のベストプラクティス" />
   <meta property="og:description" content="Docker アプリケーションの開発をより簡単に進めるための経験則を示します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/dev-best-practices/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker 開発のベストプラクティス","description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。","url":"https://docs.docker.com/develop/dev-best-practices/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -120,29 +120,29 @@
 <ul>
   <li>
     <p>適切なイメージをベースとして始めます。
-たとえば JDK を必要とするのであれば、公式イメージ <code class="language-plaintext highlighter-rouge">openjdk</code> をベースとしたイメージ作りとします。
-逆に、汎用的な <code class="language-plaintext highlighter-rouge">ubuntu</code> イメージから始めて、Dockerfile 内に <code class="language-plaintext highlighter-rouge">openjdk</code> をインストールするような方法は取らないようにします。</p>
+たとえば JDK を必要とするのであれば、公式イメージ <code class="highlighter-rouge">openjdk</code> をベースとしたイメージ作りとします。
+逆に、汎用的な <code class="highlighter-rouge">ubuntu</code> イメージから始めて、Dockerfile 内に <code class="highlighter-rouge">openjdk</code> をインストールするような方法は取らないようにします。</p>
   </li>
   <li>
     <p><a href="/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">マルチステージビルド</a> を利用します。
-たとえば <code class="language-plaintext highlighter-rouge">maven</code> イメージを使うと Java アプリケーションを構築することができます。
-これを <code class="language-plaintext highlighter-rouge">tomcat</code> イメージとして作り直して、Java アプリのコード類を適切な場所に配置してデプロイできるようにします。
+たとえば <code class="highlighter-rouge">maven</code> イメージを使うと Java アプリケーションを構築することができます。
+これを <code class="highlighter-rouge">tomcat</code> イメージとして作り直して、Java アプリのコード類を適切な場所に配置してデプロイできるようにします。
 これをすべて同一の Dockerfile 内で行います。
 これはつまり最終的なイメージがビルドされたら、そのイメージ内には、元々のイメージ取得時に存在していたライブラリや依存パッケージがすべて含まれるわけではなく、実行時に必要なモジュールや環境のみが含まれるということを意味します。</p>
 
     <ul>
       <li>
         <p>マルチステージビルドの機能を持たない Docker バージョンを使う必要があるときには、イメージ内に作られるレイヤー数を減らすようにしてください。
-これは Dockerfile 内での <code class="language-plaintext highlighter-rouge">RUN</code> コマンドの実行が、できるだけ分断されないように、その実行数を最小化します。
-これを実現するには、複数の <code class="language-plaintext highlighter-rouge">RUN</code> コマンドはできるだけ 1 つの <code class="language-plaintext highlighter-rouge">RUN</code> コマンドとなるように、シェルの機能を使って互いに連結させます。
+これは Dockerfile 内での <code class="highlighter-rouge">RUN</code> コマンドの実行が、できるだけ分断されないように、その実行数を最小化します。
+これを実現するには、複数の <code class="highlighter-rouge">RUN</code> コマンドはできるだけ 1 つの <code class="highlighter-rouge">RUN</code> コマンドとなるように、シェルの機能を使って互いに連結させます。
 たとえば以下のような 2 つのコマンド実行例があったとします。
 1 つめのコマンドは、イメージ内に 2 つのレイヤーを生成しますが、2 つめのコマンドはレイヤーが 1 つで済みます。</p>
 
         <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get <span class="nt">-y</span> update
-<span class="k">RUN </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> python
+<span class="k">RUN </span>apt-get install <span class="nt">-y</span> python
 </code></pre></div>        </div>
 
-        <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python
+        <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> python
 </code></pre></div>        </div>
       </li>
     </ul>
@@ -159,9 +159,9 @@ Docker は共通するレイヤーであれば 1 度しかロードする必要�
   </li>
   <li>
     <p>イメージをビルドする場合には、常にわかりやすいタグをつけるようにします。
-このタグを用いて、バージョン情報をコード化したり、目的とする用途（たとえば <code class="language-plaintext highlighter-rouge">prod</code> や <code class="language-plaintext highlighter-rouge">test</code> など）や安定性など、いろいろな情報を付与したりします。
+このタグを用いて、バージョン情報をコード化したり、目的とする用途（たとえば <code class="highlighter-rouge">prod</code> や <code class="highlighter-rouge">test</code> など）や安定性など、いろいろな情報を付与したりします。
 こうしておけば、アプリケーションをさまざまな環境にデプロイする際にわかりやすくなります。
-自動的に生成される <code class="language-plaintext highlighter-rouge">latest</code> タグには頼らないようにします。</p>
+自動的に生成される <code class="highlighter-rouge">latest</code> タグには頼らないようにします。</p>
   </li>
 </ul>
 

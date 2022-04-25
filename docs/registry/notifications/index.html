@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Work with notifications | Docker ドキュメント</title>
   <meta name="description" content="Explains how to work with registry notifications" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Work with notifications" />
   <meta property="og:description" content="Explains how to work with registry notifications" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/notifications/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Work with notifications","description":"Explains how to work with registry notifications","url":"https://docs.docker.com/registry/notifications/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -147,12 +147,12 @@ them to the configuration. A simple example follows:</p>
       <span class="na">headers</span><span class="pi">:</span>
         <span class="na">Authorization</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">Bearer &lt;your token</span><span class="pi">,</span> <span class="nv">if needed&gt;</span><span class="pi">]</span>
       <span class="na">timeout</span><span class="pi">:</span> <span class="s">500ms</span>
-      <span class="na">threshold</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">threshold</span><span class="pi">:</span> <span class="s">5</span>
       <span class="na">backoff</span><span class="pi">:</span> <span class="s">1s</span>
 </code></pre></div></div>
 
 <p>The above would configure the registry with an endpoint to send events to
-<code class="language-plaintext highlighter-rouge">https://mylistener.example.com/event</code>, with the header “Authorization: Bearer
+<code class="highlighter-rouge">https://mylistener.example.com/event</code>, with the header “Authorization: Bearer
 &lt;your token, if needed&gt;”. The request would timeout after 500 milliseconds. If
 5 failures happen consecutively, the registry backs off for 1 second before
 trying again.</p>
@@ -162,7 +162,7 @@ trying again.</p>
 <p>A properly configured endpoint should lead to a log message from the registry
 upon startup:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO[0000] configuring endpoint alistener (https://mylistener.example.com/event), timeout=500ms, headers=map[Authorization:[Bearer &lt;your token if needed&gt;]]  app.id=812bfeb2-62d6-43cf-b0c6-152f541618a3 environment=development service=registry
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO[0000] configuring endpoint alistener (https://mylistener.example.com/event), timeout=500ms, headers=map[Authorization:[Bearer &lt;your token if needed&gt;]]  app.id=812bfeb2-62d6-43cf-b0c6-152f541618a3 environment=development service=registry
 </code></pre></div></div>
 
 <h2 id="events">Events</h2>
@@ -173,7 +173,7 @@ envelope. Each event has a unique ID that can be used to uniquely identify incom
 requests, if required. Along with that, an <em>action</em> is provided with a
 <em>target</em>, identifying the object mutated during the event.</p>
 
-<p>The fields available in an <code class="language-plaintext highlighter-rouge">event</code> are described below.</p>
+<p>The fields available in an <code class="highlighter-rouge">event</code> are described below.</p>
 
 <table>
   <thead>
@@ -251,31 +251,31 @@ requests, if required. Along with that, an <em>action</em> is provided with a
 manifest:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"320678d8-ca14-430f-8bb6-4ca139cd83f7"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-09T14:44:26.402973972-08:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pull"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.distribution.manifest.v2+json"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello-world"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"320678d8-ca14-430f-8bb6-4ca139cd83f7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-09T14:44:26.402973972-08:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pull"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.distribution.manifest.v2+json"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello-world"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6df24a34-0959-4923-81ca-14f09767db19"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.64.11:42961"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.100.227:5000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"curl/7.38.0"</span><span class="w">
+      </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6df24a34-0959-4923-81ca-14f09767db19"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.64.11:42961"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.100.227:5000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"curl/7.38.0"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xtal.local:5000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"instanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a53db899-3b4b-4a62-a067-8dd013beaca4"</span><span class="w">
+      </span><span class="s2">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xtal.local:5000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"instanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a53db899-3b4b-4a62-a067-8dd013beaca4"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -287,18 +287,18 @@ contains a subset of the data contained in Get and Put events. Specifically,
 only the digest and repository are sent.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="w">
+  </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: As of version 2.1, the <code class="language-plaintext highlighter-rouge">length</code> field for event targets
-is being deprecated for the <code class="language-plaintext highlighter-rouge">size</code> field, bringing the target in line with
+  <p><strong>Note</strong>: As of version 2.1, the <code class="highlighter-rouge">length</code> field for event targets
+is being deprecated for the <code class="highlighter-rouge">size</code> field, bringing the target in line with
 common nomenclature. Both will continue to be set for the foreseeable
-future. Newer code should favor <code class="language-plaintext highlighter-rouge">size</code> but accept either.</p>
+future. Newer code should favor <code class="highlighter-rouge">size</code> but accept either.</p>
 </blockquote>
 
 <h2 id="envelope">Envelope</h2>
@@ -306,7 +306,7 @@ future. Newer code should favor <code class="language-plaintext highlighter-roug
 <p>The envelope contains one or more events, with the following json structure:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -421,51 +421,51 @@ registry.</p>
 <h2 id="monitoring">Monitoring</h2>
 
 <p>The state of the endpoints are reported via the debug/vars http interface,
-usually configured to <code class="language-plaintext highlighter-rouge">http://localhost:5001/debug/vars</code>. Information such as
+usually configured to <code class="highlighter-rouge">http://localhost:5001/debug/vars</code>. Information such as
 configuration and metrics are available by endpoint.</p>
 
 <p>The following provides an example of a few endpoints that have experienced
 several failures and have since recovered:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-5003"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:5003/callback"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-5003"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:5003/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"Authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"Bearer </span><span class="se">\u</span><span class="s2">003can example token</span><span class="se">\u</span><span class="s2">003e"</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-8083"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8083/callback"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"202 Accepted"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-8083"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8083/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"202 Accepted"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -502,7 +502,7 @@ request to provide better durability.</p>
 
 <p>The notification system is designed around a series of interchangeable <em>sinks</em>
 which can be wired up to achieve interesting behavior. If this system doesn’t
-provide acceptable guarantees, adding a transactional <code class="language-plaintext highlighter-rouge">Sink</code> to the registry
+provide acceptable guarantees, adding a transactional <code class="highlighter-rouge">Sink</code> to the registry
 is a possibility, although it may have an effect on request service time.
 See the
 <a href="https://godoc.org/github.com/docker/distribution/notifications#Sink">godoc</a>

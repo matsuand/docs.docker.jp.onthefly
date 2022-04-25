@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リポジトリの自動テスト | Docker ドキュメント</title>
   <meta name="description" content="自動テスト。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="リポジトリの自動テスト" />
   <meta property="og:description" content="自動テスト。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"リポジトリの自動テスト","description":"自動テスト。","url":"https://docs.docker.com/docker-hub/builds/automated-testing/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,17 +116,17 @@
 </div>
 
 <p>Docker Hub ではコンテナーを利用して、ソースコードリポジトリへの変更を自動的にテストすることができます。
-どのような <a href="/docs.docker.jp.onthefly/docker-hub/repos/">Docker Hub リポジトリ</a> でも<code class="language-plaintext highlighter-rouge">Autotest</code>を有効にすれば、ソースコードリポジトリに対するプルリクエストごとのテスト実行が可能です。
+どのような <a href="/docs.docker.jp.onthefly/docker-hub/repos/">Docker Hub リポジトリ</a> でも<code class="highlighter-rouge">Autotest</code>を有効にすれば、ソースコードリポジトリに対するプルリクエストごとのテスト実行が可能です。
 これによって継続的な統合テストサービスを実現することができます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">Autotest</code>（自動テスト）を有効にしてビルドされるイメージは、テスト目的のものです。
+<p><code class="highlighter-rouge">Autotest</code>（自動テスト）を有効にしてビルドされるイメージは、テスト目的のものです。
 ただしこれは Docker リポジトリに対して、ビルドしたイメージを自動的にはプッシュ <strong>しません</strong>。
 Docker Hub リポジトリにビルドイメージをプッシュしたい場合は <a href="/docs.docker.jp.onthefly/docker-hub/builds/">自動ビルド</a> を有効にします。</p>
 
 <h2 id="set-up-automated-test-files">自動テストファイルの設定</h2>
 
-<p>自動テストを設定するには、<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code>を生成し、実行するテストを定める<code class="language-plaintext highlighter-rouge">sut</code>サービスをそこで定義します。
-<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code>ファイルは、イメージのビルドに用いる Dockerfile と同一のディレクトリに配置しておく必要があります。</p>
+<p>自動テストを設定するには、<code class="highlighter-rouge">docker-compose.test.yml</code>を生成し、実行するテストを定める<code class="highlighter-rouge">sut</code>サービスをそこで定義します。
+<code class="highlighter-rouge">docker-compose.test.yml</code>ファイルは、イメージのビルドに用いる Dockerfile と同一のディレクトリに配置しておく必要があります。</p>
 
 <p>たとえば以下のとおりです。</p>
 
@@ -136,35 +136,35 @@ Docker Hub リポジトリにビルドイメージをプッシュしたい場合
     <span class="na">command</span><span class="pi">:</span> <span class="s">run_tests.sh</span>
 </code></pre></div></div>
 
-<p>上の例ではリポジトリをビルドし、ビルドイメージを用いてコンテナー内部で<code class="language-plaintext highlighter-rouge">run_tests.sh</code>を実行します。</p>
+<p>上の例ではリポジトリをビルドし、ビルドイメージを用いてコンテナー内部で<code class="highlighter-rouge">run_tests.sh</code>を実行します。</p>
 
 <p>このファイルにはリンクするサービスをいくつでも定義することができます。
-必要になることは<code class="language-plaintext highlighter-rouge">sut</code>を定義しておくことだけです。
+必要になることは<code class="highlighter-rouge">sut</code>を定義しておくことだけです。
 そのサービスの戻り値からテストが成功したかどうかがわかります。
-<code class="language-plaintext highlighter-rouge">sut</code>サービスが<code class="language-plaintext highlighter-rouge">0</code>を返すとテストは成功、そうでなければ <strong>失敗</strong> を表わします。</p>
+<code class="highlighter-rouge">sut</code>サービスが<code class="highlighter-rouge">0</code>を返すとテストは成功、そうでなければ <strong>失敗</strong> を表わします。</p>
 
 <blockquote>
   <p><strong>メモ</strong>
-起動されるサービスは<code class="language-plaintext highlighter-rouge">sut</code>サービスと、<a href="../../compose/compose-file/compose-file-v2/#depends_on"><code class="language-plaintext highlighter-rouge">depends_on</code></a> のもとに定義されたサービスだけです。
-何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを <a href="../../compose/compose-file/compose-file-v2/#depends_on"><code class="language-plaintext highlighter-rouge">depends_on</code></a> のリスト内に定義して、サービスがすべて起動されるようにします。
-なお<code class="language-plaintext highlighter-rouge">depends_on</code>は、compose ファイル <a href="../../compose/compose-file/compose-versioning/#version-2">バージョン 2.0</a> において追加されています。
+起動されるサービスは<code class="highlighter-rouge">sut</code>サービスと、<a href="../../compose/compose-file/compose-file-v2/#depends_on"><code class="highlighter-rouge">depends_on</code></a> のもとに定義されたサービスだけです。
+何かのサービス内での変更をポーリングするサービスがある場合、そのポーリングサービスを <a href="../../compose/compose-file/compose-file-v2/#depends_on"><code class="highlighter-rouge">depends_on</code></a> のリスト内に定義して、サービスがすべて起動されるようにします。
+なお<code class="highlighter-rouge">depends_on</code>は、compose ファイル <a href="../../compose/compose-file/compose-versioning/#version-2">バージョン 2.0</a> において追加されています。
 したがってファイルバージョンは 2.0 以降とするようにしてください。</p>
 </blockquote>
 
-<p>必要に応じて<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code>ファイルはいくつでも定義できます。
-<code class="language-plaintext highlighter-rouge">.test.yml</code>で終わるファイルはすべてテストに用いられ、そのテストは順に実行されます。
+<p>必要に応じて<code class="highlighter-rouge">docker-compose.test.yml</code>ファイルはいくつでも定義できます。
+<code class="highlighter-rouge">.test.yml</code>で終わるファイルはすべてテストに用いられ、そのテストは順に実行されます。
 また <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/#override-build-test-or-push-commands">カスタムビルドフック</a> を用いることで、テスト動作をさらにカスタマイズすることができます。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 自動ビルドを有効にしている場合、<code class="language-plaintext highlighter-rouge">test.yml</code>ファイルに定義したテストもすべて実行されます。</p>
+  <p><strong>メモ</strong>: 自動ビルドを有効にしている場合、<code class="highlighter-rouge">test.yml</code>ファイルに定義したテストもすべて実行されます。</p>
 </blockquote>
 
 <h2 id="enable-automated-tests-on-a-repository">リポジトリ上での自動テストの有効化</h2>
 
 <p>ソースコードリポジトリ上においてテストを有効にするには、まず Docker Hub 内に関連づけるビルドリポジトリを生成することが必要です。
-<code class="language-plaintext highlighter-rouge">Autotest</code>（自動テスト）は <a href="/docs.docker.jp.onthefly/docker-hub/builds/">自動ビルド</a> と同じページから設定することができます。
-ただし自動ビルドが<code class="language-plaintext highlighter-rouge">Autotest</code>を利用するように設定する必要はありません。
-自動ビルドはブランチ単位やタグ単位で有効化されるので、<code class="language-plaintext highlighter-rouge">Autotest</code>に関する有効化は無用です。</p>
+<code class="highlighter-rouge">Autotest</code>（自動テスト）は <a href="/docs.docker.jp.onthefly/docker-hub/builds/">自動ビルド</a> と同じページから設定することができます。
+ただし自動ビルドが<code class="highlighter-rouge">Autotest</code>を利用するように設定する必要はありません。
+自動ビルドはブランチ単位やタグ単位で有効化されるので、<code class="highlighter-rouge">Autotest</code>に関する有効化は無用です。</p>
 
 <p><strong>Autobuild</strong>（自動ビルド）を利用するように設定したブランチのみが、Docker リポジトリにイメージプッシュを行います。
 これは自動テストの設定と関係はありません。</p>
@@ -174,7 +174,7 @@ Docker Hub リポジトリにビルドイメージをプッシュしたい場合
     <p>Docker Hub にログインして、画面上段のナビゲーションから <strong>Repositories</strong> を選択します。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">Autotest</code>を有効にするリポジトリを選択します。</p>
+    <p><code class="highlighter-rouge">Autotest</code>を有効にするリポジトリを選択します。</p>
   </li>
   <li>
     <p>リポジトリ画面において <strong>Builds</strong>（ビルド）タブをクリックします。</p>
@@ -200,15 +200,15 @@ Docker Hub リポジトリにビルドイメージをプッシュしたい場合
 
     <ul>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">Off</code>: テストビルドは一切行わないことを指定します。
+        <p><code class="highlighter-rouge">Off</code>: テストビルドは一切行わないことを指定します。
 自動ビルドの一部としてテスト実行が設定されたもののみがテストされます。</p>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">Internal pull requests</code>（内部プルリクエスト）: ビルドルールに合致するブランチへのプルリクエストすべてに対して、テストビルドを実行します。
+        <p><code class="highlighter-rouge">Internal pull requests</code>（内部プルリクエスト）: ビルドルールに合致するブランチへのプルリクエストすべてに対して、テストビルドを実行します。
 ただしそのプルリクエストが同一のソースリポジトリからきたものに限ります。</p>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">Internal and external pull requests</code>（内部および外部プリリクエスト）: ビルドルールに合致するブランチへのプルリクエストすべてに対して、テストビルドを実行します。
+        <p><code class="highlighter-rouge">Internal and external pull requests</code>（内部および外部プリリクエスト）: ビルドルールに合致するブランチへのプルリクエストすべてに対して、テストビルドを実行します。
 プルリクエストはソースリポジトリそのものから、そして外部からも受け付けます。</p>
       </li>
     </ul>

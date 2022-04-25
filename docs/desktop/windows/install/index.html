@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Windows への Docker Desktop のインストール | Docker ドキュメント</title>
   <meta name="description" content="How to install Docker Desktop for Windows" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Windows への Docker Desktop のインストール" />
   <meta property="og:description" content="How to install Docker Desktop for Windows" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/desktop/windows/install/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Windows への Docker Desktop のインストール","description":"How to install Docker Desktop for Windows","url":"https://docs.docker.com/desktop/windows/install/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -215,16 +215,20 @@ Enterprise または Education 1909 (build 18363) またはそれ以降。</p>
 
 <h2 id="install-docker-desktop-on-windows">Windows への Docker Desktop のインストール</h2>
 
+<h3 id="install-interactively">対話的なインストール</h3>
+
 <ol>
   <li>
     <p><strong>Docker Desktop Installer.exe</strong> をダブルクリックしてインストーラーを起動します。</p>
 
-    <p>インストーラー（<code class="language-plaintext highlighter-rouge">Docker Desktop Installer.exe</code>）をまだダウンロードしていない場合は <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/"><strong>Docker Hub</strong></a> からダウンロードしてください。
- 通常は<code class="language-plaintext highlighter-rouge">Downloads</code>フォルダーにダウンロードされます。
+    <p>インストーラー（<code class="highlighter-rouge">Docker Desktop Installer.exe</code>）をまだダウンロードしていない場合は <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/"><strong>Docker Hub</strong></a> からダウンロードしてください。
+ 通常は<code class="highlighter-rouge">Downloads</code>フォルダーにダウンロードされます。
  あるいはウェブブラウザーの下段に表示される、最新のダウンロードバーから直接起動することもできます。</p>
   </li>
   <li>
-    <p>Configuration ページにおいてプロンプト画面が表示されたら、<strong>Enable Hyper-V Windows Features</strong> オプションまたは <strong>Install required Windows components for WSL 2</strong> オプションが設定されていることを確認してください。</p>
+    <p>プロンプト画面が表示されたら、バックエンドでの選択状況に従って Configuration ページにおける <strong>Use WSL 2 instead of Hyper-V</strong> オプションのオンオフが設定されていることを確認してください。</p>
+
+    <p>利用するシステムが 2 つのオプションの 1 つのみをサポートしている場合は、バックエンドにおいて選択することはできません。</p>
   </li>
   <li>
     <p>インストールウィザードの手順に従ってインストーラーを承認して、インストールを完了させます。</p>
@@ -239,6 +243,35 @@ Enterprise または Education 1909 (build 18363) またはそれ以降。</p>
 変更を有効にするため、いったんログアウトしてからログインし直します。</p>
   </li>
 </ol>
+
+<h3 id="install-from-the-command-line">コマンドラインからのインストール</h3>
+
+<p><strong>Docker Desktop Installer.exe</strong> をダウンロードしたら、端末から以下のコマンドを実行して Docker Desktop をインストールします。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Docker Desktop Installer.exe" install
+</code></pre></div></div>
+
+<p>PowerShell を利用している場合は以下を実行します。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+</code></pre></div></div>
+
+<p>Windows コマンドプロンプトの利用時は以下を実行します。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>start /w "" "Docker Desktop Installer.exe" install
+</code></pre></div></div>
+
+<p>install コマンドでは以下のフラグ指定が可能です。</p>
+<ul>
+  <li><code class="highlighter-rouge">--quiet</code>: インストーラーの起動時に情報出力を省略します。</li>
+  <li><code class="highlighter-rouge">--accept-license</code>: <a href="https://www.docker.com/legal/docker-subscription-service-agreement" target="_blank" rel="noopener" class="_">Docker Subscription Service Agreement</a> に関して、アプリケーションの初回実行時に同意するのではなく、この場で同意するものとします。</li>
+  <li><code class="highlighter-rouge">--allowed-org=&lt;org name&gt;</code>: アプリケーションを実行するにあたって、ユーザーのサインインを要求して、指定した Docker Hub 組織の一員であることを要求します。</li>
+  <li><code class="highlighter-rouge">--backend=&lt;backend name&gt;</code>: Docker Desktop において利用するバックエンドを選択します。<code class="highlighter-rouge">hyper-v</code>または<code class="highlighter-rouge">wsl-2</code>(デフォルト) のいずれかとします。</li>
+</ul>
+
+<p>ユーザーアカウントが管理者アカウントと異なる場合は、ユーザーを <strong>docker-users</strong> グループに追加することが必要です。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net localgroup docker-users &lt;user&gt; /add
+</code></pre></div></div>
 
 <h2 id="start-docker-desktop">Docker Desktop の起動</h2>
 
@@ -399,7 +432,12 @@ Windows 上に Docker Desktop が正常に起動できるようになりまし�
       <li><a href="#about-windows-containers" class="nomunge">Windows コンテナーについて</a></li>
     </ul>
   </li>
-  <li><a href="#install-docker-desktop-on-windows" class="nomunge">Windows への Docker Desktop のインストール</a></li>
+  <li><a href="#install-docker-desktop-on-windows" class="nomunge">Windows への Docker Desktop のインストール</a>
+    <ul>
+      <li><a href="#install-interactively" class="nomunge">対話的なインストール</a></li>
+      <li><a href="#install-from-the-command-line" class="nomunge">コマンドラインからのインストール</a></li>
+    </ul>
+  </li>
   <li><a href="#start-docker-desktop" class="nomunge">Docker Desktop の起動</a>
     <ul>
       <li><a href="#quick-start-guide" class="nomunge">クイックスタートガイド</a></li>

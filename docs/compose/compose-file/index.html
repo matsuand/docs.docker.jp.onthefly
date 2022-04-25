@@ -1,7 +1,7 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose ファイル | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose 仕様 | Docker ドキュメント</title>
   <meta name="description" content="Compose ファイルリファレンス" />
   <meta name="keywords" content="fig, composition, compose, docker">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/compose-file/" />
@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Compose ファイル"/>
+  <meta name="twitter:title" itemprop="title name" content="Compose 仕様"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -40,16 +40,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Compose ファイル" />
+  <meta property="og:title" content="Compose 仕様" />
   <meta property="og:description" content="Compose ファイルリファレンス" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose ファイル","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose 仕様","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -107,98 +107,2486 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose ファイル</h1><h2 id="reference-and-guidelines">リファレンスとガイドライン</h2>
+                        <section class="section"><h1>Compose 仕様</h1><p><em class="reading-time">読む時間の目安: 80 分</em></p><p>The Compose file is a <a href="https://yaml.org" target="_blank" rel="noopener" class="_">YAML</a> file defining services,
+networks, and volumes for a Docker application. The latest and recommended
+version of the Compose file format is defined by the <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md" target="_blank" rel="noopener" class="_">Compose
+Specification</a>. The Compose spec merges the legacy
+2.x and 3.x versions, aggregating properties across these formats and is implemented by <strong>Compose 1.27.0+</strong>.</p>
 
-<p>これらのトピックにおいては Docker Compose フォーマットに基づく Docker Compose の実装を示します。
-Docker Compose <strong>1.27.0 以降</strong> では、<a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md">Compose 仕様</a> に定義されたフォーマットを実装しています。
-それ以前の Docker Compose バージョンは Compose ファイルフォーマット 2、2.x、3.x をサポートします。
-Compose 仕様はファイルフォーマット 2.x と 3.x を統合したものであり、両フォーマットにおけるプロパティをまとめています。</p>
+<h2 id="status-of-this-document">Status of this document</h2>
 
-<h2 id="compose-and-docker-compatibility-matrix">Compose と Docker の互換性マトリックス</h2>
+<p>This document specifies the Compose file format used to define multi-containers applications. Distribution of this document is unlimited.</p>
 
-<p>Compose ファイルフォーマットは 2、2.x、3.x と複数バージョンがあります。
-以下に示す表においてこれをわかりやすく示します。
-各バージョンに含まれる内容やアップグレード方法についての詳細は <strong><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">バージョンとアップグレード</a></strong> を参照してください。</p>
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in <a href="https://tools.ietf.org/html/rfc2119" target="_blank" rel="noopener" class="_">RFC 2119</a>.</p>
 
-<p>以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。</p>
+<h3 id="requirements-and-optional-attributes">Requirements and optional attributes</h3>
+
+<p>The Compose specification includes properties designed to target a local <a href="https://opencontainers.org/" target="_blank" rel="noopener" class="_">OCI</a> container runtime,
+exposing Linux kernel specific configuration options, but also some Windows container specific properties, as well as cloud platform features related to resource placement on a cluster, replicated application distribution and scalability.</p>
+
+<p>We acknowledge that no Compose implementation is expected to support <strong>all</strong> attributes, and that support for some properties
+is Platform dependent and can only be confirmed at runtime. The definition of a versioned schema to control the supported
+properties in a Compose file, established by the <a href="https://github.com/docker/compose" target="_blank" rel="noopener" class="_">docker-compose</a> tool where the Compose
+file format was designed, doesn’t offer any guarantee to the end-user attributes will be actually implemented.</p>
+
+<p>The specification defines the expected configuration syntax and behavior, but - until noted - supporting any of those is OPTIONAL.</p>
+
+<p>A Compose implementation to parse a Compose file using unsupported attributes SHOULD warn user. We recommend implementors
+to support those running modes:</p>
+
+<ul>
+  <li>default: warn user about unsupported attributes, but ignore them</li>
+  <li>strict: warn user about unsupported attributes and reject the compose file</li>
+  <li>loose: ignore unsupported attributes AND unknown attributes (that were not defined by the spec by the time implementation was created)</li>
+</ul>
+
+<h2 id="the-compose-application-model">The Compose application model</h2>
+
+<p>The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.</p>
+
+<p>Computing components of an application are defined as <a href="#services-top-level-element">Services</a>. A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.</p>
+
+<p>Services communicate with each other through <a href="#networks-top-level-element">Networks</a>. In this specification, a Network is a platform capability abstraction to establish an IP route between containers within services connected together. Low-level, platform-specific networking options are grouped into the Network definition and MAY be partially implemented on some platforms.</p>
+
+<p>Services store and share persistent data into <a href="#volumes-top-level-element">Volumes</a>. The specification describes such a persistent data as a high-level filesystem mount with global options. Actual platform-specific implementation details are grouped into the Volumes definition and MAY be partially implemented on some platforms.</p>
+
+<p>Some services require configuration data that is dependent on the runtime or platform. For this, the specification defines a dedicated concept: <a href="#configs-top-level-element">Configs</a>. From a Service container point of view, Configs are comparable to Volumes, in that they are files mounted into the container. But the actual definition involves distinct platform resources and services, which are abstracted by this type.</p>
+
+<p>A <a href="#secrets-top-level-element">Secret</a> is a specific flavor of configuration data for sensitive data that SHOULD NOT be exposed without security considerations. Secrets are made available to services as files mounted into their containers, but the platform-specific resources to provide sensitive data are specific enough to deserve a distinct concept and definition within the Compose specification.</p>
+
+<p>Distinction within Volumes, Configs and Secret allows implementations to offer a comparable abstraction at service level, but cover the specific configuration of adequate platform resources for well identified data usages.</p>
+
+<p>A <strong>Project</strong> is an individual deployment of an application specification on a platform. A project’s name is used to group
+resources together and isolate them from other applications or other installation of the same Compose specified application with distinct parameters. A Compose implementation creating resources on a platform MUST prefix resource names by project and
+set the label <code class="highlighter-rouge">com.docker.compose.project</code>.</p>
+
+<p>Project name can be set explicitly by top-level <code class="highlighter-rouge">name</code> attribute. Compose implementation MUST offer a way for user to set a custom project name and override this name, so that the same <code class="highlighter-rouge">compose.yaml</code> file can be deployed twice on the same infrastructure, without changes, by just passing a distinct name.</p>
+
+<h3 id="illustrative-example">Illustrative example</h3>
+
+<p>The following example illustrates Compose specification concepts with a concrete example application. The example is non-normative.</p>
+
+<p>Consider an application split into a frontend web application and a backend service.</p>
+
+<p>The frontend is configured at runtime with an HTTP configuration file managed by infrastructure, providing an external domain name, and an HTTPS server certificate injected by the platform’s secured secret store.</p>
+
+<p>The backend stores data in a persistent volume.</p>
+
+<p>Both services communicate with each other on an isolated back-tier network, while frontend is also connected to a front-tier network and exposes port 443 for external usage.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(External user) --&gt; 443 [frontend network]
+                            |
+                  +--------------------+
+                  |  frontend service  |...ro...&lt;HTTP configuration&gt;
+                  |      "webapp"      |...ro...&lt;server certificate&gt; #secured
+                  +--------------------+
+                            |
+                        [backend network]
+                            |
+                  +--------------------+
+                  |  backend service   |  r+w   ___________________
+                  |     "database"     |=======( persistent volume )
+                  +--------------------+        \_________________/
+</code></pre></div></div>
+
+<p>The example application is composed of the following parts:</p>
+
+<ul>
+  <li>2 services, backed by Docker images: <code class="highlighter-rouge">webapp</code> and <code class="highlighter-rouge">database</code></li>
+  <li>1 secret (HTTPS certificate), injected into the frontend</li>
+  <li>1 configuration (HTTP), injected into the frontend</li>
+  <li>1 persistent volume, attached to the backend</li>
+  <li>2 networks</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">443:8043"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">front-tier</span>
+      <span class="pi">-</span> <span class="s">back-tier</span>
+    <span class="na">configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">httpd-config</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">server-certificate</span>
+
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db-data:/etc/data</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">back-tier</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">flocker</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">10GiB"</span>
+
+<span class="na">configs</span><span class="pi">:</span>
+  <span class="na">httpd-config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="c1"># The presence of these objects is sufficient to define them</span>
+  <span class="na">front-tier</span><span class="pi">:</span> <span class="pi">{}</span>
+  <span class="na">back-tier</span><span class="pi">:</span> <span class="pi">{}</span>
+</code></pre></div></div>
+
+<p>This example illustrates the distinction between volumes, configs and secrets. While all of them are all exposed
+to service containers as mounted files or directories, only a volume can be configured for read+write access.
+Secrets and configs are read-only. The volume configuration allows you to select a volume driver and pass driver options
+to tweak volume management according to the actual infrastructure. Configs and Secrets rely on platform services,
+and are declared <code class="highlighter-rouge">external</code> as they are not managed as part of the application lifecycle: the Compose implementation
+will use a platform-specific lookup mechanism to retrieve runtime values.</p>
+
+<h2 id="compose-file">Compose file</h2>
+
+<p>The Compose file is a <a href="http://yaml.org/">YAML</a> file defining
+<a href="#version-top-level-element">version</a> (DEPRECATED),
+<a href="#services-top-level-element">services</a> (REQUIRED),
+<a href="#networks-top-level-element">networks</a>,
+<a href="#volumes-top-level-element">volumes</a>,
+<a href="#configs-top-level-element">configs</a> and
+<a href="#secrets-top-level-element">secrets</a>.
+The default path for a Compose file is <code class="highlighter-rouge">compose.yaml</code> (preferred) or <code class="highlighter-rouge">compose.yml</code> in working directory.
+Compose implementations SHOULD also support <code class="highlighter-rouge">docker-compose.yaml</code> and <code class="highlighter-rouge">docker-compose.yml</code> for backward compatibility.
+If both files exist, Compose implementations MUST prefer canonical <code class="highlighter-rouge">compose.yaml</code> one.</p>
+
+<p>Multiple Compose files can be combined together to define the application model. The combination of YAML files
+MUST be implemented by appending/overriding YAML elements based on Compose file order set by the user. Simple
+attributes and maps get overridden by the highest order Compose file, lists get merged by appending. Relative
+paths MUST be resolved based on the <strong>first</strong> Compose file’s parent folder, whenever complimentary files being
+merged are hosted in other folders.</p>
+
+<p>As some Compose file elements can both be expressed as single strings or complex objects, merges MUST apply to
+the expanded form.</p>
+
+<h3 id="profiles">Profiles</h3>
+
+<p>Profiles allow to adjust the Compose application model for various usages and environments. A Compose
+implementation SHOULD allow the user to define a set of active profiles. The exact mechanism is implementation
+specific and MAY include command line flags, environment variables, etc.</p>
+
+<p>The Services top-level element supports a <code class="highlighter-rouge">profiles</code> attribute to define a list of named profiles. Services without
+a <code class="highlighter-rouge">profiles</code> attribute set MUST always be enabled. A service MUST be ignored by the Compose
+implementation when none of the listed <code class="highlighter-rouge">profiles</code> match the active ones, unless the service is
+explicitly targeted by a command. In that case its <code class="highlighter-rouge">profiles</code> MUST be added to the set of active profiles.
+All other top-level elements are not affected by <code class="highlighter-rouge">profiles</code> and are always active.</p>
+
+<p>References to other services (by <code class="highlighter-rouge">links</code>, <code class="highlighter-rouge">extends</code> or shared resource syntax <code class="highlighter-rouge">service:xxx</code>) MUST not
+automatically enable a component that would otherwise have been ignored by active profiles. Instead the
+Compose implementation MUST return an error.</p>
+
+<h4 id="illustrative-example-1">Illustrative example</h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">foo</span>
+  <span class="na">bar</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">bar</span>
+    <span class="na">profiles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">test</span>
+  <span class="na">baz</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">baz</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">bar</span>
+    <span class="na">profiles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">test</span>
+  <span class="na">zot</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">zot</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">bar</span>
+    <span class="na">profiles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">debug</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Compose application model parsed with no profile enabled only contains the <code class="highlighter-rouge">foo</code> service.</li>
+  <li>If profile <code class="highlighter-rouge">test</code> is enabled, model contains the services <code class="highlighter-rouge">bar</code> and <code class="highlighter-rouge">baz</code> which are enabled by the
+<code class="highlighter-rouge">test</code> profile and service <code class="highlighter-rouge">foo</code> which is always enabled.</li>
+  <li>If profile <code class="highlighter-rouge">debug</code> is enabled, model contains both <code class="highlighter-rouge">foo</code> and <code class="highlighter-rouge">zot</code> services, but not <code class="highlighter-rouge">bar</code> and <code class="highlighter-rouge">baz</code>
+and as such the model is invalid regarding the <code class="highlighter-rouge">depends_on</code> constraint of <code class="highlighter-rouge">zot</code>.</li>
+  <li>If profiles <code class="highlighter-rouge">debug</code> and <code class="highlighter-rouge">test</code> are enabled, model contains all services: <code class="highlighter-rouge">foo</code>, <code class="highlighter-rouge">bar</code>, <code class="highlighter-rouge">baz</code> and <code class="highlighter-rouge">zot</code>.</li>
+  <li>If Compose implementation is executed with <code class="highlighter-rouge">bar</code> as explicit service to run, it and the <code class="highlighter-rouge">test</code> profile
+will be active even if <code class="highlighter-rouge">test</code> profile is not enabled <em>by the user</em>.</li>
+  <li>If Compose implementation is executed with <code class="highlighter-rouge">baz</code> as explicit service to run, the service <code class="highlighter-rouge">baz</code> and the
+profile <code class="highlighter-rouge">test</code> will be active and <code class="highlighter-rouge">bar</code> will be pulled in by the <code class="highlighter-rouge">depends_on</code> constraint.</li>
+  <li>If Compose implementation is executed with <code class="highlighter-rouge">zot</code> as explicit service to run, again the model will be
+invalid regarding the <code class="highlighter-rouge">depends_on</code> constraint of <code class="highlighter-rouge">zot</code> since <code class="highlighter-rouge">zot</code> and <code class="highlighter-rouge">bar</code> have no common <code class="highlighter-rouge">profiles</code>
+listed.</li>
+  <li>If Compose implementation is executed with <code class="highlighter-rouge">zot</code> as explicit service to run and profile <code class="highlighter-rouge">test</code> enabled,
+profile <code class="highlighter-rouge">debug</code> is automatically enabled and service <code class="highlighter-rouge">bar</code> is pulled in as a dependency starting both
+services <code class="highlighter-rouge">zot</code> and <code class="highlighter-rouge">bar</code>.</li>
+</ul>
+
+<h2 id="version-top-level-element">Version top-level element</h2>
+
+<p>Top-level <code class="highlighter-rouge">version</code> property is defined by the specification for backward compatibility but is only informative.</p>
+
+<p>A Compose implementation SHOULD NOT use this version to select an exact schema to validate the Compose file, but
+prefer the most recent schema at the time it has been designed.</p>
+
+<p>Compose implementations SHOULD validate whether they can fully parse the Compose file. If some fields are unknown, typically
+because the Compose file was written with fields defined by a newer version of the specification, Compose implementations
+SHOULD warn the user. Compose implementations MAY offer options to ignore unknown fields (as defined by <a href="#requirements-and-optional-attributes">“loose”</a> mode).</p>
+
+<h2 id="name-top-level-element">Name top-level element</h2>
+
+<p>Top-level <code class="highlighter-rouge">name</code> property is defined by the specification as project name to be used if user doesn’t set one explicitly.
+Compose implementations MUST offer a way for user to override this name, and SHOULD define a mechanism to compute a
+default project name, to be used if the top-level <code class="highlighter-rouge">name</code> element is not set.</p>
+
+<p>Whenever project name is defined by top-level <code class="highlighter-rouge">name</code> or by some custom mechanism, it MUST be exposed for
+<a href="#interpolation">interpolation</a> and environment variable resolution as <code class="highlighter-rouge">COMPOSE_PROJECT_NAME</code></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">COMPOSE_PROJECT_NAME</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">echo "I'm running ${COMPOSE_PROJECT_NAME}"</span>
+</code></pre></div></div>
+
+<h2 id="services-top-level-element">Services top-level element</h2>
+
+<p>A Service is an abstract definition of a computing resource within an application which can be scaled/replaced
+independently from other components. Services are backed by a set of containers, run by the platform
+according to replication requirements and placement constraints. Being backed by containers, Services are defined
+by a Docker image and set of runtime arguments. All containers within a service are identically created with these
+arguments.</p>
+
+<p>A Compose file MUST declare a <code class="highlighter-rouge">services</code> root element as a map whose keys are string representations of service names,
+and whose values are service definitions. A service  definition contains the configuration that is applied to each
+container started for that service.</p>
+
+<p>Each service MAY also include a Build section, which defines how to create the Docker image for the service.
+Compose implementations MAY support building docker images using this service definition. If not implemented
+the Build section SHOULD be ignored and the Compose file MUST still be considered valid.</p>
+
+<p>Build support is an OPTIONAL aspect of the Compose specification, and is
+described in detail in the <a href="/docs.docker.jp.onthefly/compose/compose-file/build/">Build support</a> documentation.</p>
+
+<p>Each Service defines runtime constraints and requirements to run its containers. The <code class="highlighter-rouge">deploy</code> section groups
+these constraints and allows the platform to adjust the deployment strategy to best match containers’ needs with
+available resources.</p>
+
+<p>Deploy support is an OPTIONAL aspect of the Compose specification, and is
+described in detail in the <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/">Deployment support</a> documentation.
+not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.</p>
+
+<h3 id="build">build</h3>
+
+<p><code class="highlighter-rouge">build</code> specifies the build configuration for creating container image from source, as defined in the <a href="/docs.docker.jp.onthefly/compose/compose-file/build/">Build support</a> documentation.</p>
+
+<h3 id="blkio_config">blkio_config</h3>
+
+<p><code class="highlighter-rouge">blkio_config</code> defines a set of configuration options to set block IO limits for this service.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">blkio_config</span><span class="pi">:</span>
+       <span class="na">weight</span><span class="pi">:</span> <span class="s">300</span>
+       <span class="na">weight_device</span><span class="pi">:</span>
+         <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/dev/sda</span>
+           <span class="na">weight</span><span class="pi">:</span> <span class="s">400</span>
+       <span class="na">device_read_bps</span><span class="pi">:</span>
+         <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/dev/sdb</span>
+           <span class="na">rate</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12mb'</span>
+       <span class="na">device_read_iops</span><span class="pi">:</span>
+         <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/dev/sdb</span>
+           <span class="na">rate</span><span class="pi">:</span> <span class="s">120</span>
+       <span class="na">device_write_bps</span><span class="pi">:</span>
+         <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/dev/sdb</span>
+           <span class="na">rate</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1024k'</span>
+       <span class="na">device_write_iops</span><span class="pi">:</span>
+         <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/dev/sdb</span>
+           <span class="na">rate</span><span class="pi">:</span> <span class="s">30</span>
+</code></pre></div></div>
+
+<h4 id="device_read_bps-device_write_bps">device_read_bps, device_write_bps</h4>
+
+<p>Set a limit in bytes per second for read / write operations on a given device.
+Each item in the list MUST have two keys:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">path</code>: defining the symbolic path to the affected device.</li>
+  <li><code class="highlighter-rouge">rate</code>: either as an integer value representing the number of bytes or as a string expressing a byte value.</li>
+</ul>
+
+<h4 id="device_read_iops-device_write_iops">device_read_iops, device_write_iops</h4>
+
+<p>Set a limit in operations per second for read / write operations on a given device.
+Each item in the list MUST have two keys:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">path</code>: defining the symbolic path to the affected device.</li>
+  <li><code class="highlighter-rouge">rate</code>: as an integer value representing the permitted number of operations per second.</li>
+</ul>
+
+<h4 id="weight">weight</h4>
+
+<p>Modify the proportion of bandwidth allocated to this service relative to other services.
+Takes an integer value between 10 and 1000, with 500 being the default.</p>
+
+<h4 id="weight_device">weight_device</h4>
+
+<p>Fine-tune bandwidth allocation by device. Each item in the list must have two keys:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">path</code>: defining the symbolic path to the affected device.</li>
+  <li><code class="highlighter-rouge">weight</code>: an integer value between 10 and 1000.</li>
+</ul>
+
+<h3 id="cpu_count">cpu_count</h3>
+
+<p><code class="highlighter-rouge">cpu_count</code> defines the number of usable CPUs for service container.</p>
+
+<h3 id="cpu_percent">cpu_percent</h3>
+
+<p><code class="highlighter-rouge">cpu_percent</code> defines the usable percentage of the available CPUs.</p>
+
+<h3 id="cpu_shares">cpu_shares</h3>
+
+<p><code class="highlighter-rouge">cpu_shares</code> defines (as integer value) service container relative CPU weight versus other containers.</p>
+
+<h3 id="cpu_period">cpu_period</h3>
+
+<p><code class="highlighter-rouge">cpu_period</code> allow Compose implementations to configure CPU CFS (Completely Fair Scheduler) period when platform is based
+on Linux kernel.</p>
+
+<h3 id="cpu_quota">cpu_quota</h3>
+
+<p><code class="highlighter-rouge">cpu_quota</code> allow Compose implementations to configure CPU CFS (Completely Fair Scheduler) quota when platform is based
+on Linux kernel.</p>
+
+<h3 id="cpu_rt_runtime">cpu_rt_runtime</h3>
+
+<p><code class="highlighter-rouge">cpu_rt_runtime</code> configures CPU allocation parameters for platform with support for realtime scheduler. Can be either
+an integer value using microseconds as unit or a <a href="#specifying-durations">duration</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">cpu_rt_runtime</span><span class="pi">:</span> <span class="s1">'</span><span class="s">400ms'</span>
+ <span class="na">cpu_rt_runtime</span><span class="pi">:</span> <span class="s">95000`</span>
+</code></pre></div></div>
+
+<h3 id="cpu_rt_period">cpu_rt_period</h3>
+
+<p><code class="highlighter-rouge">cpu_rt_period</code> configures CPU allocation parameters for platform with support for realtime scheduler. Can be either
+an integer value using microseconds as unit or a <a href="#specifying-durations">duration</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">cpu_rt_period</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1400us'</span>
+ <span class="na">cpu_rt_period</span><span class="pi">:</span> <span class="s">11000`</span>
+</code></pre></div></div>
+
+<h3 id="cpus">cpus</h3>
+
+<p><em>DEPRECATED: use <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/#cpus">deploy.reservations.cpus</a></em></p>
+
+<p><code class="highlighter-rouge">cpus</code> define the number of (potentially virtual) CPUs to allocate to service containers. This is a fractional number.
+<code class="highlighter-rouge">0.000</code> means no limit.</p>
+
+<h3 id="cpuset">cpuset</h3>
+
+<p><code class="highlighter-rouge">cpuset</code> defines the explicit CPUs in which to allow execution. Can be a range <code class="highlighter-rouge">0-3</code> or a list <code class="highlighter-rouge">0,1</code></p>
+
+<h3 id="cap_add">cap_add</h3>
+
+<p><code class="highlighter-rouge">cap_add</code> specifies additional container <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities</a>
+as strings.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cap_add:
+  - ALL
+</code></pre></div></div>
+
+<h3 id="cap_drop">cap_drop</h3>
+
+<p><code class="highlighter-rouge">cap_drop</code> specifies container <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities</a> to drop
+as strings.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cap_drop:
+  - NET_ADMIN
+  - SYS_ADMIN
+</code></pre></div></div>
+
+<h3 id="cgroup_parent">cgroup_parent</h3>
+
+<p><code class="highlighter-rouge">cgroup_parent</code> specifies an OPTIONAL parent <a href="http://man7.org/linux/man-pages/man7/cgroups.7.html">cgroup</a> for the container.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cgroup_parent: m-executor-abcd
+</code></pre></div></div>
+
+<h3 id="command">command</h3>
+
+<p><code class="highlighter-rouge">command</code> overrides the the default command declared by the container image (i.e. by Dockerfile’s <code class="highlighter-rouge">CMD</code>).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command: bundle exec thin -p 3000
+</code></pre></div></div>
+
+<p>The command can also be a list, in a manner similar to <a href="https://docs.docker.com/engine/reference/builder/#cmd">Dockerfile</a>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command: [ "bundle", "exec", "thin", "-p", "3000" ]
+</code></pre></div></div>
+
+<h3 id="configs">configs</h3>
+
+<p><code class="highlighter-rouge">configs</code> grant access to configs on a per-service basis using the per-service <code class="highlighter-rouge">configs</code>
+configuration. Two different syntax variants are supported.</p>
+
+<p>Compose implementations MUST report an error if config doesn’t exist on platform or isn’t defined in the
+<a href="#configs-top-level-element"><code class="highlighter-rouge">configs</code></a> section of this Compose file.</p>
+
+<p>There are two syntaxes defined for configs. To remain compliant to this specification, an implementation
+MUST support both syntaxes. Implementations MUST allow use of both short and long syntaxes within the same document.</p>
+
+<h4 id="short-syntax">Short syntax</h4>
+
+<p>The short syntax variant only specifies the config name. This grants the
+container access to the config and mounts it at <code class="highlighter-rouge">/&lt;config_name&gt;</code>
+within the container. The source name and destination mount point are both set
+to the config name.</p>
+
+<p>The following example uses the short syntax to grant the <code class="highlighter-rouge">redis</code> service
+access to the <code class="highlighter-rouge">my_config</code> and <code class="highlighter-rouge">my_other_config</code> configs. The value of
+<code class="highlighter-rouge">my_config</code> is set to the contents of the file <code class="highlighter-rouge">./my_config.txt</code>, and
+<code class="highlighter-rouge">my_other_config</code> is defined as an external resource, which means that it has
+already been defined in the platform. If the external config does not exist,
+the deployment MUST fail.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis:latest</span>
+    <span class="na">configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">my_config</span>
+<span class="na">configs</span><span class="pi">:</span>
+  <span class="na">my_config</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./my_config.txt</span>
+  <span class="na">my_other_config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h4 id="long-syntax">Long syntax</h4>
+
+<p>The long syntax provides more granularity in how the config is created within the service’s task containers.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">source</code>: The name of the config as it exists in the platform.</li>
+  <li><code class="highlighter-rouge">target</code>: The path and name of the file to be mounted in the service’s
+task containers. Defaults to <code class="highlighter-rouge">/&lt;source&gt;</code> if not specified.</li>
+  <li><code class="highlighter-rouge">uid</code> and <code class="highlighter-rouge">gid</code>: The numeric UID or GID that owns the mounted config file
+within the service’s task containers. Default value when not specified is USER running container.</li>
+  <li><code class="highlighter-rouge">mode</code>: The <a href="http://permissions-calculator.org/">permissions</a> for the file that is mounted within the service’s
+task containers, in octal notation. Default value is world-readable (<code class="highlighter-rouge">0444</code>).
+Writable bit MUST be ignored. The executable bit can be set.</li>
+</ul>
+
+<p>The following example sets the name of <code class="highlighter-rouge">my_config</code> to <code class="highlighter-rouge">redis_config</code> within the
+container, sets the mode to <code class="highlighter-rouge">0440</code> (group-readable) and sets the user and group
+to <code class="highlighter-rouge">103</code>. The <code class="highlighter-rouge">redis</code> service does not have access to the <code class="highlighter-rouge">my_other_config</code>
+config.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis:latest</span>
+    <span class="na">configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">my_config</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/redis_config</span>
+        <span class="na">uid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">103"</span>
+        <span class="na">gid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">103"</span>
+        <span class="na">mode</span><span class="pi">:</span> <span class="s">0440</span>
+<span class="na">configs</span><span class="pi">:</span>
+  <span class="na">my_config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">my_other_config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>You can grant a service access to multiple configs, and you can mix long and short syntax.</p>
+
+<h3 id="container_name">container_name</h3>
+
+<p><code class="highlighter-rouge">container_name</code> is a string that specifies a custom container name, rather than a generated default name.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">container_name</span><span class="pi">:</span> <span class="s">my-web-container</span>
+</code></pre></div></div>
+
+<p>Compose implementation MUST NOT scale a service beyond one container if the Compose file specifies a
+<code class="highlighter-rouge">container_name</code>. Attempting to do so MUST result in an error.</p>
+
+<p>If present, <code class="highlighter-rouge">container_name</code> SHOULD follow the regex format of <code class="highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code></p>
+
+<h3 id="credential_spec">credential_spec</h3>
+
+<p><code class="highlighter-rouge">credential_spec</code> configures the credential spec for a managed service account.</p>
+
+<p>Compose implementations that support services using Windows containers MUST support <code class="highlighter-rouge">file:</code> and
+<code class="highlighter-rouge">registry:</code> protocols for credential_spec. Compose implementations MAY also support additional
+protocols for custom use-cases.</p>
+
+<p>The <code class="highlighter-rouge">credential_spec</code> must be in the format <code class="highlighter-rouge">file://&lt;filename&gt;</code> or <code class="highlighter-rouge">registry://&lt;value-name&gt;</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">credential_spec</span><span class="pi">:</span>
+  <span class="na">file</span><span class="pi">:</span> <span class="s">my-credential-spec.json</span>
+</code></pre></div></div>
+
+<p>When using <code class="highlighter-rouge">registry:</code>, the credential spec is read from the Windows registry on
+the daemon’s host. A registry value with the given name must be located in:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
+</code></pre></div></div>
+
+<p>The following example loads the credential spec from a value named <code class="highlighter-rouge">my-credential-spec</code>
+in the registry:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">credential_spec</span><span class="pi">:</span>
+  <span class="na">registry</span><span class="pi">:</span> <span class="s">my-credential-spec</span>
+</code></pre></div></div>
+
+<h4 id="example-gmsa-configuration">Example gMSA configuration</h4>
+
+<p>When configuring a gMSA credential spec for a service, you only need
+to specify a credential spec with <code class="highlighter-rouge">config</code>, as shown in the following example:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">myservice</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">myimage:latest</span>
+    <span class="na">credential_spec</span><span class="pi">:</span>
+      <span class="na">config</span><span class="pi">:</span> <span class="s">my_credential_spec</span>
+
+<span class="na">configs</span><span class="pi">:</span>
+  <span class="na">my_credentials_spec</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./my-credential-spec.json|</span>
+</code></pre></div></div>
+
+<h3 id="depends_on">depends_on</h3>
+
+<p><code class="highlighter-rouge">depends_on</code> expresses startup and shutdown dependencies between services.</p>
+
+<h4 id="short-syntax-1">Short syntax</h4>
+
+<p>The short syntax variant only specifies service names of the dependencies.
+Service dependencies cause the following behaviors:</p>
+
+<ul>
+  <li>
+    <p>Compose implementations MUST create services in dependency order. In the following
+example, <code class="highlighter-rouge">db</code> and <code class="highlighter-rouge">redis</code> are created before <code class="highlighter-rouge">web</code>.</p>
+  </li>
+  <li>
+    <p>Compose implementations MUST remove services in dependency order. In the following
+example, <code class="highlighter-rouge">web</code> is removed before <code class="highlighter-rouge">db</code> and <code class="highlighter-rouge">redis</code>.</p>
+  </li>
+</ul>
+
+<p>Simple example:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+      <span class="pi">-</span> <span class="s">redis</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST guarantee dependency services have been started before
+starting a dependent service.
+Compose implementations MAY wait for dependency services to be “ready” before
+starting a dependent service.</p>
+
+<h4 id="long-syntax-1">Long syntax</h4>
+
+<p>The long form syntax enables the configuration of additional fields that can’t be
+expressed in the short form.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">condition</code>: condition under which dependency is considered satisfied
+    <ul>
+      <li><code class="highlighter-rouge">service_started</code>: is an equivalent of the short syntax described above</li>
+      <li><code class="highlighter-rouge">service_healthy</code>: specifies that a dependency is expected to be “healthy”
+(as indicated by <a href="#healthcheck">healthcheck</a>) before starting a dependent
+service.</li>
+      <li><code class="highlighter-rouge">service_completed_successfully</code>: specifies that a dependency is expected to run
+to successful completion before starting a dependent service.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Service dependencies cause the following behaviors:</p>
+
+<ul>
+  <li>
+    <p>Compose implementations MUST create services in dependency order. In the following
+example, <code class="highlighter-rouge">db</code> and <code class="highlighter-rouge">redis</code> are created before <code class="highlighter-rouge">web</code>.</p>
+  </li>
+  <li>
+    <p>Compose implementations MUST wait for healthchecks to pass on dependencies
+marked with <code class="highlighter-rouge">service_healthy</code>. In the following example, <code class="highlighter-rouge">db</code> is expected to
+be “healthy” before <code class="highlighter-rouge">web</code> is created.</p>
+  </li>
+  <li>
+    <p>Compose implementations MUST remove services in dependency order. In the following
+example, <code class="highlighter-rouge">web</code> is removed before <code class="highlighter-rouge">db</code> and <code class="highlighter-rouge">redis</code>.</p>
+  </li>
+</ul>
+
+<p>Simple example:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="na">db</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_healthy</span>
+      <span class="na">redis</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_started</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST guarantee dependency services have been started before
+starting a dependent service.
+Compose implementations MUST guarantee dependency services marked with
+<code class="highlighter-rouge">service_healthy</code> are “healthy” before starting a dependent service.</p>
+
+<h3 id="deploy">deploy</h3>
+
+<p><code class="highlighter-rouge">deploy</code> specifies the configuration for the deployment and lifecycle of services, as defined <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/">here</a>.</p>
+
+<h3 id="device_cgroup_rules">device_cgroup_rules</h3>
+
+<p><code class="highlighter-rouge">device_cgroup_rules</code> defines a list of device cgroup rules for this container.
+The format is the same format the Linux kernel specifies in the <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/devices.html" target="_blank" rel="noopener" class="_">Control Groups
+Device Whitelist Controller</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">device_cgroup_rules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">c</span><span class="nv"> </span><span class="s">1:3</span><span class="nv"> </span><span class="s">mr'</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">a</span><span class="nv"> </span><span class="s">7:*</span><span class="nv"> </span><span class="s">rmw'</span>
+</code></pre></div></div>
+
+<h3 id="devices">devices</h3>
+
+<p><code class="highlighter-rouge">devices</code> defines a list of device mappings for created containers in the form of
+<code class="highlighter-rouge">HOST_PATH:CONTAINER_PATH[:CGROUP_PERMISSIONS]</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">devices</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">/dev/ttyUSB0:/dev/ttyUSB0"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">/dev/sda:/dev/xvda:rwm"</span>
+</code></pre></div></div>
+
+<h3 id="dns">dns</h3>
+
+<p><code class="highlighter-rouge">dns</code> defines custom DNS servers to set on the container network interface configuration. Can be a single value or a list.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns</span><span class="pi">:</span> <span class="s">8.8.8.8</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">8.8.8.8</span>
+  <span class="pi">-</span> <span class="s">9.9.9.9</span>
+</code></pre></div></div>
+
+<h3 id="dns_opt">dns_opt</h3>
+
+<p><code class="highlighter-rouge">dns_opt</code> list custom DNS options to be passed to the container’s DNS resolver (<code class="highlighter-rouge">/etc/resolv.conf</code> file on Linux).</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_opt</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">use-vc</span>
+  <span class="pi">-</span> <span class="s">no-tld-query</span>
+</code></pre></div></div>
+
+<h3 id="dns_search">dns_search</h3>
+
+<p><code class="highlighter-rouge">dns</code> defines custom DNS search domains to set on container network interface configuration. Can be a single value or a list.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_search</span><span class="pi">:</span> <span class="s">example.com</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_search</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">dc1.example.com</span>
+  <span class="pi">-</span> <span class="s">dc2.example.com</span>
+</code></pre></div></div>
+
+<h3 id="domainname">domainname</h3>
+
+<p><code class="highlighter-rouge">domainname</code> declares a custom domain name to use for the service container. MUST be a valid RFC 1123 hostname.</p>
+
+<h3 id="entrypoint">entrypoint</h3>
+
+<p><code class="highlighter-rouge">entrypoint</code> overrides the default entrypoint for the Docker image (i.e. <code class="highlighter-rouge">ENTRYPOINT</code> set by Dockerfile).
+Compose implementations MUST clear out any default command on the Docker image - both <code class="highlighter-rouge">ENTRYPOINT</code> and <code class="highlighter-rouge">CMD</code> instruction
+in the Dockerfile - when <code class="highlighter-rouge">entrypoint</code> is configured by a Compose file. If <a href="#command"><code class="highlighter-rouge">command</code></a> is also set,
+it is used as parameter to <code class="highlighter-rouge">entrypoint</code> as a replacement for Docker image’s <code class="highlighter-rouge">CMD</code></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">entrypoint</span><span class="pi">:</span> <span class="s">/code/entrypoint.sh</span>
+</code></pre></div></div>
+
+<p>The entrypoint can also be a list, in a manner similar to
+<a href="https://docs.docker.com/engine/reference/builder/#cmd">Dockerfile</a>:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">entrypoint</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">php</span>
+  <span class="pi">-</span> <span class="s">-d</span>
+  <span class="pi">-</span> <span class="s">zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so</span>
+  <span class="pi">-</span> <span class="s">-d</span>
+  <span class="pi">-</span> <span class="s">memory_limit=-1</span>
+  <span class="pi">-</span> <span class="s">vendor/bin/phpunit</span>
+</code></pre></div></div>
+
+<h3 id="env_file">env_file</h3>
+
+<p><code class="highlighter-rouge">env_file</code> adds environment variables to the container based on file content.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env_file</span><span class="pi">:</span> <span class="s">.env</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">env_file</code> can also be a list. The files in the list MUST be processed from the top down. For the same variable
+specified in two env files, the value from the last file in the list MUST stand.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env_file</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">./a.env</span>
+  <span class="pi">-</span> <span class="s">./b.env</span>
+</code></pre></div></div>
+
+<p>Relative path MUST be resolved from the Compose file’s parent folder. As absolute paths prevent the Compose
+file from being portable, Compose implementations SHOULD warn users when such a path is used to set <code class="highlighter-rouge">env_file</code>.</p>
+
+<p>Environment variables declared in the <a href="#environment">environment</a> section
+MUST override these values – this holds true even if those values are
+empty or undefined.</p>
+
+<h4 id="env_file-format">Env_file format</h4>
+
+<p>Each line in an env file MUST be in <code class="highlighter-rouge">VAR[=[VAL]]</code> format. Lines beginning with <code class="highlighter-rouge">#</code> MUST be ignored.
+Blank lines MUST also be ignored.</p>
+
+<p>The value of <code class="highlighter-rouge">VAL</code> is used as a raw string and not modified at all. If the value is surrounded by quotes
+(as is often the case for shell variables), the quotes MUST be <strong>included</strong> in the value passed to containers
+created by the Compose implementation.</p>
+
+<p><code class="highlighter-rouge">VAL</code> MAY be omitted, in such cases the variable value is empty string.
+<code class="highlighter-rouge">=VAL</code> MAY be omitted, in such cases the variable is <strong>unset</strong>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set Rails/Rack environment</span>
+<span class="nv">RACK_ENV</span><span class="o">=</span>development
+<span class="nv">VAR</span><span class="o">=</span><span class="s2">"quoted"</span>
+</code></pre></div></div>
+
+<h3 id="environment">environment</h3>
+
+<p><code class="highlighter-rouge">environment</code> defines environment variables set in the container. <code class="highlighter-rouge">environment</code> can use either an array or a
+map. Any boolean values; true, false, yes, no, SHOULD be enclosed in quotes to ensure
+they are not converted to True or False by the YAML parser.</p>
+
+<p>Environment variables MAY be declared by a single key (no value to equals sign). In such a case Compose
+implementations SHOULD rely on some user interaction to resolve the value. If they do not, the variable
+is unset and will be removed from the service container environment.</p>
+
+<p>Map syntax:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">environment</span><span class="pi">:</span>
+  <span class="na">RACK_ENV</span><span class="pi">:</span> <span class="s">development</span>
+  <span class="na">SHOW</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="na">USER_INPUT</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>Array syntax:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">environment</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">RACK_ENV=development</span>
+  <span class="pi">-</span> <span class="s">SHOW=true</span>
+  <span class="pi">-</span> <span class="s">USER_INPUT</span>
+</code></pre></div></div>
+
+<p>When both <code class="highlighter-rouge">env_file</code> and <code class="highlighter-rouge">environment</code> are set for a service, values set by <code class="highlighter-rouge">environment</code> have precedence.</p>
+
+<h3 id="expose">expose</h3>
+
+<p><code class="highlighter-rouge">expose</code> defines the ports that Compose implementations MUST expose from container. These ports MUST be
+accessible to linked services and SHOULD NOT be published to the host machine. Only the internal container
+ports can be specified.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">expose</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">8000"</span>
+</code></pre></div></div>
+
+<h3 id="extends">extends</h3>
+
+<p>Extend another service, in the current file or another, optionally overriding configuration. You can use
+<code class="highlighter-rouge">extends</code> on any service together with other configuration keys. The <code class="highlighter-rouge">extends</code> value MUST be a mapping
+defined with a required <code class="highlighter-rouge">service</code> and an optional <code class="highlighter-rouge">file</code> key.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extends</span><span class="pi">:</span>
+  <span class="na">file</span><span class="pi">:</span> <span class="s">common.yml</span>
+  <span class="na">service</span><span class="pi">:</span> <span class="s">webapp</span>
+</code></pre></div></div>
+
+<p>If supported Compose implementations MUST process <code class="highlighter-rouge">extends</code> in the following way:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">service</code> defines the name of the service being referenced as a base, for example <code class="highlighter-rouge">web</code> or <code class="highlighter-rouge">database</code>.</li>
+  <li><code class="highlighter-rouge">file</code> is the location of a Compose configuration file defining that service.</li>
+</ul>
+
+<h4 id="restrictions">Restrictions</h4>
+
+<p>The following restrictions apply to the service being referenced:</p>
+
+<ul>
+  <li>Services that have dependencies on other services cannot be used as a base. Therefore, any key
+that introduces a dependency on another service is incompatible with <code class="highlighter-rouge">extends</code>. The
+non-exhaustive list of such keys is: <code class="highlighter-rouge">links</code>, <code class="highlighter-rouge">volumes_from</code>, <code class="highlighter-rouge">container</code> mode (in <code class="highlighter-rouge">ipc</code>, <code class="highlighter-rouge">pid</code>,
+<code class="highlighter-rouge">network_mode</code> and <code class="highlighter-rouge">net</code>), <code class="highlighter-rouge">service</code> mode (in <code class="highlighter-rouge">ipc</code>, <code class="highlighter-rouge">pid</code> and <code class="highlighter-rouge">network_mode</code>), <code class="highlighter-rouge">depends_on</code>.</li>
+  <li>Services cannot have circular references with <code class="highlighter-rouge">extends</code></li>
+</ul>
+
+<p>Compose implementations MUST return an error in all of these cases.</p>
+
+<h4 id="finding-referenced-service">Finding referenced service</h4>
+
+<p><code class="highlighter-rouge">file</code> value can be:</p>
+
+<ul>
+  <li>Not present.
+This indicates that another service within the same Compose file is being referenced.</li>
+  <li>File path, which can be either:
+    <ul>
+      <li>Relative path. This path is considered as relative to the location of the main Compose
+file.</li>
+      <li>Absolute path.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Service denoted by <code class="highlighter-rouge">service</code> MUST be present in the identified referenced Compose file.
+Compose implementations MUST return an error if:</p>
+
+<ul>
+  <li>Service denoted by <code class="highlighter-rouge">service</code> was not found</li>
+  <li>Compose file denoted by <code class="highlighter-rouge">file</code> was not found</li>
+</ul>
+
+<h4 id="merging-service-definitions">Merging service definitions</h4>
+
+<p>Two service definitions (<em>main</em> one in the current Compose file and <em>referenced</em> one
+specified by <code class="highlighter-rouge">extends</code>) MUST be merged in the following way:</p>
+
+<ul>
+  <li>Mappings: keys in mappings of <em>main</em> service definition override keys in mappings
+of <em>referenced</em> service definition. Keys that aren’t overridden are included as is.</li>
+  <li>Sequences: items are combined together into an new sequence. Order of elements is
+preserved with the <em>referenced</em> items coming first and <em>main</em> items after.</li>
+  <li>Scalars: keys in <em>main</em> service definition take precedence over keys in the
+<em>referenced</em> one.</li>
+</ul>
+
+<h5 id="mappings">Mappings</h5>
+
+<p>The following keys should be treated as mappings: <code class="highlighter-rouge">build.args</code>, <code class="highlighter-rouge">build.labels</code>,
+<code class="highlighter-rouge">build.extra_hosts</code>, <code class="highlighter-rouge">deploy.labels</code>, <code class="highlighter-rouge">deploy.update_config</code>, <code class="highlighter-rouge">deploy.rollback_config</code>,
+<code class="highlighter-rouge">deploy.restart_policy</code>, <code class="highlighter-rouge">deploy.resources.limits</code>, <code class="highlighter-rouge">environment</code>, <code class="highlighter-rouge">healthcheck</code>,
+<code class="highlighter-rouge">labels</code>, <code class="highlighter-rouge">logging.options</code>, <code class="highlighter-rouge">sysctls</code>, <code class="highlighter-rouge">storage_opt</code>, <code class="highlighter-rouge">extra_hosts</code>, <code class="highlighter-rouge">ulimits</code>.</p>
+
+<p>One exception that applies to <code class="highlighter-rouge">healthcheck</code> is that <em>main</em> mapping cannot specify
+<code class="highlighter-rouge">disable: true</code> unless <em>referenced</em> mapping also specifies <code class="highlighter-rouge">disable: true</code>. Compose
+implementations MUST return an error in this case.</p>
+
+<p>For example, the input below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">common</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">TZ</span><span class="pi">:</span> <span class="s">utc</span>
+      <span class="na">PORT</span><span class="pi">:</span> <span class="s">80</span>
+  <span class="na">cli</span><span class="pi">:</span>
+    <span class="na">extends</span><span class="pi">:</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">common</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">PORT</span><span class="pi">:</span> <span class="s">8080</span>
+</code></pre></div></div>
+
+<p>Produces the following configuration for the <code class="highlighter-rouge">cli</code> service. The same output is
+produced if array syntax is used.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">environment</span><span class="pi">:</span>
+  <span class="na">PORT</span><span class="pi">:</span> <span class="s">8080</span>
+  <span class="na">TZ</span><span class="pi">:</span> <span class="s">utc</span>
+<span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+</code></pre></div></div>
+
+<p>Items under <code class="highlighter-rouge">blkio_config.device_read_bps</code>, <code class="highlighter-rouge">blkio_config.device_read_iops</code>,
+<code class="highlighter-rouge">blkio_config.device_write_bps</code>, <code class="highlighter-rouge">blkio_config.device_write_iops</code>, <code class="highlighter-rouge">devices</code> and
+<code class="highlighter-rouge">volumes</code> are also treated as mappings where key is the target path inside the
+container.</p>
+
+<p>For example, the input below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">common</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">common-volume:/var/lib/backup/data:rw</span>
+  <span class="na">cli</span><span class="pi">:</span>
+    <span class="na">extends</span><span class="pi">:</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">common</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cli-volume:/var/lib/backup/data:ro</span>
+</code></pre></div></div>
+
+<p>Produces the following configuration for the <code class="highlighter-rouge">cli</code> service. Note that mounted path
+now points to the new volume name and <code class="highlighter-rouge">ro</code> flag was applied.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+<span class="na">volumes</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">cli-volume:/var/lib/backup/data:ro</span>
+</code></pre></div></div>
+
+<p>If <em>referenced</em> service definition contains <code class="highlighter-rouge">extends</code> mapping, the items under it
+are simply copied into the new <em>merged</em> definition. Merging process is then kicked
+off again until no <code class="highlighter-rouge">extends</code> keys are remaining.</p>
+
+<p>For example, the input below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">base</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">common</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">extends</span><span class="pi">:</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">base</span>
+  <span class="na">cli</span><span class="pi">:</span>
+    <span class="na">extends</span><span class="pi">:</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">common</span>
+</code></pre></div></div>
+
+<p>Produces the following configuration for the <code class="highlighter-rouge">cli</code> service. Here, <code class="highlighter-rouge">cli</code> services
+gets <code class="highlighter-rouge">user</code> key from <code class="highlighter-rouge">common</code> service, which in turn gets this key from <code class="highlighter-rouge">base</code>
+service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+<span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
+</code></pre></div></div>
+
+<h5 id="sequences">Sequences</h5>
+
+<p>The following keys should be treated as sequences: <code class="highlighter-rouge">cap_add</code>, <code class="highlighter-rouge">cap_drop</code>, <code class="highlighter-rouge">configs</code>,
+<code class="highlighter-rouge">deploy.placement.constraints</code>, <code class="highlighter-rouge">deploy.placement.preferences</code>,
+<code class="highlighter-rouge">deploy.reservations.generic_resources</code>, <code class="highlighter-rouge">device_cgroup_rules</code>, <code class="highlighter-rouge">expose</code>,
+<code class="highlighter-rouge">external_links</code>, <code class="highlighter-rouge">ports</code>, <code class="highlighter-rouge">secrets</code>, <code class="highlighter-rouge">security_opt</code>.
+Any duplicates resulting from the merge are removed so that the sequence only
+contains unique elements.</p>
+
+<p>For example, the input below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">common</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">security_opt</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">label:role:ROLE</span>
+  <span class="na">cli</span><span class="pi">:</span>
+    <span class="na">extends</span><span class="pi">:</span>
+      <span class="na">service</span><span class="pi">:</span> <span class="s">common</span>
+    <span class="na">security_opt</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">label:user:USER</span>
+</code></pre></div></div>
+
+<p>Produces the following configuration for the <code class="highlighter-rouge">cli</code> service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+<span class="na">security_opt</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">label:role:ROLE</span>
+<span class="pi">-</span> <span class="s">label:user:USER</span>
+</code></pre></div></div>
+
+<p>In case list syntax is used, the following keys should also be treated as sequences:
+<code class="highlighter-rouge">dns</code>, <code class="highlighter-rouge">dns_search</code>, <code class="highlighter-rouge">env_file</code>, <code class="highlighter-rouge">tmpfs</code>. Unlike sequence fields mentioned above,
+duplicates resulting from the merge are not removed.</p>
+
+<h5 id="scalars">Scalars</h5>
+
+<p>Any other allowed keys in the service definition should be treated as scalars.</p>
+
+<h3 id="external_links">external_links</h3>
+
+<p><code class="highlighter-rouge">external_links</code> link service containers to services managed outside this Compose application.
+<code class="highlighter-rouge">external_links</code> define the name of an existing service to retrieve using the platform lookup mechanism.
+An alias of the form <code class="highlighter-rouge">SERVICE:ALIAS</code> can be specified.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">external_links</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">redis</span>
+  <span class="pi">-</span> <span class="s">database:mysql</span>
+  <span class="pi">-</span> <span class="s">database:postgresql</span>
+</code></pre></div></div>
+
+<h3 id="extra_hosts">extra_hosts</h3>
+
+<p><code class="highlighter-rouge">extra_hosts</code> adds hostname mappings to the container network interface configuration (<code class="highlighter-rouge">/etc/hosts</code> for Linux).
+Values MUST set hostname and IP address for additional hosts in the form of <code class="highlighter-rouge">HOSTNAME:IP</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">somehost:162.242.195.82"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">otherhost:50.31.209.229"</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST create matching entry with the IP address and hostname in the container’s network
+configuration, which means for Linux <code class="highlighter-rouge">/etc/hosts</code> will get extra lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>162.242.195.82  somehost
+50.31.209.229   otherhost
+</code></pre></div></div>
+
+<h3 id="group_add">group_add</h3>
+
+<p><code class="highlighter-rouge">group_add</code> specifies additional groups (by name or number) which the user inside the container MUST be a member of.</p>
+
+<p>An example of where this is useful is when multiple containers (running as different users) need to all read or write
+the same file on a shared volume. That file can be owned by a group shared by all the containers, and specified in
+<code class="highlighter-rouge">group_add</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">myservice</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">alpine</span>
+    <span class="na">group_add</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mail</span>
+</code></pre></div></div>
+
+<p>Running <code class="highlighter-rouge">id</code> inside the created container MUST show that the user belongs to the <code class="highlighter-rouge">mail</code> group, which would not have
+been the case if <code class="highlighter-rouge">group_add</code> were not declared.</p>
+
+<h3 id="healthcheck">healthcheck</h3>
+
+<p><code class="highlighter-rouge">healthcheck</code> declares a check that’s run to determine whether or not containers for this
+service are “healthy”. This overrides
+<a href="https://docs.docker.com/engine/reference/builder/#healthcheck">HEALTHCHECK Dockerfile instruction</a>
+set by the service’s Docker image.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthcheck</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost"</span><span class="pi">]</span>
+  <span class="na">interval</span><span class="pi">:</span> <span class="s">1m30s</span>
+  <span class="na">timeout</span><span class="pi">:</span> <span class="s">10s</span>
+  <span class="na">retries</span><span class="pi">:</span> <span class="s">3</span>
+  <span class="na">start_period</span><span class="pi">:</span> <span class="s">40s</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">interval</code>, <code class="highlighter-rouge">timeout</code> and <code class="highlighter-rouge">start_period</code> are <a href="#specifying-durations">specified as durations</a>.</p>
+
+<p><code class="highlighter-rouge">test</code> defines the command the Compose implementation will run to check container health. It can be
+either a string or a list. If it’s a list, the first item must be either <code class="highlighter-rouge">NONE</code>, <code class="highlighter-rouge">CMD</code> or <code class="highlighter-rouge">CMD-SHELL</code>.
+If it’s a string, it’s equivalent to specifying <code class="highlighter-rouge">CMD-SHELL</code> followed by that string.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Hit the local web app</span>
+<span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost"</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<p>Using <code class="highlighter-rouge">CMD-SHELL</code> will run the command configured as a string using the container’s default shell
+(<code class="highlighter-rouge">/bin/sh</code> for Linux). Both forms below are equivalent:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD-SHELL"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl</span><span class="nv"> </span><span class="s">-f</span><span class="nv"> </span><span class="s">http://localhost</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">exit</span><span class="nv"> </span><span class="s">1"</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span> <span class="s">curl -f https://localhost || exit 1</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">NONE</code> disable the healthcheck, and is mostly useful to disable Healthcheck set by image. Alternatively
+the healthcheck set by the image can be disabled by setting <code class="highlighter-rouge">disable: true</code>:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthcheck</span><span class="pi">:</span>
+  <span class="na">disable</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="hostname">hostname</h3>
+
+<p><code class="highlighter-rouge">hostname</code> declares a custom host name to use for the service container. MUST be a valid RFC 1123 hostname.</p>
+
+<h3 id="image">image</h3>
+
+<p><code class="highlighter-rouge">image</code> specifies the image to start the container from. Image MUST follow the Open Container Specification
+<a href="https://github.com/opencontainers/org/blob/master/docs/docs/introduction/digests.md">addressable image format</a>,
+as <code class="highlighter-rouge">[&lt;registry&gt;/][&lt;project&gt;/]&lt;image&gt;[:&lt;tag&gt;|@&lt;digest&gt;]</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis:5</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis@sha256:0ed5d5928d4737458944eb604cc8509e245c3e19d02ad83935398bc4b991aac7</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">library/redis</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/library/redis</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">my_private.registry:5000/redis</span>
+</code></pre></div></div>
+
+<p>If the image does not exist on the platform, Compose implementations MUST attempt to pull it based on the <code class="highlighter-rouge">pull_policy</code>.
+Compose implementations with build support MAY offer alternative options for the end user to control precedence of
+pull over building the image from source, however pulling the image MUST be the default behavior.</p>
+
+<p><code class="highlighter-rouge">image</code> MAY be omitted from a Compose file as long as a <code class="highlighter-rouge">build</code> section is declared. Compose implementations
+without build support MUST fail when <code class="highlighter-rouge">image</code> is missing from the Compose file.</p>
+
+<h3 id="init">init</h3>
+
+<p><code class="highlighter-rouge">init</code> run an init process (PID 1) inside the container that forwards signals and reaps processes.
+Set this option to <code class="highlighter-rouge">true</code> to enable this feature for the service.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">alpine:latest</span>
+    <span class="na">init</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>The init binary that is used is platform specific.</p>
+
+<h3 id="ipc">ipc</h3>
+
+<p><code class="highlighter-rouge">ipc</code> configures the IPC isolation mode set by service container. Available
+values are platform specific, but Compose specification defines specific values
+which MUST be implemented as described if supported:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">shareable</code> which gives the container own private IPC namespace, with a
+possibility to share it with other containers.</li>
+  <li><code class="highlighter-rouge">service:{name}</code> which makes the container join another (<code class="highlighter-rouge">shareable</code>)
+ container’s IPC namespace.</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">ipc</span><span class="pi">:</span> <span class="s2">"</span><span class="s">shareable"</span>
+    <span class="na">ipc</span><span class="pi">:</span> <span class="s2">"</span><span class="s">service:[service</span><span class="nv"> </span><span class="s">name]"</span>
+</code></pre></div></div>
+
+<h3 id="isolation">isolation</h3>
+
+<p><code class="highlighter-rouge">isolation</code> specifies a container’s isolation technology. Supported values are platform-specific.</p>
+
+<h3 id="labels">labels</h3>
+
+<p><code class="highlighter-rouge">labels</code> add metadata to containers. You can use either an array or a map.</p>
+
+<p>It’s recommended that you use reverse-DNS notation to prevent your labels from conflicting with
+those used by other software.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST create containers with canonical labels:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">com.docker.compose.project</code> set on all resources created by Compose implementation to the user project name</li>
+  <li><code class="highlighter-rouge">com.docker.compose.service</code> set on service containers with service name as defined in the Compose file</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">com.docker.compose</code> label prefix is reserved. Specifying labels with this prefix in the Compose file MUST
+result in a runtime error.</p>
+
+<h3 id="links">links</h3>
+
+<p><code class="highlighter-rouge">links</code> defines a network link to containers in another service. Either specify both the service name and
+a link alias (<code class="highlighter-rouge">SERVICE:ALIAS</code>), or just the service name.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="pi">-</span> <span class="s">db:database</span>
+    <span class="pi">-</span> <span class="s">redis</span>
+</code></pre></div></div>
+
+<p>Containers for the linked service MUST be reachable at a hostname identical to the alias, or the service name
+if no alias was specified.</p>
+
+<p>Links are not required to enable services to communicate - when no specific network configuration is set,
+any service MUST be able to reach any other service at that service’s name on the <code class="highlighter-rouge">default</code> network. If services
+do declare networks they are attached to, <code class="highlighter-rouge">links</code> SHOULD NOT override the network configuration and services not
+attached to a shared network SHOULD NOT be able to communicate. Compose implementations MAY NOT warn the user
+about this configuration mismatch.</p>
+
+<p>Links also express implicit dependency between services in the same way as
+<a href="#depends_on">depends_on</a>, so they determine the order of service startup.</p>
+
+<h3 id="logging">logging</h3>
+
+<p><code class="highlighter-rouge">logging</code> defines the logging configuration for the service.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
+  <span class="na">driver</span><span class="pi">:</span> <span class="s">syslog</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">syslog-address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tcp://192.168.0.42:123"</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">driver</code> name specifies a logging driver for the service’s containers. The default and available values
+are platform specific. Driver specific options can be set with <code class="highlighter-rouge">options</code> as key-value pairs.</p>
+
+<h3 id="network_mode">network_mode</h3>
+
+<p><code class="highlighter-rouge">network_mode</code> set service containers network mode. Available values are platform specific, but Compose
+specification define specific values which MUST be implemented as described if supported:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">none</code> which disable all container networking</li>
+  <li><code class="highlighter-rouge">host</code> which gives the container raw access to host’s network interface</li>
+  <li><code class="highlighter-rouge">service:{name}</code> which gives the containers access to the specified service only</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">network_mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">host"</span>
+    <span class="na">network_mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
+    <span class="na">network_mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">service:[service</span><span class="nv"> </span><span class="s">name]"</span>
+</code></pre></div></div>
+
+<h3 id="networks">networks</h3>
+
+<p><code class="highlighter-rouge">networks</code> defines the networks that service containers are attached to, referencing entries under the
+<a href="#networks-top-level-element">top-level <code class="highlighter-rouge">networks</code> key</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">some-service</span><span class="pi">:</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">some-network</span>
+      <span class="pi">-</span> <span class="s">other-network</span>
+</code></pre></div></div>
+
+<h4 id="aliases">aliases</h4>
+
+<p><code class="highlighter-rouge">aliases</code> declares alternative hostnames for this service on the network. Other containers on the same
+network can use either the service name or this alias to connect to one of the service’s containers.</p>
+
+<p>Since <code class="highlighter-rouge">aliases</code> are network-scoped, the same service can have different aliases on different networks.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: A network-wide alias can be shared by multiple containers, and even by multiple services.
+If it is, then exactly which container the name resolves to is not guaranteed.</p>
+</blockquote>
+
+<p>The general format is shown here:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">some-service</span><span class="pi">:</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">some-network</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">alias1</span>
+          <span class="pi">-</span> <span class="s">alias3</span>
+      <span class="na">other-network</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">alias2</span>
+</code></pre></div></div>
+
+<p>In the example below, service <code class="highlighter-rouge">frontend</code> will be able to reach the <code class="highlighter-rouge">backend</code> service at
+the hostname <code class="highlighter-rouge">backend</code> or <code class="highlighter-rouge">database</code> on the <code class="highlighter-rouge">back-tier</code> network, and service <code class="highlighter-rouge">monitoring</code>
+will be able to reach same <code class="highlighter-rouge">backend</code> service at <code class="highlighter-rouge">db</code> or <code class="highlighter-rouge">mysql</code> on the <code class="highlighter-rouge">admin</code> network.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">front-tier</span>
+      <span class="pi">-</span> <span class="s">back-tier</span>
+
+  <span class="na">monitoring</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/monitoring</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">admin</span>
+
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/backend</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">back-tier</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">database</span>
+      <span class="na">admin</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">mysql</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">front-tier</span><span class="pi">:</span>
+  <span class="na">back-tier</span><span class="pi">:</span>
+  <span class="na">admin</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h4 id="ipv4_address-ipv6_address">ipv4_address, ipv6_address</h4>
+
+<p>Specify a static IP address for containers for this service when joining the network.</p>
+
+<p>The corresponding network configuration in the <a href="#networks">top-level networks section</a> MUST have an
+<code class="highlighter-rouge">ipam</code> block with subnet configurations covering each static address.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">front-tier</span><span class="pi">:</span>
+        <span class="na">ipv4_address</span><span class="pi">:</span> <span class="s">172.16.238.10</span>
+        <span class="na">ipv6_address</span><span class="pi">:</span> <span class="s">2001:3984:3989::10</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">front-tier</span><span class="pi">:</span>
+    <span class="na">ipam</span><span class="pi">:</span>
+      <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+      <span class="na">config</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s2">"</span><span class="s">172.16.238.0/24"</span>
+        <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2001:3984:3989::/64"</span>
+</code></pre></div></div>
+
+<h4 id="link_local_ips">link_local_ips</h4>
+
+<p><code class="highlighter-rouge">link_local_ips</code> specifies a list of link-local IPs. Link-local IPs are special IPs which belong to a well
+known subnet and are purely managed by the operator, usually dependent on the architecture where they are
+deployed. Implementation is Platform specific.</p>
+
+<p>Example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">top</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">app_net</span><span class="pi">:</span>
+        <span class="na">link_local_ips</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">57.123.22.11</span>
+          <span class="pi">-</span> <span class="s">57.123.22.13</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">app_net</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
+</code></pre></div></div>
+
+<h4 id="priority">priority</h4>
+
+<p><code class="highlighter-rouge">priority</code> indicates in which order Compose implementation SHOULD connect the service’s containers to its
+networks. If unspecified, the default value is 0.</p>
+
+<p>In the following example, the app service connects to app_net_1 first as it has the highest priority. It then connects to app_net_3, then app_net_2, which uses the default priority value of 0.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">top</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">app_net_1</span><span class="pi">:</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">1000</span>
+      <span class="na">app_net_2</span><span class="pi">:</span>
+
+      <span class="na">app_net_3</span><span class="pi">:</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">100</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">app_net_1</span><span class="pi">:</span>
+  <span class="na">app_net_2</span><span class="pi">:</span>
+  <span class="na">app_net_3</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h3 id="mac_address">mac_address</h3>
+
+<p><code class="highlighter-rouge">mac_address</code> sets a MAC address for service container.</p>
+
+<h3 id="mem_limit">mem_limit</h3>
+
+<p><em>DEPRECATED: use <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/#memory">deploy.limits.memory</a></em></p>
+
+<h3 id="mem_reservation">mem_reservation</h3>
+
+<p><em>DEPRECATED: use <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/#memory">deploy.reservations.memory</a></em></p>
+
+<h3 id="mem_swappiness">mem_swappiness</h3>
+
+<p><code class="highlighter-rouge">mem_swappiness</code> defines as a percentage (a value between 0 and 100) for the host kernel to swap out
+anonymous memory pages used by a container.</p>
+
+<ul>
+  <li>a value of 0 turns off anonymous page swapping.</li>
+  <li>a value of 100 sets all anonymous pages as swappable.</li>
+</ul>
+
+<p>Default value is platform specific.</p>
+
+<h3 id="memswap_limit">memswap_limit</h3>
+
+<p><code class="highlighter-rouge">memswap_limit</code> defines the amount of memory container is allowed to swap to disk. This is a modifier
+attribute that only has meaning if <code class="highlighter-rouge">memory</code> is also set. Using swap allows the container to write excess
+memory requirements to disk when the container has exhausted all the memory that is available to it.
+There is a performance penalty for applications that swap memory to disk often.</p>
+
+<ul>
+  <li>If <code class="highlighter-rouge">memswap_limit</code> is set to a positive integer, then both <code class="highlighter-rouge">memory</code> and <code class="highlighter-rouge">memswap_limit</code> MUST be set. <code class="highlighter-rouge">memswap_limit</code> represents the total amount of memory and swap that can be used, and <code class="highlighter-rouge">memory</code> controls the amount used by non-swap memory. So if <code class="highlighter-rouge">memory</code>=”300m” and <code class="highlighter-rouge">memswap_limit</code>=”1g”, the container can use 300m of memory and 700m (1g - 300m) swap.</li>
+  <li>If <code class="highlighter-rouge">memswap_limit</code> is set to 0, the setting MUST be ignored, and the value is treated as unset.</li>
+  <li>If <code class="highlighter-rouge">memswap_limit</code> is set to the same value as <code class="highlighter-rouge">memory</code>, and <code class="highlighter-rouge">memory</code> is set to a positive integer, the container does not have access to swap. See Prevent a container from using swap.</li>
+  <li>If <code class="highlighter-rouge">memswap_limit</code> is unset, and <code class="highlighter-rouge">memory</code> is set, the container can use as much swap as the <code class="highlighter-rouge">memory</code> setting, if the host container has swap memory configured. For instance, if <code class="highlighter-rouge">memory</code>=”300m” and <code class="highlighter-rouge">memswap_limit</code> is not set, the container can use 600m in total of memory and swap.</li>
+  <li>If <code class="highlighter-rouge">memswap_limit</code> is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.</li>
+</ul>
+
+<h3 id="oom_kill_disable">oom_kill_disable</h3>
+
+<p>If <code class="highlighter-rouge">oom_kill_disable</code> is set Compose implementation MUST configure the platform so it won’t kill the container in case
+of memory starvation.</p>
+
+<h3 id="oom_score_adj">oom_score_adj</h3>
+
+<p><code class="highlighter-rouge">oom_score_adj</code> tunes the preference for containers to be killed by platform in case of memory starvation. Value MUST
+be within [-1000,1000] range.</p>
+
+<h3 id="pid">pid</h3>
+
+<p><code class="highlighter-rouge">pid</code> sets the PID mode for container created by the Compose implementation.
+Supported values are platform specific.</p>
+
+<h3 id="pids_limit">pids_limit</h3>
+
+<p><em>DEPRECATED: use <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/#pids">deploy.reservations.pids</a></em></p>
+
+<p><code class="highlighter-rouge">pids_limit</code> tunes a container’s PIDs limit. Set to -1 for unlimited PIDs.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pids_limit</span><span class="pi">:</span> <span class="s">10</span>
+</code></pre></div></div>
+
+<h3 id="platform">platform</h3>
+
+<p><code class="highlighter-rouge">platform</code> defines the target platform containers for this service will run on, using the <code class="highlighter-rouge">os[/arch[/variant]]</code> syntax.
+Compose implementation MUST use this attribute when declared to determine which version of the image will be pulled
+and/or on which platform the service’s build will be performed.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">platform</span><span class="pi">:</span> <span class="s">osx</span>
+<span class="na">platform</span><span class="pi">:</span> <span class="s">windows/amd64</span>
+<span class="na">platform</span><span class="pi">:</span> <span class="s">linux/arm64/v8</span>
+</code></pre></div></div>
+
+<h3 id="ports">ports</h3>
+
+<p>Exposes container ports.
+Port mapping MUST NOT be used with <code class="highlighter-rouge">network_mode: host</code> and doing so MUST result in a runtime error.</p>
+
+<h4 id="short-syntax-2">Short syntax</h4>
+
+<p>The short syntax is a colon-separated string to set host IP, host port and container port
+in the form:</p>
+
+<p><code class="highlighter-rouge">[HOST:]CONTAINER[/PROTOCOL]</code> where:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">HOST</code> is <code class="highlighter-rouge">[IP:](port | range)</code></li>
+  <li><code class="highlighter-rouge">CONTAINER</code> is <code class="highlighter-rouge">port | range</code></li>
+  <li><code class="highlighter-rouge">PROTOCOL</code> to restrict port to specified protocol. <code class="highlighter-rouge">tcp</code> and <code class="highlighter-rouge">udp</code> values are defined by the specification,
+Compose implementations MAY offer support for platform-specific protocol names.</li>
+</ul>
+
+<p>Host IP, if not set, MUST bind to all network interfaces. Port can be either a single
+value or a range. Host and container MUST use equivalent ranges.</p>
+
+<p>Either specify both ports (<code class="highlighter-rouge">HOST:CONTAINER</code>), or just the container port. In the latter case, the
+Compose implementation SHOULD automatically allocate any unassigned host port.</p>
+
+<p><code class="highlighter-rouge">HOST:CONTAINER</code> SHOULD always be specified as a (quoted) string, to avoid conflicts
+with <a href="https://yaml.org/type/float.html" target="_blank" rel="noopener" class="_">yaml base-60 float</a>.</p>
+
+<p>Samples:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000-3005"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">9090-9091:8080-8081"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">49100:22"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:8001:8001"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:5000-5010:5000-5010"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">6060:6060/udp"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: Host IP mapping MAY not be supported on the platform, in such case Compose implementations SHOULD reject
+the Compose file and MUST inform the user they will ignore the specified host IP.</p>
+</blockquote>
+
+<h4 id="long-syntax-2">Long syntax</h4>
+
+<p>The long form syntax allows the configuration of additional fields that can’t be
+expressed in the short form.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">target</code>: the container port</li>
+  <li><code class="highlighter-rouge">published</code>: the publicly exposed port. Can be set as a range using syntax <code class="highlighter-rouge">start-end</code>, then actual port SHOULD be assigned within this range based on available ports.</li>
+  <li><code class="highlighter-rouge">host_ip</code>: the Host IP mapping, unspecified means all network interfaces (<code class="highlighter-rouge">0.0.0.0</code>)</li>
+  <li><code class="highlighter-rouge">protocol</code>: the port protocol (<code class="highlighter-rouge">tcp</code> or <code class="highlighter-rouge">udp</code>), unspecified means any protocol</li>
+  <li><code class="highlighter-rouge">mode</code>: <code class="highlighter-rouge">host</code> for publishing a host port on each node, or <code class="highlighter-rouge">ingress</code> for a port to be load balanced.</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">80</span>
+    <span class="na">host_ip</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
+    <span class="na">published</span><span class="pi">:</span> <span class="s">8080</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">tcp</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s">host</span>
+
+  <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">80</span>
+    <span class="na">host_ip</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
+    <span class="na">published</span><span class="pi">:</span> <span class="s">8000-9000</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">tcp</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s">host</span>
+</code></pre></div></div>
+
+<h3 id="privileged">privileged</h3>
+
+<p><code class="highlighter-rouge">privileged</code> configures the service container to run with elevated privileges. Support and actual impacts are platform-specific.</p>
+
+<h3 id="profiles-1">profiles</h3>
+
+<p><code class="highlighter-rouge">profiles</code> defines a list of named profiles for the service to be enabled under. When not set, service is always enabled.</p>
+
+<p>If present, <code class="highlighter-rouge">profiles</code> SHOULD follow the regex format of <code class="highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>.</p>
+
+<h3 id="pull_policy">pull_policy</h3>
+
+<p><code class="highlighter-rouge">pull_policy</code> defines the decisions Compose implementations will make when it starts to pull images. Possible values are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">always</code>: Compose implementations SHOULD always pull the image from the registry.</li>
+  <li><code class="highlighter-rouge">never</code>: Compose implementations SHOULD NOT pull the image from a registry and SHOULD rely on the platform cached image.
+ If there is no cached image, a failure MUST be reported.</li>
+  <li><code class="highlighter-rouge">missing</code>: Compose implementations SHOULD pull the image only if it’s not available in the platform cache.
+ This SHOULD be the default option for Compose implementations without build support.
+<code class="highlighter-rouge">if_not_present</code> SHOULD be considered an alias for this value for backward compatibility</li>
+  <li><code class="highlighter-rouge">build</code>: Compose implementations SHOULD build the image. Compose implementations SHOULD rebuild the image if already present.</li>
+</ul>
+
+<p>If <code class="highlighter-rouge">pull_policy</code> and <code class="highlighter-rouge">build</code> both presents, Compose implementations SHOULD build the image by default. Compose implementations MAY override this behavior in the toolchain.</p>
+
+<h3 id="read_only">read_only</h3>
+
+<p><code class="highlighter-rouge">read_only</code> configures service container to be created with a read-only filesystem.</p>
+
+<h3 id="restart">restart</h3>
+
+<p><code class="highlighter-rouge">restart</code> defines the policy that the platform will apply on container termination.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">no</code>: The default restart policy. Does not restart a container under any circumstances.</li>
+  <li><code class="highlighter-rouge">always</code>: The policy always restarts the container until its removal.</li>
+  <li><code class="highlighter-rouge">on-failure</code>: The policy restarts a container if the exit code indicates an error.</li>
+  <li><code class="highlighter-rouge">unless-stopped</code>: The policy restarts a container irrespective of the exit code but will stop
+restarting when the service is stopped or removed.</li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">restart</span><span class="pi">:</span> <span class="s2">"</span><span class="s">no"</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">on-failure</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
+</code></pre></div></div>
+
+<h3 id="runtime">runtime</h3>
+
+<p><code class="highlighter-rouge">runtime</code> specifies which runtime to use for the service’s containers.</p>
+
+<p>The value of <code class="highlighter-rouge">runtime</code> is specific to implementation.
+For example, <code class="highlighter-rouge">runtime</code> can be the name of <a href="https://github.com/opencontainers/runtime-spec/blob/master/implementations.md" target="_blank" rel="noopener" class="_">an implementation of OCI Runtime Spec</a>, such as “runc”.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">busybox:latest</span>
+  <span class="na">command</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">runtime</span><span class="pi">:</span> <span class="s">runc</span>
+</code></pre></div></div>
+
+<h3 id="scale">scale</h3>
+
+<p>-DEPRECATED: use <a href="/docs.docker.jp.onthefly/compose/compose-file/deploy/#replicas">deploy/replicas</a>_</p>
+
+<p><code class="highlighter-rouge">scale</code> specifies the default number of containers to deploy for this service.</p>
+
+<h3 id="secrets">secrets</h3>
+
+<p><code class="highlighter-rouge">secrets</code> grants access to sensitive data defined by <a href="#secrets">secrets</a> on a per-service basis. Two
+different syntax variants are supported: the short syntax and the long syntax.</p>
+
+<p>Compose implementations MUST report an error if the secret doesn’t exist on the platform or isn’t defined in the
+<a href="#secrets-top-level-element"><code class="highlighter-rouge">secrets</code></a> section of this Compose file.</p>
+
+<h4 id="short-syntax-3">Short syntax</h4>
+
+<p>The short syntax variant only specifies the secret name. This grants the
+container access to the secret and mounts it as read-only to <code class="highlighter-rouge">/run/secrets/&lt;secret_name&gt;</code>
+within the container. The source name and destination mountpoint are both set
+to the secret name.</p>
+
+<p>The following example uses the short syntax to grant the <code class="highlighter-rouge">frontend</code> service
+access to the <code class="highlighter-rouge">server-certificate</code> secret. The value of <code class="highlighter-rouge">server-certificate</code> is set
+to the contents of the file <code class="highlighter-rouge">./server.cert</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">server-certificate</span>
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./server.cert</span>
+</code></pre></div></div>
+
+<h4 id="long-syntax-3">Long syntax</h4>
+
+<p>The long syntax provides more granularity in how the secret is created within
+the service’s containers.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">source</code>: The name of the secret as it exists on the platform.</li>
+  <li><code class="highlighter-rouge">target</code>: The name of the file to be mounted in <code class="highlighter-rouge">/run/secrets/</code> in the
+service’s task containers. Defaults to <code class="highlighter-rouge">source</code> if not specified.</li>
+  <li><code class="highlighter-rouge">uid</code> and <code class="highlighter-rouge">gid</code>: The numeric UID or GID that owns the file within
+<code class="highlighter-rouge">/run/secrets/</code> in the service’s task containers. Default value is USER running container.</li>
+  <li><code class="highlighter-rouge">mode</code>: The <a href="http://permissions-calculator.org/">permissions</a> for the file to be mounted in <code class="highlighter-rouge">/run/secrets/</code>
+in the service’s task containers, in octal notation.
+Default value is world-readable permissions (mode <code class="highlighter-rouge">0444</code>).
+The writable bit MUST be ignored if set. The executable bit MAY be set.</li>
+</ul>
+
+<p>The following example sets the name of the <code class="highlighter-rouge">server-certificate</code> secret file to <code class="highlighter-rouge">server.crt</code>
+within the container, sets the mode to <code class="highlighter-rouge">0440</code> (group-readable) and sets the user and group
+to <code class="highlighter-rouge">103</code>. The value of <code class="highlighter-rouge">server-certificate</code> secret is provided by the platform through a lookup and
+the secret lifecycle not directly managed by the Compose implementation.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">server-certificate</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">server.cert</span>
+        <span class="na">uid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">103"</span>
+        <span class="na">gid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">103"</span>
+        <span class="na">mode</span><span class="pi">:</span> <span class="s">0440</span>
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>Services MAY be granted access to multiple secrets. Long and short syntax for secrets MAY be used in the
+same Compose file. Defining a secret in the top-level <code class="highlighter-rouge">secrets</code> MUST NOT imply granting any service access to it.
+Such grant must be explicit within service specification as <a href="#secrets">secrets</a> service element.</p>
+
+<h3 id="security_opt">security_opt</h3>
+
+<p><code class="highlighter-rouge">security_opt</code> overrides the default labeling scheme for each container.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">security_opt</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">label:user:USER</span>
+  <span class="pi">-</span> <span class="s">label:role:ROLE</span>
+</code></pre></div></div>
+
+<h3 id="shm_size">shm_size</h3>
+
+<p><code class="highlighter-rouge">shm_size</code> configures the size of the shared memory (<code class="highlighter-rouge">/dev/shm</code> partition on Linux) allowed by the service container.
+Specified as a <a href="#specifying-byte-values">byte value</a>.</p>
+
+<h3 id="stdin_open">stdin_open</h3>
+
+<p><code class="highlighter-rouge">stdin_open</code> configures service containers to run with an allocated stdin.</p>
+
+<h3 id="stop_grace_period">stop_grace_period</h3>
+
+<p><code class="highlighter-rouge">stop_grace_period</code> specifies how long the Compose implementation MUST wait when attempting to stop a container if it doesn’t
+handle SIGTERM (or whichever stop signal has been specified with
+<a href="#stopsignal"><code class="highlighter-rouge">stop_signal</code></a>), before sending SIGKILL. Specified
+as a <a href="#specifying-durations">duration</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">stop_grace_period</span><span class="pi">:</span> <span class="s">1s</span>
+    <span class="na">stop_grace_period</span><span class="pi">:</span> <span class="s">1m30s</span>
+</code></pre></div></div>
+
+<p>Default value is 10 seconds for the container to exit before sending SIGKILL.</p>
+
+<h3 id="stop_signal">stop_signal</h3>
+
+<p><code class="highlighter-rouge">stop_signal</code> defines the signal that the Compose implementation MUST use to stop the service containers.
+If unset containers are stopped by the Compose Implementation by sending <code class="highlighter-rouge">SIGTERM</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stop_signal</span><span class="pi">:</span> <span class="s">SIGUSR1</span>
+</code></pre></div></div>
+
+<h3 id="storage_opt">storage_opt</h3>
+
+<p><code class="highlighter-rouge">storage_opt</code> defines storage driver options for a service.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">storage_opt</span><span class="pi">:</span>
+  <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1G'</span>
+</code></pre></div></div>
+
+<h3 id="sysctls">sysctls</h3>
+
+<p><code class="highlighter-rouge">sysctls</code> defines kernel parameters to set in the container. <code class="highlighter-rouge">sysctls</code> can use either an array or a map.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sysctls</span><span class="pi">:</span>
+  <span class="s">net.core.somaxconn</span><span class="pi">:</span> <span class="s">1024</span>
+  <span class="s">net.ipv4.tcp_syncookies</span><span class="pi">:</span> <span class="s">0</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sysctls</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">net.core.somaxconn=1024</span>
+  <span class="pi">-</span> <span class="s">net.ipv4.tcp_syncookies=0</span>
+</code></pre></div></div>
+
+<p>You can only use sysctls that are namespaced in the kernel. Docker does not
+support changing sysctls inside a container that also modify the host system.
+For an overview of supported sysctls, refer to <a href="https://docs.docker.com/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime">configure namespaced kernel
+parameters (sysctls) at runtime</a>.</p>
+
+<h3 id="tmpfs">tmpfs</h3>
+
+<p><code class="highlighter-rouge">tmpfs</code> mounts a temporary file system inside the container. Can be a single value or a list.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tmpfs</span><span class="pi">:</span> <span class="s">/run</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tmpfs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">/run</span>
+  <span class="pi">-</span> <span class="s">/tmp</span>
+</code></pre></div></div>
+
+<h3 id="tty">tty</h3>
+
+<p><code class="highlighter-rouge">tty</code> configure service container to run with a TTY.</p>
+
+<h3 id="ulimits">ulimits</h3>
+
+<p><code class="highlighter-rouge">ulimits</code> overrides the default ulimits for a container. Either specifies as a single limit as an integer or
+soft/hard limits as a mapping.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ulimits</span><span class="pi">:</span>
+  <span class="na">nproc</span><span class="pi">:</span> <span class="s">65535</span>
+  <span class="na">nofile</span><span class="pi">:</span>
+    <span class="na">soft</span><span class="pi">:</span> <span class="s">20000</span>
+    <span class="na">hard</span><span class="pi">:</span> <span class="s">40000</span>
+</code></pre></div></div>
+
+<h3 id="user">user</h3>
+
+<p><code class="highlighter-rouge">user</code> overrides the user used to run the container process. Default is that set by image (i.e. Dockerfile <code class="highlighter-rouge">USER</code>),
+if not set, <code class="highlighter-rouge">root</code>.</p>
+
+<h3 id="userns_mode">userns_mode</h3>
+
+<p><code class="highlighter-rouge">userns_mode</code> sets the user namespace for the service. Supported values are platform specific and MAY depend
+on platform configuration</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">userns_mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">host"</span>
+</code></pre></div></div>
+
+<h3 id="volumes">volumes</h3>
+
+<p><code class="highlighter-rouge">volumes</code> defines mount host paths or named volumes that MUST be accessible by service containers.</p>
+
+<p>If the mount is a host path and only used by a single service, it MAY be declared as part of the service
+definition instead of the top-level <code class="highlighter-rouge">volumes</code> key.</p>
+
+<p>To reuse a volume across multiple services, a named
+volume MUST be declared in the <a href="#volumes-top-level-element">top-level <code class="highlighter-rouge">volumes</code> key</a>.</p>
+
+<p>This example shows a named volume (<code class="highlighter-rouge">db-data</code>) being used by the <code class="highlighter-rouge">backend</code> service,
+and a bind mount defined for a single service</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/backend</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">volume</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">db-data</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/data</span>
+        <span class="na">volume</span><span class="pi">:</span>
+          <span class="na">nocopy</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">/var/run/postgres/postgres.sock</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/var/run/postgres/postgres.sock</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h4 id="short-syntax-4">Short syntax</h4>
+
+<p>The short syntax uses a single string with colon-separated values to specify a volume mount
+(<code class="highlighter-rouge">VOLUME:CONTAINER_PATH</code>), or an access mode (<code class="highlighter-rouge">VOLUME:CONTAINER_PATH:ACCESS_MODE</code>).</p>
+
+<ul>
+  <li><code class="highlighter-rouge">VOLUME</code>: MAY be either a host path on the platform hosting containers (bind mount) or a volume name</li>
+  <li><code class="highlighter-rouge">CONTAINER_PATH</code>: the path in the container where the volume is mounted</li>
+  <li><code class="highlighter-rouge">ACCESS_MODE</code>: is a comma-separated <code class="highlighter-rouge">,</code> list of options and MAY be set to:
+    <ul>
+      <li><code class="highlighter-rouge">rw</code>: read and write access (default)</li>
+      <li><code class="highlighter-rouge">ro</code>: read-only access</li>
+      <li><code class="highlighter-rouge">z</code>: SELinux option indicates that the bind mount host content is shared among multiple containers</li>
+      <li><code class="highlighter-rouge">Z</code>: SELinux option indicates that the bind mount host content is private and unshared for other containers</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><strong>Note</strong>: The SELinux re-labeling bind mount option is ignored on platforms without SELinux.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Note</strong>: Relative host paths MUST only be supported by Compose implementations that deploy to a
+local container runtime. This is because the relative path is resolved from the Compose file’s parent
+directory which is only applicable in the local case. Compose Implementations deploying to a non-local
+platform MUST reject Compose files which use relative host paths with an error. To avoid ambiguities
+with named volumes, relative paths SHOULD always begin with <code class="highlighter-rouge">.</code> or <code class="highlighter-rouge">..</code>.</p>
+</blockquote>
+
+<h4 id="long-syntax-4">Long syntax</h4>
+
+<p>The long form syntax allows the configuration of additional fields that can’t be
+expressed in the short form.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">type</code>: the mount type <code class="highlighter-rouge">volume</code>, <code class="highlighter-rouge">bind</code>, <code class="highlighter-rouge">tmpfs</code> or <code class="highlighter-rouge">npipe</code></li>
+  <li><code class="highlighter-rouge">source</code>: the source of the mount, a path on the host for a bind mount, or the
+name of a volume defined in the
+<a href="#volumes-top-level-element">top-level <code class="highlighter-rouge">volumes</code> key</a>. Not applicable for a tmpfs mount.</li>
+  <li><code class="highlighter-rouge">target</code>: the path in the container where the volume is mounted</li>
+  <li><code class="highlighter-rouge">read_only</code>: flag to set the volume as read-only</li>
+  <li><code class="highlighter-rouge">bind</code>: configure additional bind options
+    <ul>
+      <li><code class="highlighter-rouge">propagation</code>: the propagation mode used for the bind</li>
+      <li><code class="highlighter-rouge">create_host_path</code>: create a directory at the source path on host if there is nothing present.
+Do nothing if there is something present at the path. This is automatically implied by short syntax
+for backward compatibility with docker-compose legacy.</li>
+      <li><code class="highlighter-rouge">selinux</code>: the SELinux re-labeling option <code class="highlighter-rouge">z</code> (shared) or <code class="highlighter-rouge">Z</code> (private)</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">volume</code>: configure additional volume options
+    <ul>
+      <li><code class="highlighter-rouge">nocopy</code>: flag to disable copying of data from a container when a volume is created</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">tmpfs</code>: configure additional tmpfs options
+    <ul>
+      <li><code class="highlighter-rouge">size</code>: the size for the tmpfs mount in bytes (either numeric or as bytes unit)</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">consistency</code>: the consistency requirements of the mount. Available values are platform specific</li>
+</ul>
+
+<h3 id="volumes_from">volumes_from</h3>
+
+<p><code class="highlighter-rouge">volumes_from</code> mounts all of the volumes from another service or container, optionally specifying
+read-only access (ro) or read-write (rw). If no access level is specified, then read-write MUST be used.</p>
+
+<p>String value defines another service in the Compose application model to mount volumes from. The
+<code class="highlighter-rouge">container:</code> prefix, if supported, allows to mount volumes from a container that is not managed by the
+Compose implementation.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes_from</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">service_name</span>
+  <span class="pi">-</span> <span class="s">service_name:ro</span>
+  <span class="pi">-</span> <span class="s">container:container_name</span>
+  <span class="pi">-</span> <span class="s">container:container_name:rw</span>
+</code></pre></div></div>
+
+<h3 id="working_dir">working_dir</h3>
+
+<p><code class="highlighter-rouge">working_dir</code> overrides the container’s working directory from that specified by image (i.e. Dockerfile <code class="highlighter-rouge">WORKDIR</code>).</p>
+
+<h2 id="networks-top-level-element">Networks top-level element</h2>
+
+<p>Networks are the layer that allow services to communicate with each other. The networking model exposed to a service
+is limited to a simple IP connection with target services and external resources, while the Network definition allows
+fine-tuning the actual implementation provided by the platform.</p>
+
+<p>Networks can be created by specifying the network name under a top-level <code class="highlighter-rouge">networks</code> section.
+Services can connect to networks by specifying the network name under the service <a href="#networks"><code class="highlighter-rouge">networks</code></a> subsection</p>
+
+<p>In the following example, at runtime, networks <code class="highlighter-rouge">front-tier</code> and <code class="highlighter-rouge">back-tier</code> will be created and the <code class="highlighter-rouge">frontend</code> service
+connected to the <code class="highlighter-rouge">front-tier</code> network and the <code class="highlighter-rouge">back-tier</code> network.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">front-tier</span>
+      <span class="pi">-</span> <span class="s">back-tier</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">front-tier</span><span class="pi">:</span>
+  <span class="na">back-tier</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h3 id="driver">driver</h3>
+
+<p><code class="highlighter-rouge">driver</code> specifies which driver should be used for this network. Compose implementations MUST return an error if the
+driver is not available on the platform.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
+</code></pre></div></div>
+
+<p>Default and available values are platform specific. Compose specification MUST support the following specific drivers:
+<code class="highlighter-rouge">none</code> and <code class="highlighter-rouge">host</code></p>
+
+<ul>
+  <li><code class="highlighter-rouge">host</code> use the host’s networking stack</li>
+  <li><code class="highlighter-rouge">none</code> disable networking</li>
+</ul>
+
+<h4 id="host-or-none">host or none</h4>
+
+<p>The syntax for using built-in networks such as <code class="highlighter-rouge">host</code> and <code class="highlighter-rouge">none</code> is different, as such networks implicitly exists outside
+the scope of the Compose implementation. To use them one MUST define an external network with the name <code class="highlighter-rouge">host</code> or <code class="highlighter-rouge">none</code> and
+an alias that the Compose implementation can use (<code class="highlighter-rouge">hostnet</code> or <code class="highlighter-rouge">nonet</code> in the following examples), then grant the service
+access to that network using its alias.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">hostnet</span><span class="pi">:</span> <span class="pi">{}</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">hostnet</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">host</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="s">...</span>
+    <span class="s">networks</span><span class="pi">:</span>
+      <span class="na">nonet</span><span class="pi">:</span> <span class="pi">{}</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">nonet</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">none</span>
+</code></pre></div></div>
+
+<h3 id="driver_opts">driver_opts</h3>
+
+<p><code class="highlighter-rouge">driver_opts</code> specifies a list of options as key-value pairs to pass to the driver for this network. These options are
+driver-dependent - consult the driver’s documentation for more information. Optional.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver_opts</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bar"</span>
+  <span class="na">baz</span><span class="pi">:</span> <span class="s">1</span>
+</code></pre></div></div>
+
+<h3 id="attachable">attachable</h3>
+
+<p>If <code class="highlighter-rouge">attachable</code> is set to <code class="highlighter-rouge">true</code>, then standalone containers SHOULD be able attach to this network, in addition to services.
+If a standalone container attaches to the network, it can communicate with services and other standalone containers
+that are also attached to the network.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">networks</span><span class="pi">:</span>
+  <span class="na">mynet1</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
+    <span class="na">attachable</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="enable_ipv6">enable_ipv6</h3>
+
+<p><code class="highlighter-rouge">enable_ipv6</code> enable IPv6 networking on this network.</p>
+
+<h3 id="ipam">ipam</h3>
+
+<p><code class="highlighter-rouge">ipam</code> specifies custom a IPAM configuration. This is an object with several properties, each of which is optional:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">driver</code>: Custom IPAM driver, instead of the default.</li>
+  <li><code class="highlighter-rouge">config</code>: A list with zero or more configuration elements, each containing:
+    <ul>
+      <li><code class="highlighter-rouge">subnet</code>: Subnet in CIDR format that represents a network segment</li>
+      <li><code class="highlighter-rouge">ip_range</code>: Range of IPs from which to allocate container IPs</li>
+      <li><code class="highlighter-rouge">gateway</code>: IPv4 or IPv6 gateway for the master subnet</li>
+      <li><code class="highlighter-rouge">aux_addresses</code>: Auxiliary IPv4 or IPv6 addresses used by Network driver, as a mapping from hostname to IP</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">options</code>: Driver-specific options as a key-value mapping.</li>
+</ul>
+
+<p>A full example:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ipam</span><span class="pi">:</span>
+  <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">config</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s">172.28.0.0/16</span>
+      <span class="na">ip_range</span><span class="pi">:</span> <span class="s">172.28.5.0/24</span>
+      <span class="na">gateway</span><span class="pi">:</span> <span class="s">172.28.5.254</span>
+      <span class="na">aux_addresses</span><span class="pi">:</span>
+        <span class="na">host1</span><span class="pi">:</span> <span class="s">172.28.1.5</span>
+        <span class="na">host2</span><span class="pi">:</span> <span class="s">172.28.1.6</span>
+        <span class="na">host3</span><span class="pi">:</span> <span class="s">172.28.1.7</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">foo</span><span class="pi">:</span> <span class="s">bar</span>
+    <span class="na">baz</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0"</span>
+</code></pre></div></div>
+
+<h3 id="internal">internal</h3>
+
+<p>By default, Compose implementations MUST provides external connectivity to networks. <code class="highlighter-rouge">internal</code> when set to <code class="highlighter-rouge">true</code> allow to
+create an externally isolated network.</p>
+
+<h3 id="labels-1">labels</h3>
+
+<p>Add metadata to containers using Labels. Can use either an array or a dictionary.</p>
+
+<p>Users SHOULD use reverse-DNS notation to prevent labels from conflicting with those used by other software.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Financial</span><span class="nv"> </span><span class="s">transaction</span><span class="nv"> </span><span class="s">network"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Financial</span><span class="nv"> </span><span class="s">transaction</span><span class="nv"> </span><span class="s">network"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST set <code class="highlighter-rouge">com.docker.compose.project</code> and <code class="highlighter-rouge">com.docker.compose.network</code> labels.</p>
+
+<h3 id="external">external</h3>
+
+<p>If set to <code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">external</code> specifies that this network’s lifecycle is maintained outside of that of the application.
+Compose Implementations SHOULD NOT attempt to create these networks, and raises an error if one doesn’t exist.</p>
+
+<p>In the example below, <code class="highlighter-rouge">proxy</code> is the gateway to the outside world. Instead of attempting to create a network, Compose
+implementations SHOULD interrogate the platform for an existing network simply called <code class="highlighter-rouge">outside</code> and connect the
+<code class="highlighter-rouge">proxy</code> service’s containers to it.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">proxy</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/proxy</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">outside</span>
+      <span class="pi">-</span> <span class="s">default</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/app</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">default</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">outside</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="name">name</h3>
+
+<p><code class="highlighter-rouge">name</code> sets a custom name for this network. The name field can be used to reference networks which contain special characters.
+The name is used as is and will <strong>not</strong> be scoped with the project name.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">networks</span><span class="pi">:</span>
+  <span class="na">network1</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my-app-net</span>
+</code></pre></div></div>
+
+<p>It can also be used in conjunction with the <code class="highlighter-rouge">external</code> property to define the platform network that the Compose implementation
+should retrieve, typically by using a parameter so the Compose file doesn’t need to hard-code runtime specific values:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">networks</span><span class="pi">:</span>
+  <span class="na">network1</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">${NETWORK_ID}"</span>
+</code></pre></div></div>
+
+<h2 id="volumes-top-level-element">Volumes top-level element</h2>
+
+<p>Volumes are persistent data stores implemented by the platform. The Compose specification offers a neutral abstraction
+for services to mount volumes, and configuration parameters to allocate them on infrastructure.</p>
+
+<p>The <code class="highlighter-rouge">volumes</code> section allows the configuration of named volumes that can be reused across multiple services. Here’s
+an example of a two-service setup where a database’s data directory is shared with another service as a volume named
+<code class="highlighter-rouge">db-data</code> so that it can be periodically backed up:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db-data:/etc/data</span>
+
+  <span class="na">backup</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">backup-service</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db-data:/var/lib/backup/data</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>An entry under the top-level <code class="highlighter-rouge">volumes</code> key can be empty, in which case it uses the platform’s default configuration for
+creating a volume. Optionally, you can configure it with the following keys:</p>
+
+<h3 id="driver-1">driver</h3>
+
+<p>Specify which volume driver should be used for this volume. Default and available values are platform specific. If the driver is not available, the Compose implementation MUST return an error and stop application deployment.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s">foobar</span>
+</code></pre></div></div>
+
+<h3 id="driver_opts-1">driver_opts</h3>
+
+<p><code class="highlighter-rouge">driver_opts</code> specifies a list of options as key-value pairs to pass to the driver for this volume. Those options are driver-dependent.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">example</span><span class="pi">:</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nfs"</span>
+      <span class="na">o</span><span class="pi">:</span> <span class="s2">"</span><span class="s">addr=10.40.0.199,nolock,soft,rw"</span>
+      <span class="na">device</span><span class="pi">:</span> <span class="s2">"</span><span class="s">:/docker/example"</span>
+</code></pre></div></div>
+
+<h3 id="external-1">external</h3>
+
+<p>If set to <code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">external</code> specifies that this volume already exist on the platform and its lifecycle is managed outside
+of that of the application. Compose implementations MUST NOT attempt to create these volumes, and MUST return an error if they
+do not exist.</p>
+
+<p>In the example below, instead of attempting to create a volume called
+<code class="highlighter-rouge">{project_name}_db-data</code>, Compose looks for an existing volume simply
+called <code class="highlighter-rouge">db-data</code> and mounts it into the <code class="highlighter-rouge">backend</code> service’s containers.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db-data:/etc/data</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h3 id="labels-2">labels</h3>
+
+<p><code class="highlighter-rouge">labels</code> are used to add metadata to volumes. You can use either an array or a dictionary.</p>
+
+<p>It’s recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Database</span><span class="nv"> </span><span class="s">volume"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IT/Ops"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Database</span><span class="nv"> </span><span class="s">volume"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=IT/Ops"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
+</code></pre></div></div>
+
+<p>Compose implementation MUST set <code class="highlighter-rouge">com.docker.compose.project</code> and <code class="highlighter-rouge">com.docker.compose.volume</code> labels.</p>
+
+<h3 id="name-1">name</h3>
+
+<p><code class="highlighter-rouge">name</code> set a custom name for this volume. The name field can be used to reference volumes that contain special
+characters. The name is used as is and will <strong>not</strong> be scoped with the stack name.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">my-app-data"</span>
+</code></pre></div></div>
+
+<p>It can also be used in conjunction with the <code class="highlighter-rouge">external</code> property. Doing so the name of the volume used to lookup for
+actual volume on platform is set separately from the name used to refer to it within the Compose file:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">actual-name-of-volume</span>
+</code></pre></div></div>
+
+<p>This make it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
+hard-coded but the actual volume ID on platform is set at runtime during deployment:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">${DATABASE_VOLUME}</span>
+</code></pre></div></div>
+
+<h2 id="configs-top-level-element">Configs top-level element</h2>
+
+<p>Configs allow services to adapt their behaviour without the need to rebuild a Docker image. Configs are comparable to Volumes from a service point of view as they are mounted into service’s containers filesystem. The actual implementation detail to get configuration provided by the platform can be set from the Configuration definition.</p>
+
+<p>When granted access to a config, the config content is mounted as a file in the container. The location of the mount point within the container defaults to <code class="highlighter-rouge">/&lt;config-name&gt;</code> in Linux containers and <code class="highlighter-rouge">C:\&lt;config-name&gt;</code> in Windows containers.</p>
+
+<p>By default, the config MUST be owned by the user running the container command but can be overridden by service configuration.
+By default, the config MUST have world-readable permissions (mode 0444), unless service is configured to override this.</p>
+
+<p>Services can only access configs when explicitly granted by a <a href="#configs"><code class="highlighter-rouge">configs</code></a> subsection.</p>
+
+<p>The top-level <code class="highlighter-rouge">configs</code> declaration defines or references
+configuration data that can be granted to the services in this
+application. The source of the config is either <code class="highlighter-rouge">file</code> or <code class="highlighter-rouge">external</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">file</code>: The config is created with the contents of the file at the specified path.</li>
+  <li><code class="highlighter-rouge">external</code>: If set to true, specifies that this config has already been created. Compose implementation does not
+attempt to create it, and if it does not exist, an error occurs.</li>
+  <li><code class="highlighter-rouge">name</code>: The name of config object on Platform to lookup. This field can be used to
+reference configs that contain special characters. The name is used as is
+and will <strong>not</strong> be scoped with the project name.</li>
+</ul>
+
+<p>In this example, <code class="highlighter-rouge">http_config</code> is created (as <code class="highlighter-rouge">&lt;project_name&gt;_http_config</code>) when the application is deployed,
+and <code class="highlighter-rouge">my_second_config</code> MUST already exist on Platform and value will be obtained by lookup.</p>
+
+<p>In this example, <code class="highlighter-rouge">server-http_config</code> is created as <code class="highlighter-rouge">&lt;project_name&gt;_http_config</code> when the application is deployed,
+by registering content of the <code class="highlighter-rouge">httpd.conf</code> as configuration data.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">configs</span><span class="pi">:</span>
+  <span class="na">http_config</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./httpd.conf</span>
+</code></pre></div></div>
+
+<p>Alternatively, <code class="highlighter-rouge">http_config</code> can be declared as external, doing so Compose implementation will lookup <code class="highlighter-rouge">http_config</code> to expose configuration data to relevant services.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">configs</span><span class="pi">:</span>
+  <span class="na">http_config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>External configs lookup can also use a distinct key by specifying a <code class="highlighter-rouge">name</code>. The following
+example modifies the previous one to lookup for config using a parameter <code class="highlighter-rouge">HTTP_CONFIG_KEY</code>. Doing
+so the actual lookup key will be set at deployment time by <a href="#interpolation">interpolation</a> of
+variables, but exposed to containers as hard-coded ID <code class="highlighter-rouge">http_config</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">configs</span><span class="pi">:</span>
+  <span class="na">http_config</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">${HTTP_CONFIG_KEY}"</span>
+</code></pre></div></div>
+
+<p>Compose file need to explicitly grant access to the configs to relevant services in the application.</p>
+
+<h2 id="secrets-top-level-element">Secrets top-level element</h2>
+
+<p>Secrets are a flavour of Configs focussing on sensitive data, with specific constraint for this usage. As the platform implementation may significantly differ from Configs, dedicated Secrets section allows to configure the related resources.</p>
+
+<p>The top-level <code class="highlighter-rouge">secrets</code> declaration defines or references sensitive data that can be granted to the services in this
+application. The source of the secret is either <code class="highlighter-rouge">file</code> or <code class="highlighter-rouge">external</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">file</code>: The secret is created with the contents of the file at the specified path.</li>
+  <li><code class="highlighter-rouge">external</code>: If set to true, specifies that this secret has already been created. Compose implementation does
+not attempt to create it, and if it does not exist, an error occurs.</li>
+  <li><code class="highlighter-rouge">name</code>: The name of the secret object in Docker. This field can be used to
+reference secrets that contain special characters. The name is used as is
+and will <strong>not</strong> be scoped with the project name.</li>
+</ul>
+
+<p>In this example, <code class="highlighter-rouge">server-certificate</code> is created as <code class="highlighter-rouge">&lt;project_name&gt;_server-certificate</code> when the application is deployed,
+by registering content of the <code class="highlighter-rouge">server.cert</code> as a platform secret.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./server.cert</span>
+</code></pre></div></div>
+
+<p>Alternatively, <code class="highlighter-rouge">server-certificate</code> can be declared as external, doing so Compose implementation will lookup <code class="highlighter-rouge">server-certificate</code> to expose secret to relevant services.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>External secrets lookup can also use a distinct key by specifying a <code class="highlighter-rouge">name</code>. The following
+example modifies the previous one to look up for secret using a parameter <code class="highlighter-rouge">CERTIFICATE_KEY</code>. Doing
+so the actual lookup key will be set at deployment time by <a href="#interpolation">interpolation</a> of
+variables, but exposed to containers as hard-coded ID <code class="highlighter-rouge">server-certificate</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">server-certificate</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">${CERTIFICATE_KEY}"</span>
+</code></pre></div></div>
+
+<p>Compose file need to explicitly grant access to the secrets to relevant services in the application.</p>
+
+<h2 id="fragments">Fragments</h2>
+
+<p>It is possible to re-use configuration fragments using <a href="http://www.yaml.org/spec/1.2/spec.html#id2765878">YAML anchors</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span> <span class="nl">&amp;default-volume</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">metrics</span><span class="pi">:</span> <span class="nv">*default-volume</span>
+</code></pre></div></div>
+
+<p>In previous sample, an <em>anchor</em> is created as <code class="highlighter-rouge">default-volume</code> based on <code class="highlighter-rouge">db-data</code> volume specification. It is later reused by <em>alias</em> <code class="highlighter-rouge">*default-volume</code> to define <code class="highlighter-rouge">metrics</code> volume. Same logic can apply to any element in a Compose file. Anchor resolution MUST take place
+before <a href="#interpolation">variables interpolation</a>, so variables can’t be used to set anchors or aliases.</p>
+
+<p>It is also possible to partially override values set by anchor reference using the
+<a href="http://yaml.org/type/merge.html">YAML merge type</a>. In following example, <code class="highlighter-rouge">metrics</code> volume specification uses alias
+to avoid repetition but override <code class="highlighter-rouge">name</code> attribute:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db-data</span>
+      <span class="pi">-</span> <span class="s">metrics</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span> <span class="nl">&amp;default-volume</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">data"</span>
+  <span class="na">metrics</span><span class="pi">:</span>
+    <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*default-volume</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">metrics"</span>
+</code></pre></div></div>
+
+<h2 id="extension">Extension</h2>
+
+<p>Special extension fields can be of any format as long as their name starts with the <code class="highlighter-rouge">x-</code> character sequence. They can be used
+within any structure in a Compose file. This is the sole exception for Compose implementations to silently ignore unrecognized field.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">x-custom</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bar</span>
+    <span class="pi">-</span> <span class="s">zot</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">x-foo</span><span class="pi">:</span> <span class="s">bar</span>
+</code></pre></div></div>
+
+<p>The contents of such fields are unspecified by Compose specification, and can be used to enable custom features. Compose implementation to encounter an unknown extension field MUST NOT fail, but COULD warn about unknown field.</p>
+
+<p>For platform extensions, it is highly recommended to prefix extension by platform/vendor name, the same way browsers add
+support for <a href="https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords" target="_blank" rel="noopener" class="_">custom CSS features</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">service</span><span class="pi">:</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">placement</span><span class="pi">:</span>
+        <span class="na">x-aws-role</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:iam::XXXXXXXXXXXX:role/foo"</span>
+        <span class="na">x-aws-region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eu-west-3"</span>
+        <span class="na">x-azure-region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">france-central"</span>
+</code></pre></div></div>
+
+<h3 id="informative-historical-notes">Informative Historical Notes</h3>
+
+<p>This section is informative. At the time of writing, the following prefixes are known to exist:</p>
 
 <table>
   <thead>
     <tr>
-      <th><strong>Compose ファイルフォーマット</strong></th>
-      <th><strong>Docker Engine リリース</strong></th>
+      <th>prefix</th>
+      <th>vendor/organization</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Compose 仕様</td>
-      <td>19.03.0 以上</td>
+      <td>docker</td>
+      <td>Docker</td>
     </tr>
     <tr>
-      <td>3.8</td>
-      <td>19.03.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.7</td>
-      <td>18.06.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.6</td>
-      <td>18.02.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.5</td>
-      <td>17.12.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.4</td>
-      <td>17.09.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.3</td>
-      <td>17.06.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.2</td>
-      <td>17.04.0 以上</td>
-    </tr>
-    <tr>
-      <td>3.1</td>
-      <td>1.13.1 以上</td>
-    </tr>
-    <tr>
-      <td>3.0</td>
-      <td>1.13.0 以上</td>
-    </tr>
-    <tr>
-      <td>2.4</td>
-      <td>17.12.0 以上</td>
-    </tr>
-    <tr>
-      <td>2.3</td>
-      <td>17.06.0 以上</td>
-    </tr>
-    <tr>
-      <td>2.2</td>
-      <td>1.13.0 以上</td>
-    </tr>
-    <tr>
-      <td>2.1</td>
-      <td>1.12.0 以上</td>
-    </tr>
-    <tr>
-      <td>2.0</td>
-      <td>1.10.0 以上</td>
+      <td>kubernetes</td>
+      <td>Kubernetes</td>
     </tr>
   </tbody>
 </table>
 
-<p>この表に示している Compose のファイルフォーマットバージョンに加えて、Compose そのもののリリーススケジュールがあります。
-詳しくは <a href="https://github.com/docker/compose/releases/">Compose リリース</a>に示されています。
-しかしファイルフォーマットのバージョンは、個々のリリースに合わせてバージョンアップする必要がありません。
-たとえば Compose ファイルフォーマット 3.0 が初めて導入されたのは  <a href="https://github.com/docker/compose/releases/tag/1.10.0">Compose リリース 1.10.0</a> ですが、その後のリリースの中で、徐々にバージョンアップを行ってきています。</p>
+<h3 id="using-extensions-as-fragments">Using extensions as fragments</h3>
 
-<p>最新の Compose ファイルフォーマットは <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md" target="_blank" rel="noopener" class="_">Compose 仕様</a> において定義されていて、Docker Compose <strong>1.27.0 以上</strong> において実装されています。</p>
+<p>With the support for extension fields, Compose file can be written as follows to improve readability of reused fragments:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">x-logging</span><span class="pi">:</span> <span class="nl">&amp;default-logging</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">max-size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">12m"</span>
+    <span class="na">max-file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">5"</span>
+  <span class="na">driver</span><span class="pi">:</span> <span class="s">json-file</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">logging</span><span class="pi">:</span> <span class="nv">*default-logging</span>
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">logging</span><span class="pi">:</span> <span class="nv">*default-logging</span>
+</code></pre></div></div>
+
+<h3 id="specifying-byte-values">specifying byte values</h3>
+
+<p>Value express a byte value as a string in <code class="highlighter-rouge">{amount}{byte unit}</code> format:
+The supported units are <code class="highlighter-rouge">b</code> (bytes), <code class="highlighter-rouge">k</code> or <code class="highlighter-rouge">kb</code> (kilo bytes), <code class="highlighter-rouge">m</code> or <code class="highlighter-rouge">mb</code> (mega bytes) and <code class="highlighter-rouge">g</code> or <code class="highlighter-rouge">gb</code> (giga bytes).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    2b
+    1024kb
+    2048k
+    300m
+    1gb
+</code></pre></div></div>
+
+<h3 id="specifying-durations">specifying durations</h3>
+
+<p>Value express a duration as a string in the in the form of <code class="highlighter-rouge">{value}{unit}</code>.
+The supported units are <code class="highlighter-rouge">us</code> (microseconds), <code class="highlighter-rouge">ms</code> (milliseconds), <code class="highlighter-rouge">s</code> (seconds), <code class="highlighter-rouge">m</code> (minutes) and <code class="highlighter-rouge">h</code> (hours).
+Value can can combine multiple values and using without separator.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  10ms
+  40s
+  1m30s
+  1h5m30s20ms
+</code></pre></div></div>
+
+<h2 id="interpolation">Interpolation</h2>
+
+<p>Values in a Compose file can be set by variables, and interpolated at runtime. Compose files use a Bash-like
+syntax <code class="highlighter-rouge">${VARIABLE}</code></p>
+
+<p>Both <code class="highlighter-rouge">$VARIABLE</code> and <code class="highlighter-rouge">${VARIABLE}</code> syntax are supported. Default values can be defined inline using typical shell syntax:
+latest</p>
+
+<ul>
+  <li><code class="highlighter-rouge">${VARIABLE:-default}</code> evaluates to <code class="highlighter-rouge">default</code> if <code class="highlighter-rouge">VARIABLE</code> is unset or
+empty in the environment.</li>
+  <li><code class="highlighter-rouge">${VARIABLE-default}</code> evaluates to <code class="highlighter-rouge">default</code> only if <code class="highlighter-rouge">VARIABLE</code> is unset
+in the environment.</li>
+</ul>
+
+<p>Similarly, the following syntax allows you to specify mandatory variables:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">${VARIABLE:?err}</code> exits with an error message containing <code class="highlighter-rouge">err</code> if
+<code class="highlighter-rouge">VARIABLE</code> is unset or empty in the environment.</li>
+  <li><code class="highlighter-rouge">${VARIABLE?err}</code> exits with an error message containing <code class="highlighter-rouge">err</code> if
+<code class="highlighter-rouge">VARIABLE</code> is unset in the environment.</li>
+</ul>
+
+<p>Interpolation can also be nested:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">${VARIABLE:-${FOO}}</code></li>
+  <li><code class="highlighter-rouge">${VARIABLE?$FOO}</code></li>
+  <li><code class="highlighter-rouge">${VARIABLE:-${FOO:-default}}</code></li>
+</ul>
+
+<p>Other extended shell-style features, such as <code class="highlighter-rouge">${VARIABLE/foo/bar}</code>, are not
+supported by the Compose specification.</p>
+
+<p>You can use a <code class="highlighter-rouge">$$</code> (double-dollar sign) when your configuration needs a literal
+dollar sign. This also prevents Compose from interpolating a value, so a <code class="highlighter-rouge">$$</code>
+allows you to refer to environment variables that you don’t want processed by
+Compose.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$$VAR_NOT_INTERPOLATED_BY_COMPOSE"</span>
+</code></pre></div></div>
+
+<p>If the Compose implementation can’t resolve a substituted variable and no default value is defined, it MUST warn
+the user and substitute the variable with an empty string.</p>
+
+<p>As any values in a Compose file can be interpolated with variable substitution, including compact string notation
+for complex elements, interpolation MUST be applied <em>before</em> merge on a per-file-basis.</p>
 
 <h2 id="compose-documentation">Compose ドキュメント</h2>
 
@@ -243,9 +2631,199 @@ Compose 仕様はファイルフォーマット 2.x と 3.x を統合したも�
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#reference-and-guidelines" class="nomunge">リファレンスとガイドライン</a>
+  <li><a href="#status-of-this-document" class="nomunge">Status of this document</a>
     <ul>
-      <li><a href="#compose-and-docker-compatibility-matrix" class="nomunge">Compose と Docker の互換性マトリックス</a></li>
+      <li><a href="#requirements-and-optional-attributes" class="nomunge">Requirements and optional attributes</a></li>
+      <li><a href="#the-compose-application-model" class="nomunge">The Compose application model</a>
+        <ul>
+          <li><a href="#illustrative-example" class="nomunge">Illustrative example</a></li>
+        </ul>
+      </li>
+      <li><a href="#compose-file" class="nomunge">Compose file</a>
+        <ul>
+          <li><a href="#profiles" class="nomunge">Profiles</a>
+            <ul>
+              <li><a href="#illustrative-example-1" class="nomunge">Illustrative example</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#version-top-level-element" class="nomunge">Version top-level element</a></li>
+      <li><a href="#name-top-level-element" class="nomunge">Name top-level element</a></li>
+      <li><a href="#services-top-level-element" class="nomunge">Services top-level element</a>
+        <ul>
+          <li><a href="#build" class="nomunge">build</a></li>
+          <li><a href="#blkio_config" class="nomunge">blkio_config</a>
+            <ul>
+              <li><a href="#device_read_bps-device_write_bps" class="nomunge">device_read_bps, device_write_bps</a></li>
+              <li><a href="#device_read_iops-device_write_iops" class="nomunge">device_read_iops, device_write_iops</a></li>
+              <li><a href="#weight" class="nomunge">weight</a></li>
+              <li><a href="#weight_device" class="nomunge">weight_device</a></li>
+            </ul>
+          </li>
+          <li><a href="#cpu_count" class="nomunge">cpu_count</a></li>
+          <li><a href="#cpu_percent" class="nomunge">cpu_percent</a></li>
+          <li><a href="#cpu_shares" class="nomunge">cpu_shares</a></li>
+          <li><a href="#cpu_period" class="nomunge">cpu_period</a></li>
+          <li><a href="#cpu_quota" class="nomunge">cpu_quota</a></li>
+          <li><a href="#cpu_rt_runtime" class="nomunge">cpu_rt_runtime</a></li>
+          <li><a href="#cpu_rt_period" class="nomunge">cpu_rt_period</a></li>
+          <li><a href="#cpus" class="nomunge">cpus</a></li>
+          <li><a href="#cpuset" class="nomunge">cpuset</a></li>
+          <li><a href="#cap_add" class="nomunge">cap_add</a></li>
+          <li><a href="#cap_drop" class="nomunge">cap_drop</a></li>
+          <li><a href="#cgroup_parent" class="nomunge">cgroup_parent</a></li>
+          <li><a href="#command" class="nomunge">command</a></li>
+          <li><a href="#configs" class="nomunge">configs</a>
+            <ul>
+              <li><a href="#short-syntax" class="nomunge">Short syntax</a></li>
+              <li><a href="#long-syntax" class="nomunge">Long syntax</a></li>
+            </ul>
+          </li>
+          <li><a href="#container_name" class="nomunge">container_name</a></li>
+          <li><a href="#credential_spec" class="nomunge">credential_spec</a>
+            <ul>
+              <li><a href="#example-gmsa-configuration" class="nomunge">Example gMSA configuration</a></li>
+            </ul>
+          </li>
+          <li><a href="#depends_on" class="nomunge">depends_on</a>
+            <ul>
+              <li><a href="#short-syntax-1" class="nomunge">Short syntax</a></li>
+              <li><a href="#long-syntax-1" class="nomunge">Long syntax</a></li>
+            </ul>
+          </li>
+          <li><a href="#deploy" class="nomunge">deploy</a></li>
+          <li><a href="#device_cgroup_rules" class="nomunge">device_cgroup_rules</a></li>
+          <li><a href="#devices" class="nomunge">devices</a></li>
+          <li><a href="#dns" class="nomunge">dns</a></li>
+          <li><a href="#dns_opt" class="nomunge">dns_opt</a></li>
+          <li><a href="#dns_search" class="nomunge">dns_search</a></li>
+          <li><a href="#domainname" class="nomunge">domainname</a></li>
+          <li><a href="#entrypoint" class="nomunge">entrypoint</a></li>
+          <li><a href="#env_file" class="nomunge">env_file</a>
+            <ul>
+              <li><a href="#env_file-format" class="nomunge">Env_file format</a></li>
+            </ul>
+          </li>
+          <li><a href="#environment" class="nomunge">environment</a></li>
+          <li><a href="#expose" class="nomunge">expose</a></li>
+          <li><a href="#extends" class="nomunge">extends</a>
+            <ul>
+              <li><a href="#restrictions" class="nomunge">Restrictions</a></li>
+              <li><a href="#finding-referenced-service" class="nomunge">Finding referenced service</a></li>
+              <li><a href="#merging-service-definitions" class="nomunge">Merging service definitions</a></li>
+            </ul>
+          </li>
+          <li><a href="#external_links" class="nomunge">external_links</a></li>
+          <li><a href="#extra_hosts" class="nomunge">extra_hosts</a></li>
+          <li><a href="#group_add" class="nomunge">group_add</a></li>
+          <li><a href="#healthcheck" class="nomunge">healthcheck</a></li>
+          <li><a href="#hostname" class="nomunge">hostname</a></li>
+          <li><a href="#image" class="nomunge">image</a></li>
+          <li><a href="#init" class="nomunge">init</a></li>
+          <li><a href="#ipc" class="nomunge">ipc</a></li>
+          <li><a href="#isolation" class="nomunge">isolation</a></li>
+          <li><a href="#labels" class="nomunge">labels</a></li>
+          <li><a href="#links" class="nomunge">links</a></li>
+          <li><a href="#logging" class="nomunge">logging</a></li>
+          <li><a href="#network_mode" class="nomunge">network_mode</a></li>
+          <li><a href="#networks" class="nomunge">networks</a>
+            <ul>
+              <li><a href="#aliases" class="nomunge">aliases</a></li>
+              <li><a href="#ipv4_address-ipv6_address" class="nomunge">ipv4_address, ipv6_address</a></li>
+              <li><a href="#link_local_ips" class="nomunge">link_local_ips</a></li>
+              <li><a href="#priority" class="nomunge">priority</a></li>
+            </ul>
+          </li>
+          <li><a href="#mac_address" class="nomunge">mac_address</a></li>
+          <li><a href="#mem_limit" class="nomunge">mem_limit</a></li>
+          <li><a href="#mem_reservation" class="nomunge">mem_reservation</a></li>
+          <li><a href="#mem_swappiness" class="nomunge">mem_swappiness</a></li>
+          <li><a href="#memswap_limit" class="nomunge">memswap_limit</a></li>
+          <li><a href="#oom_kill_disable" class="nomunge">oom_kill_disable</a></li>
+          <li><a href="#oom_score_adj" class="nomunge">oom_score_adj</a></li>
+          <li><a href="#pid" class="nomunge">pid</a></li>
+          <li><a href="#pids_limit" class="nomunge">pids_limit</a></li>
+          <li><a href="#platform" class="nomunge">platform</a></li>
+          <li><a href="#ports" class="nomunge">ports</a>
+            <ul>
+              <li><a href="#short-syntax-2" class="nomunge">Short syntax</a></li>
+              <li><a href="#long-syntax-2" class="nomunge">Long syntax</a></li>
+            </ul>
+          </li>
+          <li><a href="#privileged" class="nomunge">privileged</a></li>
+          <li><a href="#profiles-1" class="nomunge">profiles</a></li>
+          <li><a href="#pull_policy" class="nomunge">pull_policy</a></li>
+          <li><a href="#read_only" class="nomunge">read_only</a></li>
+          <li><a href="#restart" class="nomunge">restart</a></li>
+          <li><a href="#runtime" class="nomunge">runtime</a></li>
+          <li><a href="#scale" class="nomunge">scale</a></li>
+          <li><a href="#secrets" class="nomunge">secrets</a>
+            <ul>
+              <li><a href="#short-syntax-3" class="nomunge">Short syntax</a></li>
+              <li><a href="#long-syntax-3" class="nomunge">Long syntax</a></li>
+            </ul>
+          </li>
+          <li><a href="#security_opt" class="nomunge">security_opt</a></li>
+          <li><a href="#shm_size" class="nomunge">shm_size</a></li>
+          <li><a href="#stdin_open" class="nomunge">stdin_open</a></li>
+          <li><a href="#stop_grace_period" class="nomunge">stop_grace_period</a></li>
+          <li><a href="#stop_signal" class="nomunge">stop_signal</a></li>
+          <li><a href="#storage_opt" class="nomunge">storage_opt</a></li>
+          <li><a href="#sysctls" class="nomunge">sysctls</a></li>
+          <li><a href="#tmpfs" class="nomunge">tmpfs</a></li>
+          <li><a href="#tty" class="nomunge">tty</a></li>
+          <li><a href="#ulimits" class="nomunge">ulimits</a></li>
+          <li><a href="#user" class="nomunge">user</a></li>
+          <li><a href="#userns_mode" class="nomunge">userns_mode</a></li>
+          <li><a href="#volumes" class="nomunge">volumes</a>
+            <ul>
+              <li><a href="#short-syntax-4" class="nomunge">Short syntax</a></li>
+              <li><a href="#long-syntax-4" class="nomunge">Long syntax</a></li>
+            </ul>
+          </li>
+          <li><a href="#volumes_from" class="nomunge">volumes_from</a></li>
+          <li><a href="#working_dir" class="nomunge">working_dir</a></li>
+        </ul>
+      </li>
+      <li><a href="#networks-top-level-element" class="nomunge">Networks top-level element</a>
+        <ul>
+          <li><a href="#driver" class="nomunge">driver</a>
+            <ul>
+              <li><a href="#host-or-none" class="nomunge">host or none</a></li>
+            </ul>
+          </li>
+          <li><a href="#driver_opts" class="nomunge">driver_opts</a></li>
+          <li><a href="#attachable" class="nomunge">attachable</a></li>
+          <li><a href="#enable_ipv6" class="nomunge">enable_ipv6</a></li>
+          <li><a href="#ipam" class="nomunge">ipam</a></li>
+          <li><a href="#internal" class="nomunge">internal</a></li>
+          <li><a href="#labels-1" class="nomunge">labels</a></li>
+          <li><a href="#external" class="nomunge">external</a></li>
+          <li><a href="#name" class="nomunge">name</a></li>
+        </ul>
+      </li>
+      <li><a href="#volumes-top-level-element" class="nomunge">Volumes top-level element</a>
+        <ul>
+          <li><a href="#driver-1" class="nomunge">driver</a></li>
+          <li><a href="#driver_opts-1" class="nomunge">driver_opts</a></li>
+          <li><a href="#external-1" class="nomunge">external</a></li>
+          <li><a href="#labels-2" class="nomunge">labels</a></li>
+          <li><a href="#name-1" class="nomunge">name</a></li>
+        </ul>
+      </li>
+      <li><a href="#configs-top-level-element" class="nomunge">Configs top-level element</a></li>
+      <li><a href="#secrets-top-level-element" class="nomunge">Secrets top-level element</a></li>
+      <li><a href="#fragments" class="nomunge">Fragments</a></li>
+      <li><a href="#extension" class="nomunge">Extension</a>
+        <ul>
+          <li><a href="#informative-historical-notes" class="nomunge">Informative Historical Notes</a></li>
+          <li><a href="#using-extensions-as-fragments" class="nomunge">Using extensions as fragments</a></li>
+          <li><a href="#specifying-byte-values" class="nomunge">specifying byte values</a></li>
+          <li><a href="#specifying-durations" class="nomunge">specifying durations</a></li>
+        </ul>
+      </li>
+      <li><a href="#interpolation" class="nomunge">Interpolation</a></li>
       <li><a href="#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
     </ul>
   </li>

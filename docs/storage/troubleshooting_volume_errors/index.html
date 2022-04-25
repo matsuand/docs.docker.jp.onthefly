@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ボリュームエラーに関するトラブルシューティング | Docker ドキュメント</title>
   <meta name="description" content="Troubleshooting volume errors" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ボリュームエラーに関するトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting volume errors" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/troubleshooting_volume_errors/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ボリュームエラーに関するトラブルシューティング","description":"Troubleshooting volume errors","url":"https://docs.docker.com/storage/troubleshooting_volume_errors/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,12 +109,12 @@
                     <main class="col-content content">
                         <section class="section"><h1>ボリュームエラーに関するトラブルシューティング</h1><p>ここでは Docker ボリュームやバインドマウントの利用時に発生しやすいエラーについて示します。</p>
 
-<h2 id="error-unable-to-remove-filesystem"><code class="language-plaintext highlighter-rouge">Error: Unable to remove filesystem</code></h2>
+<h2 id="error-unable-to-remove-filesystem"><code class="highlighter-rouge">Error: Unable to remove filesystem</code></h2>
 
-<p><a href="https://github.com/google/cadvisor">Google cAdvisor</a> のようなコンテナーベースのユーティリティーにおいては、<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>といった Docker システムのディレクトリをコンテナーにマウントするものがあります。
-たとえば<code class="language-plaintext highlighter-rouge">cadvisor</code>のドキュメントには、<code class="language-plaintext highlighter-rouge">cadvisor</code>コンテナーを以下のようにして実行するように説明しています。</p>
+<p><a href="https://github.com/google/cadvisor">Google cAdvisor</a> のようなコンテナーベースのユーティリティーにおいては、<code class="highlighter-rouge">/var/lib/docker/</code>といった Docker システムのディレクトリをコンテナーにマウントするものがあります。
+たとえば<code class="highlighter-rouge">cadvisor</code>のドキュメントには、<code class="highlighter-rouge">cadvisor</code>コンテナーを以下のようにして実行するように説明しています。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker run <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>docker run <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/:/rootfs:ro <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/var/run:/var/run:rw <span class="se">\</span>
   <span class="nt">--volume</span><span class="o">=</span>/sys:/sys:ro <span class="se">\</span>
@@ -125,9 +125,9 @@
   google/cadvisor:latest
 </code></pre></div></div>
 
-<p>When you bind-mount <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>, this effectively mounts all resources of
+<p>When you bind-mount <code class="highlighter-rouge">/var/lib/docker/</code>, this effectively mounts all resources of
 all other running containers as filesystems within the container which mounts
-<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. When you attempt to remove any of these containers, the
+<code class="highlighter-rouge">/var/lib/docker/</code>. When you attempt to remove any of these containers, the
 removal attempt may fail with an error like the following:</p>
 
 <pre><code class="language-none">Error: Unable to remove filesystem for
@@ -136,22 +136,22 @@ remove /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae
 Device or resource busy
 </code></pre>
 
-<p>The problem occurs if the container which bind-mounts <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>
-uses <code class="language-plaintext highlighter-rouge">statfs</code> or <code class="language-plaintext highlighter-rouge">fstatfs</code> on filesystem handles within <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>
+<p>The problem occurs if the container which bind-mounts <code class="highlighter-rouge">/var/lib/docker/</code>
+uses <code class="highlighter-rouge">statfs</code> or <code class="highlighter-rouge">fstatfs</code> on filesystem handles within <code class="highlighter-rouge">/var/lib/docker/</code>
 and does not close them.</p>
 
-<p>Typically, we would advise against bind-mounting <code class="language-plaintext highlighter-rouge">/var/lib/docker</code> in this way.
-However, <code class="language-plaintext highlighter-rouge">cAdvisor</code> requires this bind-mount for core functionality.</p>
+<p>Typically, we would advise against bind-mounting <code class="highlighter-rouge">/var/lib/docker</code> in this way.
+However, <code class="highlighter-rouge">cAdvisor</code> requires this bind-mount for core functionality.</p>
 
 <p>If you are unsure which process is causing the path mentioned in the error to
-be busy and preventing it from being removed, you can use the <code class="language-plaintext highlighter-rouge">lsof</code> command
+be busy and preventing it from being removed, you can use the <code class="highlighter-rouge">lsof</code> command
 to find its process. For instance, for the error above:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>lsof /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>lsof /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm
 </code></pre></div></div>
 
 <p>To work around this problem, stop the container which bind-mounts
-<code class="language-plaintext highlighter-rouge">/var/lib/docker</code> and try again to remove the other container.</p>
+<code class="highlighter-rouge">/var/lib/docker</code> and try again to remove the other container.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=cadvisor">cadvisor</a>, <a href="/docs.docker.jp.onthefly/search/?q=troubleshooting">troubleshooting</a>, <a href="/docs.docker.jp.onthefly/search/?q=volumes">volumes</a>, <a href="/docs.docker.jp.onthefly/search/?q=bind-mounts">bind-mounts</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose file build reference | Docker ドキュメント</title>
+  <meta name="description" content="Compose file build reference" />
+  <meta name="keywords" content="fig, composition, compose, docker">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/compose-file/build/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- hide elements that are only shown without JavaScript enabled -->
+  <script>document.documentElement.classList.add('js')</script>
+  <style>html.js .no-js { display: none !important; }</style><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Compose file build reference"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Compose file build reference" />
+  <meta property="og:description" content="Compose file build reference" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/build/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Compose file build reference","description":"Compose file build reference","url":"https://docs.docker.com/compose/compose-file/build/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div>
+        <ul class="nav navbar-nav"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/desktop/" id="manuals">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="/docs.docker.jp.onthefly/reference/">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイルリファレンス</a></li><li><a href="/docs.docker.jp.onthefly/compose/compose-file/build/">Compose file build</a></li></ol>
+    </nav>
+</div></div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Compose file build reference</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>Compose specification is a platform-neutral way to define multi-container applications. A Compose implementation
+focusing on development use-case to run application on local machine will obviously also support (re)building
+application from sources. The Compose Build specification allows to define the build process within a Compose file
+in a portable way.</p>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>Compose Specification is extended to support an OPTIONAL <code class="highlighter-rouge">build</code> subsection on services. This section define the
+build requirements for service container image. Only a subset of Compose file services MAY define such a Build
+subsection, others being created based on <code class="highlighter-rouge">Image</code> attribute. When a Build subsection is present for a service, it
+is <em>valid</em> for a Compose file to miss an <code class="highlighter-rouge">Image</code> attribute for corresponding service, as Compose implementation
+can build image from source.</p>
+
+<p>Build can be either specified as a single string defining a context path, or as a detailed build definition.</p>
+
+<p>In the former case, the whole path is used as a Docker context to execute a docker build, looking for a canonical
+<code class="highlighter-rouge">Dockerfile</code> at context root. Context path can be absolute or relative, and if so relative path MUST be resolved
+from Compose file parent folder. As an absolute path prevent the Compose file to be portable, Compose implementation
+SHOULD warn user accordingly.</p>
+
+<p>In the later case, build arguments can be specified, including an alternate <code class="highlighter-rouge">Dockerfile</code> location. This one can be
+absolute or relative path. If Dockerfile path is relative, it MUST be resolved from context path.  As an absolute
+path prevent the Compose file to be portable, Compose implementation SHOULD warn user if an absolute alternate
+Dockerfile path is used.</p>
+
+<h2 id="consistency-with-image">Consistency with Image</h2>
+
+<p>When service definition do include both <code class="highlighter-rouge">Image</code> attribute and a <code class="highlighter-rouge">Build</code> section, Compose implementation can’t
+guarantee a pulled image is strictly equivalent to building the same image from sources. Without any explicit
+user directives, Compose implementation with Build support MUST first try to pull Image, then build from source
+if image was not found on registry. Compose implementation MAY offer options to customize this behaviour by user
+request.</p>
+
+<h2 id="publishing-built-images">Publishing built images</h2>
+
+<p>Compose implementation with Build support SHOULD offer an option to push built images to a registry. Doing so, it
+MUST NOT try to push service images without an <code class="highlighter-rouge">Image</code> attribute. Compose implementation SHOULD warn user about
+missing <code class="highlighter-rouge">Image</code> attribute which prevent image being pushed.</p>
+
+<p>Compose implementation MAY offer a mechanism to compute an <code class="highlighter-rouge">Image</code> attribute for service when not explicitly
+declared in yaml file. In such a case, the resulting Compose configuration is considered to have a valid <code class="highlighter-rouge">Image</code>
+attribute, whenever the actual raw yaml file doesn’t explicitly declare one.</p>
+
+<h2 id="illustrative-sample">Illustrative sample</h2>
+
+<p>The following sample illustrates Compose specification concepts with a concrete sample application. The sample is non-normative.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/webapp</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./webapp</span>
+
+  <span class="na">backend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">awesome/database</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">backend</span>
+      <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">../backend.Dockerfile</span>
+
+  <span class="na">custom</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">~/custom</span>
+</code></pre></div></div>
+
+<p>When used to build service images from source, such a Compose file will create three docker images:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">awesome/webapp</code> docker image is build using <code class="highlighter-rouge">webapp</code> sub-directory within Compose file parent folder as docker build context. Lack of a <code class="highlighter-rouge">Dockerfile</code> within this folder will throw an error.</li>
+  <li><code class="highlighter-rouge">awesome/database</code> docker image is build using <code class="highlighter-rouge">backend</code> sub-directory within Compose file parent folder. <code class="highlighter-rouge">backend.Dockerfile</code> file is used to define build steps, this file is searched relative to context path, which means for this sample <code class="highlighter-rouge">..</code> will resolve to Compose file parent folder, so <code class="highlighter-rouge">backend.Dockerfile</code> is a sibling file.</li>
+  <li>a docker image is build using <code class="highlighter-rouge">custom</code> directory within user’s HOME as docker context. Compose implementation warn user about non-portable path used to build image.</li>
+</ul>
+
+<p>On push, both <code class="highlighter-rouge">awesome/webapp</code> and <code class="highlighter-rouge">awesome/database</code> docker images are pushed to (default) registry. <code class="highlighter-rouge">custom</code> service image is skipped as no <code class="highlighter-rouge">Image</code> attribute is set and user is warned about this missing attribute.</p>
+
+<h2 id="build-definition">Build definition</h2>
+
+<p>The <code class="highlighter-rouge">build</code> element define configuration options that are applied by Compose implementations to build Docker image from source.
+<code class="highlighter-rouge">build</code> can be specified either as a string containing a path to the build context or a detailed structure:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./dir</span>
+</code></pre></div></div>
+
+<p>Using this string syntax, only the build context can be configured as a relative path to the Compose file’s parent folder.
+This path MUST be a directory and contain a <code class="highlighter-rouge">Dockerfile</code>.</p>
+
+<p>Alternatively <code class="highlighter-rouge">build</code> can be an object with fields defined as follow</p>
+
+<h3 id="context-required">context (REQUIRED)</h3>
+
+<p><code class="highlighter-rouge">context</code> defines either a path to a directory containing a Dockerfile, or a url to a git repository.</p>
+
+<p>When the value supplied is a relative path, it MUST be interpreted as relative to the location of the Compose file.
+Compose implementations MUST warn user about absolute path used to define build context as those prevent Compose file
+for being portable.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">./dir</span>
+</code></pre></div></div>
+
+<h3 id="dockerfile">dockerfile</h3>
+
+<p><code class="highlighter-rouge">dockerfile</code> allows to set an alternate Dockerfile. A relative path MUST be resolved from the build context.
+Compose implementations MUST warn user about absolute path used to define Dockerfile as those prevent Compose file
+for being portable.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">webapp.Dockerfile</span>
+</code></pre></div></div>
+
+<h3 id="args">args</h3>
+
+<p><code class="highlighter-rouge">args</code> define build arguments, i.e. Dockerfile <code class="highlighter-rouge">ARG</code> values.</p>
+
+<p>Using following Dockerfile:</p>
+
+<pre><code class="language-Dockerfile">ARG GIT_COMMIT
+RUN echo "Based on commit: $GIT_COMMIT"
+</code></pre>
+
+<p><code class="highlighter-rouge">args</code> can be set in Compose file under the <code class="highlighter-rouge">build</code> key to define <code class="highlighter-rouge">GIT_COMMIT</code>. <code class="highlighter-rouge">args</code> can be set a mapping or a list:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">args</span><span class="pi">:</span>
+    <span class="na">GIT_COMMIT</span><span class="pi">:</span> <span class="s">cdc3b19</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">args</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">GIT_COMMIT=cdc3b19</span>
+</code></pre></div></div>
+
+<p>Value can be omitted when specifying a build argument, in which case its value at build time MUST be obtained by user interaction,
+otherwise build arg won’t be set when building the Docker image.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">args</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">GIT_COMMIT</span>
+</code></pre></div></div>
+
+<h3 id="ssh">ssh</h3>
+
+<p><code class="highlighter-rouge">ssh</code> defines SSH authentications that the image builder SHOULD use during image build (e.g., cloning private repository)</p>
+
+<p><code class="highlighter-rouge">ssh</code> property syntax can be either:</p>
+<ul>
+  <li><code class="highlighter-rouge">default</code> - let the builder connect to the ssh-agent.</li>
+  <li><code class="highlighter-rouge">ID=path</code> - a key/value definition of an ID and the associated path. Can be either a <a href="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">PEM</a> file, or path to ssh-agent socket</li>
+</ul>
+
+<p>Simple <code class="highlighter-rouge">default</code> sample</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">ssh</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">default</span>   <span class="c1"># mount the default ssh agent</span>
+</code></pre></div></div>
+<p>or</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">ssh</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">default"</span><span class="pi">]</span>   <span class="c1"># mount the default ssh agent</span>
+</code></pre></div></div>
+
+<p>Using a custom id <code class="highlighter-rouge">myproject</code> with path to a local SSH key:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">ssh</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">myproject=~/.ssh/myproject.pem</span>
+</code></pre></div></div>
+<p>Image builder can then rely on this to mount SSH key during build.
+For illustration, <a href="https://github.com/compose-spec/compose-spec/pull/234/%5Bmoby/buildkit@master/frontend/dockerfile/docs/syntax.md#run---mounttypessh%5D(https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh)">BuildKit extended syntax</a> can be used to mount ssh key set by ID and access a secured resource:</p>
+
+<p><code class="highlighter-rouge">RUN --mount=type=ssh,id=myproject git clone ...</code></p>
+
+<h3 id="cache_from">cache_from</h3>
+
+<p><code class="highlighter-rouge">cache_from</code> defines a list of sources the Image builder SHOULD use for cache resolution.</p>
+
+<p>Cache location syntax MUST follow the global format <code class="highlighter-rouge">[NAME|type=TYPE[,KEY=VALUE]]</code>. Simple <code class="highlighter-rouge">NAME</code> is actually a shortcut notation for <code class="highlighter-rouge">type=registry,ref=NAME</code>.</p>
+
+<p>Compose Builder implementations MAY support custom types, the Compose Specification defines canonical types which MUST be supported:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">registry</code> to retrieve build cache from an OCI image set by key <code class="highlighter-rouge">ref</code></li>
+</ul>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">cache_from</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">alpine:latest</span>
+    <span class="pi">-</span> <span class="s">type=local,src=path/to/cache</span>
+    <span class="pi">-</span> <span class="s">type=gha</span>
+</code></pre></div></div>
+
+<p>Unsupported caches MUST be ignored and not prevent user from building image.</p>
+
+<h3 id="cache_to">cache_to</h3>
+
+<p><code class="highlighter-rouge">cache_to</code> defines a list of export locations to be used to share build cache with future builds.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">cache_to</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="s">user/app:cache</span>
+   <span class="pi">-</span> <span class="s">type=local,dest=path/to/cache</span>
+</code></pre></div></div>
+
+<p>Cache target is defined using the same <code class="highlighter-rouge">type=TYPE[,KEY=VALUE]</code> syntax defined by <a href="#cache_from"><code class="highlighter-rouge">cache_from</code></a>.</p>
+
+<p>Unsupported cache target MUST be ignored and not prevent user from building image.</p>
+
+<h3 id="extra_hosts">extra_hosts</h3>
+
+<p><code class="highlighter-rouge">extra_hosts</code> adds hostname mappings at build-time. Use the same syntax as <a href="/docs.docker.jp.onthefly/compose/compose-file/#extra_hosts">extra_hosts</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">somehost:162.242.195.82"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">otherhost:50.31.209.229"</span>
+</code></pre></div></div>
+
+<p>Compose implementations MUST create matching entry with the IP address and hostname in the container’s network
+configuration, which means for Linux <code class="highlighter-rouge">/etc/hosts</code> will get extra lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>162.242.195.82  somehost
+50.31.209.229   otherhost
+</code></pre></div></div>
+
+<h3 id="isolation">isolation</h3>
+
+<p><code class="highlighter-rouge">isolation</code> specifies a build’s container isolation technology. Like <a href="/docs.docker.jp.onthefly/compose/compose-file/#isolation">isolation</a> supported values
+are platform-specific.</p>
+
+<h3 id="labels">labels</h3>
+
+<p><code class="highlighter-rouge">labels</code> add metadata to the resulting image. <code class="highlighter-rouge">labels</code> can be set either as an array or a map.</p>
+
+<p>reverse-DNS notation SHOULD be used to prevent labels from conflicting with those used by other software.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+    <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+    <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
+</code></pre></div></div>
+
+<h3 id="shm_size">shm_size</h3>
+
+<p><code class="highlighter-rouge">shm_size</code> set the size of the shared memory (<code class="highlighter-rouge">/dev/shm</code> partition on Linux) allocated for building Docker image. Specify
+as an integer value representing the number of bytes or as a string expressing a <a href="/docs.docker.jp.onthefly/compose/compose-file/#specifying-byte-values">byte value</a>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">shm_size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2gb'</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">shm_size</span><span class="pi">:</span> <span class="s">10000000</span>
+</code></pre></div></div>
+
+<h3 id="target">target</h3>
+
+<p><code class="highlighter-rouge">target</code> defines the stage to build as defined inside a multi-stage <code class="highlighter-rouge">Dockerfile</code>.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">target</span><span class="pi">:</span> <span class="s">prod</span>
+</code></pre></div></div>
+
+<h2 id="implementations">Implementations</h2>
+
+<ul>
+  <li><a href="https://docs.docker.com/compose">docker-compose</a></li>
+  <li><a href="https://docs.docker.com/buildx/working-with-buildx/">buildX bake</a></li>
+</ul>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=fig">fig</a>, <a href="/docs.docker.jp.onthefly/search/?q=composition">composition</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/compose/compose-file/build.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [compose/compose-file/build.ch](https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/build/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#definitions" class="nomunge">Definitions</a></li>
+  <li><a href="#consistency-with-image" class="nomunge">Consistency with Image</a></li>
+  <li><a href="#publishing-built-images" class="nomunge">Publishing built images</a></li>
+  <li><a href="#illustrative-sample" class="nomunge">Illustrative sample</a></li>
+  <li><a href="#build-definition" class="nomunge">Build definition</a>
+    <ul>
+      <li><a href="#context-required" class="nomunge">context (REQUIRED)</a></li>
+      <li><a href="#dockerfile" class="nomunge">dockerfile</a></li>
+      <li><a href="#args" class="nomunge">args</a></li>
+      <li><a href="#ssh" class="nomunge">ssh</a></li>
+      <li><a href="#cache_from" class="nomunge">cache_from</a></li>
+      <li><a href="#cache_to" class="nomunge">cache_to</a></li>
+      <li><a href="#extra_hosts" class="nomunge">extra_hosts</a></li>
+      <li><a href="#isolation" class="nomunge">isolation</a></li>
+      <li><a href="#labels" class="nomunge">labels</a></li>
+      <li><a href="#shm_size" class="nomunge">shm_size</a></li>
+      <li><a href="#target" class="nomunge">target</a></li>
+    </ul>
+  </li>
+  <li><a href="#implementations" class="nomunge">Implementations</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products" target="_blank" rel="noopener">製品ラインアップ</a></b></li>
+                        <li><a href="https://www.docker.com/products/personal" target="_blank" rel="noopener">Docker Personal</a></li>
+                        <li><a href="https://www.docker.com/products/pro" target="_blank" rel="noopener">Docker Pro</a></li>
+                        <li><a href="https://www.docker.com/products/team" target="_blank" rel="noopener">Docker Team</a></li>
+                        <li><a href="https://www.docker.com/products/business" target="_blank" rel="noopener">Docker Business</a></li>
+                        <li><a href="https://www.docker.com/products" target="_blank" rel="noopener">サブスクリプション比較</a></li>
+                        <li><b><a href="https://www.docker.com/" target="_blank" rel="noopener">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub" target="_blank" rel="noopener">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/products/secure-software-supply-chain" target="_blank" rel="noopener">セキュアなソフトウェアサプライチェーン</a></li>
+                        <li><a href="https://www.docker.com/products/container-runtime" target="_blank" rel="noopener">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools" target="_blank" rel="noopener">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/partners" target="_blank" rel="noopener">信頼できるコンテント</a></li>
+                        <li><a href="https://www.docker.com/roadmap" target="_blank" rel="noopener">Docker 製品ロードマップ</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases" target="_blank" rel="noopener">利用例</a></li>
+                        <li><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">はじめよう</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/docker-community" target="_blank" rel="noopener">コミュニティー</a></li>
+                        <li><a href="https://www.docker.com/open-source" target="_blank" rel="noopener">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/get-involved/developer-preview" target="_blank" rel="noopener">プレビュープログラム</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">価格体系</a></b></li>
+                        <li><a href="https://www.docker.com/pricing/faq" target="_blank" rel="noopener">FAQ</a></li>
+                        <li><a href="https://www.docker.com/partners/programs" target="_blank" rel="noopener">Docker 認定公開者向けプログラム</a></li>
+                        <li><a href="https://www.docker.com/partners" target="_blank" rel="noopener">パートナー</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社概要</a></b></li>
+                        <li><a href="https://www.docker.com/what-container" target="_blank" rel="noopener">コンテナーって何？</a></li>
+                        <li><a href="https://www.docker.com/why-docker" target="_blank" rel="noopener">なぜ Docker？</a></li>
+                        <li><a href="https://www.docker.com/events" target="_blank" rel="noopener">仮想イベント</a></li>
+                        <li><a href="https://www.docker.com/swag" target="_blank" rel="noopener">Swag ストア
+                        </a></li>
+                        <li><a href="https://www.docker.com/company/newsroom" target="_blank" rel="noopener">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers" target="_blank" rel="noopener">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact" target="_blank" rel="noopener">連絡先</a></li>
+                        <li><a href="https://www.docker.com/customers" target="_blank" rel="noopener">顧客</a></li>
+                        <li><a href="https://www.docker.com/newsletter-subscription" target="_blank" rel="noopener">ニュースレター</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="https://www.docker.com/legal/docker-terms-service" target="_blank" rel="noopener">サービス契約</a></li>
+                        <li><a href="https://status.docker.com/" target="_blank" rel="noopener">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal" target="_blank" rel="noopener">法的情報</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="https://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="https://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/compose/compose-file/build/";</script></body>
+</html>

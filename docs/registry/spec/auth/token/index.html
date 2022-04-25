@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Token Authentication Specification | Docker ドキュメント</title>
   <meta name="description" content="Specifies the Docker Registry v2 authentication" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Token Authentication Specification" />
   <meta property="og:description" content="Specifies the Docker Registry v2 authentication" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/auth/token/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Token Authentication Specification","description":"Specifies the Docker Registry v2 authentication","url":"https://docs.docker.com/registry/spec/auth/token/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Token Authentication Specification</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p><h1 id="docker-registry-v2-authentication-via-central-service">Docker Registry v2 authentication via central service</h1>
+                        <section class="section"><h1>Token Authentication Specification</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><h1 id="docker-registry-v2-authentication-via-central-service">Docker Registry v2 authentication via central service</h1>
 
 <p>This document outlines the v2 Docker registry authentication scheme:</p>
 
@@ -115,7 +115,7 @@
 
 <ol>
   <li>Attempt to begin a push/pull operation with the registry.</li>
-  <li>If the registry requires authorization it will return a <code class="language-plaintext highlighter-rouge">401 Unauthorized</code>
+  <li>If the registry requires authorization it will return a <code class="highlighter-rouge">401 Unauthorized</code>
 HTTP response with information on how to authenticate.</li>
   <li>The registry client makes a request to the authorization service for a
 Bearer token.</li>
@@ -156,16 +156,16 @@ to handle such an authorization workflow.</p>
 
 <p>Registry V1 clients first contact the index to initiate a push or pull. Under
 the Registry V2 workflow, clients should contact the registry first. If the
-registry server requires authentication it will return a <code class="language-plaintext highlighter-rouge">401 Unauthorized</code>
-response with a <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header detailing how to authenticate to this
+registry server requires authentication it will return a <code class="highlighter-rouge">401 Unauthorized</code>
+response with a <code class="highlighter-rouge">WWW-Authenticate</code> header detailing how to authenticate to this
 registry.</p>
 
-<p>For example, say I (username <code class="language-plaintext highlighter-rouge">jlhawn</code>) am attempting to push an image to the
-repository <code class="language-plaintext highlighter-rouge">samalba/my-app</code>. For the registry to authorize this, I will need
-<code class="language-plaintext highlighter-rouge">push</code> access to the <code class="language-plaintext highlighter-rouge">samalba/my-app</code> repository. The registry will first
+<p>For example, say I (username <code class="highlighter-rouge">jlhawn</code>) am attempting to push an image to the
+repository <code class="highlighter-rouge">samalba/my-app</code>. For the registry to authorize this, I will need
+<code class="highlighter-rouge">push</code> access to the <code class="highlighter-rouge">samalba/my-app</code> repository. The registry will first
 return this response:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 401 Unauthorized
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 401 Unauthorized
 Content-Type: application/json; charset=utf-8
 Docker-Distribution-Api-Version: registry/2.0
 Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
@@ -178,7 +178,7 @@ Strict-Transport-Security: max-age=31536000
 
 <p>Note the HTTP Response Header indicating the auth challenge:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
 </code></pre></div></div>
 
 <p>This format is documented in <a href="https://tools.ietf.org/html/rfc6750#section-3">Section 3 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
@@ -186,9 +186,9 @@ Strict-Transport-Security: max-age=31536000
 <p>This challenge indicates that the registry requires a token issued by the
 specified token server and that the request the client is attempting will
 need to include sufficient access entries in its claim set. To respond to this
-challenge, the client will need to make a <code class="language-plaintext highlighter-rouge">GET</code> request to the URL
-<code class="language-plaintext highlighter-rouge">https://auth.docker.io/token</code> using the <code class="language-plaintext highlighter-rouge">service</code> and <code class="language-plaintext highlighter-rouge">scope</code> values from the
-<code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header.</p>
+challenge, the client will need to make a <code class="highlighter-rouge">GET</code> request to the URL
+<code class="highlighter-rouge">https://auth.docker.io/token</code> using the <code class="highlighter-rouge">service</code> and <code class="highlighter-rouge">scope</code> values from the
+<code class="highlighter-rouge">WWW-Authenticate</code> header.</p>
 
 <h2 id="requesting-a-token">Requesting a Token</h2>
 
@@ -197,28 +197,28 @@ challenge, the client will need to make a <code class="language-plaintext highli
 <h4 id="query-parameters">Query Parameters</h4>
 
 <dl>
-  <dt><code class="language-plaintext highlighter-rouge">service</code></dt>
+  <dt><code class="highlighter-rouge">service</code></dt>
   <dd>The name of the service which hosts the resource.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">offline_token</code></dt>
+  <dt><code class="highlighter-rouge">offline_token</code></dt>
   <dd>Whether to return a refresh token along with the bearer token. A refresh token is capable of getting additional bearer tokens for the same subject with different scopes. The refresh token does not have an expiration and should be considered completely opaque to the client.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">client_id</code></dt>
+  <dt><code class="highlighter-rouge">client_id</code></dt>
   <dd>String identifying the client. This client_id does not need to be registered with the authorization server but should be set to a meaningful value in order to allow auditing keys created by unregistered clients. Accepted syntax is defined in [RFC6749 Appendix A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1).</dd>
-  <dt><code class="language-plaintext highlighter-rouge">scope</code></dt>
-  <dd>The resource in question, formatted as one of the space-delimited entries from the <code class="language-plaintext highlighter-rouge">scope</code> parameters from the <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header shown above. This query parameter should be specified multiple times if there is more than one <code class="language-plaintext highlighter-rouge">scope</code> entry from the <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header. The above example would be specified as: <code class="language-plaintext highlighter-rouge">scope=repository:samalba/my-app:push</code>. The scope field may be empty to request a refresh token without providing any resource permissions to the returned bearer token.</dd>
+  <dt><code class="highlighter-rouge">scope</code></dt>
+  <dd>The resource in question, formatted as one of the space-delimited entries from the <code class="highlighter-rouge">scope</code> parameters from the <code class="highlighter-rouge">WWW-Authenticate</code> header shown above. This query parameter should be specified multiple times if there is more than one <code class="highlighter-rouge">scope</code> entry from the <code class="highlighter-rouge">WWW-Authenticate</code> header. The above example would be specified as: <code class="highlighter-rouge">scope=repository:samalba/my-app:push</code>. The scope field may be empty to request a refresh token without providing any resource permissions to the returned bearer token.</dd>
 </dl>
 
 <h4 id="token-response-fields">Token Response Fields</h4>
 
 <dl>
-  <dt><code class="language-plaintext highlighter-rouge">token</code></dt>
-  <dd>An opaque <code class="language-plaintext highlighter-rouge">Bearer</code> token that clients should supply to subsequent requests in the <code class="language-plaintext highlighter-rouge">Authorization</code> header.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">access_token</code></dt>
-  <dd>For compatibility with OAuth 2.0, we will also accept <code class="language-plaintext highlighter-rouge">token</code> under the name <code class="language-plaintext highlighter-rouge">access_token</code>. At least one of these fields <strong>must</strong> be specified, but both may also appear (for compatibility with older clients). When both are specified, they should be equivalent; if they differ the client's choice is undefined.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">expires_in</code></dt>
+  <dt><code class="highlighter-rouge">token</code></dt>
+  <dd>An opaque <code class="highlighter-rouge">Bearer</code> token that clients should supply to subsequent requests in the <code class="highlighter-rouge">Authorization</code> header.</dd>
+  <dt><code class="highlighter-rouge">access_token</code></dt>
+  <dd>For compatibility with OAuth 2.0, we will also accept <code class="highlighter-rouge">token</code> under the name <code class="highlighter-rouge">access_token</code>. At least one of these fields <strong>must</strong> be specified, but both may also appear (for compatibility with older clients). When both are specified, they should be equivalent; if they differ the client's choice is undefined.</dd>
+  <dt><code class="highlighter-rouge">expires_in</code></dt>
   <dd>(Optional) The duration in seconds since the token was issued that it will remain valid. When omitted, this defaults to 60 seconds. For compatibility with older clients, a token should never be returned with less than 60 seconds to live.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">issued_at</code></dt>
-  <dd>(Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC standard time at which a given token was issued. If <code class="language-plaintext highlighter-rouge">issued_at</code> is omitted, the expiration is from when the token exchange completed.</dd>
-  <dt><code class="language-plaintext highlighter-rouge">refresh_token</code></dt>
+  <dt><code class="highlighter-rouge">issued_at</code></dt>
+  <dd>(Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC standard time at which a given token was issued. If <code class="highlighter-rouge">issued_at</code> is omitted, the expiration is from when the token exchange completed.</dd>
+  <dt><code class="highlighter-rouge">refresh_token</code></dt>
   <dd>(Optional) Token which can be used to get additional access tokens for the same subject with different scopes. This token should be kept secure by the client and only sent to the authorization server which issues bearer tokens. This field will only be set when `offline_token=true` is provided in the request.</dd>
 </dl>
 
@@ -226,7 +226,7 @@ challenge, the client will need to make a <code class="language-plaintext highli
 
 <p>For this example, the client makes an HTTP GET request to the following URL:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:samalba/my-app:pull,push
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:samalba/my-app:pull,push
 </code></pre></div></div>
 
 <p>The token server should first attempt to authenticate the client using any
@@ -234,7 +234,7 @@ authentication credentials provided with the request. From Docker 1.11 the
 Docker engine supports both Basic Authentication and <a href="/docs.docker.jp.onthefly/registry/spec/auth/oauth/">OAuth2</a> for
 getting tokens. Docker 1.10 and before, the registry client in the Docker Engine
 only supports Basic Authentication. If an attempt to authenticate to the token
-server fails, the token server should return a <code class="language-plaintext highlighter-rouge">401 Unauthorized</code> response
+server fails, the token server should return a <code class="highlighter-rouge">401 Unauthorized</code> response
 indicating that the provided credentials are invalid.</p>
 
 <p>Whether the token server requires authentication is up to the policy of that
@@ -245,12 +245,12 @@ access (such as pushing or pulling a private repository) while others may not
 <p>After authenticating the client (which may simply be an anonymous client if
 no attempt was made to authenticate), the token server must next query its
 access control list to determine whether the client has the requested scope. In
-this example request, if I have authenticated as user <code class="language-plaintext highlighter-rouge">jlhawn</code>, the token
-server will determine what access I have to the repository <code class="language-plaintext highlighter-rouge">samalba/my-app</code>
-hosted by the entity <code class="language-plaintext highlighter-rouge">registry.docker.io</code>.</p>
+this example request, if I have authenticated as user <code class="highlighter-rouge">jlhawn</code>, the token
+server will determine what access I have to the repository <code class="highlighter-rouge">samalba/my-app</code>
+hosted by the entity <code class="highlighter-rouge">registry.docker.io</code>.</p>
 
 <p>Once the token server has determined what access the client has to the
-resources requested in the <code class="language-plaintext highlighter-rouge">scope</code> parameter, it will take the intersection of
+resources requested in the <code class="highlighter-rouge">scope</code> parameter, it will take the intersection of
 the set of requested actions on each resource and the set of actions that the
 client has in fact been granted. If the client only has a subset of the
 requested access <strong>it must not be considered an error</strong> as it is not the
@@ -258,11 +258,11 @@ responsibility of the token server to indicate authorization errors as part of
 this workflow.</p>
 
 <p>Continuing with the example request, the token server will find that the
-client’s set of granted access to the repository is <code class="language-plaintext highlighter-rouge">[pull, push]</code> which when
-intersected with the requested access <code class="language-plaintext highlighter-rouge">[pull, push]</code> yields an equal set. If
-the granted access set was found only to be <code class="language-plaintext highlighter-rouge">[pull]</code> then the intersected set
-would only be <code class="language-plaintext highlighter-rouge">[pull]</code>. If the client has no access to the repository then the
-intersected set would be empty, <code class="language-plaintext highlighter-rouge">[]</code>.</p>
+client’s set of granted access to the repository is <code class="highlighter-rouge">[pull, push]</code> which when
+intersected with the requested access <code class="highlighter-rouge">[pull, push]</code> yields an equal set. If
+the granted access set was found only to be <code class="highlighter-rouge">[pull]</code> then the intersected set
+would only be <code class="highlighter-rouge">[pull]</code>. If the client has no access to the repository then the
+intersected set would be empty, <code class="highlighter-rouge">[]</code>.</p>
 
 <p>It is this intersected set of access which is placed in the returned token.</p>
 
@@ -270,7 +270,7 @@ intersected set would be empty, <code class="language-plaintext highlighter-roug
 intersected set of access, and returns it to the Docker client to use to
 authenticate to the audience service (within the indicated window of time):</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w", "expires_in": 3600,"issued_at": "2009-11-10T23:00:00Z"}
@@ -279,9 +279,9 @@ Content-Type: application/json
 <h2 id="using-the-bearer-token">Using the Bearer token</h2>
 
 <p>Once the client has a token, it will try the registry request again with the
-token placed in the HTTP <code class="language-plaintext highlighter-rouge">Authorization</code> header like so:</p>
+token placed in the HTTP <code class="highlighter-rouge">Authorization</code> header like so:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
 </code></pre></div></div>
 
 <p>This is also described in <a href="https://tools.ietf.org/html/rfc6750#section-2.1">Section 2.1 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>

@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Registry storage driver | Docker ドキュメント</title>
   <meta name="description" content="Explains how to use storage drivers" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker Registry storage driver" />
   <meta property="og:description" content="Explains how to use storage drivers" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/storage-drivers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker Registry storage driver","description":"Explains how to use storage drivers","url":"https://docs.docker.com/registry/storage-drivers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -137,37 +137,37 @@ Docker Hub はホスト提供込みの Registry であり、さまざまな機�
 
 <p>The storage driver API is designed to model a filesystem-like key/value storage in a manner abstract enough to support a range of drivers from the local filesystem to Amazon S3 or other distributed object storage systems.</p>
 
-<p>Storage drivers are required to implement the <code class="language-plaintext highlighter-rouge">storagedriver.StorageDriver</code> interface provided in <code class="language-plaintext highlighter-rouge">storagedriver.go</code>, which includes methods for reading, writing, and deleting content, as well as listing child objects of a specified prefix key.</p>
+<p>Storage drivers are required to implement the <code class="highlighter-rouge">storagedriver.StorageDriver</code> interface provided in <code class="highlighter-rouge">storagedriver.go</code>, which includes methods for reading, writing, and deleting content, as well as listing child objects of a specified prefix key.</p>
 
 <p>Storage drivers are intended to be written in Go, providing compile-time
-validation of the <code class="language-plaintext highlighter-rouge">storagedriver.StorageDriver</code> interface.</p>
+validation of the <code class="highlighter-rouge">storagedriver.StorageDriver</code> interface.</p>
 
 <h2 id="driver-selection-and-configuration">Driver selection and configuration</h2>
 
-<p>The preferred method of selecting a storage driver is using the <code class="language-plaintext highlighter-rouge">StorageDriverFactory</code> interface in the <code class="language-plaintext highlighter-rouge">storagedriver/factory</code> package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the <a href="https://golang.org/pkg/database/sql/#Register">Register</a> and <a href="https://golang.org/pkg/database/sql/#Open">Open</a> methods in the builtin <a href="https://golang.org/pkg/database/sql">database/sql</a> package.</p>
+<p>The preferred method of selecting a storage driver is using the <code class="highlighter-rouge">StorageDriverFactory</code> interface in the <code class="highlighter-rouge">storagedriver/factory</code> package. These factories provide a common interface for constructing storage drivers with a parameters map. The factory model is based on the <a href="https://golang.org/pkg/database/sql/#Register">Register</a> and <a href="https://golang.org/pkg/database/sql/#Open">Open</a> methods in the builtin <a href="https://golang.org/pkg/database/sql">database/sql</a> package.</p>
 
 <p>Storage driver factories may be registered by name using the
-<code class="language-plaintext highlighter-rouge">factory.Register</code> method, and then later invoked by calling <code class="language-plaintext highlighter-rouge">factory.Create</code>
+<code class="highlighter-rouge">factory.Register</code> method, and then later invoked by calling <code class="highlighter-rouge">factory.Create</code>
 with a driver name and parameters map. If no such storage driver can be found,
-<code class="language-plaintext highlighter-rouge">factory.Create</code> returns an <code class="language-plaintext highlighter-rouge">InvalidStorageDriverError</code>.</p>
+<code class="highlighter-rouge">factory.Create</code> returns an <code class="highlighter-rouge">InvalidStorageDriverError</code>.</p>
 
 <h2 id="driver-contribution">Driver contribution</h2>
 
 <h3 id="writing-new-storage-drivers">Writing new storage drivers</h3>
 
 <p>To create a valid storage driver, one must implement the
-<code class="language-plaintext highlighter-rouge">storagedriver.StorageDriver</code> interface and make sure to expose this driver
+<code class="highlighter-rouge">storagedriver.StorageDriver</code> interface and make sure to expose this driver
 via the factory system.</p>
 
 <h4 id="registering">Registering</h4>
 
-<p>Storage drivers should call <code class="language-plaintext highlighter-rouge">factory.Register</code> with their driver name in an <code class="language-plaintext highlighter-rouge">init</code> method, allowing callers of <code class="language-plaintext highlighter-rouge">factory.New</code> to construct instances of this driver without requiring modification of imports throughout the codebase.</p>
+<p>Storage drivers should call <code class="highlighter-rouge">factory.Register</code> with their driver name in an <code class="highlighter-rouge">init</code> method, allowing callers of <code class="highlighter-rouge">factory.New</code> to construct instances of this driver without requiring modification of imports throughout the codebase.</p>
 
 <h2 id="testing">Testing</h2>
 
 <p>Storage driver test suites are provided in
-<code class="language-plaintext highlighter-rouge">storagedriver/testsuites/testsuites.go</code> and may be used for any storage
-driver written in Go. Tests can be registered using the <code class="language-plaintext highlighter-rouge">RegisterSuite</code>
+<code class="highlighter-rouge">storagedriver/testsuites/testsuites.go</code> and may be used for any storage
+driver written in Go. Tests can be registered using the <code class="highlighter-rouge">RegisterSuite</code>
 function, which run the same set of tests for any registered drivers.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="/docs.docker.jp.onthefly/search/?q=on-prem">on-prem</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=tags">tags</a>, <a href="/docs.docker.jp.onthefly/search/?q=repository">repository</a>, <a href="/docs.docker.jp.onthefly/search/?q=distribution">distribution</a>, <a href="/docs.docker.jp.onthefly/search/?q=storage drivers">storage drivers</a>, <a href="/docs.docker.jp.onthefly/search/?q=advanced">advanced</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

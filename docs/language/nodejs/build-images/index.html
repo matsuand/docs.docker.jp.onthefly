@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node イメージのビルド | Docker ドキュメント</title>
   <meta name="description" content="Learn how to build your first Docker image by writing a Dockerfile" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Node イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Node イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/nodejs/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -132,16 +132,16 @@ BuildKit が有効になっていれば、Docker イメージビルドを効率�
 Docker Desktop をインストールしているのであれば、手動で BuildKit を有効にする必要はありません。
 Linux 上において Docker を利用している場合は、環境変数を用いるか、あるいは BuildKit がデフォルト設定となるようにして、BuildKit を有効にします。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
+<p><code class="highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>デフォルトで BuildKit を有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>内のデーモン設定を<code class="language-plaintext highlighter-rouge">true</code>に設定して、デーモンを再起動します。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルが存在していない場合は、この<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを新規生成して、以下の記述を追加します。</p>
+<p>デフォルトで BuildKit を有効にするには、<code class="highlighter-rouge">/etc/docker/daemon.json</code>内のデーモン設定を<code class="highlighter-rouge">true</code>に設定して、デーモンを再起動します。
+<code class="highlighter-rouge">daemon.json</code>ファイルが存在していない場合は、この<code class="highlighter-rouge">daemon.json</code>ファイルを新規生成して、以下の記述を追加します。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"features"</span><span class="p">:{</span><span class="nl">"buildkit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"features"</span><span class="p">:{</span><span class="s2">"buildkit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -167,30 +167,30 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <h2 id="sample-application">サンプルアプリケーション</h2>
 
 <p>例として用いる簡単な Node.js アプリケーションを作っていきます。
-ローカルマシン内に<code class="language-plaintext highlighter-rouge">node-docker</code>という名前のディレクトリを生成し、以下の手順により簡単な REST API を生成します。</p>
+ローカルマシン内に<code class="highlighter-rouge">node-docker</code>という名前のディレクトリを生成し、以下の手順により簡単な REST API を生成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="o">[</span>各自のnode-dockerディレクトリ]
-<span class="gp">$</span><span class="w"> </span>npm init <span class="nt">-y</span>
-<span class="gp">$</span><span class="w"> </span>npm <span class="nb">install </span>ronin-server ronin-mocks
-<span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>server.js
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cd</span> <span class="o">[</span>各自のnode-dockerディレクトリ]
+<span class="gp">$</span> npm init <span class="nt">-y</span>
+<span class="gp">$</span> npm install ronin-server ronin-mocks
+<span class="gp">$</span> touch server.js
 </code></pre></div></div>
 
 <p>そこで REST 要求を行うコードを追加してみます。
 簡単なモックサーバーを用いて、アプリケーションの Docker 化を行っていきます。</p>
 
 <p>IDE 環境においてワーキングディレクトリを開きます。
-そして以下のコードを<code class="language-plaintext highlighter-rouge">server.js</code>ファイルとして書き込みます。</p>
+そして以下のコードを<code class="highlighter-rouge">server.js</code>ファイルとして書き込みます。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">ronin-server</span><span class="dl">'</span><span class="p">)</span>
-<span class="kd">const</span> <span class="nx">mocks</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">ronin-mocks</span><span class="dl">'</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ronin-server'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">mocks</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ronin-mocks'</span><span class="p">)</span>
 
 <span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">ronin</span><span class="p">.</span><span class="nx">server</span><span class="p">()</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span><span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span><span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>モックサーバーは<code class="language-plaintext highlighter-rouge">Ronin.js</code>と呼ぶことにして、デフォルトでポート8000 番を待ち受けるものとします。
+<p>モックサーバーは<code class="highlighter-rouge">Ronin.js</code>と呼ぶことにして、デフォルトでポート8000 番を待ち受けるものとします。
 ルート（/）エンドポイントに対して POST 要求が行えるものとし、サーバーに送信した JSON データは、すべてメモリに保存されるようにします。
 同じくルートエンドポイントに GET 要求が送信可能であり、その前に POST 要求した結果を JSON オブジェクトの配列として受信するものとします。</p>
 
@@ -199,20 +199,20 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>ここからアプリケーションを起動させて正しく動作することを確認します。
 ターミナルを開いて、上で生成したワーキングディレクトリに移動します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>node server.js
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> node server.js
 </code></pre></div></div>
 
 <p>アプリケーションが適切に動作していることを確認するため、初めに API に対して JSON データを POST します。
 そして GET リクエストを送信して、データがどのように保存されるかを見てみます。
 新たなターミナルを開いて、以下の curl コマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{"msg": "testing" }'</span>
 <span class="go">{"code":"success","payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
 
-</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000/test
+</span><span class="gp">$</span> curl http://localhost:8000/test
 <span class="go">{"code":"success","meta":{"total":1,"count":1},"payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
 </span></code></pre></div></div>
 
@@ -227,7 +227,7 @@ Linux 上において Docker を利用している場合は、環境変数を用
 アプリケーションが動作しているのを確認できました。
 この時点で、サーバースクリプトの動作テストはローカルで完了したことになります。</p>
 
-<p>サーバーを稼働させているターミナルセッション内から<code class="language-plaintext highlighter-rouge">CTRL-c</code>を入力して、サーバーを停止させます。</p>
+<p>サーバーを稼働させているターミナルセッション内から<code class="highlighter-rouge">CTRL-c</code>を入力して、サーバーを停止させます。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">2021-08-06T12:11:33:8930  INFO: POST /test
 2021-08-06T12:11:41:5860  INFO: GET /test
@@ -239,27 +239,27 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <h2 id="create-a-dockerfile-for-nodejs">Node.js を用いた Dockerfile の生成</h2>
 
 <p>Dockerfile とは、 Docker イメージを取得する命令を含んだテキストファイルのことです。
-Docker に対して<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
+Docker に対して<code class="highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
 
 <p>ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
-プロジェクトのルートディレクトリに<code class="language-plaintext highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
+プロジェクトのルートディレクトリに<code class="highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
 
 <blockquote>
   <p><strong>Dockerfile の名前を何にするか</strong></p>
 
-  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="language-plaintext highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
-このデフォルトファイル名を用いておけば、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
+  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
+このデフォルトファイル名を用いておけば、<code class="highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
 
   <p>プロジェクトによっては、特定の目的のため、Dockerfile に別名を与える場合があります。
-普通行われる慣例としては、<code class="language-plaintext highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
-このような Dockerfile は、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="language-plaintext highlighter-rouge">--file</code>オプション (その短縮形<code class="language-plaintext highlighter-rouge">-f</code>) を用いて指定します。
-<code class="language-plaintext highlighter-rouge">--file</code>オプションの利用方法については、<code class="language-plaintext highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
+普通行われる慣例としては、<code class="highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
+このような Dockerfile は、<code class="highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="highlighter-rouge">--file</code>オプション (その短縮形<code class="highlighter-rouge">-f</code>) を用いて指定します。
+<code class="highlighter-rouge">--file</code>オプションの利用方法については、<code class="highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
 
-  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="language-plaintext highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
+  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
 本ガイドに示すほとんどの例においては、この名前を用いています。</p>
 </blockquote>
 
-<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="language-plaintext highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
+<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
 これは <strong>任意の記述</strong> ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
 また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
 <a href="/docs.docker.jp.onthefly/engine/reference/builder/#parser-directives">パーサーディレクティブ</a> は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。</p>
@@ -267,7 +267,7 @@ Docker に対して<code class="language-plaintext highlighter-rouge">docker bui
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
+<p><code class="highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
 こうしておくと、常に文法バージョン 1 の最新リリース版を指し示すことになります。
 BuildKit は、ビルド処理の前に文法に更新がないかを自動的にチェックし、最新バージョンが用いられていることを確認します。</p>
 
@@ -285,12 +285,12 @@ BuildKit は、ビルド処理の前に文法に更新がないかを自動的�
 ここで行った継承は、オブジェクト指向プログラミング言語におけるクラス継承と同じようなものとして考えることができます。
 たとえば Docker イメージを JavaScript 言語によってプログラミングできるとしたら、以下のように記述するイメージです。</p>
 
-<p><code class="language-plaintext highlighter-rouge">class MyImage extends NodeBaseImage {}</code></p>
+<p><code class="highlighter-rouge">class MyImage extends NodeBaseImage {}</code></p>
 
-<p>上は<code class="language-plaintext highlighter-rouge">MyImage</code>という名のクラスを生成し、それは<code class="language-plaintext highlighter-rouge">NodeBaseImage</code>というベースクラスから機能性を継承するものです。</p>
+<p>上は<code class="highlighter-rouge">MyImage</code>という名のクラスを生成し、それは<code class="highlighter-rouge">NodeBaseImage</code>というベースクラスから機能性を継承するものです。</p>
 
-<p>同じようなこととして Docker では<code class="language-plaintext highlighter-rouge">FROM</code>コマンドを用います。
-ここでは<code class="language-plaintext highlighter-rouge">node:12.18.1</code>というイメージの機能性をすべて含んだイメージとすることを Docker に指示します。</p>
+<p>同じようなこととして Docker では<code class="highlighter-rouge">FROM</code>コマンドを用います。
+ここでは<code class="highlighter-rouge">node:12.18.1</code>というイメージの機能性をすべて含んだイメージとすることを Docker に指示します。</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -298,8 +298,8 @@ BuildKit は、ビルド処理の前に文法に更新がないかを自動的�
   <p>独自のベースイメージ作りについて学びたい場合は、<a href="/docs.docker.jp.onthefly/develop/develop-images/baseimages/">ベースイメージの生成</a> を参照してください。</p>
 </blockquote>
 
-<p>環境変数<code class="language-plaintext highlighter-rouge">NODE_ENV</code>はアプリケーションが動作する環境を定義します（通常は development（開発環境） か production（本番環境）です。）。
-性能を改善させるために取るべき単純な方法は、この<code class="language-plaintext highlighter-rouge">NODE_ENV</code>変数を<code class="language-plaintext highlighter-rouge">production</code>に設定することです。</p>
+<p>環境変数<code class="highlighter-rouge">NODE_ENV</code>はアプリケーションが動作する環境を定義します（通常は development（開発環境） か production（本番環境）です。）。
+性能を改善させるために取るべき単純な方法は、この<code class="highlighter-rouge">NODE_ENV</code>変数を<code class="highlighter-rouge">production</code>に設定することです。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> NODE_ENV=production</span>
 </code></pre></div></div>
@@ -312,45 +312,45 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 </code></pre></div></div>
 
 <p>通常は Node.js で書かれたプロジェクトのダウンロード後、一番に行っておくことが npm パッケージのインストールです。
-これを行っておくとアプリケーションの依存パッケージがすべて<code class="language-plaintext highlighter-rouge">node_modules</code>ディレクトリ内にインストールされます。
+これを行っておくとアプリケーションの依存パッケージがすべて<code class="highlighter-rouge">node_modules</code>ディレクトリ内にインストールされます。
 Node ランタイムはそこから必要なパッケージを探し出せるようになります。</p>
 
-<p><code class="language-plaintext highlighter-rouge">npm install</code>を実行する前には、<code class="language-plaintext highlighter-rouge">package.json</code>と<code class="language-plaintext highlighter-rouge">package-lock.json</code>の両ファイルをイメージ内にコピーしておくことが必要です。
-<code class="language-plaintext highlighter-rouge">COPY</code>コマンドを使ってこれを行います。
-<code class="language-plaintext highlighter-rouge">COPY</code>コマンドには 2 つの引数<code class="language-plaintext highlighter-rouge">src</code>と<code class="language-plaintext highlighter-rouge">dest</code>があります。
-1 つめの引数<code class="language-plaintext highlighter-rouge">src</code>は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
-2 つめの引数<code class="language-plaintext highlighter-rouge">dest</code>は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
+<p><code class="highlighter-rouge">npm install</code>を実行する前には、<code class="highlighter-rouge">package.json</code>と<code class="highlighter-rouge">package-lock.json</code>の両ファイルをイメージ内にコピーしておくことが必要です。
+<code class="highlighter-rouge">COPY</code>コマンドを使ってこれを行います。
+<code class="highlighter-rouge">COPY</code>コマンドには 2 つの引数<code class="highlighter-rouge">src</code>と<code class="highlighter-rouge">dest</code>があります。
+1 つめの引数<code class="highlighter-rouge">src</code>は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
+2 つめの引数<code class="highlighter-rouge">dest</code>は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
 たとえば以下のとおりです。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> COPY ["&lt;src&gt;", "&lt;dest&gt;"]
 </code></pre></div></div>
 
-<p>複数の<code class="language-plaintext highlighter-rouge">src</code>がある場合は、カンマで区切って指定します。
-たとえば<code class="language-plaintext highlighter-rouge">COPY ["&lt;src1&gt;", "&lt;src2&gt;",..., "&lt;dest&gt;"]</code>とします。
-ここでは<code class="language-plaintext highlighter-rouge">package.json</code>と<code class="language-plaintext highlighter-rouge">package-lock.json</code>をワーキングディレクトリ<code class="language-plaintext highlighter-rouge">/app</code>にコピーします。</p>
+<p>複数の<code class="highlighter-rouge">src</code>がある場合は、カンマで区切って指定します。
+たとえば<code class="highlighter-rouge">COPY ["&lt;src1&gt;", "&lt;src2&gt;",..., "&lt;dest&gt;"]</code>とします。
+ここでは<code class="highlighter-rouge">package.json</code>と<code class="highlighter-rouge">package-lock.json</code>をワーキングディレクトリ<code class="highlighter-rouge">/app</code>にコピーします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> ["package.json", "package-lock.json*", "./"]</span>
 </code></pre></div></div>
 
 <p>なおここでは、ワーキングディレクトリ全体をコピーするのではなく、package.json ファイルだけをコピーしています。
 こうすることで Docker レイヤーのキャッシュをうまく利用するためです。
-<code class="language-plaintext highlighter-rouge">package.json</code>ファイルをイメージ内に置いたら<code class="language-plaintext highlighter-rouge">RUN</code>コマンドによって npm install を行います。
+<code class="highlighter-rouge">package.json</code>ファイルをイメージ内に置いたら<code class="highlighter-rouge">RUN</code>コマンドによって npm install を行います。
 この際の処理は npm install をマシン内でローカルに実行しているかのようにして動作します。
-ただし Node モジュール類のインストール先は、イメージ内の<code class="language-plaintext highlighter-rouge">node_modules</code>ディレクトリとなります。</p>
+ただし Node モジュール類のインストール先は、イメージ内の<code class="highlighter-rouge">node_modules</code>ディレクトリとなります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>npm <span class="nb">install</span> <span class="nt">--production</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>npm install <span class="nt">--production</span>
 </code></pre></div></div>
 
 <p>ここまでに Node バージョン 12.18.1 に基づくイメージを構築して、依存パッケージのインストールを行いました。
 次に行うのは、イメージ内にソースコードを置くことです。
-先に行った<code class="language-plaintext highlighter-rouge">package.json</code>ファイルと同じように COPY コマンドを用いることにします。</p>
+先に行った<code class="highlighter-rouge">package.json</code>ファイルと同じように COPY コマンドを用いることにします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> . .</span>
 </code></pre></div></div>
 
 <p>この COPY コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
 最後に行うのは、このイメージがコンテナー内において実行される際に実行させたいコマンドを指定します。
-これを行うには<code class="language-plaintext highlighter-rouge">CMD</code>コマンドを用います。</p>
+これを行うには<code class="highlighter-rouge">CMD</code>コマンドを用います。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
 </code></pre></div></div>
@@ -366,7 +366,7 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 
 <span class="k">COPY</span><span class="s"> ["package.json", "package-lock.json*", "./"]</span>
 
-<span class="k">RUN </span>npm <span class="nb">install</span> <span class="nt">--production</span>
+<span class="k">RUN </span>npm install <span class="nt">--production</span>
 
 <span class="k">COPY</span><span class="s"> . .</span>
 
@@ -377,7 +377,7 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 
 <p>ビルドコンテキスト内のファイルを利用するには、たとえば COPY 命令などのように Dockerfile 内の命令においてそのファイルを指定します。
 ビルド処理を効率化するためには、不要なファイルやディレクトリは .dockerignore ファイルに指定してコンテキストディレクトリに置きます。
-以下は、コンテキストのロード時間を改善するために<code class="language-plaintext highlighter-rouge">.dockerignore</code>を生成して、そこに<code class="language-plaintext highlighter-rouge">node_modules</code>ディレクトリを加える例です。</p>
+以下は、コンテキストのロード時間を改善するために<code class="highlighter-rouge">.dockerignore</code>を生成して、そこに<code class="highlighter-rouge">node_modules</code>ディレクトリを加える例です。</p>
 
 <pre><code class="language-.dockerignore">node_modules
 </code></pre>
@@ -385,30 +385,30 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 <h2 id="build-image">イメージのビルド</h2>
 
 <p>Dockerfile を生成したので、ここからイメージをビルドします。
-これを行うには<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを使います。
-<code class="language-plaintext highlighter-rouge">docker build</code>コマンドは Dockerfile と「コンテキスト（context）」から Docker イメージをビルドします。
+これを行うには<code class="highlighter-rouge">docker build</code>コマンドを使います。
+<code class="highlighter-rouge">docker build</code>コマンドは Dockerfile と「コンテキスト（context）」から Docker イメージをビルドします。
 ビルドのコンテキストとは、指定されているパスや URL 内にある一連のファイルのことです。
 Docker のビルド処理においては、コンテキスト内にあるファイルはどれにでもアクセスすることができます。</p>
 
-<p>build コマンドにはオプションとして<code class="language-plaintext highlighter-rouge">--tag</code>フラグをつけることができます。
-タグ（tag）はイメージ名とオプションとなるタグ名を<code class="language-plaintext highlighter-rouge">‘name:tag’</code>という書式で指定します。
+<p>build コマンドにはオプションとして<code class="highlighter-rouge">--tag</code>フラグをつけることができます。
+タグ（tag）はイメージ名とオプションとなるタグ名を<code class="highlighter-rouge">‘name:tag’</code>という書式で指定します。
 話を単純にするため、ここでは「タグ」は用いないことにします。
 タグを指定しなければ Docker はデフォルトのタグ名として「latest」を用います。
 これはビルド処理結果の出力最終行に示されます。</p>
 
 <p>では初めての Docker イメージをビルドしてみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
 <span class="go">
 [+] Building 93.8s (11/11) FINISHED
-</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from dockerfile                                          0.1s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 617B                                                          0.0s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                             0.0s
+</span><span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build definition from dockerfile                                          0.1s
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 617B                                                          0.0s
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                             0.0s
 <span class="c"> ...
-</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>2/5] WORKDIR /app                                                                        0.4s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>3/5] COPY <span class="o">[</span>package.json, package-lock.json<span class="k">*</span>, ./]                                         0.2s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>4/5] RUN npm <span class="nb">install</span> <span class="nt">--production</span>                                                        9.8s
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
+</span><span class="gp"> =&gt;</span> <span class="o">[</span>2/5] WORKDIR /app                                                                        0.4s
+<span class="gp"> =&gt;</span> <span class="o">[</span>3/5] COPY <span class="o">[</span>package.json, package-lock.json<span class="k">*</span>, ./]                                         0.2s
+<span class="gp"> =&gt;</span> <span class="o">[</span>4/5] RUN npm install <span class="nt">--production</span>                                                        9.8s
+<span class="gp"> =&gt;</span> <span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
 </code></pre></div></div>
 
 <h2 id="view-local-images">ローカルイメージの確認</h2>
@@ -417,15 +417,15 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 1 つは CLI を用いる方法、もう 1 つは Docker Desktop を用いる方法です。
 これまでターミナルを使って作業を進めてきていますから、イメージ一覧は CLI を使って取得することにします。</p>
 
-<p>イメージを一覧表示するには、単純に<code class="language-plaintext highlighter-rouge">images</code>コマンドを実行します。</p>
+<p>イメージを一覧表示するには、単純に<code class="highlighter-rouge">images</code>コマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
 </span></code></pre></div></div>
 
 <p>出力結果は上とは異なるはずです。
-ただし上でビルドしたものとして、タグ<code class="language-plaintext highlighter-rouge">latest</code>を持つ<code class="language-plaintext highlighter-rouge">node-docker:latest</code>は表示されているはずです。</p>
+ただし上でビルドしたものとして、タグ<code class="highlighter-rouge">latest</code>を持つ<code class="highlighter-rouge">node-docker:latest</code>は表示されているはずです。</p>
 
 <h2 id="tag-images">イメージへのタグづけ</h2>
 
@@ -442,22 +442,22 @@ node-docker         latest              3809733582bc        About a minute ago  
 
 <p>イメージに対して新たなタグを生成するには、以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag node-docker:latest node-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker tag node-docker:latest node-docker:v1.0.0
 </code></pre></div></div>
 
 <p>docker tag コマンドはイメージに対するタグを生成します。
 新たなイメージが作り出されるわけではありません。
 このタグもまた同じイメージを指していて、イメージを参照するもう 1 つの手段が出来上がったことになります。</p>
 
-<p>そこで<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
+<p>そこで<code class="highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">node-docker</code>で始まるイメージが一覧に 2 つ表示されています。
+<p><code class="highlighter-rouge">node-docker</code>で始まるイメージが一覧に 2 つ表示されています。
 IMAGE ID 列を見てみれば、その 2 つのイメージは同一のものであることがわかります。
 2 つのイメージの ID 値は同じだからです。</p>
 
@@ -465,19 +465,19 @@ IMAGE ID 列を見てみれば、その 2 つのイメージは同一のもの�
 これを行うには rmi コマンドを使います。
 rmi コマンドは「remove image」を表しています。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker rmi node-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker rmi node-docker:v1.0.0
 <span class="go">Untagged: node-docker:v1.0.0
 </span></code></pre></div></div>
 
 <p>Docker の出力結果からわかるように、イメージは削除されたわけではなく「タグづけ解除」が行われただけです。
 images コマンドを実行して確認してみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="language-plaintext highlighter-rouge">node-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
+<p><code class="highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="highlighter-rouge">node-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
 
 <h2 id="next-steps">次のステップ</h2>
 

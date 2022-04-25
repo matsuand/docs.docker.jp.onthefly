@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker 向け AppArmor セキュリティプロファイル | Docker ドキュメント</title>
   <meta name="description" content="Enabling AppArmor in Docker" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Docker 向け AppArmor セキュリティプロファイル" />
   <meta property="og:description" content="Enabling AppArmor in Docker" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/apparmor/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Docker 向け AppArmor セキュリティプロファイル","description":"Enabling AppArmor in Docker","url":"https://docs.docker.com/engine/security/apparmor/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a>本番環境でのアプリ運用</a></li><li><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/">コンテナーの設定</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/apparmor/">AppArmor セキュリティプロファイル</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/apparmor/">AppArmor セキュリティプロファイル</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -107,12 +107,12 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker 向け AppArmor セキュリティプロファイル</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>AppArmor (Application Armor) は Linux におけるモジュールの一つであり、オペレーティングシステムやアプリケーションをセキュリティの脅威から保護するものです。
+                        <section class="section"><h1>Docker 向け AppArmor セキュリティプロファイル</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>AppArmor (Application Armor) は Linux におけるモジュールの一つであり、オペレーティングシステムやアプリケーションをセキュリティの脅威から保護するものです。
 これを利用するには、システム管理者が各プログラムに対して AppArmor セキュリティプロファイルを関連づけます。
 Docker は、AppArmor ポリシーがロードされ適用されているかどうかを調べます。</p>
 
-<p>Docker はコンテナーに対するデフォルトプロファイルとして<code class="language-plaintext highlighter-rouge">docker-default</code>というものを、自動的に生成してロードします。
-Docker 実行モジュールが<code class="language-plaintext highlighter-rouge">tmpfs</code>にこのプロファイルを生成してカーネルにロードします。</p>
+<p>Docker はコンテナーに対するデフォルトプロファイルとして<code class="highlighter-rouge">docker-default</code>というものを、自動的に生成してロードします。
+Docker 実行モジュールが<code class="highlighter-rouge">tmpfs</code>にこのプロファイルを生成してカーネルにロードします。</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -120,38 +120,38 @@ Docker 実行モジュールが<code class="language-plaintext highlighter-rouge
   <p>このプロファイルはコンテナーが利用するものであって、Docker デーモンが利用するものでは <strong>ありません</strong>。</p>
 </blockquote>
 
-<p>Docker Engine のデーモン用のプロファイルというものが存在していますが、それは現時点において<code class="language-plaintext highlighter-rouge">deb</code>パッケージからはインストールされません。
+<p>Docker Engine のデーモン用のプロファイルというものが存在していますが、それは現時点において<code class="highlighter-rouge">deb</code>パッケージからはインストールされません。
 デーモン用のプロファイルソースに興味のある方は、Docker Engine のソースディレクトリ内の <a href="https://github.com/moby/moby/tree/master/contrib/apparmor">contrib/apparmor</a> にあるので参照してください。</p>
 
 <h2 id="understand-the-policies">ポリシーの理解</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker-default</code>プロファイルは、コンテナーを起動させるためのデフォルトとなるものです。
+<p><code class="highlighter-rouge">docker-default</code>プロファイルは、コンテナーを起動させるためのデフォルトとなるものです。
 これは幅広くアプリケーションとの互換性を提供しつつ、適度なセキュリティ保護を実現します。
 このプロファイルは <a href="https://github.com/moby/moby/blob/master/profiles/apparmor/template.go">Go 言語のテンプレート</a> から生成されます。</p>
 
-<p>コンテナーを起動するとき、通常は <code class="language-plaintext highlighter-rouge">docker-default</code> ポリシーが適用されます。
-ただし<code class="language-plaintext highlighter-rouge">security-opt</code>オプションを指定すれば、それがオーバーライドされま
+<p>コンテナーを起動するとき、通常は <code class="highlighter-rouge">docker-default</code> ポリシーが適用されます。
+ただし<code class="highlighter-rouge">security-opt</code>オプションを指定すれば、それがオーバーライドされま
 たとえば以下に示すのは、明示的にデフォルトポリシーを指定する例です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--security-opt</span> <span class="nv">apparmor</span><span class="o">=</span>docker-default hello-world
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--security-opt</span> <span class="nv">apparmor</span><span class="o">=</span>docker-default hello-world
 </code></pre></div></div>
 
 <h2 id="load-and-unload-profiles">プロファイルのロード、アンロード</h2>
 
 <p>コンテナーが利用できるように、AppArmor 内に新たなプロファイルをロードします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>apparmor_parser <span class="nt">-r</span> <span class="nt">-W</span> /path/to/your_profile
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> apparmor_parser <span class="nt">-r</span> <span class="nt">-W</span> /path/to/your_profile
 </code></pre></div></div>
 
-<p>そして<code class="language-plaintext highlighter-rouge">--security-opt</code>を利用して、ユーザー独自のプロファイルを実行します。</p>
+<p>そして<code class="highlighter-rouge">--security-opt</code>を利用して、ユーザー独自のプロファイルを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--security-opt</span> <span class="nv">apparmor</span><span class="o">=</span>your_profile hello-world
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--security-opt</span> <span class="nv">apparmor</span><span class="o">=</span>your_profile hello-world
 </code></pre></div></div>
 
 <p>AppArmor からプロファイルをアンロードするには、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>unload the profile
-<span class="gp">$</span><span class="w"> </span>apparmor_parser <span class="nt">-R</span> /path/to/profile
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> unload the profile
+<span class="gp">$</span> apparmor_parser <span class="nt">-R</span> /path/to/profile
 </code></pre></div></div>
 
 <h3 id="resources-for-writing-profiles">プロファイル記述のための情報</h3>
@@ -169,7 +169,7 @@ AppArmor プロファイルの文法に関しては、以下に示す情報を�
 <p>ここに示す例では、Nginx 用に AppArmor プロファイルをカスタマイズします。
 以下がそのカスタムプロファイルです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;tunables/global&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;tunables/global&gt;
 
 
 profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
@@ -245,7 +245,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
 <ol>
   <li>
-    <p>このカスタムプロファイルを<code class="language-plaintext highlighter-rouge">/etc/apparmor.d/containers/docker-nginx</code>というファイルに保存します。</p>
+    <p>このカスタムプロファイルを<code class="highlighter-rouge">/etc/apparmor.d/containers/docker-nginx</code>というファイルに保存します。</p>
 
     <p>この例におけるファイルパスは必須のものではありません。
 本番環境においては別のものにすることができます。</p>
@@ -253,7 +253,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
   <li>
     <p>プロファイルをロードします。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apparmor_parser <span class="nt">-r</span> <span class="nt">-W</span> /etc/apparmor.d/containers/docker-nginx
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apparmor_parser <span class="nt">-r</span> <span class="nt">-W</span> /etc/apparmor.d/containers/docker-nginx
 </code></pre></div>    </div>
   </li>
   <li>
@@ -261,32 +261,32 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
     <p>nginx をデタッチモードで起動します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--security-opt</span> <span class="s2">"apparmor=docker-nginx"</span> <span class="se">\</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--security-opt</span> <span class="s2">"apparmor=docker-nginx"</span> <span class="se">\</span>
      <span class="nt">-p</span> 80:80 <span class="nt">-d</span> <span class="nt">--name</span> apparmor-nginx nginx
 </code></pre></div>    </div>
   </li>
   <li>
     <p>exec により実行中のコンテナーに入ります。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">exec</span> <span class="nt">-it</span> apparmor-nginx bash
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container <span class="nb">exec</span> <span class="nt">-it</span> apparmor-nginx bash
 </code></pre></div>    </div>
   </li>
   <li>
     <p>適当な操作を通じてプロファイルを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@6da5a2a930b9:~#</span><span class="w"> </span>ping 8.8.8.8
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">root@6da5a2a930b9:~#</span> ping 8.8.8.8
 <span class="go">ping: Lacking privilege for raw socket.
 
-</span><span class="gp">root@6da5a2a930b9:/#</span><span class="w"> </span>top
+</span><span class="gp">root@6da5a2a930b9:/#</span> top
 <span class="go">bash: /usr/bin/top: Permission denied
 
-</span><span class="gp">root@6da5a2a930b9:~#</span><span class="w"> </span><span class="nb">touch</span> ~/thing
+</span><span class="gp">root@6da5a2a930b9:~#</span> touch ~/thing
 <span class="go">touch: cannot touch 'thing': Permission denied
 
-</span><span class="gp">root@6da5a2a930b9:/#</span><span class="w"> </span>sh
+</span><span class="gp">root@6da5a2a930b9:/#</span> sh
 <span class="go">bash: /bin/sh: Permission denied
 
-</span><span class="gp">root@6da5a2a930b9:/#</span><span class="w"> </span>dash
+</span><span class="gp">root@6da5a2a930b9:/#</span> dash
 <span class="go">bash: /bin/dash: Permission denied
 </span></code></pre></div>    </div>
   </li>
@@ -297,43 +297,43 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
 <h2 id="debug-apparmor">AppArmor のデバッグ</h2>
 
-<p><code class="language-plaintext highlighter-rouge">dmesg</code>を使ってデバッグすることができます。
-また<code class="language-plaintext highlighter-rouge">aa-status</code>を使えば、ロード済みプロファイルを確認することができます。</p>
+<p><code class="highlighter-rouge">dmesg</code>を使ってデバッグすることができます。
+また<code class="highlighter-rouge">aa-status</code>を使えば、ロード済みプロファイルを確認することができます。</p>
 
 <h3 id="use-dmesg">dmesg の利用</h3>
 
 <p>AppArmor に関して問題が発生したとしても、デバッグに役立つヒントをここに示します。</p>
 
-<p>AppArmor は<code class="language-plaintext highlighter-rouge">dmesg</code>に対して極めて詳細なメッセージ出力を行います。
+<p>AppArmor は<code class="highlighter-rouge">dmesg</code>に対して極めて詳細なメッセージ出力を行います。
 通常 AppArmor の出力は以下のようなものです。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 5442.864673] audit: type=1400 audit(1453830992.845:37): apparmor="ALLOWED" operation="open" profile="/usr/bin/docker" name="/home/jessie/docker/man/man1/docker-attach.1" pid=10923 comm="docker" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 5442.864673] audit: type=1400 audit(1453830992.845:37): apparmor="ALLOWED" operation="open" profile="/usr/bin/docker" name="/home/jessie/docker/man/man1/docker-attach.1" pid=10923 comm="docker" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
 </code></pre></div></div>
 
-<p>上の例では<code class="language-plaintext highlighter-rouge">profile=/usr/bin/docker</code>という記述があります。
-これはユーザーが、<code class="language-plaintext highlighter-rouge">docker-engine</code>（Docker Engine のデーモン）をロードしていることを意味します。</p>
+<p>上の例では<code class="highlighter-rouge">profile=/usr/bin/docker</code>という記述があります。
+これはユーザーが、<code class="highlighter-rouge">docker-engine</code>（Docker Engine のデーモン）をロードしていることを意味します。</p>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>Ubuntu のバージョンが 14.04 より新しい場合は、何も問題はありませんが Trusty を利用している場合、<code class="language-plaintext highlighter-rouge">docker container exec</code>を実行することで問題が発生する場合があります。</p>
+  <p>Ubuntu のバージョンが 14.04 より新しい場合は、何も問題はありませんが Trusty を利用している場合、<code class="highlighter-rouge">docker container exec</code>を実行することで問題が発生する場合があります。</p>
 </blockquote>
 
 <p>別のログ行を見てみます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 3256.689120] type=1400 audit(1405454041.341:73): apparmor="DENIED" operation="ptrace" profile="docker-default" pid=17651 comm="docker" requested_mask="receive" denied_mask="receive"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ 3256.689120] type=1400 audit(1405454041.341:73): apparmor="DENIED" operation="ptrace" profile="docker-default" pid=17651 comm="docker" requested_mask="receive" denied_mask="receive"
 </code></pre></div></div>
 
-<p>この場合、プロファイルは<code class="language-plaintext highlighter-rouge">docker-default</code>であり、<code class="language-plaintext highlighter-rouge">privileged</code>モードでない限り、デフォルトでコンテナー上に実行されているものです。
-このログ行は、AppArmor がコンテナー内の<code class="language-plaintext highlighter-rouge">ptrace</code>を拒否していることがわかります。
+<p>この場合、プロファイルは<code class="highlighter-rouge">docker-default</code>であり、<code class="highlighter-rouge">privileged</code>モードでない限り、デフォルトでコンテナー上に実行されているものです。
+このログ行は、AppArmor がコンテナー内の<code class="highlighter-rouge">ptrace</code>を拒否していることがわかります。
 これはまさに期待どおりの動作です。</p>
 
 <h3 id="use-aa-status">aa-status の利用</h3>
 
-<p>どのプロファイルがロードされているかを確認するには<code class="language-plaintext highlighter-rouge">aa-status</code>を使います。
+<p>どのプロファイルがロードされているかを確認するには<code class="highlighter-rouge">aa-status</code>を使います。
 出力は以下のようになります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>aa-status
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>aa-status
 <span class="go">apparmor module is loaded.
 14 profiles are loaded.
 1 profiles are in enforce mode.
@@ -362,18 +362,18 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 0 processes are unconfined but have a profile defined.
 </span></code></pre></div></div>
 
-<p>上の出力からわかることは、<code class="language-plaintext highlighter-rouge">docker-default</code>プロファイルがさまざまなコンテナー PID 上において実行していて、<code class="language-plaintext highlighter-rouge">enforce</code>モードにより動作しているということです。
-つまり<code class="language-plaintext highlighter-rouge">docker-default</code>プロファイルの範囲外のところで AppArmor は、<code class="language-plaintext highlighter-rouge">dmesg</code>においてブロックと監査を効果的に行っているということです。</p>
+<p>上の出力からわかることは、<code class="highlighter-rouge">docker-default</code>プロファイルがさまざまなコンテナー PID 上において実行していて、<code class="highlighter-rouge">enforce</code>モードにより動作しているということです。
+つまり<code class="highlighter-rouge">docker-default</code>プロファイルの範囲外のところで AppArmor は、<code class="highlighter-rouge">dmesg</code>においてブロックと監査を効果的に行っているということです。</p>
 
-<p>さらに <code class="language-plaintext highlighter-rouge">/usr/bin/docker</code>（Docker Engine デーモン）プロファイルは<code class="language-plaintext highlighter-rouge">complain</code>モードにより動作していることもわかります。
-これは AppArmor がプロファイルの範囲外にて、<code class="language-plaintext highlighter-rouge">dmesg</code>に対して <strong>のみ</strong> ログ出力を行っているということです。
-（Ubuntu Trusty の場合は例外で、<code class="language-plaintext highlighter-rouge">enforce</code>モードにより動作するものがあります。）</p>
+<p>さらに <code class="highlighter-rouge">/usr/bin/docker</code>（Docker Engine デーモン）プロファイルは<code class="highlighter-rouge">complain</code>モードにより動作していることもわかります。
+これは AppArmor がプロファイルの範囲外にて、<code class="highlighter-rouge">dmesg</code>に対して <strong>のみ</strong> ログ出力を行っているということです。
+（Ubuntu Trusty の場合は例外で、<code class="highlighter-rouge">enforce</code>モードにより動作するものがあります。）</p>
 
 <h2 id="contribute-dockers-apparmor-code">Docker 向け AppArmor コードの提供</h2>
 
-<p>上級ユーザーやパッケージ管理者は、<code class="language-plaintext highlighter-rouge">/usr/bin/docker</code>（Docker Engine デーモン）に対するプロファイルを、Docker Engine ソースリポジトリ内の <a href="https://github.com/moby/moby/tree/master/contrib/apparmor">contrib/apparmor</a> から検索し利用しています。</p>
+<p>上級ユーザーやパッケージ管理者は、<code class="highlighter-rouge">/usr/bin/docker</code>（Docker Engine デーモン）に対するプロファイルを、Docker Engine ソースリポジトリ内の <a href="https://github.com/moby/moby/tree/master/contrib/apparmor">contrib/apparmor</a> から検索し利用しています。</p>
 
-<p>コンテナー向けの<code class="language-plaintext highlighter-rouge">docker-default</code>プロファイルは <a href="https://github.com/moby/moby/tree/master/profiles/apparmor">profiles/apparmor</a> にあります。</p>
+<p>コンテナー向けの<code class="highlighter-rouge">docker-default</code>プロファイルは <a href="https://github.com/moby/moby/tree/master/profiles/apparmor">profiles/apparmor</a> にあります。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=AppArmor">AppArmor</a>, <a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

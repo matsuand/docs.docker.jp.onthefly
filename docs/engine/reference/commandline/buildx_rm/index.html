@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker buildx rm | Docker ドキュメント</title>
   <meta name="description" content="docker buildx rm: Removes the specified or current builder. It is a no-op attempting to remove the
@@ -46,12 +46,12 @@ default builder." />
   <meta property="og:description" content="docker buildx rm: Removes the specified or current builder. It is a no-op attempting to remove the
 default builder." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/buildx_rm/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"docker buildx rm","description":"docker buildx rm: Removes the specified or current builder. It is a no-op attempting to remove the\ndefault builder.","url":"https://docs.docker.com/engine/reference/commandline/buildx_rm/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,7 +110,7 @@ default builder." />
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker buildx rm</h1><!--
+                        <section class="section"><h1>docker buildx rm</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><!--
 This page is automatically generated from Docker's source code. If you want to
 suggest a change to the text that appears here, open a ticket or pull request
 in the source repository on GitHub:
@@ -125,7 +125,7 @@ https://github.com/docker/buildx
 
 <h2 id="usage">利用方法</h2>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker buildx <span class="nb">rm</span> <span class="o">[</span>NAME]
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker buildx rm <span class="o">[</span>NAME]
 </code></pre></div></div>
 
 <h2 id="extended-description">追加説明</h2>
@@ -156,7 +156,49 @@ default builder.</p>
   
   
   <tr>
-    <td><a href="#keep-state"><code class="language-plaintext highlighter-rouge">--keep-state</code></a></td>
+    <td><a href="#all-inactive"><code class="highlighter-rouge">--all-inactive</code></a></td>
+    <td></td>
+    <td>Remove all inactive builders</td>
+  </tr>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><a href="#force"><code class="highlighter-rouge">--force</code></a> , <a href="#force"><code class="highlighter-rouge">-f</code></a></td>
+    <td></td>
+    <td>Do not prompt for confirmation</td>
+  </tr>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><a href="#keep-daemon"><code class="highlighter-rouge">--keep-daemon</code></a></td>
+    <td></td>
+    <td>Keep the buildkitd daemon running</td>
+  </tr>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><a href="#keep-state"><code class="highlighter-rouge">--keep-state</code></a></td>
     <td></td>
     <td>Keep BuildKit state</td>
   </tr>
@@ -170,7 +212,7 @@ default builder.</p>
   
   
   <tr>
-    <td><a href="#builder"><code class="language-plaintext highlighter-rouge">--builder</code></a></td>
+    <td><a href="#builder"><code class="highlighter-rouge">--builder</code></a></td>
     <td></td>
     <td>設定された builder インスタンスをオーバーライドします。</td>
   </tr>
@@ -181,14 +223,34 @@ default builder.</p>
 
 <h2 id="examples">利用例</h2>
 
+<h3 id="all-inactive">Remove all inactive builders (--all-inactive)</h3>
+
+<p>Remove builders that are not in running state.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker buildx rm <span class="nt">--all-inactive</span>
+<span class="go">WARNING! This will remove all builders that are not in running state. Are you sure you want to continue? [y/N] y
+</span></code></pre></div></div>
+
 <h3 id="builder">Override the configured builder instance (--builder)</h3>
 
-<p>Same as <a href="/engine/reference/commandline/buildx/#builder"><code class="language-plaintext highlighter-rouge">buildx --builder</code></a>.</p>
+<p>Same as <a href="/engine/reference/commandline/buildx/#builder"><code class="highlighter-rouge">buildx --builder</code></a>.</p>
+
+<h3 id="force">Do not prompt for confirmation (--force)</h3>
+
+<p>Do not prompt for confirmation before removing inactive builders.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker buildx rm <span class="nt">--all-inactive</span> <span class="nt">--force</span>
+</code></pre></div></div>
+
+<h3 id="keep-daemon">Keep the buildkitd daemon running (--keep-daemon)</h3>
+
+<p>Keep the buildkitd daemon running after the buildx context is removed. This is useful when you manage buildkitd daemons and buildx contexts independently.
+Currently, only supported by the <a href="/engine/reference/commandline/buildx_create/#driver"><code class="highlighter-rouge">docker-container</code> and <code class="highlighter-rouge">kubernetes</code> drivers</a>.</p>
 
 <h3 id="keep-state">Keep BuildKit state (--keep-state)</h3>
 
 <p>Keep BuildKit state, so it can be reused by a new builder with the same name.
-Currently, only supported by the <a href="/engine/reference/commandline/buildx_create/#driver"><code class="language-plaintext highlighter-rouge">docker-container</code> driver</a>.</p>
+Currently, only supported by the <a href="/engine/reference/commandline/buildx_create/#driver"><code class="highlighter-rouge">docker-container</code> driver</a>.</p>
 
 <h2 id="parent-command">上位コマンド</h2>
 
@@ -332,7 +394,10 @@ Currently, only supported by the <a href="/engine/reference/commandline/buildx_c
   <li><a href="#options" class="nomunge">オプション</a></li>
   <li><a href="#examples" class="nomunge">利用例</a>
     <ul>
+      <li><a href="#all-inactive" class="nomunge">Remove all inactive builders (--all-inactive)</a></li>
       <li><a href="#builder" class="nomunge">Override the configured builder instance (--builder)</a></li>
+      <li><a href="#force" class="nomunge">Do not prompt for confirmation (--force)</a></li>
+      <li><a href="#keep-daemon" class="nomunge">Keep the buildkitd daemon running (--keep-daemon)</a></li>
       <li><a href="#keep-state" class="nomunge">Keep BuildKit state (--keep-state)</a></li>
     </ul>
   </li>

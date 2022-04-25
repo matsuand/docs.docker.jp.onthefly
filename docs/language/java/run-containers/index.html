@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーとしてのイメージ実行 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to run the image as a container." />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテナーとしてのイメージ実行" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コンテナーとしてのイメージ実行","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/java/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -123,29 +123,29 @@
 <h2 id="overview">概要</h2>
 
 <p>前節においてはサンプルアプリケーションを構築し、イメージビルドに利用する Dockerfile を生成しました。
-イメージのビルドには<code class="language-plaintext highlighter-rouge">docker build</code>というコマンドを使いました。
+イメージのビルドには<code class="highlighter-rouge">docker build</code>というコマンドを使いました。
 イメージのビルドができたので、そのイメージを実行して、アプリケーションが正しく動作することを確認します。</p>
 
 <p>コンテナーというものは、オペレーティングシステム内の通常のプロセスにすぎません。
 ただしこのプロセスは他から隔離されていて、独自のファイルシステム、独自のネットワークを持ちます。
 またホストからは引き離された独自のプロセスツリーを持ちます。</p>
 
-<p>コンテナー内においてイメージを実行するには<code class="language-plaintext highlighter-rouge">docker run</code>コマンドを使います。
-<code class="language-plaintext highlighter-rouge">docker run</code>コマンドには 1 つの引数を必要とします。
+<p>コンテナー内においてイメージを実行するには<code class="highlighter-rouge">docker run</code>コマンドを使います。
+<code class="highlighter-rouge">docker run</code>コマンドには 1 つの引数を必要とします。
 それはイメージ名です。
 ここまでに作り出したイメージを使って、正しく動作することを確認します。
 ターミナルから以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run java-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run java-docker
 </code></pre></div></div>
 
 <p>このコマンドを実行しても、コマンドプロンプトの入力状態には戻りません。
 この理由は、実行したアプリケーションが REST サーバーであって、入ってくる要求を待ち受けるためのループ内で実行されるからです。
 つまり OS へ戻る制御はなく、戻るためにはコンテナーを停止させることになります。</p>
 
-<p>さてそこで新たなターミナルを開いて、このサーバーに対して<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
+<p>さてそこで新たなターミナルを開いて、このサーバーに対して<code class="highlighter-rouge">curl</code>コマンドを使って<code class="highlighter-rouge">GET</code>リクエストを行ってみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> GET <span class="se">\</span>
 <span class="nt">--url</span> http://localhost:8080/actuator/health <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span>
 <span class="go">curl: (7) Failed to connect to localhost port 8080: Connection refused
@@ -156,21 +156,21 @@ localhost のポート 8000 には接続できなかったということです�
 この動作は期待どおりであって、コンテナーはネットワークも含めて隔離された環境内で実行されているからです。
 一度コンテナーを停止させて、今度はローカルネットワーク上にポート 8000 を公開した上で再起動してみます。</p>
 
-<p>コンテナーを停止するには<code class="language-plaintext highlighter-rouge">ctrl-c</code>を入力します。
+<p>コンテナーを停止するには<code class="highlighter-rouge">ctrl-c</code>を入力します。
 これによってターミナルのコマンドプロンプトが入力状態に戻ります。</p>
 
-<p>コンテナーのポートを公開するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--publish</code>フラグ（あるいは<code class="language-plaintext highlighter-rouge">-p</code>フラグ）を指定します。
-<code class="language-plaintext highlighter-rouge">--publish</code>フラグの書式は<code class="language-plaintext highlighter-rouge">[ホストポート]:[コンテナーポート]</code>です。
+<p>コンテナーのポートを公開するには、<code class="highlighter-rouge">docker run</code>コマンドにおいて<code class="highlighter-rouge">--publish</code>フラグ（あるいは<code class="highlighter-rouge">-p</code>フラグ）を指定します。
+<code class="highlighter-rouge">--publish</code>フラグの書式は<code class="highlighter-rouge">[ホストポート]:[コンテナーポート]</code>です。
 そこでコンテナー内部のポート 8000 をコンテナー外部のポート 8080 として公開するには、--publish フラグに 8080:8000 と指定します。</p>
 
 <p>コンテナーを起動させ、ポート 8080 をホスト上のポート 8080 として公開します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--publish</span> 8080:8080 java-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--publish</span> 8080:8080 java-docker
 </code></pre></div></div>
 
 <p>そこで先ほどの curl コマンドを再度実行してみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> GET <span class="se">\</span>
 <span class="nt">--url</span> http://localhost:8080/actuator/health <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span>
 <span class="go">{"status":"UP"}
@@ -186,10 +186,10 @@ localhost のポート 8000 には接続できなかったということです�
 <p>ここまではうまくいきました。
 もっともこのサンプルアプリケーションはウェブサーバーなので、コンテナーに接続するものではありません。
 Docker ではコンテナーをデタッチモード（detached mode）、つまりバックグラウンドで実行することができます。
-これを行うには<code class="language-plaintext highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="language-plaintext highlighter-rouge">-d</code>フラグを指定します。
+これを行うには<code class="highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="highlighter-rouge">-d</code>フラグを指定します。
 Docker は先ほどと同じようにコンテナーを起動させますが、今回はコンテナーから「デタッチされた」つまり切り離されて実行されるので、ターミナルにプロンプトが戻ってきます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 java-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 java-docker
 <span class="go">5ff83001608c7b787dbe3885277af018aaac738864d42c4fdf5547369f6ac752
 </span></code></pre></div></div>
 
@@ -198,7 +198,7 @@ Docker は先ほどと同じようにコンテナーを起動させますが、�
 <p>同じようにコンテナーが適切に動作していることを確認します。
 前とまったく同じ curl コマンドを実行してみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">--request</span> GET <span class="se">\</span>
 <span class="nt">--url</span> http://localhost:8080/actuator/health <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span>
 <span class="go">{"status":"UP"}
@@ -207,34 +207,34 @@ Docker は先ほどと同じようにコンテナーを起動させますが、�
 <h2 id="list-containers">コンテナーの一覧表示</h2>
 
 <p>コンテナーをバックグラウンドで実行したので、コンテナーが実行しているかどうか、他にどんなコンテナーがマシン上で動作しているかは、どうやって調べたらよいでしょう。
-それは<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを使います。
+それは<code class="highlighter-rouge">docker ps</code>コマンドを使います。
 Linux 上であれば、マシン上のプロセス一覧を確認するには ps コマンドを実行します。
-同じように Docker では<code class="language-plaintext highlighter-rouge">docker ps</code>を実行します。
+同じように Docker では<code class="highlighter-rouge">docker ps</code>を実行します。
 このコマンドによって、マシン上で稼働しているコンテナーの一覧が表示されます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps
 <span class="go">CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS              PORTS                    NAMES
 </span><span class="gp">5ff83001608c   java-docker      "./mvnw spring-boot:…"   About a minute ago   Up About a minute   0.0.0.0:8080-&gt;</span>8080/tcp   trusting_beaver
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドは実行中コンテナーに関して、いろいろな情報を表示します。
+<p><code class="highlighter-rouge">docker ps</code>コマンドは実行中コンテナーに関して、いろいろな情報を表示します。
 その情報とは以下です。
 コンテナー ID、コンテナー内部で実行しているイメージ、コンテナー起動時に用いられた実行コマンド、コンテナー生成時刻、ステータス、公開ポート、コンテナー名です。</p>
 
 <p>コンテナー名はどうやって決まったんだろうと不思議に思うかもしれません。
 コンテナーを起動したときにはコンテナー名を指定したわけではないので、Docker がランダムに名前を生成します。
 コンテナー名はこの後すぐに変更していきますが、そのためにはまずコンテナーを停止する必要があります。
-コンテナーを停止するには<code class="language-plaintext highlighter-rouge">docker stop</code>コマンドを実行します。
+コンテナーを停止するには<code class="highlighter-rouge">docker stop</code>コマンドを実行します。
 このコマンドはそのとおりにコンテナーを停止させます。
 この際にはコンテナー名あるいはコンテナー ID を指定します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop trusting_beaver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stop trusting_beaver
 <span class="go">trusting_beaver
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドをもう一度実行して、実行中コンテナーの一覧を確認します。</p>
+<p><code class="highlighter-rouge">docker ps</code>コマンドをもう一度実行して、実行中コンテナーの一覧を確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps
 <span class="go">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 </span></code></pre></div></div>
 
@@ -242,10 +242,10 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには p
 
 <p>Docker コンテナーは起動させ停止させ、再起動することができます。
 コンテナーを停止してもコンテナーが削除されるわけではなく、ステータスが停止となり、コンテナー内のプロセスが停止します。
-<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行したときに、出力されるコンテナーはデフォルトでは実行中コンテナーのみです。
-<code class="language-plaintext highlighter-rouge">--all</code>または<code class="language-plaintext highlighter-rouge">-a</code>を指定すると、システム上にあるコンテナーすべて、つまり停止、起動にかかわらずすべてが表示されます。</p>
+<code class="highlighter-rouge">docker ps</code>コマンドを実行したときに、出力されるコンテナーはデフォルトでは実行中コンテナーのみです。
+<code class="highlighter-rouge">--all</code>または<code class="highlighter-rouge">-a</code>を指定すると、システム上にあるコンテナーすべて、つまり停止、起動にかかわらずすべてが表示されます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps <span class="nt">-a</span>
 <span class="go">CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                        PORTS                    NAMES
 5ff83001608c   java-docker         "./mvnw spring-boot:…"   5 minutes ago    Exited (143) 18 seconds ago                            trusting_beaver
 630f2872ddf5   java-docker         "./mvnw spring-boot:…"   11 minutes ago   Exited (1) 8 minutes ago                               modest_khayyam
@@ -256,14 +256,14 @@ a28f9d587d95   java-docker         "./mvnw spring-boot:…"   17 minutes ago   E
 このコンテナーはこれまでに起動し停止し、そのまま削除していないものです。</p>
 
 <p>停止したコンテナーをここで再起動してみましょう。
-停止したコンテナーの名前を確認して、<code class="language-plaintext highlighter-rouge">restart</code>コマンドにおけるコンテナー名を書き換えて指定してください。</p>
+停止したコンテナーの名前を確認して、<code class="highlighter-rouge">restart</code>コマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker restart trusting_beaver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker restart trusting_beaver
 </code></pre></div></div>
 
-<p>そこで再び<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを使ってコンテナー一覧を確認します。</p>
+<p>そこで再び<code class="highlighter-rouge">docker ps</code>コマンドを使ってコンテナー一覧を確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps <span class="nt">-a</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps <span class="nt">-a</span>
 <span class="go">CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                      PORTS                    NAMES
 </span><span class="gp">5ff83001608c   java-docker   "./mvnw spring-boot:…"   10 minutes ago   Up 2 seconds                0.0.0.0:8080-&gt;</span>8080/tcp   trusting_beaver
 <span class="go">630f2872ddf5   java-docker   "./mvnw spring-boot:…"   16 minutes ago   Exited (1) 13 minutes ago                            modest_khayyam
@@ -279,35 +279,35 @@ a28f9d587d95   java-docker   "./mvnw spring-boot:…"   22 minutes ago   Exited 
 実行中のコンテナー名を確認してください。
 そして以下のコマンドにおけるコンテナー名を、確認したコンテナー名に置き換えてください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stop trusting_beaver
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stop trusting_beaver
 <span class="go">trusting_beaver
 </span></code></pre></div></div>
 
 <p>こうしてコンテナーはすべて停止したので削除します。
 コンテナーを削除すると、コンテナー内のプロセスはすでに停止され、コンテナーに対するメタデータも削除されています。</p>
 
-<p>コンテナーを削除するには、<code class="language-plaintext highlighter-rouge">docker rm</code>コマンドにコンテナー名を与えて実行します。
+<p>コンテナーを削除するには、<code class="highlighter-rouge">docker rm</code>コマンドにコンテナー名を与えて実行します。
 このコマンド 1 つに対して複数のコンテナー名を指定することもできます。
 同じように、以下のコマンドにおけるコンテナー名を書き換えて実行してください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">rm </span>trusting_beaver modest_khayyam lucid_greider
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker rm trusting_beaver modest_khayyam lucid_greider
 <span class="go">trusting_beaver
 modest_khayyam
 lucid_greider
 </span></code></pre></div></div>
 
-<p>再度<code class="language-plaintext highlighter-rouge">docker ps --all</code>コマンドを実行し、コンテナーすべてが削除されていることを確認してください。</p>
+<p>再度<code class="highlighter-rouge">docker ps --all</code>コマンドを実行し、コンテナーすべてが削除されていることを確認してください。</p>
 
 <p>それでは、ランダムな名称になる問題を解決します。
 コンテナーに名前をつける理由は単純なものです。
 どんなコンテナーが実行されているのかがすぐにわかります。
 またどんなアプリケーションやサービスが関連づいているのかがわかります。</p>
 
-<p>コンテナー名をつけるには<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--name</code>フラグをつけます。</p>
+<p>コンテナー名をつけるには<code class="highlighter-rouge">docker run</code>コマンドに<code class="highlighter-rouge">--name</code>フラグをつけます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 <span class="nt">--name</span> springboot-server java-docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-p</span> 8080:8080 <span class="nt">--name</span> springboot-server java-docker
 <span class="go">2e907c68d1c98be37d2b2c2ac6b16f353c85b3757e549254de68746a94a8a8d3
-</span><span class="gp">$</span><span class="w"> </span>docker ps
+</span><span class="gp">$</span> docker ps
 <span class="go">CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                    NAMES
 </span><span class="gp">2e907c68d1c9   java-docker   "./mvnw spring-boot:…"   8 seconds ago   Up 8 seconds   0.0.0.0:8080-&gt;</span>8080/tcp   springboot-server
 </code></pre></div></div>

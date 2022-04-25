@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>systemd を用いた Docker の管理 | Docker ドキュメント</title>
   <meta name="description" content="Controlling and configuring Docker using systemd" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="systemd を用いた Docker の管理" />
   <meta property="og:description" content="Controlling and configuring Docker using systemd" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"systemd を用いた Docker の管理","description":"Controlling and configuring Docker using systemd","url":"https://docs.docker.com/config/daemon/systemd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>systemd を用いた Docker の管理</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Linux ディストリビューションでは、Docker デーモンの起動に systemd を用いるものが多くあります。
+                        <section class="section"><h1>systemd を用いた Docker の管理</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>Linux ディストリビューションでは、Docker デーモンの起動に systemd を用いるものが多くあります。
 このドキュメントでは Docker の設定例をいくつか示します。</p>
 
 <h2 id="start-the-docker-daemon">Docker デーモンの起動</h2>
@@ -115,9 +115,9 @@
 <h3 id="start-manually">手動で起動する場合</h3>
 
 <p>Docker をインストールしたら Docker デーモンを起動する必要があります。
-たいていの Linux ディストリビューションでは<code class="language-plaintext highlighter-rouge">systemctl</code>を使ってサービスを起動します。</p>
+たいていの Linux ディストリビューションでは<code class="highlighter-rouge">systemctl</code>を使ってサービスを起動します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl start docker
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl start docker
 </code></pre></div></div>
 
 <h3 id="start-automatically-at-system-boot">システムブート時に自動起動する場合</h3>
@@ -127,32 +127,32 @@
 <h2 id="custom-docker-daemon-options">Docker デーモンオプションのカスタマイズ</h2>
 
 <p>Docker デーモンに対してのデーモンフラグや環境変数を設定する方法はいろいろあります。
-推奨されるのは、プラットフォームに依存しない<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを用いる方法です。
-この<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルは Linux においてはデフォルトで<code class="language-plaintext highlighter-rouge">/etc/docker/</code>に置かれます。
+推奨されるのは、プラットフォームに依存しない<code class="highlighter-rouge">daemon.json</code>ファイルを用いる方法です。
+この<code class="highlighter-rouge">daemon.json</code>ファイルは Linux においてはデフォルトで<code class="highlighter-rouge">/etc/docker/</code>に置かれます。
 詳しくは <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">デーモン設定ファイル</a> を参照してください。</p>
 
-<p><code class="language-plaintext highlighter-rouge">daemon.json</code>を使うと、デーモンオプションはほぼすべて設定することができます。
+<p><code class="highlighter-rouge">daemon.json</code>を使うと、デーモンオプションはほぼすべて設定することができます。
 以下の例では 2 つのオプションを設定しています。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>による仕組みで設定できないものに <a href="#httphttps-proxy">HTTP プロキシー</a> があります。</p>
+<code class="highlighter-rouge">daemon.json</code>による仕組みで設定できないものに <a href="#httphttps-proxy">HTTP プロキシー</a> があります。</p>
 
 <h3 id="runtime-directory-and-storage-driver">実行時の利用ディレクトリとストレージドライバー</h3>
 
 <p>Docker のイメージ、コンテナー、ボリュームは、別のパーティションを使ってディスク管理を行いたいと考えるかもしれません。</p>
 
-<p>これを行うには<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルにおいて、以下のようなフラグ設定を行います。</p>
+<p>これを行うには<code class="highlighter-rouge">daemon.json</code>ファイルにおいて、以下のようなフラグ設定を行います。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"data-root"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mnt/docker-data"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overlay2"</span><span class="w">
+    </span><span class="s2">"data-root"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mnt/docker-data"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overlay2"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <h3 id="httphttps-proxy">HTTP/HTTPS プロキシー</h3>
 
-<p>Docker デーモンではその起動環境において<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code>、<code class="language-plaintext highlighter-rouge">HTTPS_PROXY</code>、<code class="language-plaintext highlighter-rouge">NO_PROXY</code>という環境変数を利用して、HTTP または HTTPS プロキシーの動作を定めています。
-この環境変数による設定は<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを用いて行うことはできません。</p>
+<p>Docker デーモンではその起動環境において<code class="highlighter-rouge">HTTP_PROXY</code>、<code class="highlighter-rouge">HTTPS_PROXY</code>、<code class="highlighter-rouge">NO_PROXY</code>という環境変数を利用して、HTTP または HTTPS プロキシーの動作を定めています。
+この環境変数による設定は<code class="highlighter-rouge">daemon.json</code>ファイルを用いて行うことはできません。</p>
 
-<p>以下は、デフォルトの<code class="language-plaintext highlighter-rouge">docker.service</code>ファイルを上書き設定する例です。</p>
+<p>以下は、デフォルトの<code class="highlighter-rouge">docker.service</code>ファイルを上書き設定する例です。</p>
 
 <p>企業内で設定されるような HTTP あるいは HTTPS プロキシーサーバーを利用している場合は、Docker systemd サービスファイルに、これらの設定を加える必要があります。</p>
 
@@ -161,8 +161,8 @@
 
   <p>Docker を <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a> で起動させるとき、systemd 設定ファイルの収容ディレクトリは異なるところにあります。
 rootless モードの起動にあたって、Docker はユーザーモードの systemd サービスとして起動されます。
-そしてその設定ファイルは、各ユーザーのホームディレクトリ配下の<code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service.d/</code>にあるものを利用します。
-これに加えて<code class="language-plaintext highlighter-rouge">systemctl</code>は<code class="language-plaintext highlighter-rouge">sudo</code>を用いず<code class="language-plaintext highlighter-rouge">--user</code>フラグをつけて実行することが必要です。
+そしてその設定ファイルは、各ユーザーのホームディレクトリ配下の<code class="highlighter-rouge">~/.config/systemd/user/docker.service.d/</code>にあるものを利用します。
+これに加えて<code class="highlighter-rouge">systemctl</code>は<code class="highlighter-rouge">sudo</code>を用いず<code class="highlighter-rouge">--user</code>フラグをつけて実行することが必要です。
 rootless モードにより Docker を動作させる場合は、以下の <strong>“rootless モード”</strong> を選んでください。</p>
 </blockquote>
 
@@ -177,70 +177,70 @@ rootless モードにより Docker を動作させる場合は、以下の <stro
       <li>
         <p>Docker サービスに対応した systemd のドロップインディレクトリを生成します。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /etc/systemd/system/docker.service.d
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>mkdir <span class="nt">-p</span> /etc/systemd/system/docker.service.d
 </code></pre></div>        </div>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>というファイルを生成して、そこに環境変数<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code>の設定を書きます。</p>
+        <p><code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>というファイルを生成して、そこに環境変数<code class="highlighter-rouge">HTTP_PROXY</code>の設定を書きます。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+</code></pre>
 
-        <p>HTTPS プロキシーサーバーを利用している場合には、環境変数<code class="language-plaintext highlighter-rouge">HTTPS_PROXY</code>の設定を書きます。</p>
+        <p>HTTPS プロキシーサーバーを利用している場合には、環境変数<code class="highlighter-rouge">HTTPS_PROXY</code>の設定を書きます。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+</code></pre>
 
         <p>環境変数を同時に複数設定することもできます。
 以下は HTTP および HTTPs プロキシーを設定します。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+</code></pre>
       </li>
       <li>
-        <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数<code class="language-plaintext highlighter-rouge">NO_PROXY</code>を通じて設定することができます。</p>
+        <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数<code class="highlighter-rouge">NO_PROXY</code>を通じて設定することができます。</p>
 
-        <p>変数<code class="language-plaintext highlighter-rouge">NO_PROXY</code>は、プロキシーから除外したいホスト名を、カンマで区切った文字列として指定します。
+        <p>変数<code class="highlighter-rouge">NO_PROXY</code>は、プロキシーから除外したいホスト名を、カンマで区切った文字列として指定します。
 ホストを除外する設定は必要に応じて行います。</p>
         <ul>
-          <li>IP アドレスプレフィックス (<code class="language-plaintext highlighter-rouge">1.2.3.4</code>)</li>
-          <li>ドメイン名、あるいは特別な DNS ラベル (<code class="language-plaintext highlighter-rouge">*</code>)</li>
+          <li>IP アドレスプレフィックス (<code class="highlighter-rouge">1.2.3.4</code>)</li>
+          <li>ドメイン名、あるいは特別な DNS ラベル (<code class="highlighter-rouge">*</code>)</li>
           <li>ドメイン名は、その名前とサブドメインすべてにマッチします。
 先頭に “.” のついたドメイン名は、サブドメインのみにマッチします。
-たとえばドメイン名が<code class="language-plaintext highlighter-rouge">foo.example.com</code>と<code class="language-plaintext highlighter-rouge">example.com</code>であるとします。
+たとえばドメイン名が<code class="highlighter-rouge">foo.example.com</code>と<code class="highlighter-rouge">example.com</code>であるとします。
             <ul>
-              <li><code class="language-plaintext highlighter-rouge">example.com</code>は<code class="language-plaintext highlighter-rouge">example.com</code>と<code class="language-plaintext highlighter-rouge">foo.example.com</code>にマッチします。</li>
-              <li><code class="language-plaintext highlighter-rouge">.example.com</code>は<code class="language-plaintext highlighter-rouge">foo.example.com</code>のみにマッチします。</li>
+              <li><code class="highlighter-rouge">example.com</code>は<code class="highlighter-rouge">example.com</code>と<code class="highlighter-rouge">foo.example.com</code>にマッチします。</li>
+              <li><code class="highlighter-rouge">.example.com</code>は<code class="highlighter-rouge">foo.example.com</code>のみにマッチします。</li>
             </ul>
           </li>
-          <li>単一のアスタリスク (<code class="language-plaintext highlighter-rouge">*</code>) を指定するとプロキシーは行われません。</li>
-          <li>リテラル数値としてポート番号を IP アドレスやドメイン名につけることができます（<code class="language-plaintext highlighter-rouge">1.2.3.4:80</code>や<code class="language-plaintext highlighter-rouge">foo.example.com:80</code>）。</li>
+          <li>単一のアスタリスク (<code class="highlighter-rouge">*</code>) を指定するとプロキシーは行われません。</li>
+          <li>リテラル数値としてポート番号を IP アドレスやドメイン名につけることができます（<code class="highlighter-rouge">1.2.3.4:80</code>や<code class="highlighter-rouge">foo.example.com:80</code>）。</li>
         </ul>
 
         <p>設定例は以下です。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-<span class="nt">Environment</span><span class="p">=</span>"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+</code></pre>
       </li>
       <li>
         <p>設定を反映して Docker を再起動します。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl daemon-reload
-<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl restart docker
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl daemon-reload
+<span class="gp">$</span> <span class="nb">sudo </span>systemctl restart docker
 </code></pre></div>        </div>
       </li>
       <li>
         <p>設定が適切にロードされていること、そして変更した内容が反映されていることを確認します。
 たとえば以下のようにします。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
 <span class="go">
 Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
 </span></code></pre></div>        </div>
@@ -254,70 +254,70 @@ Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.exa
       <li>
         <p>Docker サービスに対応した systemd のドロップインディレクトリを生成します。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.config/systemd/user/docker.service.d
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir <span class="nt">-p</span> ~/.config/systemd/user/docker.service.d
 </code></pre></div>        </div>
       </li>
       <li>
-        <p><code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service.d/http-proxy.conf</code>というファイルを生成して、そこに環境変数<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code>の設定を書きます。</p>
+        <p><code class="highlighter-rouge">~/.config/systemd/user/docker.service.d/http-proxy.conf</code>というファイルを生成して、そこに環境変数<code class="highlighter-rouge">HTTP_PROXY</code>の設定を書きます。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+</code></pre>
 
-        <p>HTTPS プロキシーサーバーを利用している場合には、環境変数<code class="language-plaintext highlighter-rouge">HTTPS_PROXY</code>の設定を書きます。</p>
+        <p>HTTPS プロキシーサーバーを利用している場合には、環境変数<code class="highlighter-rouge">HTTPS_PROXY</code>の設定を書きます。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+</code></pre>
 
         <p>環境変数を同時に複数設定することもできます。
 以下は HTTP および HTTPs プロキシーを設定します。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+</code></pre>
       </li>
       <li>
-        <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数<code class="language-plaintext highlighter-rouge">NO_PROXY</code>を通じて設定することができます。</p>
+        <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数<code class="highlighter-rouge">NO_PROXY</code>を通じて設定することができます。</p>
 
-        <p>変数<code class="language-plaintext highlighter-rouge">NO_PROXY</code>は、プロキシーから除外したいホスト名を、カンマで区切った文字列として指定します。
+        <p>変数<code class="highlighter-rouge">NO_PROXY</code>は、プロキシーから除外したいホスト名を、カンマで区切った文字列として指定します。
 ホストを除外する設定は必要に応じて行います。</p>
         <ul>
-          <li>IP アドレスプレフィックス (<code class="language-plaintext highlighter-rouge">1.2.3.4</code>)</li>
-          <li>ドメイン名、あるいは特別な DNS ラベル (<code class="language-plaintext highlighter-rouge">*</code>)</li>
+          <li>IP アドレスプレフィックス (<code class="highlighter-rouge">1.2.3.4</code>)</li>
+          <li>ドメイン名、あるいは特別な DNS ラベル (<code class="highlighter-rouge">*</code>)</li>
           <li>ドメイン名は、その名前とサブドメインすべてにマッチします。
 先頭に “.” のついたドメイン名は、サブドメインのみにマッチします。
-たとえばドメイン名が<code class="language-plaintext highlighter-rouge">foo.example.com</code>と<code class="language-plaintext highlighter-rouge">example.com</code>であるとします。
+たとえばドメイン名が<code class="highlighter-rouge">foo.example.com</code>と<code class="highlighter-rouge">example.com</code>であるとします。
             <ul>
-              <li><code class="language-plaintext highlighter-rouge">example.com</code>は<code class="language-plaintext highlighter-rouge">example.com</code>と<code class="language-plaintext highlighter-rouge">foo.example.com</code>にマッチします。</li>
-              <li><code class="language-plaintext highlighter-rouge">.example.com</code>は<code class="language-plaintext highlighter-rouge">foo.example.com</code>のみにマッチします。</li>
+              <li><code class="highlighter-rouge">example.com</code>は<code class="highlighter-rouge">example.com</code>と<code class="highlighter-rouge">foo.example.com</code>にマッチします。</li>
+              <li><code class="highlighter-rouge">.example.com</code>は<code class="highlighter-rouge">foo.example.com</code>のみにマッチします。</li>
             </ul>
           </li>
-          <li>単一のアスタリスク (<code class="language-plaintext highlighter-rouge">*</code>) を指定するとプロキシーは行われません。</li>
-          <li>リテラル数値としてポート番号を IP アドレスやドメイン名につけることができます（<code class="language-plaintext highlighter-rouge">1.2.3.4:80</code>や<code class="language-plaintext highlighter-rouge">foo.example.com:80</code>）。</li>
+          <li>単一のアスタリスク (<code class="highlighter-rouge">*</code>) を指定するとプロキシーは行われません。</li>
+          <li>リテラル数値としてポート番号を IP アドレスやドメイン名につけることができます（<code class="highlighter-rouge">1.2.3.4:80</code>や<code class="highlighter-rouge">foo.example.com:80</code>）。</li>
         </ul>
 
         <p>設定例は以下です。</p>
 
-        <div class="language-systemd highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[Service]</span>
-<span class="nt">Environment</span><span class="p">=</span>"HTTP_PROXY=http://proxy.example.com:80"
-<span class="nt">Environment</span><span class="p">=</span>"HTTPS_PROXY=https://proxy.example.com:443"
-<span class="nt">Environment</span><span class="p">=</span>"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
-</code></pre></div>        </div>
+        <pre><code class="language-systemd">[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80"
+Environment="HTTPS_PROXY=https://proxy.example.com:443"
+Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+</code></pre>
       </li>
       <li>
         <p>設定を反映して Docker を再起動します。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> daemon-reload
-<span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> restart docker
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl <span class="nt">--user</span> daemon-reload
+<span class="gp">$</span> systemctl <span class="nt">--user</span> restart docker
 </code></pre></div>        </div>
       </li>
       <li>
         <p>設定が適切にロードされていること、そして変更した内容が反映されていることを確認します。
 たとえば以下のようにします。</p>
 
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> show <span class="nt">--property</span><span class="o">=</span>Environment docker
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl <span class="nt">--user</span> show <span class="nt">--property</span><span class="o">=</span>Environment docker
 <span class="go">
 Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
 </span></code></pre></div>        </div>
@@ -335,7 +335,7 @@ Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.exa
 <h2 id="manually-create-the-systemd-unit-files">systemd ユニットファイルの手動生成</h2>
 
 <p>パッケージを利用せずにインストールを行った場合は、systemd を用いた Docker の設定が必要になるはずです。
-これを行うには 2 つのユニットファイル（<code class="language-plaintext highlighter-rouge">service</code>と<code class="language-plaintext highlighter-rouge">socket</code>）を <a href="https://github.com/moby/moby/tree/master/contrib/init/systemd">Github リポジトリ</a> から入手して<code class="language-plaintext highlighter-rouge">/etc/systemd/system</code>に置いてください。</p>
+これを行うには 2 つのユニットファイル（<code class="highlighter-rouge">service</code>と<code class="highlighter-rouge">socket</code>）を <a href="https://github.com/moby/moby/tree/master/contrib/init/systemd">Github リポジトリ</a> から入手して<code class="highlighter-rouge">/etc/systemd/system</code>に置いてください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=daemon">daemon</a>, <a href="/docs.docker.jp.onthefly/search/?q=systemd">systemd</a>, <a href="/docs.docker.jp.onthefly/search/?q=configuration">configuration</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS integration Compose features | Docker ドキュメント</title>
   <meta name="description" content="Reference list of compose ECS features" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ECS integration Compose features" />
   <meta property="og:description" content="Reference list of compose ECS features" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-compose-features/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ECS integration Compose features","description":"Reference list of compose ECS features","url":"https://docs.docker.com/cloud/ecs-compose-features/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -291,7 +291,7 @@ Each service is mapped to an ECS service in the project’s cluster.</p>
     <tr>
       <td>service.healthcheck</td>
       <td>✓</td>
-      <td>This configures container level health check as reported on ECS console. Application Load Balancer will also check for HTTP service health by accessing <code class="language-plaintext highlighter-rouge">/</code> and expect a HTTP 200 status code.</td>
+      <td>This configures container level health check as reported on ECS console. Application Load Balancer will also check for HTTP service health by accessing <code class="highlighter-rouge">/</code> and expect a HTTP 200 status code.</td>
     </tr>
     <tr>
       <td>service.hostname</td>
@@ -371,7 +371,7 @@ Each service is mapped to an ECS service in the project’s cluster.</p>
     <tr>
       <td>service.ulimits</td>
       <td>✓</td>
-      <td>Only support <code class="language-plaintext highlighter-rouge">nofile</code> ulimit due to Fargate limitations</td>
+      <td>Only support <code class="highlighter-rouge">nofile</code> ulimit due to Fargate limitations</td>
     </tr>
     <tr>
       <td>service.userns_mode</td>
@@ -411,7 +411,7 @@ Each service is mapped to an ECS service in the project’s cluster.</p>
     <tr>
       <td>external</td>
       <td>✓</td>
-      <td><code class="language-plaintext highlighter-rouge">name</code> must be an EFS filesystem ID</td>
+      <td><code class="highlighter-rouge">name</code> must be an EFS filesystem ID</td>
     </tr>
     <tr>
       <td>labels</td>
@@ -431,7 +431,7 @@ Each service is mapped to an ECS service in the project’s cluster.</p>
     <tr>
       <td>external</td>
       <td>✓</td>
-      <td><code class="language-plaintext highlighter-rouge">name</code> must be set to secret’s ARN</td>
+      <td><code class="highlighter-rouge">name</code> must be set to secret’s ARN</td>
     </tr>
     <tr>
       <td>file</td>
@@ -458,9 +458,9 @@ Each service is mapped to an ECS service in the project’s cluster.</p>
 
 <h2 id="logs">Logs</h2>
 
-<p>Application logs can be obtained container with <code class="language-plaintext highlighter-rouge">docker compose logs</code>.
-The Docker ECS integration relies on AWS CloudWatch Logs to collect logs from all containers. CloudWatch can be customized by setting service <code class="language-plaintext highlighter-rouge">logging.driver_opts</code>
-by passing configuration attributes prefixed with <code class="language-plaintext highlighter-rouge">awslogs-</code>.</p>
+<p>Application logs can be obtained container with <code class="highlighter-rouge">docker compose logs</code>.
+The Docker ECS integration relies on AWS CloudWatch Logs to collect logs from all containers. CloudWatch can be customized by setting service <code class="highlighter-rouge">logging.driver_opts</code>
+by passing configuration attributes prefixed with <code class="highlighter-rouge">awslogs-</code>.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">test</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">mycompany/webapp</span>
@@ -477,21 +477,21 @@ The source and target ports defined in the Compose file MUST be the same, as ser
 benefit from Listeners abstraction to assign a distinct published port.</p>
 
 <p>If services in the Compose file only expose ports 80 or 443, an Application Load Balancer is created, otherwise ECS integration will provision a Network Load Balancer.
-HTTP services using distinct ports can force use of an ALB by claiming the http protocol with <code class="language-plaintext highlighter-rouge">x-aws-protocol</code> custom extension within the port declaration:</p>
+HTTP services using distinct ports can force use of an ALB by claiming the http protocol with <code class="highlighter-rouge">x-aws-protocol</code> custom extension within the port declaration:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">test</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">mycompany/webapp</span>
     <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">8080</span>
         <span class="na">x-aws-protocol</span><span class="pi">:</span> <span class="s">http</span>
 
 </code></pre></div></div>
 
 <h2 id="persistent-volumes">Persistent volumes</h2>
 
-<p>Docker volumes are mapped to EFS file systems. Volumes can be external (<code class="language-plaintext highlighter-rouge">name</code> must then be set to filesystem ID) or will be created when the application is
-first deployed. <code class="language-plaintext highlighter-rouge">docker compose down</code> will NOT delete the filesystem, and it will be re-attached to the application on future runs.
-<code class="language-plaintext highlighter-rouge">driver_opts</code> can be used to tweak the EFS filsystem.</p>
+<p>Docker volumes are mapped to EFS file systems. Volumes can be external (<code class="highlighter-rouge">name</code> must then be set to filesystem ID) or will be created when the application is
+first deployed. <code class="highlighter-rouge">docker compose down</code> will NOT delete the filesystem, and it will be re-attached to the application on future runs.
+<code class="highlighter-rouge">driver_opts</code> can be used to tweak the EFS filsystem.</p>
 
 <p>Volume mount can be customized to workaround Posix filesystem permission issues by setting user and group IDs to be used to write to filesystem, whatever user
 is configured to run the container.</p>
@@ -507,15 +507,15 @@ is configured to run the container.</p>
     <span class="na">driver_opts</span><span class="pi">:</span>
       <span class="na">performance-mode</span><span class="pi">:</span> <span class="s">maxIO</span>
       <span class="na">throughput-mode</span><span class="pi">:</span> <span class="s">bursting</span>
-      <span class="na">uid</span><span class="pi">:</span> <span class="m">0</span>
-      <span class="na">gid</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">uid</span><span class="pi">:</span> <span class="s">0</span>
+      <span class="na">gid</span><span class="pi">:</span> <span class="s">0</span>
 </code></pre></div></div>
 
 <h2 id="secrets">Secrets</h2>
 
 <p>Secrets can be defined in compose files, and will need secret files available at deploy time next to the compose file.
-The content of the secret file will be made available inside selected containers, by default under <code class="language-plaintext highlighter-rouge">/run/secrets/&lt;SECRET_NAME&gt;</code>.
-External secrets are also supported, <code class="language-plaintext highlighter-rouge">name</code> must then be set to secret’s ARN</p>
+The content of the secret file will be made available inside selected containers, by default under <code class="highlighter-rouge">/run/secrets/&lt;SECRET_NAME&gt;</code>.
+External secrets are also supported, <code class="highlighter-rouge">name</code> must then be set to secret’s ARN</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
     <span class="na">nginx</span><span class="pi">:</span>
@@ -538,7 +538,7 @@ External secrets are also supported, <code class="language-plaintext highlighter
         <span class="na">deploy</span><span class="pi">:</span>
           <span class="na">resources</span><span class="pi">:</span>
             <span class="na">limits</span><span class="pi">:</span>
-              <span class="na">cpu</span><span class="pi">:</span> <span class="m">0.5</span>
+              <span class="na">cpu</span><span class="pi">:</span> <span class="s">0.5</span>
               <span class="na">memory</span><span class="pi">:</span> <span class="s">2Gb</span>
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Amazon">Amazon</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>

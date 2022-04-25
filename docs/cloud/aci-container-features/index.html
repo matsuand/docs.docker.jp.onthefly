@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ACI 統合コンテナー機能 | Docker ドキュメント</title>
   <meta name="description" content="Reference list of container ACI features" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ACI 統合コンテナー機能" />
   <meta property="og:description" content="Reference list of container ACI features" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/aci-container-features/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ACI 統合コンテナー機能","description":"Reference list of container ACI features","url":"https://docs.docker.com/cloud/aci-container-features/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,15 +109,15 @@
                     <main class="col-content content">
                         <section class="section"><h1>ACI 統合コンテナー機能</h1><h1 id="azure-container-instances-running-single-containerrs">Azure コンテナーインスタンス、単一コンテナーとしての実行</h1>
 
-<p>単一のコンテナーを ACI 上で実行するには<code class="language-plaintext highlighter-rouge">docker run</code>を用います。
+<p>単一のコンテナーを ACI 上で実行するには<code class="highlighter-rouge">docker run</code>を用います。
 1 つのコンテナーは、これに対応する ACI コンテナーグループ内において実行され、このグループ内にはこの 1 つのコンテナーのみが含まれます。</p>
 
-<p>コンテナーの一覧は<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを使って確認します。
-またコンテナーの停止や削除は<code class="language-plaintext highlighter-rouge">docker stop &lt;CONTAINER&gt;</code>および<code class="language-plaintext highlighter-rouge">docker rm &lt;CONTAINER&gt;</code>を使って行います。</p>
+<p>コンテナーの一覧は<code class="highlighter-rouge">docker ps</code>コマンドを使って確認します。
+またコンテナーの停止や削除は<code class="highlighter-rouge">docker stop &lt;CONTAINER&gt;</code>および<code class="highlighter-rouge">docker rm &lt;CONTAINER&gt;</code>を使って行います。</p>
 
 <h1 id="docker-run-options-for-aci-containers">ACI コンテナーに対する Docker run オプション</h1>
 
-<p>以下の一覧表では、サポートされている<code class="language-plaintext highlighter-rouge">docker run</code>フラグとその ACI 対応機能について示します。</p>
+<p>以下の一覧表では、サポートされている<code class="highlighter-rouge">docker run</code>フラグとその ACI 対応機能について示します。</p>
 
 <p><strong>凡例</strong></p>
 
@@ -209,7 +209,7 @@
     <tr>
       <td>--restart</td>
       <td>✓</td>
-      <td>再起動ポリシー。以下のいずれか： <code class="language-plaintext highlighter-rouge">always</code>、<code class="language-plaintext highlighter-rouge">no</code>、<code class="language-plaintext highlighter-rouge">on-failure</code></td>
+      <td>再起動ポリシー。以下のいずれか： <code class="highlighter-rouge">always</code>、<code class="highlighter-rouge">no</code>、<code class="highlighter-rouge">on-failure</code></td>
     </tr>
     <tr>
       <td>--rm</td>
@@ -226,28 +226,28 @@
 
 <h2 id="exposing-ports">ポート公開</h2>
 
-<p>コンテナーのポートは複数公開することが可能であり、<code class="language-plaintext highlighter-rouge">docker run -p &lt;PORT&gt;:&lt;PORT&gt;</code>を使って行います。
+<p>コンテナーのポートは複数公開することが可能であり、<code class="highlighter-rouge">docker run -p &lt;PORT&gt;:&lt;PORT&gt;</code>を使って行います。
 コンテナー実行時にポートが公開されていれば、公開 IP アドレスが割り当てられ必要なポートがアクセス可能となります。
 そしてこれに応じた ACI コンテナーグループが公開されます。</p>
 <blockquote>
   <p>メモ</p>
 
   <p><a href="https://feedback.azure.com/forums/602224-azure-container-instances/suggestions/34082284-support-for-port-mapping">ACI ではポートマッピングには対応していません</a>。
-したがって<code class="language-plaintext highlighter-rouge">-p &lt;PORT&gt;:&lt;PORT&gt;</code>を利用するにあたっては、同一のポート番号を指定する必要があります。</p>
+したがって<code class="highlighter-rouge">-p &lt;PORT&gt;:&lt;PORT&gt;</code>を利用するにあたっては、同一のポート番号を指定する必要があります。</p>
 </blockquote>
 
-<p>ポートの公開にあたっては、<code class="language-plaintext highlighter-rouge">--domainname</code>フラグを用いることで、コンテナーに対するサービスの DNS ホスト名を設定することもできます。
-<code class="language-plaintext highlighter-rouge">domainname</code>は ACI の DNS ラベル名の指定に利用されます。
-そして ACI コンテナーグループは<code class="language-plaintext highlighter-rouge">&lt;DOMAINNANE&gt;.&lt;REGION&gt;.azurecontainer.io</code>としてアクセス可能になります。
-なお<code class="language-plaintext highlighter-rouge">domainname</code>は<code class="language-plaintext highlighter-rouge">&lt;REGION&gt;.azurecontainer.io</code>内においてグローバルにユニークでなければなりません。</p>
+<p>ポートの公開にあたっては、<code class="highlighter-rouge">--domainname</code>フラグを用いることで、コンテナーに対するサービスの DNS ホスト名を設定することもできます。
+<code class="highlighter-rouge">domainname</code>は ACI の DNS ラベル名の指定に利用されます。
+そして ACI コンテナーグループは<code class="highlighter-rouge">&lt;DOMAINNANE&gt;.&lt;REGION&gt;.azurecontainer.io</code>としてアクセス可能になります。
+なお<code class="highlighter-rouge">domainname</code>は<code class="highlighter-rouge">&lt;REGION&gt;.azurecontainer.io</code>内においてグローバルにユニークでなければなりません。</p>
 
 <h2 id="persistent-volumes">永続的ボリューム</h2>
 
 <p>Docker ボリュームは Azure ファイル共有にマッピングされます。
 各ファイル共有は Azure ストレージアカウントの一部です。
-ボリュームは複数指定することが可能で、<code class="language-plaintext highlighter-rouge">docker run -v &lt;STORAGE-ACCOUNT&gt;/&lt;FILESHARE&gt;:&lt;TARGET-PATH&gt;</code>を使って指定します。</p>
+ボリュームは複数指定することが可能で、<code class="highlighter-rouge">docker run -v &lt;STORAGE-ACCOUNT&gt;/&lt;FILESHARE&gt;:&lt;TARGET-PATH&gt;</code>を使って指定します。</p>
 
-<p><code class="language-plaintext highlighter-rouge">run</code>コマンドにおいては<code class="language-plaintext highlighter-rouge">--volume</code>フラグや<code class="language-plaintext highlighter-rouge">-v</code>フラグを複数用いることにより、複数ボリュームを指定することができます。
+<p><code class="highlighter-rouge">run</code>コマンドにおいては<code class="highlighter-rouge">--volume</code>フラグや<code class="highlighter-rouge">-v</code>フラグを複数用いることにより、複数ボリュームを指定することができます。
 ボリュームに対して利用するストレージアカウントは、同一でも異なっていても構いません。
 異なるボリュームをマウントする対象パスは、それぞれに異なっている必要があり、重複してはなりません。
 単一ファイルのマウントや Azure ファイル共有におけるサブフォルダーのマウントはサポートされません。</p>
@@ -257,7 +257,7 @@
 
 <h2 id="container-resources">コンテナーリソース</h2>
 
-<p>CPU とメモリのリソース予約は、コンテナー起動時に<code class="language-plaintext highlighter-rouge">docker run --cpus 1.5 --memory 2G</code>のようにして設定することができます。</p>
+<p>CPU とメモリのリソース予約は、コンテナー起動時に<code class="highlighter-rouge">docker run --cpus 1.5 --memory 2G</code>のようにして設定することができます。</p>
 
 <p>単一のコンテナーにおいては、リソース予約量とは異なるリソース制約を設定することはできません。
 ACI におけるリソース制約は、1 つのコンテナーグループにあるコンテナーに対して行います。
@@ -266,11 +266,11 @@ ACI におけるリソース制約は、1 つのコンテナーグループに�
 
 <h2 id="logs">ログ</h2>
 
-<p>コンテナーのログは、コマンド<code class="language-plaintext highlighter-rouge">docker logs &lt;CONTAINER-ID&gt;</code>を使って確認することができます。</p>
+<p>コンテナーのログは、コマンド<code class="highlighter-rouge">docker logs &lt;CONTAINER-ID&gt;</code>を使って確認することができます。</p>
 
-<p>ログを監視するには<code class="language-plaintext highlighter-rouge">--follow</code>（<code class="language-plaintext highlighter-rouge">-f</code>）オプションを指定します。
-<code class="language-plaintext highlighter-rouge">docker run</code>によってコンテナーが起動されると、起動時にデフォルトでそのコマンドラインにコンテナーログが接続されます。
-コンテナー起動時にログを監視しない場合は<code class="language-plaintext highlighter-rouge">docker run --detach</code>とします。</p>
+<p>ログを監視するには<code class="highlighter-rouge">--follow</code>（<code class="highlighter-rouge">-f</code>）オプションを指定します。
+<code class="highlighter-rouge">docker run</code>によってコンテナーが起動されると、起動時にデフォルトでそのコマンドラインにコンテナーログが接続されます。
+コンテナー起動時にログを監視しない場合は<code class="highlighter-rouge">docker run --detach</code>とします。</p>
 <blockquote>
   <p>メモ</p>
 
@@ -282,15 +282,15 @@ ACI におけるリソース制約は、1 つのコンテナーグループに�
 
 <h2 id="healthchecks">ヘルスチェック</h2>
 
-<p>ヘルスチェックは先頭に<code class="language-plaintext highlighter-rouge">--health-</code>がつくフラグを使って設定します。
-これは ACI の<code class="language-plaintext highlighter-rouge">LivenessProbe</code>に変換されます。
+<p>ヘルスチェックは先頭に<code class="highlighter-rouge">--health-</code>がつくフラグを使って設定します。
+これは ACI の<code class="highlighter-rouge">LivenessProbe</code>に変換されます。
 ヘルスチェックが失敗すると、そのコンテナーは健康でない（unhealthy）とされ停止します。
 コンテナーを自動的に再起動するためには、コンテナーの起動時に再起動ポリシーを設定しておくことが必要です。
-再起動ポリシーは<code class="language-plaintext highlighter-rouge">--restart</code>フラグを用い、その設定値には<code class="language-plaintext highlighter-rouge">no</code>以外を指定します。
-再起動ポリシーが指定されていない場合のデフォルトは<code class="language-plaintext highlighter-rouge">no</code>となることに注意してください。</p>
+再起動ポリシーは<code class="highlighter-rouge">--restart</code>フラグを用い、その設定値には<code class="highlighter-rouge">no</code>以外を指定します。
+再起動ポリシーが指定されていない場合のデフォルトは<code class="highlighter-rouge">no</code>となることに注意してください。</p>
 
-<p>再起動を自動化するためには、コンテナーも<code class="language-plaintext highlighter-rouge">--restart</code>により指定される再起動ポリシーを持っておくことが必要です。
-（<code class="language-plaintext highlighter-rouge">docker run</code>実行時のデフォルトは、再起動ポリシーが<code class="language-plaintext highlighter-rouge">no</code>になります。）</p>
+<p>再起動を自動化するためには、コンテナーも<code class="highlighter-rouge">--restart</code>により指定される再起動ポリシーを持っておくことが必要です。
+（<code class="highlighter-rouge">docker run</code>実行時のデフォルトは、再起動ポリシーが<code class="highlighter-rouge">no</code>になります。）</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Azure">Azure</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=ACI">ACI</a>, <a href="/docs.docker.jp.onthefly/search/?q=container">container</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

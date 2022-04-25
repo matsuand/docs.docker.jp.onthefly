@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Authenticate proxy with nginx | Docker ドキュメント</title>
   <meta name="description" content="Restricting access to your registry using a nginx proxy" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Authenticate proxy with nginx" />
   <meta property="og:description" content="Restricting access to your registry using a nginx proxy" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/nginx/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Authenticate proxy with nginx","description":"Restricting access to your registry using a nginx proxy","url":"https://docs.docker.com/registry/recipes/nginx/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -152,7 +152,7 @@ proxy, it also requires that you move TLS termination from the Registry to the
 proxy itself.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Docker does not recommend binding your registry to <code class="language-plaintext highlighter-rouge">localhost:5000</code> without
+  <p><strong>Note</strong>: Docker does not recommend binding your registry to <code class="highlighter-rouge">localhost:5000</code> without
 authentication. This creates a potential loophole in your Docker Registry security.
 As a result, anyone who can log on to the server where your Docker Registry is running
 can push images without authentication.</p>
@@ -165,7 +165,7 @@ complexity is required.</p>
 <p>For instance, Amazon’s Elastic Load Balancer (ELB) in HTTPS mode already sets
 the following client header:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-Real-IP
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-Real-IP
 X-Forwarded-For
 X-Forwarded-Proto
 </code></pre></div></div>
@@ -191,11 +191,11 @@ properly. For more information, see
   <li>
     <p>Create the required directories</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> auth data
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir <span class="nt">-p</span> auth data
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create the main nginx configuration. Paste this code block into a new file called <code class="language-plaintext highlighter-rouge">auth/nginx.conf</code>:</p>
+    <p>Create the main nginx configuration. Paste this code block into a new file called <code class="highlighter-rouge">auth/nginx.conf</code>:</p>
 
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">events</span> {
     <span class="n">worker_connections</span>  <span class="m">1024</span>;
@@ -263,24 +263,24 @@ properly. For more information, see
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a password file <code class="language-plaintext highlighter-rouge">auth/nginx.htpasswd</code> for “testuser” and “testpassword”.</p>
+    <p>Create a password file <code class="highlighter-rouge">auth/nginx.htpasswd</code> for “testuser” and “testpassword”.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">--entrypoint</span> htpasswd registry:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/nginx.htpasswd
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--entrypoint</span> htpasswd registry:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/nginx.htpasswd
 </code></pre></div>    </div>
 
     <blockquote>
-      <p><strong>Note</strong>: If you do not want to use <code class="language-plaintext highlighter-rouge">bcrypt</code>, you can omit the <code class="language-plaintext highlighter-rouge">-B</code> parameter.</p>
+      <p><strong>Note</strong>: If you do not want to use <code class="highlighter-rouge">bcrypt</code>, you can omit the <code class="highlighter-rouge">-B</code> parameter.</p>
     </blockquote>
   </li>
   <li>
-    <p>Copy your certificate files to the <code class="language-plaintext highlighter-rouge">auth/</code> directory.</p>
+    <p>Copy your certificate files to the <code class="highlighter-rouge">auth/</code> directory.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>domain.crt auth
-<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>domain.key auth
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> cp domain.crt auth
+<span class="gp">$</span> cp domain.key auth
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create the compose file. Paste the following YAML into a new file called <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>.</p>
+    <p>Create the compose file. Paste the following YAML into a new file called <code class="highlighter-rouge">docker-compose.yml</code>.</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx</span><span class="pi">:</span>
   <span class="c1"># Note : Only nginx:alpine supports bcrypt.</span>
@@ -307,13 +307,13 @@ properly. For more information, see
 
 <p>Now, start your stack:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
 </code></pre></div></div>
 
-<p>Login with a “push” authorized user (using <code class="language-plaintext highlighter-rouge">testuser</code> and <code class="language-plaintext highlighter-rouge">testpassword</code>), then
+<p>Login with a “push” authorized user (using <code class="highlighter-rouge">testuser</code> and <code class="highlighter-rouge">testpassword</code>), then
 tag and push your first image:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
 docker tag ubuntu myregistrydomain.com:5043/test
 docker push myregistrydomain.com:5043/test
 docker pull myregistrydomain.com:5043/test

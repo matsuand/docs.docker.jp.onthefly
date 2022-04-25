@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>よくたずねられる質問 | Docker ドキュメント</title>
   <meta name="description" content="Docker Compose FAQ" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="よくたずねられる質問" />
   <meta property="og:description" content="Docker Compose FAQ" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/faq/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"よくたずねられる質問","description":"Docker Compose FAQ","url":"https://docs.docker.com/compose/faq/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -118,11 +118,11 @@
 
 <h2 id="why-do-my-services-take-10-seconds-to-recreate-or-stop">サービスの再生成や停止に 10 秒もかかるのはなぜ？</h2>
 
-<p>Compose stop attempts to stop a container by sending a <code class="language-plaintext highlighter-rouge">SIGTERM</code>. It then waits
+<p>Compose stop attempts to stop a container by sending a <code class="highlighter-rouge">SIGTERM</code>. It then waits
 for a <a href="/docs.docker.jp.onthefly/compose/reference/stop/">default timeout of 10 seconds</a>.  After the timeout,
-a <code class="language-plaintext highlighter-rouge">SIGKILL</code> is sent to the container to forcefully kill it.  If you
+a <code class="highlighter-rouge">SIGKILL</code> is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren’t shutting down
-when they receive the <code class="language-plaintext highlighter-rouge">SIGTERM</code> signal.</p>
+when they receive the <code class="highlighter-rouge">SIGTERM</code> signal.</p>
 
 <p>There has already been a lot written about this problem of
 <a href="https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86">processes handling signals</a>
@@ -132,20 +132,20 @@ in containers.</p>
 
 <ul>
   <li>
-    <p>Make sure you’re using the exec form of <code class="language-plaintext highlighter-rouge">CMD</code> and <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>
+    <p>Make sure you’re using the exec form of <code class="highlighter-rouge">CMD</code> and <code class="highlighter-rouge">ENTRYPOINT</code>
 in your Dockerfile.</p>
 
-    <p>For example use <code class="language-plaintext highlighter-rouge">["program", "arg1", "arg2"]</code> not <code class="language-plaintext highlighter-rouge">"program arg1 arg2"</code>.
-Using the string form causes Docker to run your process using <code class="language-plaintext highlighter-rouge">bash</code> which
+    <p>For example use <code class="highlighter-rouge">["program", "arg1", "arg2"]</code> not <code class="highlighter-rouge">"program arg1 arg2"</code>.
+Using the string form causes Docker to run your process using <code class="highlighter-rouge">bash</code> which
 doesn’t handle signals properly. Compose always uses the JSON form, so don’t
 worry if you override the command or entrypoint in your Compose file.</p>
   </li>
   <li>
     <p>If you are able, modify the application that you’re running to
-add an explicit signal handler for <code class="language-plaintext highlighter-rouge">SIGTERM</code>.</p>
+add an explicit signal handler for <code class="highlighter-rouge">SIGTERM</code>.</p>
   </li>
   <li>
-    <p>Set the <code class="language-plaintext highlighter-rouge">stop_signal</code> to a signal which the application knows how to handle:</p>
+    <p>Set the <code class="highlighter-rouge">stop_signal</code> to a signal which the application knows how to handle:</p>
   </li>
 </ul>
 
@@ -160,33 +160,33 @@ add an explicit signal handler for <code class="language-plaintext highlighter-r
 system (like <a href="https://skarnet.org/software/s6/">s6</a>) or a signal proxy (like
 <a href="https://github.com/Yelp/dumb-init">dumb-init</a> or
 <a href="https://github.com/krallin/tini">tini</a>).  Either of these wrappers take care of
-handling <code class="language-plaintext highlighter-rouge">SIGTERM</code> properly.</li>
+handling <code class="highlighter-rouge">SIGTERM</code> properly.</li>
 </ul>
 
 <h2 id="how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host">1 つのホスト上で Compose ファイルを複数稼動させるには？</h2>
 
 <p>Compose uses the project name to create unique identifiers for all of a
 project’s  containers and other resources. To run multiple copies of a project,
-set a custom project name using the <a href="/docs.docker.jp.onthefly/compose/reference/"><code class="language-plaintext highlighter-rouge">-p</code> command line option</a>
-or the <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name"><code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code> environment variable</a>.</p>
+set a custom project name using the <a href="/docs.docker.jp.onthefly/compose/reference/"><code class="highlighter-rouge">-p</code> command line option</a>
+or the <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name"><code class="highlighter-rouge">COMPOSE_PROJECT_NAME</code> environment variable</a>.</p>
 
-<h2 id="whats-the-difference-between-up-run-and-start">What’s the difference between <code class="language-plaintext highlighter-rouge">up</code>, <code class="language-plaintext highlighter-rouge">run</code>, and <code class="language-plaintext highlighter-rouge">start</code>?</h2>
+<h2 id="whats-the-difference-between-up-run-and-start">What’s the difference between <code class="highlighter-rouge">up</code>, <code class="highlighter-rouge">run</code>, and <code class="highlighter-rouge">start</code>?</h2>
 
-<p>Typically, you want <code class="language-plaintext highlighter-rouge">docker-compose up</code>. Use <code class="language-plaintext highlighter-rouge">up</code> to start or restart all the
-services defined in a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>. In the default “attached”
-mode, you see all the logs from all the containers. In “detached” mode (<code class="language-plaintext highlighter-rouge">-d</code>),
+<p>Typically, you want <code class="highlighter-rouge">docker-compose up</code>. Use <code class="highlighter-rouge">up</code> to start or restart all the
+services defined in a <code class="highlighter-rouge">docker-compose.yml</code>. In the default “attached”
+mode, you see all the logs from all the containers. In “detached” mode (<code class="highlighter-rouge">-d</code>),
 Compose exits after starting the containers, but the containers continue to run
 in the background.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker-compose run</code> command is for running “one-off” or “adhoc” tasks. It
+<p>The <code class="highlighter-rouge">docker-compose run</code> command is for running “one-off” or “adhoc” tasks. It
 requires the service name you want to run and only starts containers for services
-that the running service depends on. Use <code class="language-plaintext highlighter-rouge">run</code> to run tests or perform
+that the running service depends on. Use <code class="highlighter-rouge">run</code> to run tests or perform
 an administrative task such as removing or adding data to a data volume
-container. The <code class="language-plaintext highlighter-rouge">run</code> command acts like <code class="language-plaintext highlighter-rouge">docker run -ti</code> in that it opens an
+container. The <code class="highlighter-rouge">run</code> command acts like <code class="highlighter-rouge">docker run -ti</code> in that it opens an
 interactive terminal to the container and returns an exit status matching the
 exit status of the process in the container.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker-compose start</code> command is useful only to restart containers
+<p>The <code class="highlighter-rouge">docker-compose start</code> command is useful only to restart containers
 that were previously created, but were stopped. It never creates new
 containers.</p>
 
@@ -196,22 +196,22 @@ containers.</p>
 any JSON file should be valid Yaml.  To use a JSON file with Compose,
 specify the filename to use, for example:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.json up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose <span class="nt">-f</span> docker-compose.json up
 </code></pre></div></div>
 
-<h2 id="should-i-include-my-code-with-copyadd-or-a-volume">Should I include my code with <code class="language-plaintext highlighter-rouge">COPY</code>/<code class="language-plaintext highlighter-rouge">ADD</code> or a volume?</h2>
+<h2 id="should-i-include-my-code-with-copyadd-or-a-volume">Should I include my code with <code class="highlighter-rouge">COPY</code>/<code class="highlighter-rouge">ADD</code> or a volume?</h2>
 
-<p>You can add your code to the image using <code class="language-plaintext highlighter-rouge">COPY</code> or <code class="language-plaintext highlighter-rouge">ADD</code> directive in a
-<code class="language-plaintext highlighter-rouge">Dockerfile</code>.  This is useful if you need to relocate your code along with the
+<p>You can add your code to the image using <code class="highlighter-rouge">COPY</code> or <code class="highlighter-rouge">ADD</code> directive in a
+<code class="highlighter-rouge">Dockerfile</code>.  This is useful if you need to relocate your code along with the
 Docker image, for example when you’re sending code to another environment
 (production, CI, etc).</p>
 
-<p>You should use a <code class="language-plaintext highlighter-rouge">volume</code> if you want to make changes to your code and see them
+<p>You should use a <code class="highlighter-rouge">volume</code> if you want to make changes to your code and see them
 reflected immediately, for example when you’re developing code and your server
 supports hot code reloading or live-reload.</p>
 
 <p>There may be cases where you want to use both. You can have the image
-include the code using a <code class="language-plaintext highlighter-rouge">COPY</code>, and use a <code class="language-plaintext highlighter-rouge">volume</code> in your Compose file to
+include the code using a <code class="highlighter-rouge">COPY</code>, and use a <code class="highlighter-rouge">volume</code> in your Compose file to
 include the code from the host during development. The volume overrides
 the directory contents of the image.</p>
 

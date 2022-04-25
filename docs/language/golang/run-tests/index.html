@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run your tests using Go test | Docker ドキュメント</title>
   <meta name="description" content="How to build and run your Go tests in a container" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Run your tests using Go test" />
   <meta property="og:description" content="How to build and run your Go tests in a container" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Run your tests using Go test","description":"How to build and run your Go tests in a container","url":"https://docs.docker.com/language/golang/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Run your tests using Go test</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Run your tests using Go test</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/golang/build-images/">イメージのビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/golang/run-containers/">コンテナーとしてイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/golang/develop/">コンテナーの開発利用</a></li>
@@ -120,74 +120,74 @@
 
 <h2 id="test-structure">Test structure</h2>
 
-<p>Each test is meant to verify a single business requirement for our example application. The following test is an excerpt from <code class="language-plaintext highlighter-rouge">main_test.go</code> test suite in our example application.</p>
+<p>Each test is meant to verify a single business requirement for our example application. The following test is an excerpt from <code class="highlighter-rouge">main_test.go</code> test suite in our example application.</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">TestRespondsWithLove</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">TestRespondsWithLove</span><span class="p">(</span><span class="n">t</span><span class="x"> </span><span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
 
-	<span class="n">pool</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">dockertest</span><span class="o">.</span><span class="n">NewPool</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
-	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"could not connect to Docker"</span><span class="p">)</span>
+	</span><span class="n">pool</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockertest</span><span class="o">.</span><span class="n">NewPool</span><span class="p">(</span><span class="s">""</span><span class="p">)</span><span class="x">
+	</span><span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="p">,</span><span class="x"> </span><span class="s">"could not connect to Docker"</span><span class="p">)</span><span class="x">
 
-	<span class="n">resource</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">pool</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="s">"docker-gs-ping"</span><span class="p">,</span> <span class="s">"latest"</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{})</span>
-	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"could not start container"</span><span class="p">)</span>
+	</span><span class="n">resource</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">pool</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="s">"docker-gs-ping"</span><span class="p">,</span><span class="x"> </span><span class="s">"latest"</span><span class="p">,</span><span class="x"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{})</span><span class="x">
+	</span><span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="p">,</span><span class="x"> </span><span class="s">"could not start container"</span><span class="p">)</span><span class="x">
 
-	<span class="n">t</span><span class="o">.</span><span class="n">Cleanup</span><span class="p">(</span><span class="k">func</span><span class="p">()</span> <span class="p">{</span>
-		<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">Purge</span><span class="p">(</span><span class="n">resource</span><span class="p">),</span> <span class="s">"failed to remove container"</span><span class="p">)</span>
-	<span class="p">})</span>
+	</span><span class="n">t</span><span class="o">.</span><span class="n">Cleanup</span><span class="p">(</span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">pool</span><span class="o">.</span><span class="n">Purge</span><span class="p">(</span><span class="n">resource</span><span class="p">),</span><span class="x"> </span><span class="s">"failed to remove container"</span><span class="p">)</span><span class="x">
+	</span><span class="p">})</span><span class="x">
 
-	<span class="k">var</span> <span class="n">resp</span> <span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Response</span>
+	</span><span class="k">var</span><span class="x"> </span><span class="n">resp</span><span class="x"> </span><span class="o">*</span><span class="n">http</span><span class="o">.</span><span class="n">Response</span><span class="x">
 
-	<span class="n">err</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="k">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
-		<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprint</span><span class="p">(</span><span class="s">"http://localhost:"</span><span class="p">,</span> <span class="n">resource</span><span class="o">.</span><span class="n">GetPort</span><span class="p">(</span><span class="s">"8080/tcp"</span><span class="p">),</span> <span class="s">"/"</span><span class="p">))</span>
-		<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-			<span class="n">t</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="s">"container not ready, waiting..."</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">err</span>
-		<span class="p">}</span>
-		<span class="k">return</span> <span class="no">nil</span>
-	<span class="p">})</span>
-	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"HTTP error"</span><span class="p">)</span>
-	<span class="k">defer</span> <span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+	</span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">pool</span><span class="o">.</span><span class="n">Retry</span><span class="p">(</span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+		</span><span class="n">resp</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprint</span><span class="p">(</span><span class="s">"http://localhost:"</span><span class="p">,</span><span class="x"> </span><span class="n">resource</span><span class="o">.</span><span class="n">GetPort</span><span class="p">(</span><span class="s">"8080/tcp"</span><span class="p">),</span><span class="x"> </span><span class="s">"/"</span><span class="p">))</span><span class="x">
+		</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+			</span><span class="n">t</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="s">"container not ready, waiting..."</span><span class="p">)</span><span class="x">
+			</span><span class="k">return</span><span class="x"> </span><span class="n">err</span><span class="x">
+		</span><span class="p">}</span><span class="x">
+		</span><span class="k">return</span><span class="x"> </span><span class="no">nil</span><span class="x">
+	</span><span class="p">})</span><span class="x">
+	</span><span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="p">,</span><span class="x"> </span><span class="s">"HTTP error"</span><span class="p">)</span><span class="x">
+	</span><span class="k">defer</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
 
-	<span class="n">require</span><span class="o">.</span><span class="n">Equal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="s">"HTTP status code"</span><span class="p">)</span>
+	</span><span class="n">require</span><span class="o">.</span><span class="n">Equal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">http</span><span class="o">.</span><span class="n">StatusOK</span><span class="p">,</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span><span class="x"> </span><span class="s">"HTTP status code"</span><span class="p">)</span><span class="x">
 
-	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">io</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
-	<span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s">"failed to read HTTP body"</span><span class="p">)</span>
+	</span><span class="n">body</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">io</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span><span class="x">
+	</span><span class="n">require</span><span class="o">.</span><span class="n">NoError</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="p">,</span><span class="x"> </span><span class="s">"failed to read HTTP body"</span><span class="p">)</span><span class="x">
 
-	<span class="c">// Finally, test the business requirement!</span>
-	<span class="n">require</span><span class="o">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="s">"&lt;3"</span><span class="p">,</span> <span class="s">"does not respond with love?"</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
+	</span><span class="c">// Finally, test the business requirement!</span><span class="x">
+	</span><span class="n">require</span><span class="o">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="kt">string</span><span class="p">(</span><span class="n">body</span><span class="p">),</span><span class="x"> </span><span class="s">"&lt;3"</span><span class="p">,</span><span class="x"> </span><span class="s">"does not respond with love?"</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
 
 <p>As you can see, this is a high-level test, unconcerned with the implementation details of our example application.</p>
 
 <ul>
-  <li>the test is using <a href="https://github.com/ory/dockertest"><code class="language-plaintext highlighter-rouge">ory/dockertest</code></a> Go module;</li>
+  <li>the test is using <a href="https://github.com/ory/dockertest"><code class="highlighter-rouge">ory/dockertest</code></a> Go module;</li>
   <li>the test assumes that the Docker engine instance is running on the same machine where the test is being run.</li>
 </ul>
 
-<p>The second test in <code class="language-plaintext highlighter-rouge">main_test.go</code> has almost identical structure but it tests <em>another</em> business requirement of our application. You are welcome to have a look at all available tests in <a href="https://github.com/olliefr/docker-gs-ping/blob/main/main_test.go"><code class="language-plaintext highlighter-rouge">docker-gs-ping/main_test.go</code></a>.</p>
+<p>The second test in <code class="highlighter-rouge">main_test.go</code> has almost identical structure but it tests <em>another</em> business requirement of our application. You are welcome to have a look at all available tests in <a href="https://github.com/olliefr/docker-gs-ping/blob/main/main_test.go"><code class="highlighter-rouge">docker-gs-ping/main_test.go</code></a>.</p>
 
 <h2 id="run-tests-locally">Run tests locally</h2>
 
 <p>In order to run the tests, we must make sure that our application Docker image is up-to-date.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> docker-gs-ping:latest <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">-t</span> docker-gs-ping:latest <span class="nb">.</span>
 <span class="go">[+] Building 3.0s (13/13) FINISHED
 </span><span class="c">...
 </span></code></pre></div></div>
 
 <p>In the above example we’ve omitted most of the output, only displaying the first line indicating that the build was successful.</p>
 
-<p>Note, that the image is tagged with <code class="language-plaintext highlighter-rouge">latest</code> which is the same label we’ve chosen to use in our <code class="language-plaintext highlighter-rouge">main_test.go</code> tests.</p>
+<p>Note, that the image is tagged with <code class="highlighter-rouge">latest</code> which is the same label we’ve chosen to use in our <code class="highlighter-rouge">main_test.go</code> tests.</p>
 
 <p>Now that the Docker image for our application had been built, we can run the tests that depend on it:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>go <span class="nb">test</span> ./...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> go <span class="nb">test</span> ./...
 <span class="go">ok      github.com/olliefr/docker-gs-ping       2.564s
 </span></code></pre></div></div>
 
 <p>That was a bit... underwhelming? Let’s ask it to print a bit more detail, just to be sure:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>go <span class="nb">test</span> <span class="nt">-v</span> ./...
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> go <span class="nb">test</span> <span class="nt">-v</span> ./...
 <span class="go">=== RUN   TestRespondsWithLove
     main_test.go:47: container not ready, waiting...
 --- PASS: TestRespondsWithLove (5.24s)
@@ -198,7 +198,7 @@ PASS
 ok      github.com/olliefr/docker-gs-ping       6.670s
 </span></code></pre></div></div>
 
-<p>So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialised. What happens in each test is that <code class="language-plaintext highlighter-rouge">ory/dockertest</code> module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag <code class="language-plaintext highlighter-rouge">docker-gs-ping:latest</code>. Starting up a container may take a while, so our tests retry accessing the container until the container is ready to respond to requests.</p>
+<p>So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialised. What happens in each test is that <code class="highlighter-rouge">ory/dockertest</code> module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag <code class="highlighter-rouge">docker-gs-ping:latest</code>. Starting up a container may take a while, so our tests retry accessing the container until the container is ready to respond to requests.</p>
 
 <h2 id="next-steps">Next steps</h2>
 

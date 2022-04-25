@@ -1,5 +1,5 @@
-<!-- Page generated 2022-01-22 11:32:16 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナー内での複数サービス起動 | Docker ドキュメント</title>
   <meta name="description" content="How to run more than one process in a container" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コンテナー内での複数サービス起動" />
   <meta property="og:description" content="How to run more than one process in a container" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/multi-service_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-01-22T11:32:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コンテナー内での複数サービス起動","description":"How to run more than one process in a container","url":"https://docs.docker.com/config/containers/multi-service_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナー内での複数サービス起動</h1><p>コンテナーの主となる実行プロセスは、<code class="language-plaintext highlighter-rouge">Dockerfile</code>の最終部分に指定される<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>や<code class="language-plaintext highlighter-rouge">CMD</code>です。
+                        <section class="section"><h1>コンテナー内での複数サービス起動</h1><p>コンテナーの主となる実行プロセスは、<code class="highlighter-rouge">Dockerfile</code>の最終部分に指定される<code class="highlighter-rouge">ENTRYPOINT</code>や<code class="highlighter-rouge">CMD</code>です。
 1 つのコンテナーには 1 つのサービスを割り当てるということにすれば、気にかける箇所が絞られるので、一般的にはこれが推奨されます。
 ただそのサービスからは、複数のプロセスがフォークされることもあります（たとえば Apache ウェブサーバーでは複数のワーカープロセスが起動されます）。
 マルチプロセスとなることは、まったく問題ありません。
@@ -116,10 +116,10 @@
 
 <p>コンテナーのメインプロセスは、コンテナーそのものが起動させるプロセスすべてを管理するためにあります。
 メインプロセスが十分に機能していないことが原因で、コンテナー終了時に子プロセスを適切に停止できないことがあります。
-起動プロセスがこの手の事態に陥った場合は、コンテナー起動時に<code class="language-plaintext highlighter-rouge">--init</code>オプションを指定してみてください。
-この<code class="language-plaintext highlighter-rouge">--init</code>フラグは、コンテナーのメインプロセスとして、非常に小さな初期化プロセスを埋め込みます。
+起動プロセスがこの手の事態に陥った場合は、コンテナー起動時に<code class="highlighter-rouge">--init</code>オプションを指定してみてください。
+この<code class="highlighter-rouge">--init</code>フラグは、コンテナーのメインプロセスとして、非常に小さな初期化プロセスを埋め込みます。
 この小さなプロセスが、コンテナー終了時の子プロセス停止を受け持つことになります。
-子プロセスの扱いをこのようにするのは、本格的な初期化プロセス、たとえば<code class="language-plaintext highlighter-rouge">sysvinit</code>、<code class="language-plaintext highlighter-rouge">upstart</code>、<code class="language-plaintext highlighter-rouge">systemd</code>に比べて、コンテナー内部のプロセスのライフサイクルを適切に扱うことができるからです。</p>
+子プロセスの扱いをこのようにするのは、本格的な初期化プロセス、たとえば<code class="highlighter-rouge">sysvinit</code>、<code class="highlighter-rouge">upstart</code>、<code class="highlighter-rouge">systemd</code>に比べて、コンテナー内部のプロセスのライフサイクルを適切に扱うことができるからです。</p>
 
 <p>1 つのコンテナー内に複数のサービスを起動させる必要があるなら、方法はいくつかあります。</p>
 
@@ -127,7 +127,7 @@
   <li>
     <p>実行するコマンドをすべてラッパースクリプトに含めます。
 あらかじめテストやデバッグは行っておきます。
-そしてこのラッパースクリプトを<code class="language-plaintext highlighter-rouge">CMD</code>として実行します。
+そしてこのラッパースクリプトを<code class="highlighter-rouge">CMD</code>として実行します。
 以下は簡単な例です。
 まずはラッパースクリプトを生成します。</p>
 
@@ -190,19 +190,19 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">supervisord</code>のようなプロセスマネージャーを利用する場合です。
+    <p><code class="highlighter-rouge">supervisord</code>のようなプロセスマネージャーを利用する場合です。
 これは少々面倒な方法です。
-これを行うためには、イメージ内に<code class="language-plaintext highlighter-rouge">supervisord</code>パッケージとその設定を含める必要があります。
-（あるいは<code class="language-plaintext highlighter-rouge">supervisord</code>が含まれているイメージをベースとします。）
+これを行うためには、イメージ内に<code class="highlighter-rouge">supervisord</code>パッケージとその設定を含める必要があります。
+（あるいは<code class="highlighter-rouge">supervisord</code>が含まれているイメージをベースとします。）
 さらにそのパッケージが管理する別のアプリケーションが必要になってきます。
-その上で<code class="language-plaintext highlighter-rouge">supervisord</code>を起動させてプロセス管理を行います。
+その上で<code class="highlighter-rouge">supervisord</code>を起動させてプロセス管理を行います。
 以下はこの手法を利用する Dockerfile です。
-<code class="language-plaintext highlighter-rouge">supervisord.conf</code>、<code class="language-plaintext highlighter-rouge">my_first_process</code>、<code class="language-plaintext highlighter-rouge">my_second_process</code>の各ファイルは準備ができていて、Dockerfile と同一ディレクトリに存在しているとします。</p>
+<code class="highlighter-rouge">supervisord.conf</code>、<code class="highlighter-rouge">my_first_process</code>、<code class="highlighter-rouge">my_second_process</code>の各ファイルは準備ができていて、Dockerfile と同一ディレクトリに存在しているとします。</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> ubuntu:latest</span>
-<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> supervisor
-<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/supervisor
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> supervisor
+<span class="k">RUN </span>mkdir <span class="nt">-p</span> /var/log/supervisor
 <span class="k">COPY</span><span class="s"> supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span>
 <span class="k">COPY</span><span class="s"> my_first_process my_first_process</span>
 <span class="k">COPY</span><span class="s"> my_second_process my_second_process</span>

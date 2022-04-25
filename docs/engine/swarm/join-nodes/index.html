@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm へのノード参加 | Docker ドキュメント</title>
   <meta name="description" content="Add worker and manager nodes to a swarm" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Swarm へのノード参加" />
   <meta property="og:description" content="Add worker and manager nodes to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/join-nodes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Swarm へのノード参加","description":"Add worker and manager nodes to a swarm","url":"https://docs.docker.com/engine/swarm/join-nodes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -121,7 +121,7 @@ Swarm に対してワーカーノードを追加すると、Swarm のスケー�
 デフォルトではマネージャーノードも通常のタスクを実行します。</li>
 </ul>
 
-<p>Docker Engine が Swarm に参加する際には、<code class="language-plaintext highlighter-rouge">docker swarm join</code>コマンドによって示される <strong>参加トークン</strong>（join-token）を利用します。
+<p>Docker Engine が Swarm に参加する際には、<code class="highlighter-rouge">docker swarm join</code>コマンドによって示される <strong>参加トークン</strong>（join-token）を利用します。
 ノードがトークンを利用するのはこの参加のときだけです。
 この後にトークンのローテート操作を行っても、既存の Swarm ノードには影響しません。
 <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/#view-the-join-command-or-update-a-swarm-join-token">Docker Engine の Swarm モード実行</a> を参照してください。</p>
@@ -138,7 +138,7 @@ Swarm に対してワーカーノードを追加すると、Swarm のスケー�
   <div id="origin1" class="tab-pane fade in active">
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token worker
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
 
@@ -153,7 +153,7 @@ To add a worker to this swarm, run the following command:
 
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token worker
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token worker
 
 Swarm にワーカーを追加するには、以下のコマンドを実行してください。
 
@@ -177,7 +177,7 @@ Swarm にワーカーを追加するには、以下のコマンドを実行し�
   <div id="origin2" class="tab-pane fade in active">
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
   192.168.99.100:2377
 
@@ -190,7 +190,7 @@ This node joined a swarm as a worker.
 
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
   192.168.99.100:2377
 
@@ -203,23 +203,23 @@ This node joined a swarm as a worker.
   <hr />
 </div>
 
-<p><code class="language-plaintext highlighter-rouge">docker swarm join</code>コマンドは以下の処理を行います。</p>
+<p><code class="highlighter-rouge">docker swarm join</code>コマンドは以下の処理を行います。</p>
 
 <ul>
   <li>現在のノードである Docker Engine を Swarm モードに切り替えます。</li>
   <li>マネージャーに TLS 証明書を要求します。</li>
   <li>マシンホスト名を使ってノード名を定めます。</li>
   <li>Swarm トークンに基づくマネージャーのリッスンアドレスで、現在のノードを Swarm に参加させます。</li>
-  <li>現在のノードの利用状態（availability）を<code class="language-plaintext highlighter-rouge">Active</code>に設定します。
+  <li>現在のノードの利用状態（availability）を<code class="highlighter-rouge">Active</code>に設定します。
 これはスケジューラーからのタスク受け入れが可能であることを意味します。</li>
-  <li>現在のノードに対して、<code class="language-plaintext highlighter-rouge">ingress</code>オーバーレイネットワークを拡張します。</li>
+  <li>現在のノードに対して、<code class="highlighter-rouge">ingress</code>オーバーレイネットワークを拡張します。</li>
 </ul>
 
 <h2 id="join-as-a-manager-node">マネージャーノードとしての参加</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker swarm join</code>を実行してマネージャートークンを受け渡すと、Docker Engine はワーカーノードの場合と同様に、Swarm モードへの切り替えを行います。
+<p><code class="highlighter-rouge">docker swarm join</code>を実行してマネージャートークンを受け渡すと、Docker Engine はワーカーノードの場合と同様に、Swarm モードへの切り替えを行います。
 マネージャーノードは Raft 合意（raft consensus）にも参加します。
-新たに参加させたこのノードは<code class="language-plaintext highlighter-rouge">Reachable</code>（到達可能）となりますが、Swarm の<code class="language-plaintext highlighter-rouge">Leader</code>は、それまでのものがそのまま担当します。</p>
+新たに参加させたこのノードは<code class="highlighter-rouge">Reachable</code>（到達可能）となりますが、Swarm の<code class="highlighter-rouge">Leader</code>は、それまでのものがそのまま担当します。</p>
 
 <p>Docker はクラスターの高可用性を実現するため、マネージャーノードを 3 つあるいは 5 つにより構成することが推奨されます。
 Swarm モードにおけるマネージャーノードは Raft を利用してデータ共有を行うため、マネージャーノード数は奇数としなければなりません。
@@ -237,7 +237,7 @@ Swarm はマネージャーノードの半数以上の quorum（多数票）が�
   <div id="origin3" class="tab-pane fade in active">
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token manager
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token manager
 
 To add a manager to this swarm, run the following command:
 
@@ -252,7 +252,7 @@ To add a manager to this swarm, run the following command:
 
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token manager
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join-token manager
 
 Swarm にマネージャーを追加するには、以下のコマンドを実行してください。
 
@@ -276,7 +276,7 @@ Swarm にマネージャーを追加するには、以下のコマンドを実�
   <div id="origin4" class="tab-pane fade in active">
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
   --token SWMTKN-1-61ztec5kyafptydic6jfc1i33t37flcl4nuipzcusor96k7kby-5vy9t8u35tuqm7vh67lrz9xp6 \
   192.168.99.100:2377
 
@@ -289,7 +289,7 @@ This node joined a swarm as a manager.
 
     <div class="language-console highlighter-rouge">
       <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
+        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm join \
   --token SWMTKN-1-61ztec5kyafptydic6jfc1i33t37flcl4nuipzcusor96k7kby-5vy9t8u35tuqm7vh67lrz9xp6 \
   192.168.99.100:2377
 
@@ -304,7 +304,7 @@ This node joined a swarm as a manager.
 <h2 id="learn-more">さらに詳しく</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_join/">コマンドラインリファレンス</a> の<code class="language-plaintext highlighter-rouge">swarm join</code></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_join/">コマンドラインリファレンス</a> の<code class="highlighter-rouge">swarm join</code></li>
   <li><a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/">Swarm モードチュートリアル</a></li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=guide">guide</a>, <a href="/docs.docker.jp.onthefly/search/?q=swarm mode">swarm mode</a>, <a href="/docs.docker.jp.onthefly/search/?q=node">node</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>

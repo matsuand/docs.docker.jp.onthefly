@@ -1,5 +1,5 @@
-<!-- Page generated 2022-02-26 13:40:12 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Registry Access Management | Docker ドキュメント</title>
   <meta name="description" content="レジストリアクセス管理" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Registry Access Management" />
   <meta property="og:description" content="レジストリアクセス管理" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-02-26T13:40:12+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/registry-access-management/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-02-26T13:40:12+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Registry Access Management","description":"レジストリアクセス管理","url":"https://docs.docker.com/docker-hub/registry-access-management/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -101,12 +101,12 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Registry Access Management</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.</p>
+                        <section class="section"><h1>Registry Access Management</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.</p>
 
 <blockquote class="important">
   <p><strong>Note</strong></p>
 
-  <p>Registry Access Management is currently offered as a Tech Preview to a closed group of Docker Business customers.</p>
+  <p>Registry Access Management is currently offered as a closed beta to a closed group of Docker Business customers.</p>
 </blockquote>
 
 <h2 id="configure-registry-access-management-permissions">Configure Registry Access Management permissions</h2>
@@ -115,7 +115,7 @@
 
 <ol>
   <li>Sign into your <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> account as an organization owner.</li>
-  <li>Select an organization, navigate to the <strong>Settings</strong> tab on the <strong>Organizations</strong> page and click <strong>Org Permissions</strong>.</li>
+  <li>Select an organization, navigate to the <strong>Settings</strong> tab on the <strong>Organizations</strong> page and click <strong>Registry Access</strong>.</li>
   <li>
     <p>Enable Registry Access Management to set the permissions for your registry.</p>
 
@@ -159,67 +159,62 @@
 
 <h2 id="create-a-registryjson-file">registry.json ファイルの生成</h2>
 
-<p>Docker Desktop を正常にインストールを終えたら、<code class="highlighter-rouge">registry.json</code>ファイルを生成します。
-<code class="highlighter-rouge">registry.json</code>ファイルを生成するにあたっては、そのユーザーが Docker Hub 内において、少なくとも 1 つの組織のメンバーであることを確認してください。
-<code class="highlighter-rouge">registry.json</code>ファイルの内容が、そのメンバーが属する組織に 1 つでも一致すれば、そのユーザーは Docker Desktop にサインインすることができて、すべての組織へのアクセスが可能になります。</p>
+<p><code class="highlighter-rouge">registry.json</code>ファイルを生成する際に、開発担当者は Docker Hub 上の少なくとも 1 つの組織のメンバーであることを確認します。<code class="highlighter-rouge">registry.json</code>ファイルが、開発者の属する少なくとも 1 つの組織と一致した場合、Docker Desktop へのサインインが可能となり、その組織すべてにアクセスができます。</p>
 
 <h3 id="windows">Windows の場合</h3>
 
-<p>Windows では<code class="highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>Windows では、端末上から以下のコマンドを実行して Docker Desktop をインストールします。</p>
 
-<p>Windows において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> <span class="s2">"Docker Desktop Installer.exe"</span> install
+</code></pre></div></div>
 
-<ol>
-  <li>Windows PowerShell を開いて Run as Administrator を選びます。</li>
-  <li>以下のコマンド<code class="highlighter-rouge">cd /ProgramData/DockerDesktop/</code>を実行します。</li>
-  <li>
-    <p><code class="highlighter-rouge">notepad registry.json</code>を実行します。
-その開発者が所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力し、<strong>Save</strong>（保存）をクリックします。
-たとえば以下のようにします。</p>
+<p>PowerShell の利用時は以下を実行します。</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">PS&gt;</span> Start-Process <span class="s1">'.\win\build\Docker Desktop Installer.exe'</span> <span class="nt">-Wait</span> install
+</code></pre></div></div>
+
+<p>Windows コマンドプロンプトの場合は以下とします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> start /w <span class="s2">""</span> <span class="s2">"Docker Desktop Installer.exe"</span> install
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">install</code>コマンドには以下のフラグ指定ができます。</p>
+
+<p><code class="highlighter-rouge">--allowed-org=&lt;org name&gt;</code></p>
+
+<p>This requires the user to sign in and be part of the specified Docker Hub organization
+when running the application. For example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">C:\Users\Admin&gt;</span> <span class="s2">"Docker Desktop Installer.exe"</span> install <span class="nt">--allowed-org</span><span class="o">=</span>acmeinc
+</code></pre></div></div>
+
+<p>This creates the <code class="highlighter-rouge">registry.json</code> file at <code class="highlighter-rouge">C:\ProgramData\DockerDesktop\registry.json</code>
+and includes the organization information the user belongs to. Make sure this file
+can’t be edited by the individual developer, only by the administrator.</p>
 
 <h3 id="mac">Mac の場合</h3>
 
-<p>macOS では<code class="highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>を生成します。
-この生成にあたっては、そのファイルパーミッションとして、Docker Desktop を利用する開発者がこのファイルの編集と削除ができないようにすることが必要です（つまりこのファイルを書き込めるのはシステム管理者のみとします）。
-このファイルは<code class="highlighter-rouge">JSON</code>形式であり、<code class="highlighter-rouge">allowedOrgs</code>に Docker Hub 組織名を記述することが必要です。</p>
+<p>After downloading <code class="highlighter-rouge">Docker.dmg</code>, run the following commands in a terminal to install
+Docker Desktop in the Applications folder:</p>
 
-<p>macOS において<code class="highlighter-rouge">registry.json</code>ファイルは以下のようにして生成します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>hdiutil attach Docker.dmg
+<span class="gp">$</span> <span class="nb">sudo</span> /Volumes/Docker/Docker.app/Contents/MacOS/install
+<span class="gp">$</span> <span class="nb">sudo </span>hdiutil detach /Volumes/Docker
+</code></pre></div></div>
 
-<ol>
-  <li>VS Code または好みのテキストエディターを開きます。</li>
-  <li>
-    <p>そのユーザーが所属する Docker Hub 組織名を<code class="highlighter-rouge">allowedOrgs</code>キーに入力してドキュメントフォルダに保存します。
-たとえば以下のようにします。</p>
+<p>The <code class="highlighter-rouge">install</code> command accepts the following flags:</p>
 
-    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"allowedOrgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"myorg"</span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>新たに端末画面を開いて、以下のコマンドを実行します。</p>
+<p><code class="highlighter-rouge">--allowed-org=&lt;org name&gt;</code></p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo mkdir -p /Library/Application\ Support/com.docker.docker
-</span></code></pre></div>    </div>
+<p>This requires the user to sign in and be part of the specified Docker Hub
+organization when running the application. For example:</p>
 
-    <p>プロンプトが表示されたら、ローカルマシンに関連づいたパスワードを入力します。</p>
-  </li>
-  <li>
-    <p>以下のコマンドを入力します。</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>hdiutil attach Docker.dmg <span class="nt">--allowed-org</span><span class="o">=</span>acmeinc
+</code></pre></div></div>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"> sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
-</span></code></pre></div>    </div>
-  </li>
-</ol>
+<p>This creates the <code class="highlighter-rouge">registry.json</code> file at <code class="highlighter-rouge">/Library/Application Support/com.docker.docker/registry.json</code>
+and includes the organization information the user belongs to. Make sure this file
+can’t be edited by the individual developer, only by the administrator.</p>
 
 <h2 id="verify-the-restrictions">Verify the restrictions</h2>
 
@@ -236,7 +231,6 @@
   <li>Builds such as <code class="highlighter-rouge">docker buildx</code> using a Kubernetes driver are not restricted</li>
   <li>Builds such as <code class="highlighter-rouge">docker buildx</code> using a custom docker-container driver are not restricted</li>
   <li>Blocking is DNS-based; you must use a registry’s access control mechanisms to distinguish between “push” and “pull”</li>
-  <li>You must disable HTTP proxy or use a corporate proxy which also blocks the registries</li>
   <li>WSL 2 requires at least a 5.4 series Linux kernel  (this does not apply to earlier Linux kernel series)</li>
   <li>Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)</li>
 </ul>

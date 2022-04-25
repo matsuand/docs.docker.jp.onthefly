@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>メモリ、CPU、GPU に対する実行時オプション | Docker ドキュメント</title>
   <meta name="description" content="コンテナーに対して実行時オプションを指定します。" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="メモリ、CPU、GPU に対する実行時オプション" />
   <meta property="og:description" content="コンテナーに対して実行時オプションを指定します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/resource_constraints/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"メモリ、CPU、GPU に対する実行時オプション","description":"コンテナーに対して実行時オプションを指定します。","url":"https://docs.docker.com/config/containers/resource_constraints/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,14 +107,14 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>メモリ、CPU、GPU に対する実行時オプション</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>デフォルトにおいてコンテナーには、リソースの利用に関して制限がありません。
+                        <section class="section"><h1>メモリ、CPU、GPU に対する実行時オプション</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>デフォルトにおいてコンテナーには、リソースの利用に関して制限がありません。
 したがってホストカーネルのスケジューラーが割り振るリソースを、その分だけ利用できます。
 Docker には、コンテナーが利用するメモリや CPU をどれくらいにするかを制御する方法があります。
-<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて実行時フラグを設定する方法です。
+<code class="highlighter-rouge">docker run</code>コマンドにおいて実行時フラグを設定する方法です。
 この節では、どのようなときにそういった制約を行うのか、そして制約によってどのような影響があるのかを説明します。</p>
 
 <p>制約に関する機能を利用するには、カーネルがケーパビリティーをサポートしている必要があります。
-サポートしているかどうかは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/info/"><code class="language-plaintext highlighter-rouge">docker info</code></a> コマンドを実行すればわかります。
+サポートしているかどうかは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/info/"><code class="highlighter-rouge">docker info</code></a> コマンドを実行すればわかります。
 利用しているカーネルにおいてケーパビリティーが無効になっていると、このコマンドの出力の最後に、以下のような出力が行われます。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">WARNING: No swap limit support
@@ -128,7 +128,7 @@ Docker には、コンテナーが利用するメモリや CPU をどれくら�
 <h3 id="understand-the-risks-of-running-out-of-memory">メモリ不足時のリスクへの理解</h3>
 
 <p>コンテナーがホストマシンのメモリを必要以上に消費することは避けなければなりません。
-Linux ホストにおいて、重要なシステム関数を実行するだけの十分なメモリがないことをカーネルが検出した場合、<code class="language-plaintext highlighter-rouge">OOME</code>例外、つまり<code class="language-plaintext highlighter-rouge">Out Of Memory Exception</code>がスローされます。
+Linux ホストにおいて、重要なシステム関数を実行するだけの十分なメモリがないことをカーネルが検出した場合、<code class="highlighter-rouge">OOME</code>例外、つまり<code class="highlighter-rouge">Out Of Memory Exception</code>がスローされます。
 そしてプロセスの停止を行いメモリを開放します。
 Docker であろうが重要なアプリケーションであろうが、あらゆるプロセスが強制的に停止させられます。
 停止させてはならないプロセスが停止してしまうと、システム全体を停止させる事態にもなりかねません。</p>
@@ -138,7 +138,7 @@ Docker であろうが重要なアプリケーションであろうが、あら�
 この OOM プライオリティの調整機能は、コンテナーにはありません。
 したがって Docker デーモンや他のシステムプロセスが停止することよりも、単一のコンテナーが停止する可能性の方が高いことになります。
 これは Docker が採用する安全策なので、無理に回避する方法を取らないでください。
-Docker デーモンに対して、手動で<code class="language-plaintext highlighter-rouge">--oom-score-adj</code>に極端な負数を指定したり、コンテナーに対して<code class="language-plaintext highlighter-rouge">--oom-kill-disable</code>を指定したりするようなことはやめてください。</p>
+Docker デーモンに対して、手動で<code class="highlighter-rouge">--oom-score-adj</code>に極端な負数を指定したり、コンテナーに対して<code class="highlighter-rouge">--oom-kill-disable</code>を指定したりするようなことはやめてください。</p>
 
 <p>Linux カーネルの OOM 管理については <a href="https://www.kernel.org/doc/gorman/html/understand/understand016.html" target="_blank" rel="noopener" class="_">Out of Memory Management</a> を参照してください。</p>
 
@@ -163,7 +163,7 @@ Docker デーモンに対して、手動で<code class="language-plaintext highl
 所定の条件とはたとえば、ホスト上のメモリ不足やリソースコンフリクト発生をカーネルが検出したような場合です。
 制限を指定するオプションを利用する場合には、単独で利用するか複数組み合わせて利用するかによって、その効果はさまざまです。</p>
 
-<p>この制約オプションのほとんどは、正の整数を指定して、バイト、キロバイト、メガバイト、ギガバイトを表わす<code class="language-plaintext highlighter-rouge">b</code>、<code class="language-plaintext highlighter-rouge">k</code>、<code class="language-plaintext highlighter-rouge">m</code>、<code class="language-plaintext highlighter-rouge">g</code>を後ろにつけます。</p>
+<p>この制約オプションのほとんどは、正の整数を指定して、バイト、キロバイト、メガバイト、ギガバイトを表わす<code class="highlighter-rouge">b</code>、<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">m</code>、<code class="highlighter-rouge">g</code>を後ろにつけます。</p>
 
 <table>
   <thead>
@@ -174,37 +174,37 @@ Docker デーモンに対して、手動で<code class="language-plaintext highl
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-m</code>または<code class="language-plaintext highlighter-rouge">--memory=</code></td>
-      <td style="text-align: left">コンテナーに割り当てるメモリ最大使用量。このオプションを利用する場合、指定できる最小値は<code class="language-plaintext highlighter-rouge">6m</code>(6 メガバイト) です。つまり最低でも 6 メガバイトに設定することが必要です。That is, you must set the value to at least 6 megabytes.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">-m</code>または<code class="highlighter-rouge">--memory=</code></td>
+      <td style="text-align: left">コンテナーに割り当てるメモリ最大使用量。このオプションを利用する場合、指定できる最小値は<code class="highlighter-rouge">6m</code>(6 メガバイト) です。つまり最低でも 6 メガバイトに設定することが必要です。That is, you must set the value to at least 6 megabytes.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-swap</code>*</td>
-      <td style="text-align: left">コンテナーにおいてディスクへのスワップを許容するメモリ容量。<a href="#--memory-swap-details"><code class="language-plaintext highlighter-rouge">--memory-swap</code>の詳細</a> を参照してください。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--memory-swap</code>*</td>
+      <td style="text-align: left">コンテナーにおいてディスクへのスワップを許容するメモリ容量。<a href="#--memory-swap-details"><code class="highlighter-rouge">--memory-swap</code>の詳細</a> を参照してください。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-swappiness</code></td>
-      <td style="text-align: left">デフォルトにおいては、コンテナーによって利用されている匿名ページを一定の割合でスワップアウトすることができます。<code class="language-plaintext highlighter-rouge">--memory-swappiness</code>の設定では 0 から 100 までの設定を行って、その割合を調整します。<a href="#--memory-swappiness-details"><code class="language-plaintext highlighter-rouge">--memory-swappiness</code>の詳細</a> を参照してください。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--memory-swappiness</code></td>
+      <td style="text-align: left">デフォルトにおいては、コンテナーによって利用されている匿名ページを一定の割合でスワップアウトすることができます。<code class="highlighter-rouge">--memory-swappiness</code>の設定では 0 から 100 までの設定を行って、その割合を調整します。<a href="#--memory-swappiness-details"><code class="highlighter-rouge">--memory-swappiness</code>の詳細</a> を参照してください。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-reservation</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory</code>に比べてソフトリミットとして小さな値を設定します。Docker がホストマシン上のコンフリクトやメモリ不足を検出したときに採用されます。この<code class="language-plaintext highlighter-rouge">--memory-reservation</code>を指定する際には、これが優先的に採用されるように <code class="language-plaintext highlighter-rouge">--memory</code> よりも小さな値を設定します。これはソフトリミットであり、この設定値を越えない保証はないからです。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--memory-reservation</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">--memory</code>に比べてソフトリミットとして小さな値を設定します。Docker がホストマシン上のコンフリクトやメモリ不足を検出したときに採用されます。この<code class="highlighter-rouge">--memory-reservation</code>を指定する際には、これが優先的に採用されるように <code class="highlighter-rouge">--memory</code> よりも小さな値を設定します。これはソフトリミットであり、この設定値を越えない保証はないからです。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--kernel-memory</code></td>
-      <td style="text-align: left">コンテナーに割り当てるカーネルメモリの最大使用量。指定できる最小値は<code class="language-plaintext highlighter-rouge">4m</code>です。カーネルメモリはスワップされるものではないため、カーネルメモリ不足となったコンテナーは、ホストマシンのリソースに影響を及ぼすことになります。これはホストマシンにとっても、また他のコンテナーにとっても副作用を引き起こします。<a href="#--kernel-memory-details"><code class="language-plaintext highlighter-rouge">--kernel-memory</code>の詳細</a>を参照してください。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--kernel-memory</code></td>
+      <td style="text-align: left">コンテナーに割り当てるカーネルメモリの最大使用量。指定できる最小値は<code class="highlighter-rouge">4m</code>です。カーネルメモリはスワップされるものではないため、カーネルメモリ不足となったコンテナーは、ホストマシンのリソースに影響を及ぼすことになります。これはホストマシンにとっても、また他のコンテナーにとっても副作用を引き起こします。<a href="#--kernel-memory-details"><code class="highlighter-rouge">--kernel-memory</code>の詳細</a>を参照してください。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--oom-kill-disable</code></td>
-      <td style="text-align: left">out-of-memory (OOM) エラーが発生すると、デフォルトでカーネルはコンテナー内のプロセスを停止させます。この動作を変更するには<code class="language-plaintext highlighter-rouge">--oom-kill-disable</code>オプションを指定します。これによってコンテナー上での OOM キラープロセスが無効になりますが、それは<code class="language-plaintext highlighter-rouge">-m/--memory</code>オプションを同時に指定しているコンテナーに限定されます。<code class="language-plaintext highlighter-rouge">-m</code>フラグを設定していなかった場合は、ホストがメモリ不足となり、ホストシステムの他のプロセスを停止させてメモリ確保を行うことになります。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--oom-kill-disable</code></td>
+      <td style="text-align: left">out-of-memory (OOM) エラーが発生すると、デフォルトでカーネルはコンテナー内のプロセスを停止させます。この動作を変更するには<code class="highlighter-rouge">--oom-kill-disable</code>オプションを指定します。これによってコンテナー上での OOM キラープロセスが無効になりますが、それは<code class="highlighter-rouge">-m/--memory</code>オプションを同時に指定しているコンテナーに限定されます。<code class="highlighter-rouge">-m</code>フラグを設定していなかった場合は、ホストがメモリ不足となり、ホストシステムの他のプロセスを停止させてメモリ確保を行うことになります。</td>
     </tr>
   </tbody>
 </table>
 
 <p>cgroups とメモリに関する全般的な情報は、<a href="https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt">メモリリソースコントローラー</a> に関するドキュメントを参照してください。</p>
 
-<h3 id="--memory-swapの詳細"><code class="language-plaintext highlighter-rouge">--memory-swap</code>の詳細</h3>
+<h3 id="--memory-swapの詳細"><code class="highlighter-rouge">--memory-swap</code>の詳細</h3>
 
-<p><code class="language-plaintext highlighter-rouge">--memory-swap</code>は、<code class="language-plaintext highlighter-rouge">--memory</code>が同時に設定されている場合のみ、その意味をなす修正フラグです。
+<p><code class="highlighter-rouge">--memory-swap</code>は、<code class="highlighter-rouge">--memory</code>が同時に設定されている場合のみ、その意味をなす修正フラグです。
 スワップを利用すれば、コンテナーにおいて要求されたメモリが超過して、利用可能な RAM を使い果たしたとしても、それをディスクに書き出すことになります。
 ただしメモリのスワップが頻発すると、アプリケーションの性能は劣化します。</p>
 
@@ -212,47 +212,47 @@ Docker デーモンに対して、手動で<code class="language-plaintext highl
 
 <ul>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">--memory-swap</code>に正の整数が指定する場合は、<code class="language-plaintext highlighter-rouge">--memory</code>と<code class="language-plaintext highlighter-rouge">--memory-swap</code>を同時に指定する必要があります。
-<code class="language-plaintext highlighter-rouge">--memory-swap</code>は、利用可能なメモリとスワップの総量を表わします。
-また<code class="language-plaintext highlighter-rouge">--memory</code>はスワップを含めず、利用されるメモリの総量を制御します。
-したがってたとえば<code class="language-plaintext highlighter-rouge">--memory="300m"</code>と<code class="language-plaintext highlighter-rouge">--memory-swap="1g"</code>を指定した場合、そのコンテナーが利用できるのは 300m のメモリと 700m (<code class="language-plaintext highlighter-rouge">1g - 300m</code>) のスワップとなります。</p>
+    <p><code class="highlighter-rouge">--memory-swap</code>に正の整数が指定する場合は、<code class="highlighter-rouge">--memory</code>と<code class="highlighter-rouge">--memory-swap</code>を同時に指定する必要があります。
+<code class="highlighter-rouge">--memory-swap</code>は、利用可能なメモリとスワップの総量を表わします。
+また<code class="highlighter-rouge">--memory</code>はスワップを含めず、利用されるメモリの総量を制御します。
+したがってたとえば<code class="highlighter-rouge">--memory="300m"</code>と<code class="highlighter-rouge">--memory-swap="1g"</code>を指定した場合、そのコンテナーが利用できるのは 300m のメモリと 700m (<code class="highlighter-rouge">1g - 300m</code>) のスワップとなります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">--memory-swap</code>を<code class="language-plaintext highlighter-rouge">0</code>にすると、この設定は無視され、設定されていないものとして扱われます。</p>
+    <p><code class="highlighter-rouge">--memory-swap</code>を<code class="highlighter-rouge">0</code>にすると、この設定は無視され、設定されていないものとして扱われます。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">--memory-swap</code>に設定された値が<code class="language-plaintext highlighter-rouge">--memory</code>と同じ値である場合で、かつ<code class="language-plaintext highlighter-rouge">--memory</code>に正の整数が設定されている場合、<strong>コンテナーはスワップへアクセスしません</strong>。
+    <p><code class="highlighter-rouge">--memory-swap</code>に設定された値が<code class="highlighter-rouge">--memory</code>と同じ値である場合で、かつ<code class="highlighter-rouge">--memory</code>に正の整数が設定されている場合、<strong>コンテナーはスワップへアクセスしません</strong>。
 <a href="#prevent-a-container-from-using-swap">コンテナーにおけるスワップ利用の防止</a> を参照してください。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">--memory-swap</code>が設定されていない場合で、かつ<code class="language-plaintext highlighter-rouge">--memory</code>が設定されている場合、コンテナーは<code class="language-plaintext highlighter-rouge">--memory</code>に設定されている値をスワップ容量とします。
+    <p><code class="highlighter-rouge">--memory-swap</code>が設定されていない場合で、かつ<code class="highlighter-rouge">--memory</code>が設定されている場合、コンテナーは<code class="highlighter-rouge">--memory</code>に設定されている値をスワップ容量とします。
 当然このときは、ホストコンテナーがスワップメモリを持つものとして設定されている場合に限ります。
-たとえば<code class="language-plaintext highlighter-rouge">--memory="300m"</code>と設定され、<code class="language-plaintext highlighter-rouge">--memory-swap</code>が設定されていない場合、そのコンテナーはメモリとスワップの総量として 600m を利用することになります。</p>
+たとえば<code class="highlighter-rouge">--memory="300m"</code>と設定され、<code class="highlighter-rouge">--memory-swap</code>が設定されていない場合、そのコンテナーはメモリとスワップの総量として 600m を利用することになります。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">--memory-swap</code>を明示的に<code class="language-plaintext highlighter-rouge">-1</code>とした場合、コンテナーが利用できるスワップは、ホストシステムでの利用可能なスワップ範囲内で無制限となります。</p>
+    <p><code class="highlighter-rouge">--memory-swap</code>を明示的に<code class="highlighter-rouge">-1</code>とした場合、コンテナーが利用できるスワップは、ホストシステムでの利用可能なスワップ範囲内で無制限となります。</p>
   </li>
   <li>
-    <p>コンテナーの内部から<code class="language-plaintext highlighter-rouge">free</code>などのツールを実行すると、ホスト上で利用可能なスワップ容量が表示されます。
+    <p>コンテナーの内部から<code class="highlighter-rouge">free</code>などのツールを実行すると、ホスト上で利用可能なスワップ容量が表示されます。
 コンテナー内において利用可能な量を示すわけではありません。
-<code class="language-plaintext highlighter-rouge">free</code>や同等のツールを利用する際には、出力結果からスワップ容量を判断できないことに注意してください。</p>
+<code class="highlighter-rouge">free</code>や同等のツールを利用する際には、出力結果からスワップ容量を判断できないことに注意してください。</p>
   </li>
 </ul>
 
 <h4 id="prevent-a-container-from-using-swap">コンテナーにおけるスワップ利用の防止</h4>
 
-<p><code class="language-plaintext highlighter-rouge">--memory</code>と<code class="language-plaintext highlighter-rouge">--memory-swap</code>に同じ値を設定した場合、コンテナーがスワップを利用しないようになります。
-<code class="language-plaintext highlighter-rouge">--memory-swap</code>は、利用可能なメモリとスワップを合わせた総量を表わすものであり、<code class="language-plaintext highlighter-rouge">--memory</code>は利用可能なメモリ使用量を意味するからです。</p>
+<p><code class="highlighter-rouge">--memory</code>と<code class="highlighter-rouge">--memory-swap</code>に同じ値を設定した場合、コンテナーがスワップを利用しないようになります。
+<code class="highlighter-rouge">--memory-swap</code>は、利用可能なメモリとスワップを合わせた総量を表わすものであり、<code class="highlighter-rouge">--memory</code>は利用可能なメモリ使用量を意味するからです。</p>
 
-<h3 id="--memory-swappinessの詳細"><code class="language-plaintext highlighter-rouge">--memory-swappiness</code>の詳細</h3>
+<h3 id="--memory-swappinessの詳細"><code class="highlighter-rouge">--memory-swappiness</code>の詳細</h3>
 
 <ul>
   <li>0 を指定すると、匿名ページのスワップを無効にします。</li>
   <li>100 を指定すると、匿名ページのすべてをスワップ可能とします。</li>
-  <li><code class="language-plaintext highlighter-rouge">--memory-swappiness</code> を設定しなかった場合、デフォルトでは、ホストマシンからその値を受け継ぎます。</li>
+  <li><code class="highlighter-rouge">--memory-swappiness</code> を設定しなかった場合、デフォルトでは、ホストマシンからその値を受け継ぎます。</li>
 </ul>
 
-<h3 id="--kernel-memoryの詳細"><code class="language-plaintext highlighter-rouge">--kernel-memory</code>の詳細</h3>
+<h3 id="--kernel-memoryの詳細"><code class="highlighter-rouge">--kernel-memory</code>の詳細</h3>
 
 <p>カーネルメモリに対する制約は、コンテナーに割り当てられるメモリ全体に関わります。
 以下の状況が考えられます。</p>
@@ -274,7 +274,7 @@ Docker デーモンに対して、手動で<code class="language-plaintext highl
 
 <p>カーネルメモリに制限を設けた場合、ホストマシンはプロセスごとに「最高水位標」（high water mark）の統計をとります。
 そこからどのプロセスが（今の場合、どのコンテナーが）過剰にメモリを消費しているかを知ることができます。
-具体的にはホストマシン内の<code class="language-plaintext highlighter-rouge">/proc/&lt;PID&gt;/status</code>を見ることで、プロセスごとの状況がわかります。</p>
+具体的にはホストマシン内の<code class="highlighter-rouge">/proc/&lt;PID&gt;/status</code>を見ることで、プロセスごとの状況がわかります。</p>
 
 <h2 id="cpu">CPU</h2>
 
@@ -298,36 +298,36 @@ Docker デーモンに対して、手動で<code class="language-plaintext highl
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpus=&lt;値&gt;</code></td>
-      <td style="text-align: left">コンテナーが CPU リソースをどれだけ利用可能かを指定します。たとえばホストマシンに CPU が 2 つあり<code class="language-plaintext highlighter-rouge">--cpus="1.5"</code>という設定を行った場合、コンテナーに対して CPU 最大 1.5 個分が保証されます。これは<code class="language-plaintext highlighter-rouge">--cpu-period="100000"</code>と<code class="language-plaintext highlighter-rouge">--cpu-quota="150000"</code>を設定することと同じです。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpus=&lt;値&gt;</code></td>
+      <td style="text-align: left">コンテナーが CPU リソースをどれだけ利用可能かを指定します。たとえばホストマシンに CPU が 2 つあり<code class="highlighter-rouge">--cpus="1.5"</code>という設定を行った場合、コンテナーに対して CPU 最大 1.5 個分が保証されます。これは<code class="highlighter-rouge">--cpu-period="100000"</code>と<code class="highlighter-rouge">--cpu-quota="150000"</code>を設定することと同じです。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-period=&lt;値&gt;</code></td>
-      <td style="text-align: left">CFS スケジューラー間隔を指定します。これは<code class="language-plaintext highlighter-rouge">--cpu-quota</code>とともに指定されます。デフォルトは 100000 マイクロ秒（100 ミリ秒）です。たいていの場合、このデフォルト値を変更することはしません。たいていの場合、より便利なのは<code class="language-plaintext highlighter-rouge">--cpus</code>です。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpu-period=&lt;値&gt;</code></td>
+      <td style="text-align: left">CFS スケジューラー間隔を指定します。これは<code class="highlighter-rouge">--cpu-quota</code>とともに指定されます。デフォルトは 100000 マイクロ秒（100 ミリ秒）です。たいていの場合、このデフォルト値を変更することはしません。たいていの場合、より便利なのは<code class="highlighter-rouge">--cpus</code>です。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-quota=&lt;値&gt;</code></td>
-      <td style="text-align: left">コンテナーに対して CFS クォータを設定します。<code class="language-plaintext highlighter-rouge">--cpu-period</code>ごとのマイクロ秒単位の時間であり、スロットリングされる前にこの時間に制限されます。有効しきい値として動作します。たいていの場合、より便利なのは<code class="language-plaintext highlighter-rouge">--cpus</code>です。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpu-quota=&lt;値&gt;</code></td>
+      <td style="text-align: left">コンテナーに対して CFS クォータを設定します。<code class="highlighter-rouge">--cpu-period</code>ごとのマイクロ秒単位の時間であり、スロットリングされる前にこの時間に制限されます。有効しきい値として動作します。たいていの場合、より便利なのは<code class="highlighter-rouge">--cpus</code>です。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpuset-cpus</code></td>
-      <td style="text-align: left">コンテナーが利用する CPU またはコアを特定します。CPU が複数あれば、カンマ区切りあるいはハイフン区切りのリストで CPU の利用範囲を指定します。1 つめの CPU を 0 とします。指定例としては以下です。<code class="language-plaintext highlighter-rouge">0-3</code>（1 つめから 4 つめまでの CPU を利用する場合）、<code class="language-plaintext highlighter-rouge">1,3</code>（2 つめと 4 つめの CPU を利用する場合）</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpuset-cpus</code></td>
+      <td style="text-align: left">コンテナーが利用する CPU またはコアを特定します。CPU が複数あれば、カンマ区切りあるいはハイフン区切りのリストで CPU の利用範囲を指定します。1 つめの CPU を 0 とします。指定例としては以下です。<code class="highlighter-rouge">0-3</code>（1 つめから 4 つめまでの CPU を利用する場合）、<code class="highlighter-rouge">1,3</code>（2 つめと 4 つめの CPU を利用する場合）</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-shares</code></td>
-      <td style="text-align: left">コンテナーへの配分を定めるもので、デフォルト値は 1024 です。本フラグを利用する場合は、デフォルト値より大きければ配分を増やし、小さければ減らします。そしてホストマシンの CPU サイクルへのアクセスを高比率、低比率で行います。これは CPU サイクルが制限されている場合に限って動作します。CPU サイクルが豊富に利用可能であるとき、すべてのコンテナーは必要な分だけ CPU を利用します。こういうことから、これはソフトリミットと言えます。<code class="language-plaintext highlighter-rouge">--cpu-shares</code>は Swarm モード内においてコンテナーがスケジュールされることを妨げません。コンテナーの CPU リソースは、これによって利用可能な CPU サイクルが優先的に割り当てられます。ただし CPU アクセスを保証したり予約するものではありません。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpu-shares</code></td>
+      <td style="text-align: left">コンテナーへの配分を定めるもので、デフォルト値は 1024 です。本フラグを利用する場合は、デフォルト値より大きければ配分を増やし、小さければ減らします。そしてホストマシンの CPU サイクルへのアクセスを高比率、低比率で行います。これは CPU サイクルが制限されている場合に限って動作します。CPU サイクルが豊富に利用可能であるとき、すべてのコンテナーは必要な分だけ CPU を利用します。こういうことから、これはソフトリミットと言えます。<code class="highlighter-rouge">--cpu-shares</code>は Swarm モード内においてコンテナーがスケジュールされることを妨げません。コンテナーの CPU リソースは、これによって利用可能な CPU サイクルが優先的に割り当てられます。ただし CPU アクセスを保証したり予約するものではありません。</td>
     </tr>
   </tbody>
 </table>
 
 <p>CPU が 1 つである場合に、以下のコマンドはコンテナーに対し、毎秒 CPU の最大 50 % を保証します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--cpus</span><span class="o">=</span><span class="s2">".5"</span> ubuntu /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--cpus</span><span class="o">=</span><span class="s2">".5"</span> ubuntu /bin/bash
 </code></pre></div></div>
 
-<p>手動で<code class="language-plaintext highlighter-rouge">--cpu-period</code>と<code class="language-plaintext highlighter-rouge">--cpu-quota</code>を指定しても同じです。</p>
+<p>手動で<code class="highlighter-rouge">--cpu-period</code>と<code class="highlighter-rouge">--cpu-quota</code>を指定しても同じです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--cpu-period</span><span class="o">=</span>100000 <span class="nt">--cpu-quota</span><span class="o">=</span>50000 ubuntu /bin/bash
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--cpu-period</span><span class="o">=</span>100000 <span class="nt">--cpu-quota</span><span class="o">=</span>50000 ubuntu /bin/bash
 </code></pre></div></div>
 
 <h3 id="configure-the-realtime-scheduler">リアルタイムスケジューラーの設定</h3>
@@ -346,23 +346,23 @@ CFS スケジューラーが利用できないタスクに対して用います�
 
 <h4 id="configure-the-host-machines-kernel">ホストマシンカーネルの設定</h4>
 
-<p>Linux カーネルにおいて<code class="language-plaintext highlighter-rouge">CONFIG_RT_GROUP_SCHED</code>が有効になっていることを確認します。
-これには<code class="language-plaintext highlighter-rouge">zcat /proc/config.gz | grep CONFIG_RT_GROUP_SCHED</code>を実行するか、あるいはファイル<code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/cpu.rt_runtime_us</code>が存在するかどうかで確認します。
+<p>Linux カーネルにおいて<code class="highlighter-rouge">CONFIG_RT_GROUP_SCHED</code>が有効になっていることを確認します。
+これには<code class="highlighter-rouge">zcat /proc/config.gz | grep CONFIG_RT_GROUP_SCHED</code>を実行するか、あるいはファイル<code class="highlighter-rouge">/sys/fs/cgroup/cpu.rt_runtime_us</code>が存在するかどうかで確認します。
 カーネルのリアルタイムスケジューラーの設定方法については、各オペレーティングシステムのドキュメントを参照してください。</p>
 
 <h4 id="configure-the-docker-daemon">Docker デーモンの設定</h4>
 
-<p>リアルタイムスケジューラーを利用するコンテナーを起動するには、Docker デーモンに<code class="language-plaintext highlighter-rouge">--cpu-rt-runtime</code>フラグをつけて起動します。
+<p>リアルタイムスケジューラーを利用するコンテナーを起動するには、Docker デーモンに<code class="highlighter-rouge">--cpu-rt-runtime</code>フラグをつけて起動します。
 設定値には、リアルタイムタスクに対して、実行時間ごとに割り当てられる最大の時間をマイクロ秒単位で指定します。
-たとえばデフォルトの実行時間である 1000000 マイクロ秒に対して、<code class="language-plaintext highlighter-rouge">--cpu-rt-runtime=950000</code>と設定すると、このリアルタイムスケジューラーを利用するコンテナーは、各 1000000 マイクロ秒ごとに 950000 マイクロ秒ずつ稼動するようになります。
+たとえばデフォルトの実行時間である 1000000 マイクロ秒に対して、<code class="highlighter-rouge">--cpu-rt-runtime=950000</code>と設定すると、このリアルタイムスケジューラーを利用するコンテナーは、各 1000000 マイクロ秒ごとに 950000 マイクロ秒ずつ稼動するようになります。
 残りの 50000 マイクロ秒は、リアルタイムスレッド以外のタスクに利用されます。
-<code class="language-plaintext highlighter-rouge">systemd</code>を利用するシステム上で、これを恒常的な設定とするには <a href="/docs.docker.jp.onthefly/config/daemon/systemd/">systemd を用いた Docker の管理と設定</a> を参照してください。</p>
+<code class="highlighter-rouge">systemd</code>を利用するシステム上で、これを恒常的な設定とするには <a href="/docs.docker.jp.onthefly/config/daemon/systemd/">systemd を用いた Docker の管理と設定</a> を参照してください。</p>
 
 <h4 id="configure-individual-containers">個々のコンテナーに対する設定</h4>
 
 <p>コンテナーの CPU 優先順位づけ（priority）を制御するフラグがいくつかあります。
-<code class="language-plaintext highlighter-rouge">docker run</code>を実行する際に、これを指定します。
-適切な値設定に関しては、オペレーティングシステムのドキュメントや<code class="language-plaintext highlighter-rouge">ulimit</code>コマンドを参照してください。</p>
+<code class="highlighter-rouge">docker run</code>を実行する際に、これを指定します。
+適切な値設定に関しては、オペレーティングシステムのドキュメントや<code class="highlighter-rouge">ulimit</code>コマンドを参照してください。</p>
 
 <table>
   <thead>
@@ -373,23 +373,23 @@ CFS スケジューラーが利用できないタスクに対して用います�
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cap-add=sys_nice</code></td>
-      <td style="text-align: left">コンテナーが<code class="language-plaintext highlighter-rouge">CAP_SYS_NICE</code>ケーパビリティーを利用できるようにします。これによってコンテナーにおけるプロセスの<code class="language-plaintext highlighter-rouge">nice</code>値の加算、リアルタイムスケジューラーポリシーの設定、CPU アフィニティの設定、その他が行えるようになります。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cap-add=sys_nice</code></td>
+      <td style="text-align: left">コンテナーが<code class="highlighter-rouge">CAP_SYS_NICE</code>ケーパビリティーを利用できるようにします。これによってコンテナーにおけるプロセスの<code class="highlighter-rouge">nice</code>値の加算、リアルタイムスケジューラーポリシーの設定、CPU アフィニティの設定、その他が行えるようになります。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-rt-runtime=&lt;値&gt;</code></td>
-      <td style="text-align: left">Docker デーモンにおいて、リアルタイムスケジューラー実行時間内のリアルタイム優先順位づけによる最大実行時間をマイクロ秒で指定します。同時に<code class="language-plaintext highlighter-rouge">--cap-add=sys_nice</code>フラグの指定も必要です。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--cpu-rt-runtime=&lt;値&gt;</code></td>
+      <td style="text-align: left">Docker デーモンにおいて、リアルタイムスケジューラー実行時間内のリアルタイム優先順位づけによる最大実行時間をマイクロ秒で指定します。同時に<code class="highlighter-rouge">--cap-add=sys_nice</code>フラグの指定も必要です。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--ulimit rtprio=&lt;値&gt;</code></td>
-      <td style="text-align: left">コンテナーに対して許容するリアルタイム優先順位づけの最大数。同時に<code class="language-plaintext highlighter-rouge">--cap-add=sys_nice</code>フラグの指定も必要です。</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--ulimit rtprio=&lt;値&gt;</code></td>
+      <td style="text-align: left">コンテナーに対して許容するリアルタイム優先順位づけの最大数。同時に<code class="highlighter-rouge">--cap-add=sys_nice</code>フラグの指定も必要です。</td>
     </tr>
   </tbody>
 </table>
 
-<p>以下に示すコマンドは、<code class="language-plaintext highlighter-rouge">debian:jessie</code>コンテナーに対して 3 つのフラグを設定する例です。</p>
+<p>以下に示すコマンドは、<code class="highlighter-rouge">debian:jessie</code>コンテナーに対して 3 つのフラグを設定する例です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="se">\</span>
     <span class="nt">--cpu-rt-runtime</span><span class="o">=</span>950000 <span class="se">\</span>
     <span class="nt">--ulimit</span> <span class="nv">rtprio</span><span class="o">=</span>99 <span class="se">\</span>
     <span class="nt">--cap-add</span><span class="o">=</span>sys_nice <span class="se">\</span>
@@ -413,23 +413,23 @@ CFS スケジューラーが利用できないタスクに対して用います�
 
 <p>(https://nvidia.github.io/nvidia-container-runtime/) にある手順に従い、次に以下のコマンドを実行してください。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>apt-get <span class="nb">install </span>nvidia-container-runtime
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> apt-get install nvidia-container-runtime
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">$PATH</code>上から<code class="language-plaintext highlighter-rouge">nvidia-container-runtime-hook</code>がアクセスできることを確認します。</p>
+<p><code class="highlighter-rouge">$PATH</code>上から<code class="highlighter-rouge">nvidia-container-runtime-hook</code>がアクセスできることを確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>which nvidia-container-runtime-hook
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> which nvidia-container-runtime-hook
 </code></pre></div></div>
 
 <p>Docker デーモンを再起動します。</p>
 
 <h4 id="expose-gpus-for-use">GPU の有効化</h4>
 
-<p>コンテナーの起動時に<code class="language-plaintext highlighter-rouge">--gpus</code>フラグをつけると、GPU リソースにアクセスすることができます。
+<p>コンテナーの起動時に<code class="highlighter-rouge">--gpus</code>フラグをつけると、GPU リソースにアクセスすることができます。
 このとき GPU をどれだけ利用するかを指定します。
 たとえば以下のとおりです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> all ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> all ubuntu nvidia-smi
 </code></pre></div></div>
 
 <p>利用可能な GPU をすべて有効にした場合、以下のような出力結果となります。</p>
@@ -451,15 +451,15 @@ CFS スケジューラーが利用できないタスクに対して用います�
 +-----------------------------------------------------------------------------+
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">device</code>オプションを使って GPU を指定します。
+<p><code class="highlighter-rouge">device</code>オプションを使って GPU を指定します。
 たとえば以下です。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="nv">device</span><span class="o">=</span>GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 </code></pre></div></div>
 
 <p>これにより指定した GPU が有効になります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="s1">'"device=0,2"'</span> ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--gpus</span> <span class="s1">'"device=0,2"'</span> ubuntu nvidia-smi
 </code></pre></div></div>
 
 <p>これは 1 つめと 3 つめの GPU が有効になります。</p>
@@ -475,10 +475,10 @@ CFS スケジューラーが利用できないタスクに対して用います�
 <p>ケーパビリティーは手動で設定します。
 たとえば Ubuntu では以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--gpus</span> <span class="s1">'all,capabilities=utility'</span> <span class="nt">--rm</span> ubuntu nvidia-smi
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--gpus</span> <span class="s1">'all,capabilities=utility'</span> <span class="nt">--rm</span> ubuntu nvidia-smi
 </code></pre></div></div>
 
-<p>上を行うと<code class="language-plaintext highlighter-rouge">utility</code>ドライバーケーパビリティーによって<code class="language-plaintext highlighter-rouge">nvidia-smi</code>ツールが追加され、コンテナーにより利用可能となります。</p>
+<p>上を行うと<code class="highlighter-rouge">utility</code>ドライバーケーパビリティーによって<code class="highlighter-rouge">nvidia-smi</code>ツールが追加され、コンテナーにより利用可能となります。</p>
 
 <p>ケーパビリティーも他の設定も、環境変数を利用してイメージに設定することができます。
 利用可能な環境変数の詳細は <a href="https://github.com/NVIDIA/nvidia-container-runtime">nvidia-container-runtime</a> GitHub ページを参照してください。

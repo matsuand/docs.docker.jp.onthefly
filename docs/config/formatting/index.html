@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コマンド出力やログ出力のフォーマット変更 | Docker ドキュメント</title>
   <meta name="description" content="CLI and log output formatting reference" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="コマンド出力やログ出力のフォーマット変更" />
   <meta property="og:description" content="CLI and log output formatting reference" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/formatting/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"コマンド出力やログ出力のフォーマット変更","description":"CLI and log output formatting reference","url":"https://docs.docker.com/config/formatting/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,89 +110,89 @@
                         <section class="section"><h1>コマンド出力やログ出力のフォーマット変更</h1><p>Docker は <a href="https://golang.org/pkg/text/template/">Go 言語の templates パッケージ</a> を利用して、所定のコマンドやログドライバーの出力フォーマットを操作できるようにしています。</p>
 
 <p>Docker では、テンプレート項目を操作する基本機能を提供します。
-以下では、すべて<code class="language-plaintext highlighter-rouge">docker inspect</code>コマンドを使った例を示します。
-ただしこれ以外の CLI コマンドにも<code class="language-plaintext highlighter-rouge">--format</code>フラグは用意されています。
+以下では、すべて<code class="highlighter-rouge">docker inspect</code>コマンドを使った例を示します。
+ただしこれ以外の CLI コマンドにも<code class="highlighter-rouge">--format</code>フラグは用意されています。
 また多くの CLI コマンドリファレンスにて、出力フォーマットをカスタマイズする例を示しています。</p>
 
 <blockquote class="important">
   <p><strong>メモ</strong></p>
 
-  <p><code class="language-plaintext highlighter-rouge">--format</code>フラグを用いる際には、利用しているシェル環境を考慮する必要があります。
+  <p><code class="highlighter-rouge">--format</code>フラグを用いる際には、利用しているシェル環境を考慮する必要があります。
 Posix シェルの場合、以下のようなコマンド実行では、シングルクォートで囲むことが必要です。</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args " , "}}'</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args " , "}}'</span>
 </code></pre></div>  </div>
 
   <p>逆に Windows シェル（たとえば PowerShell）の場合、シングルクォートの利用は必要ですが、パラメーター内部ではダブルクォートをエスケープする必要があります。
 たとえば以下のとおりです。</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args \" , \"}}'</span>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args \" , \"}}'</span>
 </code></pre></div>  </div>
 
 </blockquote>
 
 <h2 id="join">join</h2>
 
-<p><code class="language-plaintext highlighter-rouge">join</code>は文字列のリストを連結して、１つの文字列を生成します。
+<p><code class="highlighter-rouge">join</code>は文字列のリストを連結して、１つの文字列を生成します。
 リスト内では、各項目はセパレーターで区切ります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args " , "}}'</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s1">'{{join .Args " , "}}'</span> container
 </code></pre></div></div>
 
 <h2 id="table">table</h2>
 
-<p><code class="language-plaintext highlighter-rouge">table</code>は出力したい項目を指定します。</p>
+<p><code class="highlighter-rouge">table</code>は出力したい項目を指定します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image list <span class="nt">--format</span> <span class="s2">"table {{.ID}}</span><span class="se">\t</span><span class="s2">{{.Repository}}</span><span class="se">\t</span><span class="s2">{{.Tag}}</span><span class="se">\t</span><span class="s2">{{.Size}}"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker image list <span class="nt">--format</span> <span class="s2">"table {{.ID}}</span><span class="se">\t</span><span class="s2">{{.Repository}}</span><span class="se">\t</span><span class="s2">{{.Tag}}</span><span class="se">\t</span><span class="s2">{{.Size}}"</span>
 </code></pre></div></div>
 
 <h2 id="json">json</h2>
 
-<p><code class="language-plaintext highlighter-rouge">json</code>は項目を json 文字列としてエンコードします。</p>
+<p><code class="highlighter-rouge">json</code>は項目を json 文字列としてエンコードします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s1">'{{json .Mounts}}'</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s1">'{{json .Mounts}}'</span> container
 </code></pre></div></div>
 
 <h2 id="lower">lower</h2>
 
-<p><code class="language-plaintext highlighter-rouge">lower</code>は文字列を小文字化します。</p>
+<p><code class="highlighter-rouge">lower</code>は文字列を小文字化します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s2">"{{lower .Name}}"</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s2">"{{lower .Name}}"</span> container
 </code></pre></div></div>
 
 <h2 id="split">split</h2>
 
-<p><code class="language-plaintext highlighter-rouge">split</code>は、文字列を分割して、セパレーターによって区切られた文字列リストにします。</p>
+<p><code class="highlighter-rouge">split</code>は、文字列を分割して、セパレーターによって区切られた文字列リストにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s1">'{{split .Image ":"}}'</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s1">'{{split .Image ":"}}'</span>
 </code></pre></div></div>
 
 <h2 id="title">title</h2>
 
-<p><code class="language-plaintext highlighter-rouge">title</code>は文字列の先頭文字を大文字にします。</p>
+<p><code class="highlighter-rouge">title</code>は文字列の先頭文字を大文字にします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s2">"{{title .Name}}"</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s2">"{{title .Name}}"</span> container
 </code></pre></div></div>
 
 <h2 id="upper">upper</h2>
 
-<p><code class="language-plaintext highlighter-rouge">upper</code>は文字列を大文字化します。</p>
+<p><code class="highlighter-rouge">upper</code>は文字列を大文字化します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span> <span class="s2">"{{upper .Name}}"</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span> <span class="s2">"{{upper .Name}}"</span> container
 </code></pre></div></div>
 
 <h2 id="println">println</h2>
 
-<p><code class="language-plaintext highlighter-rouge">println</code>は各項目を一行ずつ出力します。</p>
+<p><code class="highlighter-rouge">println</code>は各項目を一行ずつ出力します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}'</span> container
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}'</span> container
 </code></pre></div></div>
 
 <h1 id="hint">ヒント</h1>
 
 <p>どの項目を出力できるかを知るには、以下を実行すれば全項目を JSON 形式で表示できます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker container <span class="nb">ls</span> <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{json .}}'</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker container <span class="nb">ls</span> <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{json .}}'</span>
 </code></pre></div></div>
 
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=format">format</a>, <a href="/docs.docker.jp.onthefly/search/?q=formatting">formatting</a>, <a href="/docs.docker.jp.onthefly/search/?q=output">output</a>, <a href="/docs.docker.jp.onthefly/search/?q=templates">templates</a>, <a href="/docs.docker.jp.onthefly/search/?q=log">log</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>

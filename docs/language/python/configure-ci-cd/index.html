@@ -1,5 +1,5 @@
-<!-- Page generated 2021-12-05 13:53:58 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アプリケーションにおける CI/CD 設定 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to Configure CI/CD for your application" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="アプリケーションにおける CI/CD 設定" />
   <meta property="og:description" content="Learn how to Configure CI/CD for your application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/configure-ci-cd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-12-05T13:53:58+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"アプリケーションにおける CI/CD 設定","description":"Learn how to Configure CI/CD for your application","url":"https://docs.docker.com/language/python/configure-ci-cd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -144,7 +144,7 @@
 自分の GitHub リポジトリにアクセスして <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong> をクリックします。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">DOCKER_HUB_USERNAME</code>という名前の Secret を新規生成します。
+    <p><code class="highlighter-rouge">DOCKER_HUB_USERNAME</code>という名前の Secret を新規生成します。
 そして値には自分の Docker ID を設定します。</p>
   </li>
   <li>
@@ -158,7 +158,7 @@
   </li>
   <li>
     <p>そこでこのパーソナルアクセストークン（PAT）を 2 つめの Secret として GitHub Secrets 画面に追加します。
-名称は<code class="language-plaintext highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code>とします。</p>
+名称は<code class="highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code>とします。</p>
 
     <p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
   </li>
@@ -177,7 +177,7 @@
   <li>2 つめの操作は、ビルドアクションとプッシュアクションです。</li>
 </ol>
 
-<p>この例ではプッシュも行いたいため、プッシュフラグを<code class="language-plaintext highlighter-rouge">true</code>に設定します。
+<p>この例ではプッシュも行いたいため、プッシュフラグを<code class="highlighter-rouge">true</code>に設定します。
 そしてタグを追加して、常に最新バージョンへアクセスするように設定します。
 またイメージダイジェスト値を表示することで、何がプッシュされたかがわかるようにします。</p>
 
@@ -211,7 +211,7 @@
 </code></pre></div></div>
 
 <p>必要となる steps を追加することにします。
-1 つめは<code class="language-plaintext highlighter-rouge">$GITHUB_WORKSPACE</code>配下にあるリポジトリからチェックアウトを行うことです。
+1 つめは<code class="highlighter-rouge">$GITHUB_WORKSPACE</code>配下にあるリポジトリからチェックアウトを行うことです。
 これによってワークフローからのアクセスが可能になります。
 2 つめは Docker Hub にログインする際の PAT とユーザー名を指定することです。
 3 つめはビルド処理です。
@@ -273,7 +273,7 @@
           <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
           <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
           <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">${{ runner.os }}-buildx-</span>
+            <span class="no">${{ runner.os }}-buildx-</span>
 </code></pre></div></div>
 
 <p>そしてビルダーとビルドキャッシュをアクションファイルの冒頭に加えたら、ビルドおよびプッシュの手順に必要な属性を追加します。
@@ -333,12 +333,12 @@
       <span class="pi">-</span> <span class="s2">"</span><span class="s">v*.*.*"</span>
 </code></pre></div></div>
 
-<p>上のようにすると CI コマンドからは<code class="language-plaintext highlighter-rouge">Vn.n.n.</code>というタグづけを行っているコミットのみが処理されます。
+<p>上のようにすると CI コマンドからは<code class="highlighter-rouge">Vn.n.n.</code>というタグづけを行っているコミットのみが処理されます。
 確認してみましょう。
 たとえば以下のようなコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git tag <span class="nt">-a</span> v1.0.2
-<span class="gp">$</span><span class="w"> </span>git push origin v1.0.2
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> git tag <span class="nt">-a</span> v1.0.2
+<span class="gp">$</span> git push origin v1.0.2
 </code></pre></div></div>
 
 <p>GitHub にアクセスしてアクションを確認します。</p>
@@ -367,7 +367,7 @@
           <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
-<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a> に対して認証を行うには、十分なセキュリティを得るために <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code></a> を用いてください。</p>
+<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a> に対して認証を行うには、十分なセキュリティを得るために <a href="https://docs.github.com/en/actions/reference/authentication-in-a-workflow"><code class="highlighter-rouge">GITHUB_TOKEN</code></a> を用いてください。</p>
 
 <p>コンテナー設定において、レジストリに対する <a href="https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio">manage write and read access of GitHub Actions</a>（GitHub Action の読み書き権限の管理）を行う必要があります。</p>
 

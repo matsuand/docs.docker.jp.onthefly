@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Quickstart: Compose and ASP.NET Core with SQL Server | Docker ドキュメント</title>
   <meta name="description" content="Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker." />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Quickstart: Compose and ASP.NET Core with SQL Server" />
   <meta property="og:description" content="Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/aspnet-mssql-compose/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Quickstart: Compose and ASP.NET Core with SQL Server","description":"Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker.","url":"https://docs.docker.com/samples/aspnet-mssql-compose/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -117,9 +117,9 @@ and <a href="/docs.docker.jp.onthefly/compose/install/">Docker Compose</a> insta
 platform of choice: Linux, Mac or Windows.</p>
 
 <p>For this sample, we create a sample .NET Core Web Application using the
-<code class="language-plaintext highlighter-rouge">microsoft/dotnet:2.1-sdk</code> Docker image. After that, we create a <code class="language-plaintext highlighter-rouge">Dockerfile</code>,
+<code class="highlighter-rouge">microsoft/dotnet:2.1-sdk</code> Docker image. After that, we create a <code class="highlighter-rouge">Dockerfile</code>,
 configure this app to use our SQL Server database, and then create a
-<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> that defines the behavior of all of these components.</p>
+<code class="highlighter-rouge">docker-compose.yml</code> that defines the behavior of all of these components.</p>
 
 <blockquote>
   <p><strong>Note</strong>: This sample is made for Docker Engine on Linux. For Windows
@@ -137,11 +137,11 @@ Containers, visit
 need to set up file sharing for the volume that you need to map.</p>
   </li>
   <li>
-    <p>Within your directory, use the <code class="language-plaintext highlighter-rouge">dotnet:2.1-sdk</code> Docker image to generate a
-sample web application within the container under the <code class="language-plaintext highlighter-rouge">/app</code> directory and
+    <p>Within your directory, use the <code class="highlighter-rouge">dotnet:2.1-sdk</code> Docker image to generate a
+sample web application within the container under the <code class="highlighter-rouge">/app</code> directory and
 into your host machine in the working directory:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-v</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>:/app <span class="nt">--workdir</span> /app microsoft/dotnet:2.1-sdk dotnet new mvc <span class="nt">--auth</span> Individual
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-v</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>:/app <span class="nt">--workdir</span> /app microsoft/dotnet:2.1-sdk dotnet new mvc <span class="nt">--auth</span> Individual
 </code></pre></div>    </div>
 
     <blockquote>
@@ -150,7 +150,7 @@ or specify the absolute path of your app directory.</p>
     </blockquote>
   </li>
   <li>
-    <p>Create a <code class="language-plaintext highlighter-rouge">Dockerfile</code> within your app directory and add the following content:</p>
+    <p>Create a <code class="highlighter-rouge">Dockerfile</code> within your app directory and add the following content:</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> microsoft/dotnet:2.1-sdk</span>
@@ -159,19 +159,19 @@ or specify the absolute path of your app directory.</p>
 <span class="k">RUN </span><span class="o">[</span><span class="s2">"dotnet"</span>, <span class="s2">"restore"</span><span class="o">]</span>
 <span class="k">RUN </span><span class="o">[</span><span class="s2">"dotnet"</span>, <span class="s2">"build"</span><span class="o">]</span>
 <span class="k">EXPOSE</span><span class="s"> 80/tcp</span>
-<span class="k">RUN </span><span class="nb">chmod</span> +x ./entrypoint.sh
+<span class="k">RUN </span>chmod +x ./entrypoint.sh
 <span class="k">CMD</span><span class="s"> /bin/bash ./entrypoint.sh</span>
 </code></pre></div>    </div>
 
     <p>This file defines how to build the web app image. It uses the
 <a href="https://hub.docker.com/_/microsoft-dotnet-core-sdk">.NET Core SDK image</a>,
 maps the volume with the generated code, restores the dependencies, builds the
-project and exposes port 80. After that, it calls an <code class="language-plaintext highlighter-rouge">entrypoint</code> script
+project and exposes port 80. After that, it calls an <code class="highlighter-rouge">entrypoint</code> script
 that we create in the next step.</p>
   </li>
   <li>
-    <p>The <code class="language-plaintext highlighter-rouge">Dockerfile</code> makes use of an entrypoint to your webapp Docker
-image. Create this script in a file called <code class="language-plaintext highlighter-rouge">entrypoint.sh</code> and paste the
+    <p>The <code class="highlighter-rouge">Dockerfile</code> makes use of an entrypoint to your webapp Docker
+image. Create this script in a file called <code class="highlighter-rouge">entrypoint.sh</code> and paste the
 contents below.</p>
 
     <blockquote>
@@ -186,7 +186,7 @@ you use Windows-based delimiters (Carriage return and line feed).</p>
 
 <span class="k">until </span>dotnet ef database update<span class="p">;</span> <span class="k">do</span>
 <span class="o">&gt;</span>&amp;2 <span class="nb">echo</span> <span class="s2">"SQL Server is starting up"</span>
-<span class="nb">sleep </span>1
+sleep 1
 <span class="k">done</span>
 
 <span class="o">&gt;</span>&amp;2 <span class="nb">echo</span> <span class="s2">"SQL Server is up - executing command"</span>
@@ -198,9 +198,9 @@ the application. This allows some time for the SQL Server database image to
 start up.</p>
   </li>
   <li>
-    <p>Create a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file. Write the following in the file, and
-make sure to replace the password in the <code class="language-plaintext highlighter-rouge">SA_PASSWORD</code> environment variable
-under <code class="language-plaintext highlighter-rouge">db</code> below. This file defines the way the images interact as
+    <p>Create a <code class="highlighter-rouge">docker-compose.yml</code> file. Write the following in the file, and
+make sure to replace the password in the <code class="highlighter-rouge">SA_PASSWORD</code> environment variable
+under <code class="highlighter-rouge">db</code> below. This file defines the way the images interact as
 independent services.</p>
 
     <blockquote>
@@ -224,7 +224,7 @@ base 10 digits and/or non-alphanumeric symbols.</p>
             <span class="na">ACCEPT_EULA</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Y"</span>
 </code></pre></div>    </div>
 
-    <p>This file defines the <code class="language-plaintext highlighter-rouge">web</code> and <code class="language-plaintext highlighter-rouge">db</code> micro-services, their relationship, the
+    <p>This file defines the <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">db</code> micro-services, their relationship, the
 ports they are using, and their specific environment variables.</p>
 
     <blockquote>
@@ -233,13 +233,13 @@ version. Be sure to choose a version that is compatible with your system.</p>
     </blockquote>
   </li>
   <li>
-    <p>Go to <code class="language-plaintext highlighter-rouge">Startup.cs</code> and locate the function called <code class="language-plaintext highlighter-rouge">ConfigureServices</code> (Hint:
+    <p>Go to <code class="highlighter-rouge">Startup.cs</code> and locate the function called <code class="highlighter-rouge">ConfigureServices</code> (Hint:
 it should be under line 42). Replace the entire function to use the following
 code (watch out for the brackets!).</p>
 
     <blockquote>
-      <p><strong>Note</strong>: Make sure to update the <code class="language-plaintext highlighter-rouge">Password</code> field in the <code class="language-plaintext highlighter-rouge">connection</code>
-variable below to the one you defined in the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file.</p>
+      <p><strong>Note</strong>: Make sure to update the <code class="highlighter-rouge">Password</code> field in the <code class="highlighter-rouge">connection</code>
+variable below to the one you defined in the <code class="highlighter-rouge">docker-compose.yml</code> file.</p>
     </blockquote>
 
     <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;...&gt;</span>
@@ -268,24 +268,24 @@ variable below to the one you defined in the <code class="language-plaintext hig
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Go to <code class="language-plaintext highlighter-rouge">app.csproj</code>. You see a line like:</p>
+    <p>Go to <code class="highlighter-rouge">app.csproj</code>. You see a line like:</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" /&gt;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" /&gt;
 </code></pre></div>    </div>
 
     <p>The generated project uses sqlite by default. To use SQL Server, add this line to
-<code class="language-plaintext highlighter-rouge">app.csproj</code>:</p>
+<code class="highlighter-rouge">app.csproj</code>:</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" /&gt;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" /&gt;
 </code></pre></div>    </div>
 
     <p>The Sqlite dependency was at version 1.1.2 at the time of this writing. Use the same
 version for the SQL Server dependency.</p>
   </li>
   <li>
-    <p>Ready! You can now run the <code class="language-plaintext highlighter-rouge">docker-compose build</code> command.</p>
+    <p>Ready! You can now run the <code class="highlighter-rouge">docker-compose build</code> command.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose build
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose build
 </code></pre></div>    </div>
   </li>
   <li>
@@ -296,12 +296,12 @@ to do it on
 This is necessary to run the SQL Server on Linux container.</p>
   </li>
   <li>
-    <p>Run the <code class="language-plaintext highlighter-rouge">docker-compose up</code> command. After a few seconds, you should be able
+    <p>Run the <code class="highlighter-rouge">docker-compose up</code> command. After a few seconds, you should be able
 to open <a href="http://localhost:8000">localhost:8000</a> and see the ASP.NET core
 sample website. The application is listening on port 80 by default, but we
-mapped it to port 8000 in the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>.</p>
+mapped it to port 8000 in the <code class="highlighter-rouge">docker-compose.yml</code>.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
 </code></pre></div>    </div>
 
     <p>Go ahead and try out the website! This sample uses the SQL Server

@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Python イメージのビルド | Docker ドキュメント</title>
   <meta name="description" content="Learn how to build your first Docker image by writing a Dockerfile" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Python イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Python イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/python/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Python イメージのビルド</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Python イメージのビルド</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -131,16 +131,16 @@ BuildKit が有効になっていれば、Docker イメージビルドを効率�
 Docker Desktop をインストールしているのであれば、手動で BuildKit を有効にする必要はありません。
 Linux 上において Docker を利用している場合は、環境変数を用いるか、あるいは BuildKit がデフォルト設定となるようにして、BuildKit を有効にします。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
+<p><code class="highlighter-rouge">docker build</code>コマンド時に環境変数 BuildKit を設定するには、以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>デフォルトで BuildKit を有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>内のデーモン設定を<code class="language-plaintext highlighter-rouge">true</code>に設定して、デーモンを再起動します。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルが存在していない場合は、この<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを新規生成して、以下の記述を追加します。</p>
+<p>デフォルトで BuildKit を有効にするには、<code class="highlighter-rouge">/etc/docker/daemon.json</code>内のデーモン設定を<code class="highlighter-rouge">true</code>に設定して、デーモンを再起動します。
+<code class="highlighter-rouge">daemon.json</code>ファイルが存在していない場合は、この<code class="highlighter-rouge">daemon.json</code>ファイルを新規生成して、以下の記述を追加します。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"features"</span><span class="p">:{</span><span class="nl">"buildkit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"features"</span><span class="p">:{</span><span class="s2">"buildkit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -167,21 +167,21 @@ Linux 上において Docker を利用している場合は、環境変数を用
 
 <p>例として用いる簡単な Python アプリケーションを作っていきます。
 これは Flask フレームワークを利用します。
-ローカルマシン内に<code class="language-plaintext highlighter-rouge">python-docker</code>という名前のディレクトリを生成し、以下の手順により簡単なウェブサーバーを生成します。</p>
+ローカルマシン内に<code class="highlighter-rouge">python-docker</code>という名前のディレクトリを生成し、以下の手順により簡単なウェブサーバーを生成します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /path/to/python-docker
-<span class="gp">$</span><span class="w"> </span>pip3 <span class="nb">install </span>Flask
-<span class="gp">$</span><span class="w"> </span>pip3 freeze | <span class="nb">grep </span>Flask <span class="o">&gt;&gt;</span> requirements.txt
-<span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>app.py
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cd</span> /path/to/python-docker
+<span class="gp">$</span> pip3 install Flask
+<span class="gp">$</span> pip3 freeze | <span class="nb">grep </span>Flask <span class="o">&gt;&gt;</span> requirements.txt
+<span class="gp">$</span> touch app.py
 </code></pre></div></div>
 
 <p>そこで簡単なウェブリクエストを扱うコードを追加してみます。
-好みの IDE 内においてワーキングディレクトリを開いて、<code class="language-plaintext highlighter-rouge">app.py</code>ファイルに以下のコードを記述します。</p>
+好みの IDE 内においてワーキングディレクトリを開いて、<code class="highlighter-rouge">app.py</code>ファイルに以下のコードを記述します。</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello, Docker!'</span>
 </code></pre></div></div>
@@ -191,10 +191,10 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>ここからアプリケーションを起動させて正しく動作することを確認します。
 ターミナルを開いて、上で生成したワーキングディレクトリに移動します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>python3 <span class="nt">-m</span> flask run
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> python3 <span class="nt">-m</span> flask run
 </code></pre></div></div>
 
-<p>アプリケーションが適切に動作していることを確認するために、ブラウザーを開いて<code class="language-plaintext highlighter-rouge">http://localhost:5000</code>にアクセスします。</p>
+<p>アプリケーションが適切に動作していることを確認するために、ブラウザーを開いて<code class="highlighter-rouge">http://localhost:5000</code>にアクセスします。</p>
 
 <p>サーバーを起動しているターミナルに戻ります。
 サーバーログとして以下のようなリクエストが表示されているはずです。
@@ -208,27 +208,27 @@ Linux 上において Docker を利用している場合は、環境変数を用
 <p>アプリケーションが正しく動作しているので、ここからは Dockerfile の生成を行っていきます。</p>
 
 <p>Dockerfile とは、 Docker イメージを取得する命令を含んだテキストファイルのことです。
-Docker に対して<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
+Docker に対して<code class="highlighter-rouge">docker build</code>コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで実行し、最終的に Docker イメージを作り出します。</p>
 
 <p>ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
-プロジェクトのルートディレクトリに<code class="language-plaintext highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
+プロジェクトのルートディレクトリに<code class="highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディターでこれを開きます。</p>
 
 <blockquote>
   <p><strong>Dockerfile の名前を何にするか</strong></p>
 
-  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="language-plaintext highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
-このデフォルトファイル名を用いておけば、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
+  <p>Dockerfile に対して用いられるデフォルトのファイル名は、 <code class="highlighter-rouge">Dockerfile</code> です (ファイル拡張子はありません)。
+このデフォルトファイル名を用いておけば、<code class="highlighter-rouge">docker build</code>コマンドを実行する際に、コマンドラインフラグを追加して指定する必要がありません。</p>
 
   <p>プロジェクトによっては、特定の目的のため、Dockerfile に別名を与える場合があります。
-普通行われる慣例としては、<code class="language-plaintext highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
-このような Dockerfile は、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="language-plaintext highlighter-rouge">--file</code>オプション (その短縮形<code class="language-plaintext highlighter-rouge">-f</code>) を用いて指定します。
-<code class="language-plaintext highlighter-rouge">--file</code>オプションの利用方法については、<code class="language-plaintext highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
+普通行われる慣例としては、<code class="highlighter-rouge">Dockerfile.&lt;something&gt;</code>や<code class="highlighter-rouge">&lt;something&gt;.Dockerfile</code>とします。
+このような Dockerfile は、<code class="highlighter-rouge">docker build</code>コマンドの実行にあたって、<code class="highlighter-rouge">--file</code>オプション (その短縮形<code class="highlighter-rouge">-f</code>) を用いて指定します。
+<code class="highlighter-rouge">--file</code>オプションの利用方法については、<code class="highlighter-rouge">docker build</code>リファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/#specify-a-dockerfile--f">Dockerfile の指定</a> のセクションを参照してください。</p>
 
-  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="language-plaintext highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
+  <p>プロジェクトの主となる Dockerfile には、デフォルト名 (<code class="highlighter-rouge">Dockerfile</code>) を用いることをお勧めします。
 本ガイドに示すほとんどの例においては、この名前を用いています。</p>
 </blockquote>
 
-<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="language-plaintext highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
+<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
 これは <strong>任意の記述</strong> ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
 また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
 <a href="/docs.docker.jp.onthefly/engine/reference/builder/#parser-directives">パーサーディレクティブ</a> は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。</p>
@@ -236,7 +236,7 @@ Docker に対して<code class="language-plaintext highlighter-rouge">docker bui
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
+<p><code class="highlighter-rouge">docker/dockerfile:1</code>を用いることをお勧めします。
 こうしておくと、常に文法バージョン 1 の最新リリース版を指し示すことになります。
 BuildKit は、ビルド処理の前に文法に更新がないかを自動的にチェックし、最新バージョンが用いられていることを確認します。</p>
 
@@ -265,37 +265,37 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WORKDIR</span><span class="s"> /app</span>
 </code></pre></div></div>
 
-<p>通常は Python で書かれたプロジェクトのダウンロード後、一番に行っておくことが<code class="language-plaintext highlighter-rouge">pip</code>パッケージのインストールです。
+<p>通常は Python で書かれたプロジェクトのダウンロード後、一番に行っておくことが<code class="highlighter-rouge">pip</code>パッケージのインストールです。
 これを行っておくとアプリケーションの依存パッケージがすべてインストールされます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">pip install</code>を実行する前には、<code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルをイメージ内にコピーしておくことが必要です。
-<code class="language-plaintext highlighter-rouge">COPY</code>コマンドを使ってこれを行います。
-<code class="language-plaintext highlighter-rouge">COPY</code>コマンドには引数が 2 つあります。
+<p><code class="highlighter-rouge">pip install</code>を実行する前には、<code class="highlighter-rouge">requirements.txt</code>ファイルをイメージ内にコピーしておくことが必要です。
+<code class="highlighter-rouge">COPY</code>コマンドを使ってこれを行います。
+<code class="highlighter-rouge">COPY</code>コマンドには引数が 2 つあります。
 1 つめの引数は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
 2 つめの引数は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
-ここでは<code class="language-plaintext highlighter-rouge">requirements.txt</code>をワーキングディレクトリ<code class="language-plaintext highlighter-rouge">/app</code>にコピーします。</p>
+ここでは<code class="highlighter-rouge">requirements.txt</code>をワーキングディレクトリ<code class="highlighter-rouge">/app</code>にコピーします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> requirements.txt requirements.txt</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルをイメージ内に置いたら<code class="language-plaintext highlighter-rouge">RUN</code>コマンドによって<code class="language-plaintext highlighter-rouge">pip3 install</code>を行います。
-この際の処理は<code class="language-plaintext highlighter-rouge">pip3 install</code>をマシン内でローカルに実行しているかのようにして動作します。
+<p><code class="highlighter-rouge">requirements.txt</code>ファイルをイメージ内に置いたら<code class="highlighter-rouge">RUN</code>コマンドによって<code class="highlighter-rouge">pip3 install</code>を行います。
+この際の処理は<code class="highlighter-rouge">pip3 install</code>をマシン内でローカルに実行しているかのようにして動作します。
 ただしこのときの Python モジュール類はイメージ内にインストールされます。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>pip3 install <span class="nt">-r</span> requirements.txt
 </code></pre></div></div>
 
 <p>ここまでに Python バージョン 3.8 に基づくイメージを構築して、依存パッケージのインストールを行いました。
 次に行うのは、イメージ内にソースコードを置くことです。
-先に行った<code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルと同じように<code class="language-plaintext highlighter-rouge">COPY</code>コマンドを用いることにします。</p>
+先に行った<code class="highlighter-rouge">requirements.txt</code>ファイルと同じように<code class="highlighter-rouge">COPY</code>コマンドを用いることにします。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> . .</span>
 </code></pre></div></div>
 
-<p>この<code class="language-plaintext highlighter-rouge">COPY</code>コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
+<p>この<code class="highlighter-rouge">COPY</code>コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
 最後に行うのは、このイメージがコンテナー内において実行される際に実行させたいコマンドを指定します。
-これを行うには<code class="language-plaintext highlighter-rouge">CMD</code>コマンドを用います。
-なおここでアプリケーションは外部から（つまりコンテナーの外から）アクセスできるようにすることが必要であるため、<code class="language-plaintext highlighter-rouge">--host=0.0.0.0</code>を指定します。</p>
+これを行うには<code class="highlighter-rouge">CMD</code>コマンドを用います。
+なおここでアプリケーションは外部から（つまりコンテナーの外から）アクセスできるようにすることが必要であるため、<code class="highlighter-rouge">--host=0.0.0.0</code>を指定します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]</span>
 </code></pre></div></div>
@@ -309,7 +309,7 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 <span class="k">WORKDIR</span><span class="s"> /app</span>
 
 <span class="k">COPY</span><span class="s"> requirements.txt requirements.txt</span>
-<span class="k">RUN </span>pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+<span class="k">RUN </span>pip3 install <span class="nt">-r</span> requirements.txt
 
 <span class="k">COPY</span><span class="s"> . .</span>
 
@@ -318,8 +318,8 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 
 <h3 id="directory-structure">ディレクトリ構造</h3>
 
-<p>ここまでの作業をまとめてみると、ローカルマシン内に<code class="language-plaintext highlighter-rouge">python-docker</code>というディレクトリを生成して、Flask フレームワークを利用した簡単な Python アプリケーションを生成しました。
-また<code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルを利用して依存パッケージを取得し、またイメージビルドのためのコマンドを記述した Dokerfile を生成しました。
+<p>ここまでの作業をまとめてみると、ローカルマシン内に<code class="highlighter-rouge">python-docker</code>というディレクトリを生成して、Flask フレームワークを利用した簡単な Python アプリケーションを生成しました。
+また<code class="highlighter-rouge">requirements.txt</code>ファイルを利用して依存パッケージを取得し、またイメージビルドのためのコマンドを記述した Dokerfile を生成しました。
 Python アプリケーションディレクトリは以下のような構造となります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python-docker
@@ -331,37 +331,37 @@ Python アプリケーションディレクトリは以下のような構造と�
 <h2 id="build-image">イメージのビルド</h2>
 
 <p>Dockerfile を生成したので、ここからイメージをビルドします。
-これを行うには<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを使います。
-<code class="language-plaintext highlighter-rouge">docker build</code>コマンドは Dockerfile と「コンテキスト（context）」から Docker イメージをビルドします。
+これを行うには<code class="highlighter-rouge">docker build</code>コマンドを使います。
+<code class="highlighter-rouge">docker build</code>コマンドは Dockerfile と「コンテキスト（context）」から Docker イメージをビルドします。
 ビルドのコンテキストとは、指定されているパスや URL 内にある一連のファイルのことです。
 Docker のビルド処理においては、コンテキスト内にあるファイルはどれにでもアクセスすることができます。</p>
 
-<p>build コマンドにはオプションとして<code class="language-plaintext highlighter-rouge">--tag</code>フラグをつけることができます。
-タグ（tag）はイメージ名とオプションとなるタグ名を<code class="language-plaintext highlighter-rouge">name:tag</code>という書式で指定します。
+<p>build コマンドにはオプションとして<code class="highlighter-rouge">--tag</code>フラグをつけることができます。
+タグ（tag）はイメージ名とオプションとなるタグ名を<code class="highlighter-rouge">name:tag</code>という書式で指定します。
 話を単純にするため、ここでは「タグ」は用いないことにします。
 タグを指定しなければ Docker はデフォルトのタグ名として「latest」を用います。</p>
 
 <p>では初めての Docker イメージをビルドしてみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
 <span class="go">[+] Building 2.7s (10/10) FINISHED
-</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 203B
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>1/6] FROM docker.io/library/python:3.8-slim-buster
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build context
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 953B
-<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>2/6] WORKDIR /app
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>3/6] COPY requirements.txt requirements.txt
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>4/6] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>5/6] COPY <span class="nb">.</span> <span class="nb">.</span>
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>6/6] CMD <span class="o">[</span> <span class="s2">"python3"</span>, <span class="s2">"-m"</span>, <span class="s2">"flask"</span>, <span class="s2">"run"</span>, <span class="s2">"--host=0.0.0.0"</span><span class="o">]</span>
-<span class="gp"> =&gt;</span><span class="w"> </span>exporting to image
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> exporting layers
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
-<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> naming to docker.io/library/python-docker
+</span><span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 203B
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load .dockerignore
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
+<span class="gp"> =&gt;</span> <span class="o">[</span>1/6] FROM docker.io/library/python:3.8-slim-buster
+<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build context
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 953B
+<span class="gp"> =&gt;</span> CACHED <span class="o">[</span>2/6] WORKDIR /app
+<span class="gp"> =&gt;</span> <span class="o">[</span>3/6] COPY requirements.txt requirements.txt
+<span class="gp"> =&gt;</span> <span class="o">[</span>4/6] RUN pip3 install <span class="nt">-r</span> requirements.txt
+<span class="gp"> =&gt;</span> <span class="o">[</span>5/6] COPY <span class="nb">.</span> <span class="nb">.</span>
+<span class="gp"> =&gt;</span> <span class="o">[</span>6/6] CMD <span class="o">[</span> <span class="s2">"python3"</span>, <span class="s2">"-m"</span>, <span class="s2">"flask"</span>, <span class="s2">"run"</span>, <span class="s2">"--host=0.0.0.0"</span><span class="o">]</span>
+<span class="gp"> =&gt;</span> exporting to image
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> exporting layers
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
+<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/python-docker
 </code></pre></div></div>
 
 <h2 id="view-local-images">ローカルイメージの確認</h2>
@@ -370,16 +370,16 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
 1 つは CLI を用いる方法、もう 1 つは <a href="/docs.docker.jp.onthefly/desktop/dashboard/#explore-your-images">Docker Desktop</a> を用いる方法です。
 これまでターミナルを使って作業を進めてきていますから、イメージ一覧は CLI を使って取得することにします。</p>
 
-<p>イメージを一覧表示するには、単純に<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行します。</p>
+<p>イメージを一覧表示するには、単純に<code class="highlighter-rouge">docker images</code>コマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 </span></code></pre></div></div>
 
 <p>一覧には少なくとも 2 つのイメージが表示されるはずです。
-1 つはベースイメージ<code class="language-plaintext highlighter-rouge">3.8-slim-buster</code>であり、もう 1 つは<code class="language-plaintext highlighter-rouge">python-docker:latest</code>としてビルドしたイメージです。</p>
+1 つはベースイメージ<code class="highlighter-rouge">3.8-slim-buster</code>であり、もう 1 つは<code class="highlighter-rouge">python-docker:latest</code>としてビルドしたイメージです。</p>
 
 <h2 id="tag-images">イメージへのタグづけ</h2>
 
@@ -397,44 +397,44 @@ python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 
 <p>イメージに対して新たなタグを生成するには、以下のコマンドを実行します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker tag python-docker:latest python-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker tag python-docker:latest python-docker:v1.0.0
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker tag</code>コマンドはイメージに対するタグを生成します。
+<p><code class="highlighter-rouge">docker tag</code>コマンドはイメージに対するタグを生成します。
 新たなイメージが作り出されるわけではありません。
 このタグもまた同じイメージを指していて、イメージを参照するもう 1 つの手段が出来上がったことになります。</p>
 
-<p>そこで<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
+<p>そこで<code class="highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
 python-docker   v1.0.0            8cae92a8fbd6   4 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">python-docker</code>で始まるイメージが一覧に 2 つ表示されています。
-<code class="language-plaintext highlighter-rouge">IMAGE ID</code>列を見てみれば、その 2 つのイメージは同一のものであることがわかります。
+<p><code class="highlighter-rouge">python-docker</code>で始まるイメージが一覧に 2 つ表示されています。
+<code class="highlighter-rouge">IMAGE ID</code>列を見てみれば、その 2 つのイメージは同一のものであることがわかります。
 2 つのイメージの ID 値は同じだからです。</p>
 
 <p>では今生成したタグを削除してみます。
-これを行うには<code class="language-plaintext highlighter-rouge">rmi</code>コマンドを使います。
-<code class="language-plaintext highlighter-rouge">rmi</code>コマンドは「remove image」を表しています。</p>
+これを行うには<code class="highlighter-rouge">rmi</code>コマンドを使います。
+<code class="highlighter-rouge">rmi</code>コマンドは「remove image」を表しています。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker rmi python-docker:v1.0.0
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker rmi python-docker:v1.0.0
 <span class="go">Untagged: python-docker:v1.0.0
 </span></code></pre></div></div>
 
 <p>Docker の出力結果からわかるように、イメージは削除されたわけではなく「タグづけ解除」が行われただけです。
-<code class="language-plaintext highlighter-rouge">docker images</code>コマンドを実行して確認してみます。</p>
+<code class="highlighter-rouge">docker images</code>コマンドを実行して確認してみます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker images
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker images
 <span class="go">REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 </span></code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="language-plaintext highlighter-rouge">python-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
+<p><code class="highlighter-rouge">:v1.0.0</code>としてタグづけを行ったイメージは削除されましたが、マシン上には<code class="highlighter-rouge">python-docker:latest</code>というタグを通じてイメージが参照可能です。</p>
 
 <h2 id="next-steps">次のステップ</h2>
 

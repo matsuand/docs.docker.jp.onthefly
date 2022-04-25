@@ -1,5 +1,5 @@
-<!-- Page generated 2022-03-11 18:17:03 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>シングルサインオンの設定 | Docker ドキュメント</title>
   <meta name="description" content="Single Sign-on" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="シングルサインオンの設定" />
   <meta property="og:description" content="Single Sign-on" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-03-11T18:17:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/single-sign-on/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2022-03-11T18:17:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"シングルサインオンの設定","description":"Single Sign-on","url":"https://docs.docker.com/single-sign-on/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,11 +109,11 @@
                     <main class="col-content content">
                         <section class="section"><h1>シングルサインオンの設定</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>この節は、Business プランにおいて Docker SSO（Single Sign-on; シングルサインオン）を必要とする管理者向けのものです。
 Docker SSO は、Docker へのアクセスにおいて IdPs (identity providers; アイデンティティープロバイダー) を使った認証を求めます。
-Docker では今のところ、Auth0 を通じて SAML 2.0 と Azure AD の IdPs をサポートしています。
+Docker では今のところ、SAML 2.0 と Azure AD の認証方法をサポートしています。
 SSO は Docker Business サブスクリプション内の組織に対して有効にできます。
 現アカウントを Business サブスクリプションにアップグレードするには、<a href="../subscription/upgrade/" target="blank" rel="noopener" class="">サブスクリプションのアップグレード</a> を参照してください。</p>
 
-<p>SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使った認証が行われます。
+<p>SSO が有効であると、ユーザーのアクセスはプロバイダーの認証画面にリダイレクトされて、SSO を使ったログインを行います。
 そこでは個人ログイン情報（Docker ID とパスワード）を使った認証はできません。
 Docker では現在、Service Provider Initiated SSO フローをサポートしています。
 所属ユーザーは SSO 認証プロセスを初期化を通じて Docker Hub や Docker Desktop へサインインすることが必要になります。</p>
@@ -134,14 +134,15 @@ Docker では ACS（Assertion Consumer Service）URL とエンティティー ID
 
 <p>現在のところ SSO の有効化は 1 つの組織についてのみ対応しています。
 ただしシングルログアウトには対応していません。
-組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。</p>
+組織内のユーザーが別のドメイン（ソーシャルドメインを含む）にも属している場合、そのユーザーは組織に対してはゲストとして参加することになります。
+この Docker ログイン資格情報を利用し、ゲストは Docker を通じて認証が継続します。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <ul>
   <li>You must first notify your company about the new SSO login procedures</li>
   <li>Verify that your org members have Docker Desktop version 4.4.2 installed on their machines</li>
-  <li>New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below</li>
+  <li>New org members must create a PAT to log in to the CLI, however existing users can currently use their username and password during the grace period as specified below</li>
   <li>Confirm that all CI/CD pipelines have replaced their passwords with PATs</li>
   <li>For your service accounts, add your additional domains or enable it in your IdP</li>
   <li>Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub</li>
@@ -149,12 +150,12 @@ Docker では ACS（Assertion Consumer Service）URL とエンティティー ID
 
 <h2 id="create-a-personal-access-token-pat">パーソナルアクセストークン（PAT）の生成</h2>
 
-<p>Before you configure SSO for your organization, new members of your organization must <a href="/docs.docker.jp.onthefly/docker-hub/access-tokens/">create an access token</a> to log into the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+<p>Before you configure SSO for your organization, new members of your organization must <a href="/docs.docker.jp.onthefly/docker-hub/access-tokens/">create an access token</a> to log in to the CLI. There is currently a grace period for existing users, which will expire in the near future. Before the grace period ends, your users will be able to log in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
 In addition, all email addresses should be added to your IdP.</p>
 
 <h2 id="configure">設定</h2>
 
-<p>To configure SSO, log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> to obtain the <strong>ACS URL</strong> and <strong>Entity IDs</strong> to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> and complete the SSO enablement process.</p>
+<p>To configure SSO, log in to <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back in to <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> and complete the SSO enablement process.</p>
 
 <blockquote class="important">
   <p><strong>重要</strong></p>
@@ -174,7 +175,7 @@ this time.</p>
 <h3 id="saml-20-idp-configuration">SAML 2.0 IdP の設定</h3>
 
 <ol>
-  <li>Log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator and navigate to <strong>Organizations</strong> and select the organization that you want to enable SSO on.</li>
+  <li>Log in to <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator and navigate to <strong>Organizations</strong> and select the organization that you want to enable SSO on.</li>
   <li>Click <strong>Settings</strong> and select the <strong>Security</strong> tab.</li>
   <li>
     <p>Select an authentication method for <strong>SAML 2.0</strong>.</p>
@@ -187,7 +188,7 @@ this time.</p>
     <p><img src="/docs.docker.jp.onthefly/single-sign-on/images/sso-saml2.png" alt="SSO SAML2" width="500px" /></p>
   </li>
   <li>
-    <p>Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.</p>
+    <p>Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.</p>
 
     <blockquote>
       <p><strong>Note:</strong></p>
@@ -218,7 +219,7 @@ special customizations available when using it.</p>
 </blockquote>
 
 <ol>
-  <li>Log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator and navigate to <strong>Organizations</strong> and select the organization that you want to enable SSO on.</li>
+  <li>Log in to <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator and navigate to <strong>Organizations</strong> and select the organization that you want to enable SSO on.</li>
   <li>Click <strong>Settings</strong> and select the <strong>Security</strong> tab.</li>
   <li>
     <p>Select an authentication method for <strong>Azure AD</strong>.</p>
@@ -231,7 +232,7 @@ special customizations available when using it.</p>
     <p><img src="/docs.docker.jp.onthefly/single-sign-on/images/sso-azure2.png" alt="SSO Azure2" width="500px" /></p>
   </li>
   <li>
-    <p>Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.</p>
+    <p>Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.</p>
 
     <blockquote>
       <p><strong>Note:</strong>
@@ -250,7 +251,7 @@ For example:         <Subject><NameID>yourname@mycompany.com</NameID>.</Subject>
 
 <h3 id="domain-control">ドメインの制御</h3>
 
-<p>Click <strong>Add Domain</strong> and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.</p>
+<p>Click <strong>Add Domain</strong> and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.</p>
 
 <blockquote>
   <p><strong>Note</strong></p>
@@ -294,11 +295,11 @@ this time.</p>
 
 <h2 id="test-your-sso-configuration">SSO 設定のテスト</h2>
 
-<p>After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log into Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.</p>
+<p>After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log in to Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.</p>
 
 <ol>
-  <li>Authenticate via email instead of using your Docker ID, and test the login process.</li>
-  <li>To authenticate via CLI, your users must have a PAT before you enforce SSO for CLI users.</li>
+  <li>Authenticate through email instead of using your Docker ID, and test the login process.</li>
+  <li>To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.</li>
 </ol>
 
 <h2 id="enforce-sso-in-docker-hub">Docker Hub における強制的な SSO</h2>
@@ -318,7 +319,7 @@ Test SSO by logging in and out successfully, confirm that all members in your or
 
   <p>If you want to turn off SSO and revert back to Docker’s built-in
 authentication, click <strong>Turn OFF Enforcement</strong>. Your members aren’t
-forced to authenticate through your IdP and can log into Docker using
+forced to authenticate through your IdP and can log in to Docker using
 their personal credentials.</p>
 </blockquote>
 
@@ -326,16 +327,12 @@ their personal credentials.</p>
 
 <h2 id="manage-users-when-sso-is-enabled">SSO 有効時のユーザー管理</h2>
 
-<p>To add a member to your organization:</p>
-<ol>
-  <li>Create an account for your members in your IdP.</li>
-  <li>Add and invite your members to your organization.</li>
-</ol>
+<p>You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they’re automatically assigned to the organization using their domain email address.</p>
 
 <blockquote>
   <p><strong>Note:</strong></p>
 
-  <p>when the first-time user logs into Docker using their domain email
+  <p>when the first-time user logs in to Docker using their domain email
 address, they are then added to your organization.</p>
 </blockquote>
 
@@ -352,7 +349,7 @@ address, they are then added to your organization.</p>
 <p>To remove a member from an organization:</p>
 
 <ol>
-  <li>Log into <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator of your organization.</li>
+  <li>Log in to <a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> as an administrator of your organization.</li>
   <li>Select the organization from the list. The organization page displays a list of members.</li>
   <li>Click the <strong>x</strong> next to a member’s name to remove them from all the teams in the organization.</li>
   <li>Click <strong>Remove</strong> to confirm. The member will receive an email notification confirming the removal.</li>

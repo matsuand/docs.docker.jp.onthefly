@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Deploy a stack to a swarm | Docker ドキュメント</title>
   <meta name="description" content="How to deploy a stack to a swarm" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="Deploy a stack to a swarm" />
   <meta property="og:description" content="How to deploy a stack to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/stack-deploy/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"Deploy a stack to a swarm","description":"How to deploy a stack to a swarm","url":"https://docs.docker.com/engine/swarm/stack-deploy/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -101,11 +101,11 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Deploy a stack to a swarm</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>When running Docker Engine in swarm mode, you can use <code class="language-plaintext highlighter-rouge">docker stack deploy</code> to
-deploy a complete application stack to the swarm. The <code class="language-plaintext highlighter-rouge">deploy</code> command accepts
+                        <section class="section"><h1>Deploy a stack to a swarm</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>When running Docker Engine in swarm mode, you can use <code class="highlighter-rouge">docker stack deploy</code> to
+deploy a complete application stack to the swarm. The <code class="highlighter-rouge">deploy</code> command accepts
 a stack description in the form of a <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/">Compose file</a>.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker stack deploy</code> command supports any Compose file of version “3.0” or
+<p>The <code class="highlighter-rouge">docker stack deploy</code> command supports any Compose file of version “3.0” or
 above. If you have an older version, see the <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#upgrading">upgrade guide</a>.</p>
 
 <p>To run through this tutorial, you need:</p>
@@ -121,10 +121,10 @@ and <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services
       <p><strong>Note</strong></p>
 
       <p>If you’re trying things out on a local development environment,
-you can put your engine into swarm mode with <code class="language-plaintext highlighter-rouge">docker swarm init</code>.</p>
+you can put your engine into swarm mode with <code class="highlighter-rouge">docker swarm init</code>.</p>
 
       <p>If you’ve already got a multi-node swarm running, keep in mind that all
-<code class="language-plaintext highlighter-rouge">docker stack</code> and <code class="language-plaintext highlighter-rouge">docker service</code> commands must be run from a manager
+<code class="highlighter-rouge">docker stack</code> and <code class="highlighter-rouge">docker service</code> commands must be run from a manager
 node.</p>
     </blockquote>
   </li>
@@ -144,25 +144,25 @@ a throwaway registry, which you can discard afterward.</p>
   <li>
     <p>Start the registry as a service on your swarm:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service create <span class="nt">--name</span> registry <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>5000,target<span class="o">=</span>5000 registry:2
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service create <span class="nt">--name</span> registry <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>5000,target<span class="o">=</span>5000 registry:2
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Check its status with <code class="language-plaintext highlighter-rouge">docker service ls</code>:</p>
+    <p>Check its status with <code class="highlighter-rouge">docker service ls</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">ls</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service <span class="nb">ls</span>
 <span class="go">
 ID            NAME      REPLICAS  IMAGE                                                                               COMMAND
 l7791tpuwkco  registry  1/1       registry:2@sha256:1152291c7f93a4ea2ddc95e46d142c31e743b6dd70e194af9e6ebe530f782c17
 </span></code></pre></div>    </div>
 
-    <p>Once it reads <code class="language-plaintext highlighter-rouge">1/1</code> under <code class="language-plaintext highlighter-rouge">REPLICAS</code>, it’s running. If it reads <code class="language-plaintext highlighter-rouge">0/1</code>, it’s
+    <p>Once it reads <code class="highlighter-rouge">1/1</code> under <code class="highlighter-rouge">REPLICAS</code>, it’s running. If it reads <code class="highlighter-rouge">0/1</code>, it’s
 probably still pulling the image.</p>
   </li>
   <li>
-    <p>Check that it’s working with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
+    <p>Check that it’s working with <code class="highlighter-rouge">curl</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:5000/v2/
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl http://localhost:5000/v2/
 <span class="go">
 {}
 </span></code></pre></div>    </div>
@@ -180,12 +180,12 @@ counter whenever you visit it.</p>
   <li>
     <p>Create a directory for the project:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir </span>stackdemo
-<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>stackdemo
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> mkdir stackdemo
+<span class="gp">$</span> <span class="nb">cd </span>stackdemo
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a file called <code class="language-plaintext highlighter-rouge">app.py</code> in the project directory and paste this in:</p>
+    <p>Create a file called <code class="highlighter-rouge">app.py</code> in the project directory and paste this in:</p>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span>
@@ -193,35 +193,35 @@ counter whenever you visit it.</p>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">redis</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'redis'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">incr</span><span class="p">(</span><span class="s">'hits'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s">'Hello World! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s">'hits'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">'Hello World! I have been seen {} times.</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">"0.0.0.0"</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a file called <code class="language-plaintext highlighter-rouge">requirements.txt</code> and paste these two lines in:</p>
+    <p>Create a file called <code class="highlighter-rouge">requirements.txt</code> and paste these two lines in:</p>
 
     <pre><code class="language-none">flask
 redis
 </code></pre>
   </li>
   <li>
-    <p>Create a file called <code class="language-plaintext highlighter-rouge">Dockerfile</code> and paste this in:</p>
+    <p>Create a file called <code class="highlighter-rouge">Dockerfile</code> and paste this in:</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> python:3.4-alpine</span>
 <span class="k">ADD</span><span class="s"> . /code</span>
 <span class="k">WORKDIR</span><span class="s"> /code</span>
-<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+<span class="k">RUN </span>pip install <span class="nt">-r</span> requirements.txt
 <span class="k">CMD</span><span class="s"> ["python", "app.py"]</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a file called <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> and paste this in:</p>
+    <p>Create a file called <code class="highlighter-rouge">docker-compose.yml</code> and paste this in:</p>
 
     <pre><code class="language-none">version: "3.9"
 
@@ -236,7 +236,7 @@ services:
 </code></pre>
 
     <p>The image for the web app is built using the Dockerfile defined
-above. It’s also tagged with <code class="language-plaintext highlighter-rouge">127.0.0.1:5000</code> - the address of the registry
+above. It’s also tagged with <code class="highlighter-rouge">127.0.0.1:5000</code> - the address of the registry
 created earlier. This is important when distributing the app to the
 swarm.</p>
   </li>
@@ -246,7 +246,7 @@ swarm.</p>
 
 <ol>
   <li>
-    <p>Start the app with <code class="language-plaintext highlighter-rouge">docker-compose up</code>. This builds the web app image,
+    <p>Start the app with <code class="highlighter-rouge">docker-compose up</code>. This builds the web app image,
 pulls the Redis image if you don’t already have it, and creates two
 containers.</p>
 
@@ -271,9 +271,9 @@ Creating stackdemo_web_1
 </code></pre>
   </li>
   <li>
-    <p>Check that the app is running with <code class="language-plaintext highlighter-rouge">docker-compose ps</code>:</p>
+    <p>Check that the app is running with <code class="highlighter-rouge">docker-compose ps</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose ps
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose ps
 <span class="go">
       Name                     Command               State           Ports
 -----------------------------------------------------------------------------------
@@ -281,22 +281,22 @@ stackdemo_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
 </span><span class="gp">stackdemo_web_1     python app.py                    Up      0.0.0.0:8000-&gt;</span>8000/tcp
 </code></pre></div>    </div>
 
-    <p>You can test the app with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
+    <p>You can test the app with <code class="highlighter-rouge">curl</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 1 times.
 
-</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+</span><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 2 times.
 
-</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+</span><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 3 times.
 </span></code></pre></div>    </div>
   </li>
   <li>
     <p>Bring the app down:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose down <span class="nt">--volumes</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose down <span class="nt">--volumes</span>
 <span class="go">
 Stopping stackdemo_web_1 ... done
 Stopping stackdemo_redis_1 ... done
@@ -312,7 +312,7 @@ Removing network stackdemo_default
 <p>To distribute the web app’s image across the swarm, it needs to be pushed to the
 registry you set up earlier. With Compose, this is very simple:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose push
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose push
 <span class="go">
 Pushing web (127.0.0.1:5000/stackdemo:latest)...
 The push refers to a repository [127.0.0.1:5000/stackdemo]
@@ -330,9 +330,9 @@ latest: digest: sha256:a81840ebf5ac24b42c1c676cbda3b2cb144580ee347c07e1bc80e35e5
 
 <ol>
   <li>
-    <p>Create the stack with <code class="language-plaintext highlighter-rouge">docker stack deploy</code>:</p>
+    <p>Create the stack with <code class="highlighter-rouge">docker stack deploy</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml stackdemo
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml stackdemo
 <span class="go">
 Ignoring unsupported options: build
 
@@ -345,42 +345,42 @@ Creating service stackdemo_redis
 name is prefixed with the stack name.</p>
   </li>
   <li>
-    <p>Check that it’s running with <code class="language-plaintext highlighter-rouge">docker stack services stackdemo</code>:</p>
+    <p>Check that it’s running with <code class="highlighter-rouge">docker stack services stackdemo</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack services stackdemo
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stack services stackdemo
 <span class="go">
 ID            NAME             MODE        REPLICAS  IMAGE
 orvjk2263y1p  stackdemo_redis  replicated  1/1       redis:3.2-alpine@sha256:f1ed3708f538b537eb9c2a7dd50dc90a706f7debd7e1196c9264edeea521a86d
 s1nf0xy8t1un  stackdemo_web    replicated  1/1       127.0.0.1:5000/stackdemo@sha256:adb070e0805d04ba2f92c724298370b7a4eb19860222120d43e0f6351ddbc26f
 </span></code></pre></div>    </div>
 
-    <p>Once it’s running, you should see <code class="language-plaintext highlighter-rouge">1/1</code> under <code class="language-plaintext highlighter-rouge">REPLICAS</code> for both services.
+    <p>Once it’s running, you should see <code class="highlighter-rouge">1/1</code> under <code class="highlighter-rouge">REPLICAS</code> for both services.
 This might take some time if you have a multi-node swarm, as images need to
 be pulled.</p>
 
-    <p>As before, you can test the app with <code class="language-plaintext highlighter-rouge">curl</code>:</p>
+    <p>As before, you can test the app with <code class="highlighter-rouge">curl</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 1 times.
 
-</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+</span><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 2 times.
 
-</span><span class="gp">$</span><span class="w"> </span>curl http://localhost:8000
+</span><span class="gp">$</span> curl http://localhost:8000
 <span class="go">Hello World! I have been seen 3 times.
 </span></code></pre></div>    </div>
 
     <p>Thanks to Docker’s built-in routing mesh, you can access any node in the
 swarm on port 8000 and get routed to the app:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl http://address-of-other-node:8000
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl http://address-of-other-node:8000
 <span class="go">Hello World! I have been seen 4 times.
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>Bring the stack down with <code class="language-plaintext highlighter-rouge">docker stack rm</code>:</p>
+    <p>Bring the stack down with <code class="highlighter-rouge">docker stack rm</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker stack <span class="nb">rm </span>stackdemo
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker stack rm stackdemo
 <span class="go">
 Removing service stackdemo_web
 Removing service stackdemo_redis
@@ -388,16 +388,16 @@ Removing network stackdemo_default
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>Bring the registry down with <code class="language-plaintext highlighter-rouge">docker service rm</code>:</p>
+    <p>Bring the registry down with <code class="highlighter-rouge">docker service rm</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker service <span class="nb">rm </span>registry
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker service rm registry
 </code></pre></div>    </div>
   </li>
   <li>
     <p>If you’re just testing things out on a local machine and want to bring your
-Docker Engine out of swarm mode, use <code class="language-plaintext highlighter-rouge">docker swarm leave</code>:</p>
+Docker Engine out of swarm mode, use <code class="highlighter-rouge">docker swarm leave</code>:</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker swarm leave <span class="nt">--force</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker swarm leave <span class="nt">--force</span>
 <span class="go">
 Node left the swarm.
 </span></code></pre></div>    </div>

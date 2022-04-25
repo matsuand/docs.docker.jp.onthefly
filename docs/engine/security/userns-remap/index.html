@@ -1,5 +1,5 @@
-<!-- Page generated 2021-10-14 19:29:01 +0900-->
 <!DOCTYPE html>
+<!-- Page generated 2022-04-25 09:39:05 +0900-->
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ユーザー名前空間を使ったコンテナーの分離 | Docker ドキュメント</title>
   <meta name="description" content="Isolate containers within a user namespace" />
@@ -43,12 +43,12 @@
   <meta property="og:title" content="ユーザー名前空間を使ったコンテナーの分離" />
   <meta property="og:description" content="Isolate containers within a user namespace" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2022-04-25T09:39:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/userns-remap/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-10-14T19:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2022-04-25T09:39:05+09:00"/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":"ユーザー名前空間を使ったコンテナーの分離","description":"Isolate containers within a user namespace","url":"https://docs.docker.com/engine/security/userns-remap/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -95,7 +95,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li><a href="/docs.docker.jp.onthefly/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
-            <li><a href="/docs.docker.jp.onthefly/get-started/overview/">ガイド</a></li><li><a>本番環境でのアプリ運用</a></li><li><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/">コンテナーの設定</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/userns-remap/">ユーザー名前空間を使ったコンテナーの分離</a></li></ol>
+            <li><a href="/docs.docker.jp.onthefly/desktop/">マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/security/">セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/">Docker Engine セキュリティ</a></li><li><a href="/docs.docker.jp.onthefly/engine/security/userns-remap/">ユーザー名前空間を使ったコンテナーの分離</a></li></ol>
     </nav>
 </div></div>
     </div>
@@ -107,27 +107,27 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ユーザー名前空間を使ったコンテナーの分離</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Linux の名前空間は、プロセスによるシステムリソースへのアクセスを制限しながら、プロセスを分離して実行します。
+                        <section class="section"><h1>ユーザー名前空間を使ったコンテナーの分離</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Linux の名前空間は、プロセスによるシステムリソースへのアクセスを制限しながら、プロセスを分離して実行します。
 実行されたプロセスにとっては、アクセスが制限されていることはわかりません。
 Linux の名前空間に関する詳細は <a href="https://www.linux.com/news/understanding-and-securing-linux-namespaces" target="_blank" rel="noopener" class="_">Linux 名前空間</a> を参照してください。</p>
 
 <p>コンテナー内部からの権限昇格による攻撃を防ぐ最大の方法は、コンテナーのアプリケーションを非特権ユーザーで実行することです。
-コンテナー内において、プロセスを<code class="language-plaintext highlighter-rouge">root</code>ユーザーで実行しなければならない場合は、この<code class="language-plaintext highlighter-rouge">root</code>ユーザーを、Docker ホスト上のより権限の少ないユーザーに再割り当て（re-map）します。
+コンテナー内において、プロセスを<code class="highlighter-rouge">root</code>ユーザーで実行しなければならない場合は、この<code class="highlighter-rouge">root</code>ユーザーを、Docker ホスト上のより権限の少ないユーザーに再割り当て（re-map）します。
 名前空間内では通常 0 から 65536 という範囲の UID が正しく機能しますが、割り当て対象のユーザーには、この範囲内で UID を定めます。
 ただしこの UID はホストマシン上では何の権限もないものです。</p>
 
 <h2 id="about-remapping-and-subordinate-user-and-group-ids">ユーザー ID、グループ ID の再割り当てとサブ ID</h2>
 
-<p>再割り当て自体は 2 つのファイル、<code class="language-plaintext highlighter-rouge">/etc/subuid</code>と<code class="language-plaintext highlighter-rouge">/etc/subgid</code>によって扱われます。
+<p>再割り当て自体は 2 つのファイル、<code class="highlighter-rouge">/etc/subuid</code>と<code class="highlighter-rouge">/etc/subgid</code>によって扱われます。
 2 つのファイルとも同様の動作をしますが、一方はユーザー ID 範囲に関して、他方はグループ ID 範囲に関して取り扱うものです。
-<code class="language-plaintext highlighter-rouge">/etc/subuid</code>内に以下のエントリーがあるとします。</p>
+<code class="highlighter-rouge">/etc/subuid</code>内に以下のエントリーがあるとします。</p>
 
 <pre><code class="language-none">testuser:231072:65536
 </code></pre>
 
-<p>上の意味は、<code class="language-plaintext highlighter-rouge">testuser</code>のサブ ID を <code class="language-plaintext highlighter-rouge">231072</code>から 65536 個分の連続した整数範囲で割り当てるものです。
-UID<code class="language-plaintext highlighter-rouge">231072</code>は、名前空間内（ここではコンテナー内）においては UID <code class="language-plaintext highlighter-rouge">0</code>（<code class="language-plaintext highlighter-rouge">root</code>）に割り当てられています。
-同じく UID<code class="language-plaintext highlighter-rouge">231073</code>は UID<code class="language-plaintext highlighter-rouge">1</code>へ割り当てられています。
+<p>上の意味は、<code class="highlighter-rouge">testuser</code>のサブ ID を <code class="highlighter-rouge">231072</code>から 65536 個分の連続した整数範囲で割り当てるものです。
+UID<code class="highlighter-rouge">231072</code>は、名前空間内（ここではコンテナー内）においては UID <code class="highlighter-rouge">0</code>（<code class="highlighter-rouge">root</code>）に割り当てられています。
+同じく UID<code class="highlighter-rouge">231073</code>は UID<code class="highlighter-rouge">1</code>へ割り当てられています。
 以下同様です。
 名前空間の外部から権限昇格を試みるようなプロセスがあったとします。
 ホスト上では権限を持たない大きな数値の UID によってプロセスが起動しており、その UID は現実のユーザーには割り当てられていません。
@@ -137,19 +137,19 @@ UID<code class="language-plaintext highlighter-rouge">231072</code>は、名前�
   <p>複数の範囲指定</p>
 
   <p>1 つのユーザーまたはグループに対して、サブ ID の範囲を複数割り当てることができます。
-これを行うには<code class="language-plaintext highlighter-rouge">/etc/subuid</code>または<code class="language-plaintext highlighter-rouge">/etc/subgid</code>において 1 つのユーザーあるいはグループに対して、互いに重複しない範囲指定を複数行います。
+これを行うには<code class="highlighter-rouge">/etc/subuid</code>または<code class="highlighter-rouge">/etc/subgid</code>において 1 つのユーザーあるいはグループに対して、互いに重複しない範囲指定を複数行います。
 これを行った場合、Docker は複数の範囲指定の中から、はじめの 5 つ分のみを利用します。
-カーネルが<code class="language-plaintext highlighter-rouge">/proc/self/uid_map</code>や<code class="language-plaintext highlighter-rouge">/proc/self/gid_map</code>において、5 つ分のエントリーしか取り扱わないという制約に従ったものです。</p>
+カーネルが<code class="highlighter-rouge">/proc/self/uid_map</code>や<code class="highlighter-rouge">/proc/self/gid_map</code>において、5 つ分のエントリーしか取り扱わないという制約に従ったものです。</p>
 </blockquote>
 
-<p>Docker において<code class="language-plaintext highlighter-rouge">userns-remap</code>機能を利用する際には、必要に応じて既存のユーザーやグループを指定することができます。
-あるいは<code class="language-plaintext highlighter-rouge">default</code>を指定することもできます。
-<code class="language-plaintext highlighter-rouge">default</code>を指定した場合、<code class="language-plaintext highlighter-rouge">dockremap</code>というユーザーおよびグループが生成され、この機能のために利用されます。</p>
+<p>Docker において<code class="highlighter-rouge">userns-remap</code>機能を利用する際には、必要に応じて既存のユーザーやグループを指定することができます。
+あるいは<code class="highlighter-rouge">default</code>を指定することもできます。
+<code class="highlighter-rouge">default</code>を指定した場合、<code class="highlighter-rouge">dockremap</code>というユーザーおよびグループが生成され、この機能のために利用されます。</p>
 
 <blockquote class="warning-vanila">
   <p><strong>警告</strong></p>
 
-  <p>RHEL や CentOS 7.3 などのディストリビューションにおいて、<code class="language-plaintext highlighter-rouge">/etc/subuid</code>と<code class="language-plaintext highlighter-rouge">/etc/subgid</code>に対して新たなグループの追加を自動では行わないものがあります。
+  <p>RHEL や CentOS 7.3 などのディストリビューションにおいて、<code class="highlighter-rouge">/etc/subuid</code>と<code class="highlighter-rouge">/etc/subgid</code>に対して新たなグループの追加を自動では行わないものがあります。
 その場合はこれらのファイルを編集する必要があり、他とは重複しないような範囲指定を行う必要があります。
 このことは <a href="#prerequisites">前提条件</a> において触れています。</p>
 </blockquote>
@@ -170,21 +170,21 @@ Linux ディストリビューションの多くでは、ユーザーの追加�
   <li>
     <p>サブ UID とサブ GID の設定範囲は、既存ユーザーに対して関連づいていなければなりません。
 ただし関連づけは、実装上の都合によるものです。
-ユーザーは<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>配下に、名前空間により分けられた保存ディレクトリを所有します。
+ユーザーは<code class="highlighter-rouge">/var/lib/docker/</code>配下に、名前空間により分けられた保存ディレクトリを所有します。
 既存ユーザーを利用したくない場合は、Docker がかわりにユーザーを生成して利用してくれます。
 逆に既存ユーザーの名前または ID を利用したい場合は、あらかじめ存在していなければなりません。
-通常は<code class="language-plaintext highlighter-rouge">/etc/passwd</code>や<code class="language-plaintext highlighter-rouge">/etc/group</code>内に、対応するエントリーが存在していなければなりませんが、別の認証システムをバックエンドに利用している場合は、そのファイルのエントリーは、別の形で取り扱われることになります。</p>
+通常は<code class="highlighter-rouge">/etc/passwd</code>や<code class="highlighter-rouge">/etc/group</code>内に、対応するエントリーが存在していなければなりませんが、別の認証システムをバックエンドに利用している場合は、そのファイルのエントリーは、別の形で取り扱われることになります。</p>
 
-    <p>上のことを確認するために<code class="language-plaintext highlighter-rouge">id</code>コマンドを実行します。</p>
+    <p>上のことを確認するために<code class="highlighter-rouge">id</code>コマンドを実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">id </span>testuser
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> id testuser
 <span class="go">
 uid=1001(testuser) gid=1001(testuser) groups=1001(testuser)
 </span></code></pre></div>    </div>
   </li>
   <li>
     <p>名前空間の再割り当てがホスト上において処理される際には、2 つのファイルが利用されます。
-<code class="language-plaintext highlighter-rouge">/etc/subuid</code>と<code class="language-plaintext highlighter-rouge">/etc/subgid</code>です。
+<code class="highlighter-rouge">/etc/subuid</code>と<code class="highlighter-rouge">/etc/subgid</code>です。
 このファイルは通常は、ユーザーやグループの追加、削除の際に、自動的に生成管理されます。
 ただし RHEL や CentOS 7.3 のような一部のディストリビューションでは、このファイルの手動での管理を必要とするものがあります。</p>
 
@@ -196,28 +196,28 @@ uid=1001(testuser) gid=1001(testuser) groups=1001(testuser)
 </code></pre>
 
     <p>上が意味することは以下のとおりです。
-<code class="language-plaintext highlighter-rouge">testuser</code>によって起動されたユーザー名前空間のプロセスは、ホスト上の <code class="language-plaintext highlighter-rouge">231072</code>（名前空間内では UID<code class="language-plaintext highlighter-rouge">0</code>として見えるもの）から<code class="language-plaintext highlighter-rouge">296607</code>(231072 + 65536 - 1) までの間の UID によって所有されます。
+<code class="highlighter-rouge">testuser</code>によって起動されたユーザー名前空間のプロセスは、ホスト上の <code class="highlighter-rouge">231072</code>（名前空間内では UID<code class="highlighter-rouge">0</code>として見えるもの）から<code class="highlighter-rouge">296607</code>(231072 + 65536 - 1) までの間の UID によって所有されます。
 この範囲は他と重複してはなりません。
 これを確実に行うことで、名前空間内のプロセスが別の名前空間へアクセスできないようにします。</p>
 
-    <p>ユーザーを追加したら<code class="language-plaintext highlighter-rouge">/etc/subuid</code>と<code class="language-plaintext highlighter-rouge">/etc/subgid</code>のそれぞれにおいて、追加したユーザーを表わすエントリーが含まれていることを確認してください。
+    <p>ユーザーを追加したら<code class="highlighter-rouge">/etc/subuid</code>と<code class="highlighter-rouge">/etc/subgid</code>のそれぞれにおいて、追加したユーザーを表わすエントリーが含まれていることを確認してください。
 もしエントリーが存在しなければ、追加してください。
 ID の重複には十分に注意してください。</p>
 
-    <p>Docker によって自動的に生成される<code class="language-plaintext highlighter-rouge">dockremap</code>ユーザーを利用したい場合は、<code class="language-plaintext highlighter-rouge">dockremap</code>のエントリーがそのファイル内にあるかどうかを確認しますが、それは設定を行って Docker を再起動した <strong>後に</strong> 行ってください。</p>
+    <p>Docker によって自動的に生成される<code class="highlighter-rouge">dockremap</code>ユーザーを利用したい場合は、<code class="highlighter-rouge">dockremap</code>のエントリーがそのファイル内にあるかどうかを確認しますが、それは設定を行って Docker を再起動した <strong>後に</strong> 行ってください。</p>
   </li>
   <li>
     <p>Docker ホスト上に、非特権ユーザーが書き込みを必要とするディレクトリがあるとします。
 その場合はそのディレクトリのパーミッションを適切に調整してください。
-これは Docker によって自動生成された<code class="language-plaintext highlighter-rouge">dockremap</code>ユーザーを利用する場合も同様ですが、このときにはパーミッション変更後に Docker を再起動しない限り、その設定変更は反映されません。</p>
+これは Docker によって自動生成された<code class="highlighter-rouge">dockremap</code>ユーザーを利用する場合も同様ですが、このときにはパーミッション変更後に Docker を再起動しない限り、その設定変更は反映されません。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">userns-remap</code>を有効にすることで、既存イメージやコンテナーのレイヤーは効果的に保護されます。
-これは<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>内にある Docker オブジェクトすべてについて言えることです。
-そもそも Docker ではそういったリソース類の所有者を調整する必要があり、そうして<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>内のサブディレクトリに情報を保存するからです。
+    <p><code class="highlighter-rouge">userns-remap</code>を有効にすることで、既存イメージやコンテナーのレイヤーは効果的に保護されます。
+これは<code class="highlighter-rouge">/var/lib/docker/</code>内にある Docker オブジェクトすべてについて言えることです。
+そもそも Docker ではそういったリソース類の所有者を調整する必要があり、そうして<code class="highlighter-rouge">/var/lib/docker/</code>内のサブディレクトリに情報を保存するからです。
 新たな Docker インストールの際に、この機能を有効にして利用していくことがベストです。</p>
 
-    <p>同じような話として、<code class="language-plaintext highlighter-rouge">userns-remap</code>を無効化すると、有効化していたときに生成したリソースへは、いっさいアクセスできなくなります。</p>
+    <p>同じような話として、<code class="highlighter-rouge">userns-remap</code>を無効化すると、有効化していたときに生成したリソースへは、いっさいアクセスできなくなります。</p>
   </li>
   <li>
     <p>ユーザー名前空間に関する <a href="#user-namespace-known-limitations">制約</a> を確認し、利用することが可能かどうかを判断してください。</p>
@@ -226,92 +226,92 @@ ID の重複には十分に注意してください。</p>
 
 <h2 id="enable-userns-remap-on-the-daemon">デーモン上での userns-remap の有効化</h2>
 
-<p><code class="language-plaintext highlighter-rouge">dockerd</code>の実行時には<code class="language-plaintext highlighter-rouge">--userns-remap</code>フラグを利用することができます。
-または以降の手順に示すように、設定ファイル<code class="language-plaintext highlighter-rouge">daemon.json</code>を使ってデーモンを設定することができます。
-<code class="language-plaintext highlighter-rouge">daemon.json</code>ファイルを用いる方法が推奨されます。
+<p><code class="highlighter-rouge">dockerd</code>の実行時には<code class="highlighter-rouge">--userns-remap</code>フラグを利用することができます。
+または以降の手順に示すように、設定ファイル<code class="highlighter-rouge">daemon.json</code>を使ってデーモンを設定することができます。
+<code class="highlighter-rouge">daemon.json</code>ファイルを用いる方法が推奨されます。
 フラグを利用する方法をとる場合、コマンドのひな形は以下のようになります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd <span class="nt">--userns-remap</span><span class="o">=</span><span class="s2">"testuser:testuser"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd <span class="nt">--userns-remap</span><span class="o">=</span><span class="s2">"testuser:testuser"</span>
 </code></pre></div></div>
 
 <ol>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>を編集します。
+    <p><code class="highlighter-rouge">/etc/docker/daemon.json</code>を編集します。
 ファイルはまったくの空であったとします。
-以下に示す項目は、<code class="language-plaintext highlighter-rouge">testuser</code>というユーザーおよびグループを使って<code class="language-plaintext highlighter-rouge">userns-remap</code>を有効にするものです。
+以下に示す項目は、<code class="highlighter-rouge">testuser</code>というユーザーおよびグループを使って<code class="highlighter-rouge">userns-remap</code>を有効にするものです。
 ユーザーやグループは、ID と名前のいずれでも指定が可能です。
 グループ名やグループ ID は、それがユーザー名またはユーザー ID とは異なる場合のみ、指定することが必要です。
-ユーザーとグループの名前あるいは ID をともに指定する場合は、両者をコロン（<code class="language-plaintext highlighter-rouge">:</code>）で区切ります。
+ユーザーとグループの名前あるいは ID をともに指定する場合は、両者をコロン（<code class="highlighter-rouge">:</code>）で区切ります。
 以下の書式は、すべて有効な指定です。
-ここで<code class="language-plaintext highlighter-rouge">testuser</code>の UID および GID は<code class="language-plaintext highlighter-rouge">1001</code>であるものとします。</p>
+ここで<code class="highlighter-rouge">testuser</code>の UID および GID は<code class="highlighter-rouge">1001</code>であるものとします。</p>
 
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">testuser</code></li>
-      <li><code class="language-plaintext highlighter-rouge">testuser:testuser</code></li>
-      <li><code class="language-plaintext highlighter-rouge">1001</code></li>
-      <li><code class="language-plaintext highlighter-rouge">1001:1001</code></li>
-      <li><code class="language-plaintext highlighter-rouge">testuser:1001</code></li>
-      <li><code class="language-plaintext highlighter-rouge">1001:testuser</code></li>
+      <li><code class="highlighter-rouge">testuser</code></li>
+      <li><code class="highlighter-rouge">testuser:testuser</code></li>
+      <li><code class="highlighter-rouge">1001</code></li>
+      <li><code class="highlighter-rouge">1001:1001</code></li>
+      <li><code class="highlighter-rouge">testuser:1001</code></li>
+      <li><code class="highlighter-rouge">1001:testuser</code></li>
     </ul>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"userns-remap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testuser"</span><span class="w">
+  </span><span class="s2">"userns-remap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testuser"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
     <blockquote>
       <p><strong>メモ</strong></p>
 
-      <p><code class="language-plaintext highlighter-rouge">dockremap</code>ユーザーは Docker が生成します。
-<code class="language-plaintext highlighter-rouge">dockremap</code>ユーザーを利用する場合は、設定値に<code class="language-plaintext highlighter-rouge">testuser</code>ではなく<code class="language-plaintext highlighter-rouge">default</code>を指定してください。</p>
+      <p><code class="highlighter-rouge">dockremap</code>ユーザーは Docker が生成します。
+<code class="highlighter-rouge">dockremap</code>ユーザーを利用する場合は、設定値に<code class="highlighter-rouge">testuser</code>ではなく<code class="highlighter-rouge">default</code>を指定してください。</p>
     </blockquote>
 
     <p>ファイルを保存して Docker を再起動します。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">dockremap</code>ユーザーを利用する場合は、<code class="language-plaintext highlighter-rouge">id</code>コマンドを実行して Docker がそのユーザーを生成していることを確認します。</p>
+    <p><code class="highlighter-rouge">dockremap</code>ユーザーを利用する場合は、<code class="highlighter-rouge">id</code>コマンドを実行して Docker がそのユーザーを生成していることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">id </span>dockremap
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> id dockremap
 <span class="go">
 uid=112(dockremap) gid=116(dockremap) groups=116(dockremap)
 </span></code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">/etc/subuid</code>と<code class="language-plaintext highlighter-rouge">/etc/subgid</code>に対してエントリーが追加されていることを確認します。</p>
+    <p><code class="highlighter-rouge">/etc/subuid</code>と<code class="highlighter-rouge">/etc/subgid</code>に対してエントリーが追加されていることを確認します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>dockremap /etc/subuid
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">grep </span>dockremap /etc/subuid
 <span class="go">
 dockremap:231072:65536
 
-</span><span class="gp">$</span><span class="w"> </span><span class="nb">grep </span>dockremap /etc/subgid
+</span><span class="gp">$</span> <span class="nb">grep </span>dockremap /etc/subgid
 <span class="go">
 dockremap:231072:65536
 </span></code></pre></div>    </div>
 
-    <p>上のようなエントリーが存在しない場合は、<code class="language-plaintext highlighter-rouge">root</code>ユーザーになってこのファイルを編集します。
-そして UID または GID の開始値として、すでに割り当てられている最大値を割り当て、これに加えてオフセット値（ここでは <code class="language-plaintext highlighter-rouge">65536</code>）を指定します。
+    <p>上のようなエントリーが存在しない場合は、<code class="highlighter-rouge">root</code>ユーザーになってこのファイルを編集します。
+そして UID または GID の開始値として、すでに割り当てられている最大値を割り当て、これに加えてオフセット値（ここでは <code class="highlighter-rouge">65536</code>）を指定します。
 複数の範囲指定のそれぞれにて ID の重複がないようにします。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker image ls</code>コマンドを実行し、以前利用していたイメージがないことを確認します。
+    <p><code class="highlighter-rouge">docker image ls</code>コマンドを実行し、以前利用していたイメージがないことを確認します。
 出力には何も表示されないはずです。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">hello-world</code>イメージを使ってコンテナーを起動します。</p>
+    <p><code class="highlighter-rouge">hello-world</code>イメージを使ってコンテナーを起動します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run hello-world
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run hello-world
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>配下に名前空間によるディレクトリがあることを確認します。
+    <p><code class="highlighter-rouge">/var/lib/docker/</code>配下に名前空間によるディレクトリがあることを確認します。
 ディレクトリ名には、名前空間におけるユーザーの UID と GID が用いられています。
 その所有は UID および GID であり、グループやワールドは読み込み権限がありません。
-サブディレクトリの中には<code class="language-plaintext highlighter-rouge">root</code>が所有しているものがあり、パーミッションも別のものになっています。</p>
+サブディレクトリの中には<code class="highlighter-rouge">root</code>が所有しているものがあり、パーミッションも別のものになっています。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo ls</span> <span class="nt">-ld</span> /var/lib/docker/231072.231072/
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo ls</span> <span class="nt">-ld</span> /var/lib/docker/231072.231072/
 <span class="go">
 drwx------ 11 231072 231072 11 Jun 21 21:19 /var/lib/docker/231072.231072/
 
-</span><span class="gp">$</span><span class="w"> </span><span class="nb">sudo ls</span> <span class="nt">-l</span> /var/lib/docker/231072.231072/
+</span><span class="gp">$</span> <span class="nb">sudo ls</span> <span class="nt">-l</span> /var/lib/docker/231072.231072/
 <span class="go">
 total 14
 drwx------ 5 231072 231072 5 Jun 21 21:19 aufs
@@ -325,11 +325,11 @@ drwx------ 2 root   root   2 Jun 21 21:19 trust
 drwx------ 2 231072 231072 3 Jun 21 21:19 volumes
 </span></code></pre></div>    </div>
 
-    <p>特にコンテナーのストレージドライバーとして<code class="language-plaintext highlighter-rouge">aufs</code>以外のものを利用している場合に、ディレクトリの一覧は、上とは異なる場合があります。</p>
+    <p>特にコンテナーのストレージドライバーとして<code class="highlighter-rouge">aufs</code>以外のものを利用している場合に、ディレクトリの一覧は、上とは異なる場合があります。</p>
 
-    <p>再割り当てによるユーザーが所有するディレクトリは、<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>直下にある同名ディレクトリとは切り離されて利用されます。
-同名ディレクトリの使用しなくなった方（この例においては<code class="language-plaintext highlighter-rouge">/var/lib/docker/tmp/</code>など）は削除してかまいません。
-Docker は<code class="language-plaintext highlighter-rouge">userns-remap</code>が有効になっている間は、それを利用しません。</p>
+    <p>再割り当てによるユーザーが所有するディレクトリは、<code class="highlighter-rouge">/var/lib/docker/</code>直下にある同名ディレクトリとは切り離されて利用されます。
+同名ディレクトリの使用しなくなった方（この例においては<code class="highlighter-rouge">/var/lib/docker/tmp/</code>など）は削除してかまいません。
+Docker は<code class="highlighter-rouge">userns-remap</code>が有効になっている間は、それを利用しません。</p>
   </li>
 </ol>
 
@@ -339,24 +339,24 @@ Docker は<code class="language-plaintext highlighter-rouge">userns-remap</code>
 特定の権限により実行されているコンテナーのような場合には、そのコンテナーに対してユーザー名前空間を明示的に無効にすることが必要になります。
 そういった制約に関しては <a href="#user-namespace-known-limitations">ユーザー名前空間における既知の制約</a> を参照してください。</p>
 
-<p>特定のコンテナーに対してユーザー名前空間を無効とするには、<code class="language-plaintext highlighter-rouge">docker container create</code>、<code class="language-plaintext highlighter-rouge">docker container run</code>、<code class="language-plaintext highlighter-rouge">docker container exec</code>の各コマンド実行の際に<code class="language-plaintext highlighter-rouge">--userns=host</code>フラグを追加します。</p>
+<p>特定のコンテナーに対してユーザー名前空間を無効とするには、<code class="highlighter-rouge">docker container create</code>、<code class="highlighter-rouge">docker container run</code>、<code class="highlighter-rouge">docker container exec</code>の各コマンド実行の際に<code class="highlighter-rouge">--userns=host</code>フラグを追加します。</p>
 
 <p>このフラグを利用した場合には副作用があります。
 ユーザーの再割り当てはそのコンテナーにおいて有効になりませんが、読み込み専用の（イメージ）レイヤーはコンテナー間で共有されるため、コンテナーのファイルシステムの所有者は、再割り当てされたままです。</p>
 
 <p>これは以下を意味します。
-コンテナーのファイルシステムはすべて、デーモンフラグ<code class="language-plaintext highlighter-rouge">--userns-remap</code>において指定されたユーザー（上の例では <code class="language-plaintext highlighter-rouge">231072</code>）に属します。
+コンテナーのファイルシステムはすべて、デーモンフラグ<code class="highlighter-rouge">--userns-remap</code>において指定されたユーザー（上の例では <code class="highlighter-rouge">231072</code>）に属します。
 このことから、コンテナー内のプログラムが予期しない動作となることがあります。
-たとえば <code class="language-plaintext highlighter-rouge">sudo</code>（実行するバイナリがユーザー<code class="language-plaintext highlighter-rouge">0</code>に属するかどうかを確認する）や<code class="language-plaintext highlighter-rouge">setuid</code>フラグがついている実行バイナリの場合です。</p>
+たとえば <code class="highlighter-rouge">sudo</code>（実行するバイナリがユーザー<code class="highlighter-rouge">0</code>に属するかどうかを確認する）や<code class="highlighter-rouge">setuid</code>フラグがついている実行バイナリの場合です。</p>
 
 <h2 id="user-namespace-known-limitations">ユーザー名前空間における既知の制約</h2>
 
 <p>以下に示す標準的な Docker の機能は、ユーザー名前空間を有効にして Docker デーモンを起動した際には、動作が変わります。</p>
 
 <ul>
-  <li>ホストの指定（<code class="language-plaintext highlighter-rouge">--pid=host</code>または<code class="language-plaintext highlighter-rouge">--network=host</code>）を行った PID 名前空間や NET 名前空間の共有。</li>
+  <li>ホストの指定（<code class="highlighter-rouge">--pid=host</code>または<code class="highlighter-rouge">--network=host</code>）を行った PID 名前空間や NET 名前空間の共有。</li>
   <li>デーモンのユーザー名前空間利用について、その利用がわからない、あるいは処理できない外部の（ボリュームまたはストレージ）ドライバー。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker run</code>の実行において<code class="language-plaintext highlighter-rouge">--userns=host</code>がなく<code class="language-plaintext highlighter-rouge">--privileged</code>モードフラグを指定した場合。</li>
+  <li><code class="highlighter-rouge">docker run</code>の実行において<code class="highlighter-rouge">--userns=host</code>がなく<code class="highlighter-rouge">--privileged</code>モードフラグを指定した場合。</li>
 </ul>
 
 <p>ユーザー名前空間は応用的な機能であって、他のケーパビリティーと連携が必要になります。
@@ -364,8 +364,8 @@ Docker は<code class="language-plaintext highlighter-rouge">userns-remap</code>
 
 <p>ユーザー名前空間を利用したコンテナーのプロセス内において root ユーザーは、コンテナー内のスーパーユーザーとして期待される数多くの権限を持ちます。
 しかし Linux カーネルは、そこがユーザー名前空間内のプロセスであることを知っていて、それに基づいた機能制約を課します。
-明らかな制約の例が、<code class="language-plaintext highlighter-rouge">mknod</code>コマンドを使えなくすることです。
-<code class="language-plaintext highlighter-rouge">root</code>ユーザーによって実行されているコンテナー内においては、デバイスの生成は拒否されます。</p>
+明らかな制約の例が、<code class="highlighter-rouge">mknod</code>コマンドを使えなくすることです。
+<code class="highlighter-rouge">root</code>ユーザーによって実行されているコンテナー内においては、デバイスの生成は拒否されます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=namespaces">namespaces</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
