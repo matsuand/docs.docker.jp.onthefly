@@ -328,18 +328,18 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 @z
 
 @x
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 @y
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 @z
 
 @x
     ```console
-    $ sudo zypper install docker-ce docker-ce-cli containerd.io
+    $ sudo zypper install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo zypper install docker-ce docker-ce-cli containerd.io
+    $ sudo zypper install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
@@ -429,11 +429,11 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 
 @x
     ```console
-    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @z
 
@@ -662,18 +662,18 @@ instead of `zypper -y install`, and point to the new file.
 @z
 
 @x
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @y
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @z
 
 @x
     ```console
-    $ sudo zypper remove docker-ce docker-ce-cli containerd.io
+    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo zypper remove docker-ce docker-ce-cli containerd.io
+    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 

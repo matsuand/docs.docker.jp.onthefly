@@ -75,11 +75,15 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 @z
 
 @x
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> Tip
+>
+> New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 @y
-> **ヒント**: はじめて利用する方は`--mount`を利用してください。
+> ヒント
+>
+> はじめて利用する方は`--mount`を利用してください。
 > 上級ユーザーは`-v`や`--volume`を用いることに慣れているかもしれませんが、`--mount`を利用するように心がけてください。
 > `--mount`の方が簡単に利用することができるとの調査もあります。
 @z
@@ -694,12 +698,12 @@ control whether `/mnt/a` and/or `/tmp/a` would exist.
 @z
 
 @x
-> **Warning:** 
-> 
+> Warning
+>
 > Mount propagation doesn't work with Docker Desktop.
-{: .warning
+{: .warning }
 @y
-> **警告** 
+> 警告
 > 
 > マウントプロパゲーションは Docker Desktop では動作しません。
 {: .warning }

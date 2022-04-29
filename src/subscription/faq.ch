@@ -573,7 +573,7 @@ More details are available at the [Docker Pricing](https://www.docker.com/pricin
 * Support for an unlimited number of teams
 * Unlimited Hub image vulnerability scans
 * Higher scan limits in Docker Desktop
-* Audit Logs
+* Audit logs
 * Slack notifications
 * Premium customer support for Docker Desktop
 @y
@@ -584,7 +584,7 @@ More details are available at the [Docker Pricing](https://www.docker.com/pricin
 * Support for an unlimited number of teams
 * Unlimited Hub image vulnerability scans
 * Higher scan limits in Docker Desktop
-* Audit Logs
+* Audit logs
 * Slack notifications
 * Premium customer support for Docker Desktop
 @z

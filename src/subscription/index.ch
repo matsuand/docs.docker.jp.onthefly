@@ -138,9 +138,9 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 @z
 
 @x
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
 @y
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
 @z
 
 @x

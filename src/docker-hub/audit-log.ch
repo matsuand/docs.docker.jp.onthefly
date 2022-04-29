@@ -17,20 +17,20 @@ title: 監査ログ
 
 @x
 {% include upgrade-cta.html
-  body="The Audit log feature is available for users subscribed to a Docker Team or a Business subscription. Upgrade now to start tracking events across your organization."
+  body="Audit log is available for users subscribed to a Docker Team or a Business subscription. Upgrade now to start tracking events across your organization."
   header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
 @y
 {% include upgrade-cta.html
-  body="監査ログ機能は、Team または Business プランを購入しているユーザーが利用可能です。既存のプランをアップグレードして、組織全体にわたるイベント追跡を始めてください。"
+  body="監査ログは、Team または Business プランを購入しているユーザーが利用可能です。既存のプランをアップグレードして、組織全体にわたるイベント追跡を始めてください。"
   header-text="この機能を利用するには、有償の Docker サブスクリプションが必要です。"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
 @z
 
 @x
-Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the Audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 @y
 監査ログ (audit log) は、組織やリポジトリレベルで発生するアクティビティーを時系列で一覧表示するものです。
 この機能では、Docker Team アカウントの所有者すべてに対して、チームメンバーのアクティビティーを報告します。
@@ -39,20 +39,20 @@ Audit log displays a chronological list of activities that occur at organization
 @z
 
 @x
-Team owners can also see the Audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
+Team owners can also see the audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
 @y
 Docker の Team プランを購入している組織のリポジトリに対しては、チーム所有者もそのリポジトリの監査ログを参照することができます。
 @z
 
 @x
-## View the Audit log
+## View the audit log
 @y
 {: #view-the-audit-log }
 ## 監査ログの参照
 @z
 
 @x
-To view the Audit log:
+To view the audit log:
 @y
 監査ログを参照するには以下を行います。
 @z
@@ -72,7 +72,7 @@ To view the Audit log:
 @z
 
 @x
-The Audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
+The audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
 @y
 監査ログは、この機能が実現された日からのアクティビティーを追跡しています。
 その日とは **2021 年 1 月 25 日** です。
@@ -82,7 +82,7 @@ The Audit log begins tracking activities from the date the feature is live, that
 @x
 > **Note**
 >
-> Docker will retain the Audit log activity data for a period of three months.
+> Docker will retain the audit log activity data for a period of three months.
 @y
 > **メモ**
 >
@@ -90,14 +90,14 @@ The Audit log begins tracking activities from the date the feature is live, that
 @z
 
 @x
-## Customize the Audit log
+## Customize the audit log
 @y
 {: #customize-the-audit-log }
 ## 監査ログのカスタマイズ
 @z
 
 @x
-By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the Audit log of all the activities that occurred during that period.
+By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the audit log of all the activities that occurred during that period.
 @y
 組織やリポジトリレベルで発生するアクティビティーは、デフォルトですべて **Activity** タブに表示されます。
 カレンダーオプションを使って日付範囲を選べば、表示結果をカスタマイズすることができます。
@@ -119,7 +119,7 @@ By default, all activities that occur at organization and repository levels are 
 @x
 > **Note**
 >
-> Activities created by the Docker Support team as part of resolving customer issues appear in the Audit log as **dockersupport**.
+> Activities created by the Docker Support team as part of resolving customer issues appear in the audit log as **dockersupport**.
 @y
 > **メモ**
 >

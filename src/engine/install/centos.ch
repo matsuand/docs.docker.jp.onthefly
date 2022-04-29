@@ -296,19 +296,19 @@ $ sudo yum-config-manager \
 @z
 
 @x
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose or go to the next step to install a specific version:
 @y
-1.  Docker Engine と containerd の最新版をインストールします。
+1.  Docker Engine、containerd、Docker Compose の**最新版**をインストールします。
     あるいは次の手順に行って、特定のバージョンをインストールします。
 @z
 
 @x
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
@@ -400,11 +400,11 @@ $ sudo yum-config-manager \
 
 @x
     ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo yum install docker-ce-<バージョン文字列> docker-ce-cli-<バージョン文字列> containerd.io
+    $ sudo yum install docker-ce-<バージョン文字列> docker-ce-cli-<バージョン文字列> containerd.io docker-compose-plugin
     ```
 @z
 
@@ -630,9 +630,9 @@ Docker Engine をアップグレードする場合は、新たなパッケージ
 @z
 
 @x
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @y
-1.  Docker Engine、CLI、Containerd パッケージをアンインストールします。
+1.  Docker Engine、CLI、Containerd、Docker Compose パッケージをアンインストールします。
 @z
 
 @x

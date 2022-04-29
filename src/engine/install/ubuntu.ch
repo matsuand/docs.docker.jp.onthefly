@@ -339,22 +339,22 @@ from the repository.
 
 @x
 1. Update the `apt` package index, and install the _latest version_ of Docker
-   Engine and containerd, or go to the next step to install a specific version:
+   Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 @y
 1.  `apt`のパッケージインデックスを更新します。
-    そしてDocker と containerd の最新版をインストールします。
+    そして Docker Engine、containerd、Docker Compose の最新版をインストールします。
     あるいは次の手順に行って、特定のバージョンをインストールします。
 @z
 
 @x
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
@@ -418,11 +418,11 @@ from the repository.
 
 @x
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt-get install docker-ce=<バージョン文字列> docker-ce-cli=<バージョン文字列> containerd.io docker-compose-plugin
     ```
 @z
 
@@ -610,18 +610,18 @@ Docker Engine をアップグレードするには、[インストール手順](
 @z
 
 @x
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @y
-1.  Docker Engine、CLI、Containerd パッケージをアンインストールします。
+1.  Docker Engine、CLI、Containerd、Docker Compose パッケージをアンインストールします。
 @z
 
 @x
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 

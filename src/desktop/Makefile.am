@@ -18,6 +18,7 @@ bases = \
 	backup-and-restore \
 	dashboard          \
 	dev-environments   \
+	extensions         \
 	faqs               \
 	index              \
 	kubernetes         \

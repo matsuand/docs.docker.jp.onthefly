@@ -304,18 +304,18 @@ $ sudo yum-config-manager \
 @z
 
 @x
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 @y
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 @z
 
 @x
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
@@ -409,11 +409,11 @@ $ sudo yum-config-manager \
 
 @x
     ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @z
 
@@ -642,18 +642,18 @@ instead of `yum -y install`, and point to the new file.
 @z
 
 @x
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @y
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 @z
 
 @x
     ```console
-    $ sudo yum remove docker-ce docker-ce-cli containerd.io
+    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo yum remove docker-ce docker-ce-cli containerd.io
+    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 

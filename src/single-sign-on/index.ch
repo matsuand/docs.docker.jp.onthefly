@@ -199,15 +199,15 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-    > **Note:**
+    > **Note**
     >
-    > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+    > The NameID is your email address and is set as the default.
+    > For example, yourname@mycompany.com. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 @y
-    > **Note:**
+    > **Note**
     >
-    > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+    > The NameID is your email address and is set as the default.
+    > For example, yourname@mycompany.com. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 @z
 
 @x
@@ -242,7 +242,7 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
->**Note:**
+>**Note**
 >
 > This section is for users who only want to configure Open ID Connect with
 > Azure AD. This connection is a basic OIDC connection, and there are no
@@ -290,13 +290,15 @@ The following video walks you through the process of configuring SSO.
 @z
 
 @x
-    > **Note:**
-    > the NameID is your email address and is set as the default.
-    > For example: <Subject><NameID>yourname@mycompany.com</NameID>.
+    > **Note**
+    >
+    > The NameID is your email address and is set as the default.
+    > For example: yourname@mycompany.com.
 @y
-    > **Note:**
-    > the NameID is your email address and is set as the default.
-    > For example: <Subject><NameID>yourname@mycompany.com</NameID>.
+    > **Note**
+    >
+    > The NameID is your email address and is set as the default.
+    > For example: yourname@mycompany.com.
 @z
 
 @x
@@ -390,13 +392,13 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 @z
 
 @x
-    > **Note:**
+    > **Note**
     >
     > It can take up to 72 hours for DNS changes to take effect, depending on
     > your DNS host. The Domains table will have an Unverified status during
     > this time.
 @y
-    > **Note:**
+    > **Note**
     >
     > It can take up to 72 hours for DNS changes to take effect, depending on
     > your DNS host. The Domains table will have an Unverified status during
@@ -460,14 +462,14 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 @z
 
 @x
-> **Note:**
+> **Note**
 >
 > If you want to turn off SSO and revert back to Docker’s built-in
 > authentication, click **Turn OFF Enforcement**. Your members aren’t
 > forced to authenticate through your IdP and can log in to Docker using
 > their personal credentials.
 @y
-> **Note:**
+> **Note**
 >
 > If you want to turn off SSO and revert back to Docker’s built-in
 > authentication, click **Turn OFF Enforcement**. Your members aren’t
@@ -495,14 +497,14 @@ You don’t need to add users to your organization in Docker Hub manually. You j
 @z
 
 @x
- > **Note:**
+ > **Note**
  >
- > when the first-time user logs in to Docker using their domain email
+ > When the first-time user logs in to Docker using their domain email
  > address, they are then added to your organization.
 @y
- > **Note:**
+ > **Note**
  >
- > when the first-time user logs in to Docker using their domain email
+ > When the first-time user logs in to Docker using their domain email
  > address, they are then added to your organization.
 @z
 
@@ -548,14 +550,14 @@ To remove a member from an organization:
 @z
 
 @x
-> **Note:**
+> **Note**
 >
-> when you remove a member from an SSO organization, they are unable to log
+> When you remove a member from an SSO organization, they are unable to log
 > in using their email address.
 @y
-> **Note:**
+> **Note**
 >
-> when you remove a member from an SSO organization, they are unable to log
+> When you remove a member from an SSO organization, they are unable to log
 > in using their email address.
 @z
 

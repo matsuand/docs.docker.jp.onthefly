@@ -293,11 +293,11 @@ $ sudo dnf config-manager \
 
 @x
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io
+    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io
+    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
@@ -390,11 +390,11 @@ $ sudo dnf config-manager \
 
 @x
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo dnf -y install docker-ce-<バージョン文字列> docker-ce-cli-<バージョン文字列> containerd.io docker-compose-plugin
     ```
 @z
 
@@ -619,18 +619,18 @@ Docker Engine をアップグレードする場合は、新たなパッケージ
 @z
 
 @x
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd and Docker Compose packages:
 @y
-1.  Docker Engine、CLI、Containerd パッケージをアンインストールします。
+1.  Docker Engine、CLI、Containerd、Docker Compose パッケージをアンインストールします。
 @z
 
 @x
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @y
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 @z
 
