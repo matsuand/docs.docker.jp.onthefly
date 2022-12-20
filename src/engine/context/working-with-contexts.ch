@@ -102,7 +102,7 @@ You will also need one of the following:
 @x
 A context is a combination of several properties. These include:
 @y
-コンテキストとは、複数プロパティが組み合わせれたものです。
+コンテキストとは、複数プロパティが組み合わせられたものです。
 そこには以下の情報が含まれます。
 @z
 
